@@ -1,8 +1,5 @@
 package org.jackhuang.compactwatermills;
 
-import org.jackhuang.compactwatermills.watermills.ContainerCompactWatermills;
-import org.jackhuang.compactwatermills.watermills.TileEntityWatermill;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -19,14 +16,17 @@ public class CommonProxy implements IGuiHandler {
 	public Object getServerGuiElement(int ID, EntityPlayer thePlayer, World world, int x, int y,
 		int z) {
 		TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
-		if (tileEntity != null && tileEntity instanceof TileEntityWatermill) {
+		/*if (tileEntity != null && tileEntity instanceof TileEntityWatermill) {
 			TileEntityWatermill tileEntityCW = (TileEntityWatermill) tileEntity;
 			return new ContainerCompactWatermills(thePlayer.inventory,
 				tileEntityCW);
 		}
 		else {
 			return null;
-		}
+		}*/
+		TileEntityBaseGenerator tileEntityCW = (TileEntityBaseGenerator) tileEntity;
+		return new ContainerRotor(thePlayer.inventory,
+			tileEntityCW);
 	}
 
 }

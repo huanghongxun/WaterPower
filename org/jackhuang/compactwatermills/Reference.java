@@ -16,6 +16,8 @@ package org.jackhuang.compactwatermills;
  */
 public class Reference {
 	
+	public static final String ModChannel = "cptwtrml";
+	
 	public static final String ModID = "CompactWatermills";
 	
 	public static final String ModName = "Compact Watermills";
@@ -26,10 +28,14 @@ public class Reference {
 	
 	public static final int ItemIDDifference = -256;
 	
-	public static final int defaultMillID = 2048,
+	public static final int defaultTurbineID = 2047,
+			defaultMillID = 2048,
 			defaultRotorID = 2049;
 	
-	public static final String configMillName = "CompactWatermill",
+	public static final String configTurbineName = "CompactWatermillTurbine",
+			configMillName = "CompactWatermill",
 			configRotorName = "Rotor";
+	
+	public static final int turbineGuiID = 100;
 	
 }

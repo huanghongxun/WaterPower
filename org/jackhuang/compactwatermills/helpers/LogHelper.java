@@ -29,4 +29,8 @@ public class LogHelper {
 		WatermillLog.log(level, message);
 	}
 	
+	public static void log(String message) {
+		WatermillLog.log(Level.INFO, message);
+	}
+	
 }
