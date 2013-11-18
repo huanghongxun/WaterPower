@@ -2,13 +2,14 @@ package org.jackhuang.compactwatermills;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
-public abstract class TileEntityInventory extends TileEntityBlock implements
+public abstract class TileEntityInventory extends TileEntityBase implements
 		ISidedInventory {
 	public final List<InventorySlot> invSlots = new ArrayList<InventorySlot>();
 
@@ -223,4 +224,5 @@ public abstract class TileEntityInventory extends TileEntityBlock implements
 
 		return null;
 	}
+
 }

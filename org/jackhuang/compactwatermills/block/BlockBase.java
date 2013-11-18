@@ -25,6 +25,7 @@ import net.minecraftforge.common.Configuration;
 public abstract class BlockBase extends BlockContainer {
 
 	protected final InternalName internalName;
+	public static int id;
 	
 	//0-bottom 1-top 2-left 3-front 4-right 5-back
 	
@@ -42,7 +43,7 @@ public abstract class BlockBase extends BlockContainer {
 
 	public BlockBase(Configuration config, InternalName internalName,
 			Material material, Class<? extends ItemBlock> itemClass) {
-		super(CompactWatermills.getBlockIdFor(config, internalName,
+		super(id = CompactWatermills.getBlockIdFor(config, internalName,
 				DefaultIds.get(internalName)), material);
 
 		setUnlocalizedName(internalName.name());

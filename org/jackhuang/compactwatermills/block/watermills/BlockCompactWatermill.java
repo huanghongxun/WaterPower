@@ -8,15 +8,11 @@
 
 package org.jackhuang.compactwatermills.block.watermills;
 
-import java.util.logging.Level;
-
 import org.jackhuang.compactwatermills.InternalName;
 import org.jackhuang.compactwatermills.block.BlockMultiID;
-import org.jackhuang.compactwatermills.helpers.LogHelper;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.Configuration;
 
@@ -44,18 +40,5 @@ public class BlockCompactWatermill extends BlockMultiID {
 	@Override
 	protected String getTextureFolder(int index) {
 		return "watermill";
-	}
-	
-	public int getFacing(IBlockAccess iBlockAccess, int x, int y, int z) {
-		TileEntity tileEntity = iBlockAccess.getBlockTileEntity(x, y, z);
-		
-		if (tileEntity instanceof TileEntityWatermill) {
-			return ((TileEntityWatermill) tileEntity).getFacing();
-		}
-		
-		LogHelper.log(Level.WARNING, "Failed to get Facing at: x=" + x + "; y=" + y + "; z=" + z
-			+ ";");
-		
-		return 4;
 	}
 }

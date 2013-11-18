@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.jackhuang.compactwatermills.CompactWatermills;
 import org.jackhuang.compactwatermills.Reference;
+import org.jackhuang.compactwatermills.TileEntityBaseGenerator;
 import org.jackhuang.compactwatermills.block.watermills.TileEntityWatermill;
 
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -67,7 +68,7 @@ public class ItemRotor extends Item {
 			+ this.getUnlocalizedName() + ".png");
 	}
 	
-	public void tickRotor(ItemStack rotor, TileEntityWatermill tileEntity, World worldObj) {
+	public void tickRotor(ItemStack rotor, TileEntityBaseGenerator tileEntity, World worldObj) {
 		return;
 	}
 	

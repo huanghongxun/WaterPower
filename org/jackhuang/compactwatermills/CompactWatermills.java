@@ -5,8 +5,10 @@ import ic2.api.item.Items;
 import java.util.Properties;
 import java.util.logging.Level;
 
+import org.jackhuang.compactwatermills.block.BlockBase;
 import org.jackhuang.compactwatermills.block.turbines.BlockReservoir;
 import org.jackhuang.compactwatermills.block.turbines.BlockTurbine;
+import org.jackhuang.compactwatermills.block.turbines.TileEntityReservoir;
 import org.jackhuang.compactwatermills.block.turbines.TileEntityTurbine;
 import org.jackhuang.compactwatermills.block.watermills.BlockCompactWatermill;
 import org.jackhuang.compactwatermills.block.watermills.WaterType;
@@ -20,6 +22,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -32,7 +35,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod(modid = Reference.ModID, name = Reference.ModName, version = Reference.Version, dependencies = "required-after:IC2")
-@NetworkMod(clientSideRequired = true, serverSideRequired = false)
+@NetworkMod(clientSideRequired = true, serverSideRequired = true)
 /**
  * 
  * @author jackhuang1998
@@ -46,7 +49,7 @@ public class CompactWatermills {
 	@SidedProxy(clientSide = "org.jackhuang.compactwatermills.ClientProxy", serverSide = "org.jackhuang.compactwatermills.CommonProxy")
 	public static CommonProxy proxy;
 
-	public static Block waterMill, turbine, reservoir;
+	public static BlockBase waterMill, turbine, reservoir;
 	public static ItemRotor waterRotor;
 
 	public static final CreativeTabs creativeTabCompactWatermills = new CreativeTabCompactWatermills(
@@ -101,18 +104,33 @@ public class CompactWatermills {
 	}
 
 	void addRotorRecipe(Item output, Item S, Block I) {
-		GameRegistry.addRecipe(new ItemStack(output), "S S", " I ", "S S", 'S',
-				new ItemStack(S), 'I', new ItemStack(I));
+		GameRegistry.addShapedRecipe(new ItemStack(output), "S S", " I ",
+				"S S", 'S', new ItemStack(S), 'I', new ItemStack(I));
 	}
 
 	void addRotorRecipe(Item output, Block S, Block I) {
-		GameRegistry.addRecipe(new ItemStack(output), "S S", " I ", "S S", 'S',
-				new ItemStack(S), 'I', new ItemStack(I));
+		GameRegistry.addShapedRecipe(new ItemStack(output), "S S", " I ",
+				"S S", 'S', new ItemStack(S), 'I', new ItemStack(I));
 	}
 
 	void addRotorRecipe(Item output, ItemStack S, ItemStack I) {
-		GameRegistry.addRecipe(new ItemStack(output), "S S", " I ", "S S", 'S',
-				S, 'I', I);
+		GameRegistry.addShapedRecipe(new ItemStack(output), "S S", " I ",
+				"S S", 'S', S, 'I', I);
+	}
+
+	void addReservoirRecipe(ItemStack output, Block S) {
+		GameRegistry.addShapedRecipe(output, "SSS", "SIS", "SSS", 'S',
+				new ItemStack(S), 'I', Block.glass);
+	}
+
+	void addReservoirRecipe(ItemStack output, Item S) {
+		GameRegistry.addShapedRecipe(output, "SSS", "SIS", "SSS", 'S',
+				new ItemStack(S), 'I', Block.glass);
+	}
+
+	void addReservoirRecipe(ItemStack output, ItemStack S) {
+		GameRegistry.addShapedRecipe(output, "SSS", "SIS", "SSS", 'S', S, 'I',
+				Block.glass);
 	}
 
 	@Mod.EventHandler
@@ -122,17 +140,17 @@ public class CompactWatermills {
 				InternalName.blockCompactWatermill);
 		turbine = new BlockTurbine(config, InternalName.blockTurbine);
 		reservoir = new BlockReservoir(config, InternalName.blockReservoir);
-		
-		for(WaterType type : WaterType.values()) {
+
+		for (WaterType type : WaterType.values()) {
 			GameRegistry.registerTileEntity(type.claSS, type.tileEntityName());
 		}
-		
-		GameRegistry.registerTileEntity(TileEntityTurbine.class,
-				"turbine");
+
+		GameRegistry.registerTileEntity(TileEntityReservoir.class, "reservoir");
+		GameRegistry.registerTileEntity(TileEntityTurbine.class, "turbine");
 
 		// Water mills recipes register
-		GameRegistry.addShapedRecipe(new ItemStack(waterMill, 1, 0), "WWW",
-				"WTW", "WWW", 'W', Items.getItem("waterMill"), 'T',
+		GameRegistry.addShapedRecipe(new ItemStack(waterMill, 1, 0), " W ",
+				"WTW", " W ", 'W', Items.getItem("waterMill"), 'T',
 				Items.getItem("transformerUpgrade"));
 		GameRegistry.addShapedRecipe(new ItemStack(waterMill, 1, 1), "WWW",
 				"WTW", "WWW", 'W', new ItemStack(waterMill, 1, 0), 'T',
@@ -152,6 +170,40 @@ public class CompactWatermills {
 		GameRegistry.addShapedRecipe(new ItemStack(waterMill, 1, 6), " W ",
 				"WTW", " W ", 'W', new ItemStack(waterMill, 1, 5), 'T',
 				Items.getItem("transformerUpgrade"));
+
+		// Reservoir recipes register
+		addReservoirRecipe(new ItemStack(reservoir, 8, 0), Block.wood);
+		addReservoirRecipe(new ItemStack(reservoir, 8, 1), Block.stone);
+		addReservoirRecipe(new ItemStack(reservoir, 8, 2), Block.blockLapis);
+		addReservoirRecipe(new ItemStack(reservoir, 8, 3),
+				Items.getItem("tinBlock"));
+		addReservoirRecipe(new ItemStack(reservoir, 8, 4),
+				Items.getItem("copperBlock"));
+		addReservoirRecipe(new ItemStack(reservoir, 8, 5),
+				Items.getItem("leadBlock"));
+		addReservoirRecipe(new ItemStack(reservoir, 8, 6),
+				Block.blockNetherQuartz);
+		addReservoirRecipe(new ItemStack(reservoir, 8, 7),
+				Items.getItem("bronzeBlock"));
+		addReservoirRecipe(new ItemStack(reservoir, 8, 8), Block.blockIron);
+		addReservoirRecipe(new ItemStack(reservoir, 8, 9), Block.netherBrick);
+		addReservoirRecipe(new ItemStack(reservoir, 8, 10), Block.obsidian);
+		// addReservoirRecipe(new ItemStack(reservoir, 8, 11), Block.sliver);
+		addReservoirRecipe(new ItemStack(reservoir, 8, 12),
+				Items.getItem("machine"));
+		addReservoirRecipe(new ItemStack(reservoir, 8, 13), Block.blockGold);
+		addReservoirRecipe(new ItemStack(reservoir, 8, 14),
+				Items.getItem("carbonPlate"));
+		addReservoirRecipe(new ItemStack(reservoir, 8, 15),
+				Items.getItem("advancedAlloy"));
+		addReservoirRecipe(new ItemStack(reservoir, 8, 16), Block.blockEmerald);
+		addReservoirRecipe(new ItemStack(reservoir, 8, 17), Block.blockDiamond);
+		GameRegistry.addShapedRecipe(new ItemStack(reservoir, 8, 18), "SSS",
+				"SIS", "SSS", 'S', Items.getItem("iridiumOre"), 'I',
+				Items.getItem("iridiumPlate"));
+		GameRegistry.addShapedRecipe(new ItemStack(reservoir, 8, 19), "SSS",
+				"SIS", "SSS", 'S', Items.getItem("iridiumPlate"), 'I',
+				Items.getItem("industrialDiamond"));
 
 		// Rotors recipes register
 		addRotorRecipe(RotorType.WOOD.getItem(), Item.stick, Block.wood);
@@ -191,6 +243,10 @@ public class CompactWatermills {
 				Block.blockDiamond);
 		addRotorRecipe(RotorType.IRIDIUM.getItem(),
 				Items.getItem("iridiumOre"), Items.getItem("iridiumPlate"));
+		
+		GameRegistry.addShapedRecipe(new ItemStack(turbine), "SAS", "AGS", "SAS",
+				'S', Block.fenceIron, 'A', new ItemStack(waterMill, 1, 5),
+				'G', Items.getItem("generator"));
 
 		for (RotorType typ : RotorType.values()) {
 			LanguageRegistry.addName(typ.getItem(), typ.showedName);
@@ -261,7 +317,13 @@ public class CompactWatermills {
 	}
 
 	public static void displayError(String msg) {
-		throw new RuntimeException("=========Compact Watermills=========\n"
+		throw new RuntimeException("\n=========Compact Watermills=========\n"
 				+ msg);
 	}
+
+	//isServer?
+	public static boolean isSimulating() {
+		return !FMLCommonHandler.instance().getEffectiveSide().isClient();
+	}
+
 }

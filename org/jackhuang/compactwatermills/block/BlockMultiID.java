@@ -2,6 +2,7 @@ package org.jackhuang.compactwatermills.block;
 
 import ic2.api.tile.IWrenchable;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
@@ -23,12 +24,14 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.Configuration;
@@ -36,11 +39,14 @@ import net.minecraftforge.common.ForgeDirection;
 
 public abstract class BlockMultiID extends BlockBase {
 
+	private static TileEntity teBeforeBreak = null;
+
 	public BlockMultiID(Configuration config, InternalName name,
 			Material material, Class<? extends ItemBlock> c) {
 		super(config, name, material, c);
 	}
 
+	@Override
 	public int getFacing(IBlockAccess iBlockAccess, int x, int y, int z) {
 		TileEntity te = iBlockAccess.getBlockTileEntity(x, y, z);
 
@@ -60,14 +66,11 @@ public abstract class BlockMultiID extends BlockBase {
 		int meta = iBlockAccess.getBlockMetadata(x, y, z);
 
 		int index = getTextureIndex(meta);
-		if (index >= textures.length) {
-			return null;
-		}
 		int subIndex = getTextureSubIndex(facing, side);
 		// LogHelper.log("meta = " + meta + "; index = " + index + "; facing = "
 		// + facing + "; side = " + side + "; subIndex = " + subIndex);
 		try {
-			return textures[index][subIndex];
+			return textures[index % textures.length][subIndex];
 		} catch (Exception e) {
 			LogHelper.log(Level.SEVERE, "Failed to get texture at: x=" + x
 					+ "; y=" + y + "; z=" + z + "; facing=" + facing
@@ -91,7 +94,6 @@ public abstract class BlockMultiID extends BlockBase {
 
 			if (entityliving == null) {
 				te.setFacing((short) 2);
-				LogHelper.log("placed 2");
 			} else {
 				int l = MathHelper
 						.floor_double(entityliving.rotationYaw * 4.0F / 360.0F + 0.5D) & 0x3;
@@ -109,9 +111,63 @@ public abstract class BlockMultiID extends BlockBase {
 				case 3:
 					te.setFacing((short) 4);
 				}
-				LogHelper.log("placed l: " + l);
+				LogHelper.log("l=" + l);
 			}
 		}
+	}
+
+	@Override
+	public void onBlockPreDestroy(World world, int x, int y, int z, int meta) {
+		super.onBlockPreDestroy(world, x, y, z, meta);
+
+		TileEntity te = world.getBlockTileEntity(x, y, z);
+
+		if ((te instanceof TileEntityBlock)) {
+			TileEntityBlock teb = (TileEntityBlock) te;
+
+			if (teb.loaded)
+				teb.onUnloaded();
+		}
+	}
+
+	public ArrayList<ItemStack> getBlockDropped(World world, int x, int y,
+			int z, int metadata, int fortune) {
+		ArrayList<ItemStack> ret = super.getBlockDropped(world, x, y, z,
+				metadata, fortune);
+
+		TileEntity te = world.getBlockTileEntity(x, y, z);
+		if (te == null)
+			te = teBeforeBreak;
+
+		if ((te instanceof IInventory)) {
+			IInventory inv = (IInventory) te;
+
+			for (int i = 0; i < inv.getSizeInventory(); i++) {
+				ItemStack itemStack = inv.getStackInSlot(i);
+
+				if (itemStack != null) {
+					ret.add(itemStack);
+					inv.setInventorySlotContents(i, null);
+				}
+			}
+		}
+
+		return ret;
+	}
+
+	@Override
+	public void breakBlock(World world, int x, int y, int z, int id, int meta) {
+		TileEntity te = world.getBlockTileEntity(x, y, z);
+		if ((te instanceof TileEntityBlock))
+			((TileEntityBlock) te).onBlockBreak(id, meta);
+
+		if (te != null)
+			teBeforeBreak = te;
+		else {
+			teBeforeBreak = null;
+		}
+
+		super.breakBlock(world, x, y, z, id, meta);
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -123,7 +179,7 @@ public abstract class BlockMultiID extends BlockBase {
 		if (!item.getHasSubtypes())
 			itemList.add(new ItemStack(this));
 		else {
-			for (int i = 0; i < 16; i++) {
+			for (int i = 0; i < 20; i++) {
 				ItemStack is = new ItemStack(this, 1, i);
 
 				if (Item.itemsList[this.blockID].getUnlocalizedName(is) == null)
@@ -220,4 +276,9 @@ public abstract class BlockMultiID extends BlockBase {
 
 	@Override
 	public abstract TileEntity createNewTileEntity(World world);
+
+	public ItemStack getPickBlock(MovingObjectPosition target, World world,
+			int x, int y, int z) {
+		return new ItemStack(this, 1, world.getBlockMetadata(x, y, z));
+	}
 }

@@ -13,21 +13,6 @@ public abstract class ContainerBase extends Container {
 
 	public ContainerBase(IInventory base) {
 		this.base = base;
-		
-		// Player's inventory drawing
-				for (int inventoryRow = 0; inventoryRow < 3; inventoryRow++) {
-					for (int inventoryColumn = 0; inventoryColumn < 9; inventoryColumn++) {
-						addSlotToContainer(new Slot(base, inventoryColumn
-								+ inventoryRow * 9 + 9, 8 + inventoryColumn * 18,
-								84 + inventoryRow * 18));
-					}
-				}
-
-				// Player's tools inventory drawing
-				for (int hotbarSlot = 0; hotbarSlot < 9; hotbarSlot++) {
-					addSlotToContainer(new Slot(base, hotbarSlot,
-							8 + hotbarSlot * 18, 142));
-				}
 	}
 
 	public final ItemStack transferStackInSlot(EntityPlayer player,

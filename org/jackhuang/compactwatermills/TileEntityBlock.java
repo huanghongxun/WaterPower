@@ -16,30 +16,57 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet132TileEntityData;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 
 import org.jackhuang.compactwatermills.block.BlockTextureStitched;
 
-public class TileEntityBlock extends TileEntity implements
+public abstract class TileEntityBlock extends TileEntityInventory implements
 		INetworkDataProvider, INetworkUpdateListener, IWrenchable {
 	private short facing = 0;
 
 	public boolean prevActive = false;
 	public short prevFacing = 0;
 
+	public boolean loaded = false;
+
 	@SideOnly(Side.CLIENT)
 	private Icon[] lastRenderIcons;
+
+	@Override
+	public void validate() {
+		super.validate();
+
+		onLoaded();
+	}
+
+	@Override
+	public void invalidate() {
+		if (this.loaded)
+			onUnloaded();
+
+		super.invalidate();
+	}
+
+	@Override
+	public void onChunkUnload() {
+		if (this.loaded)
+			onUnloaded();
+
+		super.onChunkUnload();
+	}
+
+	public void onLoaded() {
+		this.loaded = true;
+	}
+
+	public void onUnloaded() {
+		this.loaded = false;
+	}
 
 	public void readFromNBT(NBTTagCompound nbttagcompound) {
 		super.readFromNBT(nbttagcompound);
 
 		this.prevFacing = this.facing = nbttagcompound.getShort("facing");
-	}
-
-	@Override
-	public void onDataPacket(INetworkManager net, Packet132TileEntityData packet) {
-		readFromNBT(packet.data);
 	}
 
 	public void writeToNBT(NBTTagCompound nbttagcompound) {
@@ -76,12 +103,9 @@ public class TileEntityBlock extends TileEntity implements
 
 	public void onNetworkUpdate(String field) {
 		if (field.equals("facing") && this.prevFacing != this.facing) {
-			int reRenderMask = 0;
 			Block block = getBlockType();
 
-			if (this.lastRenderIcons == null)
-				reRenderMask = -1;
-			else {
+			if (this.lastRenderIcons != null) {
 				for (int side = 0; side < 6; side++) {
 					Icon oldIcon = this.lastRenderIcons[side];
 					if ((oldIcon instanceof BlockTextureStitched))
@@ -93,10 +117,6 @@ public class TileEntityBlock extends TileEntity implements
 					if ((newIcon instanceof BlockTextureStitched))
 						newIcon = ((BlockTextureStitched) newIcon)
 								.getRealTexture();
-
-					if (oldIcon != newIcon) {
-						reRenderMask |= 1 << side;
-					}
 				}
 			}
 
@@ -134,5 +154,8 @@ public class TileEntityBlock extends TileEntity implements
 		return new ItemStack(this.worldObj.getBlockId(this.xCoord, this.yCoord,
 				this.zCoord), 1, this.worldObj.getBlockMetadata(this.xCoord,
 				this.yCoord, this.zCoord));
+	}
+
+	public void onBlockBreak(int id, int meta) {
 	}
 }

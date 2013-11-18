@@ -25,5 +25,6 @@ public final class DefaultGuiIds {
 		int i = 0;
 		add("tileEntityTurbine", i++);
 		add("tileEntityWatermill", i++);
+		add("tileEntityReservoir", i++);
 	}
 }

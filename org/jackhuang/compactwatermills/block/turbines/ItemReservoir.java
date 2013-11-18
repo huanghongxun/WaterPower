@@ -27,12 +27,17 @@ public class ItemReservoir extends ItemBlock {
 	
 	@Override
 	public int getMetadata(int i) {
-		return 0;
+		if (i < ReservoirType.values().length) {
+			return i;
+		}
+		else {
+			return 0;
+		}
 	}
 	
 	@Override
 	public String getUnlocalizedName(ItemStack itemstack) {
 		if(itemstack.getItemDamage() >= ReservoirType.values().length) return null;
-		return "ReservoirType." + ReservoirType.values()[itemstack.getItemDamage()].name();
+		return ReservoirType.values()[itemstack.getItemDamage()].name();
 	}
 }

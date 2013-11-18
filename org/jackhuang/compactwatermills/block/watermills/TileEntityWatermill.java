@@ -2,13 +2,12 @@ package org.jackhuang.compactwatermills.block.watermills;
 
 import org.jackhuang.compactwatermills.CompactWatermills;
 import org.jackhuang.compactwatermills.DefaultGuiIds;
-import org.jackhuang.compactwatermills.InventorySlot;
+import org.jackhuang.compactwatermills.RotorInventorySlot;
 import org.jackhuang.compactwatermills.TileEntityBaseGenerator;
-import org.jackhuang.compactwatermills.InventorySlot.Access;
+import org.jackhuang.compactwatermills.helpers.LogHelper;
 import org.jackhuang.compactwatermills.rotors.ItemRotor;
 
 import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 /**
@@ -25,7 +24,7 @@ public class TileEntityWatermill extends TileEntityBaseGenerator {
 	public TileEntityWatermill(WaterType type) {
 		super(type.output, 32767);
 		this.type = type;
-		addInvSlot(new InventorySlot(this, "rotor", 0, Access.IO, 1));
+		addInvSlot(new RotorInventorySlot(this));
 	}
 
 	private static int getWaterBlocks(World world, int x, int y, int z,
@@ -64,6 +63,7 @@ public class TileEntityWatermill extends TileEntityBaseGenerator {
 		if (!invSlots.isEmpty() && invSlots.get(0) != null &&
 				!invSlots.get(0).isEmpty() && invSlots.get(0).get(0) != null
 				&& invSlots.get(0).get(0).getItem() instanceof ItemRotor) {
+			LogHelper.log("WATERMILL!");
 			ItemRotor rotor = (ItemRotor) invSlots.get(0).get(0).getItem();
 			if (worldObj.isRemote) {
 				return rotor.type.efficiency;
@@ -90,17 +90,6 @@ public class TileEntityWatermill extends TileEntityBaseGenerator {
 	@Override
 	public String getInvName() {
 		return type.showedName;
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemStack) {
-		if (itemStack == null) {
-			return false;
-		}
-		if (itemStack.getItem() instanceof ItemRotor) {
-			return true;
-		}
-		return false;
 	}
 
 	@Override

@@ -22,9 +22,9 @@ public class Reference {
 	
 	public static final String ModName = "Compact Watermills";
 	
-	public static final String Version = "@VERSION@";
+	public static final String Version = "0.1.1.5";
 	
-	public static final String MCVersion = "1.6.4";
+	public static final String MCVersion = "1.6.2";
 	
 	public static final int ItemIDDifference = -256;
 	
@@ -37,5 +37,7 @@ public class Reference {
 			configRotorName = "Rotor";
 	
 	public static final int turbineGuiID = 100;
+	
+	public static final boolean trackNetworkUsage = false;
 	
 }

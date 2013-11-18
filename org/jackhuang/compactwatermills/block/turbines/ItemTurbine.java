@@ -23,7 +23,7 @@ public class ItemTurbine extends ItemBlock {
 	@Override
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer,
 		List par3List, boolean par4) {
-		par3List.add("最大输出: 32767EU/t");
+		par3List.add("最大输出: 8192EU/t");
 	}
 	
 	@Override
