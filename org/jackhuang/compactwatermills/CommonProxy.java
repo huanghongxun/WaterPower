@@ -1,10 +1,13 @@
 package org.jackhuang.compactwatermills;
 
-import org.jackhuang.compactwatermills.block.turbines.ClientGUIReservoir;
-import org.jackhuang.compactwatermills.block.turbines.ClientGUITurbine;
-import org.jackhuang.compactwatermills.block.turbines.TileEntityReservoir;
+import org.jackhuang.compactwatermills.block.reservoir.TileEntityReservoir;
 import org.jackhuang.compactwatermills.block.turbines.TileEntityTurbine;
 import org.jackhuang.compactwatermills.block.watermills.TileEntityWatermill;
+import org.jackhuang.compactwatermills.gui.ClientGUIReservoir;
+import org.jackhuang.compactwatermills.gui.ClientGUITurbine;
+import org.jackhuang.compactwatermills.gui.ContainerReservoir;
+import org.jackhuang.compactwatermills.gui.ContainerRotor;
+import org.jackhuang.compactwatermills.gui.DefaultGuiIds;
 import org.jackhuang.compactwatermills.helpers.LogHelper;
 import org.jackhuang.compactwatermills.network.CompactWatermillsPacket;
 
@@ -32,39 +35,16 @@ public class CommonProxy implements IGuiHandler {
 		if (ID == DefaultGuiIds.get("tileEntityTurbine")) {
 			if (tileEntity instanceof TileEntityTurbine) {
 				TileEntityTurbine tileEntityT = (TileEntityTurbine) tileEntity;
-				return ClientGUITurbine.makeContainer(thePlayer, tileEntityT);
+				return new ContainerRotor(thePlayer, tileEntityT);
 			}
 		} else if (ID == DefaultGuiIds.get("tileEntityWatermill")) {
 			TileEntityWatermill tileEntityCW = (TileEntityWatermill) tileEntity;
-			return ClientGUIRotor.makeContainer(thePlayer, tileEntityCW);
+			return new ContainerRotor(thePlayer, tileEntityCW);
 		} else if (ID == DefaultGuiIds.get("tileEntityReservoir")) {
 			TileEntityReservoir tileEntityR = (TileEntityReservoir) tileEntity;
-			LogHelper.log("server = " + tileEntityR.masterBlock);
-			return ClientGUIReservoir.makeContainer(thePlayer, tileEntityR);
+			return new ContainerReservoir(thePlayer, tileEntityR);
 		}
 		return null;
-	}
-
-	public static void sendToPlayers(Packet packet, World world, int x, int y, int z,
-			int maxDistance) {
-		if (packet != null) {
-			for (int j = 0; j < world.playerEntities.size(); j++) {
-				EntityPlayerMP player = (EntityPlayerMP) world.playerEntities
-						.get(j);
-
-				if (Math.abs(player.posX - x) <= maxDistance
-						&& Math.abs(player.posY - y) <= maxDistance
-						&& Math.abs(player.posZ - z) <= maxDistance) {
-					player.playerNetServerHandler.sendPacketToPlayer(packet);
-				}
-			}
-		}
-	}
-
-	public static void sendToPlayer(EntityPlayer entityplayer,
-			CompactWatermillsPacket packet) {
-		EntityPlayerMP player = (EntityPlayerMP) entityplayer;
-		player.playerNetServerHandler.sendPacketToPlayer(packet.getPacket());
 	}
 
 }

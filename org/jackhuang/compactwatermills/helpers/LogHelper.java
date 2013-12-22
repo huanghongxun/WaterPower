@@ -21,6 +21,10 @@ public class LogHelper {
 		log(level, message);
 	}
 	
+	public static void debugLog(String message) {
+		debugLog(Level.INFO, message);
+	}
+	
 	public static void init() {
 		WatermillLog.setParent(FMLLog.getLogger());
 	}
@@ -30,7 +34,7 @@ public class LogHelper {
 	}
 	
 	public static void log(String message) {
-		WatermillLog.log(Level.INFO, message);
+		log(Level.INFO, message);
 	}
 	
 }

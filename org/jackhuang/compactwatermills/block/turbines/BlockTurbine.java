@@ -24,4 +24,9 @@ public class BlockTurbine extends BlockMultiID {
 		return "turbine";
 	}
 
+	@Override
+	protected int maxMetaData() {
+		return 1;
+	}
+
 }

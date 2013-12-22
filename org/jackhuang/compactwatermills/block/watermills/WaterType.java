@@ -21,13 +21,13 @@ import com.google.common.base.Throwables;
  * 
  */
 public enum WaterType {
-	UELV(1, "超低压水力发电机", TileEntityUELV.class),
-	ELV(8, "更低压水力发电机", TileEntityWatermill.class),
-	LV(32, "低压水力发电机", TileEntityLV.class),
-	MV(128, "中压水力发电机", TileEntityMV.class),
-	HV(512, "高压水力发电机", TileEntityHV.class),
-	EV(2048, "更高压水力发电机", TileEntityEV.class),
-	UEV(8192, "超高压水力发电机", TileEntityUEV.class);
+	UELV(1, "水力发电机MK1", TileEntityUELV.class, 5),
+	ELV(8, "水力发电机MK2", TileEntityWatermill.class, 5),
+	LV(32, "水力发电机MK3", TileEntityLV.class, 17),
+	MV(128, "水力发电机MK4", TileEntityMV.class, 17),
+	HV(512, "水力发电机MK5", TileEntityHV.class, 33),
+	EV(2048, "水力发电机MK6", TileEntityEV.class, 33),
+	UEV(8192, "水力发电机MK7", TileEntityUEV.class, 65);
 	
 	public static TileEntityWatermill makeTileEntity(int metadata) {
 		try {
@@ -41,17 +41,18 @@ public enum WaterType {
 		}
 	}
 	
-	public int output;
+	public int output, length;
 	
 	public Class<? extends TileEntityWatermill> claSS;
 	
 	public String showedName;
 	
 	private WaterType(int output, String showedName,
-		Class<? extends TileEntityWatermill> claSS) {
+		Class<? extends TileEntityWatermill> claSS, int length) {
 		this.output = output;
 		this.showedName = showedName;
 		this.claSS = claSS;
+		this.length = length;
 	}
 	
 	public String tileEntityName() {

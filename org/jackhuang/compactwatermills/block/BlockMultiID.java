@@ -8,11 +8,11 @@ import java.util.Random;
 import java.util.logging.Level;
 
 import org.jackhuang.compactwatermills.CompactWatermills;
-import org.jackhuang.compactwatermills.IHasGUI;
 import org.jackhuang.compactwatermills.InternalName;
 import org.jackhuang.compactwatermills.Reference;
-import org.jackhuang.compactwatermills.TileEntityBlock;
+import org.jackhuang.compactwatermills.gui.IHasGUI;
 import org.jackhuang.compactwatermills.helpers.LogHelper;
+import org.jackhuang.compactwatermills.tileentity.TileEntityBlock;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -111,7 +111,7 @@ public abstract class BlockMultiID extends BlockBase {
 				case 3:
 					te.setFacing((short) 4);
 				}
-				LogHelper.log("l=" + l);
+				LogHelper.debugLog("l=" + l);
 			}
 		}
 	}
@@ -169,6 +169,8 @@ public abstract class BlockMultiID extends BlockBase {
 
 		super.breakBlock(world, x, y, z, id, meta);
 	}
+	
+	protected abstract int maxMetaData();
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
@@ -179,7 +181,7 @@ public abstract class BlockMultiID extends BlockBase {
 		if (!item.getHasSubtypes())
 			itemList.add(new ItemStack(this));
 		else {
-			for (int i = 0; i < 20; i++) {
+			for (int i = 0; i < maxMetaData(); i++) {
 				ItemStack is = new ItemStack(this, 1, i);
 
 				if (Item.itemsList[this.blockID].getUnlocalizedName(is) == null)

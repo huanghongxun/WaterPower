@@ -22,7 +22,7 @@ public class Reference {
 	
 	public static final String ModName = "Compact Watermills";
 	
-	public static final String Version = "0.1.1.5";
+	public static final String Version = "0.1.1.9";
 	
 	public static final String MCVersion = "1.6.2";
 	
@@ -32,9 +32,9 @@ public class Reference {
 			defaultMillID = 2048,
 			defaultRotorID = 2049;
 	
-	public static final String configTurbineName = "CompactWatermillTurbine",
-			configMillName = "CompactWatermill",
-			configRotorName = "Rotor";
+	public static final String 
+			configRotorName = "Rotor",
+			configUpdaterName = "Updater";
 	
 	public static final int turbineGuiID = 100;
 	

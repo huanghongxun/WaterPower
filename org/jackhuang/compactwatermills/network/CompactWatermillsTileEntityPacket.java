@@ -5,7 +5,7 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
 
 import org.jackhuang.compactwatermills.Reference;
-import org.jackhuang.compactwatermills.TileEntityBase;
+import org.jackhuang.compactwatermills.tileentity.TileEntityBase;
 
 public class CompactWatermillsTileEntityPacket {
 	protected boolean isChunkDataPacket = false;

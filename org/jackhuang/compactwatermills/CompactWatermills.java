@@ -6,15 +6,18 @@ import java.util.Properties;
 import java.util.logging.Level;
 
 import org.jackhuang.compactwatermills.block.BlockBase;
-import org.jackhuang.compactwatermills.block.turbines.BlockReservoir;
+import org.jackhuang.compactwatermills.block.reservoir.BlockReservoir;
+import org.jackhuang.compactwatermills.block.reservoir.ReservoirType;
+import org.jackhuang.compactwatermills.block.reservoir.TileEntityReservoir;
 import org.jackhuang.compactwatermills.block.turbines.BlockTurbine;
-import org.jackhuang.compactwatermills.block.turbines.TileEntityReservoir;
 import org.jackhuang.compactwatermills.block.turbines.TileEntityTurbine;
 import org.jackhuang.compactwatermills.block.watermills.BlockCompactWatermill;
 import org.jackhuang.compactwatermills.block.watermills.WaterType;
+import org.jackhuang.compactwatermills.gui.CreativeTabCompactWatermills;
 import org.jackhuang.compactwatermills.helpers.LogHelper;
-import org.jackhuang.compactwatermills.rotors.ItemRotor;
-import org.jackhuang.compactwatermills.rotors.RotorType;
+import org.jackhuang.compactwatermills.item.rotors.ItemRotor;
+import org.jackhuang.compactwatermills.item.rotors.RotorType;
+import org.jackhuang.compactwatermills.item.updates.UpdaterType;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
@@ -50,7 +53,6 @@ public class CompactWatermills {
 	public static CommonProxy proxy;
 
 	public static BlockBase waterMill, turbine, reservoir;
-	public static ItemRotor waterRotor;
 
 	public static final CreativeTabs creativeTabCompactWatermills = new CreativeTabCompactWatermills(
 			"creativeTabCompactWatermills");
@@ -67,12 +69,15 @@ public class CompactWatermills {
 		runtimeIdProperties = new Properties();
 	}
 
+	@SuppressWarnings("unused")
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		LogHelper.init();
 		if (Reference.Version == "@VERSION@") {
 			debugMode = true;
 			LogHelper.log(Level.INFO, "Turning on debug mode.");
+		} else {
+			debugMode = false;
 		}
 		config = new Configuration(event.getSuggestedConfigurationFile());
 		config.load();
@@ -98,23 +103,31 @@ public class CompactWatermills {
 			typ.getConfig(config);
 		}
 		RotorType.initRotors();
+		
+		Property updater = config.getItem(Reference.configUpdaterName, DefaultIds.get(InternalName.itemUpdaters));
+		updater.comment = "This is the id of watermill updater items.";
+		
+		UpdaterType.initUpdaters(config);
 
 		config.save();
 
 	}
 
-	void addRotorRecipe(Item output, Item S, Block I) {
-		GameRegistry.addShapedRecipe(new ItemStack(output), "S S", " I ",
+	void addRotorRecipe(RotorType output, Item S, Block I) {
+		if(output.enable)
+		GameRegistry.addShapedRecipe(new ItemStack(output.getItem()), "S S", " I ",
 				"S S", 'S', new ItemStack(S), 'I', new ItemStack(I));
 	}
 
-	void addRotorRecipe(Item output, Block S, Block I) {
-		GameRegistry.addShapedRecipe(new ItemStack(output), "S S", " I ",
+	void addRotorRecipe(RotorType output, Block S, Block I) {
+		if(output.enable)
+		GameRegistry.addShapedRecipe(new ItemStack(output.getItem()), "S S", " I ",
 				"S S", 'S', new ItemStack(S), 'I', new ItemStack(I));
 	}
 
-	void addRotorRecipe(Item output, ItemStack S, ItemStack I) {
-		GameRegistry.addShapedRecipe(new ItemStack(output), "S S", " I ",
+	void addRotorRecipe(RotorType output, ItemStack S, ItemStack I) {
+		if(output.enable)
+		GameRegistry.addShapedRecipe(new ItemStack(output.getItem()), "S S", " I ",
 				"S S", 'S', S, 'I', I);
 	}
 
@@ -138,15 +151,10 @@ public class CompactWatermills {
 
 		waterMill = new BlockCompactWatermill(config,
 				InternalName.blockCompactWatermill);
-		turbine = new BlockTurbine(config, InternalName.blockTurbine);
-		reservoir = new BlockReservoir(config, InternalName.blockReservoir);
 
 		for (WaterType type : WaterType.values()) {
 			GameRegistry.registerTileEntity(type.claSS, type.tileEntityName());
 		}
-
-		GameRegistry.registerTileEntity(TileEntityReservoir.class, "reservoir");
-		GameRegistry.registerTileEntity(TileEntityTurbine.class, "turbine");
 
 		// Water mills recipes register
 		GameRegistry.addShapedRecipe(new ItemStack(waterMill, 1, 0), " W ",
@@ -167,11 +175,95 @@ public class CompactWatermills {
 		GameRegistry.addShapedRecipe(new ItemStack(waterMill, 1, 5), " W ",
 				"WTW", " W ", 'W', new ItemStack(waterMill, 1, 4), 'T',
 				Items.getItem("transformerUpgrade"));
-		GameRegistry.addShapedRecipe(new ItemStack(waterMill, 1, 6), " W ",
-				"WTW", " W ", 'W', new ItemStack(waterMill, 1, 5), 'T',
-				Items.getItem("transformerUpgrade"));
+		//GameRegistry.addShapedRecipe(new ItemStack(waterMill, 1, 6), " W ",
+		//		"WTW", " W ", 'W', new ItemStack(waterMill, 1, 5), 'T',
+		//		Items.getItem("transformerUpgrade"));
 
-		// Reservoir recipes register
+
+		// Rotors recipes register
+		addRotorRecipe(RotorType.WOOD, Item.stick, Block.wood);
+		addRotorRecipe(RotorType.STONE, Block.cobblestone,
+				Block.stone);
+		addRotorRecipe(RotorType.LEAD, Items.getItem("platelead"),
+				Items.getItem("denseplatelead"));
+		addRotorRecipe(RotorType.TIN, Items.getItem("platetin"),
+				Items.getItem("denseplatetin"));
+		addRotorRecipe(RotorType.GOLD, Items.getItem("plategold"),
+				Items.getItem("denseplategold"));
+		addRotorRecipe(RotorType.COPPER,
+				Items.getItem("platecopper"), Items.getItem("denseplatecopper"));
+		// addRotorRecipe(RotorType.SLIVER,
+		// Items.getItem("platecopper"), Items.getItem("copperBlock"));
+		addRotorRecipe(RotorType.IRON, Items.getItem("plateiron"),
+				Items.getItem("denseplateiron"));
+		addRotorRecipe(RotorType.REFINEDIRON,
+				Items.getItem("refinedIronIngot"), Items.getItem("machine"));
+		addRotorRecipe(RotorType.OBSIDIAN,
+				Items.getItem("plateobsidian"),
+				Items.getItem("denseplateobsidian"));
+		addRotorRecipe(RotorType.BRONZE,
+				Items.getItem("platebronze"), Items.getItem("denseplatebronze"));
+		addRotorRecipe(RotorType.LAPIS, Items.getItem("platelapi"),
+				Items.getItem("denseplatelapi"));
+		addRotorRecipe(RotorType.QUARTZ, Item.netherQuartz,
+				Block.blockNetherQuartz);
+		addRotorRecipe(RotorType.CARBON,
+				Items.getItem("carbonPlate"), Items.getItem("coalChunk"));
+		addRotorRecipe(RotorType.ADVANCED,
+				Items.getItem("advancedAlloy"),
+				Items.getItem("reinforcedStone"));
+		addRotorRecipe(RotorType.EMERALD, Item.emerald,
+				Block.blockEmerald);
+		addRotorRecipe(RotorType.DIAMOND, Item.diamond,
+				Block.blockDiamond);
+		addRotorRecipe(RotorType.IRIDIUM,
+				Items.getItem("iridiumOre"), Items.getItem("iridiumPlate"));
+
+		for (RotorType typ : RotorType.values()) {
+			if(typ.enable)
+			LanguageRegistry.addName(typ.getItem(), typ.showedName);
+		}
+
+		NetworkRegistry.instance().registerGuiHandler(this, proxy);
+		LanguageRegistry.instance().addStringLocalization(
+				"itemGroup.creativeTabCompactWatermills", "en_US",
+				"Compact Watermills");
+		LanguageRegistry.instance().addStringLocalization(
+				"itemGroup.creativeTabCompactWatermills", "zh_CN", "高级水力发电机");
+		
+		Property p = config.get("enable", "EnableReservoir", true);
+		if(p.getBoolean(true))
+			registerReservoir();
+		
+		config.save();
+	}
+	
+	private void registerUpdater() {
+		GameRegistry.addShapedRecipe(new ItemStack(UpdaterType.MK1.), "SAS", "AGA", "SAS",
+				'S', Items.getItem("advancedAlloy"),
+				'A', Items.getItem("carbonPlate"),
+				'G', Items.getItem("transformerUpgrade"));
+	}
+	
+	private void registerReservoir() {
+		
+		// Blocks registering		
+		turbine = new BlockTurbine(config, InternalName.blockTurbine);
+		reservoir = new BlockReservoir(config, InternalName.blockReservoir);
+		
+		// TileEntities registering
+		for (ReservoirType type : ReservoirType.values()) {
+			GameRegistry.registerTileEntity(type.claSS, type.tileEntityName());
+		}
+
+		GameRegistry.registerTileEntity(TileEntityTurbine.class, "turbine");
+		
+		// Turbine recipe registering
+		GameRegistry.addShapedRecipe(new ItemStack(turbine), "SAS", "AGS", "SAS",
+				'S', Block.fenceIron, 'A', new ItemStack(waterMill, 1, 5),
+				'G', Items.getItem("generator"));
+		
+		// Reservoir recipes registering
 		addReservoirRecipe(new ItemStack(reservoir, 8, 0), Block.wood);
 		addReservoirRecipe(new ItemStack(reservoir, 8, 1), Block.stone);
 		addReservoirRecipe(new ItemStack(reservoir, 8, 2), Block.blockLapis);
@@ -204,60 +296,6 @@ public class CompactWatermills {
 		GameRegistry.addShapedRecipe(new ItemStack(reservoir, 8, 19), "SSS",
 				"SIS", "SSS", 'S', Items.getItem("iridiumPlate"), 'I',
 				Items.getItem("industrialDiamond"));
-
-		// Rotors recipes register
-		addRotorRecipe(RotorType.WOOD.getItem(), Item.stick, Block.wood);
-		addRotorRecipe(RotorType.STONE.getItem(), Block.cobblestone,
-				Block.stone);
-		addRotorRecipe(RotorType.LEAD.getItem(), Items.getItem("platelead"),
-				Items.getItem("denseplatelead"));
-		addRotorRecipe(RotorType.TIN.getItem(), Items.getItem("platetin"),
-				Items.getItem("denseplatetin"));
-		addRotorRecipe(RotorType.GOLD.getItem(), Items.getItem("plategold"),
-				Items.getItem("denseplategold"));
-		addRotorRecipe(RotorType.COPPER.getItem(),
-				Items.getItem("platecopper"), Items.getItem("denseplatecopper"));
-		// addRotorRecipe(RotorType.SLIVER.getItem(),
-		// Items.getItem("platecopper"), Items.getItem("copperBlock"));
-		addRotorRecipe(RotorType.IRON.getItem(), Items.getItem("plateiron"),
-				Items.getItem("denseplateiron"));
-		addRotorRecipe(RotorType.REFINEDIRON.getItem(),
-				Items.getItem("refinedIronIngot"), Items.getItem("machine"));
-		addRotorRecipe(RotorType.OBSIDIAN.getItem(),
-				Items.getItem("plateobsidian"),
-				Items.getItem("denseplateobsidian"));
-		addRotorRecipe(RotorType.BRONZE.getItem(),
-				Items.getItem("platebronze"), Items.getItem("denseplatebronze"));
-		addRotorRecipe(RotorType.LAPIS.getItem(), Items.getItem("platelapi"),
-				Items.getItem("denseplatelapi"));
-		addRotorRecipe(RotorType.QUARTZ.getItem(), Item.netherQuartz,
-				Block.blockNetherQuartz);
-		addRotorRecipe(RotorType.CARBON.getItem(),
-				Items.getItem("carbonPlate"), Items.getItem("coalChunk"));
-		addRotorRecipe(RotorType.ADVANCED.getItem(),
-				Items.getItem("advancedAlloy"),
-				Items.getItem("reinforcedStone"));
-		addRotorRecipe(RotorType.EMERALD.getItem(), Item.emerald,
-				Block.blockEmerald);
-		addRotorRecipe(RotorType.DIAMOND.getItem(), Item.diamond,
-				Block.blockDiamond);
-		addRotorRecipe(RotorType.IRIDIUM.getItem(),
-				Items.getItem("iridiumOre"), Items.getItem("iridiumPlate"));
-		
-		GameRegistry.addShapedRecipe(new ItemStack(turbine), "SAS", "AGS", "SAS",
-				'S', Block.fenceIron, 'A', new ItemStack(waterMill, 1, 5),
-				'G', Items.getItem("generator"));
-
-		for (RotorType typ : RotorType.values()) {
-			LanguageRegistry.addName(typ.getItem(), typ.showedName);
-		}
-
-		NetworkRegistry.instance().registerGuiHandler(this, proxy);
-		LanguageRegistry.instance().addStringLocalization(
-				"itemGroup.creativeTabCompactWatermills", "en_US",
-				"Compact Watermills");
-		LanguageRegistry.instance().addStringLocalization(
-				"itemGroup.creativeTabCompactWatermills", "zh_CN", "高级水力发电机");
 	}
 
 	@EventHandler
@@ -278,7 +316,7 @@ public class CompactWatermills {
 		}
 
 		if ((ret.intValue() <= 0) || (ret.intValue() > Block.blocksList.length)) {
-			displayError("An invalid block ID has been detected on your IndustrialCraft 2\nconfiguration file. Block IDs cannot be higher than "
+			displayError("An invalid block ID has been detected on your Compact Watermills\nconfiguration file. Block IDs cannot be higher than "
 					+ (Block.blocksList.length - 1)
 					+ ".\n"
 					+ "\n"
@@ -302,7 +340,7 @@ public class CompactWatermills {
 						+ ")";
 			}
 
-			displayError("A conflicting block ID has been detected on your IndustrialCraft 2\nconfiguration file. Block IDs cannot be used more than once.\n\nBlock with invalid ID: "
+			displayError("A conflicting block ID has been detected on your Compact Watermills\nconfiguration file. Block IDs cannot be used more than once.\n\nBlock with invalid ID: "
 					+ name
 					+ "\n"
 					+ "Invalid ID: "
@@ -312,6 +350,51 @@ public class CompactWatermills {
 		}
 
 		runtimeIdProperties.setProperty("block." + name, ret.toString());
+
+		return ret.intValue();
+	}
+
+	public static int getItemIdFor(Configuration config,
+			InternalName internalName, int standardId) {
+		String name = internalName.name();
+
+		Property prop = null;
+		Integer ret;
+		if (config == null) {
+			ret = Integer.valueOf(standardId);
+		} else {
+			prop = config.get("item", name, standardId);
+			ret = Integer.valueOf(prop.getInt(standardId));
+		}
+
+		if ((ret.intValue() <= 0) || (ret.intValue() > Item.itemsList.length)) {
+			displayError("An invalid item ID has been detected on your Compact Watermills\nconfiguration file. Item IDs cannot be higher than "
+					+ (Block.blocksList.length - 1)
+					+ ".\n"
+					+ "\n"
+					+ "Item with invalid ID: "
+					+ name
+					+ "\n"
+					+ "Invalid ID: "
+					+ ret);
+		}
+
+		if (Item.itemsList[ret.intValue()] != null) {
+			String occupiedBy;
+			occupiedBy = "item " + Item.itemsList[ret.intValue()] + " ("
+					+ Item.itemsList[ret.intValue()].getUnlocalizedName()
+					+ ")";
+
+			displayError("A conflicting item ID has been detected on your Compact Watermills\nconfiguration file. Item IDs cannot be used more than once.\n\nItem with invalid ID: "
+					+ name
+					+ "\n"
+					+ "Invalid ID: "
+					+ ret
+					+ "\n"
+					+ "Already occupied by: " + occupiedBy);
+		}
+
+		runtimeIdProperties.setProperty("item." + name, ret.toString());
 
 		return ret.intValue();
 	}

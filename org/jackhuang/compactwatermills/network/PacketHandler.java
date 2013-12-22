@@ -1,6 +1,6 @@
 package org.jackhuang.compactwatermills.network;
 
-import org.jackhuang.compactwatermills.block.turbines.TileEntityReservoir;
+import org.jackhuang.compactwatermills.block.reservoir.TileEntityReservoir;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayerMP;

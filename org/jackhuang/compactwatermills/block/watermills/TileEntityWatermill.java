@@ -1,14 +1,16 @@
 package org.jackhuang.compactwatermills.block.watermills;
 
 import org.jackhuang.compactwatermills.CompactWatermills;
-import org.jackhuang.compactwatermills.DefaultGuiIds;
-import org.jackhuang.compactwatermills.RotorInventorySlot;
-import org.jackhuang.compactwatermills.TileEntityBaseGenerator;
+import org.jackhuang.compactwatermills.EnergyType;
+import org.jackhuang.compactwatermills.gui.DefaultGuiIds;
 import org.jackhuang.compactwatermills.helpers.LogHelper;
-import org.jackhuang.compactwatermills.rotors.ItemRotor;
+import org.jackhuang.compactwatermills.inventory.RotorInventorySlot;
+import org.jackhuang.compactwatermills.item.rotors.ItemRotor;
+import org.jackhuang.compactwatermills.tileentity.TileEntityBaseGenerator;
 
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
 
 /**
  * 
@@ -31,9 +33,10 @@ public class TileEntityWatermill extends TileEntityBaseGenerator {
 			WaterType type) {
 		int waterBlocks = 0;
 
-		for (int xTest = -1; xTest <= 1; xTest++) {
-			for (int yTest = -1; yTest <= 1; yTest++) {
-				for (int zTest = -1; zTest <= 1; zTest++) {
+		int range = type.length / 2;
+		for (int xTest = -range; xTest <= range; xTest++) {
+			for (int yTest = -range; yTest <= range; yTest++) {
+				for (int zTest = -range; zTest <= range; zTest++) {
 					int id = world.getBlockId(x + xTest, y + yTest, z + zTest);
 					if (id != Block.waterMoving.blockID
 							&& id != Block.waterStill.blockID) {
@@ -63,7 +66,7 @@ public class TileEntityWatermill extends TileEntityBaseGenerator {
 		if (!invSlots.isEmpty() && invSlots.get(0) != null &&
 				!invSlots.get(0).isEmpty() && invSlots.get(0).get(0) != null
 				&& invSlots.get(0).get(0).getItem() instanceof ItemRotor) {
-			LogHelper.log("WATERMILL!");
+			LogHelper.debugLog("WATERMILL!");
 			ItemRotor rotor = (ItemRotor) invSlots.get(0).get(0).getItem();
 			if (worldObj.isRemote) {
 				return rotor.type.efficiency;
@@ -95,5 +98,10 @@ public class TileEntityWatermill extends TileEntityBaseGenerator {
 	@Override
 	public int getGuiId() {
 		return DefaultGuiIds.get("tileEntityWatermill");
+	}
+
+	@Override
+	protected EnergyType energyType() {
+		return EnergyType.MJ;
 	}
 }

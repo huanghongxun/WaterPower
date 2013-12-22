@@ -1,11 +1,14 @@
 package org.jackhuang.compactwatermills.block.turbines;
 
 import org.jackhuang.compactwatermills.CompactWatermills;
-import org.jackhuang.compactwatermills.DefaultGuiIds;
-import org.jackhuang.compactwatermills.RotorInventorySlot;
-import org.jackhuang.compactwatermills.TileEntityBaseGenerator;
+import org.jackhuang.compactwatermills.EnergyType;
+import org.jackhuang.compactwatermills.block.reservoir.Reservoir;
+import org.jackhuang.compactwatermills.block.reservoir.TileEntityReservoir;
+import org.jackhuang.compactwatermills.gui.DefaultGuiIds;
 import org.jackhuang.compactwatermills.helpers.LogHelper;
-import org.jackhuang.compactwatermills.rotors.ItemRotor;
+import org.jackhuang.compactwatermills.inventory.RotorInventorySlot;
+import org.jackhuang.compactwatermills.item.rotors.ItemRotor;
+import org.jackhuang.compactwatermills.tileentity.TileEntityBaseGenerator;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -85,24 +88,24 @@ public class TileEntityTurbine extends TileEntityBaseGenerator {
 		TileEntityReservoir pair = getWater(world, x, y, z);
 		if(pair == null) return 0;
 		else {
-			LogHelper.log("-530.-384" + world.getBlockTileEntity(-530, 71, -384));
-			LogHelper.log("res" + pair);
-			LogHelper.log("x,y,z=" + pair.xCoord + "," + pair.yCoord + "," + pair.zCoord);
-			LogHelper.log("hasmaster=" + pair.masterBlock);
-			LogHelper.log("water=" + pair.getWater());
-			LogHelper.log("maxuse=" + pair.type.maxUse);
+			LogHelper.debugLog("-530.-384" + world.getBlockTileEntity(-530, 71, -384));
+			LogHelper.debugLog("res" + pair);
+			LogHelper.debugLog("x,y,z=" + pair.xCoord + "," + pair.yCoord + "," + pair.zCoord);
+			LogHelper.debugLog("hasmaster=" + pair.masterBlock);
+			LogHelper.debugLog("water=" + pair.getWater());
+			LogHelper.debugLog("maxuse=" + pair.type.maxUse);
 			double use = Math.min(pair.getWater(), pair.type.maxUse);
-			LogHelper.log("use=" + use);
-			double baseEnergy = use * 5000;
-			LogHelper.log("baseEnergy" + baseEnergy);
-			LogHelper.log("speed" + speed);
+			LogHelper.debugLog("use=" + use);
+			double baseEnergy = use * 5;
+			LogHelper.debugLog("baseEnergy" + baseEnergy);
+			LogHelper.debugLog("speed" + speed);
 			double per = tickRotor();
-			LogHelper.log("per=" + per);
+			LogHelper.debugLog("per=" + per);
 			if(per > 0) {
 				double energy = baseEnergy * per * ((double)speed / 1000);
-				LogHelper.log("energy = " + energy);
+				LogHelper.debugLog("energy = " + energy);
 				pair.useWater((int)use);
-				LogHelper.log("use=" + use);
+				LogHelper.debugLog("use=" + use);
 				return energy;
 			}
 		}
@@ -284,6 +287,11 @@ public class TileEntityTurbine extends TileEntityBaseGenerator {
 	public void writePacketData(NBTTagCompound tag) {
 		super.writePacketData(tag);
 		tag.setInteger("speed", speed);
+	}
+
+	@Override
+	protected EnergyType energyType() {
+		return EnergyType.EU;
 	}
 
 }
