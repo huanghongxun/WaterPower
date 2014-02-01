@@ -1,6 +1,6 @@
 package org.jackhuang.compactwatermills;
 
-import org.jackhuang.compactwatermills.gui.IHasGUI;
+import org.jackhuang.compactwatermills.client.gui.IHasGUI;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

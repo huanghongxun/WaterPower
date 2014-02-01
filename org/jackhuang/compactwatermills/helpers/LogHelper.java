@@ -15,7 +15,7 @@ public class LogHelper {
 	private static Logger WatermillLog = Logger.getLogger(Reference.ModID);
 	
 	public static void debugLog(Level level, String message) {
-		if (! CompactWatermills.debugMode) {
+		if (! Reference.DEBUG_MODE) {
 			return;
 		}
 		log(level, message);

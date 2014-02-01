@@ -52,7 +52,7 @@ public class ItemRotor extends Item {
 		else {
 			par3List.add("永久");
 		}
-		par3List.add("提升效率: "
+		par3List.add("获得效率: "
 			+ (int) (((ItemRotor) par1ItemStack.getItem()).type.efficiency * 100) + "%");
 	}
 	

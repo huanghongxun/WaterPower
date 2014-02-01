@@ -23,22 +23,25 @@ public class ItemTurbine extends ItemBlock {
 	@Override
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer,
 		List par3List, boolean par4) {
-		par3List.add("最大输出: 8192EU/t");
+		par3List.add(TurbineType.values()[par1ItemStack.getItemDamage()].percent + "EU/t");
 	}
 	
 	@Override
 	public String getItemDisplayName(ItemStack par1ItemStack) {
-		return "水轮机";
+		return TurbineType.values()[par1ItemStack.getItemDamage()].showedName;
 	}
 	
 	@Override
 	public int getMetadata(int i) {
-		return 0;
+		if(i < TurbineType.values().length)
+			return i;
+		else
+			return 0;
 	}
 	
 	@Override
 	public String getUnlocalizedName(ItemStack itemstack) {
-		if(itemstack.getItemDamage() > 0) return null;
-		return "turbine";
+		if(itemstack.getItemDamage() >= TurbineType.values().length) return null;
+		return TurbineType.values()[itemstack.getItemDamage()].unlocalizedName;
 	}
 }

@@ -1,5 +1,7 @@
 package org.jackhuang.compactwatermills.item;
 
+import java.util.List;
+
 import org.jackhuang.compactwatermills.CompactWatermills;
 import org.jackhuang.compactwatermills.DefaultIds;
 import org.jackhuang.compactwatermills.InternalName;
@@ -9,6 +11,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
@@ -23,7 +26,7 @@ public abstract class ItemBase extends Item {
 	
 	public ItemBase(Configuration config, InternalName internalName) {
 		super(id = CompactWatermills.getItemIdFor(config, internalName,
-				DefaultIds.get(internalName)) + Reference.ItemIDDifference);
+				DefaultIds.get(internalName)));
 
 		setCreativeTab(CompactWatermills.creativeTabCompactWatermills);
 		setNoRepair();
@@ -57,7 +60,7 @@ public abstract class ItemBase extends Item {
 	    String textureFolder = getTextureFolder() + "/";
 
 	    for (int index = 0; index < indexCount; index++)
-	      this.textures[index] = iconRegister.registerIcon("ic2:" + textureFolder + getTextureName(index));
+	      this.textures[index] = iconRegister.registerIcon(Reference.ModID + ":" + textureFolder + getTextureName(index));
 	}
 	
 	  @SideOnly(Side.CLIENT)
@@ -73,5 +76,15 @@ public abstract class ItemBase extends Item {
 	public ResourceLocation getRenderTexture() {
 		return new ResourceLocation(Reference.ModID + ":textures/items/"
 			+ this.getUnlocalizedName() + ".png");
+	}
+	
+	@Override
+	public void getSubItems(int par1, CreativeTabs par2CreativeTabs,
+			List par3List) {
+		for(int meta = 0; meta < 32767; meta++) {
+			ItemStack stack = new ItemStack(this, 1, meta);
+			if(getUnlocalizedName(stack) == null) break;
+			par3List.add(stack);
+		}
 	}
 }

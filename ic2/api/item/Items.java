@@ -30,9 +30,8 @@ public final class Items {
 
 			if (ret instanceof ItemStack) {
 				return (ItemStack) ret;
-			} else {
-				return null;
 			}
+			return null;
 		} catch (Exception e) {
 			System.out.println("IC2 API: Call getItem failed for "+name);
 
@@ -529,7 +528,7 @@ public final class Items {
 	// Metal Dense Plates
 	  denseplatecopper;               // Metal dense plate item, meta sensitive
 	  denseplatetin;                  // Metal dense plate item, meta sensitive
-	  denseplatebronze;               // Metal dense plate item, meta sensitive
+	  denseplatebronze;               // Metal dense  plate item, meta sensitive
 	  denseplategold;                 // Metal dense plate item, meta sensitive
 	  denseplateiron;                 // Metal dense plate item, meta sensitive
 	@Deprecated

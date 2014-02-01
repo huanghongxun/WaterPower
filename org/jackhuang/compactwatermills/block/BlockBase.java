@@ -83,7 +83,7 @@ public abstract class BlockBase extends BlockContainer {
 	}
 
 	public String getUnlocalizedName() {
-		return super.getUnlocalizedName().substring(5);
+		return super.getUnlocalizedName();
 	}
 
 	protected int getFacing(int meta) {
@@ -144,11 +144,6 @@ public abstract class BlockBase extends BlockContainer {
 			metaCount++;
 
 		return metaCount;
-	}
-
-	@SideOnly(Side.CLIENT)
-	public EnumRarity getRarity(ItemStack stack) {
-		return EnumRarity.common;
 	}
 
 }

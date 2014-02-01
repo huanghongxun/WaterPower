@@ -1,11 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2013 Aroma1997.
- * All rights reserved. This program and other files related to this program are
- * licensed with a extended GNU General Public License v. 3
- * License informations are at:
- * https://github.com/Aroma1997/CompactWindmills/blob/master/license.txt
- ******************************************************************************/
-
 package org.jackhuang.compactwatermills.item.rotors;
 
 
@@ -20,37 +12,50 @@ import net.minecraftforge.common.Property;
 
 /**
  * 
- * @author Aroma1997
+ * @author jackhuang1998
  * 
  */
 public enum RotorType {
-	
-	WOOD(0, 0.125, 1800 * 20, "木转子", "waterRotorWood", ItemRotor.class),
-	STONE(1, 0.2, 500 * 20, "石转子", "waterRotorStone", ItemRotor.class),
-	LEAD(2, 0.215, 500 * 20, "铅转子", "waterRotorLead", ItemRotor.class),
-	TIN(3, 0.23, 700 * 20, "锡转子", "waterRotorTin", ItemRotor.class),
-	GOLD(4, 0.7, 800 * 20, "金转子", "waterRotorGold", ItemRotor.class),
-	COPPER(5, 0.25, 800 * 20, "铜转子", "waterRotorCopper", ItemRotor.class),
-	SLIVER(6, 0.3, 1000 * 20, "银转子", "waterRotorSliver", ItemRotor.class),
-	IRON(7, 0.35, 2000 * 20, "铁转子", "waterRotorIron", ItemRotor.class),
-	REFINEDIRON(8, 0.4, 2600 * 20, "精炼铁转子", "waterRotorRefinedIron", ItemRotor.class),
-	OBSIDIAN(9, 0.45, 2100 * 20, "黑曜石转子", "waterRotorObsidian", ItemRotor.class),
-	BRONZE(10, 0.5, 2200 * 20, "青铜转子", "waterRotorBronze", ItemRotor.class),
-	LAPIS(11, 0.55, 1800 * 20, "青金石转子", "waterRotorLapis", ItemRotor.class),
-	QUARTZ(12, 0.6, 3000 * 20, "石英转子", "waterRotorQuartz", ItemRotor.class),
-	CARBON(12, 0.65, 6000 * 20, "碳板转子", "waterRotorCarbon", ItemRotor.class),
-	ADVANCED(13, 0.7, 3000 * 20, "高级合金转子", "waterRotorAdvanced", ItemRotor.class),
-	EMERALD(14, 0.75, 7000 * 20, "绿宝石转子", "waterRotorEmerald", ItemRotor.class),
-	DIAMOND(15, 0.8, 10000 * 20, "钻石转子", "waterRotorDiamond", ItemRotor.class),
-	IRIDIUM(16, 0.9, 20000 * 20, "铱转子", "waterRotorIridium", ItemRotor.class);
+	// 1 - IndustrialCraft 
+	WOOD(0.125, 1800, "木转子", "waterRotorWood"),
+	STONE(0.2, 500, "石转子", "waterRotorStone"),
+	LEAD(0.215, 500, "铅转子", "waterRotorLead"),
+	TIN(0.23, 700, "锡转子", "waterRotorTin"),
+	GOLD(0.7, 800, "金转子", "waterRotorGold"),
+	COPPER(0.25, 800, "铜转子", "waterRotorCopper"),
+	SILVER(0.3, 1000, "银转子", "waterRotorSilver"),
+	IRON(0.35, 2000, "铁转子", "waterRotorIron"),
+	REFINEDIRON(0.4, 2600, "精炼铁转子", "waterRotorRefinedIron"),
+	OBSIDIAN(0.45, 2100, "黑曜石转子", "waterRotorObsidian"),
+	BRONZE(0.5, 2200, "青铜转子", "waterRotorBronze"),
+	LAPIS(0.55, 1800, "青金石转子", "waterRotorLapis"),
+	QUARTZ(0.6, 3000, "石英转子", "waterRotorQuartz"),
+	CARBON(0.65, 6000, "碳板转子", "waterRotorCarbon"),
+	ADVANCED(0.7, 3000, "高级合金转子", "waterRotorAdvanced"),
+	EMERALD(0.75, 7000, "绿宝石转子", "waterRotorEmerald"),
+	DIAMOND(0.8, 10000, "钻石转子", "waterRotorDiamond"),
+	IRIDIUM(0.9, 40000, "铱转子", "waterRotorIridium"),
+	IRIDIUMIRON(1, 60000, "铱铁转子", "waterRotorIridiumIron"),
+	// 2 - GregTech
+	ZINC(0.23, 700, "锌转子", "waterRotorZinc"),
+	BRASS(0.5, 2200, "黄铜转子", "waterRotorBrass"),
+	ALUMINUM(0.4, 2600, "铝转子", "waterRotorAluminum"),
+	ELECTRUM(0.45, 2600, "金银转子", "waterRotorElectrum"),
+	STEEL(0.5, 3000, "钢转子", "waterRotorSteel"),
+	INVAR(0.55, 2000, "殷钢转子", "waterRotorInvar"),
+	NICKEL(0.6, 2500, "镍转子", "waterRotorNickel"),
+	TITANIUM(0.65, 3000, "钛转子", "waterRotorTitanium"),
+	PLATINUM(0.7, 10000, "铂转子", "waterRotorPlatinum"),
+	TUNGSTEN(0.75, 15000, "钨转子", "waterRotorTungsten"),
+	CHROME(0.8, 20000, "铬转子", "waterRotorChrome"),
+	TUNGSTEN_STEEL(0.85, 30000, "钨钢转子", "waterRotorTungstenSteel"),
+	OSMIUM(0.9, 50000, "锇转子", "waterRotorOsmium");
 	
 	public static void initRotors() {
 		for (RotorType type : RotorType.values()) {
 			type.initRotor();
 		}
 	}
-	
-	public int number;
 	
 	public double efficiency;
 	
@@ -60,28 +65,24 @@ public enum RotorType {
 	
 	public String unlocalizedName;
 	
-	public Class<? extends ItemRotor> claSS;
-	
 	public int id;
 	
 	private ItemRotor rotor;
 	
 	public boolean enable;
 	
-	private RotorType(int number, double efficiency, int maxDamage, String showedName,
-		String unlocalizedName, Class<? extends ItemRotor> claSS) {
-		this.number = number;
+	private RotorType(double efficiency, int maxDamage, String showedName,
+		String unlocalizedName) {
 		this.efficiency = efficiency;
-		this.maxDamage = maxDamage;
+		this.maxDamage = maxDamage * 20;
 		this.showedName = showedName;
 		this.unlocalizedName = unlocalizedName;
-		this.claSS = claSS;
 	}
 	
 	public void getConfig(Configuration config) {
-		Property rotorId = config.getItem(this.unlocalizedName, Reference.defaultRotorID + number);
+		Property rotorId = config.getItem(this.unlocalizedName, Reference.defaultRotorID + ordinal());
 		rotorId.comment = "This is the id of " + showedName + " Item.";
-		id = rotorId.getInt(Reference.defaultRotorID + number);
+		id = rotorId.getInt(Reference.defaultRotorID + ordinal());
 		Property enableRotor = config.get("enable", this.unlocalizedName, true);
 		enableRotor.comment = "这关系到是否启用" + showedName;
 		enable = enableRotor.getBoolean(true);
@@ -102,7 +103,7 @@ public enum RotorType {
 	private void initRotor() {
 		try {
 			if(enable)
-				rotor = (ItemRotor) claSS.getConstructor(RotorType.class).newInstance(this)
+				rotor = (ItemRotor) ItemRotor.class.getConstructor(RotorType.class).newInstance(this)
 					.setUnlocalizedName(unlocalizedName)
 					.setMaxDamage(maxDamage);
 		}

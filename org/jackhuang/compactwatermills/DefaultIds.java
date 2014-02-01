@@ -25,6 +25,6 @@ public final class DefaultIds {
 		add(InternalName.blockCompactWatermill, 2048);
 		add(InternalName.blockTurbine, 2047);
 		add(InternalName.blockReservoir, 2046);
-		add(InternalName.itemUpdaters, 31720);
+		add(InternalName.itemUpdaters, 31700);
 	}
 }

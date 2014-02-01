@@ -3,10 +3,13 @@ package org.jackhuang.compactwatermills.tileentity;
 import java.util.ArrayList;
 
 import org.jackhuang.compactwatermills.CompactWatermills;
-import org.jackhuang.compactwatermills.gui.IHasGUI;
+import org.jackhuang.compactwatermills.client.gui.IHasGUI;
 import org.jackhuang.compactwatermills.helpers.LogHelper;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTank;
 
 public abstract class TileEntityMultiBlock extends TileEntityLiquidTankInventory
 		implements IHasGUI {
@@ -47,6 +50,17 @@ public abstract class TileEntityMultiBlock extends TileEntityLiquidTankInventory
 	protected boolean canBeMaster() {
 		return true;
 	}
+	
+	@Override
+	public FluidTank getFluidTank() {
+		if(!CompactWatermills.isSimulating()) return fluidTank;
+		if(isMaster)
+			return fluidTank;
+		else if (masterBlock == null)
+			return fluidTank;
+		else
+			return masterBlock.fluidTank;
+	}
 
 	@Override
 	public void updateEntity() {
@@ -71,6 +85,7 @@ public abstract class TileEntityMultiBlock extends TileEntityLiquidTankInventory
 					}
 
 				}
+				sendUpdateToClient();
 			}
 		}
 

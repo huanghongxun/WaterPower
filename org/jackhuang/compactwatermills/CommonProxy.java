@@ -3,11 +3,11 @@ package org.jackhuang.compactwatermills;
 import org.jackhuang.compactwatermills.block.reservoir.TileEntityReservoir;
 import org.jackhuang.compactwatermills.block.turbines.TileEntityTurbine;
 import org.jackhuang.compactwatermills.block.watermills.TileEntityWatermill;
-import org.jackhuang.compactwatermills.gui.ClientGUIReservoir;
-import org.jackhuang.compactwatermills.gui.ClientGUITurbine;
-import org.jackhuang.compactwatermills.gui.ContainerReservoir;
-import org.jackhuang.compactwatermills.gui.ContainerRotor;
-import org.jackhuang.compactwatermills.gui.DefaultGuiIds;
+import org.jackhuang.compactwatermills.client.gui.ClientGUIReservoir;
+import org.jackhuang.compactwatermills.client.gui.ClientGUITurbine;
+import org.jackhuang.compactwatermills.client.gui.ContainerReservoir;
+import org.jackhuang.compactwatermills.client.gui.ContainerRotor;
+import org.jackhuang.compactwatermills.client.gui.DefaultGuiIds;
 import org.jackhuang.compactwatermills.helpers.LogHelper;
 import org.jackhuang.compactwatermills.network.CompactWatermillsPacket;
 
@@ -45,6 +45,10 @@ public class CommonProxy implements IGuiHandler {
 			return new ContainerReservoir(thePlayer, tileEntityR);
 		}
 		return null;
+	}
+	
+	public void registerRenderer() {
+		
 	}
 
 }

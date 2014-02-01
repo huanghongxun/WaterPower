@@ -8,7 +8,7 @@ import java.util.Random;
 
 import org.jackhuang.compactwatermills.CompactWatermills;
 import org.jackhuang.compactwatermills.EnergyType;
-import org.jackhuang.compactwatermills.gui.IHasGUI;
+import org.jackhuang.compactwatermills.client.gui.IHasGUI;
 
 import buildcraft.api.power.IPowerEmitter;
 import buildcraft.api.power.IPowerReceptor;
@@ -25,7 +25,7 @@ public abstract class TileEntityBaseGenerator extends TileEntityBlock implements
 	public static Random random = new Random();
 
 	public double storage = 0.0D;
-	public final double maxStorage;
+	public double maxStorage;
 	public int production;
 	// private boolean initialized = false;
 	public boolean addedToEnergyNet = false;
@@ -35,6 +35,9 @@ public abstract class TileEntityBaseGenerator extends TileEntityBlock implements
 	private IEnergyHandler[] energyHandlerCache;
 	private IPowerReceptor[] powerReceptorCache;
 	private boolean deadCache;
+	
+	public TileEntityBaseGenerator() {
+	}
 
 	public TileEntityBaseGenerator(int production, double maxStorage) {
 		this.production = production;
@@ -118,6 +121,7 @@ public abstract class TileEntityBaseGenerator extends TileEntityBlock implements
 	}
 
 	protected abstract EnergyType energyType();
+	protected abstract void onUpdateClientAndServer();
 
 	public void updateEntity() {
 		super.updateEntity();
@@ -138,20 +142,23 @@ public abstract class TileEntityBaseGenerator extends TileEntityBlock implements
 
 		if (this.storage > this.maxStorage)
 			this.storage = this.maxStorage;
+		
+		onUpdateClientAndServer();
 
 		if (worldObj.isRemote)
 			return;
+		
+		storage += setOutput(worldObj, xCoord, yCoord, zCoord);
+		
+		if(energyType() == EnergyType.MJ || energyType() == EnergyType.RF) {
+			double j = Math.min(this.production, this.storage);
+			storage -= j;
+			storage += producePower((int) (j / 5 * 2)) / 2 * 5;
+		}
 
 		if (tick-- == 0) {
 			onUpdate();
 			tick = CompactWatermills.updateTick;
-			storage += setOutput(worldObj, xCoord, yCoord, zCoord) * tick;
-			
-			if(energyType() == EnergyType.MJ || energyType() == EnergyType.RF) {
-				double j = Math.min(this.production, this.storage);
-				storage -= j;
-				storage += producePower((int) (j / 5 * 2)) / 2 * 5;
-			}
 
 			sendUpdateToClient();
 		}
@@ -283,6 +290,10 @@ public abstract class TileEntityBaseGenerator extends TileEntityBlock implements
 	@Override
 	public int getMaxEnergyStored(ForgeDirection paramForgeDirection) {
 		return (int) maxStorage * 5;
+	}
+	
+	public boolean isEnergyFull() {
+		return storage == maxStorage;
 	}
 
 }

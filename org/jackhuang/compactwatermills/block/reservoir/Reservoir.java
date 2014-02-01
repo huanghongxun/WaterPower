@@ -1,5 +1,6 @@
 package org.jackhuang.compactwatermills.block.reservoir;
 
+import java.beans.IntrospectionException;
 import java.util.ArrayList;
 
 import org.jackhuang.compactwatermills.block.turbines.Position;
@@ -66,9 +67,9 @@ public class Reservoir {
 	
 	/*
 	方向 L facing
+	北   2 3
 	南   0 2
 	西   1 5
-	北   2 3
 	东   3 4*/
 
 	
@@ -86,6 +87,30 @@ public class Reservoir {
 				if (!isRes(world, x, j, i, meta))
 					aList.add(new Position(x, j, i));
 			}
+		return aList;
+	}
+	
+	// WWWW
+	// W  W
+	// W  W
+	// OWWW
+	public static ArrayList<Position> getNotCircleWall(World world,
+			int x, int y, int z,
+			int length, int width, int meta) {
+		int i;
+		ArrayList<Position> aList = new ArrayList<Position>();
+		for (i = z; i <= z + width - 1; i++) {
+			if (!isRes(world, x, y, i, meta))
+				aList.add(new Position(x, y, i));
+			if (!isRes(world, x + length - 1, y, i, meta))
+				aList.add(new Position(x + length - 1, y, i));
+		}
+		for (i = x + 1; i < x + width - 1; i++) {
+			if (!isRes(world, i, y, z, meta))
+				aList.add(new Position(i, y, z));
+			if (!isRes(world, i, y, z + width - 1, meta))
+				aList.add(new Position(i, y, z + width - 1));
+		}
 		return aList;
 	}
 
@@ -164,6 +189,28 @@ public class Reservoir {
 			for (j = z; j <= z + width - 1; j++) {
 				aList.add((TileEntityMultiBlock)world.getBlockTileEntity(i, y, j));
 			}
+		return aList;
+	}
+	
+
+	
+	// WWWW
+	// W  W
+	// W  W
+	// OWWW
+	public static ArrayList<TileEntityMultiBlock> getCircleWall(World world,
+			int x, int y, int z,
+			int length, int width, int meta) {
+		int i;
+		ArrayList<TileEntityMultiBlock> aList = new ArrayList<TileEntityMultiBlock>();
+		for (i = z; i <= z + width - 1; i++) {
+			aList.add((TileEntityMultiBlock)world.getBlockTileEntity(x, y, i));
+			aList.add((TileEntityMultiBlock)world.getBlockTileEntity(x + length - 1, y, i));
+		}
+		for (i = x + 1; i < x + width - 1; i++) {
+			aList.add((TileEntityMultiBlock)world.getBlockTileEntity(i, y, z));
+			aList.add((TileEntityMultiBlock)world.getBlockTileEntity(i, y, z + width - 1));
+		}
 		return aList;
 	}
 	

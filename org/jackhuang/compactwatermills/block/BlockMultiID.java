@@ -10,7 +10,7 @@ import java.util.logging.Level;
 import org.jackhuang.compactwatermills.CompactWatermills;
 import org.jackhuang.compactwatermills.InternalName;
 import org.jackhuang.compactwatermills.Reference;
-import org.jackhuang.compactwatermills.gui.IHasGUI;
+import org.jackhuang.compactwatermills.client.gui.IHasGUI;
 import org.jackhuang.compactwatermills.helpers.LogHelper;
 import org.jackhuang.compactwatermills.tileentity.TileEntityBlock;
 
@@ -91,7 +91,6 @@ public abstract class BlockMultiID extends BlockBase {
 
 		if ((tileEntity instanceof IWrenchable)) {
 			IWrenchable te = (IWrenchable) tileEntity;
-
 			if (entityliving == null) {
 				te.setFacing((short) 2);
 			} else {

@@ -4,7 +4,7 @@ import org.jackhuang.compactwatermills.CompactWatermills;
 import org.jackhuang.compactwatermills.EnergyType;
 import org.jackhuang.compactwatermills.block.reservoir.Reservoir;
 import org.jackhuang.compactwatermills.block.reservoir.TileEntityReservoir;
-import org.jackhuang.compactwatermills.gui.DefaultGuiIds;
+import org.jackhuang.compactwatermills.client.gui.DefaultGuiIds;
 import org.jackhuang.compactwatermills.helpers.LogHelper;
 import org.jackhuang.compactwatermills.inventory.RotorInventorySlot;
 import org.jackhuang.compactwatermills.item.rotors.ItemRotor;
@@ -17,27 +17,31 @@ public class TileEntityTurbine extends TileEntityBaseGenerator {
 
 	public static int maxOutput = 32767;
 	public int speed;
-
+	private TurbineType type;
+	
 	public TileEntityTurbine() {
-		super(8192, 10000000);
+		type = TurbineType.MK2;
+		addInvSlot(new RotorInventorySlot(this));
+	}
+
+	public TileEntityTurbine(TurbineType type) {
+		super(type.percent, 10000000);
 		addInvSlot(new RotorInventorySlot(this));
 	}
 	
-	//public double getWater() {
-	//	return water;
-	//}
-	
 	public void readFromNBT(NBTTagCompound nbttagcompound) {
 		super.readFromNBT(nbttagcompound);
-		
 		this.speed = nbttagcompound.getInteger("speed");
+		if(nbttagcompound.hasKey("type")) {
+			type = TurbineType.values()[nbttagcompound.getInteger("type")];
+		}
 	}
 
 	public void writeToNBT(NBTTagCompound nbttagcompound) {
 		super.writeToNBT(nbttagcompound);
 		
-		//nbttagcompound.setDouble("water", this.water);
 		nbttagcompound.setInteger("speed", this.speed);
+		nbttagcompound.setInteger("type", type.ordinal());
 	}
 	
 	private TileEntityReservoir getWater(World world, int x, int y, int z) {
@@ -84,7 +88,6 @@ public class TileEntityTurbine extends TileEntityBaseGenerator {
 			return energy;
 		}
 		return 0;*/
-
 		TileEntityReservoir pair = getWater(world, x, y, z);
 		if(pair == null) return 0;
 		else {
@@ -96,7 +99,7 @@ public class TileEntityTurbine extends TileEntityBaseGenerator {
 			LogHelper.debugLog("maxuse=" + pair.type.maxUse);
 			double use = Math.min(pair.getWater(), pair.type.maxUse);
 			LogHelper.debugLog("use=" + use);
-			double baseEnergy = use * 5;
+			double baseEnergy = use * type.percent / 2048;
 			LogHelper.debugLog("baseEnergy" + baseEnergy);
 			LogHelper.debugLog("speed" + speed);
 			double per = tickRotor();
@@ -118,14 +121,29 @@ public class TileEntityTurbine extends TileEntityBaseGenerator {
 				&& invSlots.get(0).get(0).getItem() instanceof ItemRotor;
 	}
 	
-	private boolean hasrotor = false;
-	
 	public boolean hasRotor() {
-		return hasrotor;
+		return hasRotorImpl();
 	}
 	
 	private ItemRotor getRotor() {
 		return (ItemRotor) invSlots.get(0).get(0).getItem();
+	}
+	
+	private void damageRotor(int tick) {
+		ItemRotor rotor = getRotor();
+		rotor.tickRotor(invSlots.get(0).get(0), this, worldObj);
+		if (!rotor.type.isInfinite()) {
+			if (invSlots.get(0).get(0).getItemDamage()
+					+ tick > invSlots.get(0).get(0)
+					.getMaxDamage()) {
+				invSlots.set(0, null);
+			} else {
+				int damage = invSlots.get(0).get(0).getItemDamage()
+						+ tick;
+				invSlots.get(0).get(0).setItemDamage(damage);
+			}
+			onInventoryChanged();
+		}
 	}
 
 	private double tickRotor() {
@@ -135,19 +153,6 @@ public class TileEntityTurbine extends TileEntityBaseGenerator {
 			ItemRotor rotor = getRotor();
 			if (worldObj.isRemote) {
 				return rotor.type.efficiency;
-			}
-			rotor.tickRotor(invSlots.get(0).get(0), this, worldObj);
-			if (!rotor.type.isInfinite()) {
-				if (invSlots.get(0).get(0).getItemDamage()
-						+ CompactWatermills.updateTick > invSlots.get(0).get(0)
-						.getMaxDamage()) {
-					invSlots.set(0, null);
-				} else {
-					int damage = invSlots.get(0).get(0).getItemDamage()
-							+ CompactWatermills.updateTick;
-					invSlots.get(0).get(0).setItemDamage(damage);
-				}
-				onInventoryChanged();
 			}
 
 			return rotor.type.efficiency;
@@ -167,8 +172,6 @@ public class TileEntityTurbine extends TileEntityBaseGenerator {
 
 	@Override
 	protected void onUpdate() {
-
-		hasrotor = hasRotorImpl();
 /*		size = getReservoir(worldObj, xCoord, yCoord, zCoord);
 		if (size != null) {
 			//this.production = ReservoirType.values()[size.blockType].maxOutput;
@@ -275,6 +278,8 @@ public class TileEntityTurbine extends TileEntityBaseGenerator {
 				if(speed < 0)
 					speed = 0;
 			}
+			if(speed > 0)
+				damageRotor(1);
 	}
 	
 	@Override
@@ -292,6 +297,12 @@ public class TileEntityTurbine extends TileEntityBaseGenerator {
 	@Override
 	protected EnergyType energyType() {
 		return EnergyType.EU;
+	}
+
+	@Override
+	protected void onUpdateClientAndServer() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

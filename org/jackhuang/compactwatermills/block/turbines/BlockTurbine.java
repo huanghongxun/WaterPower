@@ -26,7 +26,7 @@ public class BlockTurbine extends BlockMultiID {
 
 	@Override
 	protected int maxMetaData() {
-		return 1;
+		return TurbineType.values().length;
 	}
 
 }

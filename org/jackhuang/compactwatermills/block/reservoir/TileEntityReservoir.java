@@ -1,10 +1,15 @@
 package org.jackhuang.compactwatermills.block.reservoir;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.chunk.Chunk;
+import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -13,7 +18,7 @@ import net.minecraftforge.fluids.FluidStack;
 import org.apache.commons.lang3.mutable.MutableObject;
 import org.jackhuang.compactwatermills.CompactWatermills;
 import org.jackhuang.compactwatermills.block.turbines.Position;
-import org.jackhuang.compactwatermills.gui.DefaultGuiIds;
+import org.jackhuang.compactwatermills.client.gui.DefaultGuiIds;
 import org.jackhuang.compactwatermills.helpers.LogHelper;
 import org.jackhuang.compactwatermills.inventory.InventorySlotConsumableLiquid;
 import org.jackhuang.compactwatermills.inventory.InventorySlotConsumableLiquidByList;
@@ -23,7 +28,8 @@ import org.jackhuang.compactwatermills.tileentity.TileEntityMultiBlock;
 public class TileEntityReservoir extends TileEntityMultiBlock {
 	public ReservoirType type;
 	public Reservoir size;
-	//double water;
+	private static ForgeChunkManager.Ticket ticket;
+	// double water;
 
 	private final InventorySlotConsumableLiquid fluidSlot;
 	private final InventorySlotOutput outputSlot;
@@ -38,21 +44,23 @@ public class TileEntityReservoir extends TileEntityMultiBlock {
 		this.outputSlot = new InventorySlotOutput(this, "output", 2, 1);
 		addInvSlot(outputSlot);
 	}
-	
+
 	public InventorySlotConsumableLiquid getFluidSlot() {
-		if(isMaster)
+		if (isMaster)
 			return fluidSlot;
 		else if (masterBlock == null)
 			return fluidSlot;
-		else return ((TileEntityReservoir) masterBlock).fluidSlot;
+		else
+			return ((TileEntityReservoir) masterBlock).fluidSlot;
 	}
-	
+
 	public InventorySlotOutput getOutputSlot() {
-		if(isMaster)
+		if (isMaster)
 			return outputSlot;
 		else if (masterBlock == null)
 			return outputSlot;
-		else return ((TileEntityReservoir) masterBlock).outputSlot;
+		else
+			return ((TileEntityReservoir) masterBlock).outputSlot;
 	}
 
 	@Override
@@ -61,9 +69,10 @@ public class TileEntityReservoir extends TileEntityMultiBlock {
 	}
 
 	public int getWater() {
-		if(!CompactWatermills.isSimulating()) return getTankAmount();
+		if (!CompactWatermills.isSimulating())
+			return getTankAmount();
 		if (isMaster)
-			//return water;
+			// return water;
 			return getTankAmount();
 		else if (masterBlock == null)
 			return 0;
@@ -82,7 +91,8 @@ public class TileEntityReservoir extends TileEntityMultiBlock {
 	}
 
 	public int getMaxWater() {
-		if(!CompactWatermills.isSimulating()) return getFluidTankCapacity();
+		if (!CompactWatermills.isSimulating())
+			return getFluidTankCapacity();
 		if (isMaster)
 			return getFluidTankCapacity();
 		else if (masterBlock == null)
@@ -110,13 +120,14 @@ public class TileEntityReservoir extends TileEntityMultiBlock {
 		ArrayList<TileEntityMultiBlock> al = new ArrayList<TileEntityMultiBlock>();
 
 		int length = 1;
-		while (length < 65)
+		while (length < 65) {
 			if (Reservoir.isRes(worldObj, xCoord + length, yCoord, zCoord,
 					type.ordinal()))
 				length++;
 			else
 				break;
-		
+		}
+
 		int width = 1;
 		while (width < 65)
 			if (Reservoir.isRes(worldObj, xCoord, yCoord, zCoord + width,
@@ -124,7 +135,7 @@ public class TileEntityReservoir extends TileEntityMultiBlock {
 				width++;
 			else
 				break;
-		
+
 		int height = 1;
 		while (height < 65)
 			if (Reservoir.isRes(worldObj, xCoord, yCoord + height, zCoord,
@@ -132,14 +143,14 @@ public class TileEntityReservoir extends TileEntityMultiBlock {
 				height++;
 			else
 				break;
-		
+
 		ArrayList<Position> l1 = Reservoir.getNotHorizontalWall(worldObj,
 				xCoord, yCoord, zCoord, length, height, type.ordinal());
 		if (l1.size() != 0) {
 			size = null;
 			return null;
 		}
-		
+
 		ArrayList<Position> l2 = Reservoir.getNotHorizontalWall(worldObj,
 				xCoord, yCoord, zCoord + width - 1, length, height,
 				type.ordinal());
@@ -147,28 +158,28 @@ public class TileEntityReservoir extends TileEntityMultiBlock {
 			size = null;
 			return null;
 		}
-		
+
 		ArrayList<Position> l3 = Reservoir.getNotVerticalWall(worldObj, xCoord,
 				yCoord, zCoord, width, height, type.ordinal());
 		if (l3.size() != 0) {
 			size = null;
 			return null;
 		}
-		
+
 		ArrayList<Position> l4 = Reservoir.getNotVerticalWall(worldObj, xCoord
 				+ length - 1, yCoord, zCoord, width, height, type.ordinal());
 		if (l4.size() != 0) {
 			size = null;
 			return null;
 		}
-		
-		ArrayList<Position> l5 = Reservoir.getNotFloor(worldObj, xCoord,
+
+		ArrayList<Position> lfloor = Reservoir.getNotFloor(worldObj, xCoord,
 				yCoord, zCoord, length, width, type.ordinal());
-		if (l5.size() != 0) {
+		if (lfloor.size() != 0) {
 			size = null;
 			return null;
 		}
-		
+
 		al.addAll(Reservoir.getHorizontalWall(worldObj, xCoord, yCoord, zCoord,
 				length, height, type.ordinal()));
 		al.addAll(Reservoir.getHorizontalWall(worldObj, xCoord, yCoord, zCoord
@@ -179,10 +190,9 @@ public class TileEntityReservoir extends TileEntityMultiBlock {
 				yCoord, zCoord, width, height, type.ordinal()));
 		al.addAll(Reservoir.getFloor(worldObj, xCoord, yCoord, zCoord, length,
 				width, type.ordinal()));
-		
 
-		size = new Reservoir(length, width, height,
-				Reservoir.getNonAirBlock(worldObj, xCoord, yCoord, zCoord, length, width, height));
+		size = new Reservoir(length, width, height, Reservoir.getNonAirBlock(
+				worldObj, xCoord, yCoord, zCoord, length, width, height));
 
 		setFluidTankCapacity(size.getCapacity() * type.capacity);
 		return al;
@@ -191,9 +201,8 @@ public class TileEntityReservoir extends TileEntityMultiBlock {
 	@Override
 	protected void onUpdate() {
 
-		
 		LogHelper.debugLog("maxwater=" + getMaxWater());
-		
+
 		if (!isMaster)
 			return;
 		if (size == null)
@@ -269,12 +278,14 @@ public class TileEntityReservoir extends TileEntityMultiBlock {
 			biomeGet = 0;
 			biomePut = 4;
 		}
-		
+
 		int length = size.getLength() - 2;
 		int width = size.getWidth() - 2;
 		int area = length * width;
-		int cover = Reservoir.getCoverBlock(worldObj, xCoord, yCoord + size.getHeight(), zCoord, size.getLength(), size.getWidth());
-		
+		int cover = Reservoir.getCoverBlock(worldObj, xCoord,
+				yCoord + size.getHeight(), zCoord, size.getLength(),
+				size.getWidth());
+
 		int addWater = (int) ((area - cover) * 2 * weather * biomeGet);
 
 		if (biomeID == BiomeGenBase.ocean.biomeID
@@ -283,43 +294,45 @@ public class TileEntityReservoir extends TileEntityMultiBlock {
 				addWater += length * width * 0.5;
 		}
 
-		int delWater = (int) (weather == 0 ? area * 0.02
-				* biomePut : 0);
+		int delWater = (int) (weather == 0 ? area * 0.02 * biomePut : 0);
 
-		fluidTank.fill(new FluidStack(FluidRegistry.WATER, addWater * CompactWatermills.updateTick), true);
+		fluidTank.fill(new FluidStack(FluidRegistry.WATER, addWater
+				* CompactWatermills.updateTick), true);
 		fluidTank.drain(delWater * CompactWatermills.updateTick, true);
-		
+
 		sendUpdateToClient();
-		
-		for(TileEntityMultiBlock b : blockList) {
+
+		for (TileEntityMultiBlock b : blockList) {
 			b.sendUpdateToClient();
 		}
-		
-		//LogHelper.log("?" + this + " " + getWater());
-		//water += (addWater - delWater) * CompactWatermills.updateTick;
-		//if (water < 0)
-		//	water = 0;
-		//if (water > getMaxWater())
-		//	water = getMaxWater();
+
+		// LogHelper.log("?" + this + " " + getWater());
+		// water += (addWater - delWater) * CompactWatermills.updateTick;
+		// if (water < 0)
+		// water = 0;
+		// if (water > getMaxWater())
+		// water = getMaxWater();
 		// LogHelper.log("water=" + water);
 	}
 
 	@Override
 	public void updateEntity() {
 		super.updateEntity();
-		
-		if(worldObj == null || worldObj.isRemote) return;
+
+		if (worldObj == null || worldObj.isRemote)
+			return;
 
 		boolean needsInvUpdate = false;
 
 		if (needsFluid()) {
 			MutableObject<ItemStack> output = new MutableObject<ItemStack>();
 
-			if ((this.getFluidSlot().transferToTank(this.fluidTank, output, true))
+			if ((this.getFluidSlot().transferToTank(this.fluidTank, output,
+					true))
 					&& ((output.getValue() == null) || (this.outputSlot
 							.canAdd(output.getValue())))) {
-				needsInvUpdate = this.getFluidSlot().transferToTank(this.fluidTank,
-						output, false);
+				needsInvUpdate = this.getFluidSlot().transferToTank(
+						this.fluidTank, output, false);
 
 				if (output.getValue() != null)
 					this.getOutputSlot().add(output.getValue());
@@ -331,19 +344,19 @@ public class TileEntityReservoir extends TileEntityMultiBlock {
 			onInventoryChanged();
 		}
 	}
-	
+
 	@Override
 	public void readPacketData(NBTTagCompound tag) {
 		super.readPacketData(tag);
-		
+
 		setFluidTankCapacity(tag.getInteger("maxWater"));
 		setTankAmount(tag.getInteger("water"), FluidRegistry.WATER.getID());
 	}
-	
+
 	@Override
 	public void writePacketData(NBTTagCompound tag) {
 		super.writePacketData(tag);
-		
+
 		tag.setInteger("maxWater", getMaxWater());
 		tag.setInteger("water", getWater());
 	}
@@ -352,16 +365,18 @@ public class TileEntityReservoir extends TileEntityMultiBlock {
 	public int getGuiId() {
 		return DefaultGuiIds.get("tileEntityReservoir");
 	}
-	
+
 	@Override
 	public boolean canFill(ForgeDirection from, Fluid fluid) {
-		//return FluidRegistry.getFluidName(fluid.getID()).contentEquals("water");
+		// return
+		// FluidRegistry.getFluidName(fluid.getID()).contentEquals("water");
 		return true;
 	}
 
 	@Override
 	public boolean canDrain(ForgeDirection from, Fluid fluid) {
-		///return FluidRegistry.getFluidName(fluid.getID()).contentEquals("water");
+		// /return
+		// FluidRegistry.getFluidName(fluid.getID()).contentEquals("water");
 		return true;
 	}
 }
