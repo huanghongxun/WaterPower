@@ -1,0 +1,238 @@
+itemGroup.creativeTabCompactWatermills=Compact Watermills
+
+# tcIntegration
+tc.research_category.CompactWatermills=Compact Watermills
+tc.research_name.industrialDiamond=Industrial Diamond
+tc.research_name.waterUraniumIngot=Water Uranium Ingot
+
+tc.research_name.waterUraniumIngotPlateMK1=Water Uranium Plate MK1
+tc.research_name.waterUraniumIngotPlateMK2=Water Uranium PlateMK2
+tc.research_name.waterUraniumIngotPlateMK3=Water Uranium PlateMK3
+tc.research_name.waterUraniumIngotPlateMK4=Water Uranium PlateMK4
+tc.research_name.waterUraniumIngotPlateMK5=Water Uranium PlateMK5
+tc.research_name.waterUraniumIngotPlateMK6=Water Uranium PlateMK6
+tc.research_name.waterUraniumIngotPlateMK7=Water Uranium PlateMK7
+
+tc.research_name.updaterMK0=Update Plugin MK0
+tc.research_name.updaterMK1=Update Plugin MK1
+tc.research_name.updaterMK2=Update Plugin MK2
+tc.research_name.updaterMK3=Update Plugin MK3
+tc.research_name.updaterMK4=Update Plugin MK4
+tc.research_name.updaterMK5=Update Plugin MK5
+tc.research_name.updaterMK6=Update Plugin MK6
+tc.research_name.updaterMK7=Update Plugin MK7
+
+tc.research_name.reservoirCore=Reservoir Core
+tc.research_name.reservoirCoreAdvanced=Advanced Reservoir Core
+
+tc.research_name.cptwtrmlMK1=Compact Watermills MK1
+tc.research_name.cptwtrmlMK2=Compact Watermills MK2
+tc.research_name.cptwtrmlMK3=Compact Watermills MK3
+tc.research_name.cptwtrmlMK4=Compact Watermills MK4
+tc.research_name.cptwtrmlMK5=Compact Watermills MK5
+tc.research_name.cptwtrmlMK6=Compact Watermills MK6
+tc.research_name.cptwtrmlMK7=Compact Watermills MK7
+tc.research_name.cptwtrmlMK8=Compact Watermills MK8
+tc.research_name.cptwtrmlMK9=Compact Watermills MK9
+tc.research_name.cptwtrmlMK10=Compact Watermills MK10
+tc.research_name.cptwtrmlMK11=Compact Watermills MK11
+tc.research_name.cptwtrmlMK12=Compact Watermills MK12
+tc.research_name.cptwtrmlMK13=Compact Watermills MK13
+tc.research_name.cptwtrmlMK14=Compact Watermills MK14
+tc.research_name.cptwtrmlMK15=Compact Watermills MK15
+tc.research_name.cptwtrmlMK16=Compact Watermills MK16
+
+# Thaumcraft integration: research pages
+cptwtrml.research.waterUraniumIngot=Nothing...
+cptwtrml.research.industrialDiamond=Nothing...
+cptwtrml.research.reservoirCore=Nothing...
+cptwtrml.research.reservoirCoreAdvanced=Nothing...
+
+# reservoir block
+cptwtrml.reservoir.RESERVOIR=Reservoir block
+cptwtrml.reservoir.WOOD=Wood
+cptwtrml.reservoir.STONE=Stone
+cptwtrml.reservoir.LAPIS=Lapis
+cptwtrml.reservoir.TIN=Tin
+cptwtrml.reservoir.COPPER=Copper
+cptwtrml.reservoir.LEAD=Lead
+cptwtrml.reservoir.QUARTZ=Quartz
+cptwtrml.reservoir.BRONZE=Bronze
+cptwtrml.reservoir.IRON=Iron
+cptwtrml.reservoir.NETHER=Nether
+cptwtrml.reservoir.OBSIDIAN=Obsidian
+cptwtrml.reservoir.SILVER=Silver
+cptwtrml.reservoir.REFINED_IRON=Refined iron
+cptwtrml.reservoir.GOLD=Gold
+cptwtrml.reservoir.CARBON=Carbon plate
+cptwtrml.reservoir.ADVANCED=Advanced
+cptwtrml.reservoir.EMERALD=Emerald
+cptwtrml.reservoir.IRIDIUM=Iridium
+cptwtrml.reservoir.IRIDIUM_PLATE=Iridium plate
+cptwtrml.reservoir.ZINC=Zinc
+cptwtrml.reservoir.BRASS=Brass
+cptwtrml.reservoir.ALUMINUM=Aluminum
+cptwtrml.reservoir.STEEL=Steel
+cptwtrml.reservoir.INVAR=Invar
+cptwtrml.reservoir.ELECTRUM=Electrum
+cptwtrml.reservoir.NICKEL=Nickel
+cptwtrml.reservoir.OSMIUM=Osmium
+cptwtrml.reservoir.TITIANIUM=Titanium
+cptwtrml.reservoir.PLATINUM=Platinum
+cptwtrml.reservoir.TUNGSTEN=Tungsten
+cptwtrml.reservoir.CHROME=Chrome
+cptwtrml.reservoir.TUNGSTEN_STEEL=Tungsten steel
+cptwtrml.reservoir.THAUMIUM=Thaumium
+cptwtrml.reservoir.IRIDIUMIRON=Iridium Iron
+
+cptwtrml.reservoir.MAXSOTRE=Max Storage
+cptwtrml.reservoir.MAXUSE=Maximum water using per second (for turbine)
+
+# rotor
+cptwtrml.rotor.ROTOR=Rotor
+cptwtrml.rotor.INFINITE=Infinite
+cptwtrml.rotor.REMAINTIME=Remains time
+cptwtrml.rotor.HOUR=Hour(s)
+cptwtrml.rotor.MINUTE=Minute(s)
+cptwtrml.rotor.SECOND=Second(s)
+cptwtrml.rotor.GOT_EFFICIENCY=Got efficiency
+
+# updater
+cptwtrml.updater.WaterUraniumIngot=Water uranium ingot
+cptwtrml.updater.WaterUraniumPlateMK1=Water uranium plate MK1
+cptwtrml.updater.WaterUraniumPlateMK2=Water uranium plate MK2
+cptwtrml.updater.WaterUraniumPlateMK3=Water uranium plate MK3
+cptwtrml.updater.WaterUraniumPlateMK4=Water uranium plate MK4
+cptwtrml.updater.WaterUraniumPlateMK5=Water uranium plate MK5
+cptwtrml.updater.WaterUraniumPlateMK6=Water uranium plate MK6
+cptwtrml.updater.WaterUraniumPlateMK7=Water uranium plate MK7
+cptwtrml.updater.IR_FE=Iridium and Iron Alloy Plate
+cptwtrml.updater.MK0=Updater MK0
+cptwtrml.updater.MK1=Updater MK1
+cptwtrml.updater.MK2=Updater MK2
+cptwtrml.updater.MK3=Updater MK3
+cptwtrml.updater.MK4=Updater MK4
+cptwtrml.updater.MK5=Updater MK5
+cptwtrml.updater.MK6=Updater MK6
+cptwtrml.updater.MK7=Updater MK7
+cptwtrml.updater.RESERVOIR_CORE=Reservoir block core
+cptwtrml.updater.RESERVOIR_CORE_ADVANCED=Advanced Reservoir Block Core
+cptwtrml.updater.PlasmaUraniumAlloyPlate=Plasma Uranium Alloy Plate
+cptwtrml.updater.PlasmaUraniumIngot=Plasma Uranium Ingot
+cptwtrml.updater.WaterUraniumAlloyPlate=Water Uranium Alloy Plate
+cptwtrml.updater.BaseRotor=Base Rotor
+
+# range
+cptwtrml.range.info.MK1=Narrow 2 blocks of the range
+cptwtrml.range.info.MK2=Narrow 16 blocks of the range
+cptwtrml.range.info.MK3=Narrow 128 blocks of the range
+cptwtrml.range.name.MK1=Range narrow plugin MK1
+cptwtrml.range.name.MK2=Range narrow plugin MK2
+cptwtrml.range.name.MK3=Range narrow plugin MK3
+
+# watermill
+cptwtrml.watermill.WATERMILL=Advanced Watermill
+cptwtrml.watermill.TURBINE=Turbine
+cptwtrml.watermill.NEED=Need
+cptwtrml.watermill.CHECK_WATER=Water
+cptwtrml.watermill.CHECK_LAVA=Lava
+cptwtrml.watermill.CANNOT_CHECK=Cannot Check
+cptwtrml.watermill.OUTPUT=Output
+cptwtrml.watermill.PRODUCTION=Output Limit
+cptwtmrl.watermill.TROUSERS=Trousers
+cptwtrml.rotor.RANGE=Range
+
+# crafting
+cptwtrml.crafting.paddleBase=Paddle Base
+cptwtrml.crafting.drainagePlate=Drainage Plate
+cptwtrml.crafting.fixedFrame=Fixed Frame
+cptwtrml.crafting.fixedTool=Fixed Tool
+cptwtrml.crafting.rotationAxle=Rotation Axle
+cptwtrml.crafting.outputInterface=Output Interface
+cptwtrml.crafting.rotor=Rotor
+cptwtrml.crafting.stator=Stator
+cptwtrml.crafting.casing=Casing
+cptwtrml.crafting.circuit=Circuit
+
+# level
+cptwtrml.level.MK1=MK1
+cptwtrml.level.MK3=MK3
+cptwtrml.level.MK4=MK4
+cptwtrml.level.MK5=MK5
+cptwtrml.level.MK7=MK7
+
+# forms
+cptwtrml.forms.plate=Plate
+cptwtrml.forms.dust=Dust
+cptwtrml.forms.dustTiny=Tiny Dust
+cptwtrml.forms.dustSmall=Small Dust
+cptwtrml.forms.plateDense=Dense Plate
+cptwtrml.forms.ingot=Ingot
+cptwtrml.forms.block=Block
+cptwtrml.forms.stick=Rod
+cptwtrml.forms.screw=Screw
+cptwtrml.forms.gear=Gear
+cptwtrml.forms.nugget=Nugget
+cptwtrml.forms.ring=Ring
+
+# materials
+cptwtrml.material.Zinc=Zinc
+cptwtrml.material.ZincAlloy=Zinc Alloy
+cptwtrml.material.Neodymium=Neodymium
+cptwtrml.material.NeodymiumMagnet=Neodymium Magnet
+cptwtrml.material.IndustrialSteel=Industrial Steel
+cptwtrml.material.Magnet=Magnet
+cptwtrml.material.ManganeseSteel=Manganese Steel
+cptwtrml.material.Manganese=Manganese
+cptwtrml.material.VanadiumSteel=Vanadium Steel
+cptwtrml.material.Vanadium=Vanadium
+cptwtrml.material.Steel=Steel
+
+# machines
+cptwtrml.machine.macerator.name=Water-power Macerator
+cptwtrml.machine.compressor.name=Water-power Compressor
+cptwtrml.machine.sawmill.name=Water-power Sawmill
+cptwtrml.machine.advancedCompressor.name=Water-power Advanced Compressor
+cptwtrml.machine.centrifuge.name=Water-power Centrifuge
+cptwtrml.machine.lathe.name=Water-power Lathe
+cptwtrml.machine.cutter.name=Water-power Cutter
+
+# ores
+cptwtrml.ore.monazite=Monazite
+cptwtrml.ore.vanadium=Vanadium Ore
+cptwtrml.ore.manganese=Manganese Ore
+cptwtrml.ore.magnet=Magnet Ore
+cptwtrml.ore.zinc=Zinc Ore
+
+# plugins
+cptwtrml.plugin.UnderMK1=Underground water Receiving Upgrade MK1
+cptwtrml.plugin.UnderMK2=Underground water Receiving Upgrade MK2
+cptwtrml.plugin.UnderMK3=Underground water Receiving Upgrade MK3
+cptwtrml.plugin.UnderMK4=Underground water Receiving Upgrade MK4
+cptwtrml.plugin.OverMK1=Overground water Receiving Upgrade MK1
+cptwtrml.plugin.OverMK2=Overground water Receiving Upgrade MK2
+cptwtrml.plugin.OverMK3=Overground water Receiving Upgrade MK3
+cptwtrml.plugin.OverMK4=Overground water Receiving Upgrade MK4
+cptwtrml.plugin.RainMK1=Rain Receiving UpgradeMK1
+cptwtrml.plugin.RainMK2=Rain Receiving UpgradeMK2
+cptwtrml.plugin.RainMK3=Rain Receiving UpgradeMK3
+cptwtrml.plugin.RainMK4=Rain Receiving Upgrade MK4
+cptwtrml.plugin.AllRoundMK1=All Round Upgrade MK1
+cptwtrml.plugin.AllRoundMK2=All Round Upgrade MK2
+cptwtrml.plugin.AllRoundMK3=All Round Upgrade MK3
+cptwtrml.plugin.AllRoundMK4=All Round Upgrade MK4
+cptwtrml.plugin.StorageMK1=Storage Upgrade MK1
+cptwtrml.plugin.StorageMK2=Storage Upgrade MK2
+cptwtrml.plugin.StorageMK3=Storage Upgrade MK3
+cptwtrml.plugin.StorageMK4=Storage Upgrade MK4
+cptwtrml.plugin.SpeedMK1=Speed Upgrade MK1
+cptwtrml.plugin.SpeedMK2=Speed Upgrade MK2
+cptwtrml.plugin.SpeedMK3=Speed Upgrade MK3
+cptwtrml.plugin.SpeedMK4=Speed Upgrade MK4
+
+# crushed ore
+item.oreDustZinc.name=Crushed Zinc Ore
+item.oreDustVanadium.name=Crushed Vanadium Ore
+item.oreDustManganese.name=Crushed Manganese Ore
+item.oreDustMonazite.name=Crushed Monazite
+item.oreDustMagnet.name=Crushed Magnet Ore
