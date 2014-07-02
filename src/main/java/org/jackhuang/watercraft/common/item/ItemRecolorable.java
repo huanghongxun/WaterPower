@@ -1,0 +1,33 @@
+/**
+ * Copyright (c) Huang Yuhui, 2014
+ * 
+ * "WaterCraft" is distributed under the terms of the Minecraft Mod Public
+ * License 1.0, or MMPL. Please check the contents of the license located in
+ * http://www.mod-buildcraft.com/MMPL-1.0.txt
+ */
+
+package org.jackhuang.watercraft.common.item;
+
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
+
+import org.jackhuang.watercraft.InternalName;
+import org.jackhuang.watercraft.client.render.IIconContainer;
+import org.jackhuang.watercraft.common.item.crafting.MaterialTypes;
+
+public abstract class ItemRecolorable extends ItemBase {
+
+	
+	public ItemRecolorable(InternalName internalName) {
+		super(internalName);
+	}
+
+	public abstract short[] getRGBA(ItemStack stack);
+
+	public abstract IIconContainer getIconContainer(int meta);
+	
+	@Override
+	public IIcon getIconFromDamage(int meta) {
+		return getIconContainer(meta).getIcon();
+	}
+}
