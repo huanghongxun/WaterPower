@@ -10,6 +10,7 @@ package org.jackhuang.watercraft.client.render;
 
 import org.jackhuang.watercraft.WaterCraft;
 import org.jackhuang.watercraft.Reference;
+import org.jackhuang.watercraft.client.ClientProxy;
 
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
@@ -31,9 +32,23 @@ public class RecolorableTextures {
 		ItemIcons.CRUSHED
 	};
 	
+	public static final IIconContainer[] CRAFTING = {
+		ItemIcons.PADDLE_BASE,
+		ItemIcons.DRAINAGE_PLATE,
+		ItemIcons.FIXED_FRAME,
+		ItemIcons.FIXED_TOOL,
+		ItemIcons.ROTATION_AXLE,
+		ItemIcons.OUTPUT_INTERFACE,
+		ItemIcons.ROTOR,
+		ItemIcons.STATOR,
+		ItemIcons.CASING,
+		ItemIcons.CIRCUIT
+	};
+	
 	public static void load() {
+		ClientProxy proxy = (ClientProxy) WaterCraft.proxy;
 		for(ItemIcons i : ItemIcons.values()) {
-			i.icon = WaterCraft.instance.iconRegister.registerIcon(Reference.ModID + ":iconsets/" + i.name());
+			i.icon = proxy.iconRegister.registerIcon(Reference.ModID + ":iconsets/" + i.name());
 		}
 	}
 	
@@ -50,6 +65,16 @@ public class RecolorableTextures {
 		DUST_TINY,
 		SCREW,
 		RING,
+		PADDLE_BASE,
+		DRAINAGE_PLATE,
+		FIXED_FRAME,
+		FIXED_TOOL,
+		ROTATION_AXLE,
+		OUTPUT_INTERFACE,
+		ROTOR,
+		STATOR,
+		CASING,
+		CIRCUIT,
 		CRUSHED;
 		
 		protected IIcon icon = null;

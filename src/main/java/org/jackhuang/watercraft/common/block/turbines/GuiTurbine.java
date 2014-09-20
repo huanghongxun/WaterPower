@@ -4,6 +4,7 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.client.gui.ContainerRotor;
@@ -36,16 +37,9 @@ public class GuiTurbine extends GuiContainer {
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
 		fontRendererObj.drawString(gen.getInventoryName(), 8, 6, 0x404040);
-		fontRendererObj.drawString("转子:", 44, 30, 0x404040);
-		fontRendererObj.drawString("物品栏", 8, ySize - 96 + 2, 0x404040);
-		fontRendererObj.drawString("当前输出: " + gen.getOfferedEnergy() + "EU/t", 8,
+		fontRendererObj.drawString(StatCollector.translateToLocal("cptwtrml.watermill.ROTOR") + ":", 44, 30, 0x404040);
+		fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 0x404040);
+		fontRendererObj.drawString(StatCollector.translateToLocal("cptwtrml.watermill.OUTPUT") + ": " + gen.getOfferedEnergy() + "EU/t", 8,
 				50, 0x404040);
-		//Reservoir r = gen.getCurrentReservoir();
-		//fontRenderer.drawString("当前容积: " + (r == null ? 0 : r.getMaxWater())
-		//		+ "桶(b)", 8, 60, 0x404040);
-		//fontRenderer.drawString("当前转速: " + gen.speed + "r/t", 80, 50, 0x404040);
-		//DecimalFormat dFormat = new DecimalFormat("#.00");
-		//fontRenderer.drawString("当前水量: " + dFormat.format(gen.getWater())
-		//		+ "桶(b)", 80, 60, 0x404040);
 	}
 }

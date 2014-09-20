@@ -1,6 +1,5 @@
 package org.jackhuang.watercraft.common.block.machines;
 
-import gregtech.api.util.GT_Recipe;
 import ic2.api.item.IC2Items;
 import ic2.api.recipe.RecipeOutput;
 import ic2.api.recipe.Recipes;
@@ -14,7 +13,6 @@ import org.jackhuang.watercraft.api.BasicMachineRecipeManager;
 import org.jackhuang.watercraft.api.MyRecipes;
 import org.jackhuang.watercraft.client.gui.DefaultGuiIds;
 import org.jackhuang.watercraft.common.inventory.InventorySlotProcessableGeneric;
-import org.jackhuang.watercraft.common.inventory.InventorySlotProcessableGreg;
 import org.jackhuang.watercraft.common.tileentity.TileEntityStandardWaterMachine;
 import org.jackhuang.watercraft.util.StackUtil;
 
@@ -24,8 +22,8 @@ public class TileEntityAdvancedCompressor extends TileEntityStandardWaterMachine
 		super(5000, 64*20);
 
 		if(WaterCraft.isGregTechLoaded) {
-			this.inputSlot = new InventorySlotProcessableGreg(this, "input",
-					2, MyRecipes.implosion_gt, GT_Recipe.sImplosionRecipes);
+			//this.inputSlot = new InventorySlotProcessableGreg(this, "input",
+			//		2, MyRecipes.implosion_gt, GT_Recipe.sImplosionRecipes);
 		}
 		else
 			this.inputSlot = new InventorySlotProcessableGeneric(this, "input",
@@ -47,18 +45,18 @@ public class TileEntityAdvancedCompressor extends TileEntityStandardWaterMachine
 
 	@Override
 	public int getGuiId() {
-		return DefaultGuiIds.get("tileEntityAdvancedCompressor").id;
+		return DefaultGuiIds.get("tileEntityAdvancedCompressor");
 	}
 	
 	@Override
 	public void markDirty() {
 		if(!inputSlot.isEmpty()) {
 			InventorySlotProcessableGeneric generic = (InventorySlotProcessableGeneric)inputSlot;
-			if(generic instanceof InventorySlotProcessableGreg) {
+			/*if(generic instanceof InventorySlotProcessableGreg) {
 				GT_Recipe recipe = ((InventorySlotProcessableGreg)generic).getGTRecipeOutput();
 				if(recipe == null) operationLength = 1;
 				else defaultOperationLength = recipe.mInputs[1].stackSize * 20;
-			}
+			}*/
 		}
 		
 		super.markDirty();
@@ -69,9 +67,9 @@ public class TileEntityAdvancedCompressor extends TileEntityStandardWaterMachine
 		super.updateEntity();
 		
 		if(WaterCraft.isGregTechLoaded) {
-			InventorySlotProcessableGreg greg = ((InventorySlotProcessableGreg)inputSlot);
+		/*	InventorySlotProcessableGreg greg = ((InventorySlotProcessableGreg)inputSlot);
 			if(greg.get(1) == null || greg.get(1).stackSize < 64)
-				greg.put(1, StackUtil.copyWithSize(IC2Items.getItem("industrialTnt"), 64));
+				greg.put(1, StackUtil.copyWithSize(IC2Items.getItem("industrialTnt"), 64));*/
 		}
 	}
 

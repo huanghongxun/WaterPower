@@ -18,8 +18,6 @@ import java.io.IOException;
 
 import org.jackhuang.watercraft.Reference;
 
-import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory.Default;
-
 import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

@@ -1,6 +1,8 @@
 package org.jackhuang.watercraft.common.network;
 
 import org.jackhuang.watercraft.Reference;
+import org.jackhuang.watercraft.common.EnergyType;
+import org.jackhuang.watercraft.common.tileentity.TileEntityBaseGenerator;
 import org.jackhuang.watercraft.util.WCLog;
 
 import net.minecraft.client.Minecraft;
@@ -14,12 +16,12 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class PacketHandler {
+public class FMLPacketHandler {
 	
-	public static final PacketHandler INSTANCE = new PacketHandler();
+	public static final FMLPacketHandler INSTANCE = new FMLPacketHandler();
 	final FMLEventChannel channel;
 	
-	private PacketHandler() {
+	private FMLPacketHandler() {
 	    this.channel = NetworkRegistry.INSTANCE.newEventDrivenChannel(Reference.ModChannel);
 	    this.channel.register(this);
 	}
@@ -49,6 +51,15 @@ public class PacketHandler {
 	
 	public void onPacketData(WCPacket packet,
 			EntityPlayerMP playerMP) {
+		switch(packet.id) {
+		case 1: // EnergyType changed event.
+			TileEntity te = playerMP.worldObj.getTileEntity(packet.dataInt[0], packet.dataInt[1], packet.dataInt[2]);
+			if(te instanceof TileEntityBaseGenerator) {
+				TileEntityBaseGenerator te2 = (TileEntityBaseGenerator) te;
+				te2.energyType = EnergyType.values()[packet.dataInt[3]];
+			}
+			break;
+		}
 	}
 
 }

@@ -8,6 +8,11 @@
 
 package org.jackhuang.watercraft.common.item.crafting;
 
+import java.util.Arrays;
+
+import org.jackhuang.watercraft.client.render.IIconContainer;
+import org.jackhuang.watercraft.client.render.RecolorableTextures;
+
 import net.minecraft.util.StatCollector;
 
 public enum CraftingTypes {

@@ -6,7 +6,6 @@ import org.jackhuang.watercraft.api.BasicMachineRecipeManager;
 import org.jackhuang.watercraft.api.MyRecipes;
 import org.jackhuang.watercraft.client.gui.DefaultGuiIds;
 import org.jackhuang.watercraft.common.inventory.InventorySlotProcessableGeneric;
-import org.jackhuang.watercraft.common.inventory.InventorySlotProcessableGreg;
 import org.jackhuang.watercraft.common.tileentity.TileEntityStandardWaterMachine;
 import org.jackhuang.watercraft.util.StackUtil;
 
@@ -144,6 +143,6 @@ public class TileEntitySawmill extends TileEntityStandardWaterMachine {
 
 	@Override
 	public int getGuiId() {
-		return DefaultGuiIds.get("tileEntitySawmill").id;
+		return DefaultGuiIds.get("tileEntitySawmill");
 	}
 }

@@ -8,19 +8,36 @@
 
 package org.jackhuang.watercraft.common.item.crafting;
 
+import java.util.Arrays;
+
+import org.jackhuang.watercraft.client.render.IIconContainer;
+import org.jackhuang.watercraft.client.render.RecolorableTextures;
+
 import net.minecraft.util.StatCollector;
 
 public enum LevelTypes {
 	/** Stone & Wood*/
-	MK1,
+	MK1(RecolorableTextures.CRAFTING, 255, 255, 255, 0),
 	/** Brass & Zinc */
-	MK3,
+	MK3(RecolorableTextures.CRAFTING, 255, 255, 255, 0),
 	/** Steel */
-	MK4,
+	MK4(RecolorableTextures.CRAFTING, 255, 255, 255, 0),
 	/** Vanadium Steel & Maganese Steel */
-	MK5,
-	/** 中二病 */
-	MK7;
+	MK5(RecolorableTextures.CRAFTING, 255, 255, 255, 0),
+	/** Most expansive! */
+	MK7(RecolorableTextures.CRAFTING, 255, 255, 255, 0);
+	
+	public short R, G, B, A;
+	
+	public IIconContainer[] iconContainer;
+	
+	private LevelTypes(IIconContainer[] iconContainer, int R, int G, int B, int A) {
+		this.R = (short)R;
+		this.G = (short)G;
+		this.B = (short)B;
+		this.A = (short)A;
+		this.iconContainer = (IIconContainer[]) Arrays.copyOf(iconContainer, 64);
+	}
 	
 	public String getShowedName() {
 		String format = "cptwtrml.level." + name();

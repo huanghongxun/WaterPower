@@ -1,6 +1,5 @@
 package org.jackhuang.watercraft.common.recipe;
 
-import gregtech.api.GregTech_API;
 import ic2.api.item.IC2Items;
 import net.minecraft.block.Block;
 import net.minecraft.init.Items;
@@ -33,7 +32,6 @@ import org.jackhuang.watercraft.common.item.others.ItemType;
 import org.jackhuang.watercraft.common.item.range.ItemRange;
 import org.jackhuang.watercraft.common.item.rotors.RotorType;
 
-import thaumcraft.api.ItemApi;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -87,7 +85,7 @@ public abstract class IRecipeHandler {
 				"WTW", " W ", 'W', IC2Items.getItem("waterMill"), 'T',
 				IC2Items.getItem("transformerUpgrade"));
 
-		for (int i = 1; i < WaterType.values().length; i++) {
+		for (int i = 1; i < 7; i++) {
 			addRecipeByOreDictionary(
 					new ItemStack(GlobalBlocks.waterMill, 1, i), " W ", "WTW",
 					" W ", 'W',
@@ -117,12 +115,12 @@ public abstract class IRecipeHandler {
 								IC2Items.getItem("transformerUpgrade"));
 			}
 			
-			for(int i = 0; i < 12; i++) {
+			/*for(int i = 0; i < 12; i++) {
 				GameRegistry.addShapelessRecipe(new ItemStack(GlobalBlocks.turbine, 1, i),
 						new ItemStack(GlobalBlocks.waterMill, 1, i + 4));
 				GameRegistry.addShapelessRecipe(new ItemStack(GlobalBlocks.waterMill, 1, i + 4),
 						new ItemStack(GlobalBlocks.turbine, 1, i));
-			}
+			}*/
 			
 			registerTurbine();
 		}

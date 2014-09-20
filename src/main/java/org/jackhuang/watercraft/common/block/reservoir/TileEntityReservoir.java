@@ -39,8 +39,6 @@ import org.jackhuang.watercraft.util.Pair;
 import org.jackhuang.watercraft.util.Utils;
 import org.lwjgl.opengl.HPOcclusionTest;
 
-import sun.nio.cs.MS1250;
-
 public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 		IWrenchable {
 
@@ -372,13 +370,13 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 		//int addWater = (int) ((area - cover) * 2 * weather * biomeGet);
 		double addWater = 0;
 		double add = (double)type.capacity / 10000.0;
-		//雨水接收
+		//Rain Receiving
 		addWater += rainLevel * (underLevel / 4) * (overLevel / 4) * weather * add * (area - cover) * biomeGet;
-		//潮汐接收
+		//Tide Receiving
 		addWater += Math.min(this.ocean.k, this.ocean.t) * type.capacity / 100;
-		//地底接收
+		//Underground water receiving
 		addWater += underLevel * (overLevel / 4) * (rainLevel / 4) * (1D - this.yCoord / 256) * add * (area - cover) * biomeGet;
-		//地表接收
+		//Surface water receiving
 		addWater += overLevel * (underLevel / 4) * (rainLevel / 4) * (1D - Math.abs(64 - this.yCoord) / 64) * (area - cover) * biomeGet * add;
 
 		if (biomeID == BiomeGenBase.ocean.biomeID
@@ -501,7 +499,7 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 
 	@Override
 	public int getGuiId() {
-		return DefaultGuiIds.get("tileEntityReservoir").id;
+		return DefaultGuiIds.get("tileEntityReservoir");
 	}
 
 	@Override

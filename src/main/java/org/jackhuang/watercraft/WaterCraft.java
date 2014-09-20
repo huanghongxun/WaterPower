@@ -8,9 +8,6 @@
 
 package org.jackhuang.watercraft;
 
-import gregtech.api.GregTech_API;
-import gregtech.api.enums.Materials;
-import gregtech.api.items.GT_Generic_Item;
 import ic2.api.item.IC2Items;
 
 import java.util.List;
@@ -46,6 +43,7 @@ import org.jackhuang.watercraft.common.item.range.ItemPlugins;
 import org.jackhuang.watercraft.common.item.range.ItemRange;
 import org.jackhuang.watercraft.common.item.rotors.ItemRotor;
 import org.jackhuang.watercraft.common.item.rotors.RotorType;
+import org.jackhuang.watercraft.common.network.MessagePacketHandler;
 import org.jackhuang.watercraft.common.recipe.EasyRecipeHandler;
 import org.jackhuang.watercraft.common.recipe.IRecipeHandler;
 import org.jackhuang.watercraft.common.recipe.NormalRecipeHandler;
@@ -90,7 +88,7 @@ public class WaterCraft implements IWorldGenerator {
 	@Mod.Instance(Reference.ModID)
 	public static WaterCraft instance;
 
-	@SidedProxy(clientSide = "org.jackhuang.watercraft.client.ClientProxy", serverSide = "org.jackhuang.watercraft.CommonProxy")
+	@SidedProxy(clientSide = "org.jackhuang.watercraft.client.ClientProxy", serverSide = "org.jackhuang.watercraft.common.CommonProxy")
 	public static CommonProxy proxy;
 
 	public static final CreativeTabs creativeTabWaterCraft = new CreativeTabWaterCraft(
@@ -101,8 +99,6 @@ public class WaterCraft implements IWorldGenerator {
 	private Configuration config;
 	
 	private IRecipeHandler recipe;
-	
-	public IIconRegister iconRegister;
 
 	public static boolean isGregTechLoaded, isThaumcraftLoaded, isIndustrialCraftLoaded;
 
@@ -111,13 +107,10 @@ public class WaterCraft implements IWorldGenerator {
 		config = new Configuration(event.getSuggestedConfigurationFile());
 		config.load();
 
-		for (RotorType type : RotorType.values()) {
-			type.getConfig(config);
-		}
-
 		Property updater = config.get("rule", Reference.configNeedRotor, true);
 		updater.comment = "If needn't, the default effencity is 100%.";
 		Reference.watermillNeedRotor = updater.getBoolean(true);
+		MessagePacketHandler.init();
 
 		config.save();
 
@@ -158,10 +151,12 @@ public class WaterCraft implements IWorldGenerator {
 	}
 
 	protected void init() {
-		
+
+		GlobalItems.updater = new ItemOthers();
+
+		GlobalBlocks.reservoir = new BlockReservoir();
 		GlobalBlocks.machine = new BlockMachines();
 		
-		GlobalItems.updater = new ItemOthers();
 		GlobalItems.crafting = new ItemCrafting();
 		GlobalItems.meterial = new ItemMaterial();
 		GlobalItems.oreDust = new ItemOreDust();
@@ -173,7 +168,6 @@ public class WaterCraft implements IWorldGenerator {
 		
 		GlobalBlocks.waterMill = new BlockWatermill();
 		GlobalBlocks.turbine = new BlockTurbine();
-		GlobalBlocks.reservoir = new BlockReservoir();
 		new BlockOre();
 	}
 
@@ -221,10 +215,6 @@ public class WaterCraft implements IWorldGenerator {
 		Minecraft mc = FMLClientHandler.instance().getClient();
 		if(mc != null) return mc.theWorld;
 		return null;
-	}
-
-	public void loadAllIcons() {
-		RecolorableTextures.load();
 	}
 	
 	public static boolean isDeobf() {

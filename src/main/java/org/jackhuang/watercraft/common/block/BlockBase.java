@@ -4,6 +4,7 @@ import java.util.Random;
 
 import org.jackhuang.watercraft.WaterCraft;
 import org.jackhuang.watercraft.InternalName;
+import org.jackhuang.watercraft.common.tileentity.TileEntityBase;
 import org.jackhuang.watercraft.common.tileentity.TileEntityInventory;
 import org.jackhuang.watercraft.util.WCLog;
 
@@ -30,9 +31,9 @@ public abstract class BlockBase extends BlockContainer {
 
 	protected final InternalName internalName;
 	public static int id;
-	
-	//0-bottom 1-top 2-left 3-front 4-right 5-back
-	
+
+	// 0-bottom 1-top 2-left 3-front 4-right 5-back
+
 	private static final int[][] facingAndSideToSpriteOffset = {
 			{ 3, 5, 1, 0, 4, 2 }, { 5, 3, 1, 0, 2, 4 }, { 0, 1, 3, 5, 4, 2 },
 			{ 0, 1, 5, 3, 2, 4 }, { 0, 1, 2, 4, 3, 5 }, { 0, 1, 4, 2, 5, 3 } };
@@ -40,13 +41,12 @@ public abstract class BlockBase extends BlockContainer {
 	@SideOnly(Side.CLIENT)
 	protected IIcon[][] textures;
 
-	public BlockBase(InternalName internalName,
-			Material material) {
+	public BlockBase(InternalName internalName, Material material) {
 		this(internalName, material, ItemBlock.class);
 	}
 
-	public BlockBase(InternalName internalName,
-			Material material, Class<? extends ItemBlock> itemClass) {
+	public BlockBase(InternalName internalName, Material material,
+			Class<? extends ItemBlock> itemClass) {
 		super(material);
 
 		setBlockName(internalName.name());
@@ -69,10 +69,9 @@ public abstract class BlockBase extends BlockContainer {
 		try {
 			return this.textures[index][subIndex];
 		} catch (Exception e) {
-			WCLog.warn("Side: " + side + "\n" + "Block: "
-					+ this + "\n" + "Meta: " + meta + "\n" + "Facing: "
-					+ facing + "\n" + "Index: " + index + "\n" + "SubIndex: "
-					+ subIndex);
+			WCLog.warn("Side: " + side + "\n" + "Block: " + this + "\n"
+					+ "Meta: " + meta + "\n" + "Facing: " + facing + "\n"
+					+ "Index: " + index + "\n" + "SubIndex: " + subIndex);
 		}
 
 		return null;
@@ -114,21 +113,22 @@ public abstract class BlockBase extends BlockContainer {
 		}
 		return ret.replace("item", "block");
 	}
-	
+
 	@Override
 	public int quantityDropped(Random random) {
 		return 1;
 	}
-	
+
 	@Override
 	public int damageDropped(int meta) {
 		return meta;
 	}
 
-	protected int getTextureIndex(IBlockAccess world, int x, int y, int z, int meta) {
+	protected int getTextureIndex(IBlockAccess world, int x, int y, int z,
+			int meta) {
 		return meta;
 	}
-	
+
 	protected int getTextureIndex(int meta) {
 		return meta;
 	}
@@ -177,6 +177,19 @@ public abstract class BlockBase extends BlockContainer {
 				item.stackSize = 0;
 				t.setInventorySlotContents(i, null);
 			}
+		}
+	}
+
+	@Override
+	public void onNeighborChange(IBlockAccess paramIBlockAccess, int paramInt1,
+			int paramInt2, int paramInt3, int paramInt4, int paramInt5,
+			int paramInt6) {
+		TileEntity localTileEntity = paramIBlockAccess.getTileEntity(paramInt1,
+				paramInt2, paramInt3);
+
+		if ((localTileEntity instanceof TileEntityBase)) {
+			((TileEntityBase) localTileEntity).onNeighborTileChange(paramInt4,
+					paramInt5, paramInt6);
 		}
 	}
 

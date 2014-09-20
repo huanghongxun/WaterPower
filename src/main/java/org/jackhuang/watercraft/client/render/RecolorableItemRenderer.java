@@ -56,7 +56,6 @@ public class RecolorableItemRenderer implements IItemRenderer {
 
 		GL11.glColor3f(1.0F, 1.0F, 1.0F);
 
-		IIconContainer iconContainer = item.getIconContainer(meta);
 		IIcon icon = stack.getIconIndex();
 		if (icon == null)
 			return;

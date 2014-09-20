@@ -19,7 +19,6 @@ import org.jackhuang.watercraft.common.item.range.ItemRange;
 import net.minecraft.item.ItemStack;
 
 /**
- * ±£´æËùÓÐµÄitemstack¡£
  * @author hyh
  */
 public class GlobalItems {

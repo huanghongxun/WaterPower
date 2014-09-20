@@ -36,8 +36,6 @@ public class ItemOthers extends ItemBase {
 		if(s != null) par3List.add(s);
 	}
 	
-	
-	
 	@Override
 	public String getItemStackDisplayName(ItemStack itemstack) {
 		if(itemstack.getItemDamage() >= ItemType.values().length) return null;
@@ -47,6 +45,7 @@ public class ItemOthers extends ItemBase {
 	@Override
 	public String getUnlocalizedName(ItemStack itemstack) {
 		if(itemstack.getItemDamage() >= ItemType.values().length) return null;
+		
 		return "item." + ItemType.values()[itemstack.getItemDamage()].unlocalizedName;
 	}
 }

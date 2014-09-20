@@ -19,12 +19,11 @@ import org.jackhuang.watercraft.common.block.GlobalBlocks;
 import org.jackhuang.watercraft.common.tileentity.TileEntityStandardWaterMachine;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import scala.tools.cmd.Meta;
 
 public class BlockMachines extends BlockMultiID {
 
 	public BlockMachines() {
-		super( InternalName.cptBlockMachine, Material.iron,
+		super(InternalName.cptBlockMachine, Material.iron,
 				ItemMachines.class);
 
 		setHardness(2f);

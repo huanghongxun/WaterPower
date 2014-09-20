@@ -36,9 +36,9 @@ public class GuiReservoir extends GuiContainer {
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
 		fontRendererObj.drawString(gen.getInventoryName(), 8, 6, 0x404040);
 		fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 0x404040);
-		fontRendererObj.drawString("容积: " + gen.getMaxWater(), 12, 20, 0x404040);
-		fontRendererObj.drawString("增加: " + gen.getLastAddedWater(), 12, 30, 0x404040);
-		fontRendererObj.drawString("水: " + gen.getWater(), 12, 40, 0x404040);
-		fontRendererObj.drawString("高能水: " + gen.getHPWater(), 12, 50, 0x404040);
+		fontRendererObj.drawString(StatCollector.translateToLocal("cptwtrml.gui.reservoir.capacity") + ": " + gen.getMaxWater(), 12, 20, 0x404040);
+		fontRendererObj.drawString(StatCollector.translateToLocal("cptwtrml.gui.reservoir.add") + ": " + gen.getLastAddedWater(), 12, 30, 0x404040);
+		fontRendererObj.drawString(StatCollector.translateToLocal("cptwtrml.gui.reservoir.water") + ": " + gen.getWater(), 12, 40, 0x404040);
+		fontRendererObj.drawString(StatCollector.translateToLocal("cptwtrml.gui.reservoir.hpWater") + ": " + gen.getHPWater(), 12, 50, 0x404040);
 	}
 }

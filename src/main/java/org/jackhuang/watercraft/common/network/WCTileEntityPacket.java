@@ -23,7 +23,6 @@ import org.jackhuang.watercraft.WaterCraft;
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.common.tileentity.TileEntityBase;
 
-import thaumcraft.api.ThaumcraftApi.EntityTags;
 import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 
 public class WCTileEntityPacket extends WCPacket {

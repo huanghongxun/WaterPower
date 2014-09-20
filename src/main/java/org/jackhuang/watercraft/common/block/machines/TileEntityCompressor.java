@@ -28,7 +28,7 @@ public class TileEntityCompressor extends TileEntityStandardWaterMachine {
 
 	@Override
 	public int getGuiId() {
-		return DefaultGuiIds.get("tileEntityCompressor").id;
+		return DefaultGuiIds.get("tileEntityCompressor");
 	}
 
 }

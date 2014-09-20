@@ -99,7 +99,7 @@ public class TileEntityTurbine extends TileEntityElectricMetaBlock {
 		return pair.getWater();
 	}
 
-	protected double setOutput(World world, int x, int y, int z) {
+	protected double computeOutput(World world, int x, int y, int z) {
 		//calSpeed();
 		/*
 		 * double use = Math.min(water,
@@ -203,7 +203,7 @@ public class TileEntityTurbine extends TileEntityElectricMetaBlock {
 
 	@Override
 	public int getGuiId() {
-		return DefaultGuiIds.get("tileEntityTurbine").id;
+		return DefaultGuiIds.get("tileEntityTurbine");
 	}
 
 	@Override

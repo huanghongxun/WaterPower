@@ -45,36 +45,36 @@ public class CommonProxy implements IGuiHandler {
 		TileEntity tileEntity = world.getTileEntity(x, y, z);
 		if (tileEntity == null)
 			return null;
-		if (ID == DefaultGuiIds.get("tileEntityTurbine").id) {
+		if (ID == DefaultGuiIds.get("tileEntityTurbine")) {
 			if (tileEntity instanceof TileEntityTurbine) {
 				TileEntityTurbine tileEntityT = (TileEntityTurbine) tileEntity;
 				return new ContainerRotor(thePlayer, tileEntityT);
 			}
-		} else if (ID == DefaultGuiIds.get("tileEntityWatermill").id) {
+		} else if (ID == DefaultGuiIds.get("tileEntityWatermill")) {
 			TileEntityWatermill tileEntityCW = (TileEntityWatermill) tileEntity;
 			return new ContainerWatermill(thePlayer, tileEntityCW);
-		} else if (ID == DefaultGuiIds.get("tileEntityReservoir").id) {
+		} else if (ID == DefaultGuiIds.get("tileEntityReservoir")) {
 			TileEntityReservoir tileEntityR = (TileEntityReservoir) tileEntity;
 			return new ContainerReservoir(thePlayer, tileEntityR);
-		} else if(ID == DefaultGuiIds.get("tileEntityMacerator").id) {
+		} else if(ID == DefaultGuiIds.get("tileEntityMacerator")) {
 			TileEntityMacerator tileEntityR = (TileEntityMacerator) tileEntity;
 			return new ContainerStandardMachine(thePlayer, tileEntityR);
-		} else if(ID == DefaultGuiIds.get("tileEntityCompressor").id) {
+		} else if(ID == DefaultGuiIds.get("tileEntityCompressor")) {
 			TileEntityCompressor tileEntityR = (TileEntityCompressor) tileEntity;
 			return new ContainerStandardMachine(thePlayer, tileEntityR);
-		} else if(ID == DefaultGuiIds.get("tileEntityAdvancedCompressor").id) {
+		} else if(ID == DefaultGuiIds.get("tileEntityAdvancedCompressor")) {
 			TileEntityAdvancedCompressor tileEntityR = (TileEntityAdvancedCompressor) tileEntity;
 			return new ContainerStandardMachine(thePlayer, tileEntityR);
-		} else if(ID == DefaultGuiIds.get("tileEntitySawmill").id) {
+		} else if(ID == DefaultGuiIds.get("tileEntitySawmill")) {
 			TileEntitySawmill tileEntityR = (TileEntitySawmill) tileEntity;
 			return new ContainerStandardMachine(thePlayer, tileEntityR);
-		} else if(ID == DefaultGuiIds.get("tileEntityLathe").id) {
+		} else if(ID == DefaultGuiIds.get("tileEntityLathe")) {
 			TileEntityLathe tileEntityR = (TileEntityLathe) tileEntity;
 			return new ContainerStandardMachine(thePlayer, tileEntityR);
-		} else if(ID == DefaultGuiIds.get("tileEntityCutter").id) {
+		} else if(ID == DefaultGuiIds.get("tileEntityCutter")) {
 			TileEntityCutter tileEntityR = (TileEntityCutter) tileEntity;
 			return new ContainerStandardMachine(thePlayer, tileEntityR);
-		} else if(ID == DefaultGuiIds.get("tileEntityCentrifuge").id) {
+		} else if(ID == DefaultGuiIds.get("tileEntityCentrifuge")) {
 			TileEntityCentrifuge tileEntityR = (TileEntityCentrifuge) tileEntity;
 			return new ContainerCentrifuge(thePlayer, tileEntityR);
 		}
@@ -84,5 +84,7 @@ public class CommonProxy implements IGuiHandler {
 	public void registerRenderer() {
 		
 	}
+	
+	public void loadAllIcons() {}
 
 }

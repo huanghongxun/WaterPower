@@ -167,24 +167,6 @@ public abstract class BlockMultiID extends BlockBase {
 		return false;
 	}
 
-	/*
-	 * public boolean rotateBlock(World worldObj, int x, int y, int z,
-	 * ForgeDirection axis) { if (axis == ForgeDirection.UNKNOWN) return false;
-	 * 
-	 * TileEntity tileEntity = worldObj.getTileEntity(x, y, z);
-	 * 
-	 * if ((tileEntity instanceof IWrenchable)) { IWrenchable te = (IWrenchable)
-	 * tileEntity;
-	 * 
-	 * int newFacing = ForgeDirection.getOrientation(te.getFacing())
-	 * .getRotation(axis).ordinal();
-	 * 
-	 * if (te.wrenchCanSetFacing(null, newFacing)) { te.setFacing((short)
-	 * newFacing); } }
-	 * 
-	 * return false; }
-	 */
-
 	@Override
 	public int quantityDropped(Random random) {
 		return 1;
@@ -197,6 +179,7 @@ public abstract class BlockMultiID extends BlockBase {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegister) {
 		int metaCount = maxMetaData();
 

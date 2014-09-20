@@ -7,11 +7,9 @@ import org.jackhuang.watercraft.api.BasicMachineRecipeManager;
 import org.jackhuang.watercraft.api.MyRecipes;
 import org.jackhuang.watercraft.client.gui.DefaultGuiIds;
 import org.jackhuang.watercraft.common.inventory.InventorySlotProcessableGeneric;
-import org.jackhuang.watercraft.common.inventory.InventorySlotProcessableGreg;
 import org.jackhuang.watercraft.common.tileentity.TileEntityStandardWaterMachine;
 import org.jackhuang.watercraft.util.StackUtil;
 
-import gregtech.api.util.GT_Recipe;
 import ic2.api.recipe.IRecipeInput;
 import ic2.api.recipe.RecipeInputItemStack;
 import ic2.api.recipe.RecipeInputOreDict;
@@ -32,8 +30,9 @@ public class TileEntityCentrifuge extends TileEntityStandardWaterMachine {
 		super(80, 10 * 20, 4);
 
 		if (WaterCraft.isGregTechLoaded)
-			this.inputSlot = new InventorySlotProcessableGreg(this, "input",
-					2, MyRecipes.centrifuge_gt, GT_Recipe.sSawmillRecipes);
+			//this.inputSlot = new InventorySlotProcessableGreg(this, "input",
+			//		2, MyRecipes.centrifuge_gt, GT_Recipe.sSawmillRecipes);
+			;
 		else
 			this.inputSlot = new InventorySlotProcessableGeneric(this, "input",
 					1, MyRecipes.centrifuge_gt);
@@ -55,6 +54,6 @@ public class TileEntityCentrifuge extends TileEntityStandardWaterMachine {
 
 	@Override
 	public int getGuiId() {
-		return DefaultGuiIds.get("tileEntitySawmill").id;
+		return DefaultGuiIds.get("tileEntitySawmill");
 	}
 }

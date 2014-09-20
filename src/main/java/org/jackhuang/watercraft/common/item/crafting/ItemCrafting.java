@@ -19,10 +19,12 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import org.jackhuang.watercraft.InternalName;
 import org.jackhuang.watercraft.Reference;
+import org.jackhuang.watercraft.client.render.IIconContainer;
 import org.jackhuang.watercraft.common.item.ItemBase;
+import org.jackhuang.watercraft.common.item.ItemRecolorable;
 import org.jackhuang.watercraft.common.recipe.IRecipeHandler;
 
-public class ItemCrafting extends ItemBase {
+public class ItemCrafting extends ItemRecolorable {
 	
 	public static ItemCrafting instance;
 
@@ -80,6 +82,23 @@ public class ItemCrafting extends ItemBase {
 		for(CraftingTypes c : CraftingTypes.values())
 			for(LevelTypes l : LevelTypes.values())
 				par3List.add(get(c, l));
+	}
+
+	@Override
+	public short[] getRGBA(ItemStack stack) {
+		int meta = stack.getItemDamage();
+		int levelType = meta % CraftingTypes.space;
+		LevelTypes type = LevelTypes.values()[levelType];
+		return new short[] { type.R, type.G, type.B, type.A };
+	}
+
+	public IIconContainer getIconContainer(int meta, LevelTypes type) {
+		return type.iconContainer[meta / CraftingTypes.space];
+	}
+
+	@Override
+	public IIconContainer getIconContainer(int meta) {
+		return getIconContainer(meta, LevelTypes.values()[meta % CraftingTypes.space]);
 	}
 	
 }

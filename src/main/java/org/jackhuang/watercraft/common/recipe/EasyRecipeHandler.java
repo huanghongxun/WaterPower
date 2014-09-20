@@ -1,7 +1,5 @@
 package org.jackhuang.watercraft.common.recipe;
 
-import thaumcraft.api.ItemApi;
-import gregtech.api.GregTech_API;
 import ic2.api.item.IC2Items;
 import ic2.api.recipe.RecipeInputItemStack;
 import ic2.api.recipe.Recipes;
@@ -109,38 +107,38 @@ public class EasyRecipeHandler extends IRecipeHandler {
 				IC2Items.getItem("advancedCircuit"), 'M', UpdaterType.MK3.item(),
 				'U', UpdaterType.WaterUraniumPlateMK3.item());
 
-		// 数据流
+		// Data Stream
 		addRecipeByOreDictionary(new ItemStack(GlobalBlocks.waterMill, 1, 8),
 				"CUC", "SAS", "PMP", 'C',
 				GregTech_API.getGregTechItem(34, 1, 0), 'A', new ItemStack(
 						GlobalBlocks.waterMill, 1, 7), 'S',
 				GregTech_API.getGregTechComponent(1, 1), 'P', Items // Turn
-																	// 数据流电路
+																	// Data Stream Circuit
 						.getItem("advancedCircuit"), 'M',
 				UpdaterType.MK4.item(), 'U',
 				UpdaterType.WaterUraniumPlateMK4.item());
 
-		// 数据流
+		// Data Stream
 		addRecipeByOreDictionary(new ItemStack(GlobalBlocks.waterMill, 1, 9),
 				"CUC", "SAS", "PMP", 'C',
 				GregTech_API.getGregTechItem(35, 1, 0), 'A', new ItemStack(
 						GlobalBlocks.waterMill, 1, 8), 'S',
-				GregTech_API.getGregTechItem(43, 1, 0), 'P', Items // Turn 数据流电路
+				GregTech_API.getGregTechItem(43, 1, 0), 'P', Items // Turn Data Stream Circuit
 						.getItem("advancedCircuit"), 'M',
 				UpdaterType.MK4.item(), 'U',
 				UpdaterType.WaterUraniumPlateMK4.item());
 
-		// He180k冷却
+		// He180k Cooling Agent
 		addRecipeByOreDictionary(new ItemStack(GlobalBlocks.waterMill, 1, 10),
 				"CUC", "SAS", "PMP", 'C',
 				GregTech_API.getGregTechItem(36, 1, 0), 'A', new ItemStack(
 						GlobalBlocks.waterMill, 1, 9), 'S',
-				GregTech_API.getGregTechItem(36, 1, 0), 'P', Items // Turn 数据流电路
+				GregTech_API.getGregTechItem(36, 1, 0), 'P', Items // Turn Data Stream Circuit
 						.getItem("advancedCircuit"), 'M',
 				UpdaterType.MK5.item(), 'U',
 				UpdaterType.WaterUraniumPlateMK5.item());
 
-		// Nak180K冷却
+		// Nak180K Cooling Agent
 		addRecipeByOreDictionary(new ItemStack(GlobalBlocks.waterMill, 1, 11),
 				"CUC", "SAS", "PMP", 'C',
 				GregTech_API.getGregTechItem(60, 1, 0), 'A', new ItemStack(
@@ -149,7 +147,7 @@ public class EasyRecipeHandler extends IRecipeHandler {
 				IC2Items.getItem("advancedCircuit"), 'M', UpdaterType.MK5.item(),
 				'U', UpdaterType.WaterUraniumPlateMK5.item());
 
-		// 能量
+		// Energy
 		addRecipeByOreDictionary(new ItemStack(GlobalBlocks.waterMill, 1, 12),
 				"CUC", "SAS", "PMP", 'C',
 				GregTech_API.getGregTechItem(61, 1, 0), 'A', new ItemStack(
@@ -158,7 +156,7 @@ public class EasyRecipeHandler extends IRecipeHandler {
 				IC2Items.getItem("advancedCircuit"), 'M', UpdaterType.MK6.item(),
 				'U', UpdaterType.WaterUraniumPlateMK6.item());
 
-		// 超导体
+		// SuperConductor
 		addRecipeByOreDictionary(new ItemStack(GlobalBlocks.waterMill, 1, 13),
 				"CUC", "SAS", "PMP", 'C',
 				GregTech_API.getGregTechItem(62, 1, 0), 'A', new ItemStack(
@@ -167,7 +165,7 @@ public class EasyRecipeHandler extends IRecipeHandler {
 				IC2Items.getItem("advancedCircuit"), 'M', UpdaterType.MK6.item(),
 				'U', UpdaterType.WaterUraniumPlateMK6.item());
 
-		// 铱中子板
+		// Ir Neutron plate
 		addRecipeByOreDictionary(new ItemStack(GlobalBlocks.waterMill, 1, 14),
 				"CUC", "SAS", "PMP", 'C', IC2Items.getItem("FluidCell"), 'A',
 				new ItemStack(GlobalBlocks.waterMill, 1, 13), 'S',
@@ -175,7 +173,7 @@ public class EasyRecipeHandler extends IRecipeHandler {
 				IC2Items.getItem("advancedCircuit"), 'M', UpdaterType.MK7.item(),
 				'U', UpdaterType.WaterUraniumPlateMK7.item());
 
-		// 铱
+		// Ir
 		addRecipeByOreDictionary(new ItemStack(GlobalBlocks.waterMill, 1, 15),
 				"CUC", "SAS", "PMP", 'C', IC2Items.getItem("FluidCell"), 'A',
 				new ItemStack(GlobalBlocks.waterMill, 1, 14), 'S',
@@ -410,11 +408,11 @@ public class EasyRecipeHandler extends IRecipeHandler {
 		Recipes.macerator.addRecipe(new RecipeInputItemStack(new ItemStack(Blocks.cactus, 1, 16)), null,
 				ItemType.DustCactus.item());
 		if(gregtechRecipe) {
-			GregTech_API.sRecipeAdder.addAssemblerRecipe(ItemType.DustCactus.item(4),
-					getUsualItemStack(new ItemStack(Blocks.tallgrass)), ItemType.DrawingWaterPart.item(4), 20*20, 120);
-			GregTech_API.sRecipeAdder.addAssemblerRecipe(ItemType.DrawingWaterPart.item(4),
-					ItemMaterial.get(MaterialTypes.VanadiumSteel, MaterialForms.ring),
-					ItemType.DrawingWaterComponent.item(), 20*20, 120);
+			//GregTech_API.sRecipeAdder.addAssemblerRecipe(ItemType.DustCactus.item(4),
+			//		getUsualItemStack(new ItemStack(Blocks.tallgrass)), ItemType.DrawingWaterPart.item(4), 20*20, 120);
+			//GregTech_API.sRecipeAdder.addAssemblerRecipe(ItemType.DrawingWaterPart.item(4),
+			//		ItemMaterial.get(MaterialTypes.VanadiumSteel, MaterialForms.ring),
+			//		ItemType.DrawingWaterComponent.item(), 20*20, 120);
 		} else {
 			addShapelessRecipeByOreDictionary(ItemType.DrawingWaterPart.item(),
 					ItemType.DustCactus.item(), ItemType.DustCactus.item(),

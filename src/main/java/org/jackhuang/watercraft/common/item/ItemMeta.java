@@ -1,6 +1,5 @@
 package org.jackhuang.watercraft.common.item;
 
-import gregtech.api.GregTech_API;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
@@ -13,7 +12,6 @@ import org.jackhuang.watercraft.common.tileentity.TileEntityElectricMetaBlock;
 import org.jackhuang.watercraft.common.tileentity.ITileEntityMeta;
 
 /**
- * 使用NBT存储metadata的BlockItem将要继承此类
  * @author hyh
  *
  */
@@ -22,10 +20,7 @@ public abstract class ItemMeta extends ItemBlock {
 	public ItemMeta(Block id) {
 		super(id);
 	}
-
-	/**
-	 * 复写placeBlockAt来帮助block初始化nbt（包括存储在NBT里的meta）
-	 */
+	
 	@Override
 	public boolean placeBlockAt(ItemStack aStack, EntityPlayer aPlayer,
 			World aWorld, int aX, int aY, int aZ, int side, float hitX,

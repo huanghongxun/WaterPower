@@ -2,6 +2,7 @@ package org.jackhuang.watercraft.common.block.watermills;
 
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.client.gui.DefaultGuiIds;
+import org.jackhuang.watercraft.client.render.ModelWaterWheel;
 import org.jackhuang.watercraft.common.entity.EntityWaterWheel;
 import org.jackhuang.watercraft.common.item.others.ItemOthers;
 import org.jackhuang.watercraft.common.item.others.ItemType;
@@ -30,6 +31,7 @@ public class TileEntityWatermill extends TileEntityElectricMetaBlock {
 
 	RotorInventorySlot slotRotor;
 	RangeInventorySlot slotUpdater;
+	ModelWaterWheel model = new ModelWaterWheel();
 	
 	public TileEntityWatermill() {
 		super(0, 32767);
@@ -105,9 +107,11 @@ public class TileEntityWatermill extends TileEntityElectricMetaBlock {
 		return type;
 	}
 
-	protected double setOutput(World world, int x, int y, int z) {
-		if (type == null || waterBlocks == -1)
+	protected double computeOutput(World world, int x, int y, int z) {
+		if (type == null || waterBlocks == -1) {
 			return 0;
+		}
+		
 		double vol = getRange();
 		vol *= vol * vol;
 		double waterPercent = (double) waterBlocks / (vol - 1);
@@ -145,6 +149,7 @@ public class TileEntityWatermill extends TileEntityElectricMetaBlock {
 		if (slotUpdater != null && !slotUpdater.isEmpty()) {
 			for (int i = 0; i < slotUpdater.size(); i++) {
 				ItemStack is = slotUpdater.get(i);
+				if (is == null) continue;
 				if (is != null
 						&& slotUpdater.get(i).getItem() instanceof ItemRange)
 					if (is.getItemDamage() >= RangeType.values().length)
@@ -226,7 +231,7 @@ public class TileEntityWatermill extends TileEntityElectricMetaBlock {
 
 	@Override
 	public int getGuiId() {
-		return DefaultGuiIds.get("tileEntityWatermill").id;
+		return DefaultGuiIds.get("tileEntityWatermill");
 	}
 
 	@Override
@@ -271,6 +276,25 @@ public class TileEntityWatermill extends TileEntityElectricMetaBlock {
 	public void updateWheel() {
 		canWheelTurn = canWheelTurn();
 		wheel.parent = this;
-		sendUpdateToClient();
+	}
+
+	public float getRotationSpeed() {
+		int vol = getRange();
+		if(vol==0) return 0;
+		return (float)waterBlocks / (vol*vol*vol);
+	}
+	
+	float angle = 0;
+	
+	public float getWheelAngle() {
+		float rotationSpeed = getRotationSpeed()/400;
+		angle += rotationSpeed;
+		if(angle >= 1) angle -= 1;
+	    return angle * 360;
+	}
+	
+	@Override
+	public boolean isActive() {
+		return super.isActive() && canWheelTurn();
 	}
 }

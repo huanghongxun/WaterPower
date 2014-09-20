@@ -39,12 +39,6 @@ public class ItemOreDust extends ItemRecolorable {
 				StatCollector.translateToLocal("cptwtrml.forms.dust");
 	}
 	
-	public void registerAllRecipes() {
-		for(OreType type : OreType.values()) {
-			Recipes.macerator.addRecipe(new RecipeInputItemStack(new ItemStack(GlobalBlocks.ore, 1, type.ordinal())), null, new ItemStack(this, 1, type.ordinal()));
-		}
-	}
-	
 	public ItemStack get(OreType type) {
 		return get(type.ordinal());
 	}

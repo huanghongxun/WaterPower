@@ -5,6 +5,7 @@ import java.util.List;
 import org.jackhuang.watercraft.WaterCraft;
 import org.jackhuang.watercraft.InternalName;
 import org.jackhuang.watercraft.Reference;
+import org.jackhuang.watercraft.client.ClientProxy;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -19,7 +20,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Configuration;
 
 /**
- * 继承此类能获得帮助读取图片和处理meta的功能
  * @author hyh
  */
 public abstract class ItemBase extends Item {
@@ -53,9 +53,12 @@ public abstract class ItemBase extends Item {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister iconRegister) {
-		if(WaterCraft.instance.iconRegister == null) {
-			WaterCraft.instance.iconRegister = iconRegister;
-			WaterCraft.instance.loadAllIcons();
+		if(WaterCraft.proxy instanceof ClientProxy) {
+			ClientProxy proxy = (ClientProxy) WaterCraft.proxy;
+			if(proxy.iconRegister == null) {
+				proxy.iconRegister = iconRegister;
+				proxy.loadAllIcons();
+			}
 		}
 		
 		this.textures = new IIcon[32768];

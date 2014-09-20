@@ -94,7 +94,7 @@ public class ItemTrouser extends ItemArmor
 		
 		percent += biomeGet * weather / 10.0;
 		
-		if(player.isInWater()) percent += 0.1;
+		if(player.isInWater()) percent += 1;
 		
 		int energy = (int)((double)type.output * percent);
 		saved += energy;

@@ -9,8 +9,8 @@ import org.jackhuang.watercraft.common.item.others.ItemType;
 import org.jackhuang.watercraft.common.recipe.IRecipeHandler;
 import org.jackhuang.watercraft.util.WCLog;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import thaumcraft.api.ItemApi;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -21,48 +21,48 @@ import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 
 /**
- * 按照布氏硬度：http://zhidao.baidu.com/link?url=QrYBWorqVruUKU3H1ifnnLMKLbStwvqmt5j6XHgBSySIY7mf_EHYwljx5u7CfqvYGKR6Toj9MxjdgscPQXDEIK
+ * http://zhidao.baidu.com/link?url=QrYBWorqVruUKU3H1ifnnLMKLbStwvqmt5j6XHgBSySIY7mf_EHYwljx5u7CfqvYGKR6Toj9MxjdgscPQXDEIK
  * x*200
  * @author jackhuang1998
  * 
  */
 public enum RotorType {
 	// 1 - IndustrialCraft 
-	WOOD(0.125, 1200, "木转子", "waterRotorWood"),
-	STONE(0.2, 1000, "石转子", "waterRotorStone"),
-	LEAD(0.215, 1000, "铅转子", "waterRotorLead"),
-	TIN(0.23, 6000, "锡转子", "waterRotorTin"),
-	GOLD(0.7, 4000, "金转子", "waterRotorGold"),
-	COPPER(0.25, 8000, "铜转子", "waterRotorCopper"),
-	SILVER(0.3, 5000, "银转子", "waterRotorSilver"),
-	IRON(0.35, 10000, "铁转子", "waterRotorIron"),
-	REFINEDIRON(0.4, 12000, "精炼铁转子", "waterRotorRefinedIron"),
-	OBSIDIAN(0.45, 20000, "黑曜石转子", "waterRotorObsidian"),
-	BRONZE(0.5, 7000, "青铜转子", "waterRotorBronze"),
-	LAPIS(0.55, 3000, "青金石转子", "waterRotorLapis"),
-	QUARTZ(0.6, 18000, "石英转子", "waterRotorQuartz"),
-	CARBON(0.65, 10000, "碳板转子", "waterRotorCarbon"),
-	ADVANCED(0.7, 6000, "高级合金转子", "waterRotorAdvanced"),
-	EMERALD(0.75, 15000, "绿宝石转子", "waterRotorEmerald"),
-	DIAMOND(0.8, 25000, "钻石转子", "waterRotorDiamond"),
-	IRIDIUM(0.9, 34000, "铱转子", "waterRotorIridium"),
-	IRIDIUMIRON(1, 107374182, "铱铁转子", "waterRotorIridiumIron"),
+	WOOD(0.125, 1200, "waterRotorWood"),
+	STONE(0.2, 1000, "waterRotorStone"),
+	LEAD(0.215, 1000, "waterRotorLead"),
+	TIN(0.23, 6000, "waterRotorTin"),
+	GOLD(0.7, 4000, "waterRotorGold"),
+	COPPER(0.25, 8000, "waterRotorCopper"),
+	SILVER(0.3, 5000, "waterRotorSilver"),
+	IRON(0.35, 10000, "waterRotorIron"),
+	REFINEDIRON(0.4, 12000, "waterRotorRefinedIron"),
+	OBSIDIAN(0.45, 20000, "waterRotorObsidian"),
+	BRONZE(0.5, 7000, "waterRotorBronze"),
+	LAPIS(0.55, 3000, "waterRotorLapis"),
+	QUARTZ(0.6, 18000, "waterRotorQuartz"),
+	CARBON(0.65, 10000, "waterRotorCarbon"),
+	ADVANCED(0.7, 6000, "waterRotorAdvanced"),
+	EMERALD(0.75, 15000, "waterRotorEmerald"),
+	DIAMOND(0.8, 25000, "waterRotorDiamond"),
+	IRIDIUM(0.9, 34000, "waterRotorIridium"),
+	IRIDIUMIRON(1, 107374182, "waterRotorIridiumIron"),
 	// 2 - GregTech
-	ZINC(0.23, 7000, "锌转子", "waterRotorZinc"),
-	BRASS(0.5, 7750, "黄铜转子", "waterRotorBrass"),
-	ALUMINUM(0.4, 5000, "铝转子", "waterRotorAluminum"),
-	ELECTRUM(0.45, 4500, "金银转子", "waterRotorElectrum"),
-	STEEL(0.5, 15000, "钢转子", "waterRotorSteel"),
-	INVAR(0.55, 12000, "殷钢转子", "waterRotorInvar"),
-	NICKEL(0.6, 16000, "镍转子", "waterRotorNickel"),
-	TITANIUM(0.65, 23000, "钛转子", "waterRotorTitanium"),
-	PLATINUM(0.7, 8000, "铂转子", "waterRotorPlatinum"),
-	TUNGSTEN(0.75, 70000, "钨转子", "waterRotorTungsten"),
-	CHROME(1, 100000, "铬转子", "waterRotorChrome"),
-	TUNGSTEN_STEEL(1, 100000, "钨钢转子", "waterRotorTungstenSteel"),
-	OSMIUM(0.9, 200000, "锇转子", "waterRotorOsmium"),
+	ZINC(0.23, 7000, "waterRotorZinc"),
+	BRASS(0.5, 7750, "waterRotorBrass"),
+	ALUMINUM(0.4, 5000, "waterRotorAluminum"),
+	ELECTRUM(0.45, 4500, "waterRotorElectrum"),
+	STEEL(0.5, 15000, "waterRotorSteel"),
+	INVAR(0.55, 12000, "waterRotorInvar"),
+	NICKEL(0.6, 16000, "waterRotorNickel"),
+	TITANIUM(0.65, 23000, "waterRotorTitanium"),
+	PLATINUM(0.7, 8000, "waterRotorPlatinum"),
+	TUNGSTEN(0.75, 70000, "waterRotorTungsten"),
+	CHROME(1, 100000, "waterRotorChrome"),
+	TUNGSTEN_STEEL(1, 100000, "waterRotorTungstenSteel"),
+	OSMIUM(0.9, 200000, "waterRotorOsmium"),
 	// 3 - Thaumcraft
-	THAUMIUM(0.7, 20000, "神秘转子", "waterRotorThaumium");
+	THAUMIUM(0.7, 20000, "waterRotorThaumium");
 	
 	public static void initRotors() {
 		for (RotorType type : RotorType.values()) {
@@ -74,8 +74,6 @@ public enum RotorType {
 	
 	public int maxDamage;
 	
-	private String showedName;
-	
 	public String unlocalizedName;
 	
 	public int id;
@@ -84,21 +82,10 @@ public enum RotorType {
 	
 	public boolean enable = true;
 	
-	private RotorType(double efficiency, int maxDamage, String showedName,
-		String unlocalizedName) {
+	private RotorType(double efficiency, int maxDamage, String unlocalizedName) {
 		this.efficiency = efficiency;
 		this.maxDamage = maxDamage * 20;
-		this.showedName = showedName;
 		this.unlocalizedName = unlocalizedName;
-	}
-	
-	public void getConfig(Configuration config) {
-		//Property rotorId = config.get("item", this.unlocalizedName, Reference.defaultRotorID + ordinal());
-		//rotorId.comment = "This is the id of " + showedName + " Item.";
-		//id = rotorId.getInt(Reference.defaultRotorID + ordinal());
-		//Property enableRotor = config.get("enable", this.unlocalizedName, true);
-		//enableRotor.comment = "这关系到是否启用" + showedName;
-		//enable = enableRotor.getBoolean(true);
 	}
 	
 	public String getShowedName() {
@@ -127,7 +114,7 @@ public enum RotorType {
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			WCLog.err("Failed to Register Rotor: " + showedName);
+			WCLog.err("Failed to Register Rotor: " + unlocalizedName);
 		}
 	}
 	
@@ -213,7 +200,6 @@ public enum RotorType {
 			/* Thaumium */
 			addRotorRecipe(RotorType.THAUMIUM,
 					ItemApi.getItem("itemNugget", 6),
-					// GregTech_API.getGregTechMaterial(17330, 1),
 					ItemApi.getBlock("blockCosmeticSolid", 4));
 		}
 	}

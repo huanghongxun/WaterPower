@@ -30,6 +30,6 @@ public class TileEntityMacerator extends TileEntityStandardWaterMachine {
 
 	@Override
 	public int getGuiId() {
-		return DefaultGuiIds.get("tileEntityMacerator").id;
+		return DefaultGuiIds.get("tileEntityMacerator");
 	}
 }

@@ -1,9 +1,9 @@
 package org.jackhuang.watercraft.client;
 
 import org.jackhuang.watercraft.client.gui.DefaultGuiIds;
-import org.jackhuang.watercraft.client.gui.DefaultGuiIds.Data;
 import org.jackhuang.watercraft.client.render.EntityWaterWheelRenderer;
 import org.jackhuang.watercraft.client.render.RecolorableItemRenderer;
+import org.jackhuang.watercraft.client.render.RecolorableTextures;
 import org.jackhuang.watercraft.common.CommonProxy;
 import org.jackhuang.watercraft.common.block.machines.GuiCentrifuge;
 import org.jackhuang.watercraft.common.block.machines.GuiCompressor;
@@ -23,13 +23,16 @@ import org.jackhuang.watercraft.common.block.reservoir.TileEntityReservoir;
 import org.jackhuang.watercraft.common.block.turbines.GuiTurbine;
 import org.jackhuang.watercraft.common.block.turbines.TileEntityTurbine;
 import org.jackhuang.watercraft.common.block.watermills.GuiWatermill;
+import org.jackhuang.watercraft.common.block.watermills.RotorRenderer;
 import org.jackhuang.watercraft.common.block.watermills.TileEntityWatermill;
 import org.jackhuang.watercraft.common.entity.EntityWaterWheel;
 import org.jackhuang.watercraft.common.item.GlobalItems;
 
+import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -38,40 +41,45 @@ import net.minecraftforge.client.MinecraftForgeClient;
 @SideOnly(Side.CLIENT)
 public class ClientProxy extends CommonProxy {
 	
+	public IIconRegister iconRegister;
+
+	public void loadAllIcons() {
+		RecolorableTextures.load();
+	}
+	
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer thePlayer, World world, int X, int Y,
 		int Z) {
 		TileEntity tileEntity = world.getTileEntity(X, Y, Z);
-		Data data;
 		if (tileEntity == null) return null;
-		if(ID == (data = DefaultGuiIds.get("tileEntityTurbine")).id) {
+		if(ID == DefaultGuiIds.get("tileEntityTurbine")) {
 			TileEntityTurbine tileEntityT = (TileEntityTurbine) tileEntity;
 			return new GuiTurbine(thePlayer, tileEntityT);
-		} else if(ID == (data = DefaultGuiIds.get("tileEntityWatermill")).id) {
+		} else if(ID == DefaultGuiIds.get("tileEntityWatermill")) {
 			TileEntityWatermill tileEntityCW = (TileEntityWatermill) tileEntity;
 			return new GuiWatermill(thePlayer, tileEntityCW);
-		} else if(ID == (data = DefaultGuiIds.get("tileEntityReservoir")).id) {
+		} else if(ID == DefaultGuiIds.get("tileEntityReservoir")) {
 			TileEntityReservoir tileEntityR = (TileEntityReservoir) tileEntity;
 			return new GuiReservoir(thePlayer, tileEntityR);
-		} else if(ID == (data = DefaultGuiIds.get("tileEntityMacerator")).id) {
+		} else if(ID == DefaultGuiIds.get("tileEntityMacerator")) {
 			TileEntityMacerator tileEntityR = (TileEntityMacerator) tileEntity;
 			return new GuiMacerator(thePlayer, tileEntityR);
-		} else if(ID == (data = DefaultGuiIds.get("tileEntityCompressor")).id) {
+		} else if(ID == DefaultGuiIds.get("tileEntityCompressor")) {
 			TileEntityCompressor tileEntityR = (TileEntityCompressor) tileEntity;
 			return new GuiCompressor(thePlayer, tileEntityR);
-		} else if(ID == (data = DefaultGuiIds.get("tileEntitySawmill")).id) {
+		} else if(ID == DefaultGuiIds.get("tileEntitySawmill")) {
 			TileEntitySawmill tileEntityR = (TileEntitySawmill) tileEntity;
 			return new GuiSawmill(thePlayer, tileEntityR);
-		} else if(ID == DefaultGuiIds.get("tileEntityLathe").id) {
+		} else if(ID == DefaultGuiIds.get("tileEntityLathe")) {
 			TileEntityLathe tileEntityR = (TileEntityLathe) tileEntity;
 			return new GuiLathe(thePlayer, tileEntityR);
-		} else if(ID == DefaultGuiIds.get("tileEntityCutter").id) {
+		} else if(ID == DefaultGuiIds.get("tileEntityCutter")) {
 			TileEntityCutter tileEntityR = (TileEntityCutter) tileEntity;
 			return new GuiCutter(thePlayer, tileEntityR);
-		} else if(ID == DefaultGuiIds.get("tileEntityAdvancedCompressor").id) {
+		} else if(ID == DefaultGuiIds.get("tileEntityAdvancedCompressor")) {
 			TileEntityAdvancedCompressor tileEntityR = (TileEntityAdvancedCompressor) tileEntity;
 			return new GuiCompressor(thePlayer, tileEntityR);
-		} else if(ID == DefaultGuiIds.get("tileEntityCentrifuge").id) {
+		} else if(ID == DefaultGuiIds.get("tileEntityCentrifuge")) {
 			TileEntityCentrifuge tileEntityR = (TileEntityCentrifuge) tileEntity;
 			return new GuiCentrifuge(thePlayer, tileEntityR);
 		}
@@ -86,6 +94,9 @@ public class ClientProxy extends CommonProxy {
 		
 		MinecraftForgeClient.registerItemRenderer(GlobalItems.meterial, new RecolorableItemRenderer());
 		MinecraftForgeClient.registerItemRenderer(GlobalItems.oreDust, new RecolorableItemRenderer());
+		MinecraftForgeClient.registerItemRenderer(GlobalItems.crafting, new RecolorableItemRenderer());
+		
+		//ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWatermill.class, new RotorRenderer());
 	}
 
 }

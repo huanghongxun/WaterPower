@@ -10,8 +10,6 @@ package org.jackhuang.watercraft.common.block.watermills;
 
 import java.util.ArrayList;
 
-import gregtech.api.interfaces.IDebugableBlock;
-
 import org.jackhuang.watercraft.InternalName;
 import org.jackhuang.watercraft.common.block.BlockMeta;
 import org.jackhuang.watercraft.common.block.BlockMultiID;
@@ -24,8 +22,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.config.Configuration;
 
-public class BlockWatermill extends BlockMeta
-	implements IDebugableBlock {
+public class BlockWatermill extends BlockMeta {
 	
 	public BlockWatermill() {
 		super(InternalName.cptBlockCompactWatermill, Material.iron, ItemWatermill.class);
@@ -64,7 +61,6 @@ public class BlockWatermill extends BlockMeta
 		return WaterType.values().length;
 	}
 
-	@Override
 	public ArrayList<String> getDebugInfo(EntityPlayer aPlayer, int aX, int aY,
 			int aZ, int aLogLevel) {
 		ArrayList<String> al = new ArrayList<String>();

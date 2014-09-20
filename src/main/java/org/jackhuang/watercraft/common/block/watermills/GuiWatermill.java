@@ -12,16 +12,25 @@ import java.text.DecimalFormat;
 
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.client.gui.ContainerRotor;
+import org.jackhuang.watercraft.common.EnergyType;
+import org.jackhuang.watercraft.common.network.FMLPacketDispatcher;
+import org.jackhuang.watercraft.common.network.MessagePacketHandler;
+import org.jackhuang.watercraft.common.network.PacketUnitChanged;
+import org.jackhuang.watercraft.common.network.WCPacket;
 import org.jackhuang.watercraft.common.tileentity.TileEntityBaseGenerator;
+import org.jackhuang.watercraft.util.WCLog;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
+import net.minecraftforge.common.DimensionManager;
 
 @SideOnly(Side.CLIENT)
 public class GuiWatermill extends GuiContainer {
@@ -29,6 +38,7 @@ public class GuiWatermill extends GuiContainer {
 
 	private ContainerWatermill container;
 	private DecimalFormat df;
+	private GuiButton btnEnergyType;
 
 	public GuiWatermill(EntityPlayer player, TileEntityWatermill gen) {
 		super(new ContainerWatermill(player, gen));
@@ -36,6 +46,16 @@ public class GuiWatermill extends GuiContainer {
 		allowUserInput = false;
 		container = new ContainerWatermill(player, gen);
 		df = new DecimalFormat("#.00");
+	}
+	
+	@Override
+	public void initGui() {
+		super.initGui();
+
+		int l = (width - xSize) / 2;
+		int i1 = (height - ySize) / 2;
+		btnEnergyType = new GuiButton(1, l + 100, i1 + 24, 30, 20, gen.energyType.name());
+		this.buttonList.add(btnEnergyType);
 	}
 
 	@Override
@@ -62,7 +82,7 @@ public class GuiWatermill extends GuiContainer {
 		fontRendererObj.drawString(
 				StatCollector.translateToLocal("cptwtrml.watermill.OUTPUT")
 						+ ": "
-						+ df.format(container.tileEntity.getOfferedEnergy())
+						+ df.format(container.tileEntity.lastestOutput)
 						+ "EU/t", 8, 40, 0x404040);
 		boolean w = gen.waterBlocks == -1;
 		fontRendererObj
@@ -84,6 +104,20 @@ public class GuiWatermill extends GuiContainer {
 		fontRendererObj.drawString(
 				StatCollector.translateToLocal("cptwtrml.watermill.NEED") + ":"
 						+ b + "=" + a + "^3-1", 8, 60, 0x404040);
+	}
+	
+	@Override
+	protected void actionPerformed(GuiButton p_146284_1_) {
+		super.actionPerformed(p_146284_1_);
+		
+		switch(p_146284_1_.id) {
+		case 1:
+			gen.energyType = EnergyType.values()[(gen.energyType.ordinal() + 1) % EnergyType.values().length];
+			btnEnergyType.displayString = gen.energyType.name();
+			MessagePacketHandler.INSTANCE.sendToServer(new PacketUnitChanged(Minecraft.getMinecraft().thePlayer.worldObj.provider.dimensionId, gen.xCoord, gen.yCoord, gen.zCoord, gen.energyType.ordinal()));
+			//MessagePacketHandler.INSTANCE.sendToAll(new PacketUnitChanged(Minecraft.getMinecraft().thePlayer.worldObj.provider.dimensionId, gen.xCoord, gen.yCoord, gen.zCoord, gen.energyType.ordinal()));
+			break;
+		}
 	}
 
 }

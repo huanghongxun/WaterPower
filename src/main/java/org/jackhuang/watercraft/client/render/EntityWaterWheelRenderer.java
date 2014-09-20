@@ -41,26 +41,31 @@ public class EntityWaterWheelRenderer extends Render {
 		float wheelf = 0.5F;
 		float wheell = 0.25F;
 		float wheelk = 0.125F;
+		float wheelRotate = 90f;
 		float[] translateWheel = { wheelf, wheelf, wheelf };
 
+		//System.out.println(facing);
 		switch (facing) {
 		case 5:
-			translateWheel[0] -= wheelf;
+			translateWheel[0] += 0.25;
 			rotationAngle[0] = -1.0F;
 			wheelAngle[2] = 1.0F;
 			break;
 		case 4:
-			translateWheel[0] += wheelf;
-			rotationAngle[0] = -1.0F;
-			wheelAngle[2] = 1.0F;
+			translateWheel[0] -= 1.25f;
+			translateWheel[2] += 1f;
+			rotationAngle[0] = -1F;
+			wheelAngle[2] = -1.5F;
 			break;
 		case 3:
-			translateWheel[2] += wheell;
-			rotationAngle[0] = 1.0F;
+			translateWheel[2] += 0.25;
+			rotationAngle[0] = -2.0f;
 			wheelAngle[0] = 1.0F;
+			wheelRotate = -90f;
 			break;
 		case 2:
-			translateWheel[2] -= wheell;
+			translateWheel[2] -= 1.25;
+			translateWheel[1] += 1;
 			rotationAngle[0] = 1.0F;
 			wheelAngle[0] = 1.0F;
 			break;
@@ -68,13 +73,13 @@ public class EntityWaterWheelRenderer extends Render {
 
 		GL11.glTranslatef(translateWheel[0], translateWheel[1],
 				translateWheel[2]);
-		GL11.glRotatef(90.0F, wheelAngle[0], wheelAngle[1], wheelAngle[2]);
+		GL11.glRotatef(wheelRotate, wheelAngle[0], wheelAngle[1], wheelAngle[2]);
 
 		FMLClientHandler.instance().getClient().renderEngine
 				.bindTexture(getTexture(wheel.wheelType));
 		this.model.trunk.render(this.ratio);
 
-		GL11.glRotatef(wheel.wheelAngle, 0.0F, rotationAngle[0],
+		GL11.glRotatef(wheel.parent.getWheelAngle(), 0.0F, rotationAngle[0],
 				rotationAngle[1]);
 
 		GL11.glTranslatef(0.0F, 0.0F, 0.0F);

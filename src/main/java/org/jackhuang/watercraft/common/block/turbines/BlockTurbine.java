@@ -1,7 +1,5 @@
 package org.jackhuang.watercraft.common.block.turbines;
 
-import gregtech.api.interfaces.IDebugableBlock;
-
 import java.util.ArrayList;
 
 import org.jackhuang.watercraft.InternalName;
@@ -14,8 +12,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockTurbine extends BlockMeta
-	implements IDebugableBlock {
+public class BlockTurbine extends BlockMeta {
 
 	public BlockTurbine() {
 		super(InternalName.cptBlockTurbine, Material.iron, ItemTurbine.class);
@@ -55,7 +52,6 @@ public class BlockTurbine extends BlockMeta
 		return TurbineType.values().length;
 	}
 
-	@Override
 	public ArrayList<String> getDebugInfo(EntityPlayer aPlayer, int aX, int aY,
 			int aZ, int aLogLevel) {
 		ArrayList<String> al = new ArrayList<String>();

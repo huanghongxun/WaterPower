@@ -1,4 +1,4 @@
-itemGroup.creativeTabCompactWatermills=高级水力发电机
+itemGroup.creativeTabWatercraft=高级水力发电机
 
 # tcIntegration
 tc.research_category.CompactWatermills=高级水力发电机
@@ -117,12 +117,42 @@ cptwtrml.updater.MK4=升级插件MK4
 cptwtrml.updater.MK5=升级插件MK5
 cptwtrml.updater.MK6=升级插件MK6
 cptwtrml.updater.MK7=升级插件MK7
-cptwtrml.updater.RESERVOIR_CORE=水库方块核心
-cptwtrml.updater.RESERVOIR_CORE_ADVANCED=高级水库方块核心
+cptwtrml.updater.ReservoirCore=水库方块核心
+cptwtrml.updater.ReservoirCoreAdvanced=高级水库方块核心
 cptwtrml.updater.PlasmaUraniumAlloyPlate=氦铀等离子合金板
 cptwtrml.updater.PlasmaUraniumIngot=氦铀等离子锭
 cptwtrml.updater.WaterUraniumAlloyPlate=水之铀锭合金板
 cptwtrml.updater.BaseRotor=基础转子
+cptwtrml.updater.StoneStruct=石制支柱
+cptwtrml.updater.WoodenHammer=木棰
+cptwtrml.updater.WaterResistantRubber=压缩橡胶
+cptwtrml.updater.WaterResistantRubberPlate=压缩橡胶板
+cptwtrml.updater.WaterResistantRubberDensePlate=厚压缩橡胶板
+cptwtrml.updater.DenseRedstonePlate=致密红石合金板
+cptwtrml.updater.DenseCoil=致密线圈
+cptwtrml.updater.OxygenEthanolFuel=氧-乙醇焰燃料
+cptwtrml.updater.SilverCoil=银线圈
+cptwtrml.updater.DenseSilverCoil=厚实银线圈
+cptwtrml.updater.FerricOxideDust=氧化铁粉
+cptwtrml.updater.FerroferricOxideDust=四氧化三铁粉
+cptwtrml.updater.FerricOxideSmallDust=小堆氧化铁粉
+cptwtrml.updater.FerroferricOxideSmallDust=小堆四氧化三铁粉
+cptwtrml.updater.HighPurityCarbonDust=高纯碳粉
+cptwtrml.updater.TungstenCarbideIngot=碳化钨锭
+cptwtrml.updater.DiamondBlade=钻石锯片
+cptwtrml.updater.DiamondGlazingWheel=钻石研磨轮
+cptwtrml.updater.BrassCentrifugePot=黄铜离心锅
+cptwtrml.updater.VSteelWaterPipe=钒钢水管
+cptwtrml.updater.RubyWaterHole=红宝石喷水口
+cptwtrml.updater.DataBall=数据球
+cptwtrml.updater.DustDiamond=钻石粉
+cptwtrml.updater.IndustrialSteelHydraulicCylinder=工业钢液压钢
+cptwtrml.updater.VSteelPistonCylinder=钒钢活塞缸
+cptwtrml.updater.DustCactus=仙人掌粉
+cptwtrml.updater.DustIron=铁粉
+cptwtrml.updater.DustGold=金粉
+cptwtrml.updater.DrawingWaterPart=汲水零件
+cptwtrml.updater.DrawingWaterComponent=汲水组件
 
 # range
 cptwtrml.range.info.MK1=缩小2格水要求
@@ -142,6 +172,12 @@ cptwtrml.watermill.CANNOT_CHECK=无法检测,范围太大
 cptwtrml.watermill.OUTPUT=输出
 cptwtrml.watermill.PRODUCTION=输出限制
 cptwtmrl.watermill.TROUSERS=裤子
+cptwtrml.watermill.ROTOR=转子
+
+cptwtrml.gui.reservoir.capacity=容积
+cptwtrml.gui.reservoir.add=增加
+cptwtrml.gui.reservoir.water=水量
+cptwtrml.gui.reservoir.hpWater=高能水
 cptwtrml.rotor.RANGE=范围缩小
 
 # crafting

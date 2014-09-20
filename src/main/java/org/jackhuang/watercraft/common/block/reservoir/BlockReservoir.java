@@ -1,6 +1,5 @@
 package org.jackhuang.watercraft.common.block.reservoir;
 
-import gregtech.api.interfaces.IDebugableBlock;
 import ic2.api.item.IC2Items;
 import ic2.api.tile.IWrenchable;
 
@@ -30,7 +29,7 @@ import com.google.common.base.Throwables;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class BlockReservoir extends BlockMeta implements IDebugableBlock {
+public class BlockReservoir extends BlockMeta {
 
 	public BlockReservoir() {
 		super(InternalName.cptBlockReservoir, Material.iron,
@@ -74,7 +73,6 @@ public class BlockReservoir extends BlockMeta implements IDebugableBlock {
 		return ReservoirType.values().length;
 	}
 
-	@Override
 	public ArrayList<String> getDebugInfo(EntityPlayer aPlayer, int aX, int aY,
 			int aZ, int aLogLevel) {
 		ArrayList<String> al = new ArrayList<String>();
@@ -87,7 +85,7 @@ public class BlockReservoir extends BlockMeta implements IDebugableBlock {
 				al.add("Type: " + te.type.name());
 			al.add("Water: " + te.getWater());
 		} else {
-			al.add("Not a watermill tile entity.");
+			al.add("Not a reservoir tile entity.");
 		}
 		return al;
 	}

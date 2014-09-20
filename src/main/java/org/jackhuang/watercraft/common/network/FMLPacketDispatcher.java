@@ -13,33 +13,33 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.management.PlayerManager;
 import net.minecraft.world.WorldServer;
 
-public class PacketDispatcher {
+public class FMLPacketDispatcher {
 	private static final Class playerInstanceClass;
 	private static final Method getOrCreateChunkWatcher;
 	private static final Method sendToAllPlayersWatchingChunk;
 
 	public static void sendToServer(WCPacket packet) {
-		PacketHandler.INSTANCE.channel.sendToServer(packet.getPacket());
+		FMLPacketHandler.INSTANCE.channel.sendToServer(packet.getPacket());
 	}
 
 	public static void sendToPlayer(WCPacket packet,
 			EntityPlayerMP player) {
-		PacketHandler.INSTANCE.channel.sendTo(packet.getPacket(), player);
+		FMLPacketHandler.INSTANCE.channel.sendTo(packet.getPacket(), player);
 	}
 
 	public static void sendToAll(WCPacket packet) {
-		PacketHandler.INSTANCE.channel.sendToAll(packet.getPacket());
+		FMLPacketHandler.INSTANCE.channel.sendToAll(packet.getPacket());
 	}
 
 	public static void sendToAllAround(WCPacket packet,
 			NetworkRegistry.TargetPoint zone) {
-		PacketHandler.INSTANCE.channel
+		FMLPacketHandler.INSTANCE.channel
 				.sendToAllAround(packet.getPacket(), zone);
 	}
 
 	public static void sendToDimension(WCPacket packet,
 			int dimensionId) {
-		PacketHandler.INSTANCE.channel.sendToDimension(packet.getPacket(),
+		FMLPacketHandler.INSTANCE.channel.sendToDimension(packet.getPacket(),
 				dimensionId);
 	}
 	
