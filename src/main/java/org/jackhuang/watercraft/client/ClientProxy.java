@@ -27,6 +27,7 @@ import org.jackhuang.watercraft.common.block.watermills.RotorRenderer;
 import org.jackhuang.watercraft.common.block.watermills.TileEntityWatermill;
 import org.jackhuang.watercraft.common.entity.EntityWaterWheel;
 import org.jackhuang.watercraft.common.item.GlobalItems;
+import org.jackhuang.watercraft.integration.waila.WailaModule;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -97,6 +98,11 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(GlobalItems.crafting, new RecolorableItemRenderer());
 		
 		//ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWatermill.class, new RotorRenderer());
+	}
+	
+	@Override
+	public void loadComplete() {
+		WailaModule.init();
 	}
 
 }

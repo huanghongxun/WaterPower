@@ -24,4 +24,23 @@ public class Reference {
 			configNeedRotor = "watermillNeedRotor";
 	
 	public static boolean watermillNeedRotor = true;
+	
+	public static class WorldGen {
+		public static boolean vanadiumOre = true,
+				manganeseOre = true,
+				monaziteOre = true,
+				magnetOre = true,
+				zincOre = true;
+		
+		public static float oreDensityFactor = 1;
+	}
+	
+	public static class Energy {
+		public static float mj = 2.5f,
+				rf = 0.12f,
+				charge = 0.1f,
+				ku = 0.25f,
+				steam = 0.1f,
+				water = 0.01f;
+	}
 }

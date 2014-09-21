@@ -1,11 +1,15 @@
 package org.jackhuang.watercraft.common;
 
+import org.jackhuang.watercraft.Reference;
+
 public enum EnergyType {
-	EU("EU"),
-	KU("KU"),
-	MJ("MJ"),
-	RF("RF"),
-	FZ("Charge");
+	EU("IC2/EU"),
+	KU("IC2/KU"),
+	MJ("BC6/MJ"),
+	RF("TE4/RF"),
+	FZ("FZ/Charge"),
+	Steam("Steam/mb"),
+	Water("Water/mb");
 	
 	public String showedName;
 	
@@ -14,23 +18,35 @@ public enum EnergyType {
 	}
 	
 	public static double EU2MJ(double eu) {
-		return eu/2.5;
+		return eu / Reference.Energy.mj;
 	}
 	
 	public static double MJ2EU(double mj) {
-		return mj*2.5;
+		return mj * Reference.Energy.mj;
 	}
 	
 	public static double EU2RF(double eu) {
-		return eu / 0.12;
+		return eu / Reference.Energy.rf;
 	}
 	
 	public static double RF2EU(double rf) {
-		return rf * 0.12;
+		return rf * Reference.Energy.rf;
 	}
 	
 	public static double EU2FZ(double eu) {
-		return eu * 10;
+		return eu / Reference.Energy.charge;
+	}
+	
+	public static double EU2KU(double eu) {
+		return eu / Reference.Energy.ku;
+	}
+	
+	public static double EU2Steam(double eu) {
+		return eu / Reference.Energy.steam;
+	}
+	
+	public static double EU2Water(double eu) {
+		return eu / Reference.Energy.water;
 	}
 
 }

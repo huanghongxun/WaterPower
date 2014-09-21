@@ -10,6 +10,9 @@ package org.jackhuang.watercraft;
 
 import ic2.api.item.IC2Items;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Properties;
 import java.util.Random;
@@ -74,6 +77,7 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
@@ -144,6 +148,11 @@ public class WaterCraft implements IWorldGenerator {
 
 		config.save();
 	}
+	
+	@EventHandler
+	public void loadComplete(FMLLoadCompleteEvent event) {
+		proxy.loadComplete();
+	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
@@ -200,14 +209,19 @@ public class WaterCraft implements IWorldGenerator {
 	public void generate(Random random, int chunkX, int chunkZ, World world,
 			IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
         int baseHeight = world.provider.getAverageGroundLevel() + 1;
-	    int baseScale = Math.round(baseHeight);
+	    int baseScale = Math.round(baseHeight * Reference.WorldGen.oreDensityFactor);
         int baseCount = 15 * baseScale / 64;
         
-	    generateOre(GlobalBlocks.vanadiumOre, 2, baseCount, world, random, chunkX, chunkZ, 16, 32);
-	    generateOre(GlobalBlocks.manganeseOre, 2, baseCount, world, random, chunkX, chunkZ, 16, 32);
-	    generateOre(GlobalBlocks.monaziteOre, 2, baseCount, world, random, chunkX, chunkZ, 16, 32);
-	    generateOre(GlobalBlocks.magnetOre, 10, baseCount, world, random, chunkX, chunkZ, 16, 32);
-	    generateOre(GlobalBlocks.zincOre, 15, baseCount, world, random, chunkX, chunkZ, 0, 64);
+        if(Reference.WorldGen.vanadiumOre)
+		    generateOre(GlobalBlocks.vanadiumOre, 2, baseCount, world, random, chunkX, chunkZ, 16, 32);
+        if(Reference.WorldGen.manganeseOre)
+		    generateOre(GlobalBlocks.manganeseOre, 2, baseCount, world, random, chunkX, chunkZ, 16, 32);
+        if(Reference.WorldGen.monaziteOre)
+		    generateOre(GlobalBlocks.monaziteOre, 2, baseCount, world, random, chunkX, chunkZ, 16, 32);
+        if(Reference.WorldGen.magnetOre)
+		    generateOre(GlobalBlocks.magnetOre, 10, baseCount, world, random, chunkX, chunkZ, 16, 32);
+        if(Reference.WorldGen.zincOre)
+		    generateOre(GlobalBlocks.zincOre, 15, baseCount, world, random, chunkX, chunkZ, 0, 64);
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -219,7 +233,11 @@ public class WaterCraft implements IWorldGenerator {
 	
 	public static boolean isDeobf() {
 		try {
-			new ChunkCoordinates(1,2,3).set(4, 5, 6);
+			Class c = ChunkCoordinates.class.getClassLoader().loadClass("net.minecraft.util.ChunkCoordinates");
+			Constructor co = c.getConstructor(Integer.class, Integer.class, Integer.class);
+			ChunkCoordinates cc = (ChunkCoordinates)co.newInstance(1, 2, 3);
+			Method f = c.getMethod("set");
+			f.invoke(cc, 4, 5, 6);
 			return true;
 		} catch(Throwable e) {
 			return false;

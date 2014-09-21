@@ -188,10 +188,10 @@ public class TileEntityTurbine extends TileEntityElectricMetaBlock {
 		if (hasRotor()) {
 			ItemRotor rotor = getRotor();
 			if (worldObj.isRemote) {
-				return rotor.type.efficiency;
+				return rotor.type.getEfficiency();
 			}
 
-			return rotor.type.efficiency;
+			return rotor.type.getEfficiency();
 		}
 		return 0;
 	}

@@ -1,6 +1,7 @@
 package org.jackhuang.watercraft.common.tileentity;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -92,7 +93,7 @@ public abstract class TileEntityLiquidTankInventory extends TileEntityInventory
 		if (!canDrain(from, resource.getFluid()))
 			return null;
 
-		return getFluidTank().drain(resource.amount, doDrain);
+		return drain(from, resource.amount, doDrain);
 	}
 
 	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
@@ -108,4 +109,22 @@ public abstract class TileEntityLiquidTankInventory extends TileEntityInventory
 
 	public abstract boolean canDrain(ForgeDirection paramForgeDirection,
 			Fluid paramFluid);
+	
+	public void pushFluidToConsumers(int flowCapacity) {
+		int amount = flowCapacity;
+		for (ForgeDirection side : ForgeDirection.VALID_DIRECTIONS) {
+			FluidStack fluidStack = getFluidTank().drain(amount, false);
+			if (fluidStack != null && fluidStack.amount > 0) {
+				TileEntity te = worldObj.getTileEntity(xCoord + side.offsetX, yCoord + side.offsetY, zCoord + side.offsetZ);
+				if(te != null && te instanceof IFluidHandler) {
+					int used = ((IFluidHandler) te).fill(side.getOpposite(), fluidStack, true);
+					if(used > 0) {
+						amount -= used;
+						getFluidTank().drain(used, true);
+						if (amount <= 0) return;
+					}
+				}
+			}
+		}
+	}
 }

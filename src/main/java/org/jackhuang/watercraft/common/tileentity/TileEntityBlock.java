@@ -12,10 +12,17 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
+import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.Fluid;
 
 import org.jackhuang.watercraft.common.block.BlockTextureStitched;
 
-public abstract class TileEntityBlock extends TileEntityInventory implements IWrenchable {
+public abstract class TileEntityBlock extends TileEntityLiquidTankInventory implements IWrenchable {
+	
+	public TileEntityBlock(int tanksize) {
+		super(tanksize);
+	}
+
 	private short facing = 0;
 
 	public boolean prevActive = false;
@@ -81,5 +88,15 @@ public abstract class TileEntityBlock extends TileEntityInventory implements IWr
 	}
 
 	public void onBlockBreak(int id, int meta) {
+	}
+	
+	@Override
+	public boolean canDrain(ForgeDirection paramForgeDirection, Fluid paramFluid) {
+		return false;
+	}
+	
+	@Override
+	public boolean canFill(ForgeDirection paramForgeDirection, Fluid paramFluid) {
+		return false;
 	}
 }

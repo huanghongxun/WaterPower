@@ -90,7 +90,7 @@ public class ItemRotor extends Item {
 			par3List.add(StatCollector.translateToLocal("cptwtrml.rotor.INFINITE"));
 		}
 		par3List.add(StatCollector.translateToLocal("cptwtrml.rotor.GOT_EFFICIENCY") + " "
-			+ (int) (((ItemRotor) par1ItemStack.getItem()).type.efficiency * 100) + "%");
+			+ (int) (((ItemRotor) par1ItemStack.getItem()).type.getEfficiency() * 100) + "%");
 	}
 	
 	@Override
