@@ -212,6 +212,8 @@ public class TileEntityWatermill extends TileEntityElectricMetaBlock {
 		tag.setInteger("waterBlocks", waterBlocks);
 		tag.setInteger("lavaBlocks", lavaBlocks);
 	}
+	
+	boolean markedBlockForUpdate = false;
 
 	@Override
 	public void readPacketData(NBTTagCompound tag) {
@@ -219,7 +221,10 @@ public class TileEntityWatermill extends TileEntityElectricMetaBlock {
 		waterBlocks = tag.getInteger("waterBlocks");
 		lavaBlocks = tag.getInteger("lavaBlocks");
 		type = WaterType.values()[tag.getInteger("type")];
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		if(!markedBlockForUpdate) {
+			markedBlockForUpdate = true;
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		}
 	}
 
 	@Override

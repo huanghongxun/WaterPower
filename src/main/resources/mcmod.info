@@ -1,7 +1,7 @@
 [
 {
   "modid": "CompactWatermills",
-  "name": "Water Craft",
+  "name": "WaterPower",
   "description": "It adds many watermills, turbines, water-power machines and many materials.",
   "version": "${version}",
   "mcversion": "${mcversion}",

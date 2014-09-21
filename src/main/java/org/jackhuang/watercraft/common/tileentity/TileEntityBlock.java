@@ -26,7 +26,7 @@ public abstract class TileEntityBlock extends TileEntityLiquidTankInventory impl
 	private short facing = 0;
 
 	public boolean prevActive = false;
-	public short prevFacing = 0;
+	private short prevFacing = 0;
 
 	@SideOnly(Side.CLIENT)
 	private IIcon[] lastRenderIcons;
@@ -41,6 +41,20 @@ public abstract class TileEntityBlock extends TileEntityLiquidTankInventory impl
 		super.writeToNBT(nbttagcompound);
 
 		nbttagcompound.setShort("facing", this.facing);
+	}
+	
+	@Override
+	public void readPacketData(NBTTagCompound tag) {
+		super.readPacketData(tag);
+
+		this.prevFacing = this.facing = tag.getShort("facing");
+	}
+	
+	@Override
+	public void writePacketData(NBTTagCompound tag) {
+		super.writePacketData(tag);
+
+		tag.setShort("facing", this.facing);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -58,6 +72,10 @@ public abstract class TileEntityBlock extends TileEntityLiquidTankInventory impl
 
 	public short getFacing() {
 		return this.facing;
+	}
+	
+	public short getPrevFacing() {
+		return this.prevFacing;
 	}
 
 	public boolean wrenchCanSetFacing(EntityPlayer entityPlayer, int side) {

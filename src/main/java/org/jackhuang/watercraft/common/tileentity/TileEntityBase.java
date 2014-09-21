@@ -11,6 +11,7 @@ package org.jackhuang.watercraft.common.tileentity;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 
+import org.jackhuang.watercraft.WaterCraft;
 import org.jackhuang.watercraft.common.network.MessagePacketHandler;
 import org.jackhuang.watercraft.common.network.PacketTileEntity;
 
@@ -21,8 +22,8 @@ import net.minecraft.tileentity.TileEntity;
 public class TileEntityBase extends TileEntity {
 
 	public void sendUpdateToClient() {
-		// FMLPacketDispatcher.sendToAll(new WCTileEntityPacket(this));
-		MessagePacketHandler.INSTANCE.sendToAll(new PacketTileEntity(this));
+		if(WaterCraft.isSimulating())
+			MessagePacketHandler.INSTANCE.sendToAll(new PacketTileEntity(this));
 	}
 
 	public boolean isServerSide() {
