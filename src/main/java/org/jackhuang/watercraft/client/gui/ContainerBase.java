@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
-import org.jackhuang.watercraft.WaterCraft;
+import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.common.inventory.SlotInventorySlot;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -93,7 +93,7 @@ public abstract class ContainerBase extends Container {
 					sourceSlot.onPickupFromSlot(player, sourceItemStack);
 				}
 
-				if (WaterCraft.isSimulating()) {
+				if (WaterPower.isSimulating()) {
 					detectAndSendChanges();
 				}
 			}

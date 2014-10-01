@@ -10,7 +10,7 @@ package org.jackhuang.watercraft.common.tileentity;
 
 import java.util.ArrayList;
 
-import org.jackhuang.watercraft.WaterCraft;
+import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.client.gui.IHasGui;
 import org.jackhuang.watercraft.common.network.WCPacket;
 
@@ -23,12 +23,12 @@ public abstract class TileEntityMultiBlock extends TileEntityLiquidTankInventory
 
 	public TileEntityMultiBlock masterBlock;
 	protected boolean tested, isMaster;
-	private int tick = 0, tick2 = WaterCraft.updateTick;
+	private int tick = 0, tick2 = WaterPower.updateTick;
 	protected ArrayList<TileEntityMultiBlock> blockList;
 
 	public TileEntityMultiBlock(int tankSize) {
 		super(tankSize);
-		this.tested = WaterCraft.isSimulating();
+		this.tested = WaterPower.isSimulating();
 	}
 
 	protected void setMaster(TileEntityMultiBlock master) {
@@ -62,7 +62,7 @@ public abstract class TileEntityMultiBlock extends TileEntityLiquidTankInventory
 	
 	@Override
 	public FluidTank getFluidTank() {
-		if(!WaterCraft.isSimulating()) return fluidTank;
+		if(!WaterPower.isSimulating()) return fluidTank;
 		if(isMaster)
 			return fluidTank;
 		else if (masterBlock == null)
@@ -111,7 +111,7 @@ public abstract class TileEntityMultiBlock extends TileEntityLiquidTankInventory
 		}
 
 		if (tick2-- == 0) {
-			tick2 = WaterCraft.updateTick;
+			tick2 = WaterPower.updateTick;
 			onUpdate();
 		}
 	}

@@ -8,8 +8,10 @@
 
 package org.jackhuang.watercraft.client.render;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 
 public interface IIconContainer {
 	IIcon getIcon();
+	void registerIcon(IIconRegister register);
 }

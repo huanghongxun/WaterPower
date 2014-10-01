@@ -17,26 +17,23 @@ import net.minecraft.util.StatCollector;
 
 public enum LevelTypes {
 	/** Stone & Wood*/
-	MK1(RecolorableTextures.CRAFTING, 255, 255, 255, 0),
+	MK1(255, 255, 255, 0),
 	/** Brass & Zinc */
-	MK3(RecolorableTextures.CRAFTING, 255, 255, 255, 0),
+	MK3(255, 255, 255, 0),
 	/** Steel */
-	MK4(RecolorableTextures.CRAFTING, 255, 255, 255, 0),
+	MK4(255, 255, 255, 0),
 	/** Vanadium Steel & Maganese Steel */
-	MK5(RecolorableTextures.CRAFTING, 255, 255, 255, 0),
+	MK5(255, 255, 255, 0),
 	/** Most expansive! */
-	MK7(RecolorableTextures.CRAFTING, 255, 255, 255, 0);
+	MK7(255, 255, 255, 0);
 	
 	public short R, G, B, A;
 	
-	public IIconContainer[] iconContainer;
-	
-	private LevelTypes(IIconContainer[] iconContainer, int R, int G, int B, int A) {
+	private LevelTypes(int R, int G, int B, int A) {
 		this.R = (short)R;
 		this.G = (short)G;
 		this.B = (short)B;
 		this.A = (short)A;
-		this.iconContainer = (IIconContainer[]) Arrays.copyOf(iconContainer, 64);
 	}
 	
 	public String getShowedName() {

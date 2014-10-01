@@ -8,7 +8,7 @@
 
 package org.jackhuang.watercraft.client.gui;
 
-import org.jackhuang.watercraft.WaterCraft;
+import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.common.block.GlobalBlocks;
 
 import net.minecraft.creativetab.CreativeTabs;

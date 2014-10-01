@@ -19,7 +19,7 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import org.jackhuang.watercraft.WaterCraft;
+import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.common.tileentity.TileEntityBase;
 
@@ -58,7 +58,7 @@ public class WCTileEntityPacket extends WCPacket {
 		y = data.readInt();
 		z = data.readInt();
 		
-		World world = WaterCraft.getWorld();
+		World world = WaterPower.getWorld();
 		TileEntity te = world.getTileEntity(x, y, z);
 		if(te instanceof TileEntityBase)
 			base = (TileEntityBase) te;

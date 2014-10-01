@@ -11,7 +11,7 @@ package org.jackhuang.watercraft.util;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.jackhuang.watercraft.WaterCraft;
+import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.Reference;
 
 public class WCLog {
@@ -39,7 +39,7 @@ public class WCLog {
 	}
 	
 	public static void debugLog(String message) {
-		if(WaterCraft.isDeobf())
+		if(WaterPower.isDeobf())
 			log(message);
 	}
 	

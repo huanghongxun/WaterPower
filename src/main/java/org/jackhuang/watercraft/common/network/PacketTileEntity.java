@@ -11,7 +11,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import org.jackhuang.watercraft.WaterCraft;
+import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.common.tileentity.TileEntityBase;
 
 import io.netty.buffer.ByteBuf;
@@ -38,7 +38,7 @@ public class PacketTileEntity
 
 	@Override
 	public IMessage onMessage(PacketTileEntity message, MessageContext ctx) {
-		World world = WaterCraft.getWorld();
+		World world = WaterPower.getWorld();
 		TileEntity te = world.getTileEntity(message.x, message.y, message.z);
 		if(te instanceof TileEntityBase)
 			message.base = (TileEntityBase) te;

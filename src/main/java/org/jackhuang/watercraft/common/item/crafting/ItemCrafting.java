@@ -20,6 +20,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import org.jackhuang.watercraft.InternalName;
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.client.render.IIconContainer;
+import org.jackhuang.watercraft.client.render.RecolorableTextures;
 import org.jackhuang.watercraft.common.item.ItemBase;
 import org.jackhuang.watercraft.common.item.ItemRecolorable;
 import org.jackhuang.watercraft.common.recipe.IRecipeHandler;
@@ -93,12 +94,17 @@ public class ItemCrafting extends ItemRecolorable {
 	}
 
 	public IIconContainer getIconContainer(int meta, LevelTypes type) {
-		return type.iconContainer[meta / CraftingTypes.space];
+		return getIconContainers()[meta / CraftingTypes.space];
 	}
 
 	@Override
 	public IIconContainer getIconContainer(int meta) {
 		return getIconContainer(meta, LevelTypes.values()[meta % CraftingTypes.space]);
+	}
+	
+	@Override
+	public IIconContainer[] getIconContainers() {
+		return RecolorableTextures.CRAFTING;
 	}
 	
 }

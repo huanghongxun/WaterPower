@@ -2,7 +2,7 @@ package org.jackhuang.watercraft.common.block;
 
 import java.util.Random;
 
-import org.jackhuang.watercraft.WaterCraft;
+import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.InternalName;
 import org.jackhuang.watercraft.common.tileentity.TileEntityBase;
 import org.jackhuang.watercraft.common.tileentity.TileEntityInventory;
@@ -50,7 +50,7 @@ public abstract class BlockBase extends BlockContainer {
 		super(material);
 
 		setBlockName(internalName.name());
-		setCreativeTab(WaterCraft.creativeTabWaterCraft);
+		setCreativeTab(WaterPower.creativeTabWaterCraft);
 		setHardness(3.0f);
 
 		this.internalName = internalName;

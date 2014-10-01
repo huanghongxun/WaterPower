@@ -3,17 +3,23 @@ package org.jackhuang.watercraft.common.block.turbines;
 import java.util.ArrayList;
 
 import org.jackhuang.watercraft.InternalName;
+import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.common.block.BlockMeta;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockTurbine extends BlockMeta {
-
+	
 	public BlockTurbine() {
 		super(InternalName.cptBlockTurbine, Material.iron, ItemTurbine.class);
 		
@@ -31,7 +37,23 @@ public class BlockTurbine extends BlockMeta {
 		return meta;
 	}
 
-
+	@Override
+	public void registerBlockIcons(IIconRegister iconRegister) {
+		textures = new IIcon[maxMetaData()][6];
+		
+		IIcon iconNorth = iconRegister.registerIcon(Reference.ModID + ":turbine/BACK");
+		IIcon iconDown = iconRegister.registerIcon(Reference.ModID + ":turbine/DOWN");
+		IIcon iconSide = iconRegister.registerIcon(Reference.ModID + ":turbine/SIDE");
+		IIcon iconSouth = iconRegister.registerIcon(Reference.ModID + ":turbine/SOUTH");
+		
+		for (int i = 0; i < maxMetaData(); i++) {
+			textures[i][0] = iconDown;
+			textures[i][3] = iconSouth;
+			textures[i][5] = iconNorth;
+			textures[i][1] = textures[i][4] = textures[i][2] = iconSide;
+		}
+	}
+	
 	@Override
 	public TileEntity createNewTileEntity(World world, int var2) {
 		return new TileEntityTurbine();

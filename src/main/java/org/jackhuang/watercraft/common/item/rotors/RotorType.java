@@ -3,7 +3,7 @@ package org.jackhuang.watercraft.common.item.rotors;
 import ic2.api.item.IC2Items;
 
 import org.apache.logging.log4j.Level;
-import org.jackhuang.watercraft.WaterCraft;
+import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.common.item.others.ItemType;
 import org.jackhuang.watercraft.common.recipe.IRecipeHandler;
@@ -200,7 +200,7 @@ public enum RotorType {
 		addRotorRecipe(RotorType.TUNGSTEN_STEEL, "plateTungstenSteel", // GregTech_API.getGregTechMaterial(83,
 																		// 1),
 				"blockTungstenSteel");//GregTech_API.getGregTechBlock(4, 1, 8));
-		if (WaterCraft.isThaumcraftLoaded) {
+		if (WaterPower.isThaumcraftLoaded) {
 			/* Thaumium */
 			addRotorRecipe(RotorType.THAUMIUM,
 					ItemApi.getItem("itemNugget", 6),

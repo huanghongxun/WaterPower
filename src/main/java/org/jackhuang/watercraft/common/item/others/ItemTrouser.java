@@ -2,7 +2,7 @@ package org.jackhuang.watercraft.common.item.others;
 
 import java.util.List;
 
-import org.jackhuang.watercraft.WaterCraft;
+import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.InternalName;
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.common.block.watermills.WaterType;
@@ -41,7 +41,7 @@ public class ItemTrouser extends ItemArmor
 		super(EnumHelper.addArmorMaterial("CPTWTRMLPANT", 1, new int[] { 1, 1, 1, 1 }, 1), 0, 2);
 
 		setUnlocalizedName(type.getTrousersUnlocalizedName());
-		setCreativeTab(WaterCraft.creativeTabWaterCraft);
+		setCreativeTab(WaterPower.creativeTabWaterCraft);
 		setHasSubtypes(true);
 		
 		GameRegistry.registerItem(this, type.getTrousersUnlocalizedName());

@@ -8,10 +8,13 @@
 
 package org.jackhuang.watercraft.common.item;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
 import org.jackhuang.watercraft.InternalName;
+import org.jackhuang.watercraft.WaterPower;
+import org.jackhuang.watercraft.client.ClientProxy;
 import org.jackhuang.watercraft.client.render.IIconContainer;
 import org.jackhuang.watercraft.common.item.crafting.MaterialTypes;
 
@@ -25,9 +28,20 @@ public abstract class ItemRecolorable extends ItemBase {
 	public abstract short[] getRGBA(ItemStack stack);
 
 	public abstract IIconContainer getIconContainer(int meta);
+	public abstract IIconContainer[] getIconContainers();
 	
 	@Override
 	public IIcon getIconFromDamage(int meta) {
 		return getIconContainer(meta).getIcon();
+	}
+	
+	@Override
+	public void registerIcons(IIconRegister iconRegister) {
+		if(WaterPower.proxy instanceof ClientProxy) {
+			ClientProxy proxy = (ClientProxy) WaterPower.proxy;
+			for(IIconContainer i : getIconContainers()) {
+				i.registerIcon(iconRegister);
+			}
+		}
 	}
 }

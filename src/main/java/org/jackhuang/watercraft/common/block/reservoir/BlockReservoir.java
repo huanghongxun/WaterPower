@@ -8,14 +8,17 @@ import java.util.logging.Level;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import org.jackhuang.watercraft.WaterCraft;
+import org.jackhuang.watercraft.Reference;
+import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.InternalName;
 import org.jackhuang.watercraft.common.block.BlockMeta;
 import org.jackhuang.watercraft.common.block.BlockMultiID;
@@ -28,8 +31,12 @@ import thaumcraft.api.ItemApi;
 import com.google.common.base.Throwables;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockReservoir extends BlockMeta {
+	
+	IIcon[] icon = new IIcon[maxMetaData()];
 
 	public BlockReservoir() {
 		super(InternalName.cptBlockReservoir, Material.iron,
@@ -39,6 +46,26 @@ public class BlockReservoir extends BlockMeta {
 		
 		GameRegistry.registerTileEntity(TileEntityReservoir.class,
 				"cptwtrml.reservoir");
+	}
+	
+	@Override
+	public void registerBlockIcons(IIconRegister iconRegister) {
+		for(int i=0;i<maxMetaData();i++) {
+			icon[i]=iconRegister.registerIcon(Reference.ModID + ":reservoir/" + ReservoirType.values()[i].name());
+		}
+	}
+	
+	@Override
+	public IIcon getIcon(int side, int meta) {
+		return icon[meta];
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(IBlockAccess iBlockAccess, int x, int y, int z,
+			int side) {
+		int meta = iBlockAccess.getBlockMetadata(x, y, z);
+		return getIcon(side, meta);
 	}
 
 	@Override
@@ -159,7 +186,7 @@ public class BlockReservoir extends BlockMeta {
 				32), "blockTungstenSteel"); // GregTech_API.getGregTechBlock(4,
 											// 1,
 											// 8));
-		if (WaterCraft.isThaumcraftLoaded) {
+		if (WaterPower.isThaumcraftLoaded) {
 			addReservoirAdvancedRecipe(new ItemStack(this, 8, 33),
 					ItemApi.getBlock("blockCosmeticSolid", 4));
 		}

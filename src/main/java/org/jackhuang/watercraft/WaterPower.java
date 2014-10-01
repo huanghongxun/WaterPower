@@ -87,10 +87,10 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(modid = Reference.ModID, name = Reference.ModName, version = Reference.Version, dependencies = "required-after:IC2; after:gregtech; after:Thaumcraft;")
-public class WaterCraft implements IWorldGenerator {
+public class WaterPower implements IWorldGenerator {
 
 	@Mod.Instance(Reference.ModID)
-	public static WaterCraft instance;
+	public static WaterPower instance;
 
 	@SidedProxy(clientSide = "org.jackhuang.watercraft.client.ClientProxy", serverSide = "org.jackhuang.watercraft.common.CommonProxy")
 	public static CommonProxy proxy;

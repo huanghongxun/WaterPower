@@ -1,6 +1,6 @@
 package org.jackhuang.watercraft.common.block.turbines;
 
-import org.jackhuang.watercraft.WaterCraft;
+import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.client.gui.DefaultGuiIds;
 import org.jackhuang.watercraft.common.block.reservoir.Reservoir;

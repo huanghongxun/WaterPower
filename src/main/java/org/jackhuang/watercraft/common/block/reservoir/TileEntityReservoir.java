@@ -23,7 +23,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 import org.apache.commons.lang3.mutable.MutableObject;
-import org.jackhuang.watercraft.WaterCraft;
+import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.api.IUpgrade;
 import org.jackhuang.watercraft.client.gui.DefaultGuiIds;
 import org.jackhuang.watercraft.common.block.turbines.Position;
@@ -136,7 +136,7 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 	}
 
 	public int getWater() {
-		if (!WaterCraft.isSimulating())
+		if (!WaterPower.isSimulating())
 			return getTankAmount();
 		if (isMaster)
 			// return water;
@@ -149,7 +149,7 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 	}
 
 	public int getHPWater() {
-		if (!WaterCraft.isSimulating())
+		if (!WaterPower.isSimulating())
 			return highPotentialEnergyWater;
 		if (isMaster)
 			// return water;
@@ -179,7 +179,7 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 	}
 
 	public int getMaxWater() {
-		if (!WaterCraft.isSimulating())
+		if (!WaterPower.isSimulating())
 			return getFluidTankCapacity();
 		if (isMaster)
 			return getFluidTankCapacity();
@@ -390,11 +390,11 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 		lastAddedWater = (int)(addWater - delWater);
 
 		fluidTank.fill(new FluidStack(FluidRegistry.WATER, (int)addWater
-				* WaterCraft.updateTick), true);
-		highPotentialEnergyWater += addWater * WaterCraft.updateTick;
+				* WaterPower.updateTick), true);
+		highPotentialEnergyWater += addWater * WaterPower.updateTick;
 		if (highPotentialEnergyWater > getMaxWater())
 			highPotentialEnergyWater = getMaxWater();
-		fluidTank.drain(delWater * WaterCraft.updateTick, true);
+		fluidTank.drain(delWater * WaterPower.updateTick, true);
 
 		sendUpdateToClient();
 
@@ -578,7 +578,7 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 	public void validate() {
 		super.validate();
 
-		if(WaterCraft.isSimulating())
+		if(WaterPower.isSimulating())
 			refreshPlugins();
 	}
 
@@ -586,7 +586,7 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 	public void markDirty() {
 		super.markDirty();
 
-		if(WaterCraft.isSimulating())
+		if(WaterPower.isSimulating())
 			refreshPlugins();
 	}
 

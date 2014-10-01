@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 
-import org.jackhuang.watercraft.WaterCraft;
+import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.api.BasicMachineRecipeManager;
 import org.jackhuang.watercraft.api.MyRecipes;
 import org.jackhuang.watercraft.client.gui.DefaultGuiIds;
@@ -21,7 +21,7 @@ public class TileEntityAdvancedCompressor extends TileEntityStandardWaterMachine
 	public TileEntityAdvancedCompressor() {
 		super(5000, 64*20);
 
-		if(WaterCraft.isGregTechLoaded) {
+		if(WaterPower.isGregTechLoaded) {
 			//this.inputSlot = new InventorySlotProcessableGreg(this, "input",
 			//		2, MyRecipes.implosion_gt, GT_Recipe.sImplosionRecipes);
 		}
@@ -66,7 +66,7 @@ public class TileEntityAdvancedCompressor extends TileEntityStandardWaterMachine
 	public void updateEntity() {
 		super.updateEntity();
 		
-		if(WaterCraft.isGregTechLoaded) {
+		if(WaterPower.isGregTechLoaded) {
 		/*	InventorySlotProcessableGreg greg = ((InventorySlotProcessableGreg)inputSlot);
 			if(greg.get(1) == null || greg.get(1).stackSize < 64)
 				greg.put(1, StackUtil.copyWithSize(IC2Items.getItem("industrialTnt"), 64));*/

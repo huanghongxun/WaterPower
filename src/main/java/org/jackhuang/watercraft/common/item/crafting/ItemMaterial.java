@@ -6,11 +6,12 @@ import ic2.api.item.IC2Items;
 import ic2.api.recipe.RecipeInputItemStack;
 import ic2.api.recipe.Recipes;
 
-import org.jackhuang.watercraft.WaterCraft;
+import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.InternalName;
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.api.MyRecipes;
 import org.jackhuang.watercraft.client.render.IIconContainer;
+import org.jackhuang.watercraft.client.render.RecolorableTextures;
 import org.jackhuang.watercraft.common.item.ItemBase;
 import org.jackhuang.watercraft.common.item.ItemRecolorable;
 import org.jackhuang.watercraft.common.item.others.ItemType;
@@ -98,7 +99,7 @@ public class ItemMaterial extends ItemRecolorable {
 					ItemMaterial.get(MaterialTypes.Zinc, MaterialForms.dust, 4), "dustCopper");
 			IRecipeHandler.addShapelessRecipeByOreDictionary(ItemMaterial.get(MaterialTypes.VanadiumSteel, MaterialForms.dust, 3),
 					ItemMaterial.get(MaterialTypes.Vanadium, MaterialForms.dust), ItemMaterial.get(MaterialTypes.Steel, MaterialForms.dust, 2));
-			if(WaterCraft.isIndustrialCraftLoaded)
+			if(WaterPower.isIndustrialCraftLoaded)
 				IRecipeHandler.addShapelessRecipeByOreDictionary(ItemMaterial.get(MaterialTypes.ManganeseSteel, MaterialForms.dust, 4),
 						ItemMaterial.get(MaterialTypes.Manganese, MaterialForms.dust), ItemMaterial.get(MaterialTypes.Steel, MaterialForms.dust, 2),
 						IC2Items.getItem("coalDust"));
@@ -140,7 +141,7 @@ public class ItemMaterial extends ItemRecolorable {
 			
 			MyRecipes.lathe_gt.addRecipe(new RecipeInputItemStack(get(types, MaterialForms.stick)), null, get(types, MaterialForms.screw, 4));
 			
-			if(WaterCraft.isGregTechLoaded) {
+			if(WaterPower.isGregTechLoaded) {
 				//GregTech_API.sRecipeAdder.addLatheRecipe(get(types, MaterialForms.stick), get(types, MaterialForms.screw, 4), null, 20, 4);
 			}
 		}
@@ -155,7 +156,7 @@ public class ItemMaterial extends ItemRecolorable {
 	}
 
 	public IIconContainer getIconContainer(int meta, MaterialTypes type) {
-		return type.iconContainer[meta % MaterialTypes.space];
+		return getIconContainers()[meta % MaterialTypes.space];
 	}
 
 	@Override
@@ -169,5 +170,10 @@ public class ItemMaterial extends ItemRecolorable {
 		int craftingType = meta / MaterialTypes.space;
 		MaterialTypes type = MaterialTypes.values()[craftingType];
 		return new short[] { type.R, type.G, type.B, type.A };
+	}
+
+	@Override
+	public IIconContainer[] getIconContainers() {
+		return RecolorableTextures.METAL;
 	}
 }

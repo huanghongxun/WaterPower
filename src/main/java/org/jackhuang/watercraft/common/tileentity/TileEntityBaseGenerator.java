@@ -10,7 +10,7 @@ import ic2.api.energy.tile.IKineticSource;
 
 import java.util.Random;
 
-import org.jackhuang.watercraft.WaterCraft;
+import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.client.gui.IHasGui;
 import org.jackhuang.watercraft.common.EnergyType;
 import org.jackhuang.watercraft.util.mods.Mods;
@@ -69,7 +69,7 @@ public abstract class TileEntityBaseGenerator extends TileEntityBlock implements
 		super(Math.round(maxStorage / 10));
 		this.production = production;
 		this.maxStorage = maxStorage;
-		tick = WaterCraft.updateTick;
+		tick = WaterPower.updateTick;
 		
 		if(Mods.Factorization.isAvailable)
 			initCharge();
@@ -83,7 +83,7 @@ public abstract class TileEntityBaseGenerator extends TileEntityBlock implements
 	@Method(modid = "IC2API")
 	public void loadEnergyTile() {
 
-		if (WaterCraft.isSimulating()) {
+		if (WaterPower.isSimulating()) {
 			MinecraftForge.EVENT_BUS.post(new EnergyTileLoadEvent(this));
 
 			this.addedToEnergyNet = true;
@@ -92,7 +92,7 @@ public abstract class TileEntityBaseGenerator extends TileEntityBlock implements
 	
 	@Method(modid = "IC2API")
 	public void unloadEnergyTile() {
-		if ((WaterCraft.isSimulating()) && (this.addedToEnergyNet)) {
+		if ((WaterPower.isSimulating()) && (this.addedToEnergyNet)) {
 			MinecraftForge.EVENT_BUS.post(new EnergyTileUnloadEvent(this));
 
 			this.addedToEnergyNet = false;
@@ -126,7 +126,7 @@ public abstract class TileEntityBaseGenerator extends TileEntityBlock implements
 	}
 
 	public boolean enableUpdateEntity() {
-		return WaterCraft.isSimulating();
+		return WaterPower.isSimulating();
 	}
 
 	@Override
@@ -240,7 +240,7 @@ public abstract class TileEntityBaseGenerator extends TileEntityBlock implements
 
 			if (tick-- == 0) {
 				onUpdate();
-				tick = WaterCraft.updateTick;
+				tick = WaterPower.updateTick;
 
 				sendUpdateToClient();
 			}

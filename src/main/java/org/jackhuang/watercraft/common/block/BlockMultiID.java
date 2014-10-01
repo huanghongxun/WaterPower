@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Random;
 
 import org.apache.logging.log4j.Level;
-import org.jackhuang.watercraft.WaterCraft;
+import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.InternalName;
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.client.gui.IHasGui;
@@ -39,8 +39,11 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public abstract class BlockMultiID extends BlockBase {
+	
+	// Facing 4 - front 6 - BACK
 
 	public BlockMultiID(InternalName name, Material material,
 			Class<? extends ItemBlock> c) {
@@ -69,7 +72,7 @@ public abstract class BlockMultiID extends BlockBase {
 		int index = getTextureIndex(iBlockAccess, x, y, z, meta);
 		int subIndex = getTextureSubIndex(facing, side);
 		try {
-			return textures[index % textures.length][subIndex];
+			return textures[index][subIndex];
 		} catch (Exception e) {
 			WCLog.err(
 					"BlockMultiID: Failed to get texture at: x=" + x + "; y="
@@ -159,7 +162,7 @@ public abstract class BlockMultiID extends BlockBase {
 		if ((te instanceof IHasGui)) {
 			// return CompactWatermills.launchGui(entityPlayer, (IHasGUI)te);
 
-			entityPlayer.openGui(WaterCraft.instance,
+			entityPlayer.openGui(WaterPower.instance,
 					((IHasGui) te).getGuiId(), world, x, y, z);
 			return true;
 		}
@@ -183,7 +186,7 @@ public abstract class BlockMultiID extends BlockBase {
 	public void registerBlockIcons(IIconRegister iconRegister) {
 		int metaCount = maxMetaData();
 
-		this.textures = new IIcon[metaCount][12];
+		this.textures = new IIcon[metaCount][6];
 
 		for (int index = 0; index < metaCount; index++) {
 			String textureFolder = getTextureFolder(index);
@@ -192,17 +195,10 @@ public abstract class BlockMultiID extends BlockBase {
 			String name = Reference.ModID + ":" + textureFolder
 					+ getTextureName(index);
 
-			for (int active = 0; active < 1; active++)
 				for (int side = 0; side < 6; side++) {
-					int subIndex = active * 6 + side;
-					String subName = name + ":" + subIndex;
+					String subName = name + ":" + side;
 
-					TextureAtlasSprite texture = new BlockTextureStitched(
-							subName, subIndex);
-
-					this.textures[index][subIndex] = texture;
-					((TextureMap) iconRegister).setTextureEntry(subName,
-							texture);
+					this.textures[index][side] = iconRegister.registerIcon(name + "." + ForgeDirection.VALID_DIRECTIONS[side].name().toLowerCase());
 				}
 		}
 	}

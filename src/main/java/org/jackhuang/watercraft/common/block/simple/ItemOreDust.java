@@ -8,6 +8,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import org.jackhuang.watercraft.InternalName;
 import org.jackhuang.watercraft.client.render.IIconContainer;
+import org.jackhuang.watercraft.client.render.RecolorableTextures;
 import org.jackhuang.watercraft.common.block.GlobalBlocks;
 import org.jackhuang.watercraft.common.item.ItemBase;
 import org.jackhuang.watercraft.common.item.ItemRecolorable;
@@ -62,7 +63,12 @@ public class ItemOreDust extends ItemRecolorable {
 
 	@Override
 	public IIconContainer getIconContainer(int meta) {
-		return OreType.values()[meta].iconContainer[MaterialForms.values().length];
+		return getIconContainers()[0];
+	}
+
+	@Override
+	public IIconContainer[] getIconContainers() {
+		return RecolorableTextures.CRUSHED;
 	}
 
 }

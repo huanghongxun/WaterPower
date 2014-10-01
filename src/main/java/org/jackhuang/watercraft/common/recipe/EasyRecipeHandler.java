@@ -14,7 +14,7 @@ import net.minecraftforge.common.config.Property;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
-import org.jackhuang.watercraft.WaterCraft;
+import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.InternalName;
 import org.jackhuang.watercraft.api.MyRecipes;
 import org.jackhuang.watercraft.common.block.GlobalBlocks;
@@ -404,6 +404,15 @@ public class EasyRecipeHandler extends IRecipeHandler {
 				"IBI", "B B", "IBI",
 				'B', "blockRuby",
 				'I', "plateIndustrialSteel");
+		addRecipeByOreDictionary(ItemType.RubyWaterHole.item(),
+				"IBI", "B B", "IBI",
+				'B', "blockVanadiumSteel",
+				'I', "plateIndustrialSteel");
+		addRecipeByOreDictionary(ItemType.DataBall.item(),
+				" D ", "CIC", " D ",
+				'D', Blocks.emerald_block,
+				'C', ItemCrafting.get(CraftingTypes.circuit, LevelTypes.MK3),
+				'I', IC2Items.getItem("electronicCircuit"));
 		OreDictionary.registerOre("dustCactus", ItemType.DustCactus.item());
 		Recipes.macerator.addRecipe(new RecipeInputItemStack(new ItemStack(Blocks.cactus, 1, 16)), null,
 				ItemType.DustCactus.item());
@@ -430,7 +439,7 @@ public class EasyRecipeHandler extends IRecipeHandler {
 		OreDictionary.registerOre("dustGold", ItemType.DustGold.item());
 		OreDictionary.registerOre("dustDiamond", ItemType.DustDiamond.item());
 		// If IC2 isn't loaded, I'll add crafting recipes for diamond dust.
-		if(!WaterCraft.isIndustrialCraftLoaded) {
+		if(!WaterPower.isIndustrialCraftLoaded) {
 			Recipes.macerator.addRecipe(new RecipeInputItemStack(new ItemStack(Items.diamond)), null, ItemType.DustDiamond.item());
 			Recipes.macerator.addRecipe(new RecipeInputItemStack(new ItemStack(Blocks.iron_ore)), null, ItemType.DustIron.item(2));
 			Recipes.macerator.addRecipe(new RecipeInputItemStack(new ItemStack(Blocks.gold_ore)), null, ItemType.DustGold.item(2));

@@ -2,7 +2,7 @@ package org.jackhuang.watercraft.common.item;
 
 import java.util.List;
 
-import org.jackhuang.watercraft.WaterCraft;
+import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.InternalName;
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.client.ClientProxy;
@@ -31,7 +31,7 @@ public abstract class ItemBase extends Item {
 	public ItemBase(InternalName internalName) {
 		super();
 
-		setCreativeTab(WaterCraft.creativeTabWaterCraft);
+		setCreativeTab(WaterPower.creativeTabWaterCraft);
 		setNoRepair();
 		
 		GameRegistry.registerItem(this, internalName.name());
@@ -53,14 +53,6 @@ public abstract class ItemBase extends Item {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister iconRegister) {
-		if(WaterCraft.proxy instanceof ClientProxy) {
-			ClientProxy proxy = (ClientProxy) WaterCraft.proxy;
-			if(proxy.iconRegister == null) {
-				proxy.iconRegister = iconRegister;
-				proxy.loadAllIcons();
-			}
-		}
-		
 		this.textures = new IIcon[32768];
 		String textureFolder = getTextureFolder() + "/";
 

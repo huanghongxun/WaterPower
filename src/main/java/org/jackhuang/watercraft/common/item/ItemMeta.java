@@ -6,7 +6,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import org.jackhuang.watercraft.WaterCraft;
+import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.InternalName;
 import org.jackhuang.watercraft.common.tileentity.TileEntityElectricMetaBlock;
 import org.jackhuang.watercraft.common.tileentity.ITileEntityMeta;
@@ -33,7 +33,7 @@ public abstract class ItemMeta extends ItemBlock {
 				.getTileEntity(aX, aY, aZ);
 		if (tTileEntity != null) {
 			if ((aStack.getTagCompound() != null)
-					&& (WaterCraft.isSimulating()))
+					&& (WaterPower.isSimulating()))
 				tTileEntity.initNBT(aStack.getTagCompound(), tDamage);
 			else {
 				tTileEntity.initNBT(null, tDamage);

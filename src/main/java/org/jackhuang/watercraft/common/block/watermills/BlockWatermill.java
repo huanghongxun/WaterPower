@@ -11,13 +11,16 @@ package org.jackhuang.watercraft.common.block.watermills;
 import java.util.ArrayList;
 
 import org.jackhuang.watercraft.InternalName;
+import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.common.block.BlockMeta;
 import org.jackhuang.watercraft.common.block.BlockMultiID;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.config.Configuration;
@@ -39,6 +42,21 @@ public class BlockWatermill extends BlockMeta {
 			return ((TileEntityWatermill)tTileEntity).getType().ordinal();
 		}
 		return meta;
+	}
+
+	@Override
+	public void registerBlockIcons(IIconRegister iconRegister) {
+		textures = new IIcon[maxMetaData()][6];
+		
+		IIcon iconDown = iconRegister.registerIcon(Reference.ModID + ":watermill/DOWN");
+		IIcon iconUp = iconRegister.registerIcon(Reference.ModID + ":watermill/UP");
+		
+		for (int i = 0; i < maxMetaData(); i++) {
+			textures[i][0] = iconDown;
+			textures[i][1] = iconUp;
+			textures[i][2] = textures[i][3] = textures[i][4] = textures[i][5] =
+					iconRegister.registerIcon(Reference.ModID + ":watermill/" + getTextureName(i));
+		}
 	}
 
 	@Override

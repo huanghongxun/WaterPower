@@ -2,7 +2,7 @@ package org.jackhuang.watercraft.common.block.machines;
 
 import java.util.ArrayList;
 
-import org.jackhuang.watercraft.WaterCraft;
+import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.api.BasicMachineRecipeManager;
 import org.jackhuang.watercraft.api.MyRecipes;
 import org.jackhuang.watercraft.client.gui.DefaultGuiIds;
@@ -29,7 +29,7 @@ public class TileEntityCentrifuge extends TileEntityStandardWaterMachine {
 	public TileEntityCentrifuge() {
 		super(80, 10 * 20, 4);
 
-		if (WaterCraft.isGregTechLoaded)
+		if (WaterPower.isGregTechLoaded)
 			//this.inputSlot = new InventorySlotProcessableGreg(this, "input",
 			//		2, MyRecipes.centrifuge_gt, GT_Recipe.sSawmillRecipes);
 			;

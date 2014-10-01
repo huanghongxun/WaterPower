@@ -26,14 +26,12 @@ public enum OreType {
 	Zinc(MaterialTypes.Zinc);
 	
 	public short R, G, B, A;
-	public IIconContainer[] iconContainer;
 	
 	private OreType(MaterialTypes t) {
 		R = t.R;
 		G = t.G;
 		B = t.B;
 		A = t.A;
-		this.iconContainer = (IIconContainer[]) Arrays.copyOf(t.iconContainer, 64);
 	}
 	
 	public String getShowedName() {

@@ -12,7 +12,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-import org.jackhuang.watercraft.WaterCraft;
+import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.InternalName;
 import org.jackhuang.watercraft.common.block.GlobalBlocks;
 import org.jackhuang.watercraft.common.block.reservoir.BlockReservoir;
@@ -52,7 +52,7 @@ public abstract class IRecipeHandler {
 	public static void initRecipeConfig(Configuration c) {
 
 		Property p = c.get("recipe", "EnableGregTechRecipe", true);
-		gregtechRecipe = p.getBoolean(true) && WaterCraft.isGregTechLoaded;
+		gregtechRecipe = p.getBoolean(true) && WaterPower.isGregTechLoaded;
 		p = c.get("recipe", "EnableThaumcraftRecipe", true);
 		thaumcraftRecipe = p.getBoolean(true)
 				&& Loader.isModLoaded("Thaumcraft");

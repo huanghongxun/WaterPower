@@ -23,7 +23,6 @@ import org.jackhuang.watercraft.common.block.reservoir.TileEntityReservoir;
 import org.jackhuang.watercraft.common.block.turbines.GuiTurbine;
 import org.jackhuang.watercraft.common.block.turbines.TileEntityTurbine;
 import org.jackhuang.watercraft.common.block.watermills.GuiWatermill;
-import org.jackhuang.watercraft.common.block.watermills.RotorRenderer;
 import org.jackhuang.watercraft.common.block.watermills.TileEntityWatermill;
 import org.jackhuang.watercraft.common.entity.EntityWaterWheel;
 import org.jackhuang.watercraft.common.item.GlobalItems;

@@ -9,25 +9,29 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import org.jackhuang.watercraft.InternalName;
+import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.common.block.BlockMultiID;
 import org.jackhuang.watercraft.common.block.GlobalBlocks;
 import org.jackhuang.watercraft.common.tileentity.TileEntityStandardWaterMachine;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockMachines extends BlockMultiID {
 
 	public BlockMachines() {
-		super(InternalName.cptBlockMachine, Material.iron,
-				ItemMachines.class);
+		super(InternalName.cptBlockMachine, Material.iron, ItemMachines.class);
 
 		setHardness(2f);
-		//setStepSound(soundMetalFootstep);
+		// setStepSound(soundMetalFootstep);
 
 		GlobalBlocks.macerator = new ItemStack(this, 1, 1);
 		GlobalBlocks.compressor = new ItemStack(this, 1, 2);
@@ -59,10 +63,31 @@ public class BlockMachines extends BlockMultiID {
 	}
 
 	@Override
+	public void registerBlockIcons(IIconRegister iconRegister) {
+
+		this.textures = new IIcon[maxMetaData()][6];
+		
+		IIcon iconSide = iconRegister.registerIcon(Reference.ModID
+				+ ":machine/SIDE");
+		IIcon iconDown = iconRegister.registerIcon(Reference.ModID
+				+ ":machine/DOWN");
+		IIcon iconUp = iconRegister.registerIcon(Reference.ModID
+				+ ":machine/UP");
+
+		for (int i = 0; i < maxMetaData(); i++) {
+			textures[i][0] = iconDown;
+			textures[i][1] = iconUp;
+			textures[i][3] = iconRegister.registerIcon(Reference.ModID
+					+ ":machine/" + getTextureName(i));
+			textures[i][2] = textures[i][4] = textures[i][5] = iconSide;
+		}
+	}
+
+	@Override
 	protected int maxMetaData() {
 		return 8;
 	}
-	
+
 	@Override
 	protected int getTextureIndex(IBlockAccess world, int x, int y, int z,
 			int meta) {
@@ -110,7 +135,7 @@ public class BlockMachines extends BlockMultiID {
 
 		return 0;
 	}
-	
+
 	@Override
 	public void getSubBlocks(Item item, CreativeTabs p_149666_2_, List itemList) {
 		for (int i = 1; i <= 7; i++) {

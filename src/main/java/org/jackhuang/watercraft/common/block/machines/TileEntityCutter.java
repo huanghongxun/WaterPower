@@ -1,6 +1,6 @@
 package org.jackhuang.watercraft.common.block.machines;
 
-import org.jackhuang.watercraft.WaterCraft;
+import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.api.BasicMachineRecipeManager;
 import org.jackhuang.watercraft.api.MyRecipes;
 import org.jackhuang.watercraft.client.gui.DefaultGuiIds;
@@ -18,7 +18,7 @@ public class TileEntityCutter extends TileEntityStandardWaterMachine {
 	public TileEntityCutter() {
 		super(8000, 1*20);
 
-		if(WaterCraft.isGregTechLoaded)
+		if(WaterPower.isGregTechLoaded)
 			//this.inputSlot = new InventorySlotProcessableGreg(this, "input",
 			//		1, MyRecipes.cutter_gt, GT_Recipe.sCutterRecipes);
 			;

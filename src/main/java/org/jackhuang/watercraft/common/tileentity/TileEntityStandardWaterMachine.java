@@ -4,7 +4,7 @@ import java.util.List;
 
 import ic2.api.recipe.RecipeOutput;
 
-import org.jackhuang.watercraft.WaterCraft;
+import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.api.IUpgrade;
 import org.jackhuang.watercraft.client.gui.IHasGui;
 import org.jackhuang.watercraft.common.inventory.InventorySlotOutput;
@@ -66,7 +66,7 @@ public abstract class TileEntityStandardWaterMachine extends
 	public void validate() {
 		super.validate();
 
-		if (WaterCraft.isSimulating())
+		if (WaterPower.isSimulating())
 			setOverclockRates();
 	}
 
@@ -74,7 +74,7 @@ public abstract class TileEntityStandardWaterMachine extends
 	public void markDirty() {
 		super.markDirty();
 
-		if (WaterCraft.isSimulating())
+		if (WaterPower.isSimulating())
 			setOverclockRates();
 
 	}
@@ -86,7 +86,7 @@ public abstract class TileEntityStandardWaterMachine extends
 	public void updateEntity() {
 		super.updateEntity();
 
-		if (!WaterCraft.isSimulating())
+		if (!WaterPower.isSimulating())
 			return;
 
 		boolean needsInvUpdate = false;
@@ -119,10 +119,10 @@ public abstract class TileEntityStandardWaterMachine extends
 			}
 
 			float tmp = guiProgress;
-			if (WaterCraft.isSimulating())
+			if (WaterPower.isSimulating())
 				this.guiProgress = ((float) this.progress / (float) this.operationLength);
 			if (Math.abs(tmp - guiProgress) > 0.001
-					&& WaterCraft.isSimulating())
+					&& WaterPower.isSimulating())
 				sendUpdateToClient();
 		}
 		if (needsInvUpdate)

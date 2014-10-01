@@ -15,8 +15,6 @@ import net.minecraft.util.IIcon;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 
-import org.jackhuang.watercraft.common.block.BlockTextureStitched;
-
 public abstract class TileEntityBlock extends TileEntityLiquidTankInventory implements IWrenchable {
 	
 	public TileEntityBlock(int tanksize) {

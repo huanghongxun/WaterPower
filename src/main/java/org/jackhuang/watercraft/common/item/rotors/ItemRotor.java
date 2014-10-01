@@ -2,7 +2,7 @@ package org.jackhuang.watercraft.common.item.rotors;
 
 import java.util.List;
 
-import org.jackhuang.watercraft.WaterCraft;
+import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.common.item.ItemBase;
 import org.jackhuang.watercraft.common.tileentity.TileEntityBaseGenerator;
@@ -33,7 +33,7 @@ public class ItemRotor extends Item {
 		this.type = type;
 		setMaxDamage(type.maxDamage);
 		setUnlocalizedName(type.unlocalizedName);
-		setCreativeTab(WaterCraft.creativeTabWaterCraft);
+		setCreativeTab(WaterPower.creativeTabWaterCraft);
 		setMaxStackSize(1);
 		setNoRepair();
 	}

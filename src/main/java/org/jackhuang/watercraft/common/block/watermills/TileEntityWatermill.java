@@ -1,6 +1,7 @@
 package org.jackhuang.watercraft.common.block.watermills;
 
 import org.jackhuang.watercraft.Reference;
+import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.client.gui.DefaultGuiIds;
 import org.jackhuang.watercraft.client.render.ModelWaterWheel;
 import org.jackhuang.watercraft.common.entity.EntityWaterWheel;
@@ -14,6 +15,7 @@ import org.jackhuang.watercraft.common.item.rotors.RotorInventorySlot;
 import org.jackhuang.watercraft.common.tileentity.TileEntityElectricMetaBlock;
 import org.jackhuang.watercraft.util.Utils;
 
+import cpw.mods.fml.relauncher.Side;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
@@ -31,7 +33,6 @@ public class TileEntityWatermill extends TileEntityElectricMetaBlock {
 
 	RotorInventorySlot slotRotor;
 	RangeInventorySlot slotUpdater;
-	ModelWaterWheel model = new ModelWaterWheel();
 	
 	public TileEntityWatermill() {
 		super(0, 32767);

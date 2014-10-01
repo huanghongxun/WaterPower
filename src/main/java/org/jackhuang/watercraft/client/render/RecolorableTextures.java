@@ -8,10 +8,11 @@
 
 package org.jackhuang.watercraft.client.render;
 
-import org.jackhuang.watercraft.WaterCraft;
+import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.client.ClientProxy;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 
@@ -28,7 +29,10 @@ public class RecolorableTextures {
 		ItemIcons.SCREW,
 		ItemIcons.GEAR,
 		ItemIcons.NUGGET,
-		ItemIcons.RING,
+		ItemIcons.RING
+	};
+	
+	public static final IIconContainer[] CRUSHED = {
 		ItemIcons.CRUSHED
 	};
 	
@@ -46,9 +50,9 @@ public class RecolorableTextures {
 	};
 	
 	public static void load() {
-		ClientProxy proxy = (ClientProxy) WaterCraft.proxy;
+		ClientProxy proxy = (ClientProxy) WaterPower.proxy;
 		for(ItemIcons i : ItemIcons.values()) {
-			i.icon = proxy.iconRegister.registerIcon(Reference.ModID + ":iconsets/" + i.name());
+			i.registerIcon(proxy.iconRegister);
 		}
 	}
 	
@@ -78,6 +82,10 @@ public class RecolorableTextures {
 		CRUSHED;
 		
 		protected IIcon icon = null;
+		
+		public void registerIcon(IIconRegister iconRegister) {
+			icon = iconRegister.registerIcon(Reference.ModID + ":iconsets/" + name());
+		}
 
 		@Override
 		public IIcon getIcon() {
