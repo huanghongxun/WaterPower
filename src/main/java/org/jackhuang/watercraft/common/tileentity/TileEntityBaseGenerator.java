@@ -226,14 +226,16 @@ public abstract class TileEntityBaseGenerator extends TileEntityBlock implements
 				boolean outputed = false;
 				if(FluidRegistry.isFluidRegistered("steam") && !outputed) {
 					Fluid f = FluidRegistry.getFluid("steam");
-					if(getFluidTank().getFluid().getFluid().getID() != f.getID())
+					if(getFluidTank().getFluid() != null && getFluidTank().getFluid().getFluid() != null &&
+							getFluidTank().getFluid().getFluid().getID() != f.getID())
 						getFluidTank().setFluid(null);
 					outputed = true;
 					getFluidTank().fill(new FluidStack(f, (int)EnergyType.EU2Steam(lastestOutput)), true);
 				}
 				if(FluidRegistry.isFluidRegistered("ic2steam") && !outputed) {
 					Fluid f = FluidRegistry.getFluid("ic2steam");
-					if(getFluidTank().getFluid().getFluid().getID() != f.getID())
+					if(getFluidTank().getFluid() != null && getFluidTank().getFluid().getFluid() != null &&
+							getFluidTank().getFluid().getFluid().getID() != f.getID())
 						getFluidTank().setFluid(null);
 					outputed = true;
 					getFluidTank().fill(new FluidStack(FluidRegistry.getFluid("ic2steam"), (int)EnergyType.EU2Steam(lastestOutput)), true);
