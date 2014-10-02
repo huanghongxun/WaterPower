@@ -25,6 +25,7 @@ import org.jackhuang.watercraft.common.block.BlockMultiID;
 import org.jackhuang.watercraft.common.block.GlobalBlocks;
 import org.jackhuang.watercraft.common.item.others.ItemType;
 import org.jackhuang.watercraft.common.recipe.IRecipeHandler;
+import org.jackhuang.watercraft.util.mods.Mods;
 
 import thaumcraft.api.ItemApi;
 
@@ -186,7 +187,7 @@ public class BlockReservoir extends BlockMeta {
 				32), "blockTungstenSteel"); // GregTech_API.getGregTechBlock(4,
 											// 1,
 											// 8));
-		if (WaterPower.isThaumcraftLoaded) {
+		if (Mods.Thaumcraft.isAvailable) {
 			addReservoirAdvancedRecipe(new ItemStack(this, 8, 33),
 					ItemApi.getBlock("blockCosmeticSolid", 4));
 		}

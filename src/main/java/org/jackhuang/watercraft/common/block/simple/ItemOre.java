@@ -1,5 +1,7 @@
 package org.jackhuang.watercraft.common.block.simple;
 
+import org.jackhuang.watercraft.common.recipe.IRecipeHandler;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -10,6 +12,7 @@ public class ItemOre extends ItemBlock {
 		super(par1);
 		
 		setHasSubtypes(true);
+		registerOreDict();
 	}
 	
 	@Override
@@ -27,6 +30,12 @@ public class ItemOre extends ItemBlock {
 	public String getUnlocalizedName(ItemStack itemstack) {
 		if(itemstack.getItemDamage() >= OreType.values().length) return null;
 		return OreType.values()[itemstack.getItemDamage()].getUnlocalizedName();
+	}
+	
+	public void registerOreDict() {
+		for(int i=0;i<OreType.values().length;i++) {
+			IRecipeHandler.registerOreDict(OreType.values()[i].name(), new ItemStack(this, 1, OreType.values()[i].ordinal()));
+		}
 	}
 
 }

@@ -183,7 +183,7 @@ public class TileEntityTurbine extends TileEntityElectricMetaBlock {
 	}
 
 	private double tickRotor() {
-		if (!Reference.watermillNeedRotor)
+		if (!Reference.General.watermillNeedsRotor)
 			return 1;
 		if (hasRotor()) {
 			ItemRotor rotor = getRotor();

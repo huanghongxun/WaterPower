@@ -104,16 +104,12 @@ public class WaterPower implements IWorldGenerator {
 	
 	private IRecipeHandler recipe;
 
-	public static boolean isGregTechLoaded, isThaumcraftLoaded, isIndustrialCraftLoaded;
-
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		config = new Configuration(event.getSuggestedConfigurationFile());
 		config.load();
-
-		Property updater = config.get("rule", Reference.configNeedRotor, true);
-		updater.comment = "If needn't, the default effencity is 100%.";
-		Reference.watermillNeedRotor = updater.getBoolean(true);
+		Reference.initConfig(config);
+		
 		MessagePacketHandler.init();
 
 		config.save();
@@ -122,10 +118,6 @@ public class WaterPower implements IWorldGenerator {
 
 	@Mod.EventHandler
 	public void load(FMLInitializationEvent event) {
-
-		isIndustrialCraftLoaded = Loader.isModLoaded("IC2");
-		isGregTechLoaded = Loader.isModLoaded("gregtech");
-		isThaumcraftLoaded = Loader.isModLoaded("Thaumcraft");
 		
 		IRecipeHandler.initRecipeConfig(config);
 		EasyRecipeHandler.initRecipeConfig(config);

@@ -1,5 +1,7 @@
 package org.jackhuang.watercraft.common.block.machines;
 
+import gregtech.api.util.GT_Recipe;
+import gregtech.api.util.GT_Recipe.GT_Recipe_Map;
 import ic2.api.item.IC2Items;
 import ic2.api.recipe.RecipeOutput;
 import ic2.api.recipe.Recipes;
@@ -15,17 +17,18 @@ import org.jackhuang.watercraft.client.gui.DefaultGuiIds;
 import org.jackhuang.watercraft.common.inventory.InventorySlotProcessableGeneric;
 import org.jackhuang.watercraft.common.tileentity.TileEntityStandardWaterMachine;
 import org.jackhuang.watercraft.util.StackUtil;
+import org.jackhuang.watercraft.util.mods.Mods;
 
 public class TileEntityAdvancedCompressor extends TileEntityStandardWaterMachine {
 
 	public TileEntityAdvancedCompressor() {
 		super(5000, 64*20);
 
-		if(WaterPower.isGregTechLoaded) {
-			//this.inputSlot = new InventorySlotProcessableGreg(this, "input",
-			//		2, MyRecipes.implosion_gt, GT_Recipe.sImplosionRecipes);
+		/*if(Mods.GregTech.isAvailable) {
+			this.inputSlot = new InventorySlotProcessableGreg(this, "input",
+					2, MyRecipes.implosion_gt, GT_Recipe_Map.sImplosionRecipes);
 		}
-		else
+		else*/
 			this.inputSlot = new InventorySlotProcessableGeneric(this, "input",
 					1, MyRecipes.implosion_gt);
 	}
@@ -66,11 +69,11 @@ public class TileEntityAdvancedCompressor extends TileEntityStandardWaterMachine
 	public void updateEntity() {
 		super.updateEntity();
 		
-		if(WaterPower.isGregTechLoaded) {
-		/*	InventorySlotProcessableGreg greg = ((InventorySlotProcessableGreg)inputSlot);
+		/*if(Mods.GregTech.isAvailable) {
+			InventorySlotProcessableGreg greg = ((InventorySlotProcessableGreg)inputSlot);
 			if(greg.get(1) == null || greg.get(1).stackSize < 64)
-				greg.put(1, StackUtil.copyWithSize(IC2Items.getItem("industrialTnt"), 64));*/
-		}
+				greg.put(1, StackUtil.copyWithSize(IC2Items.getItem("industrialTnt"), 64));
+		}*/
 	}
 
 }

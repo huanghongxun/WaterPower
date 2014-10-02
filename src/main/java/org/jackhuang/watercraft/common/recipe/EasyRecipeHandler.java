@@ -38,6 +38,7 @@ import org.jackhuang.watercraft.common.item.others.ItemType;
 import org.jackhuang.watercraft.common.item.range.ItemRange;
 import org.jackhuang.watercraft.common.item.range.PluginType;
 import org.jackhuang.watercraft.common.item.rotors.RotorType;
+import org.jackhuang.watercraft.util.mods.Mods;
 
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -439,7 +440,7 @@ public class EasyRecipeHandler extends IRecipeHandler {
 		OreDictionary.registerOre("dustGold", ItemType.DustGold.item());
 		OreDictionary.registerOre("dustDiamond", ItemType.DustDiamond.item());
 		// If IC2 isn't loaded, I'll add crafting recipes for diamond dust.
-		if(!WaterPower.isIndustrialCraftLoaded) {
+		if(!Mods.IndustrialCraft2.isAvailable) {
 			Recipes.macerator.addRecipe(new RecipeInputItemStack(new ItemStack(Items.diamond)), null, ItemType.DustDiamond.item());
 			Recipes.macerator.addRecipe(new RecipeInputItemStack(new ItemStack(Blocks.iron_ore)), null, ItemType.DustIron.item(2));
 			Recipes.macerator.addRecipe(new RecipeInputItemStack(new ItemStack(Blocks.gold_ore)), null, ItemType.DustGold.item(2));

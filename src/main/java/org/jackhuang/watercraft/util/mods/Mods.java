@@ -16,6 +16,7 @@ public class Mods {
 		public static final String ThermalExpansion = "ThermalExpansion";
 		public static final String RotaryCraft = "RotaryCraft";
 		public static final String CoFHAPIEnergy = "CoFHAPI|energy";
+		public static final String GregTech = "gregtech";
 		public static final String Waila = "Waila";
 	}
 
@@ -24,6 +25,7 @@ public class Mods {
 	public static final SimpleMod IndustrialCraft2 = new SimpleMod(IDs.IndustrialCraft2);
 	public static final SimpleMod BuildCraftPower = new SimpleMod(IDs.BuildCraftPower);
 	public static final SimpleMod Thaumcraft = new SimpleMod(IDs.Thaumcraft);
+	public static final SimpleMod GregTech = new SimpleMod(IDs.GregTech);
 	public static final SimpleMod Waila = new SimpleMod(IDs.Waila);
 
 	public static class SimpleMod {

@@ -5,6 +5,7 @@ import org.jackhuang.watercraft.Reference;
 public enum EnergyType {
 	EU("IC2/EU"),
 	KU("IC2/KU"),
+	HU("IC2/HU"),
 	MJ("BC6/MJ"),
 	RF("TE4/RF"),
 	FZ("FZ/Charge"),
@@ -39,6 +40,10 @@ public enum EnergyType {
 	
 	public static double EU2KU(double eu) {
 		return eu / Reference.Energy.ku;
+	}
+	
+	public static double EU2HU(double eu) {
+		return eu / Reference.Energy.hu;
 	}
 	
 	public static double EU2Steam(double eu) {

@@ -197,7 +197,7 @@ public class TileEntityWatermill extends TileEntityElectricMetaBlock {
 
 			return rotor.type.getEfficiency();
 		}
-		if (Reference.watermillNeedRotor)
+		if (Reference.General.watermillNeedsRotor)
 			return 0;
 		else
 			return 1;

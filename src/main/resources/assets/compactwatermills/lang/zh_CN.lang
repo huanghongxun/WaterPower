@@ -1,4 +1,4 @@
-itemGroup.creativeTabWatercraft=高级水力发电机
+itemGroup.creativeTabWatercraft=水力科技
 
 # tcIntegration
 tc.research_category.CompactWatermills=高级水力发电机
@@ -146,7 +146,7 @@ cptwtrml.updater.VSteelWaterPipe=钒钢水管
 cptwtrml.updater.RubyWaterHole=红宝石喷水口
 cptwtrml.updater.DataBall=数据球
 cptwtrml.updater.DustDiamond=钻石粉
-cptwtrml.updater.IndustrialSteelHydraulicCylinder=工业钢液压钢
+cptwtrml.updater.IndustrialSteelHydraulicCylinder=工业钢液压缸
 cptwtrml.updater.VSteelPistonCylinder=钒钢活塞缸
 cptwtrml.updater.DustCactus=仙人掌粉
 cptwtrml.updater.DustIron=铁粉

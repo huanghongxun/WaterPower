@@ -12,6 +12,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
+import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.InternalName;
 import org.jackhuang.watercraft.common.block.GlobalBlocks;
@@ -31,6 +32,7 @@ import org.jackhuang.watercraft.common.item.others.ItemOthers;
 import org.jackhuang.watercraft.common.item.others.ItemType;
 import org.jackhuang.watercraft.common.item.range.ItemRange;
 import org.jackhuang.watercraft.common.item.rotors.RotorType;
+import org.jackhuang.watercraft.util.mods.Mods;
 
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -52,7 +54,7 @@ public abstract class IRecipeHandler {
 	public static void initRecipeConfig(Configuration c) {
 
 		Property p = c.get("recipe", "EnableGregTechRecipe", true);
-		gregtechRecipe = p.getBoolean(true) && WaterPower.isGregTechLoaded;
+		gregtechRecipe = p.getBoolean(true) && Mods.GregTech.isAvailable;
 		p = c.get("recipe", "EnableThaumcraftRecipe", true);
 		thaumcraftRecipe = p.getBoolean(true)
 				&& Loader.isModLoaded("Thaumcraft");
@@ -102,7 +104,8 @@ public abstract class IRecipeHandler {
 		
 		registerWatermills();
 		registerPlugins();
-		registerMachines();
+		if(Reference.General.enableMachines)
+			registerMachines();
 		registerRange();
 
 		p = config.get("enable", "EnableReservoir", true);

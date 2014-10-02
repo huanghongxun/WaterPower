@@ -8,6 +8,7 @@ import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.common.item.others.ItemType;
 import org.jackhuang.watercraft.common.recipe.IRecipeHandler;
 import org.jackhuang.watercraft.util.WCLog;
+import org.jackhuang.watercraft.util.mods.Mods;
 
 import thaumcraft.api.ItemApi;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -200,7 +201,7 @@ public enum RotorType {
 		addRotorRecipe(RotorType.TUNGSTEN_STEEL, "plateTungstenSteel", // GregTech_API.getGregTechMaterial(83,
 																		// 1),
 				"blockTungstenSteel");//GregTech_API.getGregTechBlock(4, 1, 8));
-		if (WaterPower.isThaumcraftLoaded) {
+		if (Mods.Thaumcraft.isAvailable) {
 			/* Thaumium */
 			addRotorRecipe(RotorType.THAUMIUM,
 					ItemApi.getItem("itemNugget", 6),

@@ -6,6 +6,7 @@ import factorization.api.IChargeConductor;
 import ic2.api.energy.event.EnergyTileLoadEvent;
 import ic2.api.energy.event.EnergyTileUnloadEvent;
 import ic2.api.energy.tile.IEnergySource;
+import ic2.api.energy.tile.IHeatSource;
 import ic2.api.energy.tile.IKineticSource;
 
 import java.util.Random;
@@ -39,13 +40,14 @@ import net.minecraftforge.fluids.IFluidHandler;
 @InterfaceList({
 	@Interface(iface = "ic2.api.energy.tile.IEnergySource", modid = Mods.IDs.IndustrialCraft2API, striprefs = true),
 	@Interface(iface = "ic2.api.energy.tile.IKineticSource",  modid = Mods.IDs.IndustrialCraft2API, striprefs = true),
+	@Interface(iface = "ic2.api.energy.tile.IHeatSource",  modid = Mods.IDs.IndustrialCraft2API, striprefs = true),
 	@Interface(iface = "cofh.api.energy.IEnergyConnection", modid = Mods.IDs.CoFHAPIEnergy),
 	@Interface(iface = "buildcraft.api.power.IPowerEmitter", modid = Mods.IDs.BuildCraftPower),
 	@Interface(iface = "factorization.api.IChargeConductor", modid = Mods.IDs.Factorization)
 })
 public abstract class TileEntityBaseGenerator extends TileEntityBlock implements
 		IEnergySource, IHasGui, IKineticSource, IUnitChangeable, IPowerEmitter,
-		IEnergyConnection, IChargeConductor, IFluidHandler {
+		IEnergyConnection, IChargeConductor, IFluidHandler, IHeatSource {
 	public static Random random = new Random();
 
 	public double storage = 0.0D;
@@ -272,6 +274,23 @@ public abstract class TileEntityBaseGenerator extends TileEntityBlock implements
 	public int getSourceTier() {
 		return 1;
 	}
+	
+	@Override
+	@Method(modid = "IC2API")
+	public int maxrequestHeatTick(ForgeDirection directionFrom) {
+		if (energyType == EnergyType.HU)
+			return (int) (EnergyType.EU2HU(lastestOutput));
+		return 0;
+	}
+	
+	@Override
+	@Method(modid = "IC2API")
+	public int requestHeat(ForgeDirection directionFrom, int requestheat) {
+		if (energyType == EnergyType.KU)
+			return Math.min(requestheat,
+					maxrequestHeatTick(directionFrom));
+		return 0;
+	}
 
 	@Override
 	@Method(modid = "IC2API")
@@ -308,14 +327,14 @@ public abstract class TileEntityBaseGenerator extends TileEntityBlock implements
 		return true;
 	}
 
-	private IEnergyHandler[] handlerCache;
+	private Object[] handlerCache;
 
 	@Method(modid = "CoFHAPI|energy")
 	protected final int transmitEnergy(int paramInt) {
 		int i;
 		if (this.handlerCache != null) {
 			for (i = this.handlerCache.length; i-- > 0;) {
-				IEnergyHandler localIEnergyHandler = this.handlerCache[i];
+				IEnergyHandler localIEnergyHandler = (IEnergyHandler)this.handlerCache[i];
 				if (localIEnergyHandler == null) {
 					continue;
 				}

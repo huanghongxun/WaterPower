@@ -1,5 +1,6 @@
 package org.jackhuang.watercraft.common.recipe;
 
+import gregtech.api.GregTech_API;
 import ic2.api.item.IC2Items;
 import ic2.api.recipe.RecipeInputItemStack;
 import ic2.api.recipe.RecipeInputOreDict;
@@ -18,6 +19,7 @@ import org.jackhuang.watercraft.common.item.crafting.LevelTypes;
 import org.jackhuang.watercraft.common.item.crafting.MaterialForms;
 import org.jackhuang.watercraft.common.item.crafting.MaterialTypes;
 import org.jackhuang.watercraft.common.item.others.ItemType;
+import org.jackhuang.watercraft.util.mods.Mods;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
@@ -266,29 +268,26 @@ public class NormalRecipeHandler extends EasyRecipeHandler {
 	public void registerUpdater() {
 		super.registerUpdater();
 
-		if (WaterPower.isGregTechLoaded) {
-			// GregTech_API.sRecipeAdder.addChemicalRecipe(changeMount(IC2Items.getItem("airCell"),
-			// 3), IC2Items.getItem("biofuelCell"),
-			// ItemType.OxygenEthanolFuel.item(4), 20);
+		if (Mods.GregTech.isAvailable) {
+			GregTech_API.sRecipeAdder.addChemicalRecipe(
+					changeMount(IC2Items.getItem("airCell"), 3),
+					IC2Items.getItem("biofuelCell"),
+					ItemType.OxygenEthanolFuel.item(4), 20);
+			GregTech_API.sRecipeAdder.addAssemblerRecipe(
+					IC2Items.getItem("coil"),
+					IC2Items.getItem("copperCableItem"),
+					ItemType.DenseCoil.item(), 120 * 20, 2);
 
-			// GregTech_API.sRecipeAdder.addAssemblerRecipe(IC2Items.getItem("coil"),
-			// IC2Items.getItem("copperCableItem"), ItemType.DenseCoil.item(),
-			// 120*20,2);
+			GregTech_API.sRecipeAdder.addAssemblerRecipe(
+					ItemType.SilverCoil.item(), ItemType.SilverCoil.item(),
+					ItemType.DenseSilverCoil.item(), 240 * 20, 4);
+			addRecipeByOreDictionary(ItemType.SilverCoil.item(), "SSS", "SIS",
+					"SSS", 'S', "ingotSilver", 'I', "ingotIndustrialSteel");
 
-			// GregTech_API.sRecipeAdder.addAssemblerRecipe(ItemType.SilverCoil.item(),
-			// ItemType.SilverCoil.item(), ItemType.DenseSilverCoil.item(),
-			// 240*20, 4);
-			// addRecipeByOreDictionary(ItemType.SilverCoil.item(),
-			// "SSS", "SIS", "SSS", 'S', "ingotSilver", 'I',
-			// "ingotIndustrialSteel");
-
-			// GregTech_API.sRecipeAdder.addBlastRecipe(IC2Items.getItem("carbonMesh"),
-			// null, ItemType.HighPurityCarbonDust.item(), null, 240*20, 512,
-			// 3000);
-			// GregTech_API.sRecipeAdder.addBlastRecipe(UpdaterType.HighPurityCarbonDust.item(),
-			// OreDictionary.getOres(")s,
-			// UpdaterType.TungstenCarbideIngot.item(), null, 240*20, 512,
-			// 3000);
+			GregTech_API.sRecipeAdder.addBlastRecipe(
+					IC2Items.getItem("carbonMesh"), null,
+					ItemType.HighPurityCarbonDust.item(), null, 240 * 20, 512,
+					3000);
 		}
 	}
 

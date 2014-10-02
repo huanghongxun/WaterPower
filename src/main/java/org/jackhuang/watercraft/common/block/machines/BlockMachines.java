@@ -59,7 +59,6 @@ public class BlockMachines extends BlockMultiID {
 		TileEntityLathe.init();
 		GameRegistry.registerTileEntity(TileEntityCutter.class,
 				"cptwtrml.machine.cutter");
-		TileEntityCutter.init();
 	}
 
 	@Override
