@@ -88,7 +88,7 @@ cptwtrml.reservoir.TITANIUM=钛
 cptwtrml.reservoir.DIAMOND=钻石
 
 cptwtrml.reservoir.MAXSOTRE=最大存储
-cptwtrml.reservoir.MAXUSE=每秒最大使用水量（水轮机）
+cptwtrml.reservoir.MAXUSE=水轮机最大用水
 
 # rotor
 cptwtrml.rotor.ROTOR=转子

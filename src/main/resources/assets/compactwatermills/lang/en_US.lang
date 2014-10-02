@@ -86,7 +86,7 @@ cptwtrml.reservoir.THAUMIUM=Thaumium
 cptwtrml.reservoir.IRIDIUMIRON=Iridium Iron
 
 cptwtrml.reservoir.MAXSOTRE=Max Storage
-cptwtrml.reservoir.MAXUSE=Maximum water using per second (for turbine)
+cptwtrml.reservoir.MAXUSE=Max using(for turbine)
 
 # rotor
 cptwtrml.rotor.ROTOR=Rotor

@@ -36,8 +36,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockReservoir extends BlockMeta {
-	
-	IIcon[] icon = new IIcon[maxMetaData()];
 
 	public BlockReservoir() {
 		super(InternalName.cptBlockReservoir, Material.iron,
@@ -51,24 +49,13 @@ public class BlockReservoir extends BlockMeta {
 	
 	@Override
 	public void registerBlockIcons(IIconRegister iconRegister) {
+		textures = new IIcon[maxMetaData()][6];
 		for(int i=0;i<maxMetaData();i++) {
-			icon[i]=iconRegister.registerIcon(Reference.ModID + ":reservoir/" + ReservoirType.values()[i].name());
+			textures[i][0]=textures[i][1]=textures[i][2]=textures[i][3]=textures[i][4]=textures[i][5]=
+					iconRegister.registerIcon(Reference.ModID + ":reservoir/" + ReservoirType.values()[i].name());
 		}
 	}
 	
-	@Override
-	public IIcon getIcon(int side, int meta) {
-		return icon[meta];
-	}
-	
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(IBlockAccess iBlockAccess, int x, int y, int z,
-			int side) {
-		int meta = iBlockAccess.getBlockMetadata(x, y, z);
-		return getIcon(side, meta);
-	}
-
 	@Override
 	protected int getTextureIndex(IBlockAccess iBlockAccess, int x, int y,
 			int z, int meta) {

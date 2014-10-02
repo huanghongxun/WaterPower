@@ -159,6 +159,7 @@ public class TileEntityWatermill extends TileEntityElectricMetaBlock {
 						* RangeType.values()[is.getItemDamage()].range;
 			}
 		}
+		if(range<3) range=3;
 		return range;
 	}
 

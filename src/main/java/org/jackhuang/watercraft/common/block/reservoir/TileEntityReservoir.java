@@ -469,6 +469,8 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 		if (flag)
 			sendUpdateToClient();
 	}
+	
+	boolean markedBlockForUpdate = false;
 
 	@Override
 	public void readPacketData(NBTTagCompound tag) {
@@ -480,7 +482,10 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 		storage = defaultStorage + extraStorage;
 		setTankAmount(tag.getInteger("water"), FluidRegistry.WATER.getID());
 		type = ReservoirType.values()[tag.getInteger("type")];
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		if(!markedBlockForUpdate) {
+			markedBlockForUpdate = true;
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		}
 	}
 
 	@Override
