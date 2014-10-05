@@ -19,7 +19,7 @@ public final class DefaultGuiIds {
 	public static int get(String name) {
 		if (!idMap.containsKey(name)) {
 			throw new IllegalArgumentException("default id for " + name
-					+ " not registered");
+					+ " is not registered.");
 		}
 		return idMap.get(name);
 	}
@@ -39,6 +39,6 @@ public final class DefaultGuiIds {
 		add("tileEntityCutter", i++);
 		add("tileEntitySawmill", i++);
 		add("tileEntityAdvancedCompressor", i++);
-		//add("tileEntityCentrifuge", i++);
+		add("tileEntityCentrifuge", i++);
 	}
 }

@@ -1,5 +1,6 @@
 package org.jackhuang.watercraft.common.inventory;
 
+import org.jackhuang.watercraft.api.MyRecipeOutput;
 import org.jackhuang.watercraft.common.tileentity.TileEntityInventory;
 
 import ic2.api.recipe.RecipeOutput;
@@ -13,7 +14,7 @@ public abstract class InventorySlotProcessable extends InventorySlotConsumable {
 
 	public abstract boolean accepts(ItemStack paramItemStack);
 
-	public abstract RecipeOutput process();
+	public abstract MyRecipeOutput process();
 
 	public abstract void consume();
 }

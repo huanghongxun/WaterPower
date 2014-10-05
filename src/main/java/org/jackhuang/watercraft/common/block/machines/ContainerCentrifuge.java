@@ -15,16 +15,20 @@ public class ContainerCentrifuge extends ContainerStandardMachine {
 	@Override
 	protected void paintLayout() {
 		addSlotToContainer(new SlotInventorySlot(tileEntity.inputSlot, 0,
-				25, 25));
+				26, 26));
 		addSlotToContainer(new SlotInventorySlot(tileEntity.inputSlot, 1,
-				25, 43));
+				26, 44));
 		
 		for(int i = 0; i < 2; i++)
 			addSlotToContainer(new SlotInventorySlot(tileEntity.outputSlot, i,
 					86 + i * 18, 26));
 		for(int i = 2; i < 4; i++)
 			addSlotToContainer(new SlotInventorySlot(tileEntity.outputSlot, i,
-					86 + i * 18, 26+18));
+					86 + (i-2) * 18, 26+18));
+
+		for (int i = 0; i < 4; i++)
+			addSlotToContainer(new SlotInventorySlot(tileEntity.upgradeSlot, i,
+					upgradeX, upgradeY + i * 18, 4));
 	}
 
 }

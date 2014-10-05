@@ -1,6 +1,7 @@
 package org.jackhuang.watercraft.common.block.machines;
 
 import org.jackhuang.watercraft.api.BasicMachineRecipeManager;
+import org.jackhuang.watercraft.api.MyRecipeOutput;
 import org.jackhuang.watercraft.api.MyRecipes;
 import org.jackhuang.watercraft.client.gui.DefaultGuiIds;
 import org.jackhuang.watercraft.common.inventory.InventorySlotProcessableGeneric;
@@ -21,7 +22,7 @@ public class TileEntityCentrifuge extends TileEntityStandardWaterMachine {
 		super(80, 10 * 20, 4);
 
 		this.inputSlot = new InventorySlotProcessableGeneric(this, "input",
-				1, MyRecipes.centrifuge_gt);
+				2, MyRecipes.centrifuge_gt);
 	}
 
 	public static void init() {
@@ -31,7 +32,7 @@ public class TileEntityCentrifuge extends TileEntityStandardWaterMachine {
 
 	@Override
 	public String getInventoryName() {
-		return "Sawmill";
+		return "Centrifuge";
 	}
 
 	public float getWrenchDropRate() {
@@ -40,6 +41,25 @@ public class TileEntityCentrifuge extends TileEntityStandardWaterMachine {
 
 	@Override
 	public int getGuiId() {
-		return DefaultGuiIds.get("tileEntitySawmill");
+		return DefaultGuiIds.get("tileEntityCentrifuge");
+	}
+	
+	@Override
+	protected void beginProcess(MyRecipeOutput output) {
+		/*if(output.gt_Recipe!=null) {
+			defaultEnergyConsume = output.gt_Recipe.mEUt * 500;
+			defaultOperationLength = output.gt_Recipe.mDuration / 50;
+		} else {*/
+			defaultEnergyConsume = 80;
+			defaultOperationLength = 10 * 20;
+		//}
+	}
+	
+	@Override
+	protected void failedProcess() {
+		super.failedProcess();
+
+		defaultEnergyConsume = 80;
+		defaultOperationLength = 10 * 20;
 	}
 }

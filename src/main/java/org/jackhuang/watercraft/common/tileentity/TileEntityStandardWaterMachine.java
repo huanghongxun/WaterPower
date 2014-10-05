@@ -6,6 +6,7 @@ import ic2.api.recipe.RecipeOutput;
 
 import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.api.IUpgrade;
+import org.jackhuang.watercraft.api.MyRecipeOutput;
 import org.jackhuang.watercraft.client.gui.IHasGui;
 import org.jackhuang.watercraft.common.inventory.InventorySlotOutput;
 import org.jackhuang.watercraft.common.inventory.InventorySlotProcessable;
@@ -47,8 +48,7 @@ public abstract class TileEntityStandardWaterMachine extends
 
 		operationsPerTick = 1;
 
-		this.outputSlot = new InventorySlotOutput(this, "output",
-				outputSlots);
+		this.outputSlot = new InventorySlotOutput(this, "output", outputSlots);
 		this.upgradeSlot = new InventorySlotUpgrade(this, "upgrade", 4);
 	}
 
@@ -94,10 +94,14 @@ public abstract class TileEntityStandardWaterMachine extends
 		if (isLastFailed && inputSlot.isEquals(lastFailedContents))
 			;
 		else {
-			RecipeOutput output = getOutput();
+			MyRecipeOutput output = getOutput();
 
 			if ((output != null) && (this.water >= this.energyConsume)) {
-				isLastFailed = false;
+
+				if (isLastFailed) {
+					beginProcess(output);
+					isLastFailed = false;
+				}
 				// setActive(true);
 
 				this.progress = (short) (this.progress + 1);
@@ -125,11 +129,18 @@ public abstract class TileEntityStandardWaterMachine extends
 					&& WaterPower.isSimulating())
 				sendUpdateToClient();
 		}
+
 		if (needsInvUpdate)
 			super.markDirty();
 	}
 
-	public void operate(RecipeOutput output) {
+	protected void beginProcess(MyRecipeOutput output) {
+	}
+
+	protected void failedProcess() {
+	}
+
+	public void operate(MyRecipeOutput output) {
 		for (int i = 0; i < this.operationsPerTick; i++) {
 			List processResult = output.items;
 
@@ -141,7 +152,7 @@ public abstract class TileEntityStandardWaterMachine extends
 		}
 	}
 
-	public void operateOnce(RecipeOutput output, List<ItemStack> processResult) {
+	public void operateOnce(MyRecipeOutput output, List<ItemStack> processResult) {
 		this.inputSlot.consume();
 
 		this.outputSlot.add(processResult);
@@ -158,20 +169,18 @@ public abstract class TileEntityStandardWaterMachine extends
 		for (int i = 0; i < this.upgradeSlot.size(); i++) {
 			ItemStack stack = this.upgradeSlot.get(i);
 
-			if ((stack == null) || (!(stack.getItem() instanceof IUpgrade)))
+			if ((stack == null)
+					|| (!(stack.getItem() instanceof IUpgrade)))
 				continue;
 			IUpgrade upgrade = (IUpgrade) stack.getItem();
 
 			processTimeMultiplier *= Math.pow(
-					upgrade.getSpeedAdditionalValue(stack),
-					stack.stackSize);
+					upgrade.getSpeedAdditionalValue(stack), stack.stackSize);
 			energyDemandMultiplier *= Math.pow(
-					upgrade.getEnergyDemandMultiplier(stack),
-					stack.stackSize);
+					upgrade.getEnergyDemandMultiplier(stack), stack.stackSize);
 			extraEnergyStorage += upgrade.getStorageAdditionalValue(stack)
 					* stack.stackSize;
-			energyStorageMultiplier *= Math.pow(1,
-					stack.stackSize);
+			energyStorageMultiplier *= Math.pow(1, stack.stackSize);
 		}
 
 		double previousProgress = this.progress / this.operationLength;
@@ -202,11 +211,11 @@ public abstract class TileEntityStandardWaterMachine extends
 		return ret > 2147483647.0D ? 2147483647 : (int) ret;
 	}
 
-	public RecipeOutput getOutput() {
+	public MyRecipeOutput getOutput() {
 		if (this.inputSlot.isEmpty())
 			return null;
 
-		RecipeOutput output = this.inputSlot.process();
+		MyRecipeOutput output = this.inputSlot.process();
 		if (output == null)
 			return null;
 

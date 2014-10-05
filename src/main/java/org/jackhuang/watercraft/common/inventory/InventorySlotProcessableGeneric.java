@@ -6,6 +6,7 @@ import ic2.api.recipe.RecipeOutput;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jackhuang.watercraft.api.MyRecipeOutput;
 import org.jackhuang.watercraft.common.tileentity.TileEntityInventory;
 
 import net.minecraft.item.ItemStack;
@@ -28,7 +29,7 @@ public class InventorySlotProcessableGeneric extends InventorySlotProcessable {
 		return getOutputFor(tmp, false, true) != null;
 	}
 
-	public RecipeOutput process() {
+	public MyRecipeOutput process() {
 		ItemStack input = get();
 		if ((input == null) && (!allowEmptyInput()))
 			return null;
@@ -43,7 +44,7 @@ public class InventorySlotProcessableGeneric extends InventorySlotProcessable {
 			itemsCopy.add(itemStack.copy());
 		}
 
-		return new RecipeOutput(output.metadata, itemsCopy);
+		return new MyRecipeOutput(itemsCopy);
 	}
 
 	public void consume() {
