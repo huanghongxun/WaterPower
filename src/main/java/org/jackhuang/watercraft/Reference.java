@@ -17,11 +17,11 @@ public class Reference {
 	
 	public static final String ModChannel = "wtrpwr";
 	
-	public static final String ModID = "CompactWatermills";
+	public static final String ModID = "WaterPower";
 	
 	public static final String ModName = "WaterPower";
 	
-	public static final String Version = "0.3d";
+	public static final String Version = "0.3e";
 	
 	public static final String MCVersion = "1.7.10";
 	

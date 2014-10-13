@@ -1,6 +1,6 @@
 [
 {
-  "modid": "CompactWatermills",
+  "modid": "WaterPower",
   "name": "WaterPower",
   "description": "It adds many watermills, turbines, water-power machines and many materials.",
   "version": "${version}",
@@ -8,7 +8,7 @@
   "url": "http://www.mcbbs.net/thread-190676-1-1.html",
   "updateUrl": "http://www.mcbbs.net/thread-190676-1-1.html",
   "authorList": ["huanghongxun"],
-  "credits": "huanghongxun & many friends in baidu tieba.",
+  "credits": "huanghongxun",
   "logoFile": "",
   "screenshots": [],
   "dependencies": ["IC2"]
