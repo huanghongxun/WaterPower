@@ -8,6 +8,5 @@ deploy:
     file: "build/libs/*"
     skip_cleanup: true
     on:
-        tags: true
         all_branches: true
 after_deploy: "echo 'after deploy'"
