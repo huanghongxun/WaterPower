@@ -5,7 +5,7 @@ before_deploy: "echo 'before deploy'"
 deploy:
     provider: releases
     api-key: "a03e859e331fb219a570bbe0bd4eff4917852562"
-    file: ""
+    file: "build/libs/*"
     skip_cleanup: true
     on:
         tags: true
