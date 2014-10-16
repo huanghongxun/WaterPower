@@ -1,7 +1,7 @@
-itemGroup.creativeTabWatercraft=Compact Watermills
+itemGroup.creativeTabWatercraft=Advanced Watermills
 
 # tcIntegration
-tc.research_category.CompactWatermills=Compact Watermills
+tc.research_category.AdvancedWatermills=Advanced Watermills
 tc.research_name.industrialDiamond=Industrial Diamond
 tc.research_name.waterUraniumIngot=Water Uranium Ingot
 
@@ -25,22 +25,22 @@ tc.research_name.updaterMK7=Update Plugin MK7
 tc.research_name.reservoirCore=Reservoir Core
 tc.research_name.reservoirCoreAdvanced=Advanced Reservoir Core
 
-tc.research_name.cptwtrmlMK1=Compact Watermills MK1
-tc.research_name.cptwtrmlMK2=Compact Watermills MK2
-tc.research_name.cptwtrmlMK3=Compact Watermills MK3
-tc.research_name.cptwtrmlMK4=Compact Watermills MK4
-tc.research_name.cptwtrmlMK5=Compact Watermills MK5
-tc.research_name.cptwtrmlMK6=Compact Watermills MK6
-tc.research_name.cptwtrmlMK7=Compact Watermills MK7
-tc.research_name.cptwtrmlMK8=Compact Watermills MK8
-tc.research_name.cptwtrmlMK9=Compact Watermills MK9
-tc.research_name.cptwtrmlMK10=Compact Watermills MK10
-tc.research_name.cptwtrmlMK11=Compact Watermills MK11
-tc.research_name.cptwtrmlMK12=Compact Watermills MK12
-tc.research_name.cptwtrmlMK13=Compact Watermills MK13
-tc.research_name.cptwtrmlMK14=Compact Watermills MK14
-tc.research_name.cptwtrmlMK15=Compact Watermills MK15
-tc.research_name.cptwtrmlMK16=Compact Watermills MK16
+tc.research_name.cptwtrmlMK1=Advanced Watermills MK1
+tc.research_name.cptwtrmlMK2=Advanced Watermills MK2
+tc.research_name.cptwtrmlMK3=Advanced Watermills MK3
+tc.research_name.cptwtrmlMK4=Advanced Watermills MK4
+tc.research_name.cptwtrmlMK5=Advanced Watermills MK5
+tc.research_name.cptwtrmlMK6=Advanced Watermills MK6
+tc.research_name.cptwtrmlMK7=Advanced Watermills MK7
+tc.research_name.cptwtrmlMK8=Advanced Watermills MK8
+tc.research_name.cptwtrmlMK9=Advanced Watermills MK9
+tc.research_name.cptwtrmlMK10=Advanced Watermills MK10
+tc.research_name.cptwtrmlMK11=Advanced Watermills MK11
+tc.research_name.cptwtrmlMK12=Advanced Watermills MK12
+tc.research_name.cptwtrmlMK13=Advanced Watermills MK13
+tc.research_name.cptwtrmlMK14=Advanced Watermills MK14
+tc.research_name.cptwtrmlMK15=Advanced Watermills MK15
+tc.research_name.cptwtrmlMK16=Advanced Watermills MK16
 
 # Thaumcraft integration: research pages
 cptwtrml.research.waterUraniumIngot=Nothing...
@@ -106,7 +106,7 @@ cptwtrml.updater.WaterUraniumPlateMK4=Water uranium plate MK4
 cptwtrml.updater.WaterUraniumPlateMK5=Water uranium plate MK5
 cptwtrml.updater.WaterUraniumPlateMK6=Water uranium plate MK6
 cptwtrml.updater.WaterUraniumPlateMK7=Water uranium plate MK7
-cptwtrml.updater.IR_FE=Iridium and Iron Alloy Plate
+cptwtrml.updater.IR_FE=Iridium Iron Alloy Plate
 cptwtrml.updater.MK0=Updater MK0
 cptwtrml.updater.MK1=Updater MK1
 cptwtrml.updater.MK2=Updater MK2
@@ -143,14 +143,14 @@ cptwtrml.updater.BrassCentrifugePot=Brass Centrifuge Pot
 cptwtrml.updater.VSteelWaterPipe=Vanadium Steel Pipe
 cptwtrml.updater.RubyWaterHole=Ruby Water Hole
 cptwtrml.updater.DataBall=Data Ball
-cptwtrml.updater.DustDiamond=Diamond Dust
+cptwtrml.updater.DustDiamond=DiamondDust
 cptwtrml.updater.IndustrialSteelHydraulicCylinder=Industrial Steel Hydraulic Cylinder
 cptwtrml.updater.VSteelPistonCylinder=Vanadium Steel Piston Cylinder
 cptwtrml.updater.DustCactus=Cactus Dust
 cptwtrml.updater.DustIron=Iron Dust
 cptwtrml.updater.DustGold=Gold Dust
-cptwtrml.updater.DrawingWaterPart=Drawing Water Part
-cptwtrml.updater.DrawingWaterComponent=Drawing Water Component
+cptwtrml.updater.DrawingWaterPart=WaterDrawing Part
+cptwtrml.updater.DrawingWaterComponent=WaterDrawing Component
 
 # range
 cptwtrml.range.info.MK1=Narrow 2 blocks of the range
@@ -173,12 +173,12 @@ cptwtmrl.watermill.TROUSERS=Trousers
 cptwtrml.rotor.RANGE=Range
 
 # crafting
-cptwtrml.crafting.paddleBase=Paddle Base
+cptwtrml.crafting.paddleBase=Stator
 cptwtrml.crafting.drainagePlate=Drainage Plate
 cptwtrml.crafting.fixedFrame=Fixed Frame
 cptwtrml.crafting.fixedTool=Fixed Tool
-cptwtrml.crafting.rotationAxle=Rotation Axle
-cptwtrml.crafting.outputInterface=Output Interface
+cptwtrml.crafting.rotationAxle=Shaft
+cptwtrml.crafting.outputInterface=Output Port
 cptwtrml.crafting.rotor=Rotor
 cptwtrml.crafting.stator=Stator
 cptwtrml.crafting.casing=Casing

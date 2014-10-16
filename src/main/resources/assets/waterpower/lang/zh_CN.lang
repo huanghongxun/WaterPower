@@ -193,7 +193,7 @@ cptwtrml.crafting.casing=外壳
 cptwtrml.crafting.circuit=控制电路
 
 # level
-cptwtrml.level.MK1=木质
+cptwtrml.level.MK1=木
 cptwtrml.level.MK3=锌合金
 cptwtrml.level.MK4=钢
 cptwtrml.level.MK5=钒钢

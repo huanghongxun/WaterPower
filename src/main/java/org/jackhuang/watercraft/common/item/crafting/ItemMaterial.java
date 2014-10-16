@@ -2,6 +2,7 @@ package org.jackhuang.watercraft.common.item.crafting;
 
 import java.util.List;
 
+import gregtech.api.GregTech_API;
 import ic2.api.item.IC2Items;
 import ic2.api.recipe.RecipeInputItemStack;
 import ic2.api.recipe.Recipes;
@@ -89,12 +90,12 @@ public class ItemMaterial extends ItemRecolorable {
 	
 	public void registerAllRecipes() {
 		if(IRecipeHandler.isEnabledGregTechRecipe()) {
-			//GregTech_API.sRecipeAdder.addAlloySmelterRecipe(get(MaterialTypes.IndustrialSteel, MaterialForms.ingot), get(MaterialTypes.Neodymium, MaterialForms.ingot), get(MaterialTypes.NeodymiumMagnet, MaterialForms.ingot), 240*20, 128);
-			//GregTech_API.sRecipeAdder.addBlastRecipe(ItemMaterial.get(MaterialTypes.Vanadium, MaterialForms.dust), ItemMaterial.get(MaterialTypes.Steel, MaterialForms.ingot, 2), ItemMaterial.get(MaterialTypes.VanadiumSteel, MaterialForms.ingot, 3), null, 240*20, 512, 2000);
-			//GregTech_API.sRecipeAdder.addBlastRecipe(ItemMaterial.get(MaterialTypes.Manganese, MaterialForms.dust), ItemMaterial.get(MaterialTypes.Steel, MaterialForms.ingot, 2), ItemMaterial.get(MaterialTypes.ManganeseSteel, MaterialForms.ingot, 3), null, 240*20, 512, 2000);
+			GregTech_API.sRecipeAdder.addAlloySmelterRecipe(get(MaterialTypes.IndustrialSteel, MaterialForms.ingot), get(MaterialTypes.Neodymium, MaterialForms.ingot), get(MaterialTypes.NeodymiumMagnet, MaterialForms.ingot), 240*20, 128);
+			GregTech_API.sRecipeAdder.addBlastRecipe(ItemMaterial.get(MaterialTypes.Vanadium, MaterialForms.dust), ItemMaterial.get(MaterialTypes.Steel, MaterialForms.ingot, 2), ItemMaterial.get(MaterialTypes.VanadiumSteel, MaterialForms.ingot, 3), null, 240*20, 512, 2000);
+			GregTech_API.sRecipeAdder.addBlastRecipe(ItemMaterial.get(MaterialTypes.Manganese, MaterialForms.dust), ItemMaterial.get(MaterialTypes.Steel, MaterialForms.ingot, 2), ItemMaterial.get(MaterialTypes.ManganeseSteel, MaterialForms.ingot, 3), null, 240*20, 512, 2000);
 
-			//IRecipeHandler.addShapelessRecipeByOreDictionary(ItemMaterial.get(MaterialTypes.ZincAlloy, MaterialForms.dust, 5),
-			//		"dustSmallMagnesium", "dustSmallAluminium", "dustTinyTitanium", "dustSmallCopper", ItemMaterial.get(MaterialTypes.Zinc, MaterialForms.dust, 4));
+			IRecipeHandler.addShapelessRecipeByOreDictionary(ItemMaterial.get(MaterialTypes.ZincAlloy, MaterialForms.dust, 5),
+				"dustSmallMagnesium", "dustSmallAluminium", "dustTinyTitanium", "dustSmallCopper", ItemMaterial.get(MaterialTypes.Zinc, MaterialForms.dust, 4));
 		} else {
 			IRecipeHandler.addShapelessRecipeByOreDictionary(ItemMaterial.get(MaterialTypes.ZincAlloy, MaterialForms.dust, 5),
 					ItemMaterial.get(MaterialTypes.Zinc, MaterialForms.dust, 4), "dustCopper");
@@ -129,6 +130,8 @@ public class ItemMaterial extends ItemRecolorable {
 			GameRegistry.addShapedRecipe(get(types, MaterialForms.gear), 
 					"SPS", "P P", "SPS", 'S', get(types, MaterialForms.stick),
 					'P', get(types, MaterialForms.plate));
+			GameRegistry.addShapedRecipe(get(types, MaterialForms.ring),
+					" S ", "S S", " S ", 'S', get(types, MaterialForms.stick));
 			ItemStack aItemStack = get(types, MaterialForms.dust);
 			FurnaceRecipes.smelting().func_151394_a(aItemStack, get(types, MaterialForms.ingot), 0);
 			aItemStack = get(types, MaterialForms.dustTiny);
@@ -143,7 +146,7 @@ public class ItemMaterial extends ItemRecolorable {
 			MyRecipes.lathe_gt.addRecipe(new RecipeInputItemStack(get(types, MaterialForms.stick)), null, get(types, MaterialForms.screw, 4));
 			
 			if(Mods.GregTech.isAvailable) {
-				//GregTech_API.sRecipeAdder.addLatheRecipe(get(types, MaterialForms.stick), get(types, MaterialForms.screw, 4), null, 20, 4);
+				GregTech_API.sRecipeAdder.addLatheRecipe(get(types, MaterialForms.stick), get(types, MaterialForms.screw, 4), null, 20, 4);
 			}
 		}
 	}
