@@ -10,6 +10,7 @@ import cpw.mods.fml.common.Optional.Method;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.StatCollector;
+import net.minecraftforge.fluids.FluidStack;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
@@ -28,7 +29,9 @@ public class HUDHandlerReservoir implements IWailaDataProvider {
 		TileEntityReservoir tile = (TileEntityReservoir) te;
 		arg1.add("Capacity: " + tile.getMaxWater());
 		arg1.add("Add: " + tile.getLastAddedWater());
-		arg1.add("Fluid: " + tile.getFluidTank().getFluid().getLocalizedName());
+		if(tile.getFluidTank() == null) return arg1;
+		FluidStack f = tile.getFluidTank().getFluid();
+		arg1.add("Stored Fluid: " + (f == null ? "Empty" : f.getLocalizedName()));
 		arg1.add("Stored: " + tile.getWater());
 		arg1.add("Stored HP: " + tile.getHPWater());
 		return arg1;
@@ -41,7 +44,7 @@ public class HUDHandlerReservoir implements IWailaDataProvider {
 		TileEntity te = arg2.getTileEntity();
 		if(!(te instanceof TileEntityReservoir)) return arg1;
 		TileEntityReservoir tile = (TileEntityReservoir) te;
-		arg1.set(0, tile.type.getShowedName() + " " + StatCollector.translateToLocal("cptwtrml.reservoir.RESERVOIR"));
+		arg1.set(0, tile.type.getShowedName());
 		return arg1;
 	}
 

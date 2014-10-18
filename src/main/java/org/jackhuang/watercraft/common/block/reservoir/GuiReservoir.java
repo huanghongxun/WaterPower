@@ -10,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
+import net.minecraftforge.fluids.FluidStack;
 
 @SideOnly(Side.CLIENT)
 public class GuiReservoir extends GuiContainer {
@@ -40,5 +41,8 @@ public class GuiReservoir extends GuiContainer {
 		fontRendererObj.drawString(StatCollector.translateToLocal("cptwtrml.gui.reservoir.add") + ": " + gen.getLastAddedWater(), 12, 30, 0x404040);
 		fontRendererObj.drawString(StatCollector.translateToLocal("cptwtrml.gui.reservoir.water") + ": " + gen.getWater(), 12, 40, 0x404040);
 		fontRendererObj.drawString(StatCollector.translateToLocal("cptwtrml.gui.reservoir.hpWater") + ": " + gen.getHPWater(), 12, 50, 0x404040);
+		
+		FluidStack f = gen.getFluidTank().getFluid();
+		fontRendererObj.drawString(StatCollector.translateToLocal("cptwtrml.gui.reservoir.fluidtype") + ": " + (f == null ? "Empty" : f.getLocalizedName()), 12, 60, 0x404040);
 	}
 }

@@ -31,7 +31,6 @@ import org.jackhuang.watercraft.common.inventory.InventorySlotConsumableLiquid;
 import org.jackhuang.watercraft.common.inventory.InventorySlotConsumableLiquidByList;
 import org.jackhuang.watercraft.common.inventory.InventorySlotOutput;
 import org.jackhuang.watercraft.common.inventory.InventorySlotUpgrade;
-import org.jackhuang.watercraft.common.network.WCPacket;
 import org.jackhuang.watercraft.common.tileentity.TileEntityMetaMultiBlock;
 import org.jackhuang.watercraft.common.tileentity.TileEntityMultiBlock;
 import org.jackhuang.watercraft.common.tileentity.TileEntityStandardWaterMachine;
@@ -60,8 +59,8 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 	public TileEntityReservoir() {
 		super(0);
 
-		this.fluidSlot = new InventorySlotConsumableLiquidByList(this,
-				"fluidSlot", 1, new Fluid[] { FluidRegistry.WATER });
+		this.fluidSlot = new InventorySlotConsumableLiquid(this,
+				"fluidSlot", 1);
 		this.outputSlot = new InventorySlotOutput(this, "output", 1);
 		this.upgradeSlot = new InventorySlotUpgrade(this, "upgrade", 4);
 
@@ -287,22 +286,14 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 		lastHeight = height;
 		lastWidth = width;
 		lastLength = length;
-		return clientSetMultiBlocks(serverSendMultiBlocks());
+		return clientSetMultiBlocks();
 	}
 
-	@Override
-	public WCPacket serverSendMultiBlocks() {
-		return new WCPacket(1, null, new int[] { xCoord, yCoord,
-				zCoord, lastLength, lastWidth, lastHeight });
-	}
-
-	@Override
-	public ArrayList<TileEntityMultiBlock> clientSetMultiBlocks(
-			WCPacket packet) {
+	public ArrayList<TileEntityMultiBlock> clientSetMultiBlocks() {
 		ArrayList<TileEntityMultiBlock> al = new ArrayList<TileEntityMultiBlock>();
 		ArrayList<TileEntityMultiBlock> tmp = new ArrayList<TileEntityMultiBlock>();
 
-		int length = packet.dataInt[3], width = packet.dataInt[4], height = packet.dataInt[5];
+		int length = lastLength, width = lastWidth, height = lastHeight;
 
 		if (length == -1 || width == -1 || height == -1)
 			return null;
@@ -389,8 +380,9 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 
 		lastAddedWater = (int)(addWater - delWater);
 
-		fluidTank.fill(new FluidStack(FluidRegistry.WATER, (int)addWater
-				* WaterPower.updateTick), true);
+		if((int)addWater * WaterPower.updateTick >= 1)
+			fluidTank.fill(new FluidStack(FluidRegistry.WATER, (int)addWater
+					* WaterPower.updateTick), true);
 		highPotentialEnergyWater += addWater * WaterPower.updateTick;
 		if (highPotentialEnergyWater > getMaxWater())
 			highPotentialEnergyWater = getMaxWater();
@@ -480,7 +472,9 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 		defaultStorage = tag.getInteger("maxWater");
 		extraStorage = tag.getInteger("extraStorage");
 		storage = defaultStorage + extraStorage;
-		setTankAmount(tag.getInteger("water"), FluidRegistry.WATER.getID());
+		setFluidTankCapacity(storage);
+		if(tag.getInteger("fluid") > -1)
+			setTankAmount(tag.getInteger("water"), tag.getInteger("fluid"));
 		type = ReservoirType.values()[tag.getInteger("type")];
 		if(!markedBlockForUpdate) {
 			markedBlockForUpdate = true;
@@ -495,6 +489,10 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 		tag.setInteger("hpWater", getHPWater());
 		tag.setInteger("maxWater", getMaxWater());
 		tag.setInteger("water", getWater());
+		if(getFluidTank() != null && getFluidTank().getFluid() != null)
+			tag.setInteger("fluid", getFluidTank().getFluid().fluidID);
+		else
+			tag.setInteger("fluid", -1);
 		tag.setInteger("extraStorage", extraStorage);
 		if (type == null)
 			tag.setInteger("type", 0);

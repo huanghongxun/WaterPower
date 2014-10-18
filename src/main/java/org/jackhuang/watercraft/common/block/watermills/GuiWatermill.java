@@ -15,7 +15,6 @@ import org.jackhuang.watercraft.client.gui.ContainerRotor;
 import org.jackhuang.watercraft.common.EnergyType;
 import org.jackhuang.watercraft.common.network.MessagePacketHandler;
 import org.jackhuang.watercraft.common.network.PacketUnitChanged;
-import org.jackhuang.watercraft.common.network.WCPacket;
 import org.jackhuang.watercraft.common.tileentity.TileEntityBaseGenerator;
 import org.jackhuang.watercraft.util.WCLog;
 import org.lwjgl.opengl.GL11;

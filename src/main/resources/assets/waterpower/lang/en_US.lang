@@ -48,7 +48,7 @@ cptwtrml.research.industrialDiamond=Nothing...
 cptwtrml.research.reservoirCore=Nothing...
 cptwtrml.research.reservoirCoreAdvanced=Nothing...
 
-# reservoir block
+# reservoir block & rotor
 cptwtrml.reservoir.RESERVOIR=Reservoir block
 cptwtrml.reservoir.WOOD=Wood
 cptwtrml.reservoir.STONE=Stone
@@ -84,6 +84,8 @@ cptwtrml.reservoir.CHROME=Chrome
 cptwtrml.reservoir.TUNGSTEN_STEEL=Tungsten steel
 cptwtrml.reservoir.THAUMIUM=Thaumium
 cptwtrml.reservoir.IRIDIUMIRON=Iridium Iron
+cptwtrml.reservoir.TITANIUM=Titanium
+cptwtrml.reservoir.DIAMOND=Diamond
 
 cptwtrml.reservoir.MAXSOTRE=Max Storage
 cptwtrml.reservoir.MAXUSE=Max using(for turbine)
@@ -115,8 +117,8 @@ cptwtrml.updater.MK4=Updater MK4
 cptwtrml.updater.MK5=Updater MK5
 cptwtrml.updater.MK6=Updater MK6
 cptwtrml.updater.MK7=Updater MK7
-cptwtrml.updater.RESERVOIR_CORE=Reservoir block core
-cptwtrml.updater.RESERVOIR_CORE_ADVANCED=Advanced Reservoir Block Core
+cptwtrml.updater.ReservoirCore=Reservoir block core
+cptwtrml.updater.ReservoirCoreAdvanced=Advanced Reservoir Block Core
 cptwtrml.updater.PlasmaUraniumAlloyPlate=Plasma Uranium Alloy Plate
 cptwtrml.updater.PlasmaUraniumIngot=Plasma Uranium Ingot
 cptwtrml.updater.WaterUraniumAlloyPlate=Water Uranium Alloy Plate
@@ -170,6 +172,14 @@ cptwtrml.watermill.CANNOT_CHECK=Cannot Check
 cptwtrml.watermill.OUTPUT=Output
 cptwtrml.watermill.PRODUCTION=Output Limit
 cptwtmrl.watermill.TROUSERS=Trousers
+cptwtrml.watermill.ROTOR=Rotor
+
+cptwtrml.gui.reservoir.capacity=Capacity
+cptwtrml.gui.reservoir.add=Adds
+cptwtrml.gui.reservoir.water=Amount
+cptwtrml.gui.reservoir.fluidtype=Type
+cptwtrml.gui.reservoir.hpWater=HP Water
+
 cptwtrml.rotor.RANGE=Range
 
 # crafting

@@ -12,7 +12,6 @@ import java.util.ArrayList;
 
 import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.client.gui.IHasGui;
-import org.jackhuang.watercraft.common.network.WCPacket;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidStack;
@@ -50,8 +49,6 @@ public abstract class TileEntityMultiBlock extends TileEntityLiquidTankInventory
 	}
 
 	protected abstract ArrayList<TileEntityMultiBlock> test();
-	public abstract WCPacket serverSendMultiBlocks();
-	public abstract ArrayList<TileEntityMultiBlock> clientSetMultiBlocks(WCPacket packet);
 
 	protected void onUpdate() {
 	}

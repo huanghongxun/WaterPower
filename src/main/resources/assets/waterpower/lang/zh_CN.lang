@@ -176,8 +176,10 @@ cptwtrml.watermill.ROTOR=转子
 
 cptwtrml.gui.reservoir.capacity=容积
 cptwtrml.gui.reservoir.add=增加
-cptwtrml.gui.reservoir.water=水量
+cptwtrml.gui.reservoir.water=液量
+cptwtrml.gui.reservoir.fluidtype=液体
 cptwtrml.gui.reservoir.hpWater=高能水
+
 cptwtrml.rotor.RANGE=范围缩小
 
 # crafting
@@ -239,7 +241,6 @@ cptwtrml.machine.cutter.name=水力切割机
 cptwtrml.ore.monazite=独居石
 cptwtrml.ore.vanadium=钒矿
 cptwtrml.ore.manganese=锰矿
-cptwtrml.ore.nickel=镍矿
 cptwtrml.ore.magnet=磁铁矿
 cptwtrml.ore.zinc=锌矿
 
