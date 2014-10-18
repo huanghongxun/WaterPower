@@ -13,7 +13,6 @@ import java.text.DecimalFormat;
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.client.gui.ContainerRotor;
 import org.jackhuang.watercraft.common.EnergyType;
-import org.jackhuang.watercraft.common.network.FMLPacketDispatcher;
 import org.jackhuang.watercraft.common.network.MessagePacketHandler;
 import org.jackhuang.watercraft.common.network.PacketUnitChanged;
 import org.jackhuang.watercraft.common.network.WCPacket;
