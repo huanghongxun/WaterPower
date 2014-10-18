@@ -18,8 +18,8 @@ buildscript {
 apply plugin: 'forge'
 apply plugin: 'curseforge'
 
-//def buildnumber = System.getenv("BUILD_NUMBER") ?: "0"
-version = "0.3e"
+def buildnumber = System.getenv("BUILD_NUMBER") == null ? "" : "-"+System.getenv("BUILD_NUMBER")
+version = "0.3e"+buildnumber
 group = "org.jackhuang.watercraft" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "WaterPower"
 
