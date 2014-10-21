@@ -119,63 +119,61 @@ public class BlockReservoir extends BlockMeta {
 		addReservoirRecipe(new ItemStack(this, 8, 8), Blocks.iron_block);
 		addReservoirRecipe(new ItemStack(this, 8, 9), Blocks.nether_brick);
 		addReservoirRecipe(new ItemStack(this, 8, 10), Blocks.obsidian);
-		addReservoirRecipe(new ItemStack(this, 8, 12), IC2Items.getItem("machine"));
-		addReservoirRecipe(new ItemStack(this, 8, 13), Blocks.gold_block);
-		addReservoirRecipe(new ItemStack(this, 8, 14),
+		addReservoirRecipe(new ItemStack(this, 8, 11), "blockSilver");
+		addReservoirRecipe(new ItemStack(this, 8, 12), Blocks.gold_block);
+		addReservoirRecipe(new ItemStack(this, 8, 13),
 				IC2Items.getItem("carbonPlate"));
-		addReservoirAdvancedRecipe(new ItemStack(this, 8, 15),
+		addReservoirAdvancedRecipe(new ItemStack(this, 8, 14),
 				IC2Items.getItem("advancedAlloy"));
-		addReservoirAdvancedRecipe(new ItemStack(this, 8, 16),
+		addReservoirAdvancedRecipe(new ItemStack(this, 8, 15),
 				Blocks.emerald_block);
-		addReservoirAdvancedRecipe(new ItemStack(this, 8, 17),
+		addReservoirAdvancedRecipe(new ItemStack(this, 8, 16),
 				Blocks.diamond_block);
-		addReservoirAdvancedRecipe(new ItemStack(this, 8, 18),
+		addReservoirAdvancedRecipe(new ItemStack(this, 8, 17),
 				IC2Items.getItem("iridiumOre"));
-		addReservoirAdvancedRecipe(new ItemStack(this, 8, 19),
+		addReservoirAdvancedRecipe(new ItemStack(this, 8, 18),
 				IC2Items.getItem("iridiumPlate"));
-		/* Silver */addReservoirRecipe(new ItemStack(this, 8, 11),
-				"blockSilver"); // GregTech_API.getGregTechBlock(0, 1, 3));
-		/* Zinc */addReservoirRecipe(new ItemStack(this, 8, 20), "blockZinc"); // GregTech_API.getGregTechBlock(4,
+		/* Zinc */addReservoirRecipe(new ItemStack(this, 8, 19), "blockZinc"); // GregTech_API.getGregTechBlock(4,
 																				// 1,
 																				// 2));
-		/* Brass */addReservoirRecipe(new ItemStack(this, 8, 21), "blockBrass"); // GregTech_API.getGregTechBlock(0,
+		/* Brass */addReservoirRecipe(new ItemStack(this, 8, 20), "blockBrass"); // GregTech_API.getGregTechBlock(0,
 																					// 1,
 																					// 12));
-		/* Aluminum */addReservoirRecipe(new ItemStack(this, 8, 22),
+		/* Aluminum */addReservoirRecipe(new ItemStack(this, 8, 21),
 				"blockAluminum"); // GregTech_API.getGregTechBlock(0, 1,
 									// 7));
-		/* Steel */addReservoirAdvancedRecipe(new ItemStack(this, 8, 23),
+		/* Steel */addReservoirAdvancedRecipe(new ItemStack(this, 8, 22),
 				"blockSteel"); // GregTech_API.getGregTechBlock(0,
 								// 1, 11));
-		/* Invar */addReservoirRecipe(new ItemStack(this, 8, 24), "blockInvar"); // GregTech_API.getGregTechBlock(4,
+		/* Invar */addReservoirRecipe(new ItemStack(this, 8, 23), "blockInvar"); // GregTech_API.getGregTechBlock(4,
 																					// 1,
 																					// 10));
-		/* Electrum */addReservoirRecipe(new ItemStack(this, 8, 25),
+		/* Electrum */addReservoirRecipe(new ItemStack(this, 8, 24),
 				"blockElectrum"); // GregTech_API.getGregTechBlock(4, 1,
 									// 1));
-		/* Nickel */addReservoirRecipe(new ItemStack(this, 8, 26),
+		/* Nickel */addReservoirRecipe(new ItemStack(this, 8, 25),
 				"blockNickel"); // GregTech_API.getGregTechBlock(4, 1, 7));
-		/* Osmium */addReservoirAdvancedRecipe(new ItemStack(this, 8, 27),
+		/* Osmium */addReservoirAdvancedRecipe(new ItemStack(this, 8, 26),
 				"blockOsmium"); // GregTech_API.getGregTechBlock(4,
 								// 1, 11));
-		/* Titanium */addReservoirAdvancedRecipe(new ItemStack(this, 8, 28),
+		/* Titanium */addReservoirAdvancedRecipe(new ItemStack(this, 8, 27),
 				"blockTitanium"); // GregTech_API.getGregTechBlock(0,
 									// 1, 8));
-		/* Platinum */addReservoirAdvancedRecipe(new ItemStack(this, 8, 29),
+		/* Platinum */addReservoirAdvancedRecipe(new ItemStack(this, 8, 28),
 				"blockPlatinum"); // GregTech_API.getGregTechBlock(4,
 									// 1, 5));
-		/* Tungsten */addReservoirAdvancedRecipe(new ItemStack(this, 8, 30),
+		/* Tungsten */addReservoirAdvancedRecipe(new ItemStack(this, 8, 29),
 				"blockTungsten"); // GregTech_API.getGregTechBlock(4,
 									// 1, 6));
-		/* Chrome */addReservoirAdvancedRecipe(new ItemStack(this, 8, 31),
+		/* Chrome */addReservoirAdvancedRecipe(new ItemStack(this, 8, 30),
 				"blockChrome"); // GregTech_API.getGregTechBlock(0,
 								// 1, 9));
 		/* Tungsten Steel */addReservoirAdvancedRecipe(new ItemStack(this, 8,
-				32), "blockTungstenSteel"); // GregTech_API.getGregTechBlock(4,
+				31), "blockTungstenSteel"); // GregTech_API.getGregTechBlock(4,
 											// 1,
 											// 8));
 		if (Mods.Thaumcraft.isAvailable) {
-			addReservoirAdvancedRecipe(new ItemStack(this, 8, 33),
+			addReservoirAdvancedRecipe(new ItemStack(this, 8, 32),
 					ItemApi.getBlock("blockCosmeticSolid", 4));
 		}
 	}
