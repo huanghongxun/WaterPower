@@ -201,7 +201,7 @@ public class WaterPower implements IWorldGenerator {
 	public void generate(Random random, int chunkX, int chunkZ, World world,
 			IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
         int baseHeight = world.provider.getAverageGroundLevel() + 1;
-	    int baseScale = Math.round(baseHeight * Reference.WorldGen.oreDensityFactor);
+	    int baseScale = Math.round(baseHeight * Reference.WorldGen.oreDensityFactor / 20);
         int baseCount = 15 * baseScale / 64;
         
         if(Reference.WorldGen.vanadiumOre)
