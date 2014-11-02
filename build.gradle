@@ -16,12 +16,15 @@ buildscript {
 }
 
 apply plugin: 'forge'
-apply plugin: 'curseforge'
 
 def buildnumber = System.getenv("BUILD_NUMBER") == null ? "" : "-"+System.getenv("BUILD_NUMBER")
 version = "0.3e"+buildnumber
 group = "org.jackhuang.watercraft" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "WaterPower"
+
+/*ic2_version="2.2.628-experimental"
+buildcraft_version="6.0.17"
+gregtech_version="5.05.10"*/
 
 minecraft {
     version = "1.7.10-10.13.0.1208"
@@ -29,19 +32,9 @@ minecraft {
 }
 
 dependencies {
-    // you may put jars on which you depend on in ./libs
-    // or you may define them like so..
-    //compile "some.group:artifact:version:classifier"
-    //compile "some.group:artifact:version"
-      
-    // real examples
-    //compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
-    //compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
-
-    // for more info...
-    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
-    // http://www.gradle.org/docs/current/userguide/dependency_management.html
-
+    /*compile "net.industrial-craft:industrialcraft-2:${config.ic2_version}:api"
+    compile "com.mod-buildcraft:buildcraft:${config.buildcraft_version}:dev"
+    compile "com.gregoriust.gregtech:gregtech_${config.minecraft_version}:${config.gregtech_version}:dev"*/
 }
 
 processResources

@@ -9,7 +9,6 @@ import org.jackhuang.watercraft.common.tileentity.TileEntityStandardWaterMachine
 import org.jackhuang.watercraft.util.StackUtil;
 import org.jackhuang.watercraft.util.mods.Mods;
 
-import gregtech.api.util.GT_Recipe.GT_Recipe_Map;
 import ic2.api.recipe.IRecipeInput;
 import ic2.api.recipe.Recipes;
 import net.minecraft.inventory.Container;

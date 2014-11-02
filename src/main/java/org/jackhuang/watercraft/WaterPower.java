@@ -86,7 +86,8 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-@Mod(modid = Reference.ModID, name = Reference.ModName, version = Reference.Version, dependencies = "required-after:IC2; after:gregtech; after:Thaumcraft;")
+@Mod(modid = Reference.ModID, name = Reference.ModName, version = Reference.Version,
+	dependencies = "required-after:Forge@[10.13.0.1199,); required-after:IC2@[2.2.628,); after:gregtech; after:Thaumcraft@[4.2.0.0,); after:BuildCraftAPI|power[1.1,); after:Forestry; after:craftguide@[1.6.8.2,); after:Waila@[1.5.3,); after:factorization; after:CoFHAPI; after:Mekanism")
 public class WaterPower implements IWorldGenerator {
 
 	@Mod.Instance(Reference.ModID)

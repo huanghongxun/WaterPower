@@ -5,7 +5,6 @@ import org.jackhuang.watercraft.common.inventory.InventorySlotProcessableGeneric
 import org.jackhuang.watercraft.common.tileentity.TileEntityStandardWaterMachine;
 import org.jackhuang.watercraft.util.mods.Mods;
 
-import gregtech.api.util.GT_Recipe.GT_Recipe_Map;
 import ic2.api.recipe.Recipes;
 
 public class TileEntityCutter extends TileEntityStandardWaterMachine {

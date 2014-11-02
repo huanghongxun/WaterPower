@@ -218,7 +218,8 @@ public abstract class TileEntityBaseGenerator extends TileEntityBlock implements
 				((Charge)charge).setValue((int)EnergyType.EU2FZ(lastestOutput));
 			}
 			if (energyType == EnergyType.Water) {
-				if(getFluidTank().getFluid().getFluid().getID() != FluidRegistry.WATER.getID())
+				if(getFluidTank().getFluid() != null && getFluidTank().getFluid().getFluid() != null &&
+						getFluidTank().getFluid().getFluid().getID() != FluidRegistry.WATER.getID())
 					getFluidTank().setFluid(null);
 				getFluidTank().fill(new FluidStack(FluidRegistry.WATER, (int)EnergyType.EU2Water(lastestOutput)), true);
 			}

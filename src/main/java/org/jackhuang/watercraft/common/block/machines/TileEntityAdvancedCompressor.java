@@ -1,10 +1,5 @@
 package org.jackhuang.watercraft.common.block.machines;
 
-import gregtech.api.util.GT_Recipe;
-import gregtech.api.util.GT_Recipe.GT_Recipe_Map;
-import ic2.api.item.IC2Items;
-import ic2.api.recipe.RecipeOutput;
-import ic2.api.recipe.Recipes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
