@@ -39,7 +39,9 @@ public class IndustrialCraftRecipeManager implements IRecipeManager {
 	@Override
 	public MyRecipeOutput getOutput(ItemStack input, boolean adjustInput) {
 		try {
-			return new MyRecipeOutput(((IMachineRecipeManager) containsIC2Recipe).getOutputFor(input, adjustInput).items);
+			RecipeOutput r = ((IMachineRecipeManager) containsIC2Recipe).getOutputFor(input, adjustInput);
+			if(r == null) return null;
+			return new MyRecipeOutput(r.items);
 		} catch(Throwable t) {
 			t.printStackTrace();
 			return null;
