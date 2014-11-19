@@ -31,7 +31,7 @@ public abstract class ItemBase extends Item {
 	public ItemBase(InternalName internalName) {
 		super();
 
-		setCreativeTab(WaterPower.creativeTabWaterCraft);
+		setCreativeTab(WaterPower.creativeTabWaterPower);
 		setNoRepair();
 		
 		GameRegistry.registerItem(this, internalName.name());

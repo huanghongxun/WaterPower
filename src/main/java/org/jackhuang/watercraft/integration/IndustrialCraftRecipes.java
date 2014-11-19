@@ -2,7 +2,7 @@ package org.jackhuang.watercraft.integration;
 
 import ic2.api.recipe.Recipes;
 
-import org.jackhuang.watercraft.util.mods.Mods;
+import org.jackhuang.watercraft.util.Mods;
 
 public class IndustrialCraftRecipes {
 	

@@ -7,8 +7,8 @@ import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.common.item.others.ItemType;
 import org.jackhuang.watercraft.common.recipe.IRecipeRegistrator;
+import org.jackhuang.watercraft.util.Mods;
 import org.jackhuang.watercraft.util.WCLog;
-import org.jackhuang.watercraft.util.mods.Mods;
 
 import thaumcraft.api.ItemApi;
 import cpw.mods.fml.common.registry.GameRegistry;

@@ -25,7 +25,7 @@ import org.jackhuang.watercraft.common.block.BlockMultiID;
 import org.jackhuang.watercraft.common.block.GlobalBlocks;
 import org.jackhuang.watercraft.common.item.others.ItemType;
 import org.jackhuang.watercraft.common.recipe.IRecipeRegistrator;
-import org.jackhuang.watercraft.util.mods.Mods;
+import org.jackhuang.watercraft.util.Mods;
 
 import thaumcraft.api.ItemApi;
 

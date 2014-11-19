@@ -1,4 +1,4 @@
-package org.jackhuang.watercraft.common.block.simple;
+package org.jackhuang.watercraft.common.block.ore;
 
 import java.util.Arrays;
 

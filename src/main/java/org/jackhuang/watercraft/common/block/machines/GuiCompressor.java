@@ -8,7 +8,6 @@ import net.minecraft.util.StatCollector;
 
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.client.gui.ContainerStandardMachine;
-import org.jackhuang.watercraft.client.gui.GuiMachineBase;
 import org.jackhuang.watercraft.common.tileentity.TileEntityStandardWaterMachine;
 
 @SideOnly(Side.CLIENT)

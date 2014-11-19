@@ -8,8 +8,8 @@ import ic2.api.recipe.Recipes;
 
 import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.common.block.GlobalBlocks;
-import org.jackhuang.watercraft.common.block.simple.ItemOreDust;
-import org.jackhuang.watercraft.common.block.simple.OreType;
+import org.jackhuang.watercraft.common.block.ore.ItemOreDust;
+import org.jackhuang.watercraft.common.block.ore.OreType;
 import org.jackhuang.watercraft.common.block.turbines.TurbineType;
 import org.jackhuang.watercraft.common.item.GlobalItems;
 import org.jackhuang.watercraft.common.item.crafting.CraftingTypes;
@@ -19,7 +19,7 @@ import org.jackhuang.watercraft.common.item.crafting.LevelTypes;
 import org.jackhuang.watercraft.common.item.crafting.MaterialForms;
 import org.jackhuang.watercraft.common.item.crafting.MaterialTypes;
 import org.jackhuang.watercraft.common.item.others.ItemType;
-import org.jackhuang.watercraft.util.mods.Mods;
+import org.jackhuang.watercraft.util.Mods;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;

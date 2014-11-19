@@ -37,7 +37,7 @@ import org.jackhuang.watercraft.common.item.others.ItemType;
 import org.jackhuang.watercraft.common.item.range.ItemRange;
 import org.jackhuang.watercraft.common.item.range.PluginType;
 import org.jackhuang.watercraft.common.item.rotors.RotorType;
-import org.jackhuang.watercraft.util.mods.Mods;
+import org.jackhuang.watercraft.util.Mods;
 
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;

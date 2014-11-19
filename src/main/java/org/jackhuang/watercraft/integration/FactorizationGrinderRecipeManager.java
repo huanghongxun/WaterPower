@@ -5,12 +5,15 @@ import net.minecraft.item.ItemStack;
 
 import org.jackhuang.watercraft.common.recipe.IMyRecipeInput;
 import org.jackhuang.watercraft.common.recipe.IRecipeManager;
+import org.jackhuang.watercraft.common.recipe.MyRecipeInputItemStack;
+import org.jackhuang.watercraft.common.recipe.MyRecipeInputOreDictionary;
 import org.jackhuang.watercraft.common.recipe.MyRecipeOutput;
 import org.jackhuang.watercraft.util.StackUtil;
 
+import java.util.HashMap;
 import java.util.Map;
 
-public class FactorizationGrinder implements IRecipeManager {
+public class FactorizationGrinderRecipeManager implements IRecipeManager {
 
     @Override
     public boolean addRecipe(ItemStack input, ItemStack... outputs) {
@@ -32,6 +35,18 @@ public class FactorizationGrinder implements IRecipeManager {
 
     @Override
     public Map<IMyRecipeInput, MyRecipeOutput> getAllRecipes() {
-        return null;
+    	HashMap<IMyRecipeInput, MyRecipeOutput> map = new HashMap<IMyRecipeInput, MyRecipeOutput>();
+        for(TileEntityGrinder.GrinderRecipe recipe : TileEntityGrinder.recipes) {
+        	Object o = recipe.getOreDictionaryInput();
+        	IMyRecipeInput input;
+        	if(o instanceof String)
+        		input = new MyRecipeInputOreDictionary((String)o);
+        	else if(o instanceof ItemStack)
+        		input = new MyRecipeInputItemStack((ItemStack)o);
+        	else input = null;
+        	if(input != null)
+        		map.put(input, new MyRecipeOutput(recipe.output));
+        }
+        return map;
     }
 }

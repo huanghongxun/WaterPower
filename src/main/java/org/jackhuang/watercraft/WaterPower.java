@@ -26,11 +26,11 @@ import org.jackhuang.watercraft.common.CommonProxy;
 import org.jackhuang.watercraft.common.block.BlockBase;
 import org.jackhuang.watercraft.common.block.GlobalBlocks;
 import org.jackhuang.watercraft.common.block.machines.BlockMachines;
+import org.jackhuang.watercraft.common.block.ore.BlockOre;
+import org.jackhuang.watercraft.common.block.ore.ItemOreDust;
 import org.jackhuang.watercraft.common.block.reservoir.BlockReservoir;
 import org.jackhuang.watercraft.common.block.reservoir.ReservoirType;
 import org.jackhuang.watercraft.common.block.reservoir.TileEntityReservoir;
-import org.jackhuang.watercraft.common.block.simple.BlockOre;
-import org.jackhuang.watercraft.common.block.simple.ItemOreDust;
 import org.jackhuang.watercraft.common.block.turbines.BlockTurbine;
 import org.jackhuang.watercraft.common.block.turbines.TileEntityTurbine;
 import org.jackhuang.watercraft.common.block.watermills.BlockWatermill;
@@ -96,8 +96,8 @@ public class WaterPower implements IWorldGenerator {
 	@SidedProxy(clientSide = "org.jackhuang.watercraft.client.ClientProxy", serverSide = "org.jackhuang.watercraft.common.CommonProxy")
 	public static CommonProxy proxy;
 
-	public static final CreativeTabs creativeTabWaterCraft = new CreativeTabWaterCraft(
-			"creativeTabWatercraft");
+	public static final CreativeTabs creativeTabWaterPower = new CreativeTabWaterCraft(
+			"creativeTabWaterPower");
 
 	public static final int updateTick = 20;
 

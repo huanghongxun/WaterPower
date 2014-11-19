@@ -11,8 +11,8 @@ import org.jackhuang.watercraft.common.inventory.InventorySlotProcessableGeneric
 import org.jackhuang.watercraft.common.recipe.MultiRecipeManager;
 import org.jackhuang.watercraft.common.recipe.MyRecipes;
 import org.jackhuang.watercraft.common.tileentity.TileEntityStandardWaterMachine;
+import org.jackhuang.watercraft.util.Mods;
 import org.jackhuang.watercraft.util.StackUtil;
-import org.jackhuang.watercraft.util.mods.Mods;
 
 public class TileEntityAdvancedCompressor extends TileEntityStandardWaterMachine {
 

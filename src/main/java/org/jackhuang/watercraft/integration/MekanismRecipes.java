@@ -2,7 +2,7 @@ package org.jackhuang.watercraft.integration;
 
 import java.util.HashMap;
 
-import org.jackhuang.watercraft.util.mods.Mods;
+import org.jackhuang.watercraft.util.Mods;
 
 import cpw.mods.fml.common.FMLLog;
 import net.minecraft.item.ItemStack;

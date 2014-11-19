@@ -8,7 +8,7 @@
 
 package org.jackhuang.watercraft.common.item;
 
-import org.jackhuang.watercraft.common.block.simple.ItemOreDust;
+import org.jackhuang.watercraft.common.block.ore.ItemOreDust;
 import org.jackhuang.watercraft.common.item.crafting.ItemCrafting;
 import org.jackhuang.watercraft.common.item.crafting.ItemMaterial;
 import org.jackhuang.watercraft.common.item.others.ItemTrouser;

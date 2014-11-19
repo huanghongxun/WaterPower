@@ -2,7 +2,7 @@ package org.jackhuang.watercraft.common.block.watermills;
 
 import java.util.List;
 
-import org.jackhuang.watercraft.util.mods.Mods;
+import org.jackhuang.watercraft.util.Mods;
 
 import cpw.mods.fml.common.Optional.Interface;
 import cpw.mods.fml.common.Optional.InterfaceList;

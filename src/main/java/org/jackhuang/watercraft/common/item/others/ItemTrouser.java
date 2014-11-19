@@ -41,7 +41,7 @@ public class ItemTrouser extends ItemArmor
 		super(EnumHelper.addArmorMaterial("CPTWTRMLPANT", 1, new int[] { 1, 1, 1, 1 }, 1), 0, 2);
 
 		setUnlocalizedName(type.getTrousersUnlocalizedName());
-		setCreativeTab(WaterPower.creativeTabWaterCraft);
+		setCreativeTab(WaterPower.creativeTabWaterPower);
 		setHasSubtypes(true);
 		
 		GameRegistry.registerItem(this, type.getTrousersUnlocalizedName());

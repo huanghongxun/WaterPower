@@ -7,7 +7,7 @@ import org.jackhuang.watercraft.common.recipe.MyRecipes;
 import org.jackhuang.watercraft.common.tileentity.TileEntityStandardWaterMachine;
 import org.jackhuang.watercraft.integration.IndustrialCraftRecipeManager;
 import org.jackhuang.watercraft.integration.IndustrialCraftRecipes;
-import org.jackhuang.watercraft.util.mods.Mods;
+import org.jackhuang.watercraft.util.Mods;
 
 public class TileEntityCutter extends TileEntityStandardWaterMachine {
 

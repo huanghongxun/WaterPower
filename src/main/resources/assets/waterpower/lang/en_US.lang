@@ -1,4 +1,4 @@
-itemGroup.creativeTabWatercraft=Advanced Watermills
+itemGroup.creativeTabWaterPower=Advanced Watermills
 
 # tcIntegration
 tc.research_category.AdvancedWatermills=Advanced Watermills
@@ -229,7 +229,7 @@ cptwtrml.material.Vanadium=Vanadium
 cptwtrml.material.Steel=Steel
 
 # machines
-cptwtrml.machine.macerator.name=Water-power Macerator
+cptwtrml.machine.macerator.name=Water-power Crusher
 cptwtrml.machine.compressor.name=Water-power Compressor
 cptwtrml.machine.sawmill.name=Water-power Sawmill
 cptwtrml.machine.advancedCompressor.name=Water-power Advanced Compressor

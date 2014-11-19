@@ -18,7 +18,7 @@ import org.jackhuang.watercraft.common.item.others.ItemType;
 import org.jackhuang.watercraft.common.recipe.IRecipeRegistrator;
 import org.jackhuang.watercraft.common.recipe.MyRecipeInputItemStack;
 import org.jackhuang.watercraft.common.recipe.RecipeAdder;
-import org.jackhuang.watercraft.util.mods.Mods;
+import org.jackhuang.watercraft.util.Mods;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.creativetab.CreativeTabs;

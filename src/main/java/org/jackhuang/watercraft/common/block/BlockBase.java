@@ -50,7 +50,7 @@ public abstract class BlockBase extends BlockContainer {
 		super(material);
 
 		setBlockName(internalName.name());
-		setCreativeTab(WaterPower.creativeTabWaterCraft);
+		setCreativeTab(WaterPower.creativeTabWaterPower);
 		setHardness(3.0f);
 
 		this.internalName = internalName;

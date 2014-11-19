@@ -6,7 +6,6 @@ import net.minecraft.util.StatCollector;
 
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.client.gui.ContainerStandardMachine;
-import org.jackhuang.watercraft.client.gui.GuiMachineBase;
 import org.jackhuang.watercraft.common.tileentity.TileEntityStandardWaterMachine;
 
 import cpw.mods.fml.relauncher.Side;

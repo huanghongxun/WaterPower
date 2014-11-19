@@ -33,7 +33,7 @@ public class ItemRotor extends Item {
 		this.type = type;
 		setMaxDamage(type.maxDamage);
 		setUnlocalizedName(type.unlocalizedName);
-		setCreativeTab(WaterPower.creativeTabWaterCraft);
+		setCreativeTab(WaterPower.creativeTabWaterPower);
 		setMaxStackSize(1);
 		setNoRepair();
 	}

@@ -7,8 +7,8 @@ import org.jackhuang.watercraft.common.recipe.MyRecipeManager;
 import org.jackhuang.watercraft.common.recipe.MyRecipeOutput;
 import org.jackhuang.watercraft.common.recipe.MyRecipes;
 import org.jackhuang.watercraft.common.tileentity.TileEntityStandardWaterMachine;
+import org.jackhuang.watercraft.util.Mods;
 import org.jackhuang.watercraft.util.StackUtil;
-import org.jackhuang.watercraft.util.mods.Mods;
 
 import ic2.api.recipe.IRecipeInput;
 import ic2.api.recipe.Recipes;

@@ -6,12 +6,13 @@
  * http://www.mod-buildcraft.com/MMPL-1.0.txt
  */
 
-package org.jackhuang.watercraft.client.gui;
+package org.jackhuang.watercraft.common.block.machines;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 
+import org.jackhuang.watercraft.client.gui.ContainerStandardMachine;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
@@ -38,7 +39,7 @@ public abstract class GuiMachineBase extends GuiContainer {
 		this.fontRendererObj
 				.drawString(this.inv, 8, this.ySize - 96 + 2, 0x404040);
 
-		this.fontRendererObj.drawString("Saved(mb): "
+		this.fontRendererObj.drawString("Stored(mb): "
 				+ this.container.tileEntity.water, 8, this.ySize - 105 + 2,
 				0x404040);
 		

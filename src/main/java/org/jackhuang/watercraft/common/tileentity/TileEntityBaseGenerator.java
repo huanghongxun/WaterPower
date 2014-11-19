@@ -14,7 +14,7 @@ import java.util.Random;
 import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.client.gui.IHasGui;
 import org.jackhuang.watercraft.common.EnergyType;
-import org.jackhuang.watercraft.util.mods.Mods;
+import org.jackhuang.watercraft.util.Mods;
 
 import cofh.api.energy.IEnergyConnection;
 import cofh.api.energy.IEnergyHandler;

@@ -1,4 +1,4 @@
-package org.jackhuang.watercraft.util.mods;
+package org.jackhuang.watercraft.util;
 
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.ModAPIManager;

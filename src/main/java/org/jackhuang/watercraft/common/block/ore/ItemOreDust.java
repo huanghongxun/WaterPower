@@ -1,4 +1,4 @@
-package org.jackhuang.watercraft.common.block.simple;
+package org.jackhuang.watercraft.common.block.ore;
 
 import ic2.api.recipe.RecipeInputItemStack;
 import ic2.api.recipe.Recipes;
