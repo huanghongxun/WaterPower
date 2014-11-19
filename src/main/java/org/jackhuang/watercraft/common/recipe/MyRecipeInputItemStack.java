@@ -6,7 +6,7 @@ import java.util.List;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class MyRecipeInputItemStack implements IRecipeInput {
+public class MyRecipeInputItemStack implements IMyRecipeInput {
 	public MyRecipeInputItemStack(ItemStack aInput) {
 		this(aInput, aInput.stackSize);
 	}

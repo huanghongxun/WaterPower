@@ -41,8 +41,8 @@ public class HashMapRecipeManager implements IRecipeManager {
 	}
 
 	@Override
-	public Map<IRecipeInput, MyRecipeOutput> getAllRecipes() {
-		HashMap<IRecipeInput, MyRecipeOutput> map = new HashMap<IRecipeInput, MyRecipeOutput>();
+	public Map<IMyRecipeInput, MyRecipeOutput> getAllRecipes() {
+		HashMap<IMyRecipeInput, MyRecipeOutput> map = new HashMap<IMyRecipeInput, MyRecipeOutput>();
 		for(Map.Entry<ItemStack, ItemStack> entry : recipes.entrySet())
 			map.put(new MyRecipeInputItemStack(entry.getKey()), new MyRecipeOutput(entry.getValue()));
 		return map;

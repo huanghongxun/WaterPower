@@ -4,7 +4,7 @@ import java.util.List;
 
 import net.minecraft.item.ItemStack;
 
-public interface IRecipeInput {
+public interface IMyRecipeInput {
 	boolean matches(ItemStack input);
 	
 	int getInputAmount();

@@ -5,6 +5,8 @@ import org.jackhuang.watercraft.common.inventory.InventorySlotProcessableGeneric
 import org.jackhuang.watercraft.common.recipe.MultiRecipeManager;
 import org.jackhuang.watercraft.common.recipe.MyRecipes;
 import org.jackhuang.watercraft.common.tileentity.TileEntityStandardWaterMachine;
+import org.jackhuang.watercraft.integration.IndustrialCraftRecipeManager;
+import org.jackhuang.watercraft.integration.IndustrialCraftRecipes;
 import org.jackhuang.watercraft.util.mods.Mods;
 
 public class TileEntityCutter extends TileEntityStandardWaterMachine {
@@ -21,7 +23,7 @@ public class TileEntityCutter extends TileEntityStandardWaterMachine {
 	}
 	
 	public static void init() {
-		MyRecipes.cutter = new MultiRecipeManager();
+		MyRecipes.cutter = new MultiRecipeManager().addRecipeManager(IndustrialCraftRecipes.IS_INDUSTRIAL_CRAFT_RECIPES_AVAILABLE, new IndustrialCraftRecipeManager(IndustrialCraftRecipes.cutter));
 	}
 
 	public String getInventoryName() {

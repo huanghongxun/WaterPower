@@ -10,6 +10,6 @@ public interface IRecipeManager {
 	
 	MyRecipeOutput getOutput(ItemStack input, boolean adjustInput);
 	
-	Map<IRecipeInput, MyRecipeOutput> getAllRecipes();
+	Map<IMyRecipeInput, MyRecipeOutput> getAllRecipes();
 
 }

@@ -3,7 +3,7 @@ package org.jackhuang.watercraft.integration;
 import factorization.oreprocessing.TileEntityGrinder;
 import net.minecraft.item.ItemStack;
 
-import org.jackhuang.watercraft.common.recipe.IRecipeInput;
+import org.jackhuang.watercraft.common.recipe.IMyRecipeInput;
 import org.jackhuang.watercraft.common.recipe.IRecipeManager;
 import org.jackhuang.watercraft.common.recipe.MyRecipeOutput;
 import org.jackhuang.watercraft.util.StackUtil;
@@ -31,7 +31,7 @@ public class FactorizationGrinder implements IRecipeManager {
     }
 
     @Override
-    public Map<IRecipeInput, MyRecipeOutput> getAllRecipes() {
+    public Map<IMyRecipeInput, MyRecipeOutput> getAllRecipes() {
         return null;
     }
 }

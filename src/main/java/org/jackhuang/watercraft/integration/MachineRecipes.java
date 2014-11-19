@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.jackhuang.watercraft.common.block.GlobalBlocks;
-import org.jackhuang.watercraft.common.recipe.IRecipeInput;
+import org.jackhuang.watercraft.common.recipe.IMyRecipeInput;
 import org.jackhuang.watercraft.common.recipe.IRecipeManager;
 import org.jackhuang.watercraft.common.recipe.MyRecipeOutput;
 import org.jackhuang.watercraft.common.recipe.MyRecipes;
@@ -78,7 +78,7 @@ public class MachineRecipes extends CraftGuideAPIObject implements
 
 		for (Map.Entry recipe : recipeManager.getAllRecipes().entrySet()) {
 			Object[] recipeContents = new Object[maxOutput + 3];
-			recipeContents[0] = ((IRecipeInput) recipe.getKey()).getInputs();
+			recipeContents[0] = ((IMyRecipeInput) recipe.getKey()).getInputs();
 			recipeContents[1] = machine;
 			recipeContents[2] = null;
 			List output = ((MyRecipeOutput) recipe.getValue()).items;

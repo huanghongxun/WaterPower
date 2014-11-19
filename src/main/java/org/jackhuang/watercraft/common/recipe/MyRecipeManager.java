@@ -13,7 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class MyRecipeManager implements IRecipeManager {
-	private final Map<IRecipeInput, MyRecipeOutput> recipes = new HashMap();
+	private final Map<IMyRecipeInput, MyRecipeOutput> recipes = new HashMap();
 	private ArrayList<HashMap<ItemStack, ItemStack>> singleOutputRecipes = new ArrayList();
 
 	@Override
@@ -29,7 +29,7 @@ public class MyRecipeManager implements IRecipeManager {
 					+ " is null (counting from 0)");
 		}
 
-		for (IRecipeInput existingInput : this.recipes.keySet())
+		for (IMyRecipeInput existingInput : this.recipes.keySet())
 			if (existingInput.matches(input))
 				return false;
 		this.recipes.put(new MyRecipeInputItemStack(input), new MyRecipeOutput(outputs));
@@ -42,7 +42,7 @@ public class MyRecipeManager implements IRecipeManager {
 			return null;
 
 		for (Map.Entry entry : this.recipes.entrySet()) {
-			IRecipeInput recipeInput = (IRecipeInput) entry.getKey();
+			IMyRecipeInput recipeInput = (IMyRecipeInput) entry.getKey();
 
 			if (recipeInput.matches(input)) {
 				if ((input.stackSize < recipeInput.getInputAmount())
@@ -69,7 +69,7 @@ public class MyRecipeManager implements IRecipeManager {
 	}
 
 	@Override
-	public Map<IRecipeInput, MyRecipeOutput> getAllRecipes() {
+	public Map<IMyRecipeInput, MyRecipeOutput> getAllRecipes() {
 		return this.recipes;
 	}
 	

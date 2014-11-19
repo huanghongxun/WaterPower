@@ -31,7 +31,7 @@ public class MultiRecipeManager implements IRecipeManager {
 	}
 
 	@Override
-	public Map<IRecipeInput, MyRecipeOutput> getAllRecipes() {
+	public Map<IMyRecipeInput, MyRecipeOutput> getAllRecipes() {
 		HashMap map = new HashMap();
 		for(IRecipeManager r : container) {
 			map.putAll(r.getAllRecipes());

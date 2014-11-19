@@ -7,6 +7,8 @@ import org.jackhuang.watercraft.common.recipe.MultiRecipeManager;
 import org.jackhuang.watercraft.common.recipe.MyRecipeManager;
 import org.jackhuang.watercraft.common.recipe.MyRecipes;
 import org.jackhuang.watercraft.common.tileentity.TileEntityStandardWaterMachine;
+import org.jackhuang.watercraft.integration.IndustrialCraftRecipeManager;
+import org.jackhuang.watercraft.integration.IndustrialCraftRecipes;
 import org.jackhuang.watercraft.integration.MekanismRecipes;
 import org.jackhuang.watercraft.util.mods.Mods;
 
@@ -22,7 +24,8 @@ public class TileEntityMacerator extends TileEntityStandardWaterMachine {
 	}
 	
 	public static void init() {
-		MyRecipes.macerator = new MultiRecipeManager().addRecipeManager(Mods.Mekanism.isAvailable, new HashMapRecipeManager(MekanismRecipes.crusher));
+		MyRecipes.macerator = new MultiRecipeManager().addRecipeManager(MekanismRecipes.IS_MEKANISM_RECIPES_AVAILABLE, new HashMapRecipeManager(MekanismRecipes.crusher))
+				.addRecipeManager(IndustrialCraftRecipes.IS_INDUSTRIAL_CRAFT_RECIPES_AVAILABLE, new IndustrialCraftRecipeManager(IndustrialCraftRecipes.macerator));
 	}
 
 	@Override
