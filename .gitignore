@@ -6,6 +6,11 @@ build/
 .project
 .classpath
 
+#idea
+Forge 1208.iml
+Forge 1208.ipr
+Forge 1208.iws
+
 .settings/
 bin/
 eclipse/

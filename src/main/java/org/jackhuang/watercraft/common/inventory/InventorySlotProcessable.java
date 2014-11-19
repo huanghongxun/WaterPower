@@ -1,6 +1,6 @@
 package org.jackhuang.watercraft.common.inventory;
 
-import org.jackhuang.watercraft.api.MyRecipeOutput;
+import org.jackhuang.watercraft.common.recipe.MyRecipeOutput;
 import org.jackhuang.watercraft.common.tileentity.TileEntityInventory;
 
 import ic2.api.recipe.RecipeOutput;

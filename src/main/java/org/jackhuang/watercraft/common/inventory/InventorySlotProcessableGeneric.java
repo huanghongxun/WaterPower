@@ -1,22 +1,20 @@
 package org.jackhuang.watercraft.common.inventory;
 
-import ic2.api.recipe.IMachineRecipeManager;
-import ic2.api.recipe.RecipeOutput;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jackhuang.watercraft.api.MyRecipeOutput;
+import org.jackhuang.watercraft.common.recipe.IRecipeManager;
+import org.jackhuang.watercraft.common.recipe.MyRecipeOutput;
 import org.jackhuang.watercraft.common.tileentity.TileEntityInventory;
 
 import net.minecraft.item.ItemStack;
 
 public class InventorySlotProcessableGeneric extends InventorySlotProcessable {
-	public IMachineRecipeManager recipeManager;
+	public IRecipeManager recipeManager;
 
 	public InventorySlotProcessableGeneric(TileEntityInventory base,
 			String name, int count,
-			IMachineRecipeManager recipeManager) {
+			IRecipeManager recipeManager) {
 		super(base, name,  count);
 
 		this.recipeManager = recipeManager;
@@ -26,7 +24,7 @@ public class InventorySlotProcessableGeneric extends InventorySlotProcessable {
 		ItemStack tmp = itemStack.copy();
 		tmp.stackSize = 2147483647;
 
-		return getOutputFor(tmp, false, true) != null;
+		return getOutput(tmp, false, true) != null;
 	}
 
 	public MyRecipeOutput process() {
@@ -34,7 +32,7 @@ public class InventorySlotProcessableGeneric extends InventorySlotProcessable {
 		if ((input == null) && (!allowEmptyInput()))
 			return null;
 
-		RecipeOutput output = getOutputFor(input, false, false);
+		MyRecipeOutput output = getOutput(input, false, false);
 		if (output == null)
 			return null;
 
@@ -52,7 +50,7 @@ public class InventorySlotProcessableGeneric extends InventorySlotProcessable {
 		if ((input == null) && (!allowEmptyInput()))
 			throw new IllegalStateException("consume from empty slot");
 
-		RecipeOutput output = getOutputFor(input, true, false);
+		MyRecipeOutput output = getOutput(input, true, false);
 		if (output == null)
 			throw new IllegalStateException(
 					"consume without a processing result");
@@ -61,19 +59,19 @@ public class InventorySlotProcessableGeneric extends InventorySlotProcessable {
 			put(null);
 	}
 
-	public void setRecipeManager(IMachineRecipeManager recipeManager) {
+	public void setRecipeManager(IRecipeManager recipeManager) {
 		this.recipeManager = recipeManager;
 	}
 
-	protected RecipeOutput getOutputFor(ItemStack input, boolean adjustInput,
+	protected MyRecipeOutput getOutput(ItemStack input, boolean adjustInput,
 			boolean forAccept) {
-		return this.recipeManager.getOutputFor(input, adjustInput);
+		return this.recipeManager.getOutput(input, adjustInput);
 	}
 	
-	public RecipeOutput getRecipeOutput() {
+	public MyRecipeOutput getRecipeOutput() {
 		ItemStack input = get();
 		if(input == null) return null;
-		return getOutputFor(input, false, false);
+		return getOutput(input, false, false);
 	}
 
 	protected boolean allowEmptyInput() {

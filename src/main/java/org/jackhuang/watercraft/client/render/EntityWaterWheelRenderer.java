@@ -81,6 +81,8 @@ public class EntityWaterWheelRenderer extends Render {
 
 		GL11.glRotatef(wheel.parent.getWheelAngle(), 0.0F, rotationAngle[0],
 				rotationAngle[1]);
+		
+		this.model.initPlankWithLength(wheel.parent.getRange());
 
 		GL11.glTranslatef(0.0F, 0.0F, 0.0F);
 		for (int i = 0; i < 360; i += 45) {

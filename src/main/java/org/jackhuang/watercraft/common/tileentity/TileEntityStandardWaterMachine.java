@@ -6,11 +6,11 @@ import ic2.api.recipe.RecipeOutput;
 
 import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.api.IUpgrade;
-import org.jackhuang.watercraft.api.MyRecipeOutput;
 import org.jackhuang.watercraft.client.gui.IHasGui;
 import org.jackhuang.watercraft.common.inventory.InventorySlotOutput;
 import org.jackhuang.watercraft.common.inventory.InventorySlotProcessable;
 import org.jackhuang.watercraft.common.inventory.InventorySlotUpgrade;
+import org.jackhuang.watercraft.common.recipe.MyRecipeOutput;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

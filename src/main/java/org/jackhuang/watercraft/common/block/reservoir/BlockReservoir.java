@@ -24,7 +24,7 @@ import org.jackhuang.watercraft.common.block.BlockMeta;
 import org.jackhuang.watercraft.common.block.BlockMultiID;
 import org.jackhuang.watercraft.common.block.GlobalBlocks;
 import org.jackhuang.watercraft.common.item.others.ItemType;
-import org.jackhuang.watercraft.common.recipe.IRecipeHandler;
+import org.jackhuang.watercraft.common.recipe.IRecipeRegistrator;
 import org.jackhuang.watercraft.util.mods.Mods;
 
 import thaumcraft.api.ItemApi;
@@ -179,12 +179,12 @@ public class BlockReservoir extends BlockMeta {
 	}
 
 	void addReservoirRecipe(ItemStack output, Object S) {
-		IRecipeHandler.addRecipeByOreDictionary(output, "SSS", "SIS", "SSS",
+		IRecipeRegistrator.addRecipeByOreDictionary(output, "SSS", "SIS", "SSS",
 				'S', S, 'I', ItemType.ReservoirCore.item());
 	}
 
 	void addReservoirAdvancedRecipe(ItemStack output, Object S) {
-		IRecipeHandler.addRecipeByOreDictionary(output, "SSS", "SIS", "SSS",
+		IRecipeRegistrator.addRecipeByOreDictionary(output, "SSS", "SIS", "SSS",
 				'S', S, 'I', ItemType.ReservoirCoreAdvanced.item());
 	}
 

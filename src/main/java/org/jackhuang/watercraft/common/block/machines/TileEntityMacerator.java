@@ -2,12 +2,14 @@ package org.jackhuang.watercraft.common.block.machines;
 
 import org.jackhuang.watercraft.client.gui.DefaultGuiIds;
 import org.jackhuang.watercraft.common.inventory.InventorySlotProcessableGeneric;
+import org.jackhuang.watercraft.common.recipe.HashMapRecipeManager;
+import org.jackhuang.watercraft.common.recipe.MultiRecipeManager;
+import org.jackhuang.watercraft.common.recipe.MyRecipeManager;
+import org.jackhuang.watercraft.common.recipe.MyRecipes;
 import org.jackhuang.watercraft.common.tileentity.TileEntityStandardWaterMachine;
+import org.jackhuang.watercraft.integration.MekanismRecipes;
+import org.jackhuang.watercraft.util.mods.Mods;
 
-import ic2.api.recipe.IRecipeInput;
-import ic2.api.recipe.RecipeInputItemStack;
-import ic2.api.recipe.RecipeInputOreDict;
-import ic2.api.recipe.Recipes;
 import net.minecraft.item.ItemStack;
 
 public class TileEntityMacerator extends TileEntityStandardWaterMachine {
@@ -16,7 +18,11 @@ public class TileEntityMacerator extends TileEntityStandardWaterMachine {
 		super(80, 10*20);
 
 		this.inputSlot = new InventorySlotProcessableGeneric(this, "input",
-				1, Recipes.macerator);
+				1, MyRecipes.macerator);
+	}
+	
+	public static void init() {
+		MyRecipes.macerator = new MultiRecipeManager().addRecipeManager(Mods.Mekanism.isAvailable, new HashMapRecipeManager(MekanismRecipes.crusher));
 	}
 
 	@Override

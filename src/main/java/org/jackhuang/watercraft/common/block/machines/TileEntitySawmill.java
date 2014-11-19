@@ -2,17 +2,14 @@ package org.jackhuang.watercraft.common.block.machines;
 
 import java.util.ArrayList;
 
-import org.jackhuang.watercraft.api.BasicMachineRecipeManager;
-import org.jackhuang.watercraft.api.MyRecipes;
 import org.jackhuang.watercraft.client.gui.DefaultGuiIds;
 import org.jackhuang.watercraft.common.inventory.InventorySlotProcessableGeneric;
+import org.jackhuang.watercraft.common.recipe.MyRecipeInputItemStack;
+import org.jackhuang.watercraft.common.recipe.MyRecipeManager;
+import org.jackhuang.watercraft.common.recipe.MyRecipes;
 import org.jackhuang.watercraft.common.tileentity.TileEntityStandardWaterMachine;
 import org.jackhuang.watercraft.util.StackUtil;
 
-import ic2.api.recipe.IRecipeInput;
-import ic2.api.recipe.RecipeInputItemStack;
-import ic2.api.recipe.RecipeInputOreDict;
-import ic2.api.recipe.Recipes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.InventoryCrafting;
@@ -29,11 +26,11 @@ public class TileEntitySawmill extends TileEntityStandardWaterMachine {
 		super(80, 10 * 20);
 
 		this.inputSlot = new InventorySlotProcessableGeneric(this, "input", 1,
-				MyRecipes.sawmill_gt);
+				MyRecipes.sawmill);
 	}
 
 	public static void init() {
-		MyRecipes.sawmill_gt = new BasicMachineRecipeManager();
+		MyRecipes.sawmill = new MyRecipeManager();
 
 		addAllLogs();
 	}
@@ -42,7 +39,6 @@ public class TileEntitySawmill extends TileEntityStandardWaterMachine {
 		Container tempContainer = new Container() {
 			@Override
 			public boolean canInteractWith(EntityPlayer entityplayer) {
-				// TODO Auto-generated method stub
 				return false;
 			}
 		};
@@ -70,8 +66,7 @@ public class TileEntitySawmill extends TileEntityStandardWaterMachine {
 						ItemStack result = resultEntry.copy();
 						ItemStack tmp144_142 = result;
 						tmp144_142.stackSize = (int) (tmp144_142.stackSize * 1.5F);
-						MyRecipes.sawmill_gt.addRecipe(
-								new RecipeInputItemStack(log), null, result);
+						MyRecipes.sawmill.addRecipe(log, result);
 					}
 				}
 			} else {
@@ -83,8 +78,7 @@ public class TileEntitySawmill extends TileEntityStandardWaterMachine {
 					ItemStack result = resultEntry.copy();
 					ItemStack tmp216_214 = result;
 					tmp216_214.stackSize = (int) (tmp216_214.stackSize * 1.5F);
-					MyRecipes.sawmill_gt.addRecipe(
-							new RecipeInputItemStack(log), null, result);
+					MyRecipes.sawmill.addRecipe(log, result);
 				}
 			}
 		}

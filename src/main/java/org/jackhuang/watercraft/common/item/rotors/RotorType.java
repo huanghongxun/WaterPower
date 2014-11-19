@@ -6,7 +6,7 @@ import org.apache.logging.log4j.Level;
 import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.common.item.others.ItemType;
-import org.jackhuang.watercraft.common.recipe.IRecipeHandler;
+import org.jackhuang.watercraft.common.recipe.IRecipeRegistrator;
 import org.jackhuang.watercraft.util.WCLog;
 import org.jackhuang.watercraft.util.mods.Mods;
 
@@ -211,7 +211,7 @@ public enum RotorType {
 
 	static void addRotorRecipe(RotorType output, Object S, Object I) {
 		if (output.enable) {
-				IRecipeHandler.addRecipeByOreDictionary(new ItemStack(output.getItem()),
+				IRecipeRegistrator.addRecipeByOreDictionary(new ItemStack(output.getItem()),
 						"S S", " I ", "S S", 'S', S, 'I', I);
 		}
 	}

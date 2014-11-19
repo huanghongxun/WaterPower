@@ -26,7 +26,7 @@ import org.jackhuang.watercraft.common.block.watermills.GuiWatermill;
 import org.jackhuang.watercraft.common.block.watermills.TileEntityWatermill;
 import org.jackhuang.watercraft.common.entity.EntityWaterWheel;
 import org.jackhuang.watercraft.common.item.GlobalItems;
-import org.jackhuang.watercraft.integration.waila.WailaModule;
+import org.jackhuang.watercraft.integration.WailaModule;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;

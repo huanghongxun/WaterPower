@@ -11,8 +11,8 @@ import net.minecraft.client.model.ModelRenderer;
 @SideOnly(Side.CLIENT)
 public class ModelWaterWheel extends ModelBase {
 	public ModelRenderer trunk;
-	public ModelRenderer plank[];
-	public static final int length = 10;
+	public ModelRenderer plank;
+	private int plankPreviousLength = -1;
 
 	public ModelWaterWheel() {
 		this.trunk = new ModelRenderer(this, 0, 0);
@@ -23,22 +23,26 @@ public class ModelWaterWheel extends ModelBase {
 		this.trunk.addBox(0.0F, 0.0F, -1.0F, 1, 12, 1);
 		this.trunk.addBox(-1.0F, 0.0F, -1.0F, 1, 12, 1);
 
-		this.plank = new ModelRenderer[WaterType.values().length];
+		/*this.plank = new ModelRenderer[WaterType.values().length];
 		for (int i = 0; i < plank.length; i++) {
-			this.plank[i] = new ModelRenderer(this, 0, 0);
-			this.plank[i].addBox(-1.0F, 0.0F, 1.0F, 2, 10,
-					WaterType.values()[i].length * 6);
-			this.plank[i].setRotationPoint(0.0F, 0.0F, 0.0F);
-		}
+		}*/
+	}
+	
+	public void initPlankWithLength(int length) {
+		if(length == plankPreviousLength) return;
+		this.plank = new ModelRenderer(this, 0, 0);
+		this.plank.addBox(-1.0F, 0.0F, 1.0F, 2, 10,
+				length * 6);
+		this.plank.setRotationPoint(0.0F, 0.0F, 0.0F);
 	}
 
 	public void render(float f) {
 		this.trunk.render(f);
-		this.plank[0].render(f);
+		this.plank.render(f);
 	}
 
 	public void renderPlank(float f, WaterType type) {
-		this.plank[type.ordinal()].render(f);
+		this.plank.render(f);
 	}
 
 	public void renderTrunk(float f) {

@@ -18,6 +18,7 @@ public class Mods {
 		public static final String CoFHAPIEnergy = "CoFHAPI|energy";
 		public static final String GregTech = "gregtech";
 		public static final String Waila = "Waila";
+		public static final String Mekanism = "Mekanism";
 	}
 
 	public static final SimpleMod Factorization = new SimpleMod(IDs.Factorization);
@@ -27,6 +28,7 @@ public class Mods {
 	public static final SimpleMod Thaumcraft = new SimpleMod(IDs.Thaumcraft);
 	public static final SimpleMod GregTech = new SimpleMod(IDs.GregTech);
 	public static final SimpleMod Waila = new SimpleMod(IDs.Waila);
+	public static final SimpleMod Mekanism = new SimpleMod(IDs.Mekanism);
 
 	public static class SimpleMod {
 		public String id;

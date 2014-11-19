@@ -1,6 +1,6 @@
 package org.jackhuang.watercraft.common.block.simple;
 
-import org.jackhuang.watercraft.common.recipe.IRecipeHandler;
+import org.jackhuang.watercraft.common.recipe.IRecipeRegistrator;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
@@ -34,7 +34,7 @@ public class ItemOre extends ItemBlock {
 	
 	public void registerOreDict() {
 		for(int i=0;i<OreType.values().length;i++) {
-			IRecipeHandler.registerOreDict(OreType.values()[i].name(), new ItemStack(this, 1, OreType.values()[i].ordinal()));
+			IRecipeRegistrator.registerOreDict(OreType.values()[i].name(), new ItemStack(this, 1, OreType.values()[i].ordinal()));
 		}
 	}
 

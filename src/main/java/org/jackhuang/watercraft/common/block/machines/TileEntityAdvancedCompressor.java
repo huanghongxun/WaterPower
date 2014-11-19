@@ -6,10 +6,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 
 import org.jackhuang.watercraft.WaterPower;
-import org.jackhuang.watercraft.api.BasicMachineRecipeManager;
-import org.jackhuang.watercraft.api.MyRecipes;
 import org.jackhuang.watercraft.client.gui.DefaultGuiIds;
 import org.jackhuang.watercraft.common.inventory.InventorySlotProcessableGeneric;
+import org.jackhuang.watercraft.common.recipe.MultiRecipeManager;
+import org.jackhuang.watercraft.common.recipe.MyRecipes;
 import org.jackhuang.watercraft.common.tileentity.TileEntityStandardWaterMachine;
 import org.jackhuang.watercraft.util.StackUtil;
 import org.jackhuang.watercraft.util.mods.Mods;
@@ -25,11 +25,11 @@ public class TileEntityAdvancedCompressor extends TileEntityStandardWaterMachine
 		}
 		else*/
 			this.inputSlot = new InventorySlotProcessableGeneric(this, "input",
-					1, MyRecipes.implosion_gt);
+					1, MyRecipes.implosion);
 	}
 	
 	public static void init() {
-		MyRecipes.implosion_gt = new BasicMachineRecipeManager();
+		MyRecipes.implosion = new MultiRecipeManager();
 	}
 
 	@Override

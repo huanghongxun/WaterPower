@@ -23,7 +23,7 @@ import org.jackhuang.watercraft.client.render.IIconContainer;
 import org.jackhuang.watercraft.client.render.RecolorableTextures;
 import org.jackhuang.watercraft.common.item.ItemBase;
 import org.jackhuang.watercraft.common.item.ItemRecolorable;
-import org.jackhuang.watercraft.common.recipe.IRecipeHandler;
+import org.jackhuang.watercraft.common.recipe.IRecipeRegistrator;
 
 public class ItemCrafting extends ItemRecolorable {
 	

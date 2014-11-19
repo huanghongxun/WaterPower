@@ -2,10 +2,10 @@ package org.jackhuang.watercraft.common.block.machines;
 
 import org.jackhuang.watercraft.client.gui.DefaultGuiIds;
 import org.jackhuang.watercraft.common.inventory.InventorySlotProcessableGeneric;
+import org.jackhuang.watercraft.common.recipe.MultiRecipeManager;
+import org.jackhuang.watercraft.common.recipe.MyRecipes;
 import org.jackhuang.watercraft.common.tileentity.TileEntityStandardWaterMachine;
 import org.jackhuang.watercraft.util.mods.Mods;
-
-import ic2.api.recipe.Recipes;
 
 public class TileEntityCutter extends TileEntityStandardWaterMachine {
 
@@ -17,7 +17,11 @@ public class TileEntityCutter extends TileEntityStandardWaterMachine {
 					1, Recipes.matterAmplifier, GT_Recipe_Map.sCutterRecipes);
 		else*/
 			this.inputSlot = new InventorySlotProcessableGeneric(this, "input",
-					1, Recipes.matterAmplifier);
+					1, MyRecipes.cutter);
+	}
+	
+	public static void init() {
+		MyRecipes.cutter = new MultiRecipeManager();
 	}
 
 	public String getInventoryName() {

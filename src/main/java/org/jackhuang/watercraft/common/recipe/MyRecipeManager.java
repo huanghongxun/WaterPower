@@ -1,0 +1,81 @@
+package org.jackhuang.watercraft.common.recipe;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+
+public class MyRecipeManager implements IRecipeManager {
+	private final Map<IRecipeInput, MyRecipeOutput> recipes = new HashMap();
+	private ArrayList<HashMap<ItemStack, ItemStack>> singleOutputRecipes = new ArrayList();
+
+	@Override
+	public boolean addRecipe(ItemStack input,
+			ItemStack... outputs) {
+		if (input == null)
+			throw new NullPointerException("The recipe input is null");
+
+		for (int i = 0; i < outputs.length; i++) {
+			if (outputs[i] != null)
+				continue;
+			throw new NullPointerException("The output ItemStack #" + i
+					+ " is null (counting from 0)");
+		}
+
+		for (IRecipeInput existingInput : this.recipes.keySet())
+			if (existingInput.matches(input))
+				return false;
+		this.recipes.put(new MyRecipeInputItemStack(input), new MyRecipeOutput(outputs));
+		return true;
+	}
+
+	@Override
+	public MyRecipeOutput getOutput(ItemStack input, boolean adjustInput) {
+		if (input == null)
+			return null;
+
+		for (Map.Entry entry : this.recipes.entrySet()) {
+			IRecipeInput recipeInput = (IRecipeInput) entry.getKey();
+
+			if (recipeInput.matches(input)) {
+				if ((input.stackSize < recipeInput.getInputAmount())
+						|| ((input.getItem().hasContainerItem()) && (input.stackSize != recipeInput
+								.getInputAmount())))
+					break;
+				if (adjustInput) {
+					if (input.getItem().hasContainerItem()) {
+						ItemStack container = input.getItem()
+								.getContainerItem(input);
+						
+						input = container.copy();
+					} else {
+						input.stackSize -= recipeInput.getInputAmount();
+					}
+				}
+
+				return (MyRecipeOutput) entry.getValue();
+			}
+
+		}
+
+		return null;
+	}
+
+	@Override
+	public Map<IRecipeInput, MyRecipeOutput> getAllRecipes() {
+		return this.recipes;
+	}
+	
+	public void registerSingleOutputRecipes(HashMap map) {
+		if(map == null) return;
+		this.singleOutputRecipes.add(map);
+	}
+}
+

@@ -43,8 +43,10 @@ public class BlockMachines extends BlockMultiID {
 
 		GameRegistry.registerTileEntity(TileEntityMacerator.class,
 				"cptwtrml.machine.macerator");
+		TileEntityMacerator.init();
 		GameRegistry.registerTileEntity(TileEntityCompressor.class,
 				"cptwtrml.machine.compressor");
+		TileEntityCompressor.init();
 		GameRegistry.registerTileEntity(TileEntitySawmill.class,
 				"cptwtrml.machine.sawmill");
 		TileEntitySawmill.init();
@@ -59,6 +61,7 @@ public class BlockMachines extends BlockMultiID {
 		TileEntityLathe.init();
 		GameRegistry.registerTileEntity(TileEntityCutter.class,
 				"cptwtrml.machine.cutter");
+		TileEntityCutter.init();
 	}
 
 	@Override
