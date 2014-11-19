@@ -1,7 +1,5 @@
 package org.jackhuang.watercraft.common.recipe;
 
-import ic2.api.recipe.RecipeOutput;
-
 import java.util.Arrays;
 import java.util.List;
 
