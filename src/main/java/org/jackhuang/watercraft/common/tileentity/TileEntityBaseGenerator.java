@@ -21,12 +21,6 @@ import cofh.api.energy.IEnergyHandler;
 import cpw.mods.fml.common.Optional.Interface;
 import cpw.mods.fml.common.Optional.InterfaceList;
 import cpw.mods.fml.common.Optional.Method;
-import buildcraft.api.mj.IBatteryObject;
-import buildcraft.api.mj.MjAPI;
-import buildcraft.api.power.IPowerEmitter;
-import buildcraft.api.power.IPowerReceptor;
-import buildcraft.api.power.PowerHandler;
-import buildcraft.api.power.PowerHandler.PowerReceiver;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -42,11 +36,11 @@ import net.minecraftforge.fluids.IFluidHandler;
 	@Interface(iface = "ic2.api.energy.tile.IKineticSource",  modid = Mods.IDs.IndustrialCraft2API, striprefs = true),
 	@Interface(iface = "ic2.api.energy.tile.IHeatSource",  modid = Mods.IDs.IndustrialCraft2API, striprefs = true),
 	@Interface(iface = "cofh.api.energy.IEnergyConnection", modid = Mods.IDs.CoFHAPIEnergy),
-	@Interface(iface = "buildcraft.api.power.IPowerEmitter", modid = Mods.IDs.BuildCraftPower),
+	//@Interface(iface = "buildcraft.api.power.IPowerEmitter", modid = Mods.IDs.BuildCraftPower),
 	@Interface(iface = "factorization.api.IChargeConductor", modid = Mods.IDs.Factorization)
 })
 public abstract class TileEntityBaseGenerator extends TileEntityBlock implements
-		IEnergySource, IHasGui, IKineticSource, IUnitChangeable, IPowerEmitter,
+		IEnergySource, IHasGui, IKineticSource, IUnitChangeable, //IPowerEmitter,
 		IEnergyConnection, IChargeConductor, IFluidHandler, IHeatSource {
 	public static Random random = new Random();
 
@@ -209,11 +203,11 @@ public abstract class TileEntityBaseGenerator extends TileEntityBlock implements
 				storage -= j;
 				storage += EnergyType.RF2EU(transmitEnergy((int)EnergyType.EU2RF(j)));
 			}
-			if (energyType == EnergyType.MJ && Mods.BuildCraftPower.isAvailable) {
+			/*if (energyType == EnergyType.MJ && Mods.BuildCraftPower.isAvailable) {
 				storage += lastestOutput;
 				for(ForgeDirection d : ForgeDirection.values())
 					sendPower(d);
-			}
+			}*/
 			if (energyType == EnergyType.FZ && Mods.Factorization.isAvailable) {
 				((Charge)charge).setValue((int)EnergyType.EU2FZ(lastestOutput));
 			}
@@ -317,74 +311,13 @@ public abstract class TileEntityBaseGenerator extends TileEntityBlock implements
 	public void setUnitId(int id) {
 		energyType = EnergyType.values()[id];
 	}
-
-	@Override
+	
+	/*
 	@Method(modid = "BuildCraftAPI|power")
 	public boolean canEmitPowerFrom(ForgeDirection side) {
 		return true;
 	}
-
-	@Override
-	@Method(modid = "CoFHAPI|energy")
-	public boolean canConnectEnergy(ForgeDirection paramForgeDirection) {
-		return true;
-	}
-
-	private Object[] handlerCache;
-
-	@Method(modid = "CoFHAPI|energy")
-	protected final int transmitEnergy(int paramInt) {
-		int i;
-		if (this.handlerCache != null) {
-			for (i = this.handlerCache.length; i-- > 0;) {
-				IEnergyHandler localIEnergyHandler = (IEnergyHandler)this.handlerCache[i];
-				if (localIEnergyHandler == null) {
-					continue;
-				}
-				ForgeDirection localForgeDirection = ForgeDirection.VALID_DIRECTIONS[i];
-				if (localIEnergyHandler.receiveEnergy(localForgeDirection,
-						paramInt, true) > 0)
-					paramInt -= localIEnergyHandler.receiveEnergy(
-							localForgeDirection, paramInt, false);
-				if (paramInt <= 0)
-					return 0;
-			}
-		}
-		return paramInt;
-	}
-
-	@Method(modid = "CoFHAPI|energy")
-	private void reCache() {
-		if (this.deadCache) {
-			for (ForgeDirection localForgeDirection : ForgeDirection.VALID_DIRECTIONS) {
-				onNeighborTileChange(this.xCoord + localForgeDirection.offsetX,
-						this.yCoord + localForgeDirection.offsetY, this.zCoord
-								+ localForgeDirection.offsetZ);
-			}
-			this.deadCache = false;
-		}
-	}
-
-	@Override
-	@Method(modid = "CoFHAPI|energy")
-	public void onNeighborTileChange(int paramInt1, int paramInt2, int paramInt3) {
-		TileEntity localTileEntity = this.worldObj.getTileEntity(paramInt1,
-				paramInt2, paramInt3);
-
-		if (paramInt1 < this.xCoord)
-			addCache(localTileEntity, 5);
-		else if (paramInt1 > this.xCoord)
-			addCache(localTileEntity, 4);
-		else if (paramInt3 < this.yCoord)
-			addCache(localTileEntity, 3);
-		else if (paramInt3 > this.yCoord)
-			addCache(localTileEntity, 2);
-		else if (paramInt2 < this.zCoord)
-			addCache(localTileEntity, 1);
-		else if (paramInt2 > this.zCoord)
-			addCache(localTileEntity, 0);
-	}
-
+	
 	@Method(modid = "BuildCraftAPI|power")
 	public boolean isPoweredTile(TileEntity tile, ForgeDirection side, ForgeDirection orientation) {
 		if (tile == null) {
@@ -480,7 +413,69 @@ public abstract class TileEntityBaseGenerator extends TileEntityBlock implements
 			}
 		}
 	}
+*/
 
+	@Override
+	@Method(modid = "CoFHAPI|energy")
+	public boolean canConnectEnergy(ForgeDirection paramForgeDirection) {
+		return true;
+	}
+
+	private Object[] handlerCache;
+
+	@Method(modid = "CoFHAPI|energy")
+	protected final int transmitEnergy(int paramInt) {
+		int i;
+		if (this.handlerCache != null) {
+			for (i = this.handlerCache.length; i-- > 0;) {
+				IEnergyHandler localIEnergyHandler = (IEnergyHandler)this.handlerCache[i];
+				if (localIEnergyHandler == null) {
+					continue;
+				}
+				ForgeDirection localForgeDirection = ForgeDirection.VALID_DIRECTIONS[i];
+				if (localIEnergyHandler.receiveEnergy(localForgeDirection,
+						paramInt, true) > 0)
+					paramInt -= localIEnergyHandler.receiveEnergy(
+							localForgeDirection, paramInt, false);
+				if (paramInt <= 0)
+					return 0;
+			}
+		}
+		return paramInt;
+	}
+
+	@Method(modid = "CoFHAPI|energy")
+	private void reCache() {
+		if (this.deadCache) {
+			for (ForgeDirection localForgeDirection : ForgeDirection.VALID_DIRECTIONS) {
+				onNeighborTileChange(this.xCoord + localForgeDirection.offsetX,
+						this.yCoord + localForgeDirection.offsetY, this.zCoord
+								+ localForgeDirection.offsetZ);
+			}
+			this.deadCache = false;
+		}
+	}
+
+	@Override
+	@Method(modid = "CoFHAPI|energy")
+	public void onNeighborTileChange(int paramInt1, int paramInt2, int paramInt3) {
+		TileEntity localTileEntity = this.worldObj.getTileEntity(paramInt1,
+				paramInt2, paramInt3);
+
+		if (paramInt1 < this.xCoord)
+			addCache(localTileEntity, 5);
+		else if (paramInt1 > this.xCoord)
+			addCache(localTileEntity, 4);
+		else if (paramInt3 < this.yCoord)
+			addCache(localTileEntity, 3);
+		else if (paramInt3 > this.yCoord)
+			addCache(localTileEntity, 2);
+		else if (paramInt2 < this.zCoord)
+			addCache(localTileEntity, 1);
+		else if (paramInt2 > this.zCoord)
+			addCache(localTileEntity, 0);
+	}
+	
 	@Method(modid = "CoFHAPI|energy")
 	private void addCache(TileEntity paramTileEntity, int paramInt) {
 		if (this.handlerCache != null) {
