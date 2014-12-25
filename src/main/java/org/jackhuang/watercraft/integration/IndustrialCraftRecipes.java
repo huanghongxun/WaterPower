@@ -22,7 +22,7 @@ public class IndustrialCraftRecipes {
 		try {
 			macerator = Recipes.macerator;
 			compressor = Recipes.compressor;
-			cutter = Recipes.matterAmplifier;
+			cutter = Recipes.blockcutter;
 			IS_INDUSTRIAL_CRAFT_RECIPES_AVAILABLE = true;
 		} catch(Throwable t) {
 			t.printStackTrace();

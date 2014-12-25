@@ -44,7 +44,7 @@ public class MultiRecipeManager implements IRecipeManager {
 		for(IRecipeManager r : container) {
 			map.putAll(r.getAllRecipes());
 		}
-		return null;
+		return map;
 	}
 	
 	public MultiRecipeManager addRecipeManager(IRecipeManager rm) {

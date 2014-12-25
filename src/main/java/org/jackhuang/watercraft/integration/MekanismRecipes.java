@@ -17,7 +17,7 @@ import net.minecraft.item.ItemStack;
 
 public class MekanismRecipes {
 	public static boolean IS_MEKANISM_RECIPES_AVAILABLE = false;
-	public static HashMap<ItemStack, ItemStack> compressor = null, crusher;
+	public static HashMap compressor = null, crusher = null;
 	
 	static {
 		if(Mods.Mekanism.isAvailable) {

@@ -9,6 +9,8 @@
 package org.jackhuang.watercraft.integration;
 
 import factorization.oreprocessing.TileEntityGrinder;
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
 import org.jackhuang.watercraft.common.recipe.IMyRecipeInput;
@@ -25,6 +27,7 @@ public class FactorizationGrinderRecipeManager implements IRecipeManager {
 
     @Override
     public boolean addRecipe(ItemStack input, ItemStack... outputs) {
+    	if(Block.getBlockFromItem(input.getItem()) == Blocks.air) return false;
         TileEntityGrinder.addRecipe(input, outputs[0], 1);
         return false;
     }

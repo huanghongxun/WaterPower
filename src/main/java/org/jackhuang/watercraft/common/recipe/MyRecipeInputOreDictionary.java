@@ -10,6 +10,7 @@ package org.jackhuang.watercraft.common.recipe;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -48,6 +49,40 @@ public class MyRecipeInputOreDictionary implements IMyRecipeInput {
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + amount;
+		result = prime * result + ((input == null) ? 0 : input.hashCode());
+		result = prime * result + ((meta == null) ? 0 : meta.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		MyRecipeInputOreDictionary other = (MyRecipeInputOreDictionary) obj;
+		if (amount != other.amount)
+			return false;
+		if (input == null) {
+			if (other.input != null)
+				return false;
+		} else if (!input.equals(other.input))
+			return false;
+		if (meta == null) {
+			if (other.meta != null)
+				return false;
+		} else if (!meta.equals(other.meta))
+			return false;
+		return true;
 	}
 
 	@Override

@@ -105,13 +105,6 @@ public class NormalRecipeRegistrator extends EasyRecipeRegistrator {
 				ItemCrafting.get(CraftingTypes.rotor, LevelTypes.MK1), "CCC",
 				"CAC", "CCC", 'C', IC2Items.getItem("copperCableItem"), 'A',
 				"dustMagnet");
-		Recipes.compressor.addRecipe(new RecipeInputOreDict("dustMagnet"),
-				null,
-				ItemMaterial.get(MaterialTypes.Magnet, MaterialForms.nugget));
-		Recipes.compressor.addRecipe(new RecipeInputOreDict("nuggetMagnet", 9),
-				null,
-				ItemMaterial.get(MaterialTypes.Magnet, MaterialForms.ingot));
-		// this.addSmelting(Items.getItem(""), output);
 
 		// MK3
 		addWatermillRecipe(2, LevelTypes.MK3);

@@ -23,7 +23,7 @@ public class TileEntityLathe extends TileEntityStandardWaterMachine {
 	}
 
 	public String getInventoryName() {
-		return "Lathe";
+		return "Water-Powered Lathe";
 	}
 
 	public float getWrenchDropRate() {

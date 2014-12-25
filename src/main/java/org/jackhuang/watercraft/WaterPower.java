@@ -50,6 +50,8 @@ import org.jackhuang.watercraft.common.network.MessagePacketHandler;
 import org.jackhuang.watercraft.common.recipe.EasyRecipeRegistrator;
 import org.jackhuang.watercraft.common.recipe.IRecipeRegistrator;
 import org.jackhuang.watercraft.common.recipe.NormalRecipeRegistrator;
+import org.jackhuang.watercraft.integration.CraftGuideIntegration;
+import org.jackhuang.watercraft.util.Mods;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -87,7 +89,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(modid = Reference.ModID, name = Reference.ModName, version = Reference.Version,
-	dependencies = "required-after:Forge@[10.13.0.1199,); required-after:IC2@[2.2.628,); after:gregtech; after:Thaumcraft@[4.2.0.0,); after:BuildCraftAPI|power[1.1,); after:Forestry; after:craftguide@[1.6.8.2,); after:Waila@[1.5.3,); after:factorization; after:CoFHAPI; after:Mekanism")
+	dependencies = "required-after:Forge@[10.13.0.1199,); required-after:IC2@[2.2.628,); after:gregtech; after:Thaumcraft@[4.2.0.0,); after:BuildCraftAPI|power[1.1,); after:Forestry; after:craftguide; after:Waila@[1.5.3,); after:factorization; after:CoFHAPI; after:Mekanism")
 public class WaterPower implements IWorldGenerator {
 
 	@Mod.Instance(Reference.ModID)
@@ -140,6 +142,10 @@ public class WaterPower implements IWorldGenerator {
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
 
 		config.save();
+		
+		if(Mods.CraftGuide.isAvailable) {
+			new CraftGuideIntegration();
+		}
 	}
 	
 	@EventHandler

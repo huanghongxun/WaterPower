@@ -16,6 +16,12 @@ import org.jackhuang.watercraft.client.gui.IHasGui;
 import org.jackhuang.watercraft.common.EnergyType;
 import org.jackhuang.watercraft.util.Mods;
 
+import buildcraft.api.mj.IBatteryObject;
+import buildcraft.api.mj.MjAPI;
+import buildcraft.api.power.IPowerEmitter;
+import buildcraft.api.power.IPowerReceptor;
+import buildcraft.api.power.PowerHandler;
+import buildcraft.api.power.PowerHandler.PowerReceiver;
 import cofh.api.energy.IEnergyConnection;
 import cofh.api.energy.IEnergyHandler;
 import cpw.mods.fml.common.Optional.Interface;
@@ -36,11 +42,11 @@ import net.minecraftforge.fluids.IFluidHandler;
 	@Interface(iface = "ic2.api.energy.tile.IKineticSource",  modid = Mods.IDs.IndustrialCraft2API, striprefs = true),
 	@Interface(iface = "ic2.api.energy.tile.IHeatSource",  modid = Mods.IDs.IndustrialCraft2API, striprefs = true),
 	@Interface(iface = "cofh.api.energy.IEnergyConnection", modid = Mods.IDs.CoFHAPIEnergy),
-	//@Interface(iface = "buildcraft.api.power.IPowerEmitter", modid = Mods.IDs.BuildCraftPower),
+	@Interface(iface = "buildcraft.api.power.IPowerEmitter", modid = Mods.IDs.BuildCraftPower),
 	@Interface(iface = "factorization.api.IChargeConductor", modid = Mods.IDs.Factorization)
 })
 public abstract class TileEntityBaseGenerator extends TileEntityBlock implements
-		IEnergySource, IHasGui, IKineticSource, IUnitChangeable, //IPowerEmitter,
+		IEnergySource, IHasGui, IKineticSource, IUnitChangeable, IPowerEmitter,
 		IEnergyConnection, IChargeConductor, IFluidHandler, IHeatSource {
 	public static Random random = new Random();
 
@@ -203,11 +209,11 @@ public abstract class TileEntityBaseGenerator extends TileEntityBlock implements
 				storage -= j;
 				storage += EnergyType.RF2EU(transmitEnergy((int)EnergyType.EU2RF(j)));
 			}
-			/*if (energyType == EnergyType.MJ && Mods.BuildCraftPower.isAvailable) {
+			if (energyType == EnergyType.MJ && Mods.BuildCraftPower.isAvailable) {
 				storage += lastestOutput;
 				for(ForgeDirection d : ForgeDirection.values())
 					sendPower(d);
-			}*/
+			}
 			if (energyType == EnergyType.FZ && Mods.Factorization.isAvailable) {
 				((Charge)charge).setValue((int)EnergyType.EU2FZ(lastestOutput));
 			}
@@ -312,7 +318,7 @@ public abstract class TileEntityBaseGenerator extends TileEntityBlock implements
 		energyType = EnergyType.values()[id];
 	}
 	
-	/*
+	
 	@Method(modid = "BuildCraftAPI|power")
 	public boolean canEmitPowerFrom(ForgeDirection side) {
 		return true;
@@ -413,7 +419,7 @@ public abstract class TileEntityBaseGenerator extends TileEntityBlock implements
 			}
 		}
 	}
-*/
+
 
 	@Override
 	@Method(modid = "CoFHAPI|energy")

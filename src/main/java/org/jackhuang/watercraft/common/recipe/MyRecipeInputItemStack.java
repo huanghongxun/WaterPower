@@ -33,4 +33,32 @@ public class MyRecipeInputItemStack implements IMyRecipeInput {
 
 	public final ItemStack input;
 	public final int amount;
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + amount;
+		result = prime * result + ((input == null) ? 0 : input.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		MyRecipeInputItemStack other = (MyRecipeInputItemStack) obj;
+		if (amount != other.amount)
+			return false;
+		if (input == null) {
+			if (other.input != null)
+				return false;
+		} else if (!input.equals(other.input))
+			return false;
+		return true;
+	}
 }

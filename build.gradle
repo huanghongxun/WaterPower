@@ -17,24 +17,29 @@ buildscript {
 
 apply plugin: 'forge'
 
-def buildnumber = System.getenv("BUILD_NUMBER") == null ? "" : "-"+System.getenv("BUILD_NUMBER")
-version = "1.7.10-0.3g"+buildnumber
-group = "org.jackhuang.watercraft" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "WaterPower"
-
-/*ic2_version="2.2.628-experimental"
-buildcraft_version="6.0.17"
-gregtech_version="5.05.10"*/
+version = "1.0"
+group= "com.yourname.modid" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "modid"
 
 minecraft {
-    version = "1.7.10-10.13.0.1208"
-    assetDir = "eclipse/assets"
+    version = "1.7.10-10.13.2.1272"
+    runDir = "eclipse"
 }
 
 dependencies {
-    /*compile "net.industrial-craft:industrialcraft-2:${config.ic2_version}:api"
-    compile "com.mod-buildcraft:buildcraft:${config.buildcraft_version}:dev"
-    compile "com.gregoriust.gregtech:gregtech_${config.minecraft_version}:${config.gregtech_version}:dev"*/
+    // you may put jars on which you depend on in ./libs
+    // or you may define them like so..
+    //compile "some.group:artifact:version:classifier"
+    //compile "some.group:artifact:version"
+      
+    // real examples
+    //compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
+    //compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
+
+    // for more info...
+    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
+    // http://www.gradle.org/docs/current/userguide/dependency_management.html
+
 }
 
 processResources
@@ -56,32 +61,3 @@ processResources
         exclude 'mcmod.info'
     }
 }
-
-task sourceJar(type: Jar) {
-    from sourceSets.main.allSource
-    classifier = "sources"
-}
-
-task deobfJar(type: Jar) {
-    from sourceSets.main.output
-    classifier = "dev"
-}
-
-build.dependsOn sourceJar, deobfJar
-
-artifacts {
-    archives sourceJar
-    archives deobfJar
-}
-
-/*
-
-uploadArchives {
-    dependsOn 'reobf'
-
-    repositories {
-        mavenDeployer {
-            repository(url: uri(''))
-        }
-    }
-}*/

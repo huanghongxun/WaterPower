@@ -112,31 +112,43 @@ public class ItemMaterial extends ItemRecolorable {
 		}
 		
 		for(MaterialTypes types : MaterialTypes.values()) {
-			GameRegistry.addShapedRecipe(get(types, MaterialForms.dust),
+			GameRegistry.addShapedRecipe(get(types, MaterialForms.dust), // 4 small dusts -> 1 dust
 					"AA", "AA", 'A', get(types, MaterialForms.dustSmall));
-			GameRegistry.addShapedRecipe(get(types, MaterialForms.dustSmall, 4),
+			
+			GameRegistry.addShapedRecipe(get(types, MaterialForms.dustSmall, 4), // 1 dust -> 4 small dusts
 					"A", 'A', get(types, MaterialForms.dust));
-			GameRegistry.addShapedRecipe(get(types, MaterialForms.dust),
+			
+			GameRegistry.addShapedRecipe(get(types, MaterialForms.dust), // 9 tiny dusts -> 1 dust
 					"AAA", "AAA", "AAA", 'A', get(types, MaterialForms.dustTiny));
-			GameRegistry.addShapedRecipe(get(types, MaterialForms.dustTiny, 9),
+			
+			GameRegistry.addShapedRecipe(get(types, MaterialForms.dustTiny, 9), // 1 dust -> 9 tiny dust
 					"A", 'A', get(types, MaterialForms.dust));
-			GameRegistry.addShapedRecipe(get(types, MaterialForms.block),
+			
+			GameRegistry.addShapedRecipe(get(types, MaterialForms.block), // 9 ingots -> 1 block 
 					"AAA", "AAA", "AAA", 'A', get(types, MaterialForms.ingot));
-			GameRegistry.addShapedRecipe(get(types, MaterialForms.ingot),
+			RecipeAdder.compressor(get(types, MaterialForms.ingot, 9), get(types, MaterialForms.block));
+			
+			GameRegistry.addShapedRecipe(get(types, MaterialForms.ingot), // 9 nuggets -> 1 ingot
 					"AAA", "AAA", "AAA", 'A', get(types, MaterialForms.nugget));
-			GameRegistry.addShapedRecipe(get(types, MaterialForms.nugget, 9),
+			RecipeAdder.compressor(get(types, MaterialForms.nugget, 9), get(types, MaterialForms.ingot));
+			
+			GameRegistry.addShapedRecipe(get(types, MaterialForms.nugget, 9), // 1 ingot -> 9 nuggets
 					"A", 'A', get(types, MaterialForms.ingot));
-			GameRegistry.addShapedRecipe(get(types, MaterialForms.stick, 2),
+			
+			GameRegistry.addShapedRecipe(get(types, MaterialForms.stick, 2), // 2 ingots -> 2 stick
 					"A", "A", 'A', get(types, MaterialForms.ingot));
-			GameRegistry.addShapedRecipe(get(types, MaterialForms.gear), 
+			
+			GameRegistry.addShapedRecipe(get(types, MaterialForms.gear), // some sticks & plates -> 1 gear
 					"SPS", "P P", "SPS", 'S', get(types, MaterialForms.stick),
 					'P', get(types, MaterialForms.plate));
-			GameRegistry.addShapedRecipe(get(types, MaterialForms.ring),
+			
+			GameRegistry.addShapedRecipe(get(types, MaterialForms.ring), // 4 sticks -> 1 ring
 					" S ", "S S", " S ", 'S', get(types, MaterialForms.stick));
-			ItemStack aItemStack = get(types, MaterialForms.dust);
-			FurnaceRecipes.smelting().func_151394_a(aItemStack, get(types, MaterialForms.ingot), 0);
-			aItemStack = get(types, MaterialForms.dustTiny);
-			FurnaceRecipes.smelting().func_151394_a(aItemStack, get(types, MaterialForms.nugget), 0);
+			
+			ItemStack dust = get(types, MaterialForms.dust);
+			FurnaceRecipes.smelting().func_151394_a(dust, get(types, MaterialForms.ingot), 0);
+			dust = get(types, MaterialForms.dustTiny);
+			FurnaceRecipes.smelting().func_151394_a(dust, get(types, MaterialForms.nugget), 0);
 
 			RecipeAdder.bender(get(types, MaterialForms.ingot),get(types, MaterialForms.plate));
 			RecipeAdder.bender(get(types, MaterialForms.plate, 9), get(types, MaterialForms.plateDense));
