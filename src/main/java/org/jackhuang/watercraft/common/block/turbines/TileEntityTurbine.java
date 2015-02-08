@@ -9,7 +9,7 @@ import org.jackhuang.watercraft.common.item.rotors.ItemRotor;
 import org.jackhuang.watercraft.common.item.rotors.RotorInventorySlot;
 import org.jackhuang.watercraft.common.tileentity.TileEntityBaseGenerator;
 import org.jackhuang.watercraft.common.tileentity.TileEntityElectricMetaBlock;
-import org.jackhuang.watercraft.util.WCLog;
+import org.jackhuang.watercraft.util.WPLog;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -114,23 +114,23 @@ public class TileEntityTurbine extends TileEntityElectricMetaBlock {
 		if (pair == null)
 			return 0;
 		else {
-			WCLog.debugLog("water=" + pair.getWater());
-			WCLog.debugLog("maxuse=" + pair.type.maxUse);
+			WPLog.debugLog("water=" + pair.getWater());
+			WPLog.debugLog("maxuse=" + pair.type.maxUse);
 			double use = Math.min(pair.getWater(), pair.type.maxUse);
-			WCLog.debugLog("use=" + use);
+			WPLog.debugLog("use=" + use);
 			double baseEnergy = use * type.percent / 2048;
-			WCLog.debugLog("baseEnergy" + baseEnergy);
-			WCLog.debugLog("speed" + speed);
+			WPLog.debugLog("baseEnergy" + baseEnergy);
+			WPLog.debugLog("speed" + speed);
 			double per = tickRotor();
-			WCLog.debugLog("per=" + per);
+			WPLog.debugLog("per=" + per);
 			if (per > 0) {
 				double energy = baseEnergy * per; // * ((double) speed / 50);
-				WCLog.debugLog("energy = " + energy);
+				WPLog.debugLog("energy = " + energy);
 				if (energy > 0) {
 					pair.useWater((int) use);
 					damageRotor(1);
 				}
-				WCLog.debugLog("use=" + use);
+				WPLog.debugLog("use=" + use);
 				return energy;
 			}
 		}

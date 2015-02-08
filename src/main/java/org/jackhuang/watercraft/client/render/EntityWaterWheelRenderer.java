@@ -14,7 +14,7 @@ import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.common.block.watermills.TileEntityWatermill;
 import org.jackhuang.watercraft.common.entity.EntityWaterWheel;
 import org.jackhuang.watercraft.common.item.rotors.RotorType;
-import org.jackhuang.watercraft.util.WCLog;
+import org.jackhuang.watercraft.util.WPLog;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
@@ -26,7 +26,7 @@ public class EntityWaterWheelRenderer extends Render {
 			float f1) {
 		EntityWaterWheel wheel = (EntityWaterWheel) entity;
 		if (wheel.parent == null || wheel.wheelType == null) {
-			WCLog.debugLog("rendering terminated...");
+			WPLog.debugLog("rendering terminated...");
 			return;
 		}
 		GL11.glPushMatrix();

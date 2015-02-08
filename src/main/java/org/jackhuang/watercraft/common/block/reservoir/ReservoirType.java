@@ -4,7 +4,7 @@ import net.minecraft.util.StatCollector;
 
 import org.apache.logging.log4j.Level;
 import org.jackhuang.watercraft.common.block.reservoir.*;
-import org.jackhuang.watercraft.util.WCLog;
+import org.jackhuang.watercraft.util.WPLog;
 
 import com.google.common.base.Throwables;
 
@@ -53,7 +53,7 @@ public enum ReservoirType {
 			return tileEntity;
 		}
 		catch (Exception e) {
-			WCLog.warn("Failed to Register Watermill: "
+			WPLog.warn("Failed to Register Watermill: "
 				+ values()[metadata].getShowedName());
 			throw Throwables.propagate(e);
 		}

@@ -21,7 +21,7 @@ public class Reference {
 	
 	public static final String ModName = "WaterPower";
 	
-	public static final String Version = "0.3g";
+	public static final String Version = "0.3h";
 	
 	public static final String MCVersion = "1.7.10";
 	

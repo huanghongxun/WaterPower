@@ -8,7 +8,7 @@ import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.common.item.others.ItemType;
 import org.jackhuang.watercraft.common.recipe.IRecipeRegistrator;
 import org.jackhuang.watercraft.util.Mods;
-import org.jackhuang.watercraft.util.WCLog;
+import org.jackhuang.watercraft.util.WPLog;
 
 import thaumcraft.api.ItemApi;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -119,7 +119,7 @@ public enum RotorType {
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			WCLog.err("Failed to Register Rotor: " + unlocalizedName);
+			WPLog.err("Failed to Register Rotor: " + unlocalizedName);
 		}
 	}
 	

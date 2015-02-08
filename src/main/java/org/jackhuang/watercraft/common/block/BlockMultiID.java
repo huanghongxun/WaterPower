@@ -13,7 +13,7 @@ import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.client.gui.IHasGui;
 import org.jackhuang.watercraft.common.tileentity.TileEntityBlock;
 import org.jackhuang.watercraft.common.tileentity.TileEntityInventory;
-import org.jackhuang.watercraft.util.WCLog;
+import org.jackhuang.watercraft.util.WPLog;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -74,7 +74,7 @@ public abstract class BlockMultiID extends BlockBase {
 		try {
 			return textures[index][subIndex];
 		} catch (Exception e) {
-			WCLog.err(
+			WPLog.err(
 					"BlockMultiID: Failed to get texture at: x=" + x + "; y="
 							+ y + "; z=" + z + "; facing=" + facing + "; side="
 							+ side + "; meta=" + meta + ";");

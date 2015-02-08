@@ -75,7 +75,7 @@ public class ItemTrouser extends ItemArmor
         if (is != null) {
             if (is.getItem() instanceof IElectricItem) {
                 IElectricItem electricItem = (IElectricItem) is.getItem();
-                saved -= ElectricItem.manager.charge(is, saved, 2147483647, false, false);
+                saved -= ElectricItem.manager.charge(is, saved, 2147483647, true, false);
             }
 
         }

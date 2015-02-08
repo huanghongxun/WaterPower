@@ -17,9 +17,10 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.0"
-group= "com.yourname.modid" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "modid"
+def buildnumber = System.getenv("BUILD_NUMBER") == null ? "" : "-"+System.getenv("BUILD_NUMBER")
+version = "1.7.10-0.3h"+buildnumber
+group = "org.jackhuang.watercraft" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "WaterPower"
 
 minecraft {
     version = "1.7.10-10.13.2.1272"
@@ -60,4 +61,21 @@ processResources
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
+}
+
+task sourceJar(type: Jar) {
+    from sourceSets.main.allSource
+    classifier = "sources"
+}
+
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    classifier = "dev"
+}
+
+build.dependsOn sourceJar, deobfJar
+
+artifacts {
+    archives sourceJar
+    archives deobfJar
 }

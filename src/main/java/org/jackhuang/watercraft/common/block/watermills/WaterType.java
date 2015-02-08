@@ -12,7 +12,7 @@ import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.common.item.others.ItemTrouser;
 import org.jackhuang.watercraft.common.item.rotors.ItemRotor;
 import org.jackhuang.watercraft.common.item.rotors.RotorType;
-import org.jackhuang.watercraft.util.WCLog;
+import org.jackhuang.watercraft.util.WPLog;
 
 import com.google.common.base.Throwables;
 
@@ -47,7 +47,7 @@ public enum WaterType {
 			return tileEntity;
 		}
 		catch (Exception e) {
-			WCLog.warn("Failed to Register Watermill: "
+			WPLog.warn("Failed to Register Watermill: "
 				+ WaterType.values()[metadata].name());
 			throw Throwables.propagate(e);
 		}
@@ -80,7 +80,7 @@ public enum WaterType {
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			WCLog.err("Failed to Register Trousers: " + name());
+			WPLog.err("Failed to Register Trousers: " + name());
 		}
 	}
 	

@@ -6,7 +6,7 @@ import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.InternalName;
 import org.jackhuang.watercraft.common.tileentity.TileEntityBase;
 import org.jackhuang.watercraft.common.tileentity.TileEntityInventory;
-import org.jackhuang.watercraft.util.WCLog;
+import org.jackhuang.watercraft.util.WPLog;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -69,7 +69,7 @@ public abstract class BlockBase extends BlockContainer {
 		try {
 			return this.textures[index][subIndex];
 		} catch (Exception e) {
-			WCLog.warn("Side: " + side + "\n" + "Block: " + this + "\n"
+			WPLog.warn("Side: " + side + "\n" + "Block: " + this + "\n"
 					+ "Meta: " + meta + "\n" + "Facing: " + facing + "\n"
 					+ "Index: " + index + "\n" + "SubIndex: " + subIndex);
 		}

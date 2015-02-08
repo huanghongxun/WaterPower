@@ -17,6 +17,7 @@ import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.api.API;
+import codechicken.nei.recipe.GuiRecipe;
 import codechicken.nei.recipe.TemplateRecipeHandler;
 
 public abstract class MachineRecipeHandler extends TemplateRecipeHandler {
@@ -56,7 +57,7 @@ public abstract class MachineRecipeHandler extends TemplateRecipeHandler {
 	@Override
 	public void loadTransferRects() {
 		this.transferRects.add(new TemplateRecipeHandler.RecipeTransferRect(
-				new Rectangle(74, 23, 25, 16), getRecipeId()));
+				new Rectangle(50, 23, 25, 16), getRecipeId()));
 	}
 
 	@Override
@@ -87,6 +88,12 @@ public abstract class MachineRecipeHandler extends TemplateRecipeHandler {
 			if (((IMyRecipeInput) entry.getKey()).matches(ingredient))
 				this.arecipes.add(new CachedIORecipe((IMyRecipeInput) entry
 						.getKey(), (MyRecipeOutput) entry.getValue()));
+	}
+	
+	@Override
+	public List<String> handleItemTooltip(GuiRecipe gui, ItemStack stack,
+			List<String> currenttip, int recipe) {
+		return currenttip;
 	}
 
 	protected int getInputPosX() {
