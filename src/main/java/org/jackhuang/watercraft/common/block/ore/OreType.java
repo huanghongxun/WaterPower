@@ -1,8 +1,5 @@
 package org.jackhuang.watercraft.common.block.ore;
 
-import java.util.Arrays;
-
-import org.jackhuang.watercraft.client.render.IIconContainer;
 import org.jackhuang.watercraft.common.block.GlobalBlocks;
 import org.jackhuang.watercraft.common.item.GlobalItems;
 import org.jackhuang.watercraft.common.item.crafting.ItemMaterial;
@@ -12,7 +9,6 @@ import org.jackhuang.watercraft.common.item.crafting.MaterialTypes;
 import ic2.api.item.IC2Items;
 import ic2.api.recipe.RecipeInputItemStack;
 import ic2.api.recipe.Recipes;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;

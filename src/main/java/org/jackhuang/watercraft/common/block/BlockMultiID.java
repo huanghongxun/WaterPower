@@ -2,17 +2,14 @@ package org.jackhuang.watercraft.common.block;
 
 import ic2.api.tile.IWrenchable;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import org.apache.logging.log4j.Level;
 import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.InternalName;
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.client.gui.IHasGui;
 import org.jackhuang.watercraft.common.tileentity.TileEntityBlock;
-import org.jackhuang.watercraft.common.tileentity.TileEntityInventory;
 import org.jackhuang.watercraft.util.WPLog;
 
 import cpw.mods.fml.relauncher.Side;
@@ -20,25 +17,19 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public abstract class BlockMultiID extends BlockBase {

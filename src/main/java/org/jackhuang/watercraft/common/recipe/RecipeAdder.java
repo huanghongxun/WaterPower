@@ -9,7 +9,6 @@
 package org.jackhuang.watercraft.common.recipe;
 
 import ic2.api.recipe.RecipeInputItemStack;
-import ic2.api.recipe.RecipeInputOreDict;
 import ic2.api.recipe.Recipes;
 import gregtech.api.GregTech_API;
 
@@ -79,6 +78,10 @@ public class RecipeAdder {
 	
 	public static void bender(ItemStack input, ItemStack output) {
 		boolean need = true;
+                if(Mods.ExNihilo.isAvailable) {
+                    //Incomplete
+                    
+                }
 		if(Mods.GregTech.isAvailable) {
 			need = false;
 			GregTech_API.sRecipeAdder.addForgeHammerRecipe(input, output, 20, 32);

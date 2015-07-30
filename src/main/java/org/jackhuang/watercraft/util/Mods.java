@@ -28,6 +28,7 @@ public class Mods {
 		public static final String Waila = "Waila";
 		public static final String Mekanism = "Mekanism";
 		public static final String CraftGuide = "craftguide";
+                public static final String ExNihilo = "ExNihilo";
 	}
 
 	public static final SimpleMod Factorization = new SimpleMod(IDs.Factorization);
@@ -39,7 +40,8 @@ public class Mods {
 	public static final SimpleMod Waila = new SimpleMod(IDs.Waila);
 	public static final SimpleMod Mekanism = new SimpleMod(IDs.Mekanism);
 	public static final SimpleMod CraftGuide = new SimpleMod(IDs.CraftGuide);
-
+        public static final SimpleMod ExNihilo = new SimpleMod(IDs.ExNihilo);
+        
 	public static class SimpleMod {
 		public String id;
 		public boolean isAvailable;

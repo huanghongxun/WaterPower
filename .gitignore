@@ -10,3 +10,4 @@ bin/
 eclipse/
 out/
 natives/
+/.nb-gradle/

@@ -7,18 +7,21 @@
  */
 
 package org.jackhuang.watercraft;
-
+/**
+ * A enum of WaterCraft used names.
+ * @author jackhuang
+ */
 public enum InternalName {
-	cptBlockCompactWatermill,
-	cptBlockTurbine,
-	cptBlockReservoir,
-	cptBlockOre,
-	cptBlockMachine,
-	cptItemUpdaters,
-	cptItemRange,
-	cptItemOreDust,
-	cptItemCrafting,
-	cptItemMeterial,
-	cptItemTrousers,
-	cptItemPlugins;
+	cptBlockCompactWatermill, //Compact Watermill
+	cptBlockTurbine,          //Turbine
+	cptBlockReservoir,        //Reservoir
+	cptBlockOre,              //Ores
+	cptBlockMachine,          //Machines
+	cptItemUpdaters,          //Updaters
+	cptItemRange,             //Ranges
+	cptItemOreDust,           //Ore Dusts
+	cptItemCrafting,          //Crafting Item <--Need Edit
+	cptItemMeterial,          //Materials
+	cptItemTrousers,          //Trousers
+	cptItemPlugins;           //Plugins
 }

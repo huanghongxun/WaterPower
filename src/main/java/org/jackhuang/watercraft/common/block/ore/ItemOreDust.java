@@ -1,7 +1,5 @@
 package org.jackhuang.watercraft.common.block.ore;
 
-import ic2.api.recipe.RecipeInputItemStack;
-import ic2.api.recipe.Recipes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.oredict.OreDictionary;
@@ -9,11 +7,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import org.jackhuang.watercraft.InternalName;
 import org.jackhuang.watercraft.client.render.IIconContainer;
 import org.jackhuang.watercraft.client.render.RecolorableTextures;
-import org.jackhuang.watercraft.common.block.GlobalBlocks;
-import org.jackhuang.watercraft.common.item.ItemBase;
 import org.jackhuang.watercraft.common.item.ItemRecolorable;
-import org.jackhuang.watercraft.common.item.crafting.MaterialForms;
-import org.jackhuang.watercraft.common.item.crafting.MaterialTypes;
 
 public class ItemOreDust extends ItemRecolorable {
 
