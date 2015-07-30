@@ -11,19 +11,14 @@ package org.jackhuang.watercraft.common.item.crafting;
 import java.util.List;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
-import net.minecraftforge.oredict.OreDictionary;
 
 import org.jackhuang.watercraft.InternalName;
-import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.client.render.IIconContainer;
 import org.jackhuang.watercraft.client.render.RecolorableTextures;
-import org.jackhuang.watercraft.common.item.ItemBase;
 import org.jackhuang.watercraft.common.item.ItemRecolorable;
-import org.jackhuang.watercraft.common.recipe.IRecipeRegistrator;
 
 public class ItemCrafting extends ItemRecolorable {
 	

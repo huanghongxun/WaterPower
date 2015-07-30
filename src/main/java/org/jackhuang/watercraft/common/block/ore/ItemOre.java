@@ -33,9 +33,9 @@ public class ItemOre extends ItemBlock {
 	}
 	
 	public void registerOreDict() {
-		for(int i=0;i<OreType.values().length;i++) {
-			IRecipeRegistrator.registerOreDict(OreType.values()[i].name(), new ItemStack(this, 1, OreType.values()[i].ordinal()));
-		}
+                for (OreType value : OreType.values()) {
+                    IRecipeRegistrator.registerOreDict(value.name(), new ItemStack(this, 1, value.ordinal()));
+                }
 	}
 
 }

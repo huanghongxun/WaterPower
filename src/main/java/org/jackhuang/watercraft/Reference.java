@@ -8,26 +8,31 @@
 
 package org.jackhuang.watercraft;
 
-import com.typesafe.config.Config;
 
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 
+/**
+ * WaterPower's References.
+ * @author jackhuang
+ */
 public class Reference {
 	
-	public static final String ModChannel = "wtrpwr";
+	public static final String ModChannel = "wtrpwr";  //Mod Server Channel
 	
-	public static final String ModID = "WaterPower";
+	public static final String ModID = "WaterPower";   //Mod ID
 	
-	public static final String ModName = "WaterPower";
+	public static final String ModName = "WaterPower"; //Mod Name
 	
-	public static final String Version = "0.3h";
+	public static final String Version = "0.3h";       //Mod Version
 	
-	public static final String MCVersion = "1.7.10";
+	public static final String MCVersion = "1.7.10";   //Compatible Minecraft Version
 	
 	public static final String 
 			configNeedRotor = "watermillNeedRotor";
-	
+	/**
+         * Generate Ores in World.
+         */
 	public static class WorldGen {
 		public static boolean vanadiumOre = true,
 				manganeseOre = true,
@@ -50,7 +55,9 @@ public class Reference {
 			zincOre = p.getBoolean(zincOre);
 		}
 	}
-	
+	/**
+         * Energy to Watermills.
+         */
 	public static class Energy {
 		public static double mj = 2.5,
 				rf = 0.12,

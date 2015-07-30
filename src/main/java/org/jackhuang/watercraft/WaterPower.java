@@ -5,46 +5,29 @@
  * License 1.0, or MMPL. Please check the contents of the license located in
  * http://www.mod-buildcraft.com/MMPL-1.0.txt
  */
-
 package org.jackhuang.watercraft;
 
-import ic2.api.item.IC2Items;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.List;
-import java.util.Properties;
 import java.util.Random;
-import java.util.logging.Level;
-
-import javax.swing.JOptionPane;
 
 import org.jackhuang.watercraft.client.gui.CreativeTabWaterCraft;
-import org.jackhuang.watercraft.client.render.RecolorableTextures;
 import org.jackhuang.watercraft.common.CommonProxy;
-import org.jackhuang.watercraft.common.block.BlockBase;
 import org.jackhuang.watercraft.common.block.GlobalBlocks;
 import org.jackhuang.watercraft.common.block.machines.BlockMachines;
 import org.jackhuang.watercraft.common.block.ore.BlockOre;
 import org.jackhuang.watercraft.common.block.ore.ItemOreDust;
 import org.jackhuang.watercraft.common.block.reservoir.BlockReservoir;
-import org.jackhuang.watercraft.common.block.reservoir.ReservoirType;
-import org.jackhuang.watercraft.common.block.reservoir.TileEntityReservoir;
 import org.jackhuang.watercraft.common.block.turbines.BlockTurbine;
-import org.jackhuang.watercraft.common.block.turbines.TileEntityTurbine;
 import org.jackhuang.watercraft.common.block.watermills.BlockWatermill;
-import org.jackhuang.watercraft.common.block.watermills.TileEntityWatermill;
 import org.jackhuang.watercraft.common.block.watermills.WaterType;
 import org.jackhuang.watercraft.common.item.GlobalItems;
-import org.jackhuang.watercraft.common.item.ItemBase;
 import org.jackhuang.watercraft.common.item.crafting.ItemCrafting;
 import org.jackhuang.watercraft.common.item.crafting.ItemMaterial;
 import org.jackhuang.watercraft.common.item.others.ItemOthers;
-import org.jackhuang.watercraft.common.item.others.ItemType;
 import org.jackhuang.watercraft.common.item.range.ItemPlugins;
 import org.jackhuang.watercraft.common.item.range.ItemRange;
-import org.jackhuang.watercraft.common.item.rotors.ItemRotor;
 import org.jackhuang.watercraft.common.item.rotors.RotorType;
 import org.jackhuang.watercraft.common.network.MessagePacketHandler;
 import org.jackhuang.watercraft.common.recipe.EasyRecipeRegistrator;
@@ -55,26 +38,18 @@ import org.jackhuang.watercraft.util.Mods;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraft.world.gen.ChunkProviderEnd;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.ForgeChunkManager;
-import net.minecraftforge.common.ForgeChunkManager.LoadingCallback;
 import net.minecraftforge.common.config.Property;
-import net.minecraftforge.common.ForgeChunkManager.Ticket;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.IWorldGenerator;
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -84,24 +59,26 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
+/**
+ * WaterPower Main Class.
+ * @author jackhuang
+ */
 @Mod(modid = Reference.ModID, name = Reference.ModName, version = Reference.Version,
-	dependencies = "required-after:Forge@[10.13.0.1199,); required-after:IC2@[2.2.628,); after:gregtech; after:Thaumcraft@[4.2.0.0,); after:BuildCraftAPI|power[1.1,); after:Forestry; after:craftguide; after:Waila; after:factorization; after:CoFHAPI; after:Mekanism")
+	dependencies = "required-after:Forge@[10.13.0.1199,); required-after:IC2@[2.2.628,); after:gregtech; after:Thaumcraft@[4.2.3.5,); after:BuildCraftAPI|power[1.1,); after:Forestry; after:craftguide; after:Waila; after:factorization; after:CoFHCore; after:Mekanism")
 public class WaterPower implements IWorldGenerator {
 
 	@Mod.Instance(Reference.ModID)
-	public static WaterPower instance;
+	public static WaterPower instance; //Create Instance
 
 	@SidedProxy(clientSide = "org.jackhuang.watercraft.client.ClientProxy", serverSide = "org.jackhuang.watercraft.common.CommonProxy")
-	public static CommonProxy proxy;
+	public static CommonProxy proxy;   //Create CommonProxy
 
 	public static final CreativeTabs creativeTabWaterPower = new CreativeTabWaterCraft(
-			"creativeTabWaterPower");
+			"creativeTabWaterPower"); //Set CreativeTab.
 
-	public static final int updateTick = 20;
+	public static final int updateTick = 20; //Set Update Tick.
 
 	private Configuration config;
 	

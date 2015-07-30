@@ -46,7 +46,7 @@ import net.minecraftforge.fluids.IFluidHandler;
 	@Interface(iface = "factorization.api.IChargeConductor", modid = Mods.IDs.Factorization)
 })
 public abstract class TileEntityBaseGenerator extends TileEntityBlock implements
-		IEnergySource, IHasGui, IKineticSource, IUnitChangeable, IPowerEmitter,
+		IEnergySource, IHasGui, IKineticSource, IUnitChangeable,
 		IEnergyConnection, IChargeConductor, IFluidHandler, IHeatSource {
 	public static Random random = new Random();
 
@@ -181,6 +181,7 @@ public abstract class TileEntityBaseGenerator extends TileEntityBlock implements
 
 	protected void onUpdateClientAndServer() {}
 
+        @Override
 	public void updateEntity() {
 		super.updateEntity();
 

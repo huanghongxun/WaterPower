@@ -13,7 +13,6 @@ import java.util.HashMap;
 import org.jackhuang.watercraft.util.Mods;
 
 import cpw.mods.fml.common.FMLLog;
-import net.minecraft.item.ItemStack;
 
 public class MekanismRecipes {
 	public static boolean IS_MEKANISM_RECIPES_AVAILABLE = false;

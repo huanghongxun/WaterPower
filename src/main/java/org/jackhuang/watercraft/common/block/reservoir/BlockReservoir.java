@@ -1,12 +1,8 @@
 package org.jackhuang.watercraft.common.block.reservoir;
 
 import ic2.api.item.IC2Items;
-import ic2.api.tile.IWrenchable;
 
 import java.util.ArrayList;
-import java.util.logging.Level;
-
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,22 +14,16 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import org.jackhuang.watercraft.Reference;
-import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.InternalName;
 import org.jackhuang.watercraft.common.block.BlockMeta;
-import org.jackhuang.watercraft.common.block.BlockMultiID;
-import org.jackhuang.watercraft.common.block.GlobalBlocks;
 import org.jackhuang.watercraft.common.item.others.ItemType;
 import org.jackhuang.watercraft.common.recipe.IRecipeRegistrator;
 import org.jackhuang.watercraft.util.Mods;
 
 import thaumcraft.api.ItemApi;
 
-import com.google.common.base.Throwables;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockReservoir extends BlockMeta {
 

@@ -6,12 +6,12 @@ tc.research_name.industrialDiamond=Industrial Diamond
 tc.research_name.waterUraniumIngot=Water Uranium Ingot
 
 tc.research_name.waterUraniumIngotPlateMK1=Water Uranium Plate MK1
-tc.research_name.waterUraniumIngotPlateMK2=Water Uranium PlateMK2
-tc.research_name.waterUraniumIngotPlateMK3=Water Uranium PlateMK3
-tc.research_name.waterUraniumIngotPlateMK4=Water Uranium PlateMK4
-tc.research_name.waterUraniumIngotPlateMK5=Water Uranium PlateMK5
-tc.research_name.waterUraniumIngotPlateMK6=Water Uranium PlateMK6
-tc.research_name.waterUraniumIngotPlateMK7=Water Uranium PlateMK7
+tc.research_name.waterUraniumIngotPlateMK2=Water Uranium Plate MK2
+tc.research_name.waterUraniumIngotPlateMK3=Water Uranium Plate MK3
+tc.research_name.waterUraniumIngotPlateMK4=Water Uranium Plate MK4
+tc.research_name.waterUraniumIngotPlateMK5=Water Uranium Plate MK5
+tc.research_name.waterUraniumIngotPlateMK6=Water Uranium Plate MK6
+tc.research_name.waterUraniumIngotPlateMK7=Water Uranium Plate MK7
 
 tc.research_name.updaterMK0=Update Plugin MK0
 tc.research_name.updaterMK1=Update Plugin MK1
@@ -43,10 +43,10 @@ tc.research_name.cptwtrmlMK15=Advanced Watermills MK15
 tc.research_name.cptwtrmlMK16=Advanced Watermills MK16
 
 # Thaumcraft integration: research pages
-cptwtrml.research.waterUraniumIngot=Nothing...
-cptwtrml.research.industrialDiamond=Nothing...
-cptwtrml.research.reservoirCore=Nothing...
-cptwtrml.research.reservoirCoreAdvanced=Nothing...
+cptwtrml.research.waterUraniumIngot=You can now use Thaumcraft's elements to get Water Uranium Ingot.
+cptwtrml.research.industrialDiamond=You can now use Thaumcraft's elements to get Industrial Diamond.
+cptwtrml.research.reservoirCore=You can now use Thaumcraft's elements to get Reservoir Core.
+cptwtrml.research.reservoirCoreAdvanced=You can now use Thaumcraft's elements to get Advanced Reservoir Core.
 
 # reservoir block & rotor
 cptwtrml.reservoir.RESERVOIR=Reservoir block
@@ -100,7 +100,7 @@ cptwtrml.rotor.SECOND=Second(s)
 cptwtrml.rotor.GOT_EFFICIENCY=Got efficiency
 
 # updater
-cptwtrml.updater.WaterUraniumIngot=Water uranium ingot
+cptwtrml.updater.WaterUraniumIngot=Water Uranium Ingot
 cptwtrml.updater.WaterUraniumPlateMK1=Water uranium plate MK1
 cptwtrml.updater.WaterUraniumPlateMK2=Water uranium plate MK2
 cptwtrml.updater.WaterUraniumPlateMK3=Water uranium plate MK3
@@ -117,7 +117,7 @@ cptwtrml.updater.MK4=Updater MK4
 cptwtrml.updater.MK5=Updater MK5
 cptwtrml.updater.MK6=Updater MK6
 cptwtrml.updater.MK7=Updater MK7
-cptwtrml.updater.ReservoirCore=Reservoir block core
+cptwtrml.updater.ReservoirCore=Reservoir Block Core
 cptwtrml.updater.ReservoirCoreAdvanced=Advanced Reservoir Block Core
 cptwtrml.updater.PlasmaUraniumAlloyPlate=Plasma Uranium Alloy Plate
 cptwtrml.updater.PlasmaUraniumIngot=Plasma Uranium Ingot
