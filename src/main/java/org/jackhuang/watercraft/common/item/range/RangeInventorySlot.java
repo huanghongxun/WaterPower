@@ -8,22 +8,22 @@ import org.jackhuang.watercraft.common.tileentity.TileEntityInventory;
 
 public class RangeInventorySlot extends InventorySlot {
 
-	public RangeInventorySlot(TileEntityInventory base) {
-		this(base, 1);
+    public RangeInventorySlot(TileEntityInventory base) {
+	this(base, 1);
+    }
+
+    public RangeInventorySlot(TileEntityInventory base, int count) {
+	super(base, "range", Access.IO, count);
+    }
+
+    @Override
+    public boolean accepts(ItemStack itemStack) {
+	if (itemStack == null) {
+	    return false;
 	}
-	
-	public RangeInventorySlot(TileEntityInventory base, int count) {
-		super(base, "range", Access.IO, count);
+	if (itemStack.getItem() instanceof ItemRange) {
+	    return true;
 	}
-	
-	@Override
-	public boolean accepts(ItemStack itemStack) {
-		if (itemStack == null) {
-			return false;
-		}
-		if (itemStack.getItem() instanceof ItemRange) {
-			return true;
-		}
-		return false;
-	}
+	return false;
+    }
 }

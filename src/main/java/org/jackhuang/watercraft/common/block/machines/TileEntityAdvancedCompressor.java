@@ -16,59 +16,59 @@ import org.jackhuang.watercraft.util.StackUtil;
 
 public class TileEntityAdvancedCompressor extends TileEntityStandardWaterMachine {
 
-	public TileEntityAdvancedCompressor() {
-		super(5000, 64*20);
+    public TileEntityAdvancedCompressor() throws ClassNotFoundException {
+	super(5000, 64 * 20);
 
-		/*if(Mods.GregTech.isAvailable) {
-			this.inputSlot = new InventorySlotProcessableGreg(this, "input",
-					2, MyRecipes.implosion_gt, GT_Recipe_Map.sImplosionRecipes);
-		}
-		else*/
-			this.inputSlot = new InventorySlotProcessableGeneric(this, "input",
-					1, MyRecipes.implosion);
-	}
-	
-	public static void init() {
-		MyRecipes.implosion = new MultiRecipeManager();
+	/*if(Mods.GregTech.isAvailable) {
+	 this.inputSlot = new InventorySlotProcessableGreg(this, "input",
+	 2, MyRecipes.implosion_gt, GT_Recipe_Map.sImplosionRecipes);
+	 }
+	 else*/
+	this.inputSlot = new InventorySlotProcessableGeneric(this, "input",
+		1, MyRecipes.implosion);
+    }
+
+    public static void init() {
+	MyRecipes.implosion = new MultiRecipeManager();
+    }
+
+    @Override
+    public String getInventoryName() {
+	return "AdvancedCompressor";
+    }
+
+    public float getWrenchDropRate() {
+	return 1;
+    }
+
+    @Override
+    public int getGuiId() {
+	return DefaultGuiIds.get("tileEntityAdvancedCompressor");
+    }
+
+    @Override
+    public void markDirty() {
+	if (!inputSlot.isEmpty()) {
+	    InventorySlotProcessableGeneric generic = (InventorySlotProcessableGeneric) inputSlot;
+	    /*if(generic instanceof InventorySlotProcessableGreg) {
+	     GT_Recipe recipe = ((InventorySlotProcessableGreg)generic).getGTRecipeOutput();
+	     if(recipe == null) operationLength = 1;
+	     else defaultOperationLength = recipe.mInputs[1].stackSize * 20;
+	     }*/
 	}
 
-	@Override
-	public String getInventoryName() {
-		return "AdvancedCompressor";
-	}
+	super.markDirty();
+    }
 
-	public float getWrenchDropRate() {
-		return 1;
-	}
+    @Override
+    public void updateEntity() {
+	super.updateEntity();
 
-	@Override
-	public int getGuiId() {
-		return DefaultGuiIds.get("tileEntityAdvancedCompressor");
-	}
-	
-	@Override
-	public void markDirty() {
-		if(!inputSlot.isEmpty()) {
-			InventorySlotProcessableGeneric generic = (InventorySlotProcessableGeneric)inputSlot;
-			/*if(generic instanceof InventorySlotProcessableGreg) {
-				GT_Recipe recipe = ((InventorySlotProcessableGreg)generic).getGTRecipeOutput();
-				if(recipe == null) operationLength = 1;
-				else defaultOperationLength = recipe.mInputs[1].stackSize * 20;
-			}*/
-		}
-		
-		super.markDirty();
-	}
-	
-	@Override
-	public void updateEntity() {
-		super.updateEntity();
-		
-		/*if(Mods.GregTech.isAvailable) {
-			InventorySlotProcessableGreg greg = ((InventorySlotProcessableGreg)inputSlot);
-			if(greg.get(1) == null || greg.get(1).stackSize < 64)
-				greg.put(1, StackUtil.copyWithSize(IC2Items.getItem("industrialTnt"), 64));
-		}*/
-	}
+	/*if(Mods.GregTech.isAvailable) {
+	 InventorySlotProcessableGreg greg = ((InventorySlotProcessableGreg)inputSlot);
+	 if(greg.get(1) == null || greg.get(1).stackSize < 64)
+	 greg.put(1, StackUtil.copyWithSize(IC2Items.getItem("industrialTnt"), 64));
+	 }*/
+    }
 
 }

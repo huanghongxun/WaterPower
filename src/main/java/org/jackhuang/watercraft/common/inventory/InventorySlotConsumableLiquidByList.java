@@ -9,30 +9,31 @@ import org.jackhuang.watercraft.common.tileentity.TileEntityInventory;
 import net.minecraftforge.fluids.Fluid;
 
 public class InventorySlotConsumableLiquidByList extends
-		InventorySlotConsumableLiquid {
-	private final Set<Fluid> acceptedFluids;
+	InventorySlotConsumableLiquid {
 
-	public InventorySlotConsumableLiquidByList(TileEntityInventory base,
-			String name, int count, Fluid[] fluidlist) {
-		super(base, name, count);
+    private final Set<Fluid> acceptedFluids;
 
-		this.acceptedFluids = new HashSet<Fluid>(Arrays.asList(fluidlist));
-	}
+    public InventorySlotConsumableLiquidByList(TileEntityInventory base,
+	    String name, int count, Fluid[] fluidlist) {
+	super(base, name, count);
 
-	public InventorySlotConsumableLiquidByList(TileEntityInventory base,
-			String name, InventorySlot.Access access,
-			int count, InventorySlot.InvSide preferredSide,
-			InventorySlotConsumableLiquid.OpType opType, Fluid[] fluidlist) {
-		super(base, name, access, count, preferredSide, opType);
+	this.acceptedFluids = new HashSet<Fluid>(Arrays.asList(fluidlist));
+    }
 
-		this.acceptedFluids = new HashSet<Fluid>(Arrays.asList(fluidlist));
-	}
+    public InventorySlotConsumableLiquidByList(TileEntityInventory base,
+	    String name, InventorySlot.Access access,
+	    int count, InventorySlot.InvSide preferredSide,
+	    InventorySlotConsumableLiquid.OpType opType, Fluid[] fluidlist) {
+	super(base, name, access, count, preferredSide, opType);
 
-	protected boolean acceptsLiquid(Fluid fluid) {
-		return this.acceptedFluids.contains(fluid);
-	}
+	this.acceptedFluids = new HashSet<Fluid>(Arrays.asList(fluidlist));
+    }
 
-	protected Iterable<Fluid> getPossibleFluids() {
-		return this.acceptedFluids;
-	}
+    protected boolean acceptsLiquid(Fluid fluid) {
+	return this.acceptedFluids.contains(fluid);
+    }
+
+    protected Iterable<Fluid> getPossibleFluids() {
+	return this.acceptedFluids;
+    }
 }

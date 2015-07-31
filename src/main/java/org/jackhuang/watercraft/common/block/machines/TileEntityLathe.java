@@ -11,27 +11,27 @@ import ic2.api.recipe.Recipes;
 
 public class TileEntityLathe extends TileEntityStandardWaterMachine {
 
-	public TileEntityLathe() {
-		super(80, 10*20);
+    public TileEntityLathe() throws ClassNotFoundException {
+	super(80, 10 * 20);
 
-		this.inputSlot = new InventorySlotProcessableGeneric(this, "input",
-				1, MyRecipes.lathe);
-	}
-	
-	public static void init() {
-		MyRecipes.lathe = new MultiRecipeManager();
-	}
+	this.inputSlot = new InventorySlotProcessableGeneric(this, "input",
+		1, MyRecipes.lathe);
+    }
 
-	public String getInventoryName() {
-		return "Water-Powered Lathe";
-	}
+    public static void init() {
+	MyRecipes.lathe = new MultiRecipeManager();
+    }
 
-	public float getWrenchDropRate() {
-		return 1f;
-	}
+    public String getInventoryName() {
+	return "Water-Powered Lathe";
+    }
 
-	@Override
-	public int getGuiId() {
-		return DefaultGuiIds.get("tileEntityLathe");
-	}
+    public float getWrenchDropRate() {
+	return 1f;
+    }
+
+    @Override
+    public int getGuiId() {
+	return DefaultGuiIds.get("tileEntityLathe");
+    }
 }

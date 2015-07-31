@@ -1,27 +1,26 @@
 /**
  * Copyright (c) Huang Yuhui, 2014
- * 
+ *
  * "WaterCraft" is distributed under the terms of the Minecraft Mod Public
  * License 1.0, or MMPL. Please check the contents of the license located in
  * http://www.mod-buildcraft.com/MMPL-1.0.txt
  */
-
 package org.jackhuang.watercraft.common.tileentity;
 
 import net.minecraft.nbt.NBTTagCompound;
 
 public abstract class TileEntityElectricMetaBlock extends TileEntityBaseGenerator implements ITileEntityMeta {
 
-	private short meta;
-	
-	public TileEntityElectricMetaBlock(int i, int j) {
-		super(i, j);
-	}
+    private short meta;
 
-	@Override
-	public void readFromNBT(NBTTagCompound nbt) {
-		super.readFromNBT(nbt);
-		initNBT(nbt, -1);
-		//worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
-	}
+    public TileEntityElectricMetaBlock(int i, int j) {
+	super(i, j);
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound nbt) {
+	super.readFromNBT(nbt);
+	initNBT(nbt, -1);
+	//worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+    }
 }

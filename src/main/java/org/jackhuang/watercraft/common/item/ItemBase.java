@@ -24,86 +24,89 @@ import net.minecraftforge.common.config.Configuration;
  */
 public abstract class ItemBase extends Item {
 
-	protected final InternalName internalName;
-	public static int id;
-	protected IIcon[] textures;
+    protected final InternalName internalName;
+    public static int id;
+    protected IIcon[] textures;
 
-	public ItemBase(InternalName internalName) {
-		super();
+    public ItemBase(InternalName internalName) {
+	super();
 
-		setCreativeTab(WaterPower.creativeTabWaterPower);
-		setNoRepair();
-		
-		GameRegistry.registerItem(this, internalName.name());
+	setCreativeTab(WaterPower.creativeTabWaterPower);
+	setNoRepair();
 
-		this.internalName = internalName;
-	}
+	GameRegistry.registerItem(this, internalName.name());
 
-	public String getTextureName(int index) {
-		if (this.hasSubtypes)
-			return getUnlocalizedName(new ItemStack(this, 1, index));
-		if (index == 0) {
-			return getUnlocalizedName();
-		}
-		return null;
-	}
+	this.internalName = internalName;
+    }
 
-	public abstract String getTextureFolder();
-	
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister iconRegister) {
-		this.textures = new IIcon[32768];
-		String textureFolder = getTextureFolder() + "/";
+    public String getTextureName(int index) {
+	if (this.hasSubtypes) {
+	    return getUnlocalizedName(new ItemStack(this, 1, index));
+	}
+	if (index == 0) {
+	    return getUnlocalizedName();
+	}
+	return null;
+    }
 
-		for (int index = 0; index < 32768; index++) {
-			String resource = Reference.ModID
-					+ ":" + textureFolder + getTextureName(index);
-			this.textures[index] = getTextureName(index) != null ? 
-					iconRegister.registerIcon(resource)
-					: null;
-		}
-	}
+    public abstract String getTextureFolder();
 
-	@SideOnly(Side.CLIENT)
-	public IIcon getIconFromDamage(int meta) {
-		if (meta < this.textures.length) {
-			return this.textures[meta];
-		}
-		return this.textures.length < 1 ? null : this.textures[0];
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(IIconRegister iconRegister) {
+	this.textures = new IIcon[32768];
+	String textureFolder = getTextureFolder() + "/";
 
-	@SideOnly(Side.CLIENT)
-	public ResourceLocation getRenderTexture() {
-		return new ResourceLocation(Reference.ModID + ":textures/items/"
-				+ this.getUnlocalizedName() + ".png");
+	for (int index = 0; index < 32768; index++) {
+	    String resource = Reference.ModID
+		    + ":" + textureFolder + getTextureName(index);
+	    this.textures[index] = getTextureName(index) != null
+		    ? iconRegister.registerIcon(resource)
+		    : null;
 	}
+    }
 
-	@Override
-	public void getSubItems(Item item, CreativeTabs par2CreativeTabs,
-			List par3List) {
-		for (int meta = 0; meta < 32767; meta++) {
-			ItemStack stack = new ItemStack(item, 1, meta);
-			if (stopScanning(stack))
-				break;
-			if (validStack(stack))
-				par3List.add(stack);
-		}
+    @SideOnly(Side.CLIENT)
+    public IIcon getIconFromDamage(int meta) {
+	if (meta < this.textures.length) {
+	    return this.textures[meta];
 	}
-	
-	public boolean stopScanning(ItemStack stack) {
-		return getUnlocalizedName(stack) == null;
+	return this.textures.length < 1 ? null : this.textures[0];
+    }
+
+    @SideOnly(Side.CLIENT)
+    public ResourceLocation getRenderTexture() {
+	return new ResourceLocation(Reference.ModID + ":textures/items/"
+		+ this.getUnlocalizedName() + ".png");
+    }
+
+    @Override
+    public void getSubItems(Item item, CreativeTabs par2CreativeTabs,
+	    List par3List) {
+	for (int meta = 0; meta < 32767; meta++) {
+	    ItemStack stack = new ItemStack(item, 1, meta);
+	    if (stopScanning(stack)) {
+		break;
+	    }
+	    if (validStack(stack)) {
+		par3List.add(stack);
+	    }
 	}
-	
-	public boolean validStack(ItemStack stack) {
-		return getUnlocalizedName(stack) != null;
-	}
-	
-	public ItemStack get(int i) {
-		return get(i, 1);
-	}
-	
-	public ItemStack get(int i, int j) {
-		return new ItemStack(this, j, i);
-	}
+    }
+
+    public boolean stopScanning(ItemStack stack) {
+	return getUnlocalizedName(stack) == null;
+    }
+
+    public boolean validStack(ItemStack stack) {
+	return getUnlocalizedName(stack) != null;
+    }
+
+    public ItemStack get(int i) {
+	return get(i, 1);
+    }
+
+    public ItemStack get(int i, int j) {
+	return new ItemStack(this, j, i);
+    }
 }
