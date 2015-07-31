@@ -5,12 +5,15 @@ import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.client.gui.DefaultGuiIds;
 import org.jackhuang.watercraft.common.block.reservoir.Reservoir;
 import org.jackhuang.watercraft.common.block.reservoir.TileEntityReservoir;
+import org.jackhuang.watercraft.common.block.watermills.WaterType;
 import org.jackhuang.watercraft.common.item.rotors.ItemRotor;
 import org.jackhuang.watercraft.common.item.rotors.RotorInventorySlot;
 import org.jackhuang.watercraft.common.tileentity.TileEntityBaseGenerator;
 import org.jackhuang.watercraft.common.tileentity.TileEntityElectricMetaBlock;
 import org.jackhuang.watercraft.util.WPLog;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.StatCollector;
@@ -20,48 +23,82 @@ import net.minecraftforge.common.util.ForgeDirection;
 public class TileEntityTurbine extends TileEntityElectricMetaBlock {
 
 	public static int maxOutput = 32767;
-	public int speed;
+	//public int speed;
 	private TurbineType type;
 
-	public TurbineType getType() {
-		return type;
-	}
+    RotorInventorySlot slotRotor;
+    
+    boolean sendInitData;
 
 	public TileEntityTurbine() {
 		super(0, 10000000);
-		addInvSlot(new RotorInventorySlot(this, 1));
+		addInvSlot(slotRotor = new RotorInventorySlot(this, 1));
 	}
 
 	public TileEntityTurbine(TurbineType type) {
 		super(type.percent, 10000000);
-		addInvSlot(new RotorInventorySlot(this, 1));
+		addInvSlot(slotRotor = new RotorInventorySlot(this, 1));
 	}
 
-	public void readFromNBT(NBTTagCompound nbttagcompound) {
-		super.readFromNBT(nbttagcompound);
-		this.speed = nbttagcompound.getInteger("speed");
+    @Override
+    public void initNBT(NBTTagCompound tag, int meta) {
+        if (meta == -1) {
+            type = TurbineType.values()[tag.getInteger("type")];
+        } else {
+            type = TurbineType.values()[meta];
+        }
+        this.production = type.percent;
+        sendInitData = true;
+    }
+
+    public void writeToNBT(NBTTagCompound tag) {
+        super.writeToNBT(tag);
+
+        //tag.setInteger("speed", this.speed);
+
+        if(type == null) tag.setInteger("type", 0);
+        else tag.setInteger("type", type.ordinal());
+    }
+
+
+	public void readFromNBT(NBTTagCompound tag) {
+		super.readFromNBT(tag);
+		
+		//this.speed = tag.getInteger("speed");
 	}
 
-	@Override
-	public void initNBT(NBTTagCompound tag, int meta) {
-		if (meta == -1) {
-			type = TurbineType.values()[tag.getInteger("type")];
-		} else {
-			type = TurbineType.values()[meta];
-		}
-		this.production = type.percent;
-		sendUpdateToClient();
-	}
+    @Override
+    public void writePacketData(NBTTagCompound tag) {
+        super.writePacketData(tag);
+        
+        //tag.setInteger("speed", speed);
 
-	public void writeToNBT(NBTTagCompound nbttagcompound) {
-		super.writeToNBT(nbttagcompound);
+        if (sendInitData) {
+            sendInitData = false;
+            tag.setBoolean("sendInitData", true);
+            if (type == null)
+                tag.setInteger("type", 0);
+            else
+                tag.setInteger("type", type.ordinal());
+        }
+    }
 
-		nbttagcompound.setInteger("speed", this.speed);
+    @Override
+    public void readPacketData(NBTTagCompound tag) {
+        super.readPacketData(tag);
+        //speed = tag.getInteger("speed");
 
-		if(type == null) nbttagcompound.setInteger("type", 0);
-		else nbttagcompound.setInteger("type", type.ordinal());
-	}
+        if (tag.hasKey("sendInitData")) {
+            type = TurbineType.values()[tag.getInteger("type")];
 
+            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+        }
+    }
+
+    public TurbineType getType() {
+        return type;
+    }
+    
 	private TileEntityReservoir getWater(World world, int x, int y, int z) {
 		TileEntityReservoir reservoir = null;
 		switch (getFacing()) {
@@ -120,7 +157,7 @@ public class TileEntityTurbine extends TileEntityElectricMetaBlock {
 			WPLog.debugLog("use=" + use);
 			double baseEnergy = use * type.percent / 2048;
 			WPLog.debugLog("baseEnergy" + baseEnergy);
-			WPLog.debugLog("speed" + speed);
+			//WPLog.debugLog("speed" + speed);
 			double per = tickRotor();
 			WPLog.debugLog("per=" + per);
 			if (per > 0) {
@@ -137,35 +174,56 @@ public class TileEntityTurbine extends TileEntityElectricMetaBlock {
 		return 0;
 	}
 
-	private boolean hasRotorImpl() {
-		return !invSlots.isEmpty() && invSlots.get(0) != null
-				&& !invSlots.get(0).isEmpty() && invSlots.get(0).get(0) != null
-				&& invSlots.get(0).get(0).getItem() instanceof ItemRotor;
-	}
+    public boolean hasRotor() {
+        return slotRotor != null && !slotRotor.isEmpty()
+                && slotRotor.get(0).getItem() instanceof ItemRotor;
+    }
 
-	public boolean hasRotor() {
-		return hasRotorImpl();
-	}
-
-	private ItemRotor getRotor() {
-		return (ItemRotor) invSlots.get(0).get(0).getItem();
-	}
+    public ItemRotor getRotor() {
+        return (ItemRotor) slotRotor.get(0).getItem();
+    }
 
 	private void damageRotor(int tick) {
 		ItemRotor rotor = getRotor();
-		rotor.tickRotor(invSlots.get(0).get(0), this, worldObj);
+		rotor.tickRotor(slotRotor.get(0), this, worldObj);
 		if (!rotor.type.isInfinite()) {
-			if (invSlots.get(0).get(0).getItemDamage() + tick > invSlots.get(0)
+			if (slotRotor.get(0).getItemDamage() + tick > slotRotor
 					.get(0).getMaxDamage()) {
-				invSlots.set(0, null);
+			    slotRotor.put(0, null);
 			} else {
-				int damage = invSlots.get(0).get(0).getItemDamage() + tick;
-				invSlots.get(0).get(0).setItemDamage(damage);
+				int damage = slotRotor.get(0).getItemDamage() + tick;
+				slotRotor.get(0).setItemDamage(damage);
 			}
 			markDirty();
 		}
 	}
 
+    private double tickRotor() {
+        if (!Reference.General.watermillNeedsRotor)
+            return 1;
+        return hasRotor() ? getRotor().type.getEfficiency() : 0;
+    }
+
+    @Override
+    public String getInventoryName() {
+        return type == null ? "NULL" : type.getShowedName();
+    }
+
+    @Override
+    public int getGuiId() {
+        return DefaultGuiIds.get("tileEntityTurbine");
+    }
+
+    @Override
+    public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
+        return new ItemStack(this.getBlockType(), 1, type.ordinal());
+    }
+
+    @Override
+    public boolean isActive() {
+        return super.isActive() && (storage < maxStorage);
+    }
+    /*
 	private void calSpeed() {
 		TileEntityReservoir r = getWater(worldObj, xCoord, yCoord, zCoord);
 		if (r != null && r.getWater() > 0 && hasRotor()) {
@@ -180,44 +238,6 @@ public class TileEntityTurbine extends TileEntityElectricMetaBlock {
 		}
 		if (speed > 0)
 			damageRotor(1);
-	}
-
-	private double tickRotor() {
-		if (!Reference.General.watermillNeedsRotor)
-			return 1;
-		if (hasRotor()) {
-			ItemRotor rotor = getRotor();
-			if (worldObj.isRemote) {
-				return rotor.type.getEfficiency();
-			}
-
-			return rotor.type.getEfficiency();
-		}
-		return 0;
-	}
-
-	@Override
-	public String getInventoryName() {
-		return type.getShowedName();
-	}
-
-	@Override
-	public int getGuiId() {
-		return DefaultGuiIds.get("tileEntityTurbine");
-	}
-
-	@Override
-	public void readPacketData(NBTTagCompound tag) {
-		super.readPacketData(tag);
-		speed = tag.getInteger("speed");
-		type = TurbineType.values()[tag.getInteger("type")];
-	}
-
-	@Override
-	public void writePacketData(NBTTagCompound tag) {
-		super.writePacketData(tag);
-		if(type == null) tag.setInteger("type", 0);
-		else tag.setInteger("speed", speed);
-	}
+	}*/
 
 }

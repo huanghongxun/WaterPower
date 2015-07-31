@@ -35,15 +35,20 @@ import net.minecraftforge.fluids.FluidStack;
  */
 public class TileEntityWatermill extends TileEntityElectricMetaBlock {
 
+    private WaterType type;
+    private EntityWaterWheel wheel;
+    private boolean canWheelTurn = false;
+    public int waterBlocks, lavaBlocks;
+
     RotorInventorySlot slotRotor;
     RangeInventorySlot slotUpdater;
 
+    boolean sendInitData;
+
     public TileEntityWatermill() {
         super(0, 32767);
-        slotRotor = new RotorInventorySlot(this);
-        addInvSlot(slotRotor);
-        slotUpdater = new RangeInventorySlot(this, 4);
-        addInvSlot(slotUpdater);
+        addInvSlot(slotRotor = new RotorInventorySlot(this));
+        addInvSlot(slotUpdater = new RangeInventorySlot(this, 4));
     }
 
     public TileEntityWatermill(WaterType type) {
@@ -98,8 +103,6 @@ public class TileEntityWatermill extends TileEntityElectricMetaBlock {
         }
     }
 
-    boolean sendInitData;
-
     @Override
     public void readPacketData(NBTTagCompound tag) {
         super.readPacketData(tag);
@@ -113,6 +116,10 @@ public class TileEntityWatermill extends TileEntityElectricMetaBlock {
 
             worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
         }
+    }
+
+    public WaterType getType() {
+        return type;
     }
 
     private void getWaterBlocks() {
@@ -143,15 +150,6 @@ public class TileEntityWatermill extends TileEntityElectricMetaBlock {
 
         if (type.ordinal() < 2)
             lavaBlocks = 0;
-    }
-
-    private WaterType type;
-    private EntityWaterWheel wheel;
-    private boolean canWheelTurn = false;
-    public int waterBlocks, lavaBlocks;
-
-    public WaterType getType() {
-        return type;
     }
 
     protected double computeOutput(World world, int x, int y, int z) {
@@ -224,39 +222,28 @@ public class TileEntityWatermill extends TileEntityElectricMetaBlock {
         if (!hasRotor())
             return;
         ItemRotor rotor = getRotor();
-        rotor.tickRotor(invSlots.get(0).get(0), this, worldObj);
+        rotor.tickRotor(slotRotor.get(0), this, worldObj);
         if (!rotor.type.isInfinite()) {
-            if (invSlots.get(0).get(0).getItemDamage() + tick > invSlots.get(0)
+            if (slotRotor.get(0).getItemDamage() + tick > slotRotor
                     .get(0).getMaxDamage()) {
-                invSlots.get(0).put(0, null);
+                slotRotor.put(0, null);
             } else {
-                int damage = invSlots.get(0).get(0).getItemDamage() + tick;
-                invSlots.get(0).get(0).setItemDamage(damage);
+                int damage = slotRotor.get(0).getItemDamage() + tick;
+                slotRotor.get(0).setItemDamage(damage);
             }
             markDirty();
         }
     }
 
     private double tickRotor() {
-        if (hasRotor()) {
-            ItemRotor rotor = getRotor();
-            if (worldObj.isRemote) {
-                return rotor.type.getEfficiency();
-            }
-
-            return rotor.type.getEfficiency();
-        }
-        if (Reference.General.watermillNeedsRotor)
-            return 0;
-        else
+        if (!Reference.General.watermillNeedsRotor)
             return 1;
+        return hasRotor() ? getRotor().type.getEfficiency() : 0;
     }
 
     @Override
     public String getInventoryName() {
-        if (type == null)
-            return "NULL";
-        return type.getShowedName();
+        return type == null ? "NULL" : type.getShowedName();
     }
 
     @Override
