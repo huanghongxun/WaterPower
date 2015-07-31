@@ -81,10 +81,9 @@ public class ItemMaterial extends ItemRecolorable {
 	}
 	
 	public void registerAllRecipes() {
-                if(Mods.ExNihilo.isAvailable)
-                {
-                    
-                }
+        if(Mods.ExNihilo.isAvailable) {
+
+        }
 		if(IRecipeRegistrator.isEnabledGregTechRecipe()) {
 			GregTech_API.sRecipeAdder.addAlloySmelterRecipe(get(MaterialTypes.IndustrialSteel, MaterialForms.ingot), get(MaterialTypes.Neodymium, MaterialForms.ingot), get(MaterialTypes.NeodymiumMagnet, MaterialForms.ingot), 240*20, 128);
 			GregTech_API.sRecipeAdder.addBlastRecipe(ItemMaterial.get(MaterialTypes.Vanadium, MaterialForms.dust), ItemMaterial.get(MaterialTypes.Steel, MaterialForms.ingot, 2), ItemMaterial.get(MaterialTypes.VanadiumSteel, MaterialForms.ingot, 3), null, 240*20, 512, 2000);

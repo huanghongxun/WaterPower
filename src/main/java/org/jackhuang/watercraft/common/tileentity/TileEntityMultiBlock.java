@@ -75,7 +75,7 @@ public abstract class TileEntityMultiBlock extends TileEntityLiquidTankInventory
 		if (worldObj == null || worldObj.isRemote) return;
 
 		if (tick-- == 0) {
-			tick = 25;
+			tick = WaterPower.updateTick;
 			if (canBeMaster()) {
 				tested = true;
 				if(blockList != null) {

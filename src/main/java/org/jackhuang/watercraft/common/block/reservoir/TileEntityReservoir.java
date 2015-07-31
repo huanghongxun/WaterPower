@@ -578,11 +578,11 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 	}
 
 	@Override
-	public void validate() {
-		super.validate();
-
+	public void onLoaded() {
 		if(WaterPower.isSimulating())
 			refreshPlugins();
+		
+        super.onLoaded();
 	}
 
 	@Override

@@ -32,13 +32,13 @@ public class HUDHandlerWatermills implements IWailaDataProvider {
 		TileEntity te = arg2.getTileEntity();
 		if(!(te instanceof TileEntityWatermill)) return arg1;
 		TileEntityWatermill tile = (TileEntityWatermill) te;
-		arg1.add("Stored/EU: " + tile.storage);
-		arg1.add("Lastest Output/EU: " + tile.lastestOutput);
+		arg1.add("Stored: " + tile.getFromEU(tile.storage) + tile.energyType.name());
+		arg1.add("Latest Output: " + tile.getFromEU(tile.latestOutput) + tile.energyType.name());
 		arg1.add("Facing: " + tile.getFacing());
 		if(tile.getFluidTank() == null) return arg1;
 		FluidStack f = tile.getFluidTank().getFluid();
 		arg1.add("Stored Fluid: " + (f == null ? "Empty" : f.getLocalizedName()));
-		arg1.add("Fluid amount/mb: " + tile.getFluidTank().getFluidAmount());
+		arg1.add("Fluid amount: " + tile.getFluidTank().getFluidAmount() + "MB");
 		return arg1;
 	}
 

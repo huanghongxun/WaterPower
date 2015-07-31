@@ -7,6 +7,8 @@ import ic2.api.tile.IWrenchable;
 import java.util.List;
 import java.util.Vector;
 
+import org.jackhuang.watercraft.WaterPower;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -25,6 +27,7 @@ public abstract class TileEntityBlock extends TileEntityLiquidTankInventory impl
 
 	public boolean prevActive = false;
 	private short prevFacing = 0;
+	private boolean needsUpdate = false;
 
 	@SideOnly(Side.CLIENT)
 	private IIcon[] lastRenderIcons;
@@ -46,6 +49,17 @@ public abstract class TileEntityBlock extends TileEntityLiquidTankInventory impl
 		super.readPacketData(tag);
 
 		this.prevFacing = this.facing = tag.getShort("facing");
+		needsUpdate = tag.getBoolean("needsUpdate");
+	}
+	
+	@Override
+	public void updateEntity() {
+		super.updateEntity();
+		
+		if(needsUpdate && !WaterPower.isSimulating()) {
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+			needsUpdate = false;
+		}
 	}
 	
 	@Override
@@ -53,7 +67,11 @@ public abstract class TileEntityBlock extends TileEntityLiquidTankInventory impl
 		super.writePacketData(tag);
 
 		tag.setShort("facing", this.facing);
+		tag.setBoolean("needsUpdate", needsUpdate);
+		if(needsUpdate) needsUpdate = false;
 	}
+	
+	
 
 	@SideOnly(Side.CLIENT)
 	public void onRender() {
@@ -83,8 +101,14 @@ public abstract class TileEntityBlock extends TileEntityLiquidTankInventory impl
 	public void setFacing(short facing) {
 		this.facing = facing;
 
-		if (this.prevFacing != facing)
-			this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
+		if (this.prevFacing != facing) {
+			if (WaterPower.isSimulating()) {
+				needsUpdate = true;
+				sendUpdateToClient();
+			} else {
+				this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
+			}
+		}
 
 		this.prevFacing = facing;
 	}

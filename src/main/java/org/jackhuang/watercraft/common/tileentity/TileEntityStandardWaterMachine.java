@@ -63,11 +63,11 @@ public abstract class TileEntityStandardWaterMachine extends
 	}
 
 	@Override
-	public void validate() {
-		super.validate();
-
+	public void onLoaded() {
 		if (WaterPower.isSimulating())
 			setOverclockRates();
+		
+        super.onLoaded();
 	}
 
 	@Override

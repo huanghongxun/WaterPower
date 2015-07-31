@@ -181,15 +181,15 @@ public abstract class BlockBase extends BlockContainer {
 	}
 
 	@Override
-	public void onNeighborChange(IBlockAccess paramIBlockAccess, int paramInt1,
-			int paramInt2, int paramInt3, int paramInt4, int paramInt5,
-			int paramInt6) {
-		TileEntity localTileEntity = paramIBlockAccess.getTileEntity(paramInt1,
-				paramInt2, paramInt3);
+	public void onNeighborChange(IBlockAccess world, int x,
+			int y, int z, int tileX, int tileY,
+			int tileZ) {
+		TileEntity localTileEntity = world.getTileEntity(x,
+				y, z);
 
 		if ((localTileEntity instanceof TileEntityBase)) {
-			((TileEntityBase) localTileEntity).onNeighborTileChange(paramInt4,
-					paramInt5, paramInt6);
+			((TileEntityBase) localTileEntity).onNeighborTileChange(tileX,
+					tileY, tileZ);
 		}
 	}
 

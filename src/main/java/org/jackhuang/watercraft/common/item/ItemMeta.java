@@ -32,8 +32,7 @@ public abstract class ItemMeta extends ItemBlock {
 		ITileEntityMeta tTileEntity = (ITileEntityMeta) aWorld
 				.getTileEntity(aX, aY, aZ);
 		if (tTileEntity != null) {
-			if ((aStack.getTagCompound() != null)
-					&& (WaterPower.isSimulating()))
+			if (WaterPower.isSimulating())
 				tTileEntity.initNBT(aStack.getTagCompound(), tDamage);
 			else {
 				tTileEntity.initNBT(null, tDamage);

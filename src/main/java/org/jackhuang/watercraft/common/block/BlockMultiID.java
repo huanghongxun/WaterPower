@@ -77,6 +77,8 @@ public abstract class BlockMultiID extends BlockBase {
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z,
 			EntityLivingBase entityliving, ItemStack itemStack) {
+		if (!WaterPower.isSimulating()) return;
+		
 		TileEntity tileEntity = world.getTileEntity(x, y, z);
 
 		if ((tileEntity instanceof IWrenchable)) {

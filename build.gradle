@@ -16,6 +16,7 @@ buildscript {
 }
 
 apply plugin: 'forge'
+apply plugin: 'curseforge'
 
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
@@ -45,8 +46,13 @@ dependencies {
 
 }
 
-processResources
-{
+curse {
+    projectId = '224579'
+    apiKey = '12298b50-1735-4879-aa1b-803218f289c6'
+    releaseType = 'alpha'
+}
+
+processResources {
     // this will ensure that this task is redone when the versions change.
     inputs.property "version", project.version
     inputs.property "mcversion", project.minecraft.version

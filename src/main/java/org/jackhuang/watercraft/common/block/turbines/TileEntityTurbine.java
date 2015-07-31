@@ -220,8 +220,4 @@ public class TileEntityTurbine extends TileEntityElectricMetaBlock {
 		else tag.setInteger("speed", speed);
 	}
 
-	@Override
-	protected void onUpdateClientAndServer() {
-	}
-
 }

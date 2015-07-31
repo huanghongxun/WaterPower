@@ -20,6 +20,10 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityBase extends TileEntity {
+    
+    public TileEntityBase() {
+        tick = WaterPower.updateTick;
+    }
 
 	public void sendUpdateToClient() {
 		if(WaterPower.isSimulating())
@@ -50,7 +54,7 @@ public class TileEntityBase extends TileEntity {
 		}
 	}
 
-	public void onNeighborTileChange(int paramInt1, int paramInt2, int paramInt3) {
+	public void onNeighborTileChange(int x, int y, int z) {
 	}
 
 	public void onNeighborBlockChange() {
@@ -58,6 +62,54 @@ public class TileEntityBase extends TileEntity {
 
 	public boolean isActive() {
 		return true;
+	}
+	
+	@Override
+	public void validate() {
+	    onLoaded();
+	    
+	    super.validate();
+	}
+	
+	@Override
+	public void invalidate() {
+	    if(loaded) onUnloaded();
+	    super.invalidate();
+	}
+	
+	@Override
+	public void onChunkUnload() {
+        if(loaded) onUnloaded();
+	    super.onChunkUnload();
+	}
+	
+	protected boolean loaded = false; 
+	
+	public void onLoaded() {
+	    loaded = true;
+	}
+	
+	public void onUnloaded() {
+	    loaded = false;
+	}
+
+    protected void onUpdate() {
+    }
+
+    private int tick;
+	
+	@Override
+	public void updateEntity() {
+	    super.updateEntity();
+	    
+	    if(isServerSide() && !isRedstonePowered()) {
+            if (tick-- == 0) {
+                onUpdate();
+                tick = WaterPower.updateTick;
+    
+                sendUpdateToClient();
+            }
+	    }
 	}
 
 }

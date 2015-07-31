@@ -75,12 +75,9 @@ public class GuiWatermill extends GuiContainer {
 				StatCollector.translateToLocal("cptwtrml.rotor.ROTOR") + ":",
 				44, 30, 0x404040);
 		fontRendererObj.drawString(
-				StatCollector.translateToLocal("container.inventory"), 8,
-				ySize - 96 + 2, 0x404040);
-		fontRendererObj.drawString(
 				StatCollector.translateToLocal("cptwtrml.watermill.OUTPUT")
 						+ ": "
-						+ df.format(container.tileEntity.lastestOutput)
+						+ df.format(container.tileEntity.latestOutput)
 						+ "EU/t", 8, 40, 0x404040);
 		boolean w = gen.waterBlocks == -1;
 		fontRendererObj
@@ -96,7 +93,7 @@ public class GuiWatermill extends GuiContainer {
 										: gen.waterBlocks + ","
 												+ gen.lavaBlocks), 8, 50,
 						0x404040);
-		fontRendererObj.drawString(StatCollector.translateToLocal("cptwtrml.watermill.PRODUCTION") + ":" + gen.production, 8, 70, 0x404040);
+		fontRendererObj.drawString(StatCollector.translateToLocal("cptwtrml.watermill.PRODUCTION") + ":" + gen.getFromEU(gen.production) + gen.energyType.name(), 8, 70, 0x404040);
 		int a = gen.getRange();
 		int b = a * a * a - 1;
 		fontRendererObj.drawString(
@@ -113,7 +110,6 @@ public class GuiWatermill extends GuiContainer {
 			gen.energyType = EnergyType.values()[(gen.energyType.ordinal() + 1) % EnergyType.values().length];
 			btnEnergyType.displayString = gen.energyType.name();
 			MessagePacketHandler.INSTANCE.sendToServer(new PacketUnitChanged(Minecraft.getMinecraft().thePlayer.worldObj.provider.dimensionId, gen.xCoord, gen.yCoord, gen.zCoord, gen.energyType.ordinal()));
-			//MessagePacketHandler.INSTANCE.sendToAll(new PacketUnitChanged(Minecraft.getMinecraft().thePlayer.worldObj.provider.dimensionId, gen.xCoord, gen.yCoord, gen.zCoord, gen.energyType.ordinal()));
 			break;
 		}
 	}

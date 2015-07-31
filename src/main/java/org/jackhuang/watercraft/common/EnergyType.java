@@ -3,20 +3,62 @@ package org.jackhuang.watercraft.common;
 import org.jackhuang.watercraft.Reference;
 
 public enum EnergyType {
-	EU("IC2/EU"),
-	KU("IC2/KU"),
-	HU("IC2/HU"),
-	MJ("BC6/MJ"),
-	RF("TE4/RF"),
-	FZ("FZ/Charge"),
-	Steam("Steam/mb"),
-	Water("Water/mb");
+	EU("IC2/EU") {
+		@Override
+		public double getFromEU(double eu) {
+			return eu;
+		}
+	},
+	KU("IC2/KU") {
+		@Override
+		public double getFromEU(double eu) {
+			return EU2KU(eu);
+		}
+	},
+	HU("IC2/HU") {
+		@Override
+		public double getFromEU(double eu) {
+			return EU2HU(eu);
+		}
+	},
+	MJ("BC6/MJ") {
+		@Override
+		public double getFromEU(double eu) {
+			return EU2MJ(eu);
+		}
+	},
+	RF("Cofh/RF") {
+		@Override
+		public double getFromEU(double eu) {
+			return EU2RF(eu);
+		}
+	},
+	Charge("FZ/Charge") {
+		@Override
+		public double getFromEU(double eu) {
+			return EU2Charge(eu);
+		}
+	},
+	Steam("Steam/mb") {
+		@Override
+		public double getFromEU(double eu) {
+			return EU2Steam(eu);
+		}
+	},
+	Water("Water/mb") {
+		@Override
+		public double getFromEU(double eu) {
+			return EU2Water(eu);
+		}
+	};
 	
 	public String showedName;
 	
 	EnergyType(String showedName) {
 		this.showedName = showedName;
 	}
+	
+	public abstract double getFromEU(double eu);
 	
 	public static double EU2MJ(double eu) {
 		return eu / Reference.Energy.mj;
@@ -34,7 +76,7 @@ public enum EnergyType {
 		return rf * Reference.Energy.rf;
 	}
 	
-	public static double EU2FZ(double eu) {
+	public static double EU2Charge(double eu) {
 		return eu / Reference.Energy.charge;
 	}
 	
