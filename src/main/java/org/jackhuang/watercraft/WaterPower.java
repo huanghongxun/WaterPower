@@ -69,19 +69,37 @@ import cpw.mods.fml.relauncher.SideOnly;
 	dependencies = "required-after:Forge@[10.13.0.1199,); required-after:IC2@[2.2.628,); after:gregtech; after:Thaumcraft@[4.2.3.5,); after:BuildCraftAPI|power[1.1,); after:Forestry; after:craftguide; after:Waila; after:factorization; after:CoFHCore; after:Mekanism")
 public class WaterPower implements IWorldGenerator {
 
+    /**
+     * Instance of the Mod Water Power.
+     */
 	@Mod.Instance(Reference.ModID)
-	public static WaterPower instance; //Create Instance
+	public static WaterPower instance;
 
+	/**
+	 * Instance of the Sided Proxy, ClientProxy on Client Side, CommonProxy on Server Side.
+	 */
 	@SidedProxy(clientSide = "org.jackhuang.watercraft.client.ClientProxy", serverSide = "org.jackhuang.watercraft.common.CommonProxy")
-	public static CommonProxy proxy;   //Create CommonProxy
+	public static CommonProxy proxy;
 
+	/**
+	 * Instance of the creative tab of Water Power.
+	 */
 	public static final CreativeTabs creativeTabWaterPower = new CreativeTabWaterCraft(
-			"creativeTabWaterPower"); //Set CreativeTab.
+			"creativeTabWaterPower");
 
-	public static final int updateTick = 20; //Set Update Tick.
+	/**
+	 * Watermills & turbines update interval
+	 */
+	public static final int updateTick = 20;
 
+	/**
+	 * Loaded configuration
+	 */
 	private Configuration config;
 	
+	/**
+	 * Recipe Handler
+	 */
 	private IRecipeRegistrator recipe;
 
 	@Mod.EventHandler

@@ -19,26 +19,27 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.FluidRegistry;
 
 public class TileEntityTurbine extends TileEntityElectricMetaBlock {
 
-	public static int maxOutput = 32767;
-	//public int speed;
-	private TurbineType type;
+    public static int maxOutput = 32767;
+    // public int speed;
+    private TurbineType type;
 
     RotorInventorySlot slotRotor;
-    
+
     boolean sendInitData;
 
-	public TileEntityTurbine() {
-		super(0, 10000000);
-		addInvSlot(slotRotor = new RotorInventorySlot(this, 1));
-	}
+    public TileEntityTurbine() {
+        super(0, 10000000);
+        addInvSlot(slotRotor = new RotorInventorySlot(this, 1));
+    }
 
-	public TileEntityTurbine(TurbineType type) {
-		super(type.percent, 10000000);
-		addInvSlot(slotRotor = new RotorInventorySlot(this, 1));
-	}
+    public TileEntityTurbine(TurbineType type) {
+        super(type.percent, 10000000);
+        addInvSlot(slotRotor = new RotorInventorySlot(this, 1));
+    }
 
     @Override
     public void initNBT(NBTTagCompound tag, int meta) {
@@ -54,24 +55,25 @@ public class TileEntityTurbine extends TileEntityElectricMetaBlock {
     public void writeToNBT(NBTTagCompound tag) {
         super.writeToNBT(tag);
 
-        //tag.setInteger("speed", this.speed);
+        // tag.setInteger("speed", this.speed);
 
-        if(type == null) tag.setInteger("type", 0);
-        else tag.setInteger("type", type.ordinal());
+        if (type == null)
+            tag.setInteger("type", 0);
+        else
+            tag.setInteger("type", type.ordinal());
     }
 
+    public void readFromNBT(NBTTagCompound tag) {
+        super.readFromNBT(tag);
 
-	public void readFromNBT(NBTTagCompound tag) {
-		super.readFromNBT(tag);
-		
-		//this.speed = tag.getInteger("speed");
-	}
+        // this.speed = tag.getInteger("speed");
+    }
 
     @Override
     public void writePacketData(NBTTagCompound tag) {
         super.writePacketData(tag);
-        
-        //tag.setInteger("speed", speed);
+
+        // tag.setInteger("speed", speed);
 
         if (sendInitData) {
             sendInitData = false;
@@ -86,7 +88,7 @@ public class TileEntityTurbine extends TileEntityElectricMetaBlock {
     @Override
     public void readPacketData(NBTTagCompound tag) {
         super.readPacketData(tag);
-        //speed = tag.getInteger("speed");
+        // speed = tag.getInteger("speed");
 
         if (tag.hasKey("sendInitData")) {
             type = TurbineType.values()[tag.getInteger("type")];
@@ -98,81 +100,93 @@ public class TileEntityTurbine extends TileEntityElectricMetaBlock {
     public TurbineType getType() {
         return type;
     }
-    
-	private TileEntityReservoir getWater(World world, int x, int y, int z) {
-		TileEntityReservoir reservoir = null;
-		switch (getFacing()) {
-		case 2:
-			// z+1
-			if (Reservoir.isRes(world, x, y, z + 1)) {
-				reservoir = (TileEntityReservoir) world.getTileEntity(x,
-						y, z + 1);
-			}
-			break;
-		case 5:
-			// x-1
-			if (Reservoir.isRes(world, x - 1, y, z))
-				reservoir = (TileEntityReservoir) world.getTileEntity(
-						x - 1, y, z);
-			break;
-		case 3:
-			// z-1
-			if (Reservoir.isRes(world, x, y, z - 1))
-				reservoir = (TileEntityReservoir) world.getTileEntity(x,
-						y, z - 1);
-			break;
-		case 4:
-			// x+1
-			if (Reservoir.isRes(world, x + 1, y, z))
-				reservoir = (TileEntityReservoir) world.getTileEntity(
-						x + 1, y, z);
-			break;
-		}
-		return reservoir;
-	}
 
-	public double getWater() {
-		TileEntityReservoir pair = getWater(worldObj, xCoord, yCoord, zCoord);
-		return pair.getWater();
-	}
+    private TileEntityReservoir getWater(World world, int x, int y, int z) {
+        TileEntityReservoir reservoir = null;
+        switch (getFacing()) {
+        case 2:
+            // z+1
+            if (Reservoir.isRes(world, x, y, z + 1)) {
+                reservoir = (TileEntityReservoir) world.getTileEntity(x, y,
+                        z + 1);
+            }
+            break;
+        case 5:
+            // x-1
+            if (Reservoir.isRes(world, x - 1, y, z))
+                reservoir = (TileEntityReservoir) world.getTileEntity(x - 1, y,
+                        z);
+            break;
+        case 3:
+            // z-1
+            if (Reservoir.isRes(world, x, y, z - 1))
+                reservoir = (TileEntityReservoir) world.getTileEntity(x, y,
+                        z - 1);
+            break;
+        case 4:
+            // x+1
+            if (Reservoir.isRes(world, x + 1, y, z))
+                reservoir = (TileEntityReservoir) world.getTileEntity(x + 1, y,
+                        z);
+            break;
+        }
+        return reservoir;
+    }
 
-	protected double computeOutput(World world, int x, int y, int z) {
-		//calSpeed();
-		/*
-		 * double use = Math.min(water,
-		 * ReservoirType.values()[size.blockType].maxUse); double baseEnergy =
-		 * use * 5000; LogHelper.log("Can output?" + canOutput); if(!canOutput)
-		 * return 0; double per = tickRotor(); LogHelper.log("per?" + per);
-		 * if(per > 0) { double energy = baseEnergy * per * (speed / 1000);
-		 * LogHelper.log("energy?" + energy); LogHelper.log("use?" + use); water
-		 * -= use; return energy; } return 0;
-		 */
-		TileEntityReservoir pair = getWater(world, x, y, z);
-		if (pair == null)
-			return 0;
-		else {
-			WPLog.debugLog("water=" + pair.getWater());
-			WPLog.debugLog("maxuse=" + pair.type.maxUse);
-			double use = Math.min(pair.getWater(), pair.type.maxUse);
-			WPLog.debugLog("use=" + use);
-			double baseEnergy = use * type.percent / 2048;
-			WPLog.debugLog("baseEnergy" + baseEnergy);
-			//WPLog.debugLog("speed" + speed);
-			double per = tickRotor();
-			WPLog.debugLog("per=" + per);
-			if (per > 0) {
-				double energy = baseEnergy * per; // * ((double) speed / 50);
-				WPLog.debugLog("energy = " + energy);
-				if (energy > 0) {
-					pair.useWater((int) use);
-					damageRotor(1);
-				}
-				WPLog.debugLog("use=" + use);
-				return energy;
-			}
-		}
-		return 0;
-	}
+    public double getWater() {
+        TileEntityReservoir pair = getWater(worldObj, xCoord, yCoord, zCoord);
+        return pair.getFluidAmount();
+    }
+
+    protected double computeOutput(World world, int x, int y, int z) {
+        // calSpeed();
+        /*
+         * double use = Math.min(water,
+         * ReservoirType.values()[size.blockType].maxUse); double baseEnergy =
+         * use * 5000; LogHelper.log("Can output?" + canOutput); if(!canOutput)
+         * return 0; double per = tickRotor(); LogHelper.log("per?" + per);
+         * if(per > 0) { double energy = baseEnergy * per * (speed / 1000);
+         * LogHelper.log("energy?" + energy); LogHelper.log("use?" + use); water
+         * -= use; return energy; } return 0;
+         */
+        TileEntityReservoir pair = getWater(world, x, y, z);
+        if (pair == null)
+            return 0;
+        else {
+            WPLog.debugLog("fluidAmount=" + pair.getFluidAmount());
+            WPLog.debugLog("maxUse=" + pair.type.maxUse);
+            double use = Math.min(pair.getFluidAmount(), pair.type.maxUse);
+            WPLog.debugLog("use=" + use);
+            int multiple = 0;
+            if (pair.getFluidfromTank() == FluidRegistry.WATER)
+                multiple = 1;
+            else if (FluidRegistry.isFluidRegistered("steam")
+                    && pair.getFluidfromTank() == FluidRegistry
+                            .getFluid("steam")
+                    || FluidRegistry.isFluidRegistered("ic2steam")
+                    && pair.getFluidfromTank() == FluidRegistry
+                            .getFluid("ic2steam"))
+                multiple = 5;
+            if (multiple == 0)
+                return 0;
+            double baseEnergy = use * type.percent / 2048 * multiple;
+            WPLog.debugLog("baseEnergy" + baseEnergy);
+            // WPLog.debugLog("speed" + speed);
+            double per = tickRotor();
+            WPLog.debugLog("per=" + per);
+            if (per > 0) {
+                double energy = baseEnergy * per; // * ((double) speed / 50);
+                WPLog.debugLog("energy = " + energy);
+                if (energy > 0) {
+                    pair.useLiquid((int) use);
+                    damageRotor(1);
+                }
+                WPLog.debugLog("use=" + use);
+                return energy;
+            }
+        }
+        return 0;
+    }
 
     public boolean hasRotor() {
         return slotRotor != null && !slotRotor.isEmpty()
@@ -183,20 +197,20 @@ public class TileEntityTurbine extends TileEntityElectricMetaBlock {
         return (ItemRotor) slotRotor.get(0).getItem();
     }
 
-	private void damageRotor(int tick) {
-		ItemRotor rotor = getRotor();
-		rotor.tickRotor(slotRotor.get(0), this, worldObj);
-		if (!rotor.type.isInfinite()) {
-			if (slotRotor.get(0).getItemDamage() + tick > slotRotor
-					.get(0).getMaxDamage()) {
-			    slotRotor.put(0, null);
-			} else {
-				int damage = slotRotor.get(0).getItemDamage() + tick;
-				slotRotor.get(0).setItemDamage(damage);
-			}
-			markDirty();
-		}
-	}
+    private void damageRotor(int tick) {
+        ItemRotor rotor = getRotor();
+        rotor.tickRotor(slotRotor.get(0), this, worldObj);
+        if (!rotor.type.isInfinite()) {
+            if (slotRotor.get(0).getItemDamage() + tick > slotRotor.get(0)
+                    .getMaxDamage()) {
+                slotRotor.put(0, null);
+            } else {
+                int damage = slotRotor.get(0).getItemDamage() + tick;
+                slotRotor.get(0).setItemDamage(damage);
+            }
+            markDirty();
+        }
+    }
 
     private double tickRotor() {
         if (!Reference.General.watermillNeedsRotor)
@@ -224,20 +238,10 @@ public class TileEntityTurbine extends TileEntityElectricMetaBlock {
         return super.isActive() && (storage < maxStorage);
     }
     /*
-	private void calSpeed() {
-		TileEntityReservoir r = getWater(worldObj, xCoord, yCoord, zCoord);
-		if (r != null && r.getWater() > 0 && hasRotor()) {
-			// canOutput = true;
-			speed++;
-			if (speed > 50)
-				speed = 50;
-		} else {
-			speed--;
-			if (speed < 0)
-				speed = 0;
-		}
-		if (speed > 0)
-			damageRotor(1);
-	}*/
+     * private void calSpeed() { TileEntityReservoir r = getWater(worldObj,
+     * xCoord, yCoord, zCoord); if (r != null && r.getWater() > 0 && hasRotor())
+     * { // canOutput = true; speed++; if (speed > 50) speed = 50; } else {
+     * speed--; if (speed < 0) speed = 0; } if (speed > 0) damageRotor(1); }
+     */
 
 }

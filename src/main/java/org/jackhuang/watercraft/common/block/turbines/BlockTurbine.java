@@ -48,7 +48,8 @@ public class BlockTurbine extends BlockMeta {
 		
 		for (int i = 0; i < maxMetaData(); i++) {
 			textures[i][0] = iconDown;
-			textures[i][3] = iconSouth;
+			textures[i][3] = 
+                    iconRegister.registerIcon(Reference.ModID + ":turbine/SOUTH_" + getTextureName(i));;
 			textures[i][5] = iconNorth;
 			textures[i][1] = textures[i][4] = textures[i][2] = iconSide;
 		}

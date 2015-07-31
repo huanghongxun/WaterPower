@@ -32,86 +32,94 @@ import net.minecraftforge.common.DimensionManager;
 
 @SideOnly(Side.CLIENT)
 public class GuiWatermill extends GuiContainer {
-	private TileEntityWatermill gen;
+    private TileEntityWatermill gen;
 
-	private ContainerWatermill container;
-	private DecimalFormat df;
-	private GuiButton btnEnergyType;
+    private ContainerWatermill container;
+    private DecimalFormat df;
+    private GuiButton btnEnergyType;
 
-	public GuiWatermill(EntityPlayer player, TileEntityWatermill gen) {
-		super(new ContainerWatermill(player, gen));
-		this.gen = gen;
-		allowUserInput = false;
-		container = new ContainerWatermill(player, gen);
-		df = new DecimalFormat("#.00");
-	}
-	
-	@Override
-	public void initGui() {
-		super.initGui();
+    public GuiWatermill(EntityPlayer player, TileEntityWatermill gen) {
+        super(new ContainerWatermill(player, gen));
+        this.gen = gen;
+        allowUserInput = false;
+        container = new ContainerWatermill(player, gen);
+        df = new DecimalFormat("#.00");
+    }
 
-		int l = (width - xSize) / 2;
-		int i1 = (height - ySize) / 2;
-		btnEnergyType = new GuiButton(1, l + 100, i1 + 24, 30, 20, gen.energyType.name());
-		this.buttonList.add(btnEnergyType);
-	}
+    @Override
+    public void initGui() {
+        super.initGui();
 
-	@Override
-	protected void drawGuiContainerBackgroundLayer(float f, int i, int j) {
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        int l = (width - xSize) / 2;
+        int i1 = (height - ySize) / 2;
+        btnEnergyType = new GuiButton(1, l + 100, i1 + 24, 30, 20,
+                gen.energyType.name());
+        this.buttonList.add(btnEnergyType);
+    }
 
-		mc.renderEngine.bindTexture(new ResourceLocation(Reference.ModID
-				+ ":textures/gui/GUIWatermill.png"));
-		int l = (width - xSize) / 2;
-		int i1 = (height - ySize) / 2;
-		drawTexturedModalRect(l, i1, 0, 0, xSize, ySize);
-	}
+    @Override
+    protected void drawGuiContainerBackgroundLayer(float f, int i, int j) {
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-	@Override
-	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
+        mc.renderEngine.bindTexture(new ResourceLocation(Reference.ModID
+                + ":textures/gui/GUIWatermill.png"));
+        int l = (width - xSize) / 2;
+        int i1 = (height - ySize) / 2;
+        drawTexturedModalRect(l, i1, 0, 0, xSize, ySize);
+    }
 
-		fontRendererObj.drawString(gen.getInventoryName(), 8, 6, 0x404040);
-		fontRendererObj.drawString(
-				StatCollector.translateToLocal("cptwtrml.rotor.ROTOR") + ":",
-				44, 30, 0x404040);
-		fontRendererObj.drawString(
-				StatCollector.translateToLocal("cptwtrml.watermill.OUTPUT")
-						+ ": "
-						+ df.format(container.tileEntity.latestOutput)
-						+ "EU/t", 8, 40, 0x404040);
-		boolean w = gen.waterBlocks == -1;
-		fontRendererObj
-				.drawString(
-						StatCollector
-								.translateToLocal("cptwtrml.watermill.CHECK_WATER")
-								+ ","
-								+ StatCollector
-										.translateToLocal("cptwtrml.watermill.CHECK_LAVA")
-								+ ":"
-								+ (w ? StatCollector
-										.translateToLocal("cptwtrml.watermill.CANNOT_CHECK")
-										: gen.waterBlocks + ","
-												+ gen.lavaBlocks), 8, 50,
-						0x404040);
-		fontRendererObj.drawString(StatCollector.translateToLocal("cptwtrml.watermill.PRODUCTION") + ":" + gen.getFromEU(gen.production) + gen.energyType.name(), 8, 70, 0x404040);
-		int a = gen.getRange();
-		int b = a * a * a - 1;
-		fontRendererObj.drawString(
-				StatCollector.translateToLocal("cptwtrml.watermill.NEED") + ":"
-						+ b + "=" + a + "^3-1", 8, 60, 0x404040);
-	}
-	
-	@Override
-	protected void actionPerformed(GuiButton p_146284_1_) {
-		super.actionPerformed(p_146284_1_);
-		
-		switch(p_146284_1_.id) {
-		case 1:
-			gen.energyType = EnergyType.values()[(gen.energyType.ordinal() + 1) % EnergyType.values().length];
-			btnEnergyType.displayString = gen.energyType.name();
-			MessagePacketHandler.INSTANCE.sendToServer(new PacketUnitChanged(Minecraft.getMinecraft().thePlayer.worldObj.provider.dimensionId, gen.xCoord, gen.yCoord, gen.zCoord, gen.energyType.ordinal()));
-			break;
-		}
-	}
+    @Override
+    protected void drawGuiContainerForegroundLayer(int par1, int par2) {
+
+        fontRendererObj.drawString(gen.getInventoryName(), 8, 6, 0x404040);
+        fontRendererObj.drawString(
+                StatCollector.translateToLocal("cptwtrml.rotor.ROTOR") + ":",
+                44, 30, 0x404040);
+        fontRendererObj.drawString(
+                StatCollector.translateToLocal("cptwtrml.watermill.OUTPUT")
+                        + ": " + df.format(container.tileEntity.latestOutput)
+                        + "EU/t", 8, 45, 0x404040);
+        boolean w = gen.waterBlocks == -1;
+        fontRendererObj
+                .drawString(
+                        StatCollector
+                                .translateToLocal("cptwtrml.watermill.CHECK_WATER")
+                                + ","
+                                + StatCollector
+                                        .translateToLocal("cptwtrml.watermill.CHECK_LAVA")
+                                + ":"
+                                + (w ? StatCollector
+                                        .translateToLocal("cptwtrml.watermill.CANNOT_CHECK")
+                                        : gen.waterBlocks + ","
+                                                + gen.lavaBlocks), 8, 55,
+                        0x404040);
+        int a = gen.getRange();
+        int b = a * a * a - 1;
+        fontRendererObj.drawString(
+                StatCollector.translateToLocal("cptwtrml.watermill.NEED") + ":"
+                        + b + "=" + a + "^3-1", 8, 65, 0x404040);
+        fontRendererObj.drawString(
+                StatCollector.translateToLocal("cptwtrml.watermill.PRODUCTION")
+                        + ":" + gen.getFromEU(gen.production)
+                        + gen.energyType.name(), 8, 75, 0x404040);
+    }
+
+    @Override
+    protected void actionPerformed(GuiButton p_146284_1_) {
+        super.actionPerformed(p_146284_1_);
+
+        switch (p_146284_1_.id) {
+        case 1:
+            gen.energyType = EnergyType.values()[(gen.energyType.ordinal() + 1)
+                    % EnergyType.values().length];
+            btnEnergyType.displayString = gen.energyType.name();
+            MessagePacketHandler.INSTANCE
+                    .sendToServer(new PacketUnitChanged(
+                            Minecraft.getMinecraft().thePlayer.worldObj.provider.dimensionId,
+                            gen.xCoord, gen.yCoord, gen.zCoord, gen.energyType
+                                    .ordinal()));
+            break;
+        }
+    }
 
 }

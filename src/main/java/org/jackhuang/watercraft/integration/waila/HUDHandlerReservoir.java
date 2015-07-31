@@ -31,12 +31,12 @@ public class HUDHandlerReservoir implements IWailaDataProvider {
 		TileEntity te = arg2.getTileEntity();
 		if(!(te instanceof TileEntityReservoir)) return arg1;
 		TileEntityReservoir tile = (TileEntityReservoir) te;
-		arg1.add("Capacity: " + tile.getMaxWater());
+		arg1.add("Capacity: " + tile.getMaxFluidAmount());
 		arg1.add("Add: " + tile.getLastAddedWater());
 		if(tile.getFluidTank() == null) return arg1;
 		FluidStack f = tile.getFluidTank().getFluid();
 		arg1.add("Stored Fluid: " + (f == null ? "Empty" : f.getLocalizedName()));
-		arg1.add("Stored: " + tile.getWater());
+		arg1.add("Stored: " + tile.getFluidAmount());
 		arg1.add("Stored HP: " + tile.getHPWater());
 		return arg1;
 	}

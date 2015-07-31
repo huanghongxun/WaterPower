@@ -88,7 +88,7 @@ public class BlockReservoir extends BlockMeta {
 				al.add("Type: null");
 			else
 				al.add("Type: " + te.type.name());
-			al.add("Water: " + te.getWater());
+			al.add("Water: " + te.getFluidAmount());
 		} else {
 			al.add("Not a reservoir tile entity.");
 		}
