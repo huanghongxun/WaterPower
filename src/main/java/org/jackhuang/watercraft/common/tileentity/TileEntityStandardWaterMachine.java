@@ -2,8 +2,6 @@ package org.jackhuang.watercraft.common.tileentity;
 
 import java.util.List;
 
-import ic2.api.recipe.RecipeOutput;
-
 import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.api.IUpgrade;
 import org.jackhuang.watercraft.client.gui.IHasGui;
@@ -16,255 +14,269 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 public abstract class TileEntityStandardWaterMachine extends
-		TileEntityWaterMachine implements IHasGui {
-	protected short progress = 0;
-	public int defaultEnergyConsume;
-	public int defaultOperationLength;
-	public int defaultEnergyStorage;
-	public int energyConsume;
-	public int operationLength;
-	public int operationsPerTick;
-	protected float guiProgress;
-	private static final int EventStart = 0;
-	private static final int EventInterrupt = 1;
-	private static final int EventStop = 2;
-	public InventorySlotProcessable inputSlot;
-	public final InventorySlotOutput outputSlot;
-	public final InventorySlotUpgrade upgradeSlot;
-	protected boolean isLastFailed = false;
-	protected ItemStack[] lastFailedContents;
+	TileEntityWaterMachine implements IHasGui {
 
-	public TileEntityStandardWaterMachine(int waterPerTick, int length) {
-		this(waterPerTick, length, 2);
+    protected short progress = 0;
+    public int defaultEnergyConsume;
+    public int defaultOperationLength;
+    public int defaultEnergyStorage;
+    public int energyConsume;
+    public int operationLength;
+    public int operationsPerTick;
+    protected float guiProgress;
+    private static final int EventStart = 0;
+    private static final int EventInterrupt = 1;
+    private static final int EventStop = 2;
+    public InventorySlotProcessable inputSlot;
+    public final InventorySlotOutput outputSlot;
+    public final InventorySlotUpgrade upgradeSlot;
+    protected boolean isLastFailed = false;
+    protected ItemStack[] lastFailedContents;
+
+    public TileEntityStandardWaterMachine(int waterPerTick, int length) throws ClassNotFoundException {
+	this(waterPerTick, length, 2);
+    }
+
+    public TileEntityStandardWaterMachine(int waterPerTick, int length,
+	    int outputSlots) throws ClassNotFoundException {
+	super(waterPerTick * length);
+
+	this.defaultEnergyConsume = this.energyConsume = waterPerTick;
+	this.defaultOperationLength = this.operationLength = length;
+	this.defaultEnergyStorage = waterPerTick * length;
+
+	operationsPerTick = 1;
+
+	this.outputSlot = new InventorySlotOutput(this, "output", outputSlots);
+	this.upgradeSlot = new InventorySlotUpgrade(this, "upgrade", 4);
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound nbttagcompound) {
+	super.readFromNBT(nbttagcompound);
+	this.progress = nbttagcompound.getShort("progress");
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound nbttagcompound) {
+	super.writeToNBT(nbttagcompound);
+	nbttagcompound.setShort("progress", this.progress);
+    }
+
+    @Override
+    public void validate() {
+	super.validate();
+
+	if (WaterPower.isSimulating()) {
+	    setOverclockRates();
+	}
+    }
+
+    @Override
+    public void markDirty() {
+	super.markDirty();
+
+	if (WaterPower.isSimulating()) {
+	    setOverclockRates();
 	}
 
-	public TileEntityStandardWaterMachine(int waterPerTick, int length,
-			int outputSlots) {
-		super(waterPerTick * length);
+    }
 
-		this.defaultEnergyConsume = this.energyConsume = waterPerTick;
-		this.defaultOperationLength = this.operationLength = length;
-		this.defaultEnergyStorage = waterPerTick * length;
+    public float getProgress() {
+	return this.guiProgress;
+    }
 
-		operationsPerTick = 1;
+    @Override
+    public void updateEntity() {
+	super.updateEntity();
 
-		this.outputSlot = new InventorySlotOutput(this, "output", outputSlots);
-		this.upgradeSlot = new InventorySlotUpgrade(this, "upgrade", 4);
+	if (!WaterPower.isSimulating()) {
+	    return;
 	}
 
-	public void readFromNBT(NBTTagCompound nbttagcompound) {
-		super.readFromNBT(nbttagcompound);
-		this.progress = nbttagcompound.getShort("progress");
-	}
+	boolean needsInvUpdate = false;
 
-	public void writeToNBT(NBTTagCompound nbttagcompound) {
-		super.writeToNBT(nbttagcompound);
-		nbttagcompound.setShort("progress", this.progress);
-	}
+	if (isLastFailed && inputSlot.isEquals(lastFailedContents))
+			; else {
+	    MyRecipeOutput output = getOutput();
 
-	@Override
-	public void validate() {
-		super.validate();
+	    if ((output != null) && (this.water >= this.energyConsume)) {
 
-		if (WaterPower.isSimulating())
-			setOverclockRates();
-	}
+		if (isLastFailed) {
+		    beginProcess(output);
+		    isLastFailed = false;
+		}
+		// setActive(true);
 
-	@Override
-	public void markDirty() {
-		super.markDirty();
+		this.progress = (short) (this.progress + 1);
+		this.water -= this.energyConsume;
 
-		if (WaterPower.isSimulating())
-			setOverclockRates();
-
-	}
-
-	public float getProgress() {
-		return this.guiProgress;
-	}
-
-	public void updateEntity() {
-		super.updateEntity();
-
-		if (!WaterPower.isSimulating())
-			return;
-
-		boolean needsInvUpdate = false;
-
-		if (isLastFailed && inputSlot.isEquals(lastFailedContents))
-			;
-		else {
-			MyRecipeOutput output = getOutput();
-
-			if ((output != null) && (this.water >= this.energyConsume)) {
-
-				if (isLastFailed) {
-					beginProcess(output);
-					isLastFailed = false;
-				}
-				// setActive(true);
-
-				this.progress = (short) (this.progress + 1);
-				this.water -= this.energyConsume;
-
-				if (this.progress >= this.operationLength) {
-					operate(output);
-					needsInvUpdate = true;
-					this.progress = 0;
-				}
-			} else {
-				if (output == null) {
-					this.progress = 0;
-					isLastFailed = true;
-					lastFailedContents = inputSlot.getCopiedContent();
-				}
-
-				// setActive(false);
-			}
-
-			float tmp = guiProgress;
-			if (WaterPower.isSimulating())
-				this.guiProgress = ((float) this.progress / (float) this.operationLength);
-			if (Math.abs(tmp - guiProgress) > 0.001
-					&& WaterPower.isSimulating())
-				sendUpdateToClient();
+		if (this.progress >= this.operationLength) {
+		    operate(output);
+		    needsInvUpdate = true;
+		    this.progress = 0;
+		}
+	    } else {
+		if (output == null) {
+		    this.progress = 0;
+		    isLastFailed = true;
+		    lastFailedContents = inputSlot.getCopiedContent();
 		}
 
-		if (needsInvUpdate)
-			super.markDirty();
+		// setActive(false);
+	    }
+
+	    float tmp = guiProgress;
+	    if (WaterPower.isSimulating()) {
+		this.guiProgress = ((float) this.progress / (float) this.operationLength);
+	    }
+	    if (Math.abs(tmp - guiProgress) > 0.001
+		    && WaterPower.isSimulating()) {
+		sendUpdateToClient();
+	    }
 	}
 
-	protected void beginProcess(MyRecipeOutput output) {
+	if (needsInvUpdate) {
+	    super.markDirty();
+	}
+    }
+
+    protected void beginProcess(MyRecipeOutput output) {
+    }
+
+    protected void failedProcess() {
+    }
+
+    public void operate(MyRecipeOutput output) {
+	for (int i = 0; i < this.operationsPerTick; i++) {
+	    List processResult = output.items;
+
+	    operateOnce(output, processResult);
+
+	    output = getOutput();
+	    if (output == null) {
+		break;
+	    }
+	}
+    }
+
+    public void operateOnce(MyRecipeOutput output, List<ItemStack> processResult) {
+	this.inputSlot.consume();
+
+	this.outputSlot.add(processResult);
+    }
+
+    public void setOverclockRates() {
+	int extraProcessTime = 0;
+	double processTimeMultiplier = 1.0D;
+	int extraEnergyDemand = 0;
+	double energyDemandMultiplier = 1.0D;
+	int extraEnergyStorage = 0;
+	double energyStorageMultiplier = 1.0D;
+
+	for (int i = 0; i < this.upgradeSlot.size(); i++) {
+	    ItemStack stack = this.upgradeSlot.get(i);
+
+	    if ((stack == null)
+		    || (!(stack.getItem() instanceof IUpgrade))) {
+		continue;
+	    }
+	    IUpgrade upgrade = (IUpgrade) stack.getItem();
+
+	    processTimeMultiplier *= Math.pow(
+		    upgrade.getSpeedAdditionalValue(stack), stack.stackSize);
+	    energyDemandMultiplier *= Math.pow(
+		    upgrade.getEnergyDemandMultiplier(stack), stack.stackSize);
+	    extraEnergyStorage += upgrade.getStorageAdditionalValue(stack)
+		    * stack.stackSize;
+	    energyStorageMultiplier *= Math.pow(1, stack.stackSize);
 	}
 
-	protected void failedProcess() {
+	double previousProgress = this.progress / this.operationLength;
+
+	double stackOpLen = (this.defaultOperationLength + extraProcessTime)
+		* 64.0D * processTimeMultiplier;
+	this.operationsPerTick = (int) Math.min(Math.ceil(64.0D / stackOpLen),
+		2147483647.0D);
+	this.operationLength = (int) Math.round(stackOpLen
+		* this.operationsPerTick / 64.0D);
+
+	this.energyConsume = applyModifier(this.defaultEnergyConsume,
+		extraEnergyDemand, energyDemandMultiplier);
+	this.maxWater = applyModifier(this.defaultEnergyStorage,
+		extraEnergyStorage + this.operationLength * this.energyConsume,
+		energyStorageMultiplier);
+
+	if (this.operationLength < 1) {
+	    this.operationLength = 1;
 	}
 
-	public void operate(MyRecipeOutput output) {
-		for (int i = 0; i < this.operationsPerTick; i++) {
-			List processResult = output.items;
+	this.progress = (short) (int) Math.floor(previousProgress
+		* this.operationLength + 0.1D);
+    }
 
-			operateOnce(output, processResult);
+    private int applyModifier(int base, int extra, double multiplier) {
+	double ret = Math.round((base + extra) * multiplier);
 
-			output = getOutput();
-			if (output == null)
-				break;
-		}
+	return ret > 2147483647.0D ? 2147483647 : (int) ret;
+    }
+
+    public MyRecipeOutput getOutput() {
+	if (this.inputSlot.isEmpty()) {
+	    return null;
 	}
 
-	public void operateOnce(MyRecipeOutput output, List<ItemStack> processResult) {
-		this.inputSlot.consume();
-
-		this.outputSlot.add(processResult);
+	MyRecipeOutput output = this.inputSlot.process();
+	if (output == null) {
+	    return null;
 	}
 
-	public void setOverclockRates() {
-		int extraProcessTime = 0;
-		double processTimeMultiplier = 1.0D;
-		int extraEnergyDemand = 0;
-		double energyDemandMultiplier = 1.0D;
-		int extraEnergyStorage = 0;
-		double energyStorageMultiplier = 1.0D;
-
-		for (int i = 0; i < this.upgradeSlot.size(); i++) {
-			ItemStack stack = this.upgradeSlot.get(i);
-
-			if ((stack == null)
-					|| (!(stack.getItem() instanceof IUpgrade)))
-				continue;
-			IUpgrade upgrade = (IUpgrade) stack.getItem();
-
-			processTimeMultiplier *= Math.pow(
-					upgrade.getSpeedAdditionalValue(stack), stack.stackSize);
-			energyDemandMultiplier *= Math.pow(
-					upgrade.getEnergyDemandMultiplier(stack), stack.stackSize);
-			extraEnergyStorage += upgrade.getStorageAdditionalValue(stack)
-					* stack.stackSize;
-			energyStorageMultiplier *= Math.pow(1, stack.stackSize);
-		}
-
-		double previousProgress = this.progress / this.operationLength;
-
-		double stackOpLen = (this.defaultOperationLength + extraProcessTime)
-				* 64.0D * processTimeMultiplier;
-		this.operationsPerTick = (int) Math.min(Math.ceil(64.0D / stackOpLen),
-				2147483647.0D);
-		this.operationLength = (int) Math.round(stackOpLen
-				* this.operationsPerTick / 64.0D);
-
-		this.energyConsume = applyModifier(this.defaultEnergyConsume,
-				extraEnergyDemand, energyDemandMultiplier);
-		this.maxWater = applyModifier(this.defaultEnergyStorage,
-				extraEnergyStorage + this.operationLength * this.energyConsume,
-				energyStorageMultiplier);
-
-		if (this.operationLength < 1)
-			this.operationLength = 1;
-
-		this.progress = (short) (int) Math.floor(previousProgress
-				* this.operationLength + 0.1D);
+	if (this.outputSlot.canAdd(output.items)) {
+	    return output;
 	}
+	return null;
+    }
 
-	private int applyModifier(int base, int extra, double multiplier) {
-		double ret = Math.round((base + extra) * multiplier);
+    public double getEnergy() {
+	return this.water;
+    }
 
-		return ret > 2147483647.0D ? 2147483647 : (int) ret;
+    public boolean useEnergy(double amount) {
+	if (this.water >= amount) {
+	    this.water -= amount;
+
+	    return true;
 	}
+	return false;
+    }
 
-	public MyRecipeOutput getOutput() {
-		if (this.inputSlot.isEmpty())
-			return null;
+    public int getOutputSize() {
+	return this.outputSlot.size();
+    }
 
-		MyRecipeOutput output = this.inputSlot.process();
-		if (output == null)
-			return null;
+    public ItemStack getOutput(int index) {
+	return this.outputSlot.get(index);
+    }
 
-		if (this.outputSlot.canAdd(output.items)) {
-			return output;
-		}
-		return null;
-	}
+    public void setOutput(int index, ItemStack stack) {
+	this.outputSlot.put(index, stack);
+    }
 
-	public double getEnergy() {
-		return this.water;
-	}
+    @Override
+    public void readPacketData(NBTTagCompound tag) {
+	super.readPacketData(tag);
 
-	public boolean useEnergy(double amount) {
-		if (this.water >= amount) {
-			this.water -= amount;
+	guiProgress = tag.getFloat("guiProgress");
+	progress = tag.getShort("progress");
+	energyConsume = tag.getInteger("energyConsume");
+    }
 
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public void writePacketData(NBTTagCompound tag) {
+	super.writePacketData(tag);
 
-	public int getOutputSize() {
-		return this.outputSlot.size();
-	}
-
-	public ItemStack getOutput(int index) {
-		return this.outputSlot.get(index);
-	}
-
-	public void setOutput(int index, ItemStack stack) {
-		this.outputSlot.put(index, stack);
-	}
-
-	@Override
-	public void readPacketData(NBTTagCompound tag) {
-		super.readPacketData(tag);
-
-		guiProgress = tag.getFloat("guiProgress");
-		progress = tag.getShort("progress");
-		energyConsume = tag.getInteger("energyConsume");
-	}
-
-	@Override
-	public void writePacketData(NBTTagCompound tag) {
-		super.writePacketData(tag);
-
-		tag.setFloat("guiProgress", guiProgress);
-		tag.setShort("progress", progress);
-		tag.setInteger("energyConsume", energyConsume);
-	}
+	tag.setFloat("guiProgress", guiProgress);
+	tag.setShort("progress", progress);
+	tag.setInteger("energyConsume", energyConsume);
+    }
 }

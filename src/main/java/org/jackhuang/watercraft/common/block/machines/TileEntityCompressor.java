@@ -16,30 +16,30 @@ import org.jackhuang.watercraft.integration.MekanismRecipes;
 
 public class TileEntityCompressor extends TileEntityStandardWaterMachine {
 
-	public TileEntityCompressor() {
-		super(2000, 2*20);
+    public TileEntityCompressor() throws ClassNotFoundException {
+	super(2000, 2 * 20);
 
-		this.inputSlot = new InventorySlotProcessableGeneric(this, "input",
-				1, MyRecipes.compressor);
-	}
-	
-	public static void init() {
-		MyRecipes.compressor = new MultiRecipeManager().addRecipeManager(MekanismRecipes.IS_MEKANISM_RECIPES_AVAILABLE, new HashMapRecipeManager(MekanismRecipes.compressor))
-				.addRecipeManager(IndustrialCraftRecipes.IS_INDUSTRIAL_CRAFT_RECIPES_AVAILABLE, new IndustrialCraftRecipeManager(IndustrialCraftRecipes.compressor));
-	}
+	this.inputSlot = new InventorySlotProcessableGeneric(this, "input",
+		1, MyRecipes.compressor);
+    }
 
-	@Override
-	public String getInventoryName() {
-		return "Compressor";
-	}
+    public static void init() {
+	MyRecipes.compressor = new MultiRecipeManager().addRecipeManager(MekanismRecipes.IS_MEKANISM_RECIPES_AVAILABLE, new HashMapRecipeManager(MekanismRecipes.compressor))
+		.addRecipeManager(IndustrialCraftRecipes.IS_INDUSTRIAL_CRAFT_RECIPES_AVAILABLE, new IndustrialCraftRecipeManager(IndustrialCraftRecipes.compressor));
+    }
 
-	public float getWrenchDropRate() {
-		return 1;
-	}
+    @Override
+    public String getInventoryName() {
+	return "Compressor";
+    }
 
-	@Override
-	public int getGuiId() {
-		return DefaultGuiIds.get("tileEntityCompressor");
-	}
+    public float getWrenchDropRate() {
+	return 1;
+    }
+
+    @Override
+    public int getGuiId() {
+	return DefaultGuiIds.get("tileEntityCompressor");
+    }
 
 }
