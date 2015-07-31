@@ -56,7 +56,7 @@ public abstract class TileEntityLiquidTankInventory extends TileEntityInventory
 	}
 
 	public int getTankFluidId() {
-		return getFluidStackfromTank().fluidID;
+		return getFluidStackfromTank().getFluidID();
 	}
 
 	public int gaugeLiquidScaled(int i) {

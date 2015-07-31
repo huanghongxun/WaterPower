@@ -490,7 +490,7 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 		tag.setInteger("maxWater", getMaxWater());
 		tag.setInteger("water", getWater());
 		if(getFluidTank() != null && getFluidTank().getFluid() != null)
-			tag.setInteger("fluid", getFluidTank().getFluid().fluidID);
+			tag.setInteger("fluid", getFluidTank().getFluid().getFluidID());
 		else
 			tag.setInteger("fluid", -1);
 		tag.setInteger("extraStorage", extraStorage);

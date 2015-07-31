@@ -8,9 +8,12 @@ import org.jackhuang.watercraft.util.Mods;
 import cpw.mods.fml.common.Optional.Interface;
 import cpw.mods.fml.common.Optional.InterfaceList;
 import cpw.mods.fml.common.Optional.Method;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import mcp.mobius.waila.api.IWailaConfigHandler;
@@ -64,6 +67,13 @@ public class HUDHandlerWatermills implements IWailaDataProvider {
 			IWailaDataAccessor arg2, IWailaConfigHandler arg3) {
 		// TODO Auto-generated method stub
 		return arg1;
+	}
+
+	@Override
+	public NBTTagCompound getNBTData(EntityPlayerMP arg0, TileEntity arg1,
+			NBTTagCompound arg2, World arg3, int arg4, int arg5, int arg6) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

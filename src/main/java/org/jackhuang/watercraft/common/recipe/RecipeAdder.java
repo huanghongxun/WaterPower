@@ -18,7 +18,7 @@ import org.jackhuang.watercraft.util.Mods;
 
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.registry.GameRegistry;
-import mekanism.api.RecipeHelper;
+import mekanism.api.recipe.RecipeHelper;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -43,7 +43,7 @@ public class RecipeAdder {
 		    	if(Block.getBlockFromItem(input.getItem()) != Blocks.air)
 		    		factorization.oreprocessing.TileEntityGrinder.addRecipe(input, output, 1);
 			} catch(Throwable ex) {
-				FMLLog.warning("Failed to add pulverization recipe to factorization. Please report this error to the author of WaterPower!");
+				FMLLog.warning("Failed to add pulverization recipe to factorization. Please report this error to https://github.com/huanghongxun/WaterPower/issues!");
 			}
 		}
 		if(Mods.Mekanism.isAvailable) {

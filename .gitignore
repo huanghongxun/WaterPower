@@ -1,3 +1,11 @@
+
+#idea
+bin/
+
+*.iml
+*.ipr
+*.iws
+
 #gradle
 build/
 .gradle/
