@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -15,7 +16,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import org.jackhuang.watercraft.InternalName;
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.common.block.BlockMultiID;
 import org.jackhuang.watercraft.common.block.GlobalBlocks;
@@ -28,7 +28,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BlockMachines extends BlockMultiID {
 
 	public BlockMachines() {
-		super(InternalName.cptBlockMachine, Material.iron, ItemMachines.class);
+		super("cptBlockMachine", Material.iron, ItemMachines.class);
 
 		setHardness(2f);
 		// setStepSound(soundMetalFootstep);

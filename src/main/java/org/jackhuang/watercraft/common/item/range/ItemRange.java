@@ -5,14 +5,13 @@ import java.util.List;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
-import org.jackhuang.watercraft.InternalName;
 import org.jackhuang.watercraft.common.item.GlobalItems;
 import org.jackhuang.watercraft.common.item.ItemBase;
 
 public class ItemRange extends ItemBase {
 	
 	public ItemRange() {
-		super(InternalName.cptItemRange);
+		super("cptItemRange");
 		setHasSubtypes(true);
 	}
 	

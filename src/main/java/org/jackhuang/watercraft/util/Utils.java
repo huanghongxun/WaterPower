@@ -11,10 +11,16 @@ package org.jackhuang.watercraft.util;
 import ic2.api.item.IC2Items;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
+import org.jackhuang.watercraft.WaterPower;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
@@ -68,6 +74,7 @@ public class Utils {
 	}
 	
 	public static boolean isITNT(ItemStack is) {
+	    if(!Mods.IndustrialCraft2.isAvailable) return false;
 		ItemStack b = IC2Items.getItem("industrialTnt");
 		if(b.getItem() == is.getItem() && b.getItemDamage() == is.getItemDamage())
 			return true;
@@ -161,6 +168,33 @@ public class Utils {
 	public static boolean isLava(World world, int x, int y, int z) {
 		Block block = world.getBlock(x, y, z);
 		return block == Blocks.lava || block == Blocks.flowing_lava;
+	}
+	
+	public static final Random rand = new Random();
+	
+	public static void dropItems(World world, int x, int y, int z, List<ItemStack> drops) {
+	    if(WaterPower.isSimulating()) {
+	        for(ItemStack item : drops) {
+	            if(item != null && item.stackSize > 0) {
+	                float rx = rand.nextFloat() * 0.8F + 0.1F;
+	                float ry = rand.nextFloat() * 0.8F + 0.1F;
+	                float rz = rand.nextFloat() * 0.8F + 0.1F;
+
+	                EntityItem entityItem = new EntityItem(world, x + rx, y + ry, z
+	                        + rz, item.copy());
+
+	                float factor = 0.05F;
+	                entityItem.motionX = (rand.nextGaussian() * factor);
+	                entityItem.motionY = (rand.nextGaussian() * factor + 0.2);
+	                entityItem.motionZ = (rand.nextGaussian() * factor);
+	                world.spawnEntityInWorld(entityItem);
+	            }
+	        }
+	    }
+	}
+	
+	public static int convertFacingAndForgeDirection(int facing) {
+	    return facing + (facing % 2 * -2 + 1);
 	}
 }
 

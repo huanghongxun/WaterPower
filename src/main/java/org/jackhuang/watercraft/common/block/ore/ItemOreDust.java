@@ -4,7 +4,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.oredict.OreDictionary;
 
-import org.jackhuang.watercraft.InternalName;
 import org.jackhuang.watercraft.client.render.IIconContainer;
 import org.jackhuang.watercraft.client.render.RecolorableTextures;
 import org.jackhuang.watercraft.common.item.ItemRecolorable;
@@ -12,7 +11,7 @@ import org.jackhuang.watercraft.common.item.ItemRecolorable;
 public class ItemOreDust extends ItemRecolorable {
 
 	public ItemOreDust() {
-		super(InternalName.cptItemOreDust);
+		super("cptItemOreDust");
 		
 		registerOreDict();
 	}

@@ -2,7 +2,6 @@ package org.jackhuang.watercraft.common.block.turbines;
 
 import java.util.ArrayList;
 
-import org.jackhuang.watercraft.InternalName;
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.common.block.BlockMeta;
 
@@ -21,7 +20,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 public class BlockTurbine extends BlockMeta {
 	
 	public BlockTurbine() {
-		super(InternalName.cptBlockTurbine, Material.iron, ItemTurbine.class);
+		super("cptBlockTurbine", Material.iron, ItemTurbine.class);
 		
 		GameRegistry.registerTileEntity(TileEntityTurbine.class,
 				"cptwtrml.turbine");

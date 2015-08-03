@@ -13,7 +13,6 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import org.jackhuang.watercraft.InternalName;
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.common.block.BlockMultiID;
 import org.jackhuang.watercraft.common.block.GlobalBlocks;
@@ -25,7 +24,7 @@ public class BlockOre extends BlockMultiID {
 	public IIcon[] icon = new IIcon[maxMetaData()];
 
 	public BlockOre() {
-		super(InternalName.cptBlockOre, Material.rock, ItemOre.class);
+		super("cptBlockOre", Material.rock, ItemOre.class);
 		
 		GlobalBlocks.ore = this;
 

@@ -10,7 +10,6 @@ package org.jackhuang.watercraft.common.block.watermills;
 
 import java.util.ArrayList;
 
-import org.jackhuang.watercraft.InternalName;
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.common.block.BlockMeta;
 
@@ -26,7 +25,7 @@ import net.minecraft.world.World;
 public class BlockWatermill extends BlockMeta {
 	
 	public BlockWatermill() {
-		super(InternalName.cptBlockCompactWatermill, Material.iron, ItemWatermill.class);
+		super("cptBlockCompactWatermill", Material.iron, ItemWatermill.class);
 		
 		GameRegistry.registerTileEntity(TileEntityWatermill.class,
 				"cptwtrml.watermill");		

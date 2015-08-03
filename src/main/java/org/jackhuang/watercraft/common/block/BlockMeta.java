@@ -8,16 +8,14 @@
 
 package org.jackhuang.watercraft.common.block;
 
-import org.jackhuang.watercraft.InternalName;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemBlock;
 
 public abstract class BlockMeta extends BlockMultiID {
 
-	public BlockMeta(InternalName name,
+	public BlockMeta(String id,
 			Material material, Class<? extends ItemBlock> c) {
-		super(name, material, c);
+		super(id, material, c);
 	}
 
 	@Override

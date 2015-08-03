@@ -9,7 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import org.jackhuang.watercraft.WaterPower;
-import org.jackhuang.watercraft.InternalName;
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.common.item.GlobalItems;
 import org.jackhuang.watercraft.common.item.ItemBase;
@@ -20,7 +19,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemOthers extends ItemBase {
 	
 	public ItemOthers() {
-		super(InternalName.cptItemUpdaters);
+		super("cptItemUpdaters");
 		setHasSubtypes(true);
 	}
 	

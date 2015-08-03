@@ -99,9 +99,15 @@ public class EntityWaterWheel extends Entity {
 
 		this.parent = ((TileEntityWatermill) this.worldObj.getTileEntity(
 				this.xParent, this.yParent, this.zParent));
-		if ((this.parent == null) || (!this.parent.hasRotor())
-				|| (this.parent.getFacing() != this.parentFacing))
+		
+		if (this.parent == null)
 			destroy();
+		else {
+		    parentFacing = parent.getFacing();
+		    int[] actualCoords = Utils.moveForward(worldObj, parent.xCoord,
+	                parent.yCoord, parent.zCoord, parent.getFacing(), 1);
+	        setPosition(actualCoords[0], actualCoords[1], actualCoords[2]);
+		}
 		updateParameters();
 	}
 

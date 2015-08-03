@@ -11,15 +11,9 @@ package org.jackhuang.watercraft.common.recipe;
 import gregtech.api.GregTech_API;
 import ic2.api.item.IC2Items;
 import ic2.api.recipe.RecipeInputItemStack;
-import ic2.api.recipe.RecipeInputOreDict;
 import ic2.api.recipe.Recipes;
 
-import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.common.block.GlobalBlocks;
-import org.jackhuang.watercraft.common.block.ore.ItemOreDust;
-import org.jackhuang.watercraft.common.block.ore.OreType;
-import org.jackhuang.watercraft.common.block.turbines.TurbineType;
-import org.jackhuang.watercraft.common.item.GlobalItems;
 import org.jackhuang.watercraft.common.item.crafting.CraftingTypes;
 import org.jackhuang.watercraft.common.item.crafting.ItemCrafting;
 import org.jackhuang.watercraft.common.item.crafting.ItemMaterial;
@@ -29,19 +23,15 @@ import org.jackhuang.watercraft.common.item.crafting.MaterialTypes;
 import org.jackhuang.watercraft.common.item.others.ItemType;
 import org.jackhuang.watercraft.util.Mods;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class NormalRecipeRegistrator extends EasyRecipeRegistrator {
+public class NormalRecipeRegistrar extends EasyRecipeRegistrar {
 
-	public NormalRecipeRegistrator(Configuration c) {
+	public NormalRecipeRegistrar(Configuration c) {
 		super(c);
 	}
 

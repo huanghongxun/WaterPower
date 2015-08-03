@@ -3,7 +3,6 @@ package org.jackhuang.watercraft.common.item;
 import java.util.List;
 
 import org.jackhuang.watercraft.WaterPower;
-import org.jackhuang.watercraft.InternalName;
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.client.ClientProxy;
 
@@ -24,19 +23,16 @@ import net.minecraftforge.common.config.Configuration;
  */
 public abstract class ItemBase extends Item {
 
-	protected final InternalName internalName;
 	public static int id;
 	protected IIcon[] textures;
 
-	public ItemBase(InternalName internalName) {
+	public ItemBase(String id) {
 		super();
 
 		setCreativeTab(WaterPower.creativeTabWaterPower);
 		setNoRepair();
 		
-		GameRegistry.registerItem(this, internalName.name());
-
-		this.internalName = internalName;
+		GameRegistry.registerItem(this, id);
 	}
 
 	public String getTextureName(int index) {

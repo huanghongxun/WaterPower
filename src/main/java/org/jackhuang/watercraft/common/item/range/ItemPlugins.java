@@ -5,14 +5,13 @@ import java.util.List;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
-import org.jackhuang.watercraft.InternalName;
 import org.jackhuang.watercraft.api.IUpgrade;
 import org.jackhuang.watercraft.common.item.ItemBase;
 
 public class ItemPlugins extends ItemBase implements IUpgrade {
 	
 	public ItemPlugins() {
-		super(InternalName.cptItemPlugins);
+		super("cptItemPlugins");
 		setHasSubtypes(true);
 	}
 	

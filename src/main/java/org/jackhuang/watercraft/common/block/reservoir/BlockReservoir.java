@@ -14,10 +14,9 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import org.jackhuang.watercraft.Reference;
-import org.jackhuang.watercraft.InternalName;
 import org.jackhuang.watercraft.common.block.BlockMeta;
 import org.jackhuang.watercraft.common.item.others.ItemType;
-import org.jackhuang.watercraft.common.recipe.IRecipeRegistrator;
+import org.jackhuang.watercraft.common.recipe.IRecipeRegistrar;
 import org.jackhuang.watercraft.util.Mods;
 
 import thaumcraft.api.ItemApi;
@@ -28,7 +27,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class BlockReservoir extends BlockMeta {
 
 	public BlockReservoir() {
-		super(InternalName.cptBlockReservoir, Material.iron,
+		super("cptBlockReservoir", Material.iron,
 				ItemReservoir.class);
 
 		registerReservoir();
@@ -169,12 +168,12 @@ public class BlockReservoir extends BlockMeta {
 	}
 
 	void addReservoirRecipe(ItemStack output, Object S) {
-		IRecipeRegistrator.addRecipeByOreDictionary(output, "SSS", "SIS", "SSS",
+		IRecipeRegistrar.addRecipeByOreDictionary(output, "SSS", "SIS", "SSS",
 				'S', S, 'I', ItemType.ReservoirCore.item());
 	}
 
 	void addReservoirAdvancedRecipe(ItemStack output, Object S) {
-		IRecipeRegistrator.addRecipeByOreDictionary(output, "SSS", "SIS", "SSS",
+		IRecipeRegistrar.addRecipeByOreDictionary(output, "SSS", "SIS", "SSS",
 				'S', S, 'I', ItemType.ReservoirCoreAdvanced.item());
 	}
 

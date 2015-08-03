@@ -27,6 +27,7 @@ import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.api.IUpgrade;
 import org.jackhuang.watercraft.api.IWaterReceiver;
 import org.jackhuang.watercraft.client.gui.DefaultGuiIds;
+import org.jackhuang.watercraft.common.block.IDroppable;
 import org.jackhuang.watercraft.common.block.turbines.Position;
 import org.jackhuang.watercraft.common.inventory.InventorySlotConsumableLiquid;
 import org.jackhuang.watercraft.common.inventory.InventorySlotConsumableLiquidByList;
@@ -34,12 +35,19 @@ import org.jackhuang.watercraft.common.inventory.InventorySlotOutput;
 import org.jackhuang.watercraft.common.inventory.InventorySlotUpgrade;
 import org.jackhuang.watercraft.common.tileentity.TileEntityMetaMultiBlock;
 import org.jackhuang.watercraft.common.tileentity.TileEntityMultiBlock;
+import org.jackhuang.watercraft.util.Mods;
 import org.jackhuang.watercraft.util.Pair;
 import org.jackhuang.watercraft.util.Utils;
 import org.lwjgl.opengl.HPOcclusionTest;
 
+import cpw.mods.fml.common.Optional.Interface;
+import cpw.mods.fml.common.Optional.InterfaceList;
+import cpw.mods.fml.common.Optional.Method;
+
+@InterfaceList({
+        @Interface(iface = "ic2.api.tile.IWrenchable", modid = Mods.IDs.IndustrialCraft2API, striprefs = true)})
 public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
-		IWrenchable {
+		IWrenchable, IDroppable {
 
 	public Direction side;
 	public ReservoirType type;
@@ -517,11 +525,13 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 	}
 
 	@Override
+    @Method(modid = Mods.IDs.IndustrialCraft2API)
 	public boolean wrenchCanSetFacing(EntityPlayer entityPlayer, int side) {
 		return false;
 	}
 
 	@Override
+    @Method(modid = Mods.IDs.IndustrialCraft2API)
 	public short getFacing() {
 		return 0;
 	}
@@ -531,25 +541,21 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 	}
 
 	@Override
+    @Method(modid = Mods.IDs.IndustrialCraft2API)
 	public boolean wrenchCanRemove(EntityPlayer entityPlayer) {
 		return true;
 	}
 
 	@Override
+    @Method(modid = Mods.IDs.IndustrialCraft2API)
 	public float getWrenchDropRate() {
 		return 1;
 	}
 
 	@Override
+    @Method(modid = Mods.IDs.IndustrialCraft2API)
 	public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
-		int meta = 0;
-		if (type != null)
-			meta = type.ordinal();
-		if (isServerSide())
-			return new ItemStack(this.worldObj.getBlock(xCoord, yCoord,
-					zCoord), 1, meta);
-		else
-			return new ItemStack(this.getBlockType(), 1, meta);
+	    return getDroppedItemStack();
 	}
 
 	@Override
@@ -608,4 +614,9 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 
 		setFluidTankCapacity(defaultStorage + extraStorage);
 	}
+    
+    @Override
+    public ItemStack getDroppedItemStack() {
+        return new ItemStack(this.getBlockType(), 1, type == null ? 0 : type.ordinal());
+    }
 }

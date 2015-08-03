@@ -22,7 +22,7 @@ public abstract class TileEntityInventory extends TileEntityBase implements
 		NBTTagCompound invSlotsTag = nbtTagCompound.getCompoundTag("InvSlots");
 
 		for (InventorySlot invSlot : this.invSlots)
-			invSlot.readFromNbt(invSlotsTag.getCompoundTag(invSlot.name));
+			invSlot.readFromNBT(invSlotsTag.getCompoundTag(invSlot.name));
 	}
 
 	public void writeToNBT(NBTTagCompound nbtTagCompound) {
@@ -33,7 +33,7 @@ public abstract class TileEntityInventory extends TileEntityBase implements
 		for (InventorySlot invSlot : this.invSlots) {
 			NBTTagCompound invSlotTag = new NBTTagCompound();
 
-			invSlot.writeToNbt(invSlotTag);
+			invSlot.writeToNBT(invSlotTag);
 
 			invSlotsTag.setTag(invSlot.name, invSlotTag);
 		}

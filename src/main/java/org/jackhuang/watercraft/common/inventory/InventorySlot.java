@@ -31,7 +31,7 @@ public class InventorySlot {
 		base.addInvSlot(this);
 	}
 
-	public void readFromNbt(NBTTagCompound nbtTagCompound) {
+	public void readFromNBT(NBTTagCompound nbtTagCompound) {
 		NBTTagList contentsTag = nbtTagCompound.getTagList("Contents", 10);
 
 		for (int i = 0; i < contentsTag.tagCount(); i++) {
@@ -48,7 +48,7 @@ public class InventorySlot {
 		}
 	}
 
-	public void writeToNbt(NBTTagCompound nbtTagCompound) {
+	public void writeToNBT(NBTTagCompound nbtTagCompound) {
 		NBTTagList contentsTag = new NBTTagList();
 
 		for (int i = 0; i < this.contents.length; i++) {

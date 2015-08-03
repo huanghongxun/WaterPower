@@ -8,10 +8,12 @@ import org.jackhuang.watercraft.common.block.reservoir.TileEntityReservoir;
 import org.jackhuang.watercraft.common.block.watermills.WaterType;
 import org.jackhuang.watercraft.common.item.rotors.ItemRotor;
 import org.jackhuang.watercraft.common.item.rotors.RotorInventorySlot;
-import org.jackhuang.watercraft.common.tileentity.TileEntityBaseGenerator;
+import org.jackhuang.watercraft.common.tileentity.TileEntityGenerator;
 import org.jackhuang.watercraft.common.tileentity.TileEntityElectricMetaBlock;
+import org.jackhuang.watercraft.util.Mods;
 import org.jackhuang.watercraft.util.WPLog;
 
+import cpw.mods.fml.common.Optional.Method;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -150,7 +152,7 @@ public class TileEntityTurbine extends TileEntityElectricMetaBlock {
          * -= use; return energy; } return 0;
          */
         TileEntityReservoir pair = getWater(world, x, y, z);
-        if (pair == null)
+        if (pair == null || pair.getFluidTank() == null)
             return 0;
         else {
             WPLog.debugLog("fluidAmount=" + pair.getFluidAmount());
@@ -229,8 +231,14 @@ public class TileEntityTurbine extends TileEntityElectricMetaBlock {
     }
 
     @Override
+    @Method(modid = Mods.IDs.IndustrialCraft2API)
     public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
-        return new ItemStack(this.getBlockType(), 1, type.ordinal());
+        return getDroppedItemStack();
+    }
+    
+    @Override
+    public ItemStack getDroppedItemStack() {
+        return new ItemStack(this.getBlockType(), 1, type == null ? 0 : type.ordinal());
     }
 
     @Override

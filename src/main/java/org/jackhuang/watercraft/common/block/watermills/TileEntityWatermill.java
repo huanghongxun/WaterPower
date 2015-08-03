@@ -91,10 +91,10 @@ public class TileEntityWatermill extends TileEntityElectricMetaBlock {
             sendInitData = false;
             tag.setBoolean("sendInitData", true);
             NBTTagCompound nbt = new NBTTagCompound();
-            slotRotor.writeToNbt(nbt);
+            slotRotor.writeToNBT(nbt);
             tag.setTag("rotor", nbt);
             nbt = new NBTTagCompound();
-            slotUpdater.writeToNbt(nbt);
+            slotUpdater.writeToNBT(nbt);
             tag.setTag("updater", nbt);
             if (type == null)
                 tag.setInteger("type", 0);
@@ -110,8 +110,8 @@ public class TileEntityWatermill extends TileEntityElectricMetaBlock {
         lavaBlocks = tag.getInteger("lavaBlocks");
 
         if (tag.hasKey("sendInitData")) {
-            slotRotor.readFromNbt((NBTTagCompound) tag.getTag("rotor"));
-            slotUpdater.readFromNbt((NBTTagCompound) tag.getTag("updater"));
+            slotRotor.readFromNBT((NBTTagCompound) tag.getTag("rotor"));
+            slotUpdater.readFromNBT((NBTTagCompound) tag.getTag("updater"));
             type = WaterType.values()[tag.getInteger("type")];
 
             worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
@@ -150,6 +150,10 @@ public class TileEntityWatermill extends TileEntityElectricMetaBlock {
 
         if (type.ordinal() < 2)
             lavaBlocks = 0;
+    }
+    
+    public boolean isRangeSupported() {
+        return waterBlocks != -1 && lavaBlocks != -1;
     }
 
     protected double computeOutput(World world, int x, int y, int z) {
@@ -264,9 +268,9 @@ public class TileEntityWatermill extends TileEntityElectricMetaBlock {
 
         if (isServerSide())
             return;
-        if (wheel == null && hasRotor())
+        if (wheel == null && hasRotor() && isRangeSupported())
             spawnWheel();
-        else if (wheel != null && !hasRotor())
+        else if (wheel != null && (!hasRotor() || !isRangeSupported()))
             destroyWheel();
         if (wheel != null) {
             updateWheel();
@@ -275,8 +279,9 @@ public class TileEntityWatermill extends TileEntityElectricMetaBlock {
     }
 
     @Override
+    @Method(modid = Mods.IDs.IndustrialCraft2API)
     public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
-        return new ItemStack(this.getBlockType(), 1, type.ordinal());
+        return getDroppedItemStack();
     }
 
     public void spawnWheel() {
@@ -333,7 +338,12 @@ public class TileEntityWatermill extends TileEntityElectricMetaBlock {
         FluidStack f = getFluidTank().getFluid();
         sb.append("Stored Fluid: "
                 + (f == null ? "Empty" : f.getLocalizedName()) + "\n");
-        sb.append("Fluid amount/mb: " + getFluidTank().getFluidAmount() + "\n");
+        sb.append("Fluid Amount: " + getFluidTank().getFluidAmount() + "mb\n");
         return sb.toString();
+    }
+    
+    @Override
+    public ItemStack getDroppedItemStack() {
+        return new ItemStack(this.getBlockType(), 1, type == null ? 0 : type.ordinal());
     }
 }

@@ -12,12 +12,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 
 import org.jackhuang.watercraft.common.inventory.SlotInventorySlot;
-import org.jackhuang.watercraft.common.tileentity.TileEntityBaseGenerator;
+import org.jackhuang.watercraft.common.tileentity.TileEntityGenerator;
 
 public class ContainerRotor extends ContainerFullInventory {
-	public TileEntityBaseGenerator tileEntity;
+	public TileEntityGenerator tileEntity;
 	
-	public ContainerRotor(EntityPlayer player, TileEntityBaseGenerator tileEntityCW) {
+	public ContainerRotor(EntityPlayer player, TileEntityGenerator tileEntityCW) {
 		super(player, tileEntityCW, 166);
 		tileEntity = tileEntityCW;
 		layoutContainer();

@@ -7,7 +7,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import org.jackhuang.watercraft.WaterPower;
-import org.jackhuang.watercraft.InternalName;
 import org.jackhuang.watercraft.common.tileentity.TileEntityElectricMetaBlock;
 import org.jackhuang.watercraft.common.tileentity.ITileEntityMeta;
 

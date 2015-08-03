@@ -12,7 +12,7 @@ import net.minecraftforge.fluids.IFluidHandler;
 
 public abstract class TileEntityLiquidTankInventory extends TileEntityInventory
 		implements IFluidHandler {
-	protected final FluidTank fluidTank;
+	protected FluidTank fluidTank;
 
 	public TileEntityLiquidTankInventory(int tanksize) {
 		this.fluidTank = new FluidTank(1000 * tanksize);
@@ -31,9 +31,13 @@ public abstract class TileEntityLiquidTankInventory extends TileEntityInventory
 		nbttagcompound.setTag("fluidTank", fluidTankTag);
 	}
 
-	public FluidTank getFluidTank() {
-		return this.fluidTank;
-	}
+    public FluidTank getFluidTank() {
+        return this.fluidTank;
+    }
+
+    public void setFluidTank(FluidTank fluidTank) {
+        this.fluidTank = fluidTank;
+    }
 	
 	public void setFluidTankCapacity(int capacity) {
 		getFluidTank().setCapacity(capacity);
@@ -127,4 +131,20 @@ public abstract class TileEntityLiquidTankInventory extends TileEntityInventory
 			}
 		}
 	}
+    
+    @Override
+    public void readPacketData(NBTTagCompound tag) {
+        super.readPacketData(tag);
+        
+        getFluidTank().readFromNBT(tag.getCompoundTag("tank"));
+    }
+    
+    @Override
+    public void writePacketData(NBTTagCompound tag) {
+        super.writePacketData(tag);
+        
+        NBTTagCompound n = new NBTTagCompound();
+        getFluidTank().writeToNBT(n);
+        tag.setTag("tank", n);
+    }
 }

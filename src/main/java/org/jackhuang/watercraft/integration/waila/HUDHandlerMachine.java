@@ -38,7 +38,8 @@ public class HUDHandlerMachine implements IWailaDataProvider {
 		TileEntityStandardWaterMachine tile = (TileEntityStandardWaterMachine) te;
 		
 		arg1.add("Using: " + tile.energyConsume);
-		arg1.add("Stored: " + tile.water);
+        arg1.add("Stored: " + tile.getFluidTank().getFluidAmount());
+        arg1.add("Capacity: " + tile.getFluidTankCapacity());
 		
 		return arg1;
 	}

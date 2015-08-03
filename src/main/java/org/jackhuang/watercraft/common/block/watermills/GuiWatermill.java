@@ -15,7 +15,7 @@ import org.jackhuang.watercraft.client.gui.ContainerRotor;
 import org.jackhuang.watercraft.common.EnergyType;
 import org.jackhuang.watercraft.common.network.MessagePacketHandler;
 import org.jackhuang.watercraft.common.network.PacketUnitChanged;
-import org.jackhuang.watercraft.common.tileentity.TileEntityBaseGenerator;
+import org.jackhuang.watercraft.common.tileentity.TileEntityGenerator;
 import org.jackhuang.watercraft.util.WPLog;
 import org.lwjgl.opengl.GL11;
 
@@ -77,9 +77,8 @@ public class GuiWatermill extends GuiContainer {
                 44, 30, 0x404040);
         fontRendererObj.drawString(
                 StatCollector.translateToLocal("cptwtrml.watermill.OUTPUT")
-                        + ": " + df.format(container.tileEntity.latestOutput)
-                        + "EU/t", 8, 45, 0x404040);
-        boolean w = gen.waterBlocks == -1;
+                        + ": " + df.format(gen.getFromEU(gen.latestOutput))
+                        + gen.energyType.name() + "/t", 8, 45, 0x404040);
         fontRendererObj
                 .drawString(
                         StatCollector
@@ -88,11 +87,11 @@ public class GuiWatermill extends GuiContainer {
                                 + StatCollector
                                         .translateToLocal("cptwtrml.watermill.CHECK_LAVA")
                                 + ":"
-                                + (w ? StatCollector
-                                        .translateToLocal("cptwtrml.watermill.CANNOT_CHECK")
-                                        : gen.waterBlocks + ","
-                                                + gen.lavaBlocks), 8, 55,
-                        0x404040);
+                                + (gen.isRangeSupported() ? gen.waterBlocks
+                                        + "," + gen.lavaBlocks
+                                        : StatCollector
+                                                .translateToLocal("cptwtrml.watermill.CANNOT_CHECK")),
+                        8, 55, 0x404040);
         int a = gen.getRange();
         int b = a * a * a - 1;
         fontRendererObj.drawString(
@@ -100,7 +99,7 @@ public class GuiWatermill extends GuiContainer {
                         + b + "=" + a + "^3-1", 8, 65, 0x404040);
         fontRendererObj.drawString(
                 StatCollector.translateToLocal("cptwtrml.watermill.PRODUCTION")
-                        + ":" + gen.getFromEU(gen.production)
+                        + ":" + df.format(gen.getFromEU(gen.production))
                         + gen.energyType.name(), 8, 75, 0x404040);
     }
 

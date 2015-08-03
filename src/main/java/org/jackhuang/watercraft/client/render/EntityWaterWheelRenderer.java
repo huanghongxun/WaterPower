@@ -77,10 +77,11 @@ public class EntityWaterWheelRenderer extends Render {
 
 		FMLClientHandler.instance().getClient().renderEngine
 				.bindTexture(getTexture(wheel.wheelType));
-		this.model.trunk.render(this.ratio);
 
-		GL11.glRotatef(wheel.parent.getWheelAngle(), 0.0F, rotationAngle[0],
-				rotationAngle[1]);
+        GL11.glRotatef(wheel.parent.getWheelAngle(), 0.0F, rotationAngle[0],
+                rotationAngle[1]);
+        
+		this.model.trunk.render(this.ratio);
 		
 		this.model.initPlankWithLength(wheel.parent.getRange());
 

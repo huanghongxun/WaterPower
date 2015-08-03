@@ -12,7 +12,6 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
-import org.jackhuang.watercraft.InternalName;
 import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.client.ClientProxy;
 import org.jackhuang.watercraft.client.render.IIconContainer;
@@ -21,8 +20,8 @@ import org.jackhuang.watercraft.common.item.crafting.MaterialTypes;
 public abstract class ItemRecolorable extends ItemBase {
 
 	
-	public ItemRecolorable(InternalName internalName) {
-		super(internalName);
+	public ItemRecolorable(String id) {
+		super(id);
 	}
 
 	public abstract short[] getRGBA(ItemStack stack);

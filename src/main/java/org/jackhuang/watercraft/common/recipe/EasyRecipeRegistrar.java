@@ -11,28 +11,14 @@ package org.jackhuang.watercraft.common.recipe;
 import ic2.api.item.IC2Items;
 import ic2.api.recipe.RecipeInputItemStack;
 import ic2.api.recipe.Recipes;
-import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
 import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.oredict.ShapedOreRecipe;
 
-import org.jackhuang.watercraft.WaterPower;
-import org.jackhuang.watercraft.InternalName;
 import org.jackhuang.watercraft.common.block.GlobalBlocks;
-import org.jackhuang.watercraft.common.block.reservoir.BlockReservoir;
-import org.jackhuang.watercraft.common.block.reservoir.ReservoirType;
-import org.jackhuang.watercraft.common.block.reservoir.TileEntityReservoir;
-import org.jackhuang.watercraft.common.block.turbines.BlockTurbine;
-import org.jackhuang.watercraft.common.block.turbines.TileEntityTurbine;
-import org.jackhuang.watercraft.common.block.turbines.TurbineType;
-import org.jackhuang.watercraft.common.block.watermills.TileEntityWatermill;
-import org.jackhuang.watercraft.common.block.watermills.WaterType;
 import org.jackhuang.watercraft.common.item.GlobalItems;
 import org.jackhuang.watercraft.common.item.crafting.CraftingTypes;
 import org.jackhuang.watercraft.common.item.crafting.ItemCrafting;
@@ -40,19 +26,15 @@ import org.jackhuang.watercraft.common.item.crafting.ItemMaterial;
 import org.jackhuang.watercraft.common.item.crafting.LevelTypes;
 import org.jackhuang.watercraft.common.item.crafting.MaterialForms;
 import org.jackhuang.watercraft.common.item.crafting.MaterialTypes;
-import org.jackhuang.watercraft.common.item.others.ItemOthers;
 import org.jackhuang.watercraft.common.item.others.ItemType;
-import org.jackhuang.watercraft.common.item.range.ItemRange;
 import org.jackhuang.watercraft.common.item.range.PluginType;
-import org.jackhuang.watercraft.common.item.rotors.RotorType;
 import org.jackhuang.watercraft.util.Mods;
 
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class EasyRecipeRegistrator extends IRecipeRegistrator {
+public class EasyRecipeRegistrar extends IRecipeRegistrar {
 
-	public EasyRecipeRegistrator(Configuration c) {
+	public EasyRecipeRegistrar(Configuration c) {
 		super(c);
 	}
 

@@ -10,9 +10,7 @@ package org.jackhuang.watercraft.common.tileentity;
 
 import net.minecraft.nbt.NBTTagCompound;
 
-public abstract class TileEntityElectricMetaBlock extends TileEntityBaseGenerator implements ITileEntityMeta {
-
-	private short meta;
+public abstract class TileEntityElectricMetaBlock extends TileEntityGenerator implements ITileEntityMeta {
 	
 	public TileEntityElectricMetaBlock(int i, int j) {
 		super(i, j);
@@ -22,6 +20,5 @@ public abstract class TileEntityElectricMetaBlock extends TileEntityBaseGenerato
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
 		initNBT(nbt, -1);
-		//worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 	}
 }

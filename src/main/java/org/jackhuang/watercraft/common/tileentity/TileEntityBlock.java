@@ -1,5 +1,8 @@
 package org.jackhuang.watercraft.common.tileentity;
 
+import cpw.mods.fml.common.Optional.Interface;
+import cpw.mods.fml.common.Optional.InterfaceList;
+import cpw.mods.fml.common.Optional.Method;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ic2.api.tile.IWrenchable;
@@ -8,6 +11,9 @@ import java.util.List;
 import java.util.Vector;
 
 import org.jackhuang.watercraft.WaterPower;
+import org.jackhuang.watercraft.common.block.IDroppable;
+import org.jackhuang.watercraft.util.Mods;
+import org.jackhuang.watercraft.util.Utils;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,7 +23,9 @@ import net.minecraft.util.IIcon;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 
-public abstract class TileEntityBlock extends TileEntityLiquidTankInventory implements IWrenchable {
+@InterfaceList({
+        @Interface(iface = "ic2.api.tile.IWrenchable", modid = Mods.IDs.IndustrialCraft2API, striprefs = true)})
+public abstract class TileEntityBlock extends TileEntityLiquidTankInventory implements IWrenchable, IDroppable {
 	
 	public TileEntityBlock(int tanksize) {
 		super(tanksize);
@@ -32,16 +40,16 @@ public abstract class TileEntityBlock extends TileEntityLiquidTankInventory impl
 	@SideOnly(Side.CLIENT)
 	private IIcon[] lastRenderIcons;
 
-	public void readFromNBT(NBTTagCompound nbttagcompound) {
-		super.readFromNBT(nbttagcompound);
+	public void readFromNBT(NBTTagCompound tag) {
+		super.readFromNBT(tag);
 
-		this.prevFacing = this.facing = nbttagcompound.getShort("facing");
+		this.prevFacing = this.facing = tag.getShort("facing");
 	}
 
-	public void writeToNBT(NBTTagCompound nbttagcompound) {
-		super.writeToNBT(nbttagcompound);
+	public void writeToNBT(NBTTagCompound tag) {
+		super.writeToNBT(tag);
 
-		nbttagcompound.setShort("facing", this.facing);
+		tag.setShort("facing", this.facing);
 	}
 	
 	@Override
@@ -86,6 +94,8 @@ public abstract class TileEntityBlock extends TileEntityLiquidTankInventory impl
 		}
 	}
 
+    @Override
+	@Method(modid = Mods.IDs.IndustrialCraft2API)
 	public short getFacing() {
 		return this.facing;
 	}
@@ -94,33 +104,51 @@ public abstract class TileEntityBlock extends TileEntityLiquidTankInventory impl
 		return this.prevFacing;
 	}
 
+    @Override
+    @Method(modid = Mods.IDs.IndustrialCraft2API)
 	public boolean wrenchCanSetFacing(EntityPlayer entityPlayer, int side) {
 		return facing != side;
 	}
 
+    @Override
+    @Method(modid = Mods.IDs.IndustrialCraft2API)
 	public void setFacing(short facing) {
-		this.facing = facing;
-
-		if (this.prevFacing != facing) {
-			if (WaterPower.isSimulating()) {
-				needsUpdate = true;
-				sendUpdateToClient();
-			} else {
-				this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
-			}
-		}
-
-		this.prevFacing = facing;
+		//setDirection(Utils.convertFacingAndForgeDirection(facing));
+        setDirection(facing);
 	}
+    
+    public boolean setDirection(int side) {
+        //short facing = (short)Utils.convertFacingAndForgeDirection(side);
+        this.facing = (short)side;
 
+        if (this.prevFacing != facing) {
+            if (WaterPower.isSimulating()) {
+                needsUpdate = true;
+                sendUpdateToClient();
+            } else {
+                this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
+            }
+        }
+
+        boolean flag = prevFacing != facing;
+        this.prevFacing = facing;
+        return flag;
+    }
+
+    @Override
+    @Method(modid = Mods.IDs.IndustrialCraft2API)
 	public boolean wrenchCanRemove(EntityPlayer entityPlayer) {
 		return true;
 	}
 
+    @Override
+    @Method(modid = Mods.IDs.IndustrialCraft2API)
 	public float getWrenchDropRate() {
 		return 1.0F;
 	}
 
+    @Override
+    @Method(modid = Mods.IDs.IndustrialCraft2API)
 	public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
 		return new ItemStack(this.worldObj.getBlock(this.xCoord, this.yCoord,
 				this.zCoord), 1, this.worldObj.getBlockMetadata(this.xCoord,
@@ -138,5 +166,10 @@ public abstract class TileEntityBlock extends TileEntityLiquidTankInventory impl
 	@Override
 	public boolean canFill(ForgeDirection paramForgeDirection, Fluid paramFluid) {
 		return false;
+	}
+	
+	@Override
+	public ItemStack getDroppedItemStack() {
+	    return new ItemStack(getBlockType(), 1, getBlockMetadata());
 	}
 }

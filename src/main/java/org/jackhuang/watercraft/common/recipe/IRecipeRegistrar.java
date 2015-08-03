@@ -9,9 +9,7 @@
 package org.jackhuang.watercraft.common.recipe;
 
 import ic2.api.item.IC2Items;
-import net.minecraft.block.Block;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.common.config.Configuration;
@@ -21,35 +19,19 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 import org.jackhuang.watercraft.Reference;
-import org.jackhuang.watercraft.WaterPower;
-import org.jackhuang.watercraft.InternalName;
 import org.jackhuang.watercraft.common.block.GlobalBlocks;
-import org.jackhuang.watercraft.common.block.ore.BlockOre;
-import org.jackhuang.watercraft.common.block.ore.ItemOreDust;
-import org.jackhuang.watercraft.common.block.reservoir.BlockReservoir;
-import org.jackhuang.watercraft.common.block.reservoir.TileEntityReservoir;
-import org.jackhuang.watercraft.common.block.turbines.BlockTurbine;
-import org.jackhuang.watercraft.common.block.turbines.TileEntityTurbine;
 import org.jackhuang.watercraft.common.block.turbines.TurbineType;
-import org.jackhuang.watercraft.common.block.watermills.TileEntityWatermill;
 import org.jackhuang.watercraft.common.block.watermills.WaterType;
-import org.jackhuang.watercraft.common.item.GlobalItems;
-import org.jackhuang.watercraft.common.item.crafting.ItemCrafting;
-import org.jackhuang.watercraft.common.item.crafting.ItemMaterial;
-import org.jackhuang.watercraft.common.item.others.ItemOthers;
-import org.jackhuang.watercraft.common.item.others.ItemType;
-import org.jackhuang.watercraft.common.item.range.ItemRange;
-import org.jackhuang.watercraft.common.item.rotors.RotorType;
 import org.jackhuang.watercraft.util.Mods;
 
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public abstract class IRecipeRegistrator {
+public abstract class IRecipeRegistrar {
 
-	protected static IRecipeRegistrator instance;
+	protected static IRecipeRegistrar instance;
 	
-	public static IRecipeRegistrator getInstance() {
+	public static IRecipeRegistrar getInstance() {
 		return instance;
 	}
 
@@ -71,7 +53,7 @@ public abstract class IRecipeRegistrator {
 		industrialDiamond = p.getBoolean(true) ? IC2Items.getItem("industrialDiamond") : IC2Items.getItem("coalChunk");
 	}
 
-	public IRecipeRegistrator(Configuration c) {
+	public IRecipeRegistrar(Configuration c) {
 		instance = this;
 		
 		config = c;

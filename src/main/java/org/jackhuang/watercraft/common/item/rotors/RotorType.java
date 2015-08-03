@@ -2,24 +2,18 @@ package org.jackhuang.watercraft.common.item.rotors;
 
 import ic2.api.item.IC2Items;
 
-import org.apache.logging.log4j.Level;
-import org.jackhuang.watercraft.WaterPower;
-import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.common.item.others.ItemType;
-import org.jackhuang.watercraft.common.recipe.IRecipeRegistrator;
+import org.jackhuang.watercraft.common.recipe.IRecipeRegistrar;
 import org.jackhuang.watercraft.util.Mods;
 import org.jackhuang.watercraft.util.WPLog;
 
 import thaumcraft.api.ItemApi;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
 
 /**
  * http://zhidao.baidu.com/link?url=QrYBWorqVruUKU3H1ifnnLMKLbStwvqmt5j6XHgBSySIY7mf_EHYwljx5u7CfqvYGKR6Toj9MxjdgscPQXDEIK
@@ -211,7 +205,7 @@ public enum RotorType {
 
 	static void addRotorRecipe(RotorType output, Object S, Object I) {
 		if (output.enable) {
-				IRecipeRegistrator.addRecipeByOreDictionary(new ItemStack(output.getItem()),
+				IRecipeRegistrar.addRecipeByOreDictionary(new ItemStack(output.getItem()),
 						"S S", " I ", "S S", 'S', S, 'I', I);
 		}
 	}

@@ -15,7 +15,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 
-import org.jackhuang.watercraft.InternalName;
 import org.jackhuang.watercraft.client.render.IIconContainer;
 import org.jackhuang.watercraft.client.render.RecolorableTextures;
 import org.jackhuang.watercraft.common.item.ItemRecolorable;
@@ -25,7 +24,7 @@ public class ItemCrafting extends ItemRecolorable {
 	public static ItemCrafting instance;
 
 	public ItemCrafting() {
-		super(InternalName.cptItemCrafting);
+		super("cptItemCrafting");
 		setHasSubtypes(true);
 		// 
 		instance = this;

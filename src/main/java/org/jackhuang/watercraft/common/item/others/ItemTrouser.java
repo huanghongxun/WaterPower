@@ -3,7 +3,6 @@ package org.jackhuang.watercraft.common.item.others;
 import java.util.List;
 
 import org.jackhuang.watercraft.WaterPower;
-import org.jackhuang.watercraft.InternalName;
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.common.block.watermills.WaterType;
 import org.jackhuang.watercraft.util.Utils;

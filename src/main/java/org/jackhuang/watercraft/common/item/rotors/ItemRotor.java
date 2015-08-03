@@ -5,7 +5,7 @@ import java.util.List;
 import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.common.item.ItemBase;
-import org.jackhuang.watercraft.common.tileentity.TileEntityBaseGenerator;
+import org.jackhuang.watercraft.common.tileentity.TileEntityGenerator;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -104,7 +104,7 @@ public class ItemRotor extends Item {
 			+ this.getUnlocalizedName() + ".png");
 	}
 	
-	public void tickRotor(ItemStack rotor, TileEntityBaseGenerator tileEntity, World worldObj) {
+	public void tickRotor(ItemStack rotor, TileEntityGenerator tileEntity, World worldObj) {
 		return;
 	}
 	

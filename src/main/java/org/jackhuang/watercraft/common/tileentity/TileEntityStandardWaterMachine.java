@@ -96,7 +96,7 @@ public abstract class TileEntityStandardWaterMachine extends
 		else {
 			MyRecipeOutput output = getOutput();
 
-			if ((output != null) && (this.water >= this.energyConsume)) {
+			if ((output != null) && (this.getTankAmount() >= this.energyConsume)) {
 
 				if (isLastFailed) {
 					beginProcess(output);
@@ -105,7 +105,7 @@ public abstract class TileEntityStandardWaterMachine extends
 				// setActive(true);
 
 				this.progress = (short) (this.progress + 1);
-				this.water -= this.energyConsume;
+				this.getFluidTank().drain(energyConsume, true);
 
 				if (this.progress >= this.operationLength) {
 					operate(output);
@@ -194,9 +194,9 @@ public abstract class TileEntityStandardWaterMachine extends
 
 		this.energyConsume = applyModifier(this.defaultEnergyConsume,
 				extraEnergyDemand, energyDemandMultiplier);
-		this.maxWater = applyModifier(this.defaultEnergyStorage,
+		this.setFluidTankCapacity(applyModifier(this.defaultEnergyStorage,
 				extraEnergyStorage + this.operationLength * this.energyConsume,
-				energyStorageMultiplier);
+				energyStorageMultiplier));
 
 		if (this.operationLength < 1)
 			this.operationLength = 1;
@@ -226,12 +226,12 @@ public abstract class TileEntityStandardWaterMachine extends
 	}
 
 	public double getEnergy() {
-		return this.water;
+		return this.getTankAmount();
 	}
 
 	public boolean useEnergy(double amount) {
-		if (this.water >= amount) {
-			this.water -= amount;
+		if (this.getTankAmount() >= amount) {
+			this.getFluidTank().drain((int)amount, true);
 
 			return true;
 		}

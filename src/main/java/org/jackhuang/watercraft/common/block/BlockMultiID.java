@@ -2,14 +2,16 @@ package org.jackhuang.watercraft.common.block;
 
 import ic2.api.tile.IWrenchable;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import org.jackhuang.watercraft.WaterPower;
-import org.jackhuang.watercraft.InternalName;
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.client.gui.IHasGui;
 import org.jackhuang.watercraft.common.tileentity.TileEntityBlock;
+import org.jackhuang.watercraft.integration.BuildCraftIntegration;
+import org.jackhuang.watercraft.util.Utils;
 import org.jackhuang.watercraft.util.WPLog;
 
 import cpw.mods.fml.relauncher.Side;
@@ -36,9 +38,9 @@ public abstract class BlockMultiID extends BlockBase {
 	
 	// Facing 4 - front 6 - BACK
 
-	public BlockMultiID(InternalName name, Material material,
+	public BlockMultiID(String id, Material material,
 			Class<? extends ItemBlock> c) {
-		super(name, material, c);
+		super(id, material, c);
 	}
 
 	@Override
@@ -147,14 +149,28 @@ public abstract class BlockMultiID extends BlockBase {
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z,
 			EntityPlayer entityPlayer, int s, float f1, float f2, float f3) {
+	    if(entityPlayer != null) {
+	        ItemStack is = entityPlayer.inventory.getCurrentItem();
+	        if(BuildCraftIntegration.isWrench(entityPlayer, is, x, y, z)&&entityPlayer.isSneaking()) {
+	            TileEntity tileEntity = world.getTileEntity(x, y, z);
+	            Block b = world.getBlock(x, y, z);
+	            if(tileEntity != null && tileEntity instanceof IDroppable) {
+	                IDroppable te = (IDroppable) tileEntity;
+                    ArrayList<ItemStack> drops = b.getDrops(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
+	                if(b.removedByPlayer(world, entityPlayer, x, y, z, false)) {
+	                    Utils.dropItems(world, x, y, z, drops);
+	                }
+	                return false;
+	            }
+	        }
+	    }
+	    
 		if (entityPlayer.isSneaking())
 			return false;
 
 		TileEntity te = world.getTileEntity(x, y, z);
 
 		if ((te instanceof IHasGui)) {
-			// return CompactWatermills.launchGui(entityPlayer, (IHasGUI)te);
-
 			entityPlayer.openGui(WaterPower.instance,
 					((IHasGui) te).getGuiId(), world, x, y, z);
 			return true;
@@ -196,6 +212,7 @@ public abstract class BlockMultiID extends BlockBase {
 		}
 	}
 
+	@Override
 	public ItemStack getPickBlock(MovingObjectPosition target, World world,
 			int x, int y, int z) {
 		return new ItemStack(this, 1, world.getBlockMetadata(x, y, z));

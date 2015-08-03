@@ -43,7 +43,7 @@ import net.minecraftforge.fluids.IFluidHandler;
         @Interface(iface = "ic2.api.energy.tile.IHeatSource", modid = Mods.IDs.IndustrialCraft2API, striprefs = true),
         @Interface(iface = "cofh.api.energy.IEnergyConnection", modid = Mods.IDs.CoFHAPIEnergy),
         @Interface(iface = "factorization.api.IChargeConductor", modid = Mods.IDs.Factorization) })
-public abstract class TileEntityBaseGenerator extends TileEntityBlock implements
+public abstract class TileEntityGenerator extends TileEntityBlock implements
         IEnergySource, IHasGui, IKineticSource, IUnitChangeable,
         IEnergyConnection, IChargeConductor, IFluidHandler, IHeatSource {
     public static Random random = new Random();
@@ -60,11 +60,11 @@ public abstract class TileEntityBaseGenerator extends TileEntityBlock implements
 
     private Object charge;
 
-    public TileEntityBaseGenerator() {
+    public TileEntityGenerator() {
         super(0);
     }
 
-    public TileEntityBaseGenerator(int production, float maxStorage) {
+    public TileEntityGenerator(int production, float maxStorage) {
         super(Math.round(maxStorage / 10));
         this.production = production;
         this.maxStorage = maxStorage;
@@ -78,7 +78,7 @@ public abstract class TileEntityBaseGenerator extends TileEntityBlock implements
         charge = new Charge(this);
     }
 
-    @Method(modid = "IC2API")
+    @Method(modid = Mods.IDs.IndustrialCraft2API)
     public void loadEnergyTile() {
 
         if (WaterPower.isSimulating()) {
@@ -88,7 +88,7 @@ public abstract class TileEntityBaseGenerator extends TileEntityBlock implements
         }
     }
 
-    @Method(modid = "IC2API")
+    @Method(modid = Mods.IDs.IndustrialCraft2API)
     public void unloadEnergyTile() {
         if ((WaterPower.isSimulating()) && (this.addedToEnergyNet)) {
             MinecraftForge.EVENT_BUS.post(new EnergyTileUnloadEvent(this));
@@ -117,7 +117,7 @@ public abstract class TileEntityBaseGenerator extends TileEntityBlock implements
     }
 
     @Override
-    @Method(modid = "IC2API")
+    @Method(modid = Mods.IDs.IndustrialCraft2API)
     public boolean emitsEnergyTo(TileEntity receiver, ForgeDirection direction) {
         return energyType == EnergyType.EU;
     }
@@ -167,7 +167,7 @@ public abstract class TileEntityBaseGenerator extends TileEntityBlock implements
     }
 
     @Override
-    @Method(modid = "IC2API")
+    @Method(modid = Mods.IDs.IndustrialCraft2API)
     public double getOfferedEnergy() {
         if (energyType == EnergyType.EU)
             return Math.min(this.getProduction(), this.storage);
@@ -175,13 +175,13 @@ public abstract class TileEntityBaseGenerator extends TileEntityBlock implements
     }
 
     @Override
-    @Method(modid = "IC2API")
+    @Method(modid = Mods.IDs.IndustrialCraft2API)
     public void drawEnergy(double amount) {
         this.storage -= amount;
     }
 
     @Override
-    @Method(modid = "IC2API")
+    @Method(modid = Mods.IDs.IndustrialCraft2API)
     public float getWrenchDropRate() {
         return 1f;
     }
@@ -280,13 +280,13 @@ public abstract class TileEntityBaseGenerator extends TileEntityBlock implements
     }
 
     @Override
-    @Method(modid = "IC2API")
+    @Method(modid = Mods.IDs.IndustrialCraft2API)
     public int getSourceTier() {
         return 1;
     }
 
     @Override
-    @Method(modid = "IC2API")
+    @Method(modid = Mods.IDs.IndustrialCraft2API)
     public int maxrequestHeatTick(ForgeDirection directionFrom) {
         if (energyType == EnergyType.HU)
             return (int) (EnergyType.EU2HU(latestOutput));
@@ -294,7 +294,7 @@ public abstract class TileEntityBaseGenerator extends TileEntityBlock implements
     }
 
     @Override
-    @Method(modid = "IC2API")
+    @Method(modid = Mods.IDs.IndustrialCraft2API)
     public int requestHeat(ForgeDirection directionFrom, int requestheat) {
         if (energyType == EnergyType.KU)
             return Math.min(requestheat, maxrequestHeatTick(directionFrom));
@@ -302,7 +302,7 @@ public abstract class TileEntityBaseGenerator extends TileEntityBlock implements
     }
 
     @Override
-    @Method(modid = "IC2API")
+    @Method(modid = Mods.IDs.IndustrialCraft2API)
     public int maxrequestkineticenergyTick(ForgeDirection directionFrom) {
         if (energyType == EnergyType.KU)
             return (int) (EnergyType.EU2KU(latestOutput));
@@ -310,7 +310,7 @@ public abstract class TileEntityBaseGenerator extends TileEntityBlock implements
     }
 
     @Override
-    @Method(modid = "IC2API")
+    @Method(modid = Mods.IDs.IndustrialCraft2API)
     public int requestkineticenergy(ForgeDirection directionFrom,
             int requestkineticenergy) {
         if (energyType == EnergyType.KU)
@@ -398,14 +398,14 @@ public abstract class TileEntityBaseGenerator extends TileEntityBlock implements
      */
 
     @Override
-    @Method(modid = "CoFHAPI|energy")
+    @Method(modid = Mods.IDs.CoFHAPIEnergy)
     public boolean canConnectEnergy(ForgeDirection paramForgeDirection) {
         return true;
     }
 
     private Object[] handlerCache;
 
-    @Method(modid = "CoFHAPI|energy")
+    @Method(modid = Mods.IDs.CoFHAPIEnergy)
     protected final int transmitEnergy(int paramInt) {
         int i;
         if (this.handlerCache != null) {
@@ -426,7 +426,7 @@ public abstract class TileEntityBaseGenerator extends TileEntityBlock implements
         return paramInt;
     }
 
-    @Method(modid = "CoFHAPI|energy")
+    @Method(modid = Mods.IDs.CoFHAPIEnergy)
     private void reCache() {
         if (this.deadCache) {
             for (ForgeDirection d : ForgeDirection.VALID_DIRECTIONS) {
@@ -438,7 +438,7 @@ public abstract class TileEntityBaseGenerator extends TileEntityBlock implements
     }
 
     @Override
-    @Method(modid = "CoFHAPI|energy")
+    @Method(modid = Mods.IDs.CoFHAPIEnergy)
     public void onNeighborTileChange(int x, int y, int z) {
         TileEntity localTileEntity = this.worldObj.getTileEntity(x, y, z);
 
@@ -456,7 +456,7 @@ public abstract class TileEntityBaseGenerator extends TileEntityBlock implements
             addCache(localTileEntity, ForgeDirection.SOUTH.ordinal());
     }
 
-    @Method(modid = "CoFHAPI|energy")
+    @Method(modid = Mods.IDs.CoFHAPIEnergy)
     private void addCache(TileEntity paramTileEntity, int dir) {
         if (this.handlerCache != null) {
             this.handlerCache[dir] = null;

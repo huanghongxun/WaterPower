@@ -30,9 +30,9 @@ import org.jackhuang.watercraft.common.item.range.ItemPlugins;
 import org.jackhuang.watercraft.common.item.range.ItemRange;
 import org.jackhuang.watercraft.common.item.rotors.RotorType;
 import org.jackhuang.watercraft.common.network.MessagePacketHandler;
-import org.jackhuang.watercraft.common.recipe.EasyRecipeRegistrator;
-import org.jackhuang.watercraft.common.recipe.IRecipeRegistrator;
-import org.jackhuang.watercraft.common.recipe.NormalRecipeRegistrator;
+import org.jackhuang.watercraft.common.recipe.EasyRecipeRegistrar;
+import org.jackhuang.watercraft.common.recipe.IRecipeRegistrar;
+import org.jackhuang.watercraft.common.recipe.NormalRecipeRegistrar;
 import org.jackhuang.watercraft.integration.CraftGuideIntegration;
 import org.jackhuang.watercraft.util.Mods;
 
@@ -100,7 +100,7 @@ public class WaterPower implements IWorldGenerator {
 	/**
 	 * Recipe Handler
 	 */
-	private IRecipeRegistrator recipe;
+	private IRecipeRegistrar recipe;
 
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -117,18 +117,18 @@ public class WaterPower implements IWorldGenerator {
 	@Mod.EventHandler
 	public void load(FMLInitializationEvent event) {
 		
-		IRecipeRegistrator.initRecipeConfig(config);
-		EasyRecipeRegistrator.initRecipeConfig(config);
-		NormalRecipeRegistrator.initRecipeConfig(config);
+		IRecipeRegistrar.initRecipeConfig(config);
+		EasyRecipeRegistrar.initRecipeConfig(config);
+		NormalRecipeRegistrar.initRecipeConfig(config);
 		
 		init();
 		
 		Property enableEasyRecipe = config.get("recipe", "enableEasyRecipe", false);
 		if(enableEasyRecipe.getBoolean(false))
-			recipe = new EasyRecipeRegistrator(config);
+			recipe = new EasyRecipeRegistrar(config);
 		Property enableNormalRecipe = config.get("recipe", "enableNormalRecipe", true);
 		if(enableNormalRecipe.getBoolean(true))
-			recipe = new NormalRecipeRegistrator(config);
+			recipe = new NormalRecipeRegistrar(config);
 		
 		GameRegistry.registerWorldGenerator(this, 0);
 

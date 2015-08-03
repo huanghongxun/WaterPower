@@ -41,7 +41,7 @@ public enum OreType {
 	public static void registerRecipes() {
 		for(OreType o : OreType.values()) {
 			Recipes.macerator.addRecipe(new RecipeInputItemStack(new ItemStack(GlobalBlocks.ore, 1, o.ordinal())), null,
-					new ItemStack(GlobalItems.oreDust, 1, o.ordinal()));
+					new ItemStack(GlobalItems.oreDust, 2, o.ordinal()));
 		}
 		FurnaceRecipes.smelting().func_151394_a(new ItemStack(GlobalBlocks.ore, 1, Monazite.ordinal()),
 				ItemMaterial.get(MaterialTypes.Neodymium, MaterialForms.ingot), 0f);

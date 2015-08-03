@@ -40,7 +40,7 @@ public abstract class GuiMachineBase extends GuiContainer {
 				.drawString(this.inv, 8, this.ySize - 96 + 2, 0x404040);
 
 		this.fontRendererObj.drawString("Stored(mb): "
-				+ this.container.tileEntity.water, 8, this.ySize - 105 + 2,
+				+ this.container.tileEntity.getEnergy(), 8, this.ySize - 105 + 2,
 				0x404040);
 		
 		this.fontRendererObj.drawString("Using(mb/t): "
