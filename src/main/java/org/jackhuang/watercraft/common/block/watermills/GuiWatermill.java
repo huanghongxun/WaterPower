@@ -16,6 +16,7 @@ import org.jackhuang.watercraft.common.EnergyType;
 import org.jackhuang.watercraft.common.network.MessagePacketHandler;
 import org.jackhuang.watercraft.common.network.PacketUnitChanged;
 import org.jackhuang.watercraft.common.tileentity.TileEntityGenerator;
+import org.jackhuang.watercraft.util.Utils;
 import org.jackhuang.watercraft.util.WPLog;
 import org.lwjgl.opengl.GL11;
 
@@ -35,7 +36,6 @@ public class GuiWatermill extends GuiContainer {
     private TileEntityWatermill gen;
 
     private ContainerWatermill container;
-    private DecimalFormat df;
     private GuiButton btnEnergyType;
 
     public GuiWatermill(EntityPlayer player, TileEntityWatermill gen) {
@@ -43,7 +43,6 @@ public class GuiWatermill extends GuiContainer {
         this.gen = gen;
         allowUserInput = false;
         container = new ContainerWatermill(player, gen);
-        df = new DecimalFormat("#.00");
     }
 
     @Override
@@ -77,7 +76,7 @@ public class GuiWatermill extends GuiContainer {
                 44, 30, 0x404040);
         fontRendererObj.drawString(
                 StatCollector.translateToLocal("cptwtrml.watermill.OUTPUT")
-                        + ": " + df.format(gen.getFromEU(gen.latestOutput))
+                        + ": " + Utils.DEFAULT_DECIMAL_FORMAT.format(gen.getFromEU(gen.latestOutput))
                         + gen.energyType.name() + "/t", 8, 45, 0x404040);
         fontRendererObj
                 .drawString(
@@ -99,7 +98,7 @@ public class GuiWatermill extends GuiContainer {
                         + b + "=" + a + "^3-1", 8, 65, 0x404040);
         fontRendererObj.drawString(
                 StatCollector.translateToLocal("cptwtrml.watermill.PRODUCTION")
-                        + ":" + df.format(gen.getFromEU(gen.production))
+                        + ":" + Utils.DEFAULT_DECIMAL_FORMAT.format(gen.getFromEU(gen.production))
                         + gen.energyType.name(), 8, 75, 0x404040);
     }
 

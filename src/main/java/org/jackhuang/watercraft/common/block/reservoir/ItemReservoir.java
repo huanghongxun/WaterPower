@@ -21,9 +21,11 @@ public class ItemReservoir extends ItemMeta {
 	@Override
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer,
 		List par3List, boolean par4) {
+	    par3List.add(StatCollector.translateToLocal("cptwtrml.reservoir.info"));
+        par3List.add(StatCollector.translateToLocal("cptwtrml.reservoir.info2"));
 		ReservoirType t = ReservoirType.values()[par1ItemStack.getItemDamage()];
-		par3List.add(StatCollector.translateToLocal("cptwtrml.reservoir.MAXSOTRE") + t.capacity + "mb");
-		par3List.add(StatCollector.translateToLocal("cptwtrml.reservoir.MAXUSE") + t.maxUse + "mb/s");
+		par3List.add(StatCollector.translateToLocal("cptwtrml.reservoir.MAXSOTRE") + ": " + t.capacity + "mb");
+		par3List.add(StatCollector.translateToLocal("cptwtrml.reservoir.MAXUSE") + ": " + t.maxUse + "mb/s");
 	}
 	
 	@Override

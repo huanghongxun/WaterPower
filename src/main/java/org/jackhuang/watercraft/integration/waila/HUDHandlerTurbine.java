@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.jackhuang.watercraft.common.block.turbines.TileEntityTurbine;
 import org.jackhuang.watercraft.util.Mods;
+import org.jackhuang.watercraft.util.Utils;
 
 import cpw.mods.fml.common.Optional.Interface;
 import cpw.mods.fml.common.Optional.InterfaceList;
@@ -32,9 +33,8 @@ public class HUDHandlerTurbine implements IWailaDataProvider {
 		TileEntity te = arg2.getTileEntity();
 		if(!(te instanceof TileEntityTurbine)) return arg1;
 		TileEntityTurbine tile = (TileEntityTurbine) te;
-		arg1.add("Stored: " + tile.getFromEU(tile.storage) + tile.energyType.name());
-		arg1.add("Latest Output: " + tile.getFromEU(tile.latestOutput) + tile.energyType.name());
-		arg1.add("Facing: " + tile.getFacing());
+		arg1.add(StatCollector.translateToLocal("cptwtrml.gui.stored") + ": " + Utils.DEFAULT_DECIMAL_FORMAT.format(tile.getFromEU(tile.storage)) + tile.energyType.name());
+		arg1.add(StatCollector.translateToLocal("cptwtrml.gui.latest_output") + ": " + Utils.DEFAULT_DECIMAL_FORMAT.format(tile.getFromEU(tile.latestOutput)) + tile.energyType.name());
 		return arg1;
 	}
 
@@ -53,7 +53,6 @@ public class HUDHandlerTurbine implements IWailaDataProvider {
 	@Method(modid = Mods.IDs.Waila)
 	public ItemStack getWailaStack(IWailaDataAccessor arg0,
 			IWailaConfigHandler arg1) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -61,14 +60,12 @@ public class HUDHandlerTurbine implements IWailaDataProvider {
 	@Method(modid = Mods.IDs.Waila)
 	public List<String> getWailaTail(ItemStack arg0, List<String> arg1,
 			IWailaDataAccessor arg2, IWailaConfigHandler arg3) {
-		// TODO Auto-generated method stub
 		return arg1;
 	}
 
 	@Override
 	public NBTTagCompound getNBTData(EntityPlayerMP arg0, TileEntity arg1,
 			NBTTagCompound arg2, World arg3, int arg4, int arg5, int arg6) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

@@ -14,6 +14,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import org.jackhuang.watercraft.common.tileentity.TileEntityStandardWaterMachine;
@@ -37,9 +38,9 @@ public class HUDHandlerMachine implements IWailaDataProvider {
 		if(!(te instanceof TileEntityStandardWaterMachine)) return arg1;
 		TileEntityStandardWaterMachine tile = (TileEntityStandardWaterMachine) te;
 		
-		arg1.add("Using: " + tile.energyConsume);
-        arg1.add("Stored: " + tile.getFluidTank().getFluidAmount());
-        arg1.add("Capacity: " + tile.getFluidTankCapacity());
+		arg1.add(StatCollector.translateToLocal("cptwtrml.gui.using") + ": " + tile.energyConsume + "mb/t");
+        arg1.add(StatCollector.translateToLocal("cptwtrml.gui.stored") + ": " + tile.getTankAmount() + "mb");
+        arg1.add(StatCollector.translateToLocal("cptwtrml.gui.capacity") + ": " + tile.getFluidTankCapacity() + "mb");
 		
 		return arg1;
 	}

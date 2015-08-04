@@ -90,6 +90,9 @@ cptwtrml.reservoir.DIAMOND=Diamond
 cptwtrml.reservoir.MAXSOTRE=Max Storage
 cptwtrml.reservoir.MAXUSE=Max using(for turbine)
 
+cptwtrml.reservoir.info=MultiBlock structure, like a bucket. 
+cptwtrml.reservoir.info2=Will receive water raining or in river and ocean. 
+
 # rotor
 cptwtrml.rotor.ROTOR=Rotor
 cptwtrml.rotor.INFINITE=Infinite
@@ -154,6 +157,8 @@ cptwtrml.updater.DustGold=Gold Dust
 cptwtrml.updater.DrawingWaterPart=WaterDrawing Part
 cptwtrml.updater.DrawingWaterComponent=WaterDrawing Component
 
+cptwtrml.updater.info=For crafting
+
 # range
 cptwtrml.range.info.MK1=Narrow 2 blocks of the range
 cptwtrml.range.info.MK2=Narrow 16 blocks of the range
@@ -174,11 +179,18 @@ cptwtrml.watermill.PRODUCTION=Output Limit
 cptwtmrl.watermill.TROUSERS=Trousers
 cptwtrml.watermill.ROTOR=Rotor
 
-cptwtrml.gui.reservoir.capacity=Capacity
+cptwtrml.watermill.max_output=Maximum Output
+
 cptwtrml.gui.reservoir.add=Adds
-cptwtrml.gui.reservoir.water=Amount
-cptwtrml.gui.reservoir.fluidtype=Type
 cptwtrml.gui.reservoir.hpWater=HP Water
+
+cptwtrml.gui.capacity=Capacity
+cptwtrml.gui.stored=Stored
+cptwtrml.gui.latest_output=Latest Output
+cptwtrml.gui.stored_fluid=Stored fluid
+cptwtrml.gui.fluid_amount=Fluid amount
+cptwtrml.gui.empty=Empty
+cptwtrml.gui.using=Using Energy
 
 cptwtrml.rotor.RANGE=Range
 
@@ -236,6 +248,8 @@ cptwtrml.machine.advancedCompressor.name=Water-power Advanced Compressor
 cptwtrml.machine.centrifuge.name=Water-power Centrifuge
 cptwtrml.machine.lathe.name=Water-power Lathe
 cptwtrml.machine.cutter.name=Water-power Cutter
+
+cptwtrml.machine.info=Must next to the valid reservoir to receive energy
 
 # ores
 cptwtrml.ore.monazite=Monazite

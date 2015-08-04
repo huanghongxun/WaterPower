@@ -31,13 +31,13 @@ public class HUDHandlerReservoir implements IWailaDataProvider {
 		TileEntity te = arg2.getTileEntity();
 		if(!(te instanceof TileEntityReservoir)) return arg1;
 		TileEntityReservoir tile = (TileEntityReservoir) te;
-		arg1.add("Capacity: " + tile.getMaxFluidAmount());
-		arg1.add("Add: " + tile.getLastAddedWater());
+		arg1.add(StatCollector.translateToLocal("cptwtrml.gui.capacity") + ": " + tile.getMaxFluidAmount());
+		arg1.add(StatCollector.translateToLocal("cptwtrml.gui.reservoir.add") + ": " + tile.getLastAddedWater());
 		if(tile.getFluidTank() == null) return arg1;
 		FluidStack f = tile.getFluidTank().getFluid();
-		arg1.add("Stored Fluid: " + (f == null ? "Empty" : f.getLocalizedName()));
-		arg1.add("Stored: " + tile.getFluidAmount());
-		arg1.add("Stored HP: " + tile.getHPWater());
+		arg1.add(StatCollector.translateToLocal("cptwtrml.gui.stored_fluid") + ": " + (f == null ? StatCollector.translateToLocal("cptwtrml.gui.empty") : f.getLocalizedName()));
+		arg1.add(StatCollector.translateToLocal("cptwtrml.gui.fluid_amount") + ": " + tile.getFluidAmount());
+		arg1.add(StatCollector.translateToLocal("cptwtrml.gui.reservoir.hpWater") + ": " + tile.getHPWater());
 		return arg1;
 	}
 

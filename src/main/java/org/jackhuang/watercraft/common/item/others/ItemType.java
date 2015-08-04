@@ -75,14 +75,9 @@ public enum ItemType {
 	public static ItemType[] stackPool = new ItemType[100];
 	
 	private ItemType(int ord, String unlocalizedName) {
-		this(ord, unlocalizedName, null);
-	}
-	
-	private ItemType(int ord, String unlocalizedName, String information) {
-		this.unlocalizedName = unlocalizedName;
-		this.information = information;
-		//this.ord = ord;
-		//stackPool[ord] = this;
+        this.unlocalizedName = unlocalizedName;
+        //this.ord = ord;
+        //stackPool[ord] = this;
 	}
 	
 	public String getShowedName() {
@@ -95,7 +90,7 @@ public enum ItemType {
 		String format = "cptwtrml.updater.info." + name();
 		String s = StatCollector.translateToLocal(format);
 		if(format.equals(s)) {
-			return information;
+			return StatCollector.translateToLocal("cptwtrml.updater.info");
 		}
 		return s;
 	}

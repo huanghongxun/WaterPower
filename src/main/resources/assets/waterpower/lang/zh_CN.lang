@@ -90,6 +90,9 @@ cptwtrml.reservoir.DIAMOND=钻石
 cptwtrml.reservoir.MAXSOTRE=最大存储
 cptwtrml.reservoir.MAXUSE=水轮机最大用水
 
+cptwtrml.reservoir.info=多方块结构，像个桶
+cptwtrml.reservoir.info2=下雨或在河流或海洋中接收水  
+
 # rotor
 cptwtrml.rotor.ROTOR=转子
 cptwtrml.rotor.INFINITE=永久
@@ -154,6 +157,8 @@ cptwtrml.updater.DustGold=金粉
 cptwtrml.updater.DrawingWaterPart=汲水零件
 cptwtrml.updater.DrawingWaterComponent=汲水组件
 
+cptwtrml.updater.info=用于合成
+
 # range
 cptwtrml.range.info.MK1=缩小2格水要求
 cptwtrml.range.info.MK2=缩小16格水要求
@@ -174,11 +179,18 @@ cptwtrml.watermill.PRODUCTION=输出限制
 cptwtmrl.watermill.TROUSERS=裤子
 cptwtrml.watermill.ROTOR=转子
 
-cptwtrml.gui.reservoir.capacity=容积
+cptwtrml.watermill.max_output=最大输出
+
 cptwtrml.gui.reservoir.add=增加
-cptwtrml.gui.reservoir.water=液量
-cptwtrml.gui.reservoir.fluidtype=液体
 cptwtrml.gui.reservoir.hpWater=高能水
+
+cptwtrml.gui.capacity=容积
+cptwtrml.gui.stored=已存储
+cptwtrml.gui.latest_output=上次输出
+cptwtrml.gui.stored_fluid=已存储液体
+cptwtrml.gui.fluid_amount=液量
+cptwtrml.gui.empty=空
+cptwtrml.gui.using=使用能量
 
 cptwtrml.rotor.RANGE=范围缩小
 
@@ -236,6 +248,8 @@ cptwtrml.machine.advancedCompressor.name=高压液压压缩机
 cptwtrml.machine.centrifuge.name=高速离心机
 cptwtrml.machine.lathe.name=水力车床
 cptwtrml.machine.cutter.name=水力切割机
+
+cptwtrml.machine.info=必须邻接水库方块来接收能量
 
 # ores
 cptwtrml.ore.monazite=独居石

@@ -21,7 +21,7 @@ import uristqwerty.CraftGuide.api.RecipeTemplate;
 import uristqwerty.CraftGuide.api.Slot;
 import uristqwerty.CraftGuide.api.SlotType;
 
-public class CraftGuideIntegration extends CraftGuideAPIObject implements
+public class CraftGuideWaterPowerObject extends CraftGuideAPIObject implements
 		RecipeProvider {
 
 	@Override

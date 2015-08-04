@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.jackhuang.watercraft.common.block.watermills.TileEntityWatermill;
 import org.jackhuang.watercraft.util.Mods;
+import org.jackhuang.watercraft.util.Utils;
 
 import cpw.mods.fml.common.Optional.Interface;
 import cpw.mods.fml.common.Optional.InterfaceList;
@@ -32,13 +33,12 @@ public class HUDHandlerWatermills implements IWailaDataProvider {
 		TileEntity te = arg2.getTileEntity();
 		if(!(te instanceof TileEntityWatermill)) return arg1;
 		TileEntityWatermill tile = (TileEntityWatermill) te;
-		arg1.add("Stored: " + tile.getFromEU(tile.storage) + tile.energyType.name());
-		arg1.add("Latest Output: " + tile.getFromEU(tile.latestOutput) + tile.energyType.name());
-		arg1.add("Facing: " + tile.getFacing());
+		arg1.add(StatCollector.translateToLocal("cptwtrml.gui.stored") + ": " + Utils.DEFAULT_DECIMAL_FORMAT.format(tile.getFromEU(tile.storage)) + tile.energyType.name());
+		arg1.add(StatCollector.translateToLocal("cptwtrml.gui.latest_output") + ": " + Utils.DEFAULT_DECIMAL_FORMAT.format(tile.getFromEU(tile.latestOutput)) + tile.energyType.name());
 		if(tile.getFluidTank() == null) return arg1;
 		FluidStack f = tile.getFluidTank().getFluid();
-		arg1.add("Stored Fluid: " + (f == null ? "Empty" : f.getLocalizedName()));
-		arg1.add("Fluid amount: " + tile.getFluidTank().getFluidAmount() + "MB");
+		arg1.add(StatCollector.translateToLocal("cptwtrml.gui.stored_fluid") + ": " + (f == null ? StatCollector.translateToLocal("cptwtrml.gui.empty") : f.getLocalizedName()));
+		arg1.add(StatCollector.translateToLocal("cptwtrml.gui.fluid_amount") + ": " + tile.getFluidTank().getFluidAmount() + "mb");
 		return arg1;
 	}
 

@@ -15,6 +15,8 @@ import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.client.gui.IHasGui;
 import org.jackhuang.watercraft.common.EnergyType;
 import org.jackhuang.watercraft.util.Mods;
+import org.jackhuang.watercraft.util.Utils;
+
 
 /*import buildcraft.api.mj.IBatteryObject;
  import buildcraft.api.mj.MjAPI;
@@ -29,6 +31,7 @@ import cpw.mods.fml.common.Optional.InterfaceList;
 import cpw.mods.fml.common.Optional.Method;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -489,18 +492,17 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements
     }
 
     public double getFromEU(double eu) {
-        int s = (int) (energyType.getFromEU(eu) * 100);
-        return ((double) s) / 100;
+        return energyType.getFromEU(eu);
     }
 
     @Override
     @Method(modid = Mods.IDs.Factorization)
     public String getInfo() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Stored/" + energyType.name() + ": " + getFromEU(storage)
+        sb.append(StatCollector.translateToLocal("cptwtrml.gui.stored") + "/" + energyType.name() + ": " + Utils.DEFAULT_DECIMAL_FORMAT.format(getFromEU(storage))
                 + "\n");
-        sb.append("Latest Output/" + energyType.name() + ": "
-                + getFromEU(latestOutput) + "\n");
+        sb.append(StatCollector.translateToLocal("cptwtrml.gui.latest_output") + "/" + energyType.name() + ": "
+                + Utils.DEFAULT_DECIMAL_FORMAT.format(getFromEU(latestOutput)) + "\n");
         return sb.toString();
     }
 

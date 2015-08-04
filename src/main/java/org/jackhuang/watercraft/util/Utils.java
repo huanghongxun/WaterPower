@@ -10,6 +10,7 @@ package org.jackhuang.watercraft.util;
 
 import ic2.api.item.IC2Items;
 
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -171,6 +172,7 @@ public class Utils {
 	}
 	
 	public static final Random rand = new Random();
+    public static final DecimalFormat DEFAULT_DECIMAL_FORMAT = new DecimalFormat("#.00");
 	
 	public static void dropItems(World world, int x, int y, int z, List<ItemStack> drops) {
 	    if(WaterPower.isSimulating()) {

@@ -225,7 +225,7 @@ public abstract class TileEntityStandardWaterMachine extends
 		return null;
 	}
 
-	public double getEnergy() {
+	public int getEnergy() {
 		return this.getTankAmount();
 	}
 

@@ -13,6 +13,7 @@ import org.jackhuang.watercraft.client.gui.ContainerRotor;
 import org.jackhuang.watercraft.common.EnergyType;
 import org.jackhuang.watercraft.common.network.MessagePacketHandler;
 import org.jackhuang.watercraft.common.network.PacketUnitChanged;
+import org.jackhuang.watercraft.util.Utils;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
@@ -57,7 +58,7 @@ public class GuiTurbine extends GuiContainer {
 		fontRendererObj.drawString(gen.getInventoryName(), 8, 6, 0x404040);
 		fontRendererObj.drawString(StatCollector.translateToLocal("cptwtrml.watermill.ROTOR") + ":", 44, 30, 0x404040);
 		fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 0x404040);
-		fontRendererObj.drawString(StatCollector.translateToLocal("cptwtrml.watermill.OUTPUT") + ": " + gen.getOfferedEnergy() + "EU/t", 8,
+		fontRendererObj.drawString(StatCollector.translateToLocal("cptwtrml.watermill.OUTPUT") + ": " + Utils.DEFAULT_DECIMAL_FORMAT.format(gen.getFromEU(gen.latestOutput)) + gen.energyType.name() + "/t", 8,
 				50, 0x404040);
 	}
 

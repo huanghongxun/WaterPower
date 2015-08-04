@@ -33,7 +33,8 @@ import org.jackhuang.watercraft.common.network.MessagePacketHandler;
 import org.jackhuang.watercraft.common.recipe.EasyRecipeRegistrar;
 import org.jackhuang.watercraft.common.recipe.IRecipeRegistrar;
 import org.jackhuang.watercraft.common.recipe.NormalRecipeRegistrar;
-import org.jackhuang.watercraft.integration.CraftGuideIntegration;
+import org.jackhuang.watercraft.integration.CraftGuideWaterPowerObject;
+import org.jackhuang.watercraft.integration.IntegrationType;
 import org.jackhuang.watercraft.util.Mods;
 
 import net.minecraft.block.Block;
@@ -137,15 +138,19 @@ public class WaterPower implements IWorldGenerator {
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
 
 		config.save();
-		
-		if(Mods.CraftGuide.isAvailable) {
-			new CraftGuideIntegration();
-		}
+
+        for(IntegrationType type : IntegrationType.values()) {
+            if(type.getModule() != null)
+                type.getModule().init();
+        }
 	}
 	
 	@EventHandler
 	public void loadComplete(FMLLoadCompleteEvent event) {
-		proxy.loadComplete();
+		for(IntegrationType type : IntegrationType.values()) {
+		    if(type.getModule() != null)
+		        type.getModule().loadComplete();
+		}
 	}
 
 	@EventHandler
@@ -202,20 +207,20 @@ public class WaterPower implements IWorldGenerator {
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world,
 			IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
-        int baseHeight = world.provider.getAverageGroundLevel() + 1;
-	    int baseScale = Math.round(baseHeight * Reference.WorldGen.oreDensityFactor / 20);
-        int baseCount = 15 * baseScale / 64;
+        int baseHeight = world.provider.getAverageGroundLevel();
+	    int baseScale = Math.round(baseHeight * Reference.WorldGen.oreDensityFactor);
+        int baseCount = 3 * baseScale / 64;
         
         if(Reference.WorldGen.vanadiumOre)
-		    generateOre(GlobalBlocks.vanadiumOre, 2, baseCount, world, random, chunkX, chunkZ, 16, 32);
+		    generateOre(GlobalBlocks.vanadiumOre, 7, baseCount, world, random, chunkX, chunkZ, 16, 32);
         if(Reference.WorldGen.manganeseOre)
-		    generateOre(GlobalBlocks.manganeseOre, 2, baseCount, world, random, chunkX, chunkZ, 16, 32);
+		    generateOre(GlobalBlocks.manganeseOre, 7, baseCount, world, random, chunkX, chunkZ, 16, 32);
         if(Reference.WorldGen.monaziteOre)
-		    generateOre(GlobalBlocks.monaziteOre, 2, baseCount, world, random, chunkX, chunkZ, 16, 32);
+		    generateOre(GlobalBlocks.monaziteOre, 7, baseCount, world, random, chunkX, chunkZ, 16, 32);
         if(Reference.WorldGen.magnetOre)
-		    generateOre(GlobalBlocks.magnetOre, 10, baseCount, world, random, chunkX, chunkZ, 16, 32);
+		    generateOre(GlobalBlocks.magnetOre, 7, baseCount, world, random, chunkX, chunkZ, 16, 32);
         if(Reference.WorldGen.zincOre)
-		    generateOre(GlobalBlocks.zincOre, 15, baseCount, world, random, chunkX, chunkZ, 0, 64);
+		    generateOre(GlobalBlocks.zincOre, 7, baseCount, world, random, chunkX, chunkZ, 6, 64);
 	}
 	
 	@SideOnly(Side.CLIENT)

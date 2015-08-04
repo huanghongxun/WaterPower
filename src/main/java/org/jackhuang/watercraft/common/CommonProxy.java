@@ -86,7 +86,5 @@ public class CommonProxy implements IGuiHandler {
 	}
 	
 	public void loadAllIcons() {}
-	
-	public void loadComplete() {}
 
 }

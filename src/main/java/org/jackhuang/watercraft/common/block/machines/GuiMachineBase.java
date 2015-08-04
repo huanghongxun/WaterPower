@@ -11,6 +11,7 @@ package org.jackhuang.watercraft.common.block.machines;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 
 import org.jackhuang.watercraft.client.gui.ContainerStandardMachine;
 import org.lwjgl.opengl.GL11;
@@ -39,12 +40,12 @@ public abstract class GuiMachineBase extends GuiContainer {
 		this.fontRendererObj
 				.drawString(this.inv, 8, this.ySize - 96 + 2, 0x404040);
 
-		this.fontRendererObj.drawString("Stored(mb): "
-				+ this.container.tileEntity.getEnergy(), 8, this.ySize - 105 + 2,
+		this.fontRendererObj.drawString(StatCollector.translateToLocal("cptwtrml.gui.stored") + ": "
+				+ this.container.tileEntity.getEnergy() + "mb", 8, this.ySize - 105 + 2,
 				0x404040);
 		
-		this.fontRendererObj.drawString("Using(mb/t): "
-				+ this.container.tileEntity.energyConsume, 8, this.ySize - 114 + 2,
+		this.fontRendererObj.drawString(StatCollector.translateToLocal("cptwtrml.gui.using") + ": "
+				+ this.container.tileEntity.energyConsume + "mb/t", 8, this.ySize - 114 + 2,
 				0x404040);
 	}
 
