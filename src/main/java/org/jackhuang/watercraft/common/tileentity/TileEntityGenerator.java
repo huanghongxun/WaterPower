@@ -299,7 +299,7 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements
     @Override
     @Method(modid = Mods.IDs.IndustrialCraft2API)
     public int requestHeat(ForgeDirection directionFrom, int requestheat) {
-        if (energyType == EnergyType.KU)
+        if (energyType == EnergyType.HU)
             return Math.min(requestheat, maxrequestHeatTick(directionFrom));
         return 0;
     }

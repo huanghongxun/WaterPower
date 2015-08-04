@@ -22,6 +22,7 @@ import org.jackhuang.watercraft.util.Mods;
 
 import cpw.mods.fml.common.Optional.Interface;
 import cpw.mods.fml.common.Optional.InterfaceList;
+import cpw.mods.fml.common.Optional.Method;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
@@ -32,6 +33,7 @@ import mcp.mobius.waila.api.IWailaDataProvider;
 public class HUDHandlerMachine implements IWailaDataProvider {
 
 	@Override
+    @Method(modid = Mods.IDs.Waila)
 	public List<String> getWailaBody(ItemStack arg0, List<String> arg1,
 			IWailaDataAccessor arg2, IWailaConfigHandler arg3) {
 		TileEntity te = arg2.getTileEntity();
@@ -46,6 +48,7 @@ public class HUDHandlerMachine implements IWailaDataProvider {
 	}
 
 	@Override
+    @Method(modid = Mods.IDs.Waila)
 	public List<String> getWailaHead(ItemStack arg0, List<String> arg1,
 			IWailaDataAccessor arg2, IWailaConfigHandler arg3) {
 		// TODO Auto-generated method stub
@@ -53,6 +56,7 @@ public class HUDHandlerMachine implements IWailaDataProvider {
 	}
 
 	@Override
+    @Method(modid = Mods.IDs.Waila)
 	public ItemStack getWailaStack(IWailaDataAccessor arg0,
 			IWailaConfigHandler arg1) {
 		// TODO Auto-generated method stub
@@ -60,6 +64,7 @@ public class HUDHandlerMachine implements IWailaDataProvider {
 	}
 
 	@Override
+    @Method(modid = Mods.IDs.Waila)
 	public List<String> getWailaTail(ItemStack arg0, List<String> arg1,
 			IWailaDataAccessor arg2, IWailaConfigHandler arg3) {
 		// TODO Auto-generated method stub
@@ -67,6 +72,7 @@ public class HUDHandlerMachine implements IWailaDataProvider {
 	}
 
 	@Override
+    @Method(modid = Mods.IDs.Waila)
 	public NBTTagCompound getNBTData(EntityPlayerMP arg0, TileEntity arg1,
 			NBTTagCompound arg2, World arg3, int arg4, int arg5, int arg6) {
 		// TODO Auto-generated method stub

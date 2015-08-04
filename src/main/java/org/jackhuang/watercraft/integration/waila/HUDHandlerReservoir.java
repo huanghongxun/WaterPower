@@ -56,7 +56,6 @@ public class HUDHandlerReservoir implements IWailaDataProvider {
 	@Method(modid = Mods.IDs.Waila)
 	public ItemStack getWailaStack(IWailaDataAccessor arg0,
 			IWailaConfigHandler arg1) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -64,14 +63,13 @@ public class HUDHandlerReservoir implements IWailaDataProvider {
 	@Method(modid = Mods.IDs.Waila)
 	public List<String> getWailaTail(ItemStack arg0, List<String> arg1,
 			IWailaDataAccessor arg2, IWailaConfigHandler arg3) {
-		// TODO Auto-generated method stub
 		return arg1;
 	}
 
 	@Override
+    @Method(modid = Mods.IDs.Waila)
 	public NBTTagCompound getNBTData(EntityPlayerMP arg0, TileEntity arg1,
 			NBTTagCompound arg2, World arg3, int arg4, int arg5, int arg6) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

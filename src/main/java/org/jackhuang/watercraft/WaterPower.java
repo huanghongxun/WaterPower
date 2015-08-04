@@ -35,6 +35,7 @@ import org.jackhuang.watercraft.common.recipe.IRecipeRegistrar;
 import org.jackhuang.watercraft.common.recipe.NormalRecipeRegistrar;
 import org.jackhuang.watercraft.integration.CraftGuideWaterPowerObject;
 import org.jackhuang.watercraft.integration.IntegrationType;
+import org.jackhuang.watercraft.integration.waila.WailaModule;
 import org.jackhuang.watercraft.util.Mods;
 
 import net.minecraft.block.Block;
