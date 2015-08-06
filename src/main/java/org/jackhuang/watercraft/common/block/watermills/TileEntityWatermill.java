@@ -290,7 +290,7 @@ public class TileEntityWatermill extends TileEntityElectricMetaBlock {
     public void spawnWheel() {
         wheel = new EntityWaterWheel(worldObj, this);
         wheel.parent = this;
-        wheel.parentFacing = getFacing();
+        wheel.parentFacing = getDirection();
         this.worldObj.spawnEntityInWorld(wheel);
     }
 

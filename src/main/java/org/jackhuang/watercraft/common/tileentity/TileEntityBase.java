@@ -31,7 +31,7 @@ public class TileEntityBase extends TileEntity {
 	}
 
 	public boolean isServerSide() {
-		return !worldObj.isRemote;
+		return WaterPower.isServerSide();
 	}
 
 	public void writePacketData(NBTTagCompound tag) {

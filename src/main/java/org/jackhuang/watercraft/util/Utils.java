@@ -8,14 +8,13 @@
 
 package org.jackhuang.watercraft.util;
 
-import ic2.api.item.IC2Items;
-
 import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 import org.jackhuang.watercraft.WaterPower;
+import org.jackhuang.watercraft.integration.ic2.ICItemFinder;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
@@ -76,7 +75,7 @@ public class Utils {
 	
 	public static boolean isITNT(ItemStack is) {
 	    if(!Mods.IndustrialCraft2.isAvailable) return false;
-		ItemStack b = IC2Items.getItem("industrialTnt");
+		ItemStack b = ICItemFinder.getIC2Item("industrialTnt");
 		if(b.getItem() == is.getItem() && b.getItemDamage() == is.getItemDamage())
 			return true;
 		else

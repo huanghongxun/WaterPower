@@ -1,7 +1,5 @@
 package org.jackhuang.watercraft.common.block;
 
-import ic2.api.tile.IWrenchable;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -44,22 +42,22 @@ public abstract class BlockMultiID extends BlockBase {
 	}
 
 	@Override
-	public int getFacing(IBlockAccess iBlockAccess, int x, int y, int z) {
+	public int getDirection(IBlockAccess iBlockAccess, int x, int y, int z) {
 		TileEntity te = iBlockAccess.getTileEntity(x, y, z);
 
 		if ((te instanceof TileEntityBlock)) {
-			return ((TileEntityBlock) te).getFacing();
+			return ((TileEntityBlock) te).getDirection();
 		}
 		int meta = iBlockAccess.getBlockMetadata(x, y, z);
 
-		return getFacing(meta);
+		return getDirection(meta);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(IBlockAccess iBlockAccess, int x, int y, int z,
 			int side) {
-		int facing = getFacing(iBlockAccess, x, y, z);
+		int facing = getDirection(iBlockAccess, x, y, z);
 		int meta = iBlockAccess.getBlockMetadata(x, y, z);
 
 		int index = getTextureIndex(iBlockAccess, x, y, z, meta);
@@ -83,26 +81,26 @@ public abstract class BlockMultiID extends BlockBase {
 		
 		TileEntity tileEntity = world.getTileEntity(x, y, z);
 
-		if ((tileEntity instanceof IWrenchable)) {
-			IWrenchable te = (IWrenchable) tileEntity;
+		if ((tileEntity instanceof TileEntityBlock)) {
+		    TileEntityBlock te = (TileEntityBlock) tileEntity;
 			if (entityliving == null) {
-				te.setFacing((short) 2);
+				te.setDirection(2);
 			} else {
 				int l = MathHelper
 						.floor_double(entityliving.rotationYaw * 4.0F / 360.0F + 0.5D) & 0x3;
 
 				switch (l) {
 				case 0:
-					te.setFacing((short) 2);
+					te.setDirection(2);
 					break;
 				case 1:
-					te.setFacing((short) 5);
+					te.setDirection(5);
 					break;
 				case 2:
-					te.setFacing((short) 3);
+					te.setDirection(3);
 					break;
 				case 3:
-					te.setFacing((short) 4);
+					te.setDirection(4);
 				}
 			}
 		}

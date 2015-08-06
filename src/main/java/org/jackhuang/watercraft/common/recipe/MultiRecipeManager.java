@@ -51,11 +51,5 @@ public class MultiRecipeManager implements IRecipeManager {
 		container.add(rm);
 		return this;
 	}
-	
-	public MultiRecipeManager addRecipeManager(boolean really, IRecipeManager rm) {
-		if(really)
-			container.add(rm);
-		return this;
-	}
 
 }

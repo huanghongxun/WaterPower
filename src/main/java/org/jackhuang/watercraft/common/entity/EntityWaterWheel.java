@@ -33,7 +33,7 @@ public class EntityWaterWheel extends Entity {
 		super(world);
 
 		this.parent = parent;
-		this.parentFacing = parent.getFacing();
+		this.parentFacing = parent.getDirection();
 		this.noClip = false;
 
 		this.xParent = parent.xCoord;
@@ -41,7 +41,7 @@ public class EntityWaterWheel extends Entity {
 		this.zParent = parent.zCoord;
 
 		int[] actualCoords = Utils.moveForward(world, parent.xCoord,
-				parent.yCoord, parent.zCoord, parent.getFacing(), 1);
+				parent.yCoord, parent.zCoord, parent.getDirection(), 1);
 		setPosition(actualCoords[0], actualCoords[1], actualCoords[2]);
 
 		//this.boundingBox.setBB(getBoundingBox());
@@ -58,8 +58,8 @@ public class EntityWaterWheel extends Entity {
 			return null;
 		}
 
-		//System.out.println(this.parent.getFacing());
-		switch (this.parent.getFacing()) {
+		//System.out.println(this.parent.getDirection());
+		switch (this.parent.getDirection()) {
 		case 5:
 			offset[0] += 1;
 			offset[2] -= 4;
@@ -103,9 +103,9 @@ public class EntityWaterWheel extends Entity {
 		if (this.parent == null)
 			destroy();
 		else {
-		    parentFacing = parent.getFacing();
+		    parentFacing = parent.getDirection();
 		    int[] actualCoords = Utils.moveForward(worldObj, parent.xCoord,
-	                parent.yCoord, parent.zCoord, parent.getFacing(), 1);
+	                parent.yCoord, parent.zCoord, parent.getDirection(), 1);
 	        setPosition(actualCoords[0], actualCoords[1], actualCoords[2]);
 		}
 		updateParameters();

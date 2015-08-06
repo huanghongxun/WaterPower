@@ -64,7 +64,7 @@ public abstract class BlockBase extends BlockContainer {
 
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(int side, int meta) {
-        int facing = getFacing(meta);
+        int facing = getDirection(meta);
         int index = getTextureIndex(meta);
         int subIndex = getTextureSubIndex(facing, side);
 
@@ -85,14 +85,14 @@ public abstract class BlockBase extends BlockContainer {
         return super.getUnlocalizedName();
     }
 
-    protected int getFacing(int meta) {
+    protected int getDirection(int meta) {
         return 3;
     }
 
-    public int getFacing(IBlockAccess iBlockAccess, int x, int y, int z) {
+    public int getDirection(IBlockAccess iBlockAccess, int x, int y, int z) {
         int meta = iBlockAccess.getBlockMetadata(x, y, z);
 
-        return getFacing(meta);
+        return getDirection(meta);
     }
 
     protected String getTextureFolder(int index) {

@@ -3,9 +3,6 @@ package org.jackhuang.watercraft.common.item.crafting;
 import java.util.List;
 
 import gregtech.api.GregTech_API;
-import ic2.api.item.IC2Items;
-import ic2.api.recipe.RecipeInputOreDict;
-import ic2.api.recipe.Recipes;
 
 import org.jackhuang.watercraft.client.render.IIconContainer;
 import org.jackhuang.watercraft.client.render.RecolorableTextures;

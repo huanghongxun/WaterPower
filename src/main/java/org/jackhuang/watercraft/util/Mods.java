@@ -71,8 +71,6 @@ public class Mods {
                         .getProcessedVersion());
             else
                 isAvailable = ModAPIManager.INSTANCE.hasAPI(version.getLabel());
-            
-            isAvailable = false;
         }
     }
 

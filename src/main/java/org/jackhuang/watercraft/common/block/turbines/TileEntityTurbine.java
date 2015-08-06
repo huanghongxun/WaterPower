@@ -105,7 +105,7 @@ public class TileEntityTurbine extends TileEntityElectricMetaBlock {
 
     private TileEntityReservoir getWater(World world, int x, int y, int z) {
         TileEntityReservoir reservoir = null;
-        switch (getFacing()) {
+        switch (getDirection()) {
         case 2:
             // z+1
             if (Reservoir.isRes(world, x, y, z + 1)) {

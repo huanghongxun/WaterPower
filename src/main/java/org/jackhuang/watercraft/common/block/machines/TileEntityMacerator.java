@@ -24,8 +24,9 @@ public class TileEntityMacerator extends TileEntityStandardWaterMachine {
 	}
 	
 	public static void init() {
-		MyRecipes.macerator = new MultiRecipeManager()
-				.addRecipeManager(IndustrialCraftModule.IS_INDUSTRIAL_CRAFT_RECIPES_AVAILABLE, new IndustrialCraftRecipeManager(IndustrialCraftModule.macerator));
+		MyRecipes.macerator = new MultiRecipeManager();
+		if(Mods.IndustrialCraft2.isAvailable)
+		    ((MultiRecipeManager)MyRecipes.macerator).addRecipeManager(new IndustrialCraftRecipeManager(IndustrialCraftModule.macerator));
 	}
 
 	@Override

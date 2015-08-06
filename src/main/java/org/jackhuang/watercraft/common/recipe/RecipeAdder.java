@@ -8,9 +8,6 @@
 
 package org.jackhuang.watercraft.common.recipe;
 
-import ic2.api.recipe.RecipeInputItemStack;
-import ic2.api.recipe.RecipeInputOreDict;
-import ic2.api.recipe.Recipes;
 import gregtech.api.GregTech_API;
 
 import org.jackhuang.watercraft.common.item.others.ItemType;
@@ -24,7 +21,6 @@ import org.jackhuang.watercraft.util.Mods;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.registry.GameRegistry;
 import mekanism.api.recipe.RecipeHelper;
-import mods.railcraft.api.crafting.RailcraftCraftingManager;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -41,8 +37,7 @@ public class RecipeAdder {
         boolean need = true;
         if (Mods.IndustrialCraft2.isAvailable) {
             need = false;
-            Recipes.macerator.addRecipe(new RecipeInputItemStack(input), null,
-                    output);
+            IndustrialCraftModule.macerator(input, output);
         }
         if (Mods.ThermalExpansion.isAvailable) {
             ThermalExpansionModule.addPulverizerRecipe(3200, input, output);
@@ -68,8 +63,7 @@ public class RecipeAdder {
         boolean need = true;
         if (Mods.IndustrialCraft2.isAvailable) {
             need = false;
-            Recipes.blockcutter.addRecipe(new RecipeInputItemStack(input),
-                    null, output);
+            IndustrialCraftModule.blockcutter(input, output);
         }
         if (need) {
             MyRecipes.cutter.addRecipe(input, output);
@@ -80,8 +74,7 @@ public class RecipeAdder {
         boolean need = true;
         if (Mods.IndustrialCraft2.isAvailable) {
             need = false;
-            Recipes.compressor.addRecipe(new RecipeInputItemStack(input), null,
-                    output);
+            IndustrialCraftModule.compressor(input, output);
         }
         if (need) {
             MyRecipes.compressor.addRecipe(input, output);
@@ -98,8 +91,7 @@ public class RecipeAdder {
                     32);
         }
         if (Mods.IndustrialCraft2.isAvailable) {
-            Recipes.metalformerRolling.addRecipe(
-                    new RecipeInputItemStack(input), null, output);
+            IndustrialCraftModule.metalformerRolling(input, output);
         }
         if (Mods.Railcraft.isAvailable) {
             int sz = input.stackSize;
@@ -151,8 +143,7 @@ public class RecipeAdder {
             int cookTime) {
         boolean flag = false;
         if (Mods.IndustrialCraft2.isAvailable) {
-            Recipes.blastfurance.addRecipe(new RecipeInputItemStack(input),
-                    null, output);
+            IndustrialCraftModule.blastfurance(input, output);
             flag = true;
         }
         if (Mods.Railcraft.isAvailable) {
@@ -160,16 +151,12 @@ public class RecipeAdder {
             flag = true;
         }
         if (Mods.ImmersiveEngineering.isAvailable) {
-            ImmersiveEngineeringModule.blastFurnace(
-                    IndustrialCraftModule.getIC2Item("carbonMesh"), 200,
-                    ItemType.HighPurityCarbonDust.item());
+            ImmersiveEngineeringModule.blastFurnace(input, 200, output);
             flag = true;
         }
         if (Mods.Mekanism.isAvailable) {
             MekanismModule.addMetallurgicInfuserRecipe("CARBON",
-                    Math.round(((float) cookTime) / 100.0f),
-                    IndustrialCraftModule.getIC2Item("carbonMesh"),
-                    ItemType.HighPurityCarbonDust.item());
+                    Math.round(((float) cookTime) / 100.0f), input, output);
             flag = true;
         }
         if (!flag) {

@@ -11,31 +11,36 @@ import org.jackhuang.watercraft.util.Mods;
 
 public class TileEntityCutter extends TileEntityStandardWaterMachine {
 
-	public TileEntityCutter() {
-		super(8000, 1*20);
+    public TileEntityCutter() {
+        super(8000, 1 * 20);
 
-		/*if(Mods.GregTech.isAvailable)
-			this.inputSlot = new InventorySlotProcessableGreg(this, "input",
-					1, Recipes.matterAmplifier, GT_Recipe_Map.sCutterRecipes);
-		else*/
-			this.inputSlot = new InventorySlotProcessableGeneric(this, "input",
-					1, MyRecipes.cutter);
-	}
-	
-	public static void init() {
-		MyRecipes.cutter = new MultiRecipeManager().addRecipeManager(IndustrialCraftModule.IS_INDUSTRIAL_CRAFT_RECIPES_AVAILABLE, new IndustrialCraftRecipeManager(IndustrialCraftModule.cutter));
-	}
+        /*
+         * if(Mods.GregTech.isAvailable) this.inputSlot = new
+         * InventorySlotProcessableGreg(this, "input", 1,
+         * Recipes.matterAmplifier, GT_Recipe_Map.sCutterRecipes); else
+         */
+        this.inputSlot = new InventorySlotProcessableGeneric(this, "input", 1,
+                MyRecipes.cutter);
+    }
 
-	public String getInventoryName() {
-		return "Cutter";
-	}
+    public static void init() {
+        MyRecipes.cutter = new MultiRecipeManager();
+        if (Mods.IndustrialCraft2.isAvailable)
+            ((MultiRecipeManager) MyRecipes.cutter)
+                    .addRecipeManager(new IndustrialCraftRecipeManager(
+                            IndustrialCraftModule.cutter));
+    }
 
-	public float getWrenchDropRate() {
-		return 1f;
-	}
+    public String getInventoryName() {
+        return "Cutter";
+    }
 
-	@Override
-	public int getGuiId() {
-		return DefaultGuiIds.get("tileEntityCutter");
-	}
+    public float getWrenchDropRate() {
+        return 1f;
+    }
+
+    @Override
+    public int getGuiId() {
+        return DefaultGuiIds.get("tileEntityCutter");
+    }
 }

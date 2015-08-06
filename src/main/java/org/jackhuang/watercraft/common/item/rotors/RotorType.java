@@ -1,9 +1,8 @@
 package org.jackhuang.watercraft.common.item.rotors;
 
-import ic2.api.item.IC2Items;
-
 import org.jackhuang.watercraft.common.item.others.ItemType;
 import org.jackhuang.watercraft.common.recipe.IRecipeRegistrar;
+import org.jackhuang.watercraft.integration.ic2.ICItemFinder;
 import org.jackhuang.watercraft.util.Mods;
 import org.jackhuang.watercraft.util.WPLog;
 
@@ -142,61 +141,46 @@ public enum RotorType {
 				"plateDenseLapis");
 		addRotorRecipe(RotorType.QUARTZ, Items.quartz,
 				Blocks.quartz_block);
-		addRotorRecipe(RotorType.CARBON, IC2Items.getItem("carbonPlate"),
-				IC2Items.getItem("coalChunk"));
-		addRotorRecipe(RotorType.ADVANCED, IC2Items.getItem("advancedAlloy"),
-				IC2Items.getItem("reinforcedStone"));
+		addRotorRecipe(RotorType.CARBON, ICItemFinder.getIC2Item("carbonPlate"),
+				ICItemFinder.getIC2Item("coalChunk"));
+		addRotorRecipe(RotorType.ADVANCED, ICItemFinder.getIC2Item("advancedAlloy"),
+				ICItemFinder.getIC2Item("reinforcedStone"));
 		addRotorRecipe(RotorType.EMERALD, Items.emerald, Blocks.emerald_block);
 		addRotorRecipe(RotorType.DIAMOND, Items.diamond, Blocks.diamond_block);
-		addRotorRecipe(RotorType.IRIDIUM, IC2Items.getItem("iridiumOre"),
-				IC2Items.getItem("iridiumPlate"));
-		addRotorRecipe(RotorType.IRIDIUMIRON, IC2Items.getItem("iridiumPlate"),
+		addRotorRecipe(RotorType.IRIDIUM, ICItemFinder.getIC2Item("iridiumOre"),
+				ICItemFinder.getIC2Item("iridiumPlate"));
+		addRotorRecipe(RotorType.IRIDIUMIRON, ICItemFinder.getIC2Item("iridiumPlate"),
 				ItemType.IR_FE.item());
 
-		addRotorRecipe(RotorType.SILVER, "plateSilver", // GregTech_API.getGregTechMaterial(69,
-														// 1),
-				"blockSilver"); // GregTech_API.getGregTechBlock(0, 1, 3));
-		addRotorRecipe(RotorType.ZINC, "plateZinc", // GregTech_API.getGregTechMaterial(82,
-													// 1),
-				"blockZinc"); // GregTech_API.getGregTechBlock(4, 1, 2));
-		addRotorRecipe(RotorType.BRASS, "plateBrass", // GregTech_API.getGregTechMaterial(81,
-														// 1),
-				"blockBrass"); // GregTech_API.getGregTechBlock(0, 1, 12));
-		addRotorRecipe(RotorType.ALUMINUM, "plateAluminium", // GregTech_API.getGregTechMaterial(75,
-																// 1),
-				"blockAluminium"); // GregTech_API.getGregTechBlock(0, 1, 7));
-		addRotorRecipe(RotorType.STEEL, "plateSteel", // GregTech_API.getGregTechMaterial(78,
-														// 1),
-				"blockSteel"); // GregTech_API.getGregTechBlock(0, 1, 11));
-		addRotorRecipe(RotorType.INVAR, "plateInvar", // GregTech_API.getGregTechMaterial(73,
-														// 1),
-				"blockInvar"); // GregTech_API.getGregTechBlock(4, 1, 10));
-		addRotorRecipe(RotorType.ELECTRUM, "plateElectrum", // GregTech_API.getGregTechMaterial(71,
-															// 1),
-				"blockElectrum"); // GregTech_API.getGregTechBlock(4, 1, 1));
-		addRotorRecipe(RotorType.NICKEL, "plateNickel", // GregTech_API.getGregTechMaterial(72,
-														// 1),
-				"blockNickel"); // GregTech_API.getGregTechBlock(4, 1, 7));
-		addRotorRecipe(RotorType.OSMIUM, "plateOsmium", // GregTech_API.getGregTechMaterial(84,
-														// 1),
-				"blockOsmium"); // GregTech_API.getGregTechBlock(4, 1, 11));
-		addRotorRecipe(RotorType.TITANIUM, "plateTitanium", // GregTech_API.getGregTechMaterial(77,
-															// 1),
-				"blockTitanium"); // GregTech_API.getGregTechBlock(0, 1, 8));
-		addRotorRecipe(RotorType.PLATINUM, "platePlatinum", // GregTech_API.getGregTechMaterial(79,
-															// 1),
-				"blockPlatinum"); // GregTech_API.getGregTechBlock(4, 1, 5));
-		addRotorRecipe(RotorType.TUNGSTEN, "plateTungsten", // GregTech_API.getGregTechMaterial(80,
-															// 1),
-				"blockTungsten");// GregTech_API.getGregTechBlock(4, 1, 6));
-		addRotorRecipe(RotorType.CHROME, "plateChrome", // GregTech_API.getGregTechMaterial(76,
-														// 1),
-				"blockChrome"); // GregTech_API.getGregTechBlock(0, 1, 9));
-		addRotorRecipe(RotorType.TUNGSTEN_STEEL, "plateTungstenSteel", // GregTech_API.getGregTechMaterial(83,
-																		// 1),
-				"blockTungstenSteel");//GregTech_API.getGregTechBlock(4, 1, 8));
+		addRotorRecipe(RotorType.SILVER, "plateSilver",
+				"blockSilver");
+		addRotorRecipe(RotorType.ZINC, "plateZinc",
+				"blockZinc");
+		addRotorRecipe(RotorType.BRASS, "plateBrass",
+				"blockBrass");
+		addRotorRecipe(RotorType.ALUMINUM, "plateAluminium",
+				"blockAluminium");
+		addRotorRecipe(RotorType.STEEL, "plateSteel",
+				"blockSteel");
+		addRotorRecipe(RotorType.INVAR, "plateInvar",
+				"blockInvar");
+		addRotorRecipe(RotorType.ELECTRUM, "plateElectrum",
+				"blockElectrum");
+		addRotorRecipe(RotorType.NICKEL, "plateNickel",
+				"blockNickel");
+		addRotorRecipe(RotorType.OSMIUM, "plateOsmium",
+				"blockOsmium");
+		addRotorRecipe(RotorType.TITANIUM, "plateTitanium",
+				"blockTitanium");
+		addRotorRecipe(RotorType.PLATINUM, "platePlatinum",
+				"blockPlatinum");
+		addRotorRecipe(RotorType.TUNGSTEN, "plateTungsten",
+				"blockTungsten");
+		addRotorRecipe(RotorType.CHROME, "plateChrome",
+				"blockChrome");
+		addRotorRecipe(RotorType.TUNGSTEN_STEEL, "plateTungstenSteel",
+				"blockTungstenSteel");
 		if (Mods.Thaumcraft.isAvailable) {
-			/* Thaumium */
 			addRotorRecipe(RotorType.THAUMIUM,
 					ItemApi.getItem("itemNugget", 6),
 					ItemApi.getBlock("blockCosmeticSolid", 4));
@@ -204,6 +188,7 @@ public enum RotorType {
 	}
 
 	static void addRotorRecipe(RotorType output, Object S, Object I) {
+	    if(S == null || I == null) return;
 		if (output.enable) {
 				IRecipeRegistrar.addRecipeByOreDictionary(new ItemStack(output.getItem()),
 						"S S", " I ", "S S", 'S', S, 'I', I);

@@ -8,21 +8,9 @@
 
 package org.jackhuang.watercraft.common.recipe;
 
-import static org.jackhuang.watercraft.common.item.crafting.CraftingTypes.casing;
-import static org.jackhuang.watercraft.common.item.crafting.CraftingTypes.circuit;
-import static org.jackhuang.watercraft.common.item.crafting.CraftingTypes.drainagePlate;
-import static org.jackhuang.watercraft.common.item.crafting.CraftingTypes.fixedFrame;
-import static org.jackhuang.watercraft.common.item.crafting.CraftingTypes.fixedTool;
-import static org.jackhuang.watercraft.common.item.crafting.CraftingTypes.outputInterface;
-import static org.jackhuang.watercraft.common.item.crafting.CraftingTypes.rotationAxle;
-import static org.jackhuang.watercraft.common.item.crafting.CraftingTypes.rotor;
-import static org.jackhuang.watercraft.common.item.crafting.CraftingTypes.stator;
-import static org.jackhuang.watercraft.common.item.crafting.LevelTypes.MK1;
-import static org.jackhuang.watercraft.common.item.crafting.LevelTypes.MK3;
+import static org.jackhuang.watercraft.common.item.crafting.CraftingTypes.*;
+import static org.jackhuang.watercraft.common.item.crafting.LevelTypes.*;
 import gregtech.api.GregTech_API;
-import ic2.api.item.IC2Items;
-import ic2.api.recipe.RecipeInputItemStack;
-import ic2.api.recipe.Recipes;
 import mods.railcraft.api.crafting.RailcraftCraftingManager;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -48,7 +36,7 @@ import org.jackhuang.watercraft.common.item.others.ItemType;
 import org.jackhuang.watercraft.integration.ImmersiveEngineeringModule;
 import org.jackhuang.watercraft.integration.MekanismModule;
 import org.jackhuang.watercraft.integration.RailcraftModule;
-import org.jackhuang.watercraft.integration.ic2.IndustrialCraftModule;
+import org.jackhuang.watercraft.integration.ic2.ICItemFinder;
 import org.jackhuang.watercraft.util.Mods;
 
 import cpw.mods.fml.common.Loader;
@@ -79,33 +67,27 @@ public abstract class IRecipeRegistrar {
         thaumcraftRecipe = p.getBoolean(true) && Mods.Thaumcraft.isAvailable;
 
         if (Mods.IndustrialCraft2.isAvailable) {
-            electronicCircuit = IndustrialCraftModule
-                    .getIC2Item("electronicCircuit");
-            advancedCircuit = IndustrialCraftModule
-                    .getIC2Item("advancedCircuit");
-            advancedAlloy = IndustrialCraftModule.getIC2Item("advancedAlloy");
-            carbonPlate = IndustrialCraftModule.getIC2Item("carbonPlate");
-            iridiumPlate = IndustrialCraftModule.getIC2Item("iridiumPlate");
-            machine = IndustrialCraftModule.getIC2Item("machine");
-            transformerUpgrade = IndustrialCraftModule
-                    .getIC2Item("transformerUpgrade");
+            electronicCircuit = ICItemFinder.getIC2Item("electronicCircuit");
+            advancedCircuit = ICItemFinder.getIC2Item("advancedCircuit");
+            advancedAlloy = ICItemFinder.getIC2Item("advancedAlloy");
+            carbonPlate = ICItemFinder.getIC2Item("carbonPlate");
+            iridiumPlate = ICItemFinder.getIC2Item("iridiumPlate");
+            machine = ICItemFinder.getIC2Item("machine");
+            transformerUpgrade = ICItemFinder.getIC2Item("transformerUpgrade");
 
             p = c.get("recipe", "UseIndustrialDiamond", true);
-            industrialDiamond = p.getBoolean(true) ? IC2Items
-                    .getItem("industrialDiamond") : IC2Items
-                    .getItem("coalChunk");
+            industrialDiamond = p.getBoolean(true) ? ICItemFinder
+                    .getIC2Item("industrialDiamond") : ICItemFinder
+                    .getIC2Item("coalChunk");
         } else {
-            electronicCircuit = ItemCrafting.get(CraftingTypes.circuit,
-                    LevelTypes.MK1);
-            advancedCircuit = ItemCrafting.get(CraftingTypes.circuit,
-                    LevelTypes.MK3);
+            electronicCircuit = ItemCrafting.get(circuit, MK1);
+            advancedCircuit = ItemCrafting.get(circuit, MK3);
             advancedAlloy = "plateSteel";
             carbonPlate = "gemDiamond";
             iridiumPlate = "plateVanadiumSteel";
             machine = "blockIron";
             industrialDiamond = "gemDiamond";
-            transformerUpgrade = ItemCrafting.get(CraftingTypes.circuit,
-                    LevelTypes.MK1);
+            transformerUpgrade = ItemCrafting.get(circuit, MK1);
         }
 
         config = c;
@@ -122,7 +104,7 @@ public abstract class IRecipeRegistrar {
         if (Mods.IndustrialCraft2.isAvailable)
             addRecipeByOreDictionary(
                     new ItemStack(GlobalBlocks.waterMill, 1, 2), "W", 'W',
-                    IndustrialCraftModule.getIC2Item("WaterKineticGenerator"));
+                    ICItemFinder.getIC2Item("WaterKineticGenerator"));
 
         for (int i = 1; i < WaterType.values().length; i++) {
             addRecipeByOreDictionary(
@@ -200,13 +182,12 @@ public abstract class IRecipeRegistrar {
         if (Mods.IndustrialCraft2.isAvailable) {
             this.addRecipeByOreDictionary(
                     ItemCrafting.get(outputInterface, LevelTypes.MK1), "GW",
-                    " G", "GW", 'G',
-                    IndustrialCraftModule.getIC2Item("goldCableItem"), 'W',
-                    "plankWood");
+                    " G", "GW", 'G', ICItemFinder.getIC2Item("goldCableItem"),
+                    'W', "plankWood");
             this.addShapelessRecipeByOreDictionary(
                     ItemCrafting.get(circuit, MK1),
                     ItemType.WaterResistantRubber.item(),
-                    IndustrialCraftModule.getIC2Item("electronicCircuit"));
+                    ICItemFinder.getIC2Item("electronicCircuit"));
         } else {
             this.addRecipeByOreDictionary(
                     ItemCrafting.get(outputInterface, MK1), " W", "G ", " W",
@@ -242,7 +223,7 @@ public abstract class IRecipeRegistrar {
         if (Mods.IndustrialCraft2.isAvailable) {
             this.addRecipeByOreDictionary(ItemCrafting.get(rotor, MK1), "CCC",
                     "CAC", "CCC", 'C',
-                    IndustrialCraftModule.getIC2Item("copperCableItem"), 'A',
+                    ICItemFinder.getIC2Item("copperCableItem"), 'A',
                     "dustMagnet");
         } else {
             this.addRecipeByOreDictionary(ItemCrafting.get(rotor, MK1), " C ",
@@ -256,8 +237,7 @@ public abstract class IRecipeRegistrar {
         if (Mods.IndustrialCraft2.isAvailable) {
             this.addRecipeByOreDictionary(ItemCrafting.get(drainagePlate, MK3),
                     "WW", "AW", "KW", 'W', "plateZincAlloy", 'A',
-                    IndustrialCraftModule.getIC2Item("ironScaffold"), 'K',
-                    "screwZinc");
+                    ICItemFinder.getIC2Item("ironScaffold"), 'K', "screwZinc");
         } else {
             this.addRecipeByOreDictionary(ItemCrafting.get(drainagePlate, MK3),
                     "WW", "AW", "KW", 'W', "plateZincAlloy", 'A',
@@ -308,15 +288,14 @@ public abstract class IRecipeRegistrar {
         if (Mods.IndustrialCraft2.isAvailable) {
             this.addRecipeByOreDictionary(
                     ItemCrafting.get(rotor, LevelTypes.MK3), "CIC", "GIG",
-                    "G G", 'G',
-                    IndustrialCraftModule.getIC2Item("goldCableItem"), 'C',
+                    "G G", 'G', ICItemFinder.getIC2Item("goldCableItem"), 'C',
                     ItemType.DenseCoil.item(), 'I', "ingotIron");
             this.addRecipeByOreDictionary(
                     ItemCrafting.get(outputInterface, LevelTypes.MK3), "PRB",
                     "RAI", "PRB", 'P', "plateZincAlloy", 'R', "plateRubber",
                     'I', "ingotZincAlloy", 'A',
-                    IndustrialCraftModule.getIC2Item("lvTransformer"), 'B',
-                    IndustrialCraftModule.getIC2Item("reBattery"));
+                    ICItemFinder.getIC2Item("lvTransformer"), 'B',
+                    ICItemFinder.getIC2Item("reBattery"));
         } else {
             this.addRecipeByOreDictionary(
                     ItemCrafting.get(rotor, LevelTypes.MK3), "CIC", " I ",
@@ -357,15 +336,15 @@ public abstract class IRecipeRegistrar {
             this.addRecipeByOreDictionary(ItemCrafting.get(
                     CraftingTypes.outputInterface, LevelTypes.MK4), "SSP",
                     "PTB", "SSP", 'S', "blockSilver", 'P',
-                    "plateIndustrialSteel", 'T', IndustrialCraftModule
-                            .getIC2Item("mvTransformer"), 'B',
-                    IndustrialCraftModule.getIC2Item("suBattery"));
+                    "plateIndustrialSteel", 'T', ICItemFinder
+                            .getIC2Item("mvTransformer"), 'B', ICItemFinder
+                            .getIC2Item("suBattery"));
             this.addRecipeByOreDictionary(ItemCrafting.get(
                     CraftingTypes.outputInterface, LevelTypes.MK4), "SSP",
                     "PTB", "SSP", 'S', "blockNeodymium", 'P',
-                    "plateIndustrialSteel", 'T', IndustrialCraftModule
-                            .getIC2Item("mvTransformer"), 'B',
-                    IndustrialCraftModule.getIC2Item("suBattery"));
+                    "plateIndustrialSteel", 'T', ICItemFinder
+                            .getIC2Item("mvTransformer"), 'B', ICItemFinder
+                            .getIC2Item("suBattery"));
         } else {
             this.addRecipeByOreDictionary(ItemCrafting.get(
                     CraftingTypes.outputInterface, LevelTypes.MK4), "SSP",
@@ -422,7 +401,7 @@ public abstract class IRecipeRegistrar {
                     ItemCrafting.get(CraftingTypes.circuit, LevelTypes.MK5),
                     "PDP", "DCD", "PDP", 'P',
                     ItemType.WaterResistantRubberDensePlate.item(), 'C',
-                    IndustrialCraftModule.getIC2Item("energyCrystal"), 'D',
+                    ICItemFinder.getIC2Item("energyCrystal"), 'D',
                     ItemType.DataBall.item());
         } else {
             this.addRecipeByOreDictionary(
@@ -455,9 +434,9 @@ public abstract class IRecipeRegistrar {
             this.addRecipeByOreDictionary(ItemCrafting.get(
                     CraftingTypes.outputInterface, LevelTypes.MK5), "SSP",
                     "PTB", "SSP", 'S', "blockNeodymiumMagnet", 'P',
-                    "plateManganeseSteel", 'T', IndustrialCraftModule
-                            .getIC2Item("hvTransformer"), 'B',
-                    IndustrialCraftModule.getIC2Item("suBattery"));
+                    "plateManganeseSteel", 'T', ICItemFinder
+                            .getIC2Item("hvTransformer"), 'B', ICItemFinder
+                            .getIC2Item("suBattery"));
         } else {
             this.addRecipeByOreDictionary(ItemCrafting.get(
                     CraftingTypes.outputInterface, LevelTypes.MK5), "SSP",
@@ -493,7 +472,7 @@ public abstract class IRecipeRegistrar {
                     ItemCrafting.get(CraftingTypes.circuit, LevelTypes.MK7),
                     "PDP", "DCD", "PDP", 'P',
                     ItemType.WaterResistantRubberDensePlate.item(), 'C',
-                    IndustrialCraftModule.getIC2Item("lapotronCrystal"), 'D',
+                    ICItemFinder.getIC2Item("lapotronCrystal"), 'D',
                     ItemType.DataBall.item());
         } else {
             this.addRecipeByOreDictionary(
@@ -542,16 +521,13 @@ public abstract class IRecipeRegistrar {
                 "plateVanadiumSteel", 'B', Blocks.diamond_block);
 
         if (gregtechRecipe) {
-            GregTech_API.sRecipeAdder
-                    .addChemicalRecipe(
-                            changeMount(
-                                    IndustrialCraftModule.getIC2Item("airCell"),
-                                    3), IndustrialCraftModule
-                                    .getIC2Item("biofuelCell"),
-                            ItemType.OxygenEthanolFuel.item(4), 20);
+            GregTech_API.sRecipeAdder.addChemicalRecipe(
+                    changeMount(ICItemFinder.getIC2Item("airCell"), 3),
+                    ICItemFinder.getIC2Item("biofuelCell"),
+                    ItemType.OxygenEthanolFuel.item(4), 20);
             GregTech_API.sRecipeAdder.addAssemblerRecipe(
-                    IndustrialCraftModule.getIC2Item("coil"),
-                    IndustrialCraftModule.getIC2Item("copperCableItem"),
+                    ICItemFinder.getIC2Item("coil"),
+                    ICItemFinder.getIC2Item("copperCableItem"),
                     ItemType.DenseCoil.item(), 120 * 20, 2);
 
             GregTech_API.sRecipeAdder.addAssemblerRecipe(
@@ -559,16 +535,15 @@ public abstract class IRecipeRegistrar {
                     ItemType.DenseSilverCoil.item(), 240 * 20, 4);
 
             GregTech_API.sRecipeAdder.addBlastRecipe(
-                    IndustrialCraftModule.getIC2Item("carbonMesh"), null,
+                    ICItemFinder.getIC2Item("carbonMesh"), null,
                     ItemType.HighPurityCarbonDust.item(), null, 240 * 20, 512,
                     3000);
         } else {
             if (Mods.IndustrialCraft2.isAvailable) {
                 addShapelessRecipeByOreDictionary(ItemType.DenseCoil.item(),
-                        IndustrialCraftModule.getIC2Item("coil"),
-                        IndustrialCraftModule.getIC2Item("copperCableItem"));
-                RecipeAdder.blastFurnace(
-                        IndustrialCraftModule.getIC2Item("carbonMesh"),
+                        ICItemFinder.getIC2Item("coil"),
+                        ICItemFinder.getIC2Item("copperCableItem"));
+                RecipeAdder.blastFurnace(ICItemFinder.getIC2Item("carbonMesh"),
                         ItemType.HighPurityCarbonDust.item(), 1000);
             } else {
                 String ingotCopper = "ingotCopper";
@@ -611,17 +586,20 @@ public abstract class IRecipeRegistrar {
     public abstract void registerPlugins();
 
     public static ItemStack getUsualItemStack(ItemStack in) {
+        if(in == null) return null;
         return new ItemStack(in.getItem(), in.stackSize,
                 OreDictionary.WILDCARD_VALUE);
     }
 
     public static void addRecipeByOreDictionary(ItemStack output,
             Object... params) {
+        for(Object object : params) if (object == null) return;
         GameRegistry.addRecipe(new ShapedOreRecipe(output, params));
     }
 
     public static void addShapelessRecipeByOreDictionary(ItemStack output,
             Object... params) {
+        for(Object object : params) if (object == null) return;
         GameRegistry.addRecipe(new ShapelessOreRecipe(output, params));
     }
 

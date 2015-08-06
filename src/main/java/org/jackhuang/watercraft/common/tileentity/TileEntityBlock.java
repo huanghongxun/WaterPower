@@ -97,7 +97,7 @@ public abstract class TileEntityBlock extends TileEntityLiquidTankInventory impl
     @Override
 	@Method(modid = Mods.IDs.IndustrialCraft2API)
 	public short getFacing() {
-		return this.facing;
+		return getDirection();
 	}
 	
 	public short getPrevFacing() {
@@ -115,6 +115,10 @@ public abstract class TileEntityBlock extends TileEntityLiquidTankInventory impl
 	public void setFacing(short facing) {
         setDirection(facing);
 	}
+    
+    public short getDirection() {
+        return facing;
+    }
     
     public boolean setDirection(int side) {
         this.facing = (short)side;

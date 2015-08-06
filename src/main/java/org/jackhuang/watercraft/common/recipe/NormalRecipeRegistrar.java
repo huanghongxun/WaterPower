@@ -10,10 +10,6 @@ package org.jackhuang.watercraft.common.recipe;
 
 import static org.jackhuang.watercraft.common.item.crafting.MaterialForms.ingot;
 import static org.jackhuang.watercraft.common.item.crafting.MaterialTypes.IndustrialSteel;
-import gregtech.api.GregTech_API;
-import ic2.api.item.IC2Items;
-import ic2.api.recipe.RecipeInputItemStack;
-import ic2.api.recipe.Recipes;
 
 import org.jackhuang.watercraft.common.block.GlobalBlocks;
 import org.jackhuang.watercraft.common.item.crafting.CraftingTypes;

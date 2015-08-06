@@ -19,9 +19,13 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
 import org.jackhuang.watercraft.api.IWaterReceiver;
+import org.jackhuang.watercraft.util.Mods;
+
+import cpw.mods.fml.common.Optional.Interface;
+import cpw.mods.fml.common.Optional.InterfaceList;
 
 public abstract class TileEntityWaterMachine extends TileEntityBlock
-		implements IWaterReceiver, IWrenchable {
+		implements IWaterReceiver {
 	public TileEntityWaterMachine(int maxWater) {
 	    super(maxWater);
 	}
