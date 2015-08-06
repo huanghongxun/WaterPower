@@ -64,7 +64,7 @@ public abstract class TileEntityStandardWaterMachine extends
 
 	@Override
 	public void onLoaded() {
-		if (WaterPower.isSimulating())
+		if (isServerSide())
 			setOverclockRates();
 		
         super.onLoaded();
@@ -74,9 +74,8 @@ public abstract class TileEntityStandardWaterMachine extends
 	public void markDirty() {
 		super.markDirty();
 
-		if (WaterPower.isSimulating())
+		if (isServerSide())
 			setOverclockRates();
-
 	}
 
 	public float getProgress() {
@@ -86,7 +85,7 @@ public abstract class TileEntityStandardWaterMachine extends
 	public void updateEntity() {
 		super.updateEntity();
 
-		if (!WaterPower.isSimulating())
+		if (!isServerSide())
 			return;
 
 		boolean needsInvUpdate = false;
@@ -123,10 +122,10 @@ public abstract class TileEntityStandardWaterMachine extends
 			}
 
 			float tmp = guiProgress;
-			if (WaterPower.isSimulating())
+			if (isServerSide())
 				this.guiProgress = ((float) this.progress / (float) this.operationLength);
 			if (Math.abs(tmp - guiProgress) > 0.001
-					&& WaterPower.isSimulating())
+					&& isServerSide())
 				sendUpdateToClient();
 		}
 

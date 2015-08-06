@@ -17,53 +17,70 @@ import org.jackhuang.watercraft.common.block.watermills.TileEntityWatermill;
 import org.jackhuang.watercraft.integration.BaseModule;
 import org.jackhuang.watercraft.util.Mods;
 
+import cpw.mods.fml.common.Optional.Method;
+
 public class WailaModule extends BaseModule {
-    
+
+    @Method(modid = Mods.IDs.Waila)
     public void register() {
-        ModuleRegistrar.instance().registerHeadProvider(new HUDHandlerWatermills(), TileEntityWatermill.class);
-        ModuleRegistrar.instance().registerBodyProvider(new HUDHandlerWatermills(), TileEntityWatermill.class);
-        //ModuleRegistrar.instance().registerSyncedNBTKey("*", TileEntityWatermill.class);
+        ModuleRegistrar.instance().registerHeadProvider(
+                new HUDHandlerWatermills(), TileEntityWatermill.class);
+        ModuleRegistrar.instance().registerBodyProvider(
+                new HUDHandlerWatermills(), TileEntityWatermill.class);
 
-        ModuleRegistrar.instance().registerHeadProvider(new HUDHandlerTurbine(), TileEntityTurbine.class);
-        ModuleRegistrar.instance().registerBodyProvider(new HUDHandlerTurbine(), TileEntityTurbine.class);
-        //ModuleRegistrar.instance().registerSyncedNBTKey("*", TileEntityTurbine.class);
+        ModuleRegistrar.instance().registerHeadProvider(
+                new HUDHandlerTurbine(), TileEntityTurbine.class);
+        ModuleRegistrar.instance().registerBodyProvider(
+                new HUDHandlerTurbine(), TileEntityTurbine.class);
 
-        ModuleRegistrar.instance().registerHeadProvider(new HUDHandlerReservoir(), TileEntityReservoir.class);
-        ModuleRegistrar.instance().registerBodyProvider(new HUDHandlerReservoir(), TileEntityReservoir.class);
-        //ModuleRegistrar.instance().registerSyncedNBTKey("*", TileEntityReservoir.class);
+        ModuleRegistrar.instance().registerHeadProvider(
+                new HUDHandlerReservoir(), TileEntityReservoir.class);
+        ModuleRegistrar.instance().registerBodyProvider(
+                new HUDHandlerReservoir(), TileEntityReservoir.class);
 
-        ModuleRegistrar.instance().registerHeadProvider(new HUDHandlerMachine(), TileEntityMacerator.class);
-        ModuleRegistrar.instance().registerBodyProvider(new HUDHandlerMachine(), TileEntityMacerator.class);
-        //ModuleRegistrar.instance().registerSyncedNBTKey("*", TileEntityMacerator.class);
+        ModuleRegistrar.instance().registerHeadProvider(
+                new HUDHandlerMachine(), TileEntityMacerator.class);
+        ModuleRegistrar.instance().registerBodyProvider(
+                new HUDHandlerMachine(), TileEntityMacerator.class);
 
-        ModuleRegistrar.instance().registerHeadProvider(new HUDHandlerMachine(), TileEntityAdvancedCompressor.class);
-        ModuleRegistrar.instance().registerBodyProvider(new HUDHandlerMachine(), TileEntityAdvancedCompressor.class);
-        //ModuleRegistrar.instance().registerSyncedNBTKey("*", TileEntityAdvancedCompressor.class);
+        ModuleRegistrar.instance().registerHeadProvider(
+                new HUDHandlerMachine(), TileEntityAdvancedCompressor.class);
+        ModuleRegistrar.instance().registerBodyProvider(
+                new HUDHandlerMachine(), TileEntityAdvancedCompressor.class);
 
-        ModuleRegistrar.instance().registerHeadProvider(new HUDHandlerMachine(), TileEntityCompressor.class);
-        ModuleRegistrar.instance().registerBodyProvider(new HUDHandlerMachine(), TileEntityCompressor.class);
-        //ModuleRegistrar.instance().registerSyncedNBTKey("*", TileEntityCompressor.class);
+        ModuleRegistrar.instance().registerHeadProvider(
+                new HUDHandlerMachine(), TileEntityCompressor.class);
+        ModuleRegistrar.instance().registerBodyProvider(
+                new HUDHandlerMachine(), TileEntityCompressor.class);
 
-        ModuleRegistrar.instance().registerHeadProvider(new HUDHandlerMachine(), TileEntityCutter.class);
-        ModuleRegistrar.instance().registerBodyProvider(new HUDHandlerMachine(), TileEntityCutter.class);
-        //ModuleRegistrar.instance().registerSyncedNBTKey("*", TileEntityCutter.class);
+        ModuleRegistrar.instance().registerHeadProvider(
+                new HUDHandlerMachine(), TileEntityCutter.class);
+        ModuleRegistrar.instance().registerBodyProvider(
+                new HUDHandlerMachine(), TileEntityCutter.class);
 
-        ModuleRegistrar.instance().registerHeadProvider(new HUDHandlerMachine(), TileEntityLathe.class);
-        ModuleRegistrar.instance().registerBodyProvider(new HUDHandlerMachine(), TileEntityLathe.class);
-        //ModuleRegistrar.instance().registerSyncedNBTKey("*", TileEntityLathe.class);
+        ModuleRegistrar.instance().registerHeadProvider(
+                new HUDHandlerMachine(), TileEntityLathe.class);
+        ModuleRegistrar.instance().registerBodyProvider(
+                new HUDHandlerMachine(), TileEntityLathe.class);
 
-        ModuleRegistrar.instance().registerHeadProvider(new HUDHandlerMachine(), TileEntitySawmill.class);
-        ModuleRegistrar.instance().registerBodyProvider(new HUDHandlerMachine(), TileEntitySawmill.class);
-        //ModuleRegistrar.instance().registerSyncedNBTKey("*", TileEntitySawmill.class);
+        ModuleRegistrar.instance().registerHeadProvider(
+                new HUDHandlerMachine(), TileEntitySawmill.class);
+        ModuleRegistrar.instance().registerBodyProvider(
+                new HUDHandlerMachine(), TileEntitySawmill.class);
 
-        ModuleRegistrar.instance().registerHeadProvider(new HUDHandlerMachine(), TileEntityCentrifuge.class);
-        ModuleRegistrar.instance().registerBodyProvider(new HUDHandlerMachine(), TileEntityCentrifuge.class);
-        //ModuleRegistrar.instance().registerSyncedNBTKey("*", TileEntityCentrifuge.class);
+        ModuleRegistrar.instance().registerHeadProvider(
+                new HUDHandlerMachine(), TileEntityCentrifuge.class);
+        ModuleRegistrar.instance().registerBodyProvider(
+                new HUDHandlerMachine(), TileEntityCentrifuge.class);
     }
-	
+
     @Override
-	public void loadComplete() {
-	    register();
-	}
+    public void init() {
+        try {
+            register();
+        } catch(Throwable t) {
+            t.printStackTrace();
+        }
+    }
 
 }

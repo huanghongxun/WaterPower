@@ -84,7 +84,7 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements
     @Method(modid = Mods.IDs.IndustrialCraft2API)
     public void loadEnergyTile() {
 
-        if (WaterPower.isSimulating()) {
+        if (isServerSide()) {
             MinecraftForge.EVENT_BUS.post(new EnergyTileLoadEvent(this));
 
             this.addedToEnergyNet = true;
@@ -93,7 +93,7 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements
 
     @Method(modid = Mods.IDs.IndustrialCraft2API)
     public void unloadEnergyTile() {
-        if ((WaterPower.isSimulating()) && (this.addedToEnergyNet)) {
+        if (isServerSide() && this.addedToEnergyNet) {
             MinecraftForge.EVENT_BUS.post(new EnergyTileUnloadEvent(this));
 
             this.addedToEnergyNet = false;
@@ -126,7 +126,7 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements
     }
 
     public boolean enableUpdateEntity() {
-        return WaterPower.isSimulating();
+        return isServerSide();
     }
 
     @Override
@@ -330,75 +330,6 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements
         }
         energyType = EnergyType.values()[id];
     }
-
-    /*
-     * @Method(modid = "BuildCraftAPI|power") public boolean
-     * canEmitPowerFrom(ForgeDirection side) { return true; }
-     * 
-     * @Method(modid = "BuildCraftAPI|power") public boolean
-     * isPoweredTile(TileEntity tile, ForgeDirection side, ForgeDirection
-     * orientation) { if (tile == null) { return false; } else if
-     * (MjAPI.getMjBattery(tile, MjAPI.DEFAULT_POWER_FRAMEWORK,
-     * orientation.getOpposite()) != null) { return true; } else if (tile
-     * instanceof IPowerReceptor) { return ((IPowerReceptor)
-     * tile).getPowerReceiver(side.getOpposite()) != null; } else { return
-     * false; } }
-     * 
-     * @Method(modid = "BuildCraftAPI|power") public double extractEnergy(double
-     * min, double max, boolean doExtract) { double energy =
-     * EnergyType.EU2MJ(storage); if (energy < min) { return 0; }
-     * 
-     * double actualMax;
-     * 
-     * if (max > EnergyType.EU2MJ(production)) { actualMax =
-     * EnergyType.EU2MJ(production); } else { actualMax = max; }
-     * 
-     * if (actualMax < min) { return 0; }
-     * 
-     * double extracted;
-     * 
-     * if (energy >= actualMax) { extracted = actualMax;
-     * 
-     * if (doExtract) { energy -= actualMax; } } else { extracted = energy;
-     * 
-     * if (doExtract) { energy = 0; } } storage = EnergyType.MJ2EU(energy);
-     * 
-     * return extracted; }
-     * 
-     * @Method(modid = "BuildCraftAPI|power") private double
-     * getPowerToExtract(TileEntity tile, ForgeDirection orientation) {
-     * 
-     * IBatteryObject battery = MjAPI.getMjBattery(tile,
-     * MjAPI.DEFAULT_POWER_FRAMEWORK, orientation.getOpposite());
-     * 
-     * if (battery != null) { return extractEnergy(0,
-     * battery.getEnergyRequested(), false); } else if (tile instanceof
-     * IPowerReceptor) { PowerReceiver receptor = ((IPowerReceptor) tile)
-     * .getPowerReceiver(orientation.getOpposite());
-     * 
-     * return extractEnergy(receptor.getMinEnergyReceived(),
-     * receptor.getMaxEnergyReceived(), false); } else { return 0; } }
-     * 
-     * @Method(modid = "BuildCraftAPI|power") private void
-     * sendPower(ForgeDirection orientation) { TileEntity tile =
-     * worldObj.getTileEntity(xCoord + orientation.offsetX, yCoord +
-     * orientation.offsetY, zCoord + orientation.offsetZ); if
-     * (isPoweredTile(tile, orientation, orientation)) { double extracted =
-     * getPowerToExtract(tile, orientation);
-     * 
-     * IBatteryObject battery = MjAPI.getMjBattery(tile,
-     * MjAPI.DEFAULT_POWER_FRAMEWORK, orientation.getOpposite());
-     * 
-     * if (battery != null) { battery.addEnergy(extractEnergy(0,
-     * battery.maxReceivedPerCycle(), true)); } else if (tile instanceof
-     * IPowerReceptor) { PowerReceiver receptor = ((IPowerReceptor) tile)
-     * .getPowerReceiver(orientation.getOpposite());
-     * 
-     * if (extracted > 0) { double needed = receptor.receiveEnergy(
-     * PowerHandler.Type.ENGINE, extracted, orientation.getOpposite());
-     * 
-     * extractEnergy(receptor.getMinEnergyReceived(), needed, true); } } } }
-     */
 
     @Override
     @Method(modid = Mods.IDs.CoFHAPIEnergy)

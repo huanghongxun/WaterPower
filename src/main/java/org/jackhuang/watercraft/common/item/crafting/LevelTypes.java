@@ -20,11 +20,11 @@ public enum LevelTypes {
 	MK1(255, 255, 255, 0),
 	/** Brass & Zinc */
 	MK3(255, 255, 255, 0),
-	/** Steel */
+	/** Steel & Industrial Steel */
 	MK4(255, 255, 255, 0),
-	/** Vanadium Steel & Maganese Steel */
+	/** Maganese Steel */
 	MK5(255, 255, 255, 0),
-	/** Most expansive! */
+	/** Vanadium Steel */
 	MK7(255, 255, 255, 0);
 	
 	public short R, G, B, A;

@@ -9,90 +9,173 @@
 package org.jackhuang.watercraft.common.recipe;
 
 import ic2.api.recipe.RecipeInputItemStack;
+import ic2.api.recipe.RecipeInputOreDict;
 import ic2.api.recipe.Recipes;
 import gregtech.api.GregTech_API;
 
 import org.jackhuang.watercraft.common.item.others.ItemType;
-import org.jackhuang.watercraft.integration.TERecipeAdder;
+import org.jackhuang.watercraft.integration.ImmersiveEngineeringModule;
+import org.jackhuang.watercraft.integration.MekanismModule;
+import org.jackhuang.watercraft.integration.RailcraftModule;
+import org.jackhuang.watercraft.integration.ThermalExpansionModule;
+import org.jackhuang.watercraft.integration.ic2.IndustrialCraftModule;
 import org.jackhuang.watercraft.util.Mods;
 
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.registry.GameRegistry;
 import mekanism.api.recipe.RecipeHelper;
+import mods.railcraft.api.crafting.RailcraftCraftingManager;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class RecipeAdder {
-	
-	public static void lathe(ItemStack input, ItemStack output) {
-		MyRecipes.lathe.addRecipe(input, output);
-	}
-	
-	public static void macerator(ItemStack input, ItemStack output) {
-		boolean need = true;
-		if(Mods.IndustrialCraft2.isAvailable) {
-			need = false;
-			Recipes.macerator.addRecipe(new RecipeInputItemStack(input), null, output);
-		}
-		if(Mods.ThermalExpansion.isAvailable) {
-			TERecipeAdder.addPulverizerRecipe(3200, input, output);
-		}
-		if(Mods.Factorization.isAvailable) {
-			try {
-		    	if(Block.getBlockFromItem(input.getItem()) != Blocks.air)
-		    		factorization.oreprocessing.TileEntityGrinder.addRecipe(input, output, 1);
-			} catch(Throwable ex) {
-				FMLLog.warning("Failed to add pulverization recipe to factorization. Please report this error to https://github.com/huanghongxun/WaterPower/issues!");
-			}
-		}
-		if(Mods.Mekanism.isAvailable) {
-			RecipeHelper.addCrusherRecipe(input, output);
-		}
-		if(need) {
-			MyRecipes.macerator.addRecipe(input, output);
-		}
-	}
-	
-	public static void cutter(ItemStack input, ItemStack output) {
-		boolean need = true;
-		if(Mods.IndustrialCraft2.isAvailable) {
-			need = false;
-			Recipes.blockcutter.addRecipe(new RecipeInputItemStack(input), null, output);
-		}
-		if(need) {
-			MyRecipes.cutter.addRecipe(input, output);
-		}
-	}
-	
-	public static void compressor(ItemStack input, ItemStack output) {
-		boolean need = true;
-		if(Mods.IndustrialCraft2.isAvailable) {
-			need = false;
-			Recipes.compressor.addRecipe(new RecipeInputItemStack(input), null, output);
-		}
-		if(need) {
-			MyRecipes.compressor.addRecipe(input, output);
-		}
-	}
-	
-	public static void bender(ItemStack input, ItemStack output) {
-		boolean need = true;
-                if(Mods.ExNihilo.isAvailable) {
-                    //Incomplete
-                    
-                }
-		if(Mods.GregTech.isAvailable) {
-			need = false;
-			GregTech_API.sRecipeAdder.addForgeHammerRecipe(input, output, 20, 32);
-		}
-		if(Mods.IndustrialCraft2.isAvailable) {
-			need = false;
-			Recipes.metalformerRolling.addRecipe(new RecipeInputItemStack(input), null, output);
-		}
-		if(need) {
-			GameRegistry.addShapelessRecipe(output, ItemType.WoodenHammer.item(), input);
-		}
-	}
+
+    public static void lathe(ItemStack input, ItemStack output) {
+        MyRecipes.lathe.addRecipe(input, output);
+    }
+
+    public static void macerator(ItemStack input, ItemStack output) {
+        boolean need = true;
+        if (Mods.IndustrialCraft2.isAvailable) {
+            need = false;
+            Recipes.macerator.addRecipe(new RecipeInputItemStack(input), null,
+                    output);
+        }
+        if (Mods.ThermalExpansion.isAvailable) {
+            ThermalExpansionModule.addPulverizerRecipe(3200, input, output);
+        }
+        if (Mods.Factorization.isAvailable) {
+            try {
+                if (Block.getBlockFromItem(input.getItem()) != Blocks.air)
+                    factorization.oreprocessing.TileEntityGrinder.addRecipe(
+                            input, output, 1);
+            } catch (Throwable ex) {
+                FMLLog.warning("Failed to add pulverization recipe to factorization. Please report this error to https://github.com/huanghongxun/WaterPower/issues!");
+            }
+        }
+        if (Mods.Mekanism.isAvailable) {
+            MekanismModule.addCrusherRecipe(input, output);
+        }
+        if (need) {
+            MyRecipes.macerator.addRecipe(input, output);
+        }
+    }
+
+    public static void cutter(ItemStack input, ItemStack output) {
+        boolean need = true;
+        if (Mods.IndustrialCraft2.isAvailable) {
+            need = false;
+            Recipes.blockcutter.addRecipe(new RecipeInputItemStack(input),
+                    null, output);
+        }
+        if (need) {
+            MyRecipes.cutter.addRecipe(input, output);
+        }
+    }
+
+    public static void compressor(ItemStack input, ItemStack output) {
+        boolean need = true;
+        if (Mods.IndustrialCraft2.isAvailable) {
+            need = false;
+            Recipes.compressor.addRecipe(new RecipeInputItemStack(input), null,
+                    output);
+        }
+        if (need) {
+            MyRecipes.compressor.addRecipe(input, output);
+        }
+    }
+
+    public static void bender(ItemStack input, ItemStack output) {
+        if (Mods.ExNihilo.isAvailable) {
+            // Incomplete
+
+        }
+        if (Mods.GregTech.isAvailable) {
+            GregTech_API.sRecipeAdder.addForgeHammerRecipe(input, output, 20,
+                    32);
+        }
+        if (Mods.IndustrialCraft2.isAvailable) {
+            Recipes.metalformerRolling.addRecipe(
+                    new RecipeInputItemStack(input), null, output);
+        }
+        if (Mods.Railcraft.isAvailable) {
+            int sz = input.stackSize;
+            input.stackSize = 1;
+            switch (sz) {
+            case 1:
+                RailcraftModule
+                        .addRollingMachineRecipe(output, "A", 'A', input);
+                break;
+            case 2:
+                RailcraftModule.addRollingMachineRecipe(output, "AA", 'A',
+                        input);
+                break;
+            case 3:
+                RailcraftModule.addRollingMachineRecipe(output, "AAA", 'A',
+                        input);
+                break;
+            case 4:
+                RailcraftModule.addRollingMachineRecipe(output, "AA", "AA",
+                        'A', input);
+                break;
+            case 5:
+                RailcraftModule.addRollingMachineRecipe(output, "AAA", "AA ",
+                        'A', input);
+                break;
+            case 6:
+                RailcraftModule.addRollingMachineRecipe(output, "AAA", "AAA",
+                        'A', input);
+                break;
+            case 7:
+                RailcraftModule.addRollingMachineRecipe(output, "AAA", "AAA",
+                        "A  ", 'A', input);
+                break;
+            case 8:
+                RailcraftModule.addRollingMachineRecipe(output, "AAA", "AAA",
+                        "AA ", 'A', input);
+                break;
+            case 9:
+                RailcraftModule.addRollingMachineRecipe(output, "AAA", "AAA",
+                        "AAA", 'A', input);
+                break;
+            }
+        }
+        GameRegistry.addShapelessRecipe(output, ItemType.WoodenHammer.item(),
+                input);
+    }
+
+    public static boolean blastFurnace(ItemStack input, ItemStack output,
+            int cookTime) {
+        boolean flag = false;
+        if (Mods.IndustrialCraft2.isAvailable) {
+            Recipes.blastfurance.addRecipe(new RecipeInputItemStack(input),
+                    null, output);
+            flag = true;
+        }
+        if (Mods.Railcraft.isAvailable) {
+            RailcraftModule.blastFurnace(input, true, false, cookTime, output);
+            flag = true;
+        }
+        if (Mods.ImmersiveEngineering.isAvailable) {
+            ImmersiveEngineeringModule.blastFurnace(
+                    IndustrialCraftModule.getIC2Item("carbonMesh"), 200,
+                    ItemType.HighPurityCarbonDust.item());
+            flag = true;
+        }
+        if (Mods.Mekanism.isAvailable) {
+            MekanismModule.addMetallurgicInfuserRecipe("CARBON",
+                    Math.round(((float) cookTime) / 100.0f),
+                    IndustrialCraftModule.getIC2Item("carbonMesh"),
+                    ItemType.HighPurityCarbonDust.item());
+            flag = true;
+        }
+        if (!flag) {
+            FurnaceRecipes.smelting().func_151394_a(input, output, 0);
+        }
+        return flag;
+    }
 
 }

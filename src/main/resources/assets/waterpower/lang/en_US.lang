@@ -195,7 +195,7 @@ cptwtrml.gui.using=Using Energy
 cptwtrml.rotor.RANGE=Range
 
 # crafting
-cptwtrml.crafting.paddleBase=Stator
+cptwtrml.crafting.paddleBase=Paddle Base
 cptwtrml.crafting.drainagePlate=Drainage Plate
 cptwtrml.crafting.fixedFrame=Fixed Frame
 cptwtrml.crafting.fixedTool=Fixed Tool

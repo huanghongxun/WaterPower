@@ -1,9 +1,16 @@
 package org.jackhuang.watercraft.integration;
 
+import org.jackhuang.watercraft.integration.craftguide.CraftGuideModule;
+import org.jackhuang.watercraft.integration.ic2.IndustrialCraftModule;
 import org.jackhuang.watercraft.integration.waila.WailaModule;
 import org.jackhuang.watercraft.util.Mods;
 
 public enum IntegrationType {
+    IndustrialCraft(IndustrialCraftModule.class, Mods.IndustrialCraft2),
+    BuildCraft(BuildCraftModule.class, Mods.BuildCraftCore),
+    Mekanism(MekanismModule.class, Mods.Mekanism),
+    Railcraft(RailcraftModule.class, Mods.Railcraft),
+    ThermalExpansion(ThermalExpansionModule.class, Mods.ThermalExpansion),
     Waila(WailaModule.class, Mods.Waila),
     CraftGuide(CraftGuideModule.class, Mods.CraftGuide);
     

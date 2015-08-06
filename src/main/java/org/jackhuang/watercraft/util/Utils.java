@@ -175,7 +175,7 @@ public class Utils {
     public static final DecimalFormat DEFAULT_DECIMAL_FORMAT = new DecimalFormat("#.00");
 	
 	public static void dropItems(World world, int x, int y, int z, List<ItemStack> drops) {
-	    if(WaterPower.isSimulating()) {
+	    if(WaterPower.isServerSide()) {
 	        for(ItemStack item : drops) {
 	            if(item != null && item.stackSize > 0) {
 	                float rx = rand.nextFloat() * 0.8F + 0.1F;

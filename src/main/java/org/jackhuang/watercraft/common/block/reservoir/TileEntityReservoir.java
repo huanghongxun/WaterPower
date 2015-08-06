@@ -143,7 +143,7 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 	}
 
 	public int getFluidAmount() {
-		if (!WaterPower.isSimulating())
+		if (!isServerSide())
 			return getTankAmount();
 		if (isMaster)
 			// return water;
@@ -156,7 +156,7 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 	}
 
 	public int getHPWater() {
-		if (!WaterPower.isSimulating())
+		if (!isServerSide())
 			return highPotentialEnergyWater;
 		if (isMaster)
 			return highPotentialEnergyWater;
@@ -185,7 +185,7 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 	}
 
 	public int getMaxFluidAmount() {
-		if (!WaterPower.isSimulating())
+		if (!isServerSide())
 			return getFluidTankCapacity();
 		if (isMaster)
 			return getFluidTankCapacity();
@@ -582,7 +582,7 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 
 	@Override
 	public void onLoaded() {
-		if(WaterPower.isSimulating())
+		if(isServerSide())
 			refreshPlugins();
 		
         super.onLoaded();
@@ -592,7 +592,7 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 	public void markDirty() {
 		super.markDirty();
 
-		if(WaterPower.isSimulating())
+		if(isServerSide())
 			refreshPlugins();
 	}
 

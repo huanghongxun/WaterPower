@@ -1,4 +1,4 @@
-package org.jackhuang.watercraft.integration;
+package org.jackhuang.watercraft.integration.craftguide;
 
 import java.util.List;
 import java.util.Map;

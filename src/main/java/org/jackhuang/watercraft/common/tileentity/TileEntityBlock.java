@@ -64,7 +64,7 @@ public abstract class TileEntityBlock extends TileEntityLiquidTankInventory impl
 	public void updateEntity() {
 		super.updateEntity();
 		
-		if(needsUpdate && !WaterPower.isSimulating()) {
+		if(needsUpdate && !isServerSide()) {
 			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 			needsUpdate = false;
 		}
@@ -113,16 +113,14 @@ public abstract class TileEntityBlock extends TileEntityLiquidTankInventory impl
     @Override
     @Method(modid = Mods.IDs.IndustrialCraft2API)
 	public void setFacing(short facing) {
-		//setDirection(Utils.convertFacingAndForgeDirection(facing));
         setDirection(facing);
 	}
     
     public boolean setDirection(int side) {
-        //short facing = (short)Utils.convertFacingAndForgeDirection(side);
         this.facing = (short)side;
 
         if (this.prevFacing != facing) {
-            if (WaterPower.isSimulating()) {
+            if (isServerSide()) {
                 needsUpdate = true;
                 sendUpdateToClient();
             } else {

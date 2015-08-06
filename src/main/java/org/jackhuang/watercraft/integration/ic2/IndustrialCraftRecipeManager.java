@@ -6,7 +6,7 @@
  * http://www.mod-buildcraft.com/MMPL-1.0.txt
  */
 
-package org.jackhuang.watercraft.integration;
+package org.jackhuang.watercraft.integration.ic2;
 
 import ic2.api.recipe.IMachineRecipeManager;
 import ic2.api.recipe.IRecipeInput;

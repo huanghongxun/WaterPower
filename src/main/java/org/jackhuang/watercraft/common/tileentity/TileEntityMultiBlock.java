@@ -27,7 +27,7 @@ public abstract class TileEntityMultiBlock extends TileEntityLiquidTankInventory
 
 	public TileEntityMultiBlock(int tankSize) {
 		super(tankSize);
-		this.tested = WaterPower.isSimulating();
+		this.tested = isServerSide();
 	}
 
 	protected void setMaster(TileEntityMultiBlock master) {
@@ -59,7 +59,7 @@ public abstract class TileEntityMultiBlock extends TileEntityLiquidTankInventory
 	
 	@Override
 	public FluidTank getFluidTank() {
-		if(!WaterPower.isSimulating()) return fluidTank;
+		if(!isServerSide()) return fluidTank;
 		if(isMaster)
 			return fluidTank;
 		else if (masterBlock == null)
@@ -98,7 +98,6 @@ public abstract class TileEntityMultiBlock extends TileEntityLiquidTankInventory
 						block.isMaster = false;
 						block.sendUpdateToClient();
 					}
-					//PacketDispatcher.sendPacketToAllInDimension(serverSendMultiBlocks().getPacket(), this.worldObj.provider.dimensionId);
 				}
 				isMaster = true;
 				

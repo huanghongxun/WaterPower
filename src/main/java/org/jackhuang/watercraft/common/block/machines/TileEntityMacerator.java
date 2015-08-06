@@ -7,10 +7,9 @@ import org.jackhuang.watercraft.common.recipe.MultiRecipeManager;
 import org.jackhuang.watercraft.common.recipe.MyRecipeManager;
 import org.jackhuang.watercraft.common.recipe.MyRecipes;
 import org.jackhuang.watercraft.common.tileentity.TileEntityStandardWaterMachine;
-import org.jackhuang.watercraft.integration.FactorizationGrinderRecipeManager;
-import org.jackhuang.watercraft.integration.IndustrialCraftRecipeManager;
-import org.jackhuang.watercraft.integration.IndustrialCraftRecipes;
-import org.jackhuang.watercraft.integration.MekanismRecipes;
+import org.jackhuang.watercraft.integration.MekanismModule;
+import org.jackhuang.watercraft.integration.ic2.IndustrialCraftRecipeManager;
+import org.jackhuang.watercraft.integration.ic2.IndustrialCraftModule;
 import org.jackhuang.watercraft.util.Mods;
 
 import net.minecraft.item.ItemStack;
@@ -25,9 +24,8 @@ public class TileEntityMacerator extends TileEntityStandardWaterMachine {
 	}
 	
 	public static void init() {
-		MyRecipes.macerator = new MultiRecipeManager().addRecipeManager(MekanismRecipes.IS_MEKANISM_RECIPES_AVAILABLE, new HashMapRecipeManager(MekanismRecipes.crusher))
-				.addRecipeManager(IndustrialCraftRecipes.IS_INDUSTRIAL_CRAFT_RECIPES_AVAILABLE, new IndustrialCraftRecipeManager(IndustrialCraftRecipes.macerator))
-				.addRecipeManager(Mods.Factorization.isAvailable, new FactorizationGrinderRecipeManager());
+		MyRecipes.macerator = new MultiRecipeManager()
+				.addRecipeManager(IndustrialCraftModule.IS_INDUSTRIAL_CRAFT_RECIPES_AVAILABLE, new IndustrialCraftRecipeManager(IndustrialCraftModule.macerator));
 	}
 
 	@Override

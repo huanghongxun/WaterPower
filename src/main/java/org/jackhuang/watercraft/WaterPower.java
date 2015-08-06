@@ -33,8 +33,8 @@ import org.jackhuang.watercraft.common.network.MessagePacketHandler;
 import org.jackhuang.watercraft.common.recipe.EasyRecipeRegistrar;
 import org.jackhuang.watercraft.common.recipe.IRecipeRegistrar;
 import org.jackhuang.watercraft.common.recipe.NormalRecipeRegistrar;
-import org.jackhuang.watercraft.integration.CraftGuideWaterPowerObject;
 import org.jackhuang.watercraft.integration.IntegrationType;
+import org.jackhuang.watercraft.integration.craftguide.CraftGuideWaterPowerObject;
 import org.jackhuang.watercraft.integration.waila.WailaModule;
 import org.jackhuang.watercraft.util.Mods;
 
@@ -68,7 +68,7 @@ import cpw.mods.fml.relauncher.SideOnly;
  * @author jackhuang
  */
 @Mod(modid = Reference.ModID, name = Reference.ModName, version = Reference.Version,
-	dependencies = "required-after:Forge@[10.13.0.1199,); required-after:IC2@[2.2.628,); after:gregtech; after:Thaumcraft@[4.2.3.5,); after:BuildCraftAPI|power[1.1,); after:Forestry; after:craftguide; after:Waila; after:factorization; after:CoFHCore; after:Mekanism")
+	dependencies = "required-after:Forge@[10.13.0.1199,); after:IC2@[2.2.628,); after:gregtech; after:Thaumcraft@[4.2.3.5,); after:BuildCraftAPI|power[1.1,); after:Forestry; after:craftguide; after:Waila; after:factorization; after:CoFHCore; after:Mekanism; after:ThermalFoundation; after:MineFactoryReloaded; ")
 public class WaterPower implements IWorldGenerator {
 
     /**
@@ -119,22 +119,9 @@ public class WaterPower implements IWorldGenerator {
 	@Mod.EventHandler
 	public void load(FMLInitializationEvent event) {
 		
-		IRecipeRegistrar.initRecipeConfig(config);
-		EasyRecipeRegistrar.initRecipeConfig(config);
-		NormalRecipeRegistrar.initRecipeConfig(config);
-		
 		init();
 		
-		Property enableEasyRecipe = config.get("recipe", "enableEasyRecipe", false);
-		if(enableEasyRecipe.getBoolean(false))
-			recipe = new EasyRecipeRegistrar(config);
-		Property enableNormalRecipe = config.get("recipe", "enableNormalRecipe", true);
-		if(enableNormalRecipe.getBoolean(true))
-			recipe = new NormalRecipeRegistrar(config);
-		
 		GameRegistry.registerWorldGenerator(this, 0);
-
-		recipe.registerAllRecipes();
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
 
@@ -145,17 +132,19 @@ public class WaterPower implements IWorldGenerator {
                 type.getModule().init();
         }
 	}
-	
-	@EventHandler
-	public void loadComplete(FMLLoadCompleteEvent event) {
-		for(IntegrationType type : IntegrationType.values()) {
-		    if(type.getModule() != null)
-		        type.getModule().loadComplete();
-		}
-	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
+        
+        Property enableEasyRecipe = config.get("recipe", "enableEasyRecipe", false);
+        if(enableEasyRecipe.getBoolean(false))
+            recipe = new EasyRecipeRegistrar(config);
+        Property enableNormalRecipe = config.get("recipe", "enableNormalRecipe", true);
+        if(enableNormalRecipe.getBoolean(true))
+            recipe = new NormalRecipeRegistrar(config);
+
+        recipe.registerAllRecipes();
+        
 		proxy.registerRenderer();
 	}
 
@@ -180,12 +169,13 @@ public class WaterPower implements IWorldGenerator {
 		new BlockOre();
 	}
 
-	/**
-	 * isServer?
-	 */
-	public static boolean isSimulating() {
-		return !FMLCommonHandler.instance().getEffectiveSide().isClient();
-	}
+    public static boolean isServerSide() {
+        return FMLCommonHandler.instance().getEffectiveSide().isServer();
+    }
+
+    public static boolean isClientSide() {
+        return FMLCommonHandler.instance().getEffectiveSide().isClient();
+    }
 	
 	private static WorldGenMinable getMinable(ItemStack is, int number) {
 		return new WorldGenMinable(Block.getBlockFromItem(is.getItem()), is.getItemDamage(), number, Blocks.stone);
@@ -210,18 +200,18 @@ public class WaterPower implements IWorldGenerator {
 			IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
         int baseHeight = world.provider.getAverageGroundLevel();
 	    int baseScale = Math.round(baseHeight * Reference.WorldGen.oreDensityFactor);
-        int baseCount = 3 * baseScale / 64;
+        int baseCount = 2 * baseScale / 64;
         
         if(Reference.WorldGen.vanadiumOre)
-		    generateOre(GlobalBlocks.vanadiumOre, 7, baseCount, world, random, chunkX, chunkZ, 16, 32);
+		    generateOre(GlobalBlocks.vanadiumOre, 5, baseCount, world, random, chunkX, chunkZ, 16, 32);
         if(Reference.WorldGen.manganeseOre)
-		    generateOre(GlobalBlocks.manganeseOre, 7, baseCount, world, random, chunkX, chunkZ, 16, 32);
+		    generateOre(GlobalBlocks.manganeseOre, 7, baseCount*2, world, random, chunkX, chunkZ, 16, 32);
         if(Reference.WorldGen.monaziteOre)
-		    generateOre(GlobalBlocks.monaziteOre, 7, baseCount, world, random, chunkX, chunkZ, 16, 32);
+		    generateOre(GlobalBlocks.monaziteOre, 5, baseCount, world, random, chunkX, chunkZ, 16, 32);
         if(Reference.WorldGen.magnetOre)
-		    generateOre(GlobalBlocks.magnetOre, 7, baseCount, world, random, chunkX, chunkZ, 16, 32);
+		    generateOre(GlobalBlocks.magnetOre, 7, baseCount*3, world, random, chunkX, chunkZ, 6, 64);
         if(Reference.WorldGen.zincOre)
-		    generateOre(GlobalBlocks.zincOre, 7, baseCount, world, random, chunkX, chunkZ, 6, 64);
+		    generateOre(GlobalBlocks.zincOre, 7, baseCount*3, world, random, chunkX, chunkZ, 6, 64);
 	}
 	
 	@SideOnly(Side.CLIENT)

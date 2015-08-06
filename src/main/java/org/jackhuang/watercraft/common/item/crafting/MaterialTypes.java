@@ -29,6 +29,10 @@ public enum MaterialTypes {
 	public short R, G, B, A;
 	public boolean blastFurnaceRequired;
 	
+	public static final MaterialTypes[] MATERIALS_SORTED_BY_VALUE = {
+	    
+	};
+	
 	private MaterialTypes(int R, int G, int B, int A, boolean blastFurnaceRequired) {
 		this.R = (short)R;
 		this.G = (short)G;

@@ -1,5 +1,7 @@
 package org.jackhuang.watercraft.common.block.watermills;
 
+import java.util.List;
+
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.client.gui.DefaultGuiIds;
@@ -27,6 +29,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 /**
  * 

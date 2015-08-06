@@ -93,7 +93,7 @@ public abstract class ContainerBase extends Container {
 					sourceSlot.onPickupFromSlot(player, sourceItemStack);
 				}
 
-				if (WaterPower.isSimulating()) {
+				if (WaterPower.isServerSide()) {
 					detectAndSendChanges();
 				}
 			}

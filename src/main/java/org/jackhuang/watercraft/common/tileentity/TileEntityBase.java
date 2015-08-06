@@ -26,7 +26,7 @@ public class TileEntityBase extends TileEntity {
     }
 
 	public void sendUpdateToClient() {
-		if(WaterPower.isSimulating())
+		if(isServerSide())
 			MessagePacketHandler.INSTANCE.sendToAll(new PacketTileEntity(this));
 	}
 

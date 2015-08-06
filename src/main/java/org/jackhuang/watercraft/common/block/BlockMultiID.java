@@ -10,7 +10,7 @@ import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.client.gui.IHasGui;
 import org.jackhuang.watercraft.common.tileentity.TileEntityBlock;
-import org.jackhuang.watercraft.integration.BuildCraftIntegration;
+import org.jackhuang.watercraft.integration.BuildCraftModule;
 import org.jackhuang.watercraft.util.Utils;
 import org.jackhuang.watercraft.util.WPLog;
 
@@ -79,7 +79,7 @@ public abstract class BlockMultiID extends BlockBase {
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z,
 			EntityLivingBase entityliving, ItemStack itemStack) {
-		if (!WaterPower.isSimulating()) return;
+		if (WaterPower.isClientSide()) return;
 		
 		TileEntity tileEntity = world.getTileEntity(x, y, z);
 
@@ -151,7 +151,7 @@ public abstract class BlockMultiID extends BlockBase {
 			EntityPlayer entityPlayer, int s, float f1, float f2, float f3) {
 	    if(entityPlayer != null) {
 	        ItemStack is = entityPlayer.inventory.getCurrentItem();
-	        if(BuildCraftIntegration.isWrench(entityPlayer, is, x, y, z)&&entityPlayer.isSneaking()) {
+	        if(BuildCraftModule.isWrench(entityPlayer, is, x, y, z)&&entityPlayer.isSneaking()) {
 	            TileEntity tileEntity = world.getTileEntity(x, y, z);
 	            Block b = world.getBlock(x, y, z);
 	            if(tileEntity != null && tileEntity instanceof IDroppable) {

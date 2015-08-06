@@ -17,6 +17,7 @@ public class Mods {
 
     public static class IDs {
         public static final String BuildCraftPower = "BuildCraftAPI|power";
+        public static final String BuildCraftCore = "BuildCraft|Core";
         public static final String Factorization = "factorization";
         public static final String IndustrialCraft2 = "IC2";
         public static final String IndustrialCraft2API = "IC2API";
@@ -29,6 +30,8 @@ public class Mods {
         public static final String Mekanism = "Mekanism";
         public static final String CraftGuide = "craftguide";
         public static final String ExNihilo = "ExNihilo";
+        public static final String Railcraft = "Railcraft";
+        public static final String ImmersiveEngineering = "ImmersiveEngineering";
     }
 
     public static final SimpleMod Factorization = new SimpleMod(
@@ -37,10 +40,16 @@ public class Mods {
             IDs.ThermalExpansion);
     public static final SimpleMod IndustrialCraft2 = new SimpleMod(
             IDs.IndustrialCraft2);
+    public static final SimpleMod BuildCraftCore = new SimpleMod(
+            IDs.BuildCraftCore);
+    public static final SimpleMod Railcraft = new SimpleMod(
+            IDs.Railcraft);
     public static final SimpleMod BuildCraftPower = new SimpleMod(
             IDs.BuildCraftPower);
     public static final SimpleMod CoFHAPIEnergy = new SimpleMod(
             IDs.CoFHAPIEnergy);
+    public static final SimpleMod ImmersiveEngineering = new SimpleMod(
+            IDs.ImmersiveEngineering);
     public static final SimpleMod Thaumcraft = new SimpleMod(IDs.Thaumcraft);
     public static final SimpleMod GregTech = new SimpleMod(IDs.GregTech);
     public static final SimpleMod Waila = new SimpleMod(IDs.Waila);
@@ -62,6 +71,8 @@ public class Mods {
                         .getProcessedVersion());
             else
                 isAvailable = ModAPIManager.INSTANCE.hasAPI(version.getLabel());
+            
+            isAvailable = false;
         }
     }
 
