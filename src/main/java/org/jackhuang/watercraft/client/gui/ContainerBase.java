@@ -14,96 +14,102 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 public abstract class ContainerBase extends Container {
-	public final IInventory base;
 
-	public ContainerBase(IInventory base) {
-		this.base = base;
-	}
+    public final IInventory base;
 
-	public final ItemStack transferStackInSlot(EntityPlayer player,
-			int sourceSlotIndex) {
-		Slot sourceSlot = (Slot) this.inventorySlots.get(sourceSlotIndex);
+    public ContainerBase(IInventory base) {
+	this.base = base;
+    }
 
-		if ((sourceSlot != null) && (sourceSlot.getHasStack())) {
-			ItemStack sourceItemStack = sourceSlot.getStack();
-			int oldSourceItemStackSize = sourceItemStack.stackSize;
+    public final ItemStack transferStackInSlot(EntityPlayer player,
+	    int sourceSlotIndex) {
+	Slot sourceSlot = (Slot) this.inventorySlots.get(sourceSlotIndex);
 
-			if (sourceSlot.inventory == player.inventory) {
-				for (int run = 0; (run < 4) && (sourceItemStack.stackSize > 0); run++)
-					if (run < 2)
-						for (Object o : inventorySlots) {
-							Slot targetSlot = (Slot) o;
-							if (((targetSlot instanceof SlotInventorySlot))
-									&& (((SlotInventorySlot) targetSlot).invSlot
-											.canInput())
-									&& (targetSlot.isItemValid(sourceItemStack))) {
-								if ((targetSlot.getStack() != null)
-										|| (run == 1)) {
-									mergeItemStack(sourceItemStack,
-											targetSlot.slotNumber,
-											targetSlot.slotNumber + 1, false);
+	if ((sourceSlot != null) && (sourceSlot.getHasStack())) {
+	    ItemStack sourceItemStack = sourceSlot.getStack();
+	    int oldSourceItemStackSize = sourceItemStack.stackSize;
 
-									if (sourceItemStack.stackSize == 0)
-										break;
-								}
-							}
-						}
-					else
-						for (Object o : this.inventorySlots) {
-							Slot targetSlot = (Slot) o;
-							if ((targetSlot.inventory != player.inventory)
-									&& (targetSlot.isItemValid(sourceItemStack))) {
-								if ((targetSlot.getStack() != null)
-										|| (run == 3)) {
-									mergeItemStack(sourceItemStack,
-											targetSlot.slotNumber,
-											targetSlot.slotNumber + 1, false);
+	    if (sourceSlot.inventory == player.inventory) {
+		for (int run = 0; (run < 4) && (sourceItemStack.stackSize > 0); run++) {
+		    if (run < 2) {
+			for (Object o : inventorySlots) {
+			    Slot targetSlot = (Slot) o;
+			    if (((targetSlot instanceof SlotInventorySlot))
+				    && (((SlotInventorySlot) targetSlot).invSlot
+				    .canInput())
+				    && (targetSlot.isItemValid(sourceItemStack))) {
+				if ((targetSlot.getStack() != null)
+					|| (run == 1)) {
+				    mergeItemStack(sourceItemStack,
+					    targetSlot.slotNumber,
+					    targetSlot.slotNumber + 1, false);
 
-									if (sourceItemStack.stackSize == 0)
-										break;
-								}
-							}
-						}
-			} else {
-				ListIterator it;
-				for (int run = 0; (run < 2) && (sourceItemStack.stackSize > 0); run++) {
-					for (it = this.inventorySlots
-							.listIterator(this.inventorySlots.size()); it
-							.hasPrevious();) {
-						Slot targetSlot = (Slot) it.previous();
-
-						if ((targetSlot.inventory == player.inventory)
-								&& (targetSlot.isItemValid(sourceItemStack))) {
-							if ((targetSlot.getStack() != null) || (run == 1)) {
-								mergeItemStack(sourceItemStack,
-										targetSlot.slotNumber,
-										targetSlot.slotNumber + 1, false);
-
-								if (sourceItemStack.stackSize == 0)
-									break;
-							}
-						}
-					}
+				    if (sourceItemStack.stackSize == 0) {
+					break;
+				    }
 				}
+			    }
 			}
-			if (sourceItemStack.stackSize != oldSourceItemStackSize) {
-				if (sourceItemStack.stackSize == 0)
-					sourceSlot.putStack(null);
-				else {
-					sourceSlot.onPickupFromSlot(player, sourceItemStack);
-				}
+		    } else {
+			for (Object o : this.inventorySlots) {
+			    Slot targetSlot = (Slot) o;
+			    if ((targetSlot.inventory != player.inventory)
+				    && (targetSlot.isItemValid(sourceItemStack))) {
+				if ((targetSlot.getStack() != null)
+					|| (run == 3)) {
+				    mergeItemStack(sourceItemStack,
+					    targetSlot.slotNumber,
+					    targetSlot.slotNumber + 1, false);
 
-				if (WaterPower.isServerSide()) {
-					detectAndSendChanges();
+				    if (sourceItemStack.stackSize == 0) {
+					break;
+				    }
 				}
+			    }
 			}
+		    }
+		}
+	    } else {
+		ListIterator it;
+		for (int run = 0; (run < 2) && (sourceItemStack.stackSize > 0); run++) {
+		    for (it = this.inventorySlots
+			    .listIterator(this.inventorySlots.size()); it
+			    .hasPrevious();) {
+			Slot targetSlot = (Slot) it.previous();
+
+			if ((targetSlot.inventory == player.inventory)
+				&& (targetSlot.isItemValid(sourceItemStack))) {
+			    if ((targetSlot.getStack() != null) || (run == 1)) {
+				mergeItemStack(sourceItemStack,
+					targetSlot.slotNumber,
+					targetSlot.slotNumber + 1, false);
+
+				if (sourceItemStack.stackSize == 0) {
+				    break;
+				}
+			    }
+			}
+		    }
+		}
+	    }
+	    if (sourceItemStack.stackSize != oldSourceItemStackSize) {
+		if (sourceItemStack.stackSize == 0) {
+		    sourceSlot.putStack(null);
+		} else {
+		    sourceSlot.onPickupFromSlot(player, sourceItemStack);
 		}
 
-		return null;
+		if (WaterPower.isServerSide()) {
+		    detectAndSendChanges();
+		}
+	    }
 	}
 
-	@Override
-	public boolean canInteractWith(EntityPlayer entityplayer) {
-		return true;
-	}
+	return null;
+    }
+
+    @Override
+    public boolean canInteractWith(EntityPlayer entityplayer) {
+	return true;
+    }
 }

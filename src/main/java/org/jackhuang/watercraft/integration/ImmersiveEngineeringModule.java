@@ -11,6 +11,6 @@ public class ImmersiveEngineeringModule extends BaseModule {
 
     @Method(modid = Mods.IDs.ImmersiveEngineering)
     public static void blastFurnace(Object input, int cookTime, ItemStack output) {
-        BlastFurnaceRecipe.addRecipe(output, input, cookTime);
+	BlastFurnaceRecipe.addRecipe(output, input, cookTime);
     }
 }

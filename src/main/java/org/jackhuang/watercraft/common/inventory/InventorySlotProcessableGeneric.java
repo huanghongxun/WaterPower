@@ -10,71 +10,79 @@ import org.jackhuang.watercraft.common.tileentity.TileEntityInventory;
 import net.minecraft.item.ItemStack;
 
 public class InventorySlotProcessableGeneric extends InventorySlotProcessable {
-	public IRecipeManager recipeManager;
 
-	public InventorySlotProcessableGeneric(TileEntityInventory base,
-			String name, int count,
-			IRecipeManager recipeManager) {
-		super(base, name,  count);
+    public IRecipeManager recipeManager;
 
-		this.recipeManager = recipeManager;
+    public InventorySlotProcessableGeneric(TileEntityInventory base,
+	    String name, int count,
+	    IRecipeManager recipeManager) {
+	super(base, name, count);
+
+	this.recipeManager = recipeManager;
+    }
+
+    public boolean accepts(ItemStack itemStack) {
+	ItemStack tmp = itemStack.copy();
+	tmp.stackSize = 2147483647;
+
+	return getOutput(tmp, false, true) != null;
+    }
+
+    public MyRecipeOutput process() {
+	ItemStack input = get();
+	if ((input == null) && (!allowEmptyInput())) {
+	    return null;
 	}
 
-	public boolean accepts(ItemStack itemStack) {
-		ItemStack tmp = itemStack.copy();
-		tmp.stackSize = 2147483647;
-
-		return getOutput(tmp, false, true) != null;
+	MyRecipeOutput output = getOutput(input, false, false);
+	if (output == null) {
+	    return null;
 	}
 
-	public MyRecipeOutput process() {
-		ItemStack input = get();
-		if ((input == null) && (!allowEmptyInput()))
-			return null;
+	List itemsCopy = new ArrayList(output.items.size());
 
-		MyRecipeOutput output = getOutput(input, false, false);
-		if (output == null)
-			return null;
-
-		List itemsCopy = new ArrayList(output.items.size());
-
-		for (ItemStack itemStack : output.items) {
-			itemsCopy.add(itemStack.copy());
-		}
-
-		return new MyRecipeOutput(itemsCopy);
+	for (ItemStack itemStack : output.items) {
+	    itemsCopy.add(itemStack.copy());
 	}
 
-	public void consume() {
-		ItemStack input = get();
-		if ((input == null) && (!allowEmptyInput()))
-			throw new IllegalStateException("consume from empty slot");
+	return new MyRecipeOutput(itemsCopy);
+    }
 
-		MyRecipeOutput output = getOutput(input, true, false);
-		if (output == null)
-			throw new IllegalStateException(
-					"consume without a processing result");
-
-		if ((input != null) && (input.stackSize <= 0))
-			put(null);
+    public void consume() {
+	ItemStack input = get();
+	if ((input == null) && (!allowEmptyInput())) {
+	    throw new IllegalStateException("consume from empty slot");
 	}
 
-	public void setRecipeManager(IRecipeManager recipeManager) {
-		this.recipeManager = recipeManager;
+	MyRecipeOutput output = getOutput(input, true, false);
+	if (output == null) {
+	    throw new IllegalStateException(
+		    "consume without a processing result");
 	}
 
-	protected MyRecipeOutput getOutput(ItemStack input, boolean adjustInput,
-			boolean forAccept) {
-		return this.recipeManager.getOutput(input, adjustInput);
+	if ((input != null) && (input.stackSize <= 0)) {
+	    put(null);
 	}
-	
-	public MyRecipeOutput getRecipeOutput() {
-		ItemStack input = get();
-		if(input == null) return null;
-		return getOutput(input, false, false);
-	}
+    }
 
-	protected boolean allowEmptyInput() {
-		return false;
+    public void setRecipeManager(IRecipeManager recipeManager) {
+	this.recipeManager = recipeManager;
+    }
+
+    protected MyRecipeOutput getOutput(ItemStack input, boolean adjustInput,
+	    boolean forAccept) {
+	return this.recipeManager.getOutput(input, adjustInput);
+    }
+
+    public MyRecipeOutput getRecipeOutput() {
+	ItemStack input = get();
+	if (input == null) {
+	    return null;
 	}
+	return getOutput(input, false, false);
+    }
+
+    protected boolean allowEmptyInput() {
+	return false;
+    }
 }

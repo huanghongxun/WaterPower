@@ -17,34 +17,40 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemOthers extends ItemBase {
-	
-	public ItemOthers() {
-		super("cptItemUpdaters");
-		setHasSubtypes(true);
+
+    public ItemOthers() {
+	super("cptItemUpdaters");
+	setHasSubtypes(true);
+    }
+
+    @Override
+    public String getTextureFolder() {
+	return "updaters";
+    }
+
+    @Override
+    public void addInformation(ItemStack par1ItemStack,
+	    EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
+	String s = ItemType.values()[par1ItemStack.getItemDamage()].getInformation();
+	if (s != null) {
+	    par3List.add(s);
 	}
-	
-	@Override
-	public String getTextureFolder() {
-		return "updaters";
+    }
+
+    @Override
+    public String getItemStackDisplayName(ItemStack itemstack) {
+	if (itemstack.getItemDamage() >= ItemType.values().length) {
+	    return null;
 	}
-	
-	@Override
-	public void addInformation(ItemStack par1ItemStack,
-			EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
-		String s = ItemType.values()[par1ItemStack.getItemDamage()].getInformation();
-		if(s != null) par3List.add(s);
+	return ItemType.values()[itemstack.getItemDamage()].getShowedName();
+    }
+
+    @Override
+    public String getUnlocalizedName(ItemStack itemstack) {
+	if (itemstack.getItemDamage() >= ItemType.values().length) {
+	    return null;
 	}
-	
-	@Override
-	public String getItemStackDisplayName(ItemStack itemstack) {
-		if(itemstack.getItemDamage() >= ItemType.values().length) return null;
-		return ItemType.values()[itemstack.getItemDamage()].getShowedName();
-	}
-	
-	@Override
-	public String getUnlocalizedName(ItemStack itemstack) {
-		if(itemstack.getItemDamage() >= ItemType.values().length) return null;
-		
-		return "item." + ItemType.values()[itemstack.getItemDamage()].unlocalizedName;
-	}
+
+	return "item." + ItemType.values()[itemstack.getItemDamage()].unlocalizedName;
+    }
 }

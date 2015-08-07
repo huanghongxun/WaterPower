@@ -9,15 +9,15 @@ public class CraftGuideModule extends BaseModule {
 
     @Method(modid = Mods.IDs.CraftGuide)
     public void register() {
-        new CraftGuideWaterPowerObject();
+	new CraftGuideWaterPowerObject();
     }
 
     @Override
     public void init() {
-        try {
-            register();
-        } catch(Throwable t) {
-            t.printStackTrace();
-        }
+	try {
+	    register();
+	} catch (Throwable t) {
+	    t.printStackTrace();
+	}
     }
 }

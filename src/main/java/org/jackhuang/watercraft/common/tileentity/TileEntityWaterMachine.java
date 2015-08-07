@@ -1,11 +1,10 @@
 /**
  * Copyright (c) Huang Yuhui, 2014
- * 
+ *
  * "WaterCraft" is distributed under the terms of the Minecraft Mod Public
  * License 1.0, or MMPL. Please check the contents of the license located in
  * http://www.mod-buildcraft.com/MMPL-1.0.txt
  */
-
 package org.jackhuang.watercraft.common.tileentity;
 
 import ic2.api.tile.IWrenchable;
@@ -25,20 +24,21 @@ import cpw.mods.fml.common.Optional.Interface;
 import cpw.mods.fml.common.Optional.InterfaceList;
 
 public abstract class TileEntityWaterMachine extends TileEntityBlock
-		implements IWaterReceiver {
-	public TileEntityWaterMachine(int maxWater) {
-	    super(maxWater);
-	}
+	implements IWaterReceiver {
 
-	@Override
-	public int canProvideWater(int water, ForgeDirection side, TileEntity provider) {
-		int need = getFluidTankCapacity() - this.getTankAmount();
-		need = Math.min(need, water);
-		return need;
-	}
+    public TileEntityWaterMachine(int maxWater) {
+	super(maxWater);
+    }
 
-	@Override
-	public void provideWater(int provide) {
-		this.getFluidTank().fill(new FluidStack(FluidRegistry.WATER, provide), true);
-	}
+    @Override
+    public int canProvideWater(int water, ForgeDirection side, TileEntity provider) {
+	int need = getFluidTankCapacity() - this.getTankAmount();
+	need = Math.min(need, water);
+	return need;
+    }
+
+    @Override
+    public void provideWater(int provide) {
+	this.getFluidTank().fill(new FluidStack(FluidRegistry.WATER, provide), true);
+    }
 }
