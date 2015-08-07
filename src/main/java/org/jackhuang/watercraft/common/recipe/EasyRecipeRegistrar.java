@@ -8,6 +8,7 @@
 
 package org.jackhuang.watercraft.common.recipe;
 
+import gregtech.api.GregTech_API;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -39,47 +40,40 @@ public class EasyRecipeRegistrar extends IRecipeRegistrar {
 
     public void registerWatermills() {
         addRecipeByOreDictionary(new ItemStack(GlobalBlocks.waterMill, 1, 0),
-                "CUC", "SAS", "PMP", 'C',
-                ICItemFinder.getIC2Item("FluidCell"), 'A',
-                "blockIron", 'S', "plateIron", 'P', electronicCircuit, 'M',
-                ItemType.MK0.item(), 'U', ItemType.WaterUraniumIngot.item());
-
-        addRecipeByOreDictionary(new ItemStack(GlobalBlocks.waterMill, 1, 1),
-                "CUC", "SAS", "PMP", 'C',
-                ICItemFinder.getIC2Item("FluidCell"), 'A',
-                new ItemStack(GlobalBlocks.waterMill, 1, 0), 'S', "plateIron",
-                'P', advancedCircuit, 'M', ItemType.MK0.item(), 'U',
+                "CUC", "SAS", "PMP", 'C', ICItemFinder.getIC2Item("FluidCell"),
+                'A', "blockIron", 'S', "plateIron", 'P', electronicCircuit,
+                'M', ItemType.MK0.item(), 'U',
                 ItemType.WaterUraniumIngot.item());
 
+        addRecipeByOreDictionary(new ItemStack(GlobalBlocks.waterMill, 1, 1),
+                "CUC", "SAS", "PMP", 'C', ICItemFinder.getIC2Item("FluidCell"),
+                'A', new ItemStack(GlobalBlocks.waterMill, 1, 0), 'S',
+                "plateIron", 'P', advancedCircuit, 'M', ItemType.MK0.item(),
+                'U', ItemType.WaterUraniumIngot.item());
+
         addRecipeByOreDictionary(new ItemStack(GlobalBlocks.waterMill, 1, 3),
-                "CUC", "SAS", "PMP", 'C',
-                ICItemFinder.getIC2Item("FluidCell"), 'A',
-                new ItemStack(GlobalBlocks.waterMill, 1, 1), 'S', carbonPlate,
-                'P', advancedCircuit, 'M', ItemType.MK1.item(), 'U',
-                ItemType.WaterUraniumPlateMK1.item());
+                "CUC", "SAS", "PMP", 'C', ICItemFinder.getIC2Item("FluidCell"),
+                'A', new ItemStack(GlobalBlocks.waterMill, 1, 1), 'S',
+                carbonPlate, 'P', advancedCircuit, 'M', ItemType.MK1.item(),
+                'U', ItemType.WaterUraniumPlateMK1.item());
 
         addRecipeByOreDictionary(new ItemStack(GlobalBlocks.waterMill, 1, 4),
-                "CUC", "SAS", "PMP", 'C',
-                ICItemFinder.getIC2Item("FluidCell"), 'A',
-                new ItemStack(GlobalBlocks.waterMill, 1, 3), 'S',
+                "CUC", "SAS", "PMP", 'C', ICItemFinder.getIC2Item("FluidCell"),
+                'A', new ItemStack(GlobalBlocks.waterMill, 1, 3), 'S',
                 advancedAlloy, 'P', advancedCircuit, 'M', ItemType.MK2.item(),
                 'U', ItemType.WaterUraniumPlateMK2.item());
 
         addRecipeByOreDictionary(new ItemStack(GlobalBlocks.waterMill, 1, 5),
-                "CUC", "SAS", "PMP", 'C',
-                ICItemFinder.getIC2Item("FluidCell"), 'A',
-                new ItemStack(GlobalBlocks.waterMill, 1, 4), 'S',
-                ICItemFinder.getIC2Item("elemotor"), 'P',
-                advancedCircuit, 'M', ItemType.MK2.item(), 'U',
-                ItemType.WaterUraniumPlateMK2.item());
+                "CUC", "SAS", "PMP", 'C', ICItemFinder.getIC2Item("FluidCell"),
+                'A', new ItemStack(GlobalBlocks.waterMill, 1, 4), 'S',
+                ICItemFinder.getIC2Item("elemotor"), 'P', advancedCircuit, 'M',
+                ItemType.MK2.item(), 'U', ItemType.WaterUraniumPlateMK2.item());
 
         addRecipeByOreDictionary(new ItemStack(GlobalBlocks.waterMill, 1, 6),
-                "CUC", "SAS", "PMP", 'C',
-                ICItemFinder.getIC2Item("FluidCell"), 'A',
-                new ItemStack(GlobalBlocks.waterMill, 1, 5), 'S',
-                getUsualItemStack(ICItemFinder
-                        .getIC2Item("lapotronCrystal")), 'P', advancedCircuit,
-                'M', ItemType.MK3.item(), 'U',
+                "CUC", "SAS", "PMP", 'C', ICItemFinder.getIC2Item("FluidCell"),
+                'A', new ItemStack(GlobalBlocks.waterMill, 1, 5), 'S',
+                getUsualItemStack(ICItemFinder.getIC2Item("lapotronCrystal")),
+                'P', advancedCircuit, 'M', ItemType.MK3.item(), 'U',
                 ItemType.WaterUraniumPlateMK3.item());
 
         /*
@@ -170,47 +164,59 @@ public class EasyRecipeRegistrar extends IRecipeRegistrar {
 
     public void registerRange() {
         if (gregtechRecipe) {
-            addRecipeByOreDictionary(new ItemStack(GlobalItems.range, 1, 0),
-                    "WSW", "SAS", "WSW", 'W', electronicCircuit, 'S',
-                    getUsualItemStack(ICItemFinder
-                            .getIC2Item("energyCrystal")), 'A', machine);
+            addRecipeByOreDictionary(
+                    new ItemStack(GlobalItems.range, 1, 0),
+                    "WSW",
+                    "SAS",
+                    "WSW",
+                    'W',
+                    electronicCircuit,
+                    'S',
+                    getUsualItemStack(ICItemFinder.getIC2Item("energyCrystal")),
+                    'A', machine);
             addRecipeByOreDictionary(new ItemStack(GlobalItems.range, 1, 1),
                     "WSW", "SAS", "WSW", 'W', advancedCircuit, 'S',
                     getUsualItemStack(ICItemFinder
                             .getIC2Item("lapotronCrystal")), 'A',
                     new ItemStack(GlobalItems.range, 1, 0));
-            addRecipeByOreDictionary(new ItemStack(GlobalItems.range, 1, 2),
-                    "WSW", "SAS", "WSW", 'W',
-                    getUsualItemStack(ICItemFinder
-                            .getIC2Item("energyCrystal")), 'S',
-                    ICItemFinder.getIC2Item("mfeUnit"), 'A',
+            addRecipeByOreDictionary(
+                    new ItemStack(GlobalItems.range, 1, 2),
+                    "WSW",
+                    "SAS",
+                    "WSW",
+                    'W',
+                    getUsualItemStack(ICItemFinder.getIC2Item("energyCrystal")),
+                    'S', ICItemFinder.getIC2Item("mfeUnit"), 'A',
                     new ItemStack(GlobalItems.range, 1, 1));
             addRecipeByOreDictionary(new ItemStack(GlobalItems.range, 1, 3),
                     "WSW", "SAS", "WSW", 'W',
                     getUsualItemStack(ICItemFinder
                             .getIC2Item("lapotronCrystal")), 'S',
-                    ICItemFinder.getIC2Item("mfsUnit"), 'A',
-                    new ItemStack(GlobalItems.range, 1, 2));
+                    ICItemFinder.getIC2Item("mfsUnit"), 'A', new ItemStack(
+                            GlobalItems.range, 1, 2));
         } else {
             addRecipeByOreDictionary(new ItemStack(GlobalItems.range, 1, 0),
                     "WSW", "SAS", "WSW", 'W', electronicCircuit, 'S',
                     ICItemFinder.getIC2Item("batBox"), 'A', machine);
             addRecipeByOreDictionary(new ItemStack(GlobalItems.range, 1, 1),
                     "WSW", "SAS", "WSW", 'W', advancedCircuit, 'S',
-                    ICItemFinder.getIC2Item("cesuUnit"), 'A',
-                    new ItemStack(GlobalItems.range, 1, 0));
-            addRecipeByOreDictionary(new ItemStack(GlobalItems.range, 1, 2),
-                    "WSW", "SAS", "WSW", 'W',
-                    getUsualItemStack(ICItemFinder
-                            .getIC2Item("energyCrystal")), 'S',
-                    ICItemFinder.getIC2Item("mfeUnit"), 'A',
+                    ICItemFinder.getIC2Item("cesuUnit"), 'A', new ItemStack(
+                            GlobalItems.range, 1, 0));
+            addRecipeByOreDictionary(
+                    new ItemStack(GlobalItems.range, 1, 2),
+                    "WSW",
+                    "SAS",
+                    "WSW",
+                    'W',
+                    getUsualItemStack(ICItemFinder.getIC2Item("energyCrystal")),
+                    'S', ICItemFinder.getIC2Item("mfeUnit"), 'A',
                     new ItemStack(GlobalItems.range, 1, 1));
             addRecipeByOreDictionary(new ItemStack(GlobalItems.range, 1, 3),
                     "WSW", "SAS", "WSW", 'W',
                     getUsualItemStack(ICItemFinder
                             .getIC2Item("lapotronCrystal")), 'S',
-                    ICItemFinder.getIC2Item("mfsUnit"), 'A',
-                    new ItemStack(GlobalItems.range, 1, 2));
+                    ICItemFinder.getIC2Item("mfsUnit"), 'A', new ItemStack(
+                            GlobalItems.range, 1, 2));
         }
     }
 
@@ -246,17 +252,19 @@ public class EasyRecipeRegistrar extends IRecipeRegistrar {
             if (Mods.Railcraft.isAvailable)
                 for (ItemStack sasasasa : OreDictionary.getOres("ingotUranium"))
                     RailcraftModule.addRollingMachineRecipe(is2, "SAS", "ASA",
-                            "SAS", 'A', sasasasa, 'S', ICItemFinder
-                                    .getIC2Item("electrolyzedWaterCell"));
+                            "SAS", 'A', sasasasa, 'S',
+                            ICItemFinder.getIC2Item("electrolyzedWaterCell"));
             else
                 addRecipeByOreDictionary(is2, "SAS", "ASA", "SAS", 'A',
                         "ingotUranium", 'S',
-                        ICItemFinder
-                                .getIC2Item("electrolyzedWaterCell"));
+                        ICItemFinder.getIC2Item("electrolyzedWaterCell"));
         }
         addRecipeByOreDictionary(ItemType.WaterUraniumPlateMK1.item(), "SSS",
                 "SAS", "SSS", 'A', ItemType.WaterUraniumIngot.item(), 'S',
                 "plateBronze");
+        addRecipeByOreDictionary(ItemType.WaterUraniumPlateMK1.item(), "SSS",
+                "SAS", "SSS", 'A', ItemType.WaterUraniumIngot.item(), 'S',
+                "plateManganese");
         addRecipeByOreDictionary(ItemType.WaterUraniumPlateMK2.item(), "SSS",
                 "SAS", "SSS", 'A', ItemType.WaterUraniumPlateMK1.item(), 'S',
                 carbonPlate);
@@ -265,35 +273,32 @@ public class EasyRecipeRegistrar extends IRecipeRegistrar {
                 "SAS", "SSS", 'A', ItemType.WaterUraniumPlateMK2.item(), 'S',
                 advancedAlloy);
 
-        if (Mods.IndustrialCraft2.isAvailable)
+        if (gregtechRecipe) {
             addRecipeByOreDictionary(ItemType.WaterUraniumPlateMK4.item(),
                     "SSS", "SAS", "SSS", 'A',
                     ItemType.WaterUraniumPlateMK3.item(), 'S', "plateTungsten");
-        else
-            addRecipeByOreDictionary(ItemType.WaterUraniumPlateMK4.item(),
-                    "SSS", "SAS", "SSS", 'A',
-                    ItemType.WaterUraniumPlateMK3.item(), 'S',
-                    "plateIndustrialSteel");
-        if (OreDictionary.doesOreNameExist("plateStainlessSteel"))
             addRecipeByOreDictionary(ItemType.WaterUraniumPlateMK5.item(),
                     "SSS", "SAS", "SSS", 'A',
                     ItemType.WaterUraniumPlateMK4.item(), 'S',
                     "plateStainlessSteel");
-        else
-            addRecipeByOreDictionary(ItemType.WaterUraniumPlateMK5.item(),
-                    "SSS", "SAS", "SSS", 'A',
-                    ItemType.WaterUraniumPlateMK4.item(), 'S',
-                    "plateManganeseSteel");
-        if (OreDictionary.doesOreNameExist("plateTungstenSteel"))
             addRecipeByOreDictionary(ItemType.WaterUraniumPlateMK6.item(),
                     "SSS", "SAS", "SSS", 'A',
                     ItemType.WaterUraniumPlateMK5.item(), 'S',
                     "plateTungstenSteel");
-        else
+        } else {
+            addRecipeByOreDictionary(ItemType.WaterUraniumPlateMK4.item(),
+                    "SSS", "SAS", "SSS", 'A',
+                    ItemType.WaterUraniumPlateMK3.item(), 'S',
+                    "plateIndustrialSteel");
+            addRecipeByOreDictionary(ItemType.WaterUraniumPlateMK5.item(),
+                    "SSS", "SAS", "SSS", 'A',
+                    ItemType.WaterUraniumPlateMK4.item(), 'S',
+                    "plateManganeseSteel");
             addRecipeByOreDictionary(ItemType.WaterUraniumPlateMK6.item(),
                     "SSS", "SAS", "SSS", 'A',
                     ItemType.WaterUraniumPlateMK5.item(), 'S',
                     "plateVanadiumSteel");
+        }
         if (Mods.IndustrialCraft2.isAvailable)
             addRecipeByOreDictionary(ItemType.WaterUraniumPlateMK7.item(),
                     "SSS", "SAS", "SSS", 'A',
@@ -330,16 +335,22 @@ public class EasyRecipeRegistrar extends IRecipeRegistrar {
                 'S', iron, 'G', iridiumPlate);
         if (Mods.IndustrialCraft2.isAvailable) {
             addRecipeByOreDictionary(ItemType.MK4.item(), "SMS", "UGU", "SAS",
-                    'S', ICItemFinder.getIC2Item("advancedAlloy"),
-                    'U', ItemType.WaterUraniumPlateMK4.item(), 'A',
-                    getUsualItemStack(ICItemFinder
-                            .getIC2Item("advBattery")), 'M',
-                    Blocks.emerald_block, 'G', ItemType.MK3.item());
-            addRecipeByOreDictionary(ItemType.MK5.item(), "SMS", "UGU", "SAS",
-                    'S', ICItemFinder.getIC2Item("advancedAlloy"),
-                    'U', ItemType.WaterUraniumPlateMK5.item(), 'A',
-                    getUsualItemStack(ICItemFinder
-                            .getIC2Item("energyCrystal")), 'M',
+                    'S', ICItemFinder.getIC2Item("advancedAlloy"), 'U',
+                    ItemType.WaterUraniumPlateMK4.item(), 'A',
+                    getUsualItemStack(ICItemFinder.getIC2Item("advBattery")),
+                    'M', Blocks.emerald_block, 'G', ItemType.MK3.item());
+            addRecipeByOreDictionary(
+                    ItemType.MK5.item(),
+                    "SMS",
+                    "UGU",
+                    "SAS",
+                    'S',
+                    ICItemFinder.getIC2Item("advancedAlloy"),
+                    'U',
+                    ItemType.WaterUraniumPlateMK5.item(),
+                    'A',
+                    getUsualItemStack(ICItemFinder.getIC2Item("energyCrystal")),
+                    'M',
                     OreDictionary.doesOreNameExist("blockRuby") ? "blockRuby"
                             : "blockManganeseSteel", 'G', ItemType.MK4.item());
             addRecipeByOreDictionary(
@@ -367,8 +378,7 @@ public class EasyRecipeRegistrar extends IRecipeRegistrar {
                     'U',
                     ItemType.WaterUraniumPlateMK7.item(),
                     'A',
-                    getUsualItemStack(ICItemFinder
-                            .getIC2Item("suBattery")),
+                    getUsualItemStack(ICItemFinder.getIC2Item("suBattery")),
                     'M',
                     OreDictionary.doesOreNameExist("blockChrome") ? "blockChrome"
                             : "blockVanadiumSteel", 'G', ItemType.MK6.item());
@@ -471,30 +481,6 @@ public class EasyRecipeRegistrar extends IRecipeRegistrar {
         OreDictionary.registerOre("dustCactus", ItemType.DustCactus.item());
         RecipeAdder.macerator(new ItemStack(Blocks.cactus, 1, 16),
                 ItemType.DustCactus.item());
-        // if (gregtechRecipe) {
-        // GregTech_API.sRecipeAdder.addAssemblerRecipe(ItemType.DustCactus.item(4),
-        // getUsualItemStack(new ItemStack(Blocks.tallgrass)),
-        // ItemType.DrawingWaterPart.item(4), 20*20, 120);
-        // GregTech_API.sRecipeAdder.addAssemblerRecipe(ItemType.DrawingWaterPart.item(4),
-        // ItemMaterial.get(MaterialTypes.VanadiumSteel,
-        // MaterialForms.ring),
-        // ItemType.DrawingWaterComponent.item(), 20*20, 120);
-        // } else {
-        addShapelessRecipeByOreDictionary(
-                ItemType.DrawingWaterPart.item(),
-                ItemType.DustCactus.item(),
-                ItemType.DustCactus.item(),
-                ItemType.DustCactus.item(),
-                ItemType.DustCactus.item(),
-                new ItemStack(Blocks.tallgrass, 1, OreDictionary.WILDCARD_VALUE));
-        addShapelessRecipeByOreDictionary(
-                ItemType.DrawingWaterComponent.item(), ItemMaterial.get(
-                        MaterialTypes.VanadiumSteel, MaterialForms.ring),
-                ItemType.DrawingWaterPart.item(),
-                ItemType.DrawingWaterPart.item(),
-                ItemType.DrawingWaterPart.item(),
-                ItemType.DrawingWaterPart.item());
-        // }
 
         OreDictionary.registerOre("dustIron", ItemType.DustIron.item());
         OreDictionary.registerOre("dustGold", ItemType.DustGold.item());
@@ -612,9 +598,8 @@ public class EasyRecipeRegistrar extends IRecipeRegistrar {
                 ItemType.BaseRotor.item());
         addRecipeByOreDictionary(new ItemStack(GlobalBlocks.turbine, 1, 3),
                 "IRI", "TCT", "IRI", 'T', new ItemStack(GlobalBlocks.turbine,
-                        1, 2), 'I',
-                ICItemFinder.getIC2Item("reactorPlating"), 'C',
-                ICItemFinder.getIC2Item("teleporter"), 'R',
+                        1, 2), 'I', ICItemFinder.getIC2Item("reactorPlating"),
+                'C', ICItemFinder.getIC2Item("teleporter"), 'R',
                 ItemType.BaseRotor.item());
         // }
 
@@ -690,18 +675,35 @@ public class EasyRecipeRegistrar extends IRecipeRegistrar {
         addShapelessRecipeByOreDictionary(PluginType.SpeedMK1.item(),
                 ItemType.DataBall.item(), Items.iron_ingot, Items.iron_ingot,
                 Items.iron_ingot);
-        addRecipeByOreDictionary(PluginType.OverMK1.item(), "CBC", "EPE",
-                "CBC", 'C', ItemType.DrawingWaterComponent.item(), 'B',
-                ICItemFinder.getIC2Item("pump"), 'E',
-                ICItemFinder.getIC2Item("extractor"), 'P',
-                ItemType.VSteelWaterPipe.item());
+        Object extractor = ItemType.RubyWaterHole.item();
+        if(Mods.IndustrialCraft2.isAvailable) {
+            extractor = ICItemFinder.getIC2Item("extractor");
+            addRecipeByOreDictionary(PluginType.OverMK1.item(), "CBC", "EPE",
+                    "CBC", 'C', "ringVanadiumSteel", 'B',
+                    ICItemFinder.getIC2Item("pump"), 'E',
+                    extractor, 'P',
+                    ItemType.VSteelWaterPipe.item());
+        }
+        if (Mods.BuildCraftFactory.isAvailable) {
+            addRecipeByOreDictionary(PluginType.OverMK1.item(), "CBC", "EPE",
+                    "CBC", 'C', "ringVanadiumSteel", 'B',
+                    GameRegistry.findBlock("BuildCraft|Factory", "pumpBlock"), 'E',
+                    ItemType.RubyWaterHole.item(), 'P',
+                    ItemType.VSteelWaterPipe.item());
+        }
+        if(!Mods.IndustrialCraft2.isAvailable && !Mods.BuildCraftFactory.isAvailable)
+            addRecipeByOreDictionary(PluginType.OverMK1.item(), "CBC", "EPE",
+                    "CBC", 'C', "ringVanadiumSteel", 'B',
+                    "gearVanadiumSteel", 'E',
+                    ItemType.RubyWaterHole.item(), 'P',
+                    ItemType.VSteelWaterPipe.item());
         addShapelessRecipeByOreDictionary(PluginType.UnderMK1.item(),
                 PluginType.OverMK1.item());
         addShapelessRecipeByOreDictionary(PluginType.OverMK1.item(),
                 PluginType.UnderMK1.item());
         addRecipeByOreDictionary(PluginType.RainMK1.item(), "C C", "EPE",
-                "C C", 'C', ItemType.DrawingWaterComponent.item(), 'E',
-                ICItemFinder.getIC2Item("extractor"), 'P',
+                "C C", 'C', "ringVanadiumSteel", 'E',
+                extractor, 'P',
                 ItemType.VSteelWaterPipe.item());
     }
 

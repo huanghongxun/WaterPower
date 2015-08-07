@@ -26,10 +26,6 @@ public class TileEntityLathe extends TileEntityStandardWaterMachine {
 		return "Water-Powered Lathe";
 	}
 
-	public float getWrenchDropRate() {
-		return 1f;
-	}
-
 	@Override
 	public int getGuiId() {
 		return DefaultGuiIds.get("tileEntityLathe");

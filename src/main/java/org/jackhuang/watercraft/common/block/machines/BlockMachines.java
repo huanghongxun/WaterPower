@@ -31,7 +31,6 @@ public class BlockMachines extends BlockMultiID {
 		super("cptBlockMachine", Material.iron, ItemMachines.class);
 
 		setHardness(2f);
-		// setStepSound(soundMetalFootstep);
 
 		GlobalBlocks.macerator = new ItemStack(this, 1, 1);
 		GlobalBlocks.compressor = new ItemStack(this, 1, 2);
@@ -66,7 +65,6 @@ public class BlockMachines extends BlockMultiID {
 
 	@Override
 	public void registerBlockIcons(IIconRegister iconRegister) {
-
 		this.textures = new IIcon[maxMetaData()][6];
 		
 		IIcon iconSide = iconRegister.registerIcon(Reference.ModID
@@ -76,7 +74,7 @@ public class BlockMachines extends BlockMultiID {
 		IIcon iconUp = iconRegister.registerIcon(Reference.ModID
 				+ ":machine/UP");
 
-		for (int i = 0; i < maxMetaData(); i++) {
+		for (int i = 1; i <= 7; i++) {
 			textures[i][0] = iconDown;
 			textures[i][1] = iconUp;
 			textures[i][3] = iconRegister.registerIcon(Reference.ModID

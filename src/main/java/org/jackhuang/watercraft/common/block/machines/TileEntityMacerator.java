@@ -34,10 +34,6 @@ public class TileEntityMacerator extends TileEntityStandardWaterMachine {
 		return "Macerator";
 	}
 
-	public float getWrenchDropRate() {
-		return 1f;
-	}
-
 	@Override
 	public int getGuiId() {
 		return DefaultGuiIds.get("tileEntityMacerator");

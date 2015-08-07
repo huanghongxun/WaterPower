@@ -45,7 +45,7 @@ public class HUDHandlerTurbine implements IWailaDataProvider {
 		TileEntity te = arg2.getTileEntity();
 		if(!(te instanceof TileEntityTurbine)) return arg1;
 		TileEntityTurbine tile = (TileEntityTurbine) te;
-		arg1.set(0, StatCollector.translateToLocal("cptwtrml.watermill.TURBINE") + " " + tile.getType().name());
+		arg1.add(StatCollector.translateToLocal("cptwtrml.watermill.TURBINE") + " " + tile.getType().name());
 		return arg1;
 	}
 

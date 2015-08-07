@@ -37,10 +37,6 @@ public class TileEntityCompressor extends TileEntityStandardWaterMachine {
         return "Compressor";
     }
 
-    public float getWrenchDropRate() {
-        return 1;
-    }
-
     @Override
     public int getGuiId() {
         return DefaultGuiIds.get("tileEntityCompressor");

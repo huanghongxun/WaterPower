@@ -40,9 +40,9 @@ public class GuiReservoir extends GuiContainer {
 		fontRendererObj.drawString(StatCollector.translateToLocal("cptwtrml.gui.capacity") + ": " + gen.getMaxFluidAmount(), 12, 20, 0x404040);
 		fontRendererObj.drawString(StatCollector.translateToLocal("cptwtrml.gui.reservoir.add") + ": " + gen.getLastAddedWater(), 12, 30, 0x404040);
 		fontRendererObj.drawString(StatCollector.translateToLocal("cptwtrml.gui.fluid_amount") + ": " + gen.getFluidAmount(), 12, 40, 0x404040);
-		fontRendererObj.drawString(StatCollector.translateToLocal("cptwtrml.gui.reservoir.hpWater") + ": " + gen.getHPWater(), 12, 50, 0x404040);
+		//fontRendererObj.drawString(StatCollector.translateToLocal("cptwtrml.gui.reservoir.hpWater") + ": " + gen.getHPWater(), 12, 50, 0x404040);
 		
 		FluidStack f = gen.getFluidStackfromTank();
-		fontRendererObj.drawString(StatCollector.translateToLocal("cptwtrml.gui.stored_fluid") + ": " + (f == null ? StatCollector.translateToLocal("cptwtrml.gui.empty") : f.getLocalizedName()), 12, 60, 0x404040);
+		fontRendererObj.drawString(StatCollector.translateToLocal("cptwtrml.gui.stored_fluid") + ": " + (f == null ? StatCollector.translateToLocal("cptwtrml.gui.empty") : f.getLocalizedName()), 12, 50, 0x404040);
 	}
 }

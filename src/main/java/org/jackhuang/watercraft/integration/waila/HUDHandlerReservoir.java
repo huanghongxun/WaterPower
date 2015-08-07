@@ -2,6 +2,7 @@ package org.jackhuang.watercraft.integration.waila;
 
 import java.util.List;
 
+import org.jackhuang.watercraft.common.block.GlobalBlocks;
 import org.jackhuang.watercraft.common.block.reservoir.TileEntityReservoir;
 import org.jackhuang.watercraft.util.Mods;
 
@@ -37,7 +38,7 @@ public class HUDHandlerReservoir implements IWailaDataProvider {
 		FluidStack f = tile.getFluidTank().getFluid();
 		arg1.add(StatCollector.translateToLocal("cptwtrml.gui.stored_fluid") + ": " + (f == null ? StatCollector.translateToLocal("cptwtrml.gui.empty") : f.getLocalizedName()));
 		arg1.add(StatCollector.translateToLocal("cptwtrml.gui.fluid_amount") + ": " + tile.getFluidAmount());
-		arg1.add(StatCollector.translateToLocal("cptwtrml.gui.reservoir.hpWater") + ": " + tile.getHPWater());
+		//arg1.add(StatCollector.translateToLocal("cptwtrml.gui.reservoir.hpWater") + ": " + tile.getHPWater());
 		return arg1;
 	}
 
@@ -48,7 +49,7 @@ public class HUDHandlerReservoir implements IWailaDataProvider {
 		TileEntity te = arg2.getTileEntity();
 		if(!(te instanceof TileEntityReservoir)) return arg1;
 		TileEntityReservoir tile = (TileEntityReservoir) te;
-		arg1.set(0, tile.type.getShowedName());
+		arg1.add(0, tile.type.getShowedName()); 
 		return arg1;
 	}
 
@@ -56,7 +57,10 @@ public class HUDHandlerReservoir implements IWailaDataProvider {
 	@Method(modid = Mods.IDs.Waila)
 	public ItemStack getWailaStack(IWailaDataAccessor arg0,
 			IWailaConfigHandler arg1) {
-		return null;
+        TileEntity te = arg0.getTileEntity();
+        if(!(te instanceof TileEntityReservoir)) return null;
+        TileEntityReservoir tile = (TileEntityReservoir) te;
+		return new ItemStack(GlobalBlocks.reservoir, 1, tile.type.ordinal());
 	}
 
 	@Override

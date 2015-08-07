@@ -9,6 +9,7 @@ package org.jackhuang.watercraft.integration.waila;
 
 import java.util.List;
 
+import org.jackhuang.watercraft.common.block.GlobalBlocks;
 import org.jackhuang.watercraft.common.block.watermills.TileEntityWatermill;
 import org.jackhuang.watercraft.util.Mods;
 import org.jackhuang.watercraft.util.Utils;
@@ -56,7 +57,7 @@ public class HUDHandlerWatermills implements IWailaDataProvider {
 		TileEntity te = arg2.getTileEntity();
 		if(!(te instanceof TileEntityWatermill)) return arg1;
 		TileEntityWatermill tile = (TileEntityWatermill) te;
-		arg1.set(0, StatCollector.translateToLocal("cptwtrml.watermill.WATERMILL") + " " + tile.getType().name());
+		arg1.add(StatCollector.translateToLocal("cptwtrml.watermill.WATERMILL") + " " + tile.getType().name());
 		return arg1;
 	}
 
@@ -64,8 +65,10 @@ public class HUDHandlerWatermills implements IWailaDataProvider {
 	@Method(modid = Mods.IDs.Waila)
 	public ItemStack getWailaStack(IWailaDataAccessor arg0,
 			IWailaConfigHandler arg1) {
-		// TODO Auto-generated method stub
-		return null;
+        TileEntity te = arg0.getTileEntity();
+        if(!(te instanceof TileEntityWatermill)) return null;
+        TileEntityWatermill tile = (TileEntityWatermill) te;
+        return new ItemStack(GlobalBlocks.waterMill, 1, tile.getType().ordinal());
 	}
 
 	@Override

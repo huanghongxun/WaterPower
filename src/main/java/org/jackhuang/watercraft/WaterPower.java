@@ -118,6 +118,11 @@ public class WaterPower implements IWorldGenerator {
 
 	@Mod.EventHandler
 	public void load(FMLInitializationEvent event) {
+
+        for(IntegrationType type : IntegrationType.values()) {
+            if(type.getModule() != null)
+                type.getModule().init();
+        }
 		
 		init();
 		
@@ -126,11 +131,6 @@ public class WaterPower implements IWorldGenerator {
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
 
 		config.save();
-
-        for(IntegrationType type : IntegrationType.values()) {
-            if(type.getModule() != null)
-                type.getModule().init();
-        }
 	}
 
 	@EventHandler

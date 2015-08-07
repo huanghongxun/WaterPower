@@ -1,6 +1,6 @@
 /**
  * Copyright (c) Huang Yuhui, 2014
- * 
+ * <p/>
  * "WaterCraft" is distributed under the terms of the Minecraft Mod Public
  * License 1.0, or MMPL. Please check the contents of the license located in
  * http://www.mod-buildcraft.com/MMPL-1.0.txt
@@ -10,6 +10,7 @@ package org.jackhuang.watercraft.common.recipe;
 
 import static org.jackhuang.watercraft.common.item.crafting.CraftingTypes.*;
 import static org.jackhuang.watercraft.common.item.crafting.LevelTypes.*;
+
 import gregtech.api.GregTech_API;
 import mods.railcraft.api.crafting.RailcraftCraftingManager;
 import net.minecraft.init.Blocks;
@@ -132,8 +133,8 @@ public abstract class IRecipeRegistrar {
 
             for (int i = 1; i < TurbineType.values().length; i++) {
                 addRecipeByOreDictionary(new ItemStack(GlobalBlocks.turbine, 1,
-                        i), " W ", "WTW", " W ", 'W', new ItemStack(
-                        GlobalBlocks.turbine, 1, i - 1), 'T',
+                                i), " W ", "WTW", " W ", 'W', new ItemStack(
+                                GlobalBlocks.turbine, 1, i - 1), 'T',
                         transformerUpgrade);
             }
 
@@ -151,7 +152,7 @@ public abstract class IRecipeRegistrar {
     }
 
     private void addCasingRecipe(LevelTypes level, Object stick, Object plate,
-            Object casing) {
+                                 Object casing) {
         this.addRecipeByOreDictionary(
                 ItemCrafting.get(CraftingTypes.casing, level), "WSW", "WAW",
                 "WSW", 'W', stick, 'S', plate, 'A', casing);
@@ -245,13 +246,13 @@ public abstract class IRecipeRegistrar {
         }
         if (gregtechRecipe) {
             GregTech_API.sRecipeAdder.addAssemblerRecipe(ItemMaterial.get(
-                    MaterialTypes.Zinc, MaterialForms.plate, 4), ItemMaterial
-                    .get(MaterialTypes.Zinc, MaterialForms.screw, 4),
+                            MaterialTypes.Zinc, MaterialForms.plate, 4), ItemMaterial
+                            .get(MaterialTypes.Zinc, MaterialForms.screw, 4),
                     ItemCrafting.get(CraftingTypes.fixedFrame, LevelTypes.MK3),
                     4000, 5);
             GregTech_API.sRecipeAdder.addAssemblerRecipe(ItemMaterial.get(
-                    MaterialTypes.Zinc, MaterialForms.ingot, 2), ItemMaterial
-                    .get(MaterialTypes.Zinc, MaterialForms.screw, 4),
+                            MaterialTypes.Zinc, MaterialForms.ingot, 2), ItemMaterial
+                            .get(MaterialTypes.Zinc, MaterialForms.screw, 4),
                     ItemCrafting.get(CraftingTypes.fixedTool, LevelTypes.MK3),
                     4000, 5);
         } else {
@@ -323,7 +324,7 @@ public abstract class IRecipeRegistrar {
                 "plateDenseIndustrialSteel", 'S', "screwIndustrialSteel");
         if (gregtechRecipe) {
             GregTech_API.sRecipeAdder.addAssemblerRecipe(ItemMaterial.get(
-                    MaterialTypes.IndustrialSteel, MaterialForms.plateDense),
+                            MaterialTypes.IndustrialSteel, MaterialForms.plateDense),
                     ItemMaterial.get(MaterialTypes.IndustrialSteel,
                             MaterialForms.ingot), ItemCrafting.get(
                             CraftingTypes.fixedTool, LevelTypes.MK4), 6000, 5);
@@ -334,25 +335,25 @@ public abstract class IRecipeRegistrar {
         }
         if (Mods.IndustrialCraft2.isAvailable) {
             this.addRecipeByOreDictionary(ItemCrafting.get(
-                    CraftingTypes.outputInterface, LevelTypes.MK4), "SSP",
+                            CraftingTypes.outputInterface, LevelTypes.MK4), "SSP",
                     "PTB", "SSP", 'S', "blockSilver", 'P',
                     "plateIndustrialSteel", 'T', ICItemFinder
                             .getIC2Item("mvTransformer"), 'B', ICItemFinder
                             .getIC2Item("suBattery"));
             this.addRecipeByOreDictionary(ItemCrafting.get(
-                    CraftingTypes.outputInterface, LevelTypes.MK4), "SSP",
+                            CraftingTypes.outputInterface, LevelTypes.MK4), "SSP",
                     "PTB", "SSP", 'S', "blockNeodymium", 'P',
                     "plateIndustrialSteel", 'T', ICItemFinder
                             .getIC2Item("mvTransformer"), 'B', ICItemFinder
                             .getIC2Item("suBattery"));
         } else {
             this.addRecipeByOreDictionary(ItemCrafting.get(
-                    CraftingTypes.outputInterface, LevelTypes.MK4), "SSP",
+                            CraftingTypes.outputInterface, LevelTypes.MK4), "SSP",
                     "PTB", "SSP", 'S', "blockSilver", 'P',
                     "plateIndustrialSteel", 'T', "blockIron", 'B',
                     "dustRedstone");
             this.addRecipeByOreDictionary(ItemCrafting.get(
-                    CraftingTypes.outputInterface, LevelTypes.MK4), "SSP",
+                            CraftingTypes.outputInterface, LevelTypes.MK4), "SSP",
                     "PTB", "SSP", 'S', "blockNeodymium", 'P',
                     "plateIndustrialSteel", 'T', "blockIron", 'B',
                     "dustRedstone");
@@ -416,7 +417,7 @@ public abstract class IRecipeRegistrar {
                 "plateDenseManganeseSteel", 'S', "screwManganeseSteel");
         if (gregtechRecipe) {
             GregTech_API.sRecipeAdder.addAssemblerRecipe(ItemMaterial.get(
-                    MaterialTypes.ManganeseSteel, MaterialForms.plateDense),
+                            MaterialTypes.ManganeseSteel, MaterialForms.plateDense),
                     ItemMaterial.get(MaterialTypes.ManganeseSteel,
                             MaterialForms.ingot), ItemCrafting.get(
                             CraftingTypes.fixedTool, LevelTypes.MK5), 6000, 5);
@@ -432,14 +433,14 @@ public abstract class IRecipeRegistrar {
 
         if (Mods.IndustrialCraft2.isAvailable) {
             this.addRecipeByOreDictionary(ItemCrafting.get(
-                    CraftingTypes.outputInterface, LevelTypes.MK5), "SSP",
+                            CraftingTypes.outputInterface, LevelTypes.MK5), "SSP",
                     "PTB", "SSP", 'S', "blockNeodymiumMagnet", 'P',
                     "plateManganeseSteel", 'T', ICItemFinder
                             .getIC2Item("hvTransformer"), 'B', ICItemFinder
                             .getIC2Item("suBattery"));
         } else {
             this.addRecipeByOreDictionary(ItemCrafting.get(
-                    CraftingTypes.outputInterface, LevelTypes.MK5), "SSP",
+                            CraftingTypes.outputInterface, LevelTypes.MK5), "SSP",
                     "PTB", "SSP", 'S', "blockNeodymiumMagnet", 'P',
                     "plateManganeseSteel", 'T', "blockManganese", 'B',
                     "dustRedstone");
@@ -487,7 +488,7 @@ public abstract class IRecipeRegistrar {
                 "plateDenseVanadiumSteel", 'S', "screwVanadiumSteel");
         if (gregtechRecipe) {
             GregTech_API.sRecipeAdder.addAssemblerRecipe(ItemMaterial.get(
-                    MaterialTypes.VanadiumSteel, MaterialForms.plateDense),
+                            MaterialTypes.VanadiumSteel, MaterialForms.plateDense),
                     ItemMaterial.get(MaterialTypes.VanadiumSteel,
                             MaterialForms.ingot), ItemCrafting.get(
                             CraftingTypes.fixedTool, LevelTypes.MK7), 6000, 5);
@@ -586,21 +587,23 @@ public abstract class IRecipeRegistrar {
     public abstract void registerPlugins();
 
     public static ItemStack getUsualItemStack(ItemStack in) {
-        if(in == null) return null;
+        if (in == null) return null;
         return new ItemStack(in.getItem(), in.stackSize,
                 OreDictionary.WILDCARD_VALUE);
     }
 
-    public static void addRecipeByOreDictionary(ItemStack output,
-            Object... params) {
-        for(Object object : params) if (object == null) return;
+    public static boolean addRecipeByOreDictionary(ItemStack output,
+                                                   Object... params) {
+        for (Object object : params) if (object == null) return false;
         GameRegistry.addRecipe(new ShapedOreRecipe(output, params));
+        return true;
     }
 
-    public static void addShapelessRecipeByOreDictionary(ItemStack output,
-            Object... params) {
-        for(Object object : params) if (object == null) return;
+    public static boolean addShapelessRecipeByOreDictionary(ItemStack output,
+                                                            Object... params) {
+        for (Object object : params) if (object == null) return false;
         GameRegistry.addRecipe(new ShapelessOreRecipe(output, params));
+        return true;
     }
 
     public static void addSmelting(ItemStack input, ItemStack output) {

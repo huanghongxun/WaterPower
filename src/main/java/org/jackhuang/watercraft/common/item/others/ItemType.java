@@ -62,8 +62,6 @@ public enum ItemType {
 	DustCactus(48, "watermillDustCactus"),
 	DustIron(49, "watermillDustIron"),
 	DustGold(50, "watermillDustGold"),
-	DrawingWaterPart(51, "watermillDrawingWaterPart"),
-	DrawingWaterComponent(52, "watermillDrawingWaterComponent")
 	;
 	
 	public String unlocalizedName;

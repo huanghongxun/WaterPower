@@ -2,6 +2,7 @@ package org.jackhuang.watercraft.integration;
 
 import org.jackhuang.watercraft.integration.craftguide.CraftGuideModule;
 import org.jackhuang.watercraft.integration.ic2.IndustrialCraftModule;
+import org.jackhuang.watercraft.integration.minetweaker.MineTweakerModule;
 import org.jackhuang.watercraft.integration.waila.WailaModule;
 import org.jackhuang.watercraft.util.Mods;
 
@@ -12,6 +13,7 @@ public enum IntegrationType {
     Railcraft(RailcraftModule.class, Mods.Railcraft),
     ThermalExpansion(ThermalExpansionModule.class, Mods.ThermalExpansion),
     Waila(WailaModule.class, Mods.Waila),
+    MineTweaker3(MineTweakerModule.class, Mods.MineTweaker3),
     CraftGuide(CraftGuideModule.class, Mods.CraftGuide);
     
     public Class<? extends BaseModule> clazz;

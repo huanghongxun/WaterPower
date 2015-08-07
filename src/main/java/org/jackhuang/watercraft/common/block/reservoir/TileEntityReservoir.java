@@ -27,6 +27,7 @@ import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.api.IUpgrade;
 import org.jackhuang.watercraft.api.IWaterReceiver;
 import org.jackhuang.watercraft.client.gui.DefaultGuiIds;
+import org.jackhuang.watercraft.common.block.GlobalBlocks;
 import org.jackhuang.watercraft.common.block.IDroppable;
 import org.jackhuang.watercraft.common.block.turbines.Position;
 import org.jackhuang.watercraft.common.inventory.InventorySlotConsumableLiquid;
@@ -61,7 +62,7 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 	private final InventorySlotConsumableLiquid fluidSlot;
 	private final InventorySlotOutput outputSlot;
 	private final InventorySlotUpgrade upgradeSlot;
-	private int highPotentialEnergyWater;
+	//private int highPotentialEnergyWater;
 	private int defaultStorage, extraStorage, storage;
 
 	public TileEntityReservoir() {
@@ -72,7 +73,7 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 		this.outputSlot = new InventorySlotOutput(this, "output", 1);
 		this.upgradeSlot = new InventorySlotUpgrade(this, "upgrade", 4);
 
-		highPotentialEnergyWater = 0;
+		//highPotentialEnergyWater = 0;
 	}
 
 	@Override
@@ -93,14 +94,14 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 		else
 			nbttagcompound.setInteger("type", type.ordinal());
 
-		nbttagcompound.setInteger("hpWater", highPotentialEnergyWater);
+		//nbttagcompound.setInteger("hpWater", highPotentialEnergyWater);
 	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
 
-		highPotentialEnergyWater = nbt.getInteger("hpWater");
+		//highPotentialEnergyWater = nbt.getInteger("hpWater");
 	}
 
 	public TileEntityReservoir(ReservoirType type) {
@@ -154,7 +155,7 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 			return ((TileEntityReservoir) masterBlock).getTankAmount();
 
 	}
-
+/*
 	public int getHPWater() {
 		if (!isServerSide())
 			return highPotentialEnergyWater;
@@ -164,7 +165,7 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 			return 0;
 		else
 			return ((TileEntityReservoir) masterBlock).highPotentialEnergyWater;
-	}
+	}*/
 
 	public void useLiquid(int use) {
 		if (isMaster)
@@ -174,7 +175,7 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 		else
 			((TileEntityReservoir) masterBlock).fluidTank.drain(use, true);
 	}
-
+/*
 	public void useHPWater(int use) {
 		if (isMaster)
 			highPotentialEnergyWater -= use;
@@ -182,7 +183,7 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 			return;
 		else
 			((TileEntityReservoir) masterBlock).highPotentialEnergyWater -= use;
-	}
+	}*/
 
 	public int getMaxFluidAmount() {
 		if (!isServerSide())
@@ -363,17 +364,16 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 				yCoord + size.getHeight(), zCoord, size.getLength(),
 				size.getWidth());
 
-		//int addWater = (int) ((area - cover) * 2 * weather * biomeGet);
 		double addWater = 0;
 		double add = (double)type.capacity / 10000.0;
 		//Rain Receiving
-		addWater += rainLevel * (underLevel / 4) * (overLevel / 4) * weather * add * (area - cover) * biomeGet;
+		addWater += rainLevel * weather * add * (area - cover) * biomeGet;
 		//Tide Receiving
 		addWater += Math.min(this.ocean.k, this.ocean.t) * type.capacity / 100;
 		//Underground water receiving
-		addWater += underLevel * (overLevel / 4) * (rainLevel / 4) * (1D - this.yCoord / 256) * add * (area - cover) * biomeGet;
+		addWater += underLevel * (1D - this.yCoord / 256) * add * (area - cover) * biomeGet;
 		//Surface water receiving
-		addWater += overLevel * (underLevel / 4) * (rainLevel / 4) * (1D - Math.abs(64 - this.yCoord) / 64) * (area - cover) * biomeGet * add;
+		addWater += overLevel * (1D - Math.abs(64 - this.yCoord) / 64) * (area - cover) * biomeGet * add;
 
 		if (biomeID == BiomeGenBase.ocean.biomeID
 				|| biomeID == BiomeGenBase.river.biomeID) {
@@ -388,9 +388,9 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 		if((int)addWater * WaterPower.updateTick >= 1)
 			fluidTank.fill(new FluidStack(FluidRegistry.WATER, (int)addWater
 					* WaterPower.updateTick), true);
-		highPotentialEnergyWater += addWater * WaterPower.updateTick;
-		if (highPotentialEnergyWater > getMaxFluidAmount())
-			highPotentialEnergyWater = getMaxFluidAmount();
+		//highPotentialEnergyWater += addWater * WaterPower.updateTick;
+		//if (highPotentialEnergyWater > getMaxFluidAmount())
+		//	highPotentialEnergyWater = getMaxFluidAmount();
 		fluidTank.drain(delWater * WaterPower.updateTick, true);
 
 		sendUpdateToClient();
@@ -445,14 +445,14 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 					+ direction.offsetZ);
 			if (te instanceof IWaterReceiver) {
 			    IWaterReceiver te2 = (IWaterReceiver) te;
-				int i = te2.canProvideWater(this.getHPWater() * 20,
+				int /*i = te2.canProvideWater(this.getHPWater() * 20,
 						direction.getOpposite(), this);
 				if (i > 0) {
 					i /= 20;
 					te2.provideWater(i * 20);
 					this.useHPWater(i);
 					flag = true;
-				}
+				}*/
 				i = te2.canProvideWater(this.getFluidAmount(),
 						direction.getOpposite(), this);
 				if (i > 0) {
@@ -473,7 +473,7 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 	public void readPacketData(NBTTagCompound tag) {
 		super.readPacketData(tag);
 
-		highPotentialEnergyWater = tag.getInteger("hpWater");
+		//highPotentialEnergyWater = tag.getInteger("hpWater");
 		defaultStorage = tag.getInteger("maxFluidAmount");
 		extraStorage = tag.getInteger("extraStorage");
 		storage = defaultStorage + extraStorage;
@@ -491,7 +491,7 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 	public void writePacketData(NBTTagCompound tag) {
 		super.writePacketData(tag);
 
-		tag.setInteger("hpWater", getHPWater());
+		//tag.setInteger("hpWater", getHPWater());
 		tag.setInteger("maxFluidAmount", getMaxFluidAmount());
 		tag.setInteger("fluidAmount", getFluidAmount());
 		if(getFluidTank() != null && getFluidTank().getFluid() != null)
@@ -561,7 +561,7 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 	@Override
 	protected void onTestFailed() {
 		setFluidTankCapacity(0);
-		highPotentialEnergyWater = 0;
+		//highPotentialEnergyWater = 0;
 	}
 
 	public int getLastAddedWater() {
@@ -617,6 +617,6 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
     
     @Override
     public ItemStack getDroppedItemStack() {
-        return new ItemStack(this.getBlockType(), 1, type == null ? 0 : type.ordinal());
+        return new ItemStack(GlobalBlocks.reservoir, 1, type == null ? 0 : type.ordinal());
     }
 }

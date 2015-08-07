@@ -34,10 +34,6 @@ public class TileEntityCentrifuge extends TileEntityStandardWaterMachine {
 		return "Centrifuge";
 	}
 
-	public float getWrenchDropRate() {
-		return 1f;
-	}
-
 	@Override
 	public int getGuiId() {
 		return DefaultGuiIds.get("tileEntityCentrifuge");

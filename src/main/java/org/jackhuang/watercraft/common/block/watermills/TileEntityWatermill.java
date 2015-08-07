@@ -6,6 +6,7 @@ import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.client.gui.DefaultGuiIds;
 import org.jackhuang.watercraft.client.render.ModelWaterWheel;
+import org.jackhuang.watercraft.common.block.GlobalBlocks;
 import org.jackhuang.watercraft.common.entity.EntityWaterWheel;
 import org.jackhuang.watercraft.common.item.others.ItemOthers;
 import org.jackhuang.watercraft.common.item.others.ItemType;
@@ -347,6 +348,6 @@ public class TileEntityWatermill extends TileEntityElectricMetaBlock {
     
     @Override
     public ItemStack getDroppedItemStack() {
-        return new ItemStack(this.getBlockType(), 1, type == null ? 0 : type.ordinal());
+        return new ItemStack(GlobalBlocks.waterMill, 1, type == null ? 0 : type.ordinal());
     }
 }

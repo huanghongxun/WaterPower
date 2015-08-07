@@ -131,10 +131,6 @@ public class TileEntitySawmill extends TileEntityStandardWaterMachine {
 		return "Sawmill";
 	}
 
-	public float getWrenchDropRate() {
-		return 1f;
-	}
-
 	@Override
 	public int getGuiId() {
 		return DefaultGuiIds.get("tileEntitySawmill");

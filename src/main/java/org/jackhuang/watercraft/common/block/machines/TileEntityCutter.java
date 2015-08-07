@@ -35,10 +35,6 @@ public class TileEntityCutter extends TileEntityStandardWaterMachine {
         return "Cutter";
     }
 
-    public float getWrenchDropRate() {
-        return 1f;
-    }
-
     @Override
     public int getGuiId() {
         return DefaultGuiIds.get("tileEntityCutter");

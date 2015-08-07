@@ -3,6 +3,7 @@ package org.jackhuang.watercraft.common.block.turbines;
 import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.client.gui.DefaultGuiIds;
+import org.jackhuang.watercraft.common.block.GlobalBlocks;
 import org.jackhuang.watercraft.common.block.reservoir.Reservoir;
 import org.jackhuang.watercraft.common.block.reservoir.TileEntityReservoir;
 import org.jackhuang.watercraft.common.block.watermills.WaterType;
@@ -238,7 +239,7 @@ public class TileEntityTurbine extends TileEntityElectricMetaBlock {
     
     @Override
     public ItemStack getDroppedItemStack() {
-        return new ItemStack(this.getBlockType(), 1, type == null ? 0 : type.ordinal());
+        return new ItemStack(GlobalBlocks.turbine, 1, type == null ? 0 : type.ordinal());
     }
 
     @Override
