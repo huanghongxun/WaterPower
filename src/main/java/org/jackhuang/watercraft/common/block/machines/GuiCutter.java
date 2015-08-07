@@ -9,13 +9,14 @@ import org.jackhuang.watercraft.client.gui.ContainerStandardMachine;
 import org.jackhuang.watercraft.common.tileentity.TileEntityStandardWaterMachine;
 
 public class GuiCutter extends GuiMachineBase {
-	public GuiCutter(EntityPlayer player,
-			TileEntityStandardWaterMachine tileEntity) {
-		super(new ContainerStandardMachine(player, tileEntity));
 
-		this.name = StatCollector
-				.translateToLocal("cptwtrml.machine.cutter.name");
-		this.inv = StatCollector.translateToLocal("container.inventory");
-		this.background = new ResourceLocation(Reference.ModID + ":textures/gui/GUICutter.png");
-	}
+    public GuiCutter(EntityPlayer player,
+	    TileEntityStandardWaterMachine tileEntity) {
+	super(new ContainerStandardMachine(player, tileEntity));
+
+	this.name = StatCollector
+		.translateToLocal("cptwtrml.machine.cutter.name");
+	this.inv = StatCollector.translateToLocal("container.inventory");
+	this.background = new ResourceLocation(Reference.ModID + ":textures/gui/GUICutter.png");
+    }
 }

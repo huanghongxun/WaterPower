@@ -24,154 +24,155 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 
 @InterfaceList({
-        @Interface(iface = "ic2.api.tile.IWrenchable", modid = Mods.IDs.IndustrialCraft2API, striprefs = true)})
+    @Interface(iface = "ic2.api.tile.IWrenchable", modid = Mods.IDs.IndustrialCraft2API, striprefs = true)})
 public abstract class TileEntityBlock extends TileEntityLiquidTankInventory implements IWrenchable, IDroppable {
-	
-	public TileEntityBlock(int tanksize) {
-		super(tanksize);
-	}
 
-	private short facing = 0;
+    public TileEntityBlock(int tanksize) {
+	super(tanksize);
+    }
 
-	public boolean prevActive = false;
-	private short prevFacing = 0;
-	private boolean needsUpdate = false;
+    private short facing = 0;
 
-	@SideOnly(Side.CLIENT)
-	private IIcon[] lastRenderIcons;
+    public boolean prevActive = false;
+    private short prevFacing = 0;
+    private boolean needsUpdate = false;
 
-	public void readFromNBT(NBTTagCompound tag) {
-		super.readFromNBT(tag);
+    @SideOnly(Side.CLIENT)
+    private IIcon[] lastRenderIcons;
 
-		this.prevFacing = this.facing = tag.getShort("facing");
-	}
+    public void readFromNBT(NBTTagCompound tag) {
+	super.readFromNBT(tag);
 
-	public void writeToNBT(NBTTagCompound tag) {
-		super.writeToNBT(tag);
+	this.prevFacing = this.facing = tag.getShort("facing");
+    }
 
-		tag.setShort("facing", this.facing);
-	}
-	
-	@Override
-	public void readPacketData(NBTTagCompound tag) {
-		super.readPacketData(tag);
+    public void writeToNBT(NBTTagCompound tag) {
+	super.writeToNBT(tag);
 
-		this.prevFacing = this.facing = tag.getShort("facing");
-		needsUpdate = tag.getBoolean("needsUpdate");
-	}
-	
-	@Override
-	public void updateEntity() {
-		super.updateEntity();
-		
-		if(needsUpdate && !isServerSide()) {
-			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-			needsUpdate = false;
-		}
-	}
-	
-	@Override
-	public void writePacketData(NBTTagCompound tag) {
-		super.writePacketData(tag);
-
-		tag.setShort("facing", this.facing);
-		tag.setBoolean("needsUpdate", needsUpdate);
-		if(needsUpdate) needsUpdate = false;
-	}
-	
-	
-
-	@SideOnly(Side.CLIENT)
-	public void onRender() {
-		Block block = getBlockType();
-
-		if (this.lastRenderIcons == null)
-			this.lastRenderIcons = new IIcon[6];
-
-		for (int side = 0; side < 6; side++) {
-			this.lastRenderIcons[side] = block.getIcon(this.worldObj,
-					this.xCoord, this.yCoord, this.zCoord, side);
-		}
-	}
+	tag.setShort("facing", this.facing);
+    }
 
     @Override
-	@Method(modid = Mods.IDs.IndustrialCraft2API)
-	public short getFacing() {
-		return getDirection();
+    public void readPacketData(NBTTagCompound tag) {
+	super.readPacketData(tag);
+
+	this.prevFacing = this.facing = tag.getShort("facing");
+	needsUpdate = tag.getBoolean("needsUpdate");
+    }
+
+    @Override
+    public void updateEntity() {
+	super.updateEntity();
+
+	if (needsUpdate && !isServerSide()) {
+	    worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+	    needsUpdate = false;
 	}
-	
-	public short getPrevFacing() {
-		return this.prevFacing;
+    }
+
+    @Override
+    public void writePacketData(NBTTagCompound tag) {
+	super.writePacketData(tag);
+
+	tag.setShort("facing", this.facing);
+	tag.setBoolean("needsUpdate", needsUpdate);
+	if (needsUpdate) {
+	    needsUpdate = false;
 	}
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void onRender() {
+	Block block = getBlockType();
+
+	if (this.lastRenderIcons == null) {
+	    this.lastRenderIcons = new IIcon[6];
+	}
+
+	for (int side = 0; side < 6; side++) {
+	    this.lastRenderIcons[side] = block.getIcon(this.worldObj,
+		    this.xCoord, this.yCoord, this.zCoord, side);
+	}
+    }
 
     @Override
     @Method(modid = Mods.IDs.IndustrialCraft2API)
-	public boolean wrenchCanSetFacing(EntityPlayer entityPlayer, int side) {
-		return facing != side;
-	}
+    public short getFacing() {
+	return getDirection();
+    }
+
+    public short getPrevFacing() {
+	return this.prevFacing;
+    }
 
     @Override
     @Method(modid = Mods.IDs.IndustrialCraft2API)
-	public void setFacing(short facing) {
-        setDirection(facing);
-	}
-    
+    public boolean wrenchCanSetFacing(EntityPlayer entityPlayer, int side) {
+	return facing != side;
+    }
+
+    @Override
+    @Method(modid = Mods.IDs.IndustrialCraft2API)
+    public void setFacing(short facing) {
+	setDirection(facing);
+    }
+
     public short getDirection() {
-        return facing;
+	return facing;
     }
-    
+
     public boolean setDirection(int side) {
-        this.facing = (short)side;
+	this.facing = (short) side;
 
-        if (this.prevFacing != facing) {
-            if (isServerSide()) {
-                needsUpdate = true;
-                sendUpdateToClient();
-            } else {
-                this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
-            }
-        }
+	if (this.prevFacing != facing) {
+	    if (isServerSide()) {
+		needsUpdate = true;
+		sendUpdateToClient();
+	    } else {
+		this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
+	    }
+	}
 
-        boolean flag = prevFacing != facing;
-        this.prevFacing = facing;
-        return flag;
+	boolean flag = prevFacing != facing;
+	this.prevFacing = facing;
+	return flag;
     }
 
     @Override
     @Method(modid = Mods.IDs.IndustrialCraft2API)
-	public boolean wrenchCanRemove(EntityPlayer entityPlayer) {
-		return true;
-	}
+    public boolean wrenchCanRemove(EntityPlayer entityPlayer) {
+	return true;
+    }
 
     @Override
     @Method(modid = Mods.IDs.IndustrialCraft2API)
-	public float getWrenchDropRate() {
-		return 1.0F;
-	}
+    public float getWrenchDropRate() {
+	return 1.0F;
+    }
 
     @Override
     @Method(modid = Mods.IDs.IndustrialCraft2API)
-	public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
-		return new ItemStack(this.worldObj.getBlock(this.xCoord, this.yCoord,
-				this.zCoord), 1, this.worldObj.getBlockMetadata(this.xCoord,
-				this.yCoord, this.zCoord));
-	}
+    public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
+	return new ItemStack(this.worldObj.getBlock(this.xCoord, this.yCoord,
+		this.zCoord), 1, this.worldObj.getBlockMetadata(this.xCoord,
+			this.yCoord, this.zCoord));
+    }
 
-	public void onBlockBreak(int id, int meta) {
-	}
-	
-	@Override
-	public boolean canDrain(ForgeDirection paramForgeDirection, Fluid paramFluid) {
-		return false;
-	}
-	
-	@Override
-	public boolean canFill(ForgeDirection paramForgeDirection, Fluid paramFluid) {
-		return false;
-	}
-	
-	@Override
-	public ItemStack getDroppedItemStack() {
-	    return new ItemStack(getBlockType(), 1, getBlockMetadata());
-	}
+    public void onBlockBreak(int id, int meta) {
+    }
+
+    @Override
+    public boolean canDrain(ForgeDirection paramForgeDirection, Fluid paramFluid) {
+	return false;
+    }
+
+    @Override
+    public boolean canFill(ForgeDirection paramForgeDirection, Fluid paramFluid) {
+	return false;
+    }
+
+    @Override
+    public ItemStack getDroppedItemStack() {
+	return new ItemStack(getBlockType(), 1, getBlockMetadata());
+    }
 }

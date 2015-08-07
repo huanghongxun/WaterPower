@@ -1,11 +1,10 @@
 /**
  * Copyright (c) Huang Yuhui, 2014
- * 
+ *
  * "WaterCraft" is distributed under the terms of the Minecraft Mod Public
  * License 1.0, or MMPL. Please check the contents of the license located in
  * http://www.mod-buildcraft.com/MMPL-1.0.txt
  */
-
 package org.jackhuang.watercraft.common.item;
 
 import org.jackhuang.watercraft.common.block.ore.ItemOreDust;
@@ -23,11 +22,11 @@ import net.minecraft.item.ItemStack;
  */
 public class GlobalItems {
 
-	public static ItemOthers updater;
-	public static ItemRange range;
-	public static ItemOreDust oreDust;
-	public static ItemMaterial meterial;
-	public static ItemCrafting crafting;
-	public static ItemTrouser trousers;
-	public static ItemPlugins plugins;
+    public static ItemOthers updater;
+    public static ItemRange range;
+    public static ItemOreDust oreDust;
+    public static ItemMaterial meterial;
+    public static ItemCrafting crafting;
+    public static ItemTrouser trousers;
+    public static ItemPlugins plugins;
 }
