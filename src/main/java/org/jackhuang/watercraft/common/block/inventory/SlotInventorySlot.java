@@ -60,11 +60,11 @@ public class SlotInventorySlot extends Slot {
 		if (inventory != this.invSlot.getTileEntity())
 			return false;
 
-		for (InventorySlot invSlot : invSlot.getTileEntity().getInventorySlots()) {
-			if (index < invSlot.size()) {
+		for (InventorySlot s : this.invSlot.getTileEntity().getInventorySlots()) {
+			if (index < s.size()) {
 				return index == this.index;
 			}
-			index -= invSlot.size();
+			index -= s.size();
 		}
 
 		return false;
