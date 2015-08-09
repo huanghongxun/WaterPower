@@ -12,7 +12,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import org.jackhuang.watercraft.WaterPower;
-import org.jackhuang.watercraft.common.tileentity.TileEntityBase;
+import org.jackhuang.watercraft.common.block.tileentity.TileEntityBase;
 
 import io.netty.buffer.ByteBuf;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;

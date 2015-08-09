@@ -78,4 +78,9 @@ public class IndustrialCraftRecipeManager implements IRecipeManager {
 		}
 	}
 
+    @Override
+    public boolean removeRecipe(ItemStack input) {
+        return false;
+    }
+
 }

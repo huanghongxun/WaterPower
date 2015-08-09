@@ -1,4 +1,4 @@
-package org.jackhuang.watercraft.common.tileentity;
+package org.jackhuang.watercraft.common.block.machines;
 
 import java.util.List;
 
@@ -7,9 +7,9 @@ import ic2.api.recipe.RecipeOutput;
 import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.api.IUpgrade;
 import org.jackhuang.watercraft.client.gui.IHasGui;
-import org.jackhuang.watercraft.common.inventory.InventorySlotOutput;
-import org.jackhuang.watercraft.common.inventory.InventorySlotProcessable;
-import org.jackhuang.watercraft.common.inventory.InventorySlotUpgrade;
+import org.jackhuang.watercraft.common.block.inventory.InventorySlotOutput;
+import org.jackhuang.watercraft.common.block.inventory.InventorySlotProcessable;
+import org.jackhuang.watercraft.common.block.inventory.InventorySlotUpgrade;
 import org.jackhuang.watercraft.common.recipe.MyRecipeOutput;
 
 import net.minecraft.item.ItemStack;

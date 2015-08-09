@@ -19,7 +19,6 @@ import net.minecraftforge.common.util.ForgeDirection;
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.common.block.BlockMultiID;
 import org.jackhuang.watercraft.common.block.GlobalBlocks;
-import org.jackhuang.watercraft.common.tileentity.TileEntityStandardWaterMachine;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;

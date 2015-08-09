@@ -6,7 +6,7 @@
  * http://www.mod-buildcraft.com/MMPL-1.0.txt
  */
 
-package org.jackhuang.watercraft.common.tileentity;
+package org.jackhuang.watercraft.common.block.tileentity;
 
 import net.minecraft.nbt.NBTTagCompound;
 

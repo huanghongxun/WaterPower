@@ -4,8 +4,8 @@ import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
 
-import org.jackhuang.watercraft.common.inventory.SlotInventorySlot;
-import org.jackhuang.watercraft.common.tileentity.TileEntityStandardWaterMachine;
+import org.jackhuang.watercraft.common.block.inventory.SlotInventorySlot;
+import org.jackhuang.watercraft.common.block.machines.TileEntityStandardWaterMachine;
 
 public class ContainerStandardMachine extends ContainerFullInventory {
 	public final TileEntityStandardWaterMachine tileEntity;

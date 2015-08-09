@@ -1,4 +1,4 @@
-package org.jackhuang.watercraft.common.tileentity;
+package org.jackhuang.watercraft.common.block.tileentity;
 
 public interface IUnitChangeable {
 	

@@ -124,7 +124,7 @@ public class ItemMaterial extends ItemRecolorable {
                     "dustVanadium", "dustSteel", "dustSteel");
             addShapelessRecipeByOreDictionary(get(NeodymiumMagnet, ingot, 2),
                     "dustNeodymium", "dustIndustrialSteel");
-            if (OreDictionary.doesOreNameExist("dustCoal")) {
+            if (IRecipeRegistrar.doesOreNameExist("dustCoal")) {
                 addShapelessRecipeByOreDictionary(get(ManganeseSteel, dust, 4),
                         "dustManganese", "dustSteel", "dustSteel", "dustCoal");
             } else {

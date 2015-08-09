@@ -21,13 +21,21 @@ public class MultiRecipeManager implements IRecipeManager {
 		addRecipeManager(new MyRecipeManager());
 	}
 
-	@Override
-	public boolean addRecipe(ItemStack input, ItemStack... outputs) {
-		for(IRecipeManager r : container) {
-			if(r.addRecipe(input, outputs)) return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean addRecipe(ItemStack input, ItemStack... outputs) {
+        for(IRecipeManager r : container) {
+            if(r.addRecipe(input, outputs)) return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean removeRecipe(ItemStack input) {
+        for(IRecipeManager r : container) {
+            if(r.removeRecipe(input)) return true;
+        }
+        return false;
+    }
 
 	@Override
 	public MyRecipeOutput getOutput(ItemStack input, boolean adjustInput) {

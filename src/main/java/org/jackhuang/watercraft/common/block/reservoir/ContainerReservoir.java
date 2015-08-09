@@ -3,7 +3,7 @@ package org.jackhuang.watercraft.common.block.reservoir;
 import net.minecraft.entity.player.EntityPlayer;
 
 import org.jackhuang.watercraft.client.gui.ContainerFullInventory;
-import org.jackhuang.watercraft.common.inventory.SlotInventorySlot;
+import org.jackhuang.watercraft.common.block.inventory.SlotInventorySlot;
 
 public class ContainerReservoir extends ContainerFullInventory {
 	public TileEntityReservoir tileEntity;

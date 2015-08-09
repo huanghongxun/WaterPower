@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -21,69 +22,84 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class MyRecipeManager implements IRecipeManager {
-	private final Map<IMyRecipeInput, MyRecipeOutput> recipes = new HashMap();
-	private ArrayList<HashMap<ItemStack, ItemStack>> singleOutputRecipes = new ArrayList();
+    private final Map<IMyRecipeInput, MyRecipeOutput> recipes = new HashMap();
+    private ArrayList<HashMap<ItemStack, ItemStack>> singleOutputRecipes = new ArrayList();
 
-	@Override
-	public boolean addRecipe(ItemStack input,
-			ItemStack... outputs) {
-		if (input == null)
-			throw new NullPointerException("The recipe input is null");
+    @Override
+    public boolean addRecipe(ItemStack input, ItemStack... outputs) {
+        if (input == null)
+            throw new NullPointerException("The recipe input is null");
 
-		for (int i = 0; i < outputs.length; i++) {
-			if (outputs[i] != null)
-				continue;
-			throw new NullPointerException("The output ItemStack #" + i
-					+ " is null (counting from 0)");
-		}
+        for (int i = 0; i < outputs.length; i++) {
+            if (outputs[i] != null)
+                continue;
+            throw new NullPointerException("The output ItemStack #" + i
+                    + " is null (counting from 0)");
+        }
 
-		for (IMyRecipeInput existingInput : this.recipes.keySet())
-			if (existingInput.matches(input))
-				return false;
-		this.recipes.put(new MyRecipeInputItemStack(input), new MyRecipeOutput(outputs));
-		return true;
-	}
+        for (IMyRecipeInput existingInput : this.recipes.keySet())
+            if (existingInput.matches(input))
+                return false;
+        this.recipes.put(new MyRecipeInputItemStack(input), new MyRecipeOutput(
+                outputs));
+        return true;
+    }
 
-	@Override
-	public MyRecipeOutput getOutput(ItemStack input, boolean adjustInput) {
-		if (input == null)
-			return null;
+    @Override
+    public boolean removeRecipe(ItemStack input) {
+        if (input == null)
+            throw new NullPointerException("The recipe input is null");
 
-		for (Map.Entry entry : this.recipes.entrySet()) {
-			IMyRecipeInput recipeInput = (IMyRecipeInput) entry.getKey();
+        LinkedList<IMyRecipeInput> r = new LinkedList<IMyRecipeInput>();
 
-			if (recipeInput.matches(input)) {
-				if ((input.stackSize < recipeInput.getInputAmount())
-						|| ((input.getItem().hasContainerItem()) && (input.stackSize != recipeInput
-								.getInputAmount())))
-					break;
-				if (adjustInput) {
-					if (input.getItem().hasContainerItem()) {
-						ItemStack container = input.getItem()
-								.getContainerItem(input);
-						
-						input = container.copy();
-					} else {
-						input.stackSize -= recipeInput.getInputAmount();
-					}
-				}
+        for (IMyRecipeInput existingInput : this.recipes.keySet())
+            if (existingInput.matches(input))
+                r.add(existingInput);
+        for (IMyRecipeInput s : r)
+            recipes.remove(s);
+        return !r.isEmpty();
+    }
 
-				return (MyRecipeOutput) entry.getValue();
-			}
+    @Override
+    public MyRecipeOutput getOutput(ItemStack input, boolean adjustInput) {
+        if (input == null)
+            return null;
 
-		}
+        for (Map.Entry entry : this.recipes.entrySet()) {
+            IMyRecipeInput recipeInput = (IMyRecipeInput) entry.getKey();
 
-		return null;
-	}
+            if (recipeInput.matches(input)) {
+                if ((input.stackSize < recipeInput.getInputAmount())
+                        || ((input.getItem().hasContainerItem()) && (input.stackSize != recipeInput
+                                .getInputAmount())))
+                    break;
+                if (adjustInput) {
+                    if (input.getItem().hasContainerItem()) {
+                        ItemStack container = input.getItem().getContainerItem(
+                                input);
 
-	@Override
-	public Map<IMyRecipeInput, MyRecipeOutput> getAllRecipes() {
-		return this.recipes;
-	}
-	
-	public void registerSingleOutputRecipes(HashMap map) {
-		if(map == null) return;
-		this.singleOutputRecipes.add(map);
-	}
+                        input = container.copy();
+                    } else {
+                        input.stackSize -= recipeInput.getInputAmount();
+                    }
+                }
+
+                return (MyRecipeOutput) entry.getValue();
+            }
+
+        }
+
+        return null;
+    }
+
+    @Override
+    public Map<IMyRecipeInput, MyRecipeOutput> getAllRecipes() {
+        return this.recipes;
+    }
+
+    public void registerSingleOutputRecipes(HashMap map) {
+        if (map == null)
+            return;
+        this.singleOutputRecipes.add(map);
+    }
 }
-

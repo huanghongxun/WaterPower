@@ -1,8 +1,8 @@
-package org.jackhuang.watercraft.common.inventory;
+package org.jackhuang.watercraft.common.block.inventory;
 
 import java.util.Random;
 
-import org.jackhuang.watercraft.common.tileentity.TileEntityInventory;
+import org.jackhuang.watercraft.common.block.tileentity.TileEntityInventory;
 import org.jackhuang.watercraft.util.StackUtil;
 
 import net.minecraft.entity.EntityLivingBase;

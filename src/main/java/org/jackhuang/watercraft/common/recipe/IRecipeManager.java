@@ -15,6 +15,8 @@ import net.minecraft.item.ItemStack;
 public interface IRecipeManager {
 	
 	boolean addRecipe(ItemStack input, ItemStack... outputs);
+
+    boolean removeRecipe(ItemStack input);
 	
 	MyRecipeOutput getOutput(ItemStack input, boolean adjustInput);
 	

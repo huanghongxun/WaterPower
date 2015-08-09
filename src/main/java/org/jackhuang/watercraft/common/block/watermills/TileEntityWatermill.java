@@ -7,6 +7,8 @@ import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.client.gui.DefaultGuiIds;
 import org.jackhuang.watercraft.client.render.ModelWaterWheel;
 import org.jackhuang.watercraft.common.block.GlobalBlocks;
+import org.jackhuang.watercraft.common.block.tileentity.TileEntityElectricMetaBlock;
+import org.jackhuang.watercraft.common.block.tileentity.TileEntityRotor;
 import org.jackhuang.watercraft.common.entity.EntityWaterWheel;
 import org.jackhuang.watercraft.common.item.others.ItemOthers;
 import org.jackhuang.watercraft.common.item.others.ItemType;
@@ -15,7 +17,6 @@ import org.jackhuang.watercraft.common.item.range.RangeInventorySlot;
 import org.jackhuang.watercraft.common.item.range.RangeType;
 import org.jackhuang.watercraft.common.item.rotors.ItemRotor;
 import org.jackhuang.watercraft.common.item.rotors.RotorInventorySlot;
-import org.jackhuang.watercraft.common.tileentity.TileEntityElectricMetaBlock;
 import org.jackhuang.watercraft.util.Mods;
 import org.jackhuang.watercraft.util.Utils;
 
@@ -37,29 +38,25 @@ import net.minecraftforge.oredict.OreDictionary;
  * @author jackhuang1998
  * 
  */
-public class TileEntityWatermill extends TileEntityElectricMetaBlock {
+public class TileEntityWatermill extends TileEntityRotor {
 
     private WaterType type;
     private EntityWaterWheel wheel;
     private boolean canWheelTurn = false;
     public int waterBlocks, lavaBlocks;
 
-    RotorInventorySlot slotRotor;
     RangeInventorySlot slotUpdater;
 
     boolean sendInitData;
 
     public TileEntityWatermill() {
         super(0, 32767);
-        addInvSlot(slotRotor = new RotorInventorySlot(this));
         addInvSlot(slotUpdater = new RangeInventorySlot(this, 4));
     }
 
     public TileEntityWatermill(WaterType type) {
         super(type.output, 32767);
         this.type = type;
-        slotRotor = new RotorInventorySlot(this);
-        addInvSlot(slotRotor);
         slotUpdater = new RangeInventorySlot(this);
         addInvSlot(slotUpdater);
     }
@@ -217,38 +214,6 @@ public class TileEntityWatermill extends TileEntityElectricMetaBlock {
         return range;
     }
 
-    public boolean hasRotor() {
-        return slotRotor != null && !slotRotor.isEmpty()
-                && slotRotor.get(0).getItem() instanceof ItemRotor;
-    }
-
-    public ItemRotor getRotor() {
-        return (ItemRotor) slotRotor.get(0).getItem();
-    }
-
-    private void damageRotor(int tick) {
-        if (!hasRotor())
-            return;
-        ItemRotor rotor = getRotor();
-        rotor.tickRotor(slotRotor.get(0), this, worldObj);
-        if (!rotor.type.isInfinite()) {
-            if (slotRotor.get(0).getItemDamage() + tick > slotRotor
-                    .get(0).getMaxDamage()) {
-                slotRotor.put(0, null);
-            } else {
-                int damage = slotRotor.get(0).getItemDamage() + tick;
-                slotRotor.get(0).setItemDamage(damage);
-            }
-            markDirty();
-        }
-    }
-
-    private double tickRotor() {
-        if (!Reference.General.watermillNeedsRotor)
-            return 1;
-        return hasRotor() ? getRotor().type.getEfficiency() : 0;
-    }
-
     @Override
     public String getInventoryName() {
         return type == null ? "NULL" : type.getShowedName();
@@ -280,12 +245,6 @@ public class TileEntityWatermill extends TileEntityElectricMetaBlock {
             updateWheel();
         }
 
-    }
-
-    @Override
-    @Method(modid = Mods.IDs.IndustrialCraft2API)
-    public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
-        return getDroppedItemStack();
     }
 
     public void spawnWheel() {

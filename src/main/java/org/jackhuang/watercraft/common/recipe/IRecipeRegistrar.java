@@ -10,7 +10,6 @@ package org.jackhuang.watercraft.common.recipe;
 
 import static org.jackhuang.watercraft.common.item.crafting.CraftingTypes.*;
 import static org.jackhuang.watercraft.common.item.crafting.LevelTypes.*;
-
 import gregtech.api.GregTech_API;
 import mods.railcraft.api.crafting.RailcraftCraftingManager;
 import net.minecraft.init.Blocks;
@@ -548,7 +547,7 @@ public abstract class IRecipeRegistrar {
                         ItemType.HighPurityCarbonDust.item(), 1000);
             } else {
                 String ingotCopper = "ingotCopper";
-                if (!OreDictionary.doesOreNameExist("ingotCopper"))
+                if (!doesOreNameExist("ingotCopper"))
                     addRecipeByOreDictionary(ItemType.DenseCoil.item(), " I ",
                             "CCC", " I ", 'C', "ingotVanadium", 'I',
                             "ingotIron");
@@ -612,6 +611,10 @@ public abstract class IRecipeRegistrar {
 
     public static void registerOreDict(String name, ItemStack stack) {
         OreDictionary.registerOre(name, stack);
+    }
+    
+    public static boolean doesOreNameExist(String name) {
+        return OreDictionary.getOres(name).size() > 0;
     }
 
 }

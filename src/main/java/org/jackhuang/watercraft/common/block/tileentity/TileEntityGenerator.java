@@ -1,4 +1,4 @@
-package org.jackhuang.watercraft.common.tileentity;
+package org.jackhuang.watercraft.common.block.tileentity;
 
 import factorization.api.Charge;
 import factorization.api.Coord;
@@ -59,8 +59,6 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements
     public EnergyType energyType = EnergyType.EU;
     public boolean needsToAddToEnergyNet = false;
 
-    private boolean deadCache = true;
-
     private Object charge;
 
     public TileEntityGenerator() {
@@ -76,53 +74,25 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements
             initCharge();
     }
 
-    @Method(modid = Mods.IDs.Factorization)
-    public void initCharge() {
-        charge = new Charge(this);
-    }
-
-    @Method(modid = Mods.IDs.IndustrialCraft2API)
-    public void loadEnergyTile() {
-
-        if (isServerSide()) {
-            MinecraftForge.EVENT_BUS.post(new EnergyTileLoadEvent(this));
-
-            this.addedToEnergyNet = true;
-        }
-    }
-
-    @Method(modid = Mods.IDs.IndustrialCraft2API)
-    public void unloadEnergyTile() {
-        if (isServerSide() && this.addedToEnergyNet) {
-            MinecraftForge.EVENT_BUS.post(new EnergyTileUnloadEvent(this));
-
-            this.addedToEnergyNet = false;
-        }
-    }
-
     @Override
     public void onLoaded() {
+        // EU INTEGRATION
         needsToAddToEnergyNet = true;
 
-        // BuildCraft & Thermal Expansion integration begins
+        // RF INTEGRATION
         deadCache = true;
-        this.handlerCache = null;
+        handlerCache = null;
 
         super.onLoaded();
     }
 
     @Override
     public void onUnloaded() {
+        // EU INTEGRATION
         if (Mods.IndustrialCraft2.isAvailable)
             unloadEnergyTile();
 
         super.onUnloaded();
-    }
-
-    @Override
-    @Method(modid = Mods.IDs.IndustrialCraft2API)
-    public boolean emitsEnergyTo(TileEntity receiver, ForgeDirection direction) {
-        return energyType == EnergyType.EU;
     }
 
     public boolean enableUpdateEntity() {
@@ -167,26 +137,6 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements
         tag.setInteger("production", production);
         tag.setDouble("latestOutput", latestOutput);
         tag.setInteger("energyType", energyType.ordinal());
-    }
-
-    @Override
-    @Method(modid = Mods.IDs.IndustrialCraft2API)
-    public double getOfferedEnergy() {
-        if (energyType == EnergyType.EU)
-            return Math.min(this.getProduction(), this.storage);
-        return 0;
-    }
-
-    @Override
-    @Method(modid = Mods.IDs.IndustrialCraft2API)
-    public void drawEnergy(double amount) {
-        this.storage -= amount;
-    }
-
-    @Override
-    @Method(modid = Mods.IDs.IndustrialCraft2API)
-    public float getWrenchDropRate() {
-        return 1f;
     }
 
     protected abstract double computeOutput(World world, int x, int y, int z);
@@ -237,10 +187,7 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements
                         .EU2Charge(latestOutput));
             }
             if (energyType == EnergyType.Water) {
-                if (getFluidTank().getFluid() != null
-                        && getFluidTank().getFluid().getFluid() != null
-                        && getFluidTank().getFluid().getFluid().getID() != FluidRegistry.WATER
-                                .getID())
+                if (getFluidID() != FluidRegistry.WATER.getID())
                     getFluidTank().setFluid(null);
                 getFluidTank().fill(
                         new FluidStack(FluidRegistry.WATER,
@@ -250,10 +197,7 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements
                 boolean outputed = false;
                 if (FluidRegistry.isFluidRegistered("steam") && !outputed) {
                     Fluid f = FluidRegistry.getFluid("steam");
-                    if (getFluidTank().getFluid() != null
-                            && getFluidTank().getFluid().getFluid() != null
-                            && getFluidTank().getFluid().getFluid().getID() != f
-                                    .getID())
+                    if (getFluidID() != f.getID())
                         getFluidTank().setFluid(null);
                     outputed = true;
                     getFluidTank().fill(
@@ -263,10 +207,7 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements
                 }
                 if (FluidRegistry.isFluidRegistered("ic2steam") && !outputed) {
                     Fluid f = FluidRegistry.getFluid("ic2steam");
-                    if (getFluidTank().getFluid() != null
-                            && getFluidTank().getFluid().getFluid() != null
-                            && getFluidTank().getFluid().getFluid().getID() != f
-                                    .getID())
+                    if (getFluidID() != f.getID())
                         getFluidTank().setFluid(null);
                     outputed = true;
                     getFluidTank().fill(
@@ -280,6 +221,53 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements
 
     public boolean isEnergyFull() {
         return storage >= maxStorage;
+    }
+
+    /**
+     * ------------------------------------------------------
+     * 
+     * EU, HU, KU(INDUSTRIAL CRAFT 2 EXPERIMENTAL) INTEGRATION BEGINS
+     * 
+     * ------------------------------------------------------
+     */
+
+    @Method(modid = Mods.IDs.IndustrialCraft2API)
+    public void loadEnergyTile() {
+
+        if (isServerSide()) {
+            MinecraftForge.EVENT_BUS.post(new EnergyTileLoadEvent(this));
+
+            this.addedToEnergyNet = true;
+        }
+    }
+
+    @Method(modid = Mods.IDs.IndustrialCraft2API)
+    public void unloadEnergyTile() {
+        if (isServerSide() && this.addedToEnergyNet) {
+            MinecraftForge.EVENT_BUS.post(new EnergyTileUnloadEvent(this));
+
+            this.addedToEnergyNet = false;
+        }
+    }
+
+    @Override
+    @Method(modid = Mods.IDs.IndustrialCraft2API)
+    public boolean emitsEnergyTo(TileEntity receiver, ForgeDirection direction) {
+        return energyType == EnergyType.EU;
+    }
+
+    @Override
+    @Method(modid = Mods.IDs.IndustrialCraft2API)
+    public double getOfferedEnergy() {
+        if (energyType == EnergyType.EU)
+            return Math.min(this.getProduction(), this.storage);
+        return 0;
+    }
+
+    @Override
+    @Method(modid = Mods.IDs.IndustrialCraft2API)
+    public void drawEnergy(double amount) {
+        this.storage -= amount;
     }
 
     @Override
@@ -322,6 +310,14 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements
         return 0;
     }
 
+    /**
+     * ------------------------------------------------------
+     * 
+     * EU, HU, KU(INDUSTRIAL CRAFT 2 EXPERIMENTAL) INTEGRATION ENDS
+     * 
+     * ------------------------------------------------------
+     */
+
     @Override
     public void setUnitId(int id) {
         if (EnergyType.values()[id] != EnergyType.EU
@@ -331,33 +327,38 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements
         energyType = EnergyType.values()[id];
     }
 
+    /**
+     * ------------------------------------------------------
+     * 
+     * RF(THERMAL EXPANSION, BUILD CRAFT) INTEGRATION BEGINS
+     * 
+     * ------------------------------------------------------
+     */
+    
+    private Object[] handlerCache;
+    private boolean deadCache = true;
+
     @Override
     @Method(modid = Mods.IDs.CoFHAPIEnergy)
-    public boolean canConnectEnergy(ForgeDirection paramForgeDirection) {
+    public boolean canConnectEnergy(ForgeDirection d) {
         return true;
     }
 
-    private Object[] handlerCache;
-
     @Method(modid = Mods.IDs.CoFHAPIEnergy)
-    protected final int transmitEnergy(int paramInt) {
-        int i;
+    protected final int transmitEnergy(int e) {
         if (this.handlerCache != null) {
-            for (i = this.handlerCache.length; i-- > 0;) {
-                IEnergyHandler localIEnergyHandler = (IEnergyHandler) this.handlerCache[i];
-                if (localIEnergyHandler == null) {
+            for (int i = this.handlerCache.length; i-- > 0;) {
+                IEnergyHandler h = (IEnergyHandler) this.handlerCache[i];
+                if (h == null)
                     continue;
-                }
-                ForgeDirection localForgeDirection = ForgeDirection.VALID_DIRECTIONS[i];
-                if (localIEnergyHandler.receiveEnergy(localForgeDirection,
-                        paramInt, true) > 0)
-                    paramInt -= localIEnergyHandler.receiveEnergy(
-                            localForgeDirection, paramInt, false);
-                if (paramInt <= 0)
+                ForgeDirection d = ForgeDirection.VALID_DIRECTIONS[i];
+                if (h.receiveEnergy(d, e, true) > 0)
+                    e -= h.receiveEnergy(d, e, false);
+                if (e <= 0)
                     return 0;
             }
         }
-        return paramInt;
+        return e;
     }
 
     @Method(modid = Mods.IDs.CoFHAPIEnergy)
@@ -374,40 +375,61 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements
     @Override
     @Method(modid = Mods.IDs.CoFHAPIEnergy)
     public void onNeighborTileChange(int x, int y, int z) {
-        TileEntity localTileEntity = this.worldObj.getTileEntity(x, y, z);
+        TileEntity t = this.worldObj.getTileEntity(x, y, z);
 
         if (x < this.xCoord)
-            addCache(localTileEntity, ForgeDirection.EAST.ordinal());
+            addCache(t, ForgeDirection.EAST.ordinal());
         else if (x > this.xCoord)
-            addCache(localTileEntity, ForgeDirection.WEST.ordinal());
+            addCache(t, ForgeDirection.WEST.ordinal());
         else if (y < this.yCoord)
-            addCache(localTileEntity, ForgeDirection.UP.ordinal());
+            addCache(t, ForgeDirection.UP.ordinal());
         else if (y > this.yCoord)
-            addCache(localTileEntity, ForgeDirection.DOWN.ordinal());
+            addCache(t, ForgeDirection.DOWN.ordinal());
         else if (z < this.zCoord)
-            addCache(localTileEntity, ForgeDirection.NORTH.ordinal());
+            addCache(t, ForgeDirection.NORTH.ordinal());
         else if (z > this.zCoord)
-            addCache(localTileEntity, ForgeDirection.SOUTH.ordinal());
+            addCache(t, ForgeDirection.SOUTH.ordinal());
     }
 
     @Method(modid = Mods.IDs.CoFHAPIEnergy)
-    private void addCache(TileEntity paramTileEntity, int dir) {
+    private void addCache(TileEntity t, int side) {
         if (this.handlerCache != null) {
-            this.handlerCache[dir] = null;
+            this.handlerCache[side] = null;
         }
-        if ((paramTileEntity instanceof IEnergyHandler)) {
-            if (((IEnergyHandler) paramTileEntity)
-                    .canConnectEnergy(ForgeDirection.VALID_DIRECTIONS[dir])) {
+        if ((t instanceof IEnergyHandler)) {
+            if (((IEnergyHandler) t)
+                    .canConnectEnergy(ForgeDirection.VALID_DIRECTIONS[side])) {
                 if (this.handlerCache == null)
                     this.handlerCache = new IEnergyHandler[6];
-                this.handlerCache[dir] = ((IEnergyHandler) paramTileEntity);
+                this.handlerCache[side] = ((IEnergyHandler) t);
             }
         }
     }
 
+    /**
+     * ------------------------------------------------------
+     * 
+     * RF(THERMAL EXPANSION, BUILD CRAFT) INTEGRATION ENDS
+     * 
+     * ------------------------------------------------------
+     */
+
     @Override
     public boolean isActive() {
         return !isRedstonePowered();
+    }
+
+    /**
+     * ------------------------------------------------------
+     * 
+     * CHARGE(FACTORIZATION) INTEGRATION BEGINS
+     * 
+     * ------------------------------------------------------
+     */
+
+    @Method(modid = Mods.IDs.Factorization)
+    public void initCharge() {
+        charge = new Charge(this);
     }
 
     @Override
@@ -437,15 +459,13 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements
         return sb.toString();
     }
 
-    @Override
-    public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
-        return 0;
-    }
-
-    @Override
-    public boolean canFill(ForgeDirection paramForgeDirection, Fluid paramFluid) {
-        return false;
-    }
+    /**
+     * ------------------------------------------------------
+     * 
+     * CHARGE(FACTORIZATION) INTEGRATION ENDS
+     * 
+     * ------------------------------------------------------
+     */
 
     @Override
     public boolean canDrain(ForgeDirection paramForgeDirection, Fluid paramFluid) {

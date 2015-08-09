@@ -1,6 +1,6 @@
-package org.jackhuang.watercraft.common.inventory;
+package org.jackhuang.watercraft.common.block.inventory;
 
-import org.jackhuang.watercraft.common.tileentity.TileEntityInventory;
+import org.jackhuang.watercraft.common.block.tileentity.TileEntityInventory;
 import org.jackhuang.watercraft.util.StackUtil;
 
 import net.minecraft.item.ItemStack;
@@ -8,7 +8,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
 public class InventorySlot {
-	public final TileEntityInventory base;
+	private final TileEntityInventory base;
 	public final String name;
 	protected final ItemStack[] contents;
 	protected final Access access;
@@ -155,6 +155,10 @@ public class InventorySlot {
 		}
 
 		return ret;
+	}
+	
+	public TileEntityInventory getTileEntity() {
+	    return base;
 	}
 	
 	public ItemStack[] getCopiedContent() {

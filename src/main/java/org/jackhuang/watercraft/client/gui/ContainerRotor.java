@@ -11,22 +11,22 @@ package org.jackhuang.watercraft.client.gui;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 
-import org.jackhuang.watercraft.common.inventory.SlotInventorySlot;
-import org.jackhuang.watercraft.common.tileentity.TileEntityGenerator;
+import org.jackhuang.watercraft.common.block.inventory.SlotInventorySlot;
+import org.jackhuang.watercraft.common.block.tileentity.TileEntityRotor;
 
 public class ContainerRotor extends ContainerFullInventory {
-	public TileEntityGenerator tileEntity;
+	public TileEntityRotor tileEntity;
 	
-	public ContainerRotor(EntityPlayer player, TileEntityGenerator tileEntityCW) {
+	public ContainerRotor(EntityPlayer player, TileEntityRotor tileEntityCW) {
 		super(player, tileEntityCW, 166);
 		tileEntity = tileEntityCW;
 		layoutContainer();
 	}
 
-	private void layoutContainer() {
+	protected void layoutContainer() {
 		
 		//Rotor inventory drawing
-		addSlotToContainer(new SlotInventorySlot(tileEntity.invSlots.get(0), 0, 80, 26));
+		addSlotToContainer(new SlotInventorySlot(tileEntity.slotRotor, 0, 80, 26));
 		
 	}
 }

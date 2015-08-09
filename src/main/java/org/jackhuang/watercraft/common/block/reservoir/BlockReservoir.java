@@ -11,6 +11,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidContainerItem;
 
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.common.block.BlockMeta;
@@ -18,6 +22,7 @@ import org.jackhuang.watercraft.common.item.others.ItemType;
 import org.jackhuang.watercraft.common.recipe.IRecipeRegistrar;
 import org.jackhuang.watercraft.integration.ic2.ICItemFinder;
 import org.jackhuang.watercraft.util.Mods;
+import org.jackhuang.watercraft.util.StackUtil;
 
 import thaumcraft.api.ItemApi;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -75,6 +80,136 @@ public class BlockReservoir extends BlockMeta {
         return ReservoirType.values().length;
     }
 
+    @Override
+    public boolean onBlockActivated(World world, int x, int y, int z,
+            EntityPlayer entityplayer, int s, float f1, float f2, float f3) {
+        ItemStack current = entityplayer.inventory.getCurrentItem();
+        if (current != null) {
+            TileEntity tile = world.getTileEntity(x, y, z);
+
+            if ((tile instanceof TileEntityReservoir)) {
+                TileEntityReservoir reservoir = (TileEntityReservoir) tile;
+
+                if (FluidContainerRegistry.isContainer(current)) {
+                    FluidStack liquid = FluidContainerRegistry
+                            .getFluidForFilledItem(current);
+
+                    if (liquid != null) {
+                        int qty = reservoir.fill(ForgeDirection.UNKNOWN,
+                                liquid, true);
+
+                        if ((qty != 0)
+                                && (!entityplayer.capabilities.isCreativeMode)) {
+                            if (current.stackSize > 1) {
+                                if (!entityplayer.inventory
+                                        .addItemStackToInventory(FluidContainerRegistry
+                                                .drainFluidContainer(current))) {
+                                    entityplayer
+                                            .dropPlayerItemWithRandomChoice(
+                                                    FluidContainerRegistry
+                                                            .drainFluidContainer(current),
+                                                    false);
+                                }
+
+                                entityplayer.inventory
+                                        .setInventorySlotContents(
+                                                entityplayer.inventory.currentItem,
+                                                StackUtil.consumeItem(current));
+                            } else {
+                                entityplayer.inventory
+                                        .setInventorySlotContents(
+                                                entityplayer.inventory.currentItem,
+                                                FluidContainerRegistry
+                                                        .drainFluidContainer(current));
+                            }
+                        }
+
+                        return true;
+                    }
+
+                    FluidStack available = reservoir.getFluidStackfromTank();
+
+                    if (available != null) {
+                        ItemStack filled = FluidContainerRegistry
+                                .fillFluidContainer(available, current);
+
+                        liquid = FluidContainerRegistry
+                                .getFluidForFilledItem(filled);
+
+                        if (liquid != null) {
+                            if (!entityplayer.capabilities.isCreativeMode) {
+                                if (current.stackSize > 1) {
+                                    if (!entityplayer.inventory
+                                            .addItemStackToInventory(filled)) {
+                                        return false;
+                                    }
+                                    entityplayer.inventory
+                                            .setInventorySlotContents(
+                                                    entityplayer.inventory.currentItem,
+                                                    StackUtil.consumeItem(current));
+                                } else {
+                                    entityplayer.inventory
+                                            .setInventorySlotContents(
+                                                    entityplayer.inventory.currentItem,
+                                                    StackUtil.consumeItem(current));
+                                    entityplayer.inventory
+                                            .setInventorySlotContents(
+                                                    entityplayer.inventory.currentItem,
+                                                    filled);
+                                }
+                            }
+
+                            reservoir.drain(ForgeDirection.UNKNOWN, liquid.amount,
+                                    true);
+
+                            return true;
+                        }
+                    }
+                } else if ((current.getItem() instanceof IFluidContainerItem)) {
+                    if (current.stackSize != 1) {
+                        return false;
+                    }
+
+                    if (!world.isRemote) {
+                        IFluidContainerItem container = (IFluidContainerItem) current
+                                .getItem();
+                        FluidStack liquid = container.getFluid(current);
+                        FluidStack tankLiquid = reservoir
+                                .getFluidStackfromTank();
+                        boolean mustDrain = (liquid == null)
+                                || (liquid.amount == 0);
+                        boolean mustFill = (tankLiquid == null)
+                                || (tankLiquid.amount == 0);
+                        if ((!mustDrain) || (!mustFill)) {
+                            if ((mustDrain) || (!entityplayer.isSneaking())) {
+                                liquid = reservoir.drain(
+                                        ForgeDirection.UNKNOWN, 1000, false);
+                                int qtyToFill = container.fill(current, liquid,
+                                        true);
+                                reservoir.drain(ForgeDirection.UNKNOWN,
+                                        qtyToFill, true);
+                            } else if (((mustFill) || (entityplayer
+                                    .isSneaking())) && (liquid.amount > 0)) {
+                                int qty = reservoir.fill(
+                                        ForgeDirection.UNKNOWN, liquid, false);
+                                reservoir.fill(ForgeDirection.UNKNOWN,
+                                        container.drain(current, qty, true),
+                                        true);
+                            }
+                        }
+                    }
+
+                    return true;
+                }
+
+            }
+
+        }
+
+        return super.onBlockActivated(world, x, y, z, entityplayer, s, f1, f2,
+                f3);
+    }
+
     public ArrayList<String> getDebugInfo(EntityPlayer aPlayer, int aX, int aY,
             int aZ, int aLogLevel) {
         ArrayList<String> al = new ArrayList<String>();
@@ -122,27 +257,18 @@ public class BlockReservoir extends BlockMeta {
                 ICItemFinder.getIC2Item("iridiumPlate"));
         addReservoirRecipe(new ItemStack(this, 8, 19), "blockZinc");
         addReservoirRecipe(new ItemStack(this, 8, 20), "blockBrass");
-        addReservoirRecipe(new ItemStack(this, 8, 21),
-                "blockAluminum");
-        addReservoirAdvancedRecipe(new ItemStack(this, 8, 22),
-                "blockSteel");
+        addReservoirRecipe(new ItemStack(this, 8, 21), "blockAluminum");
+        addReservoirAdvancedRecipe(new ItemStack(this, 8, 22), "blockSteel");
         addReservoirRecipe(new ItemStack(this, 8, 23), "blockInvar");
-        addReservoirRecipe(new ItemStack(this, 8, 24),
-                "blockElectrum");
-        addReservoirRecipe(new ItemStack(this, 8, 25),
-                "blockNickel");
-        addReservoirAdvancedRecipe(new ItemStack(this, 8, 26),
-                "blockOsmium");
-        addReservoirAdvancedRecipe(new ItemStack(this, 8, 27),
-                "blockTitanium");
-        addReservoirAdvancedRecipe(new ItemStack(this, 8, 28),
-                "blockPlatinum");
-        addReservoirAdvancedRecipe(new ItemStack(this, 8, 29),
-                "blockTungsten");
-        addReservoirAdvancedRecipe(new ItemStack(this, 8, 30),
-                "blockChrome");
-        addReservoirAdvancedRecipe(new ItemStack(this, 8,
-                31), "blockTungstenSteel");
+        addReservoirRecipe(new ItemStack(this, 8, 24), "blockElectrum");
+        addReservoirRecipe(new ItemStack(this, 8, 25), "blockNickel");
+        addReservoirAdvancedRecipe(new ItemStack(this, 8, 26), "blockOsmium");
+        addReservoirAdvancedRecipe(new ItemStack(this, 8, 27), "blockTitanium");
+        addReservoirAdvancedRecipe(new ItemStack(this, 8, 28), "blockPlatinum");
+        addReservoirAdvancedRecipe(new ItemStack(this, 8, 29), "blockTungsten");
+        addReservoirAdvancedRecipe(new ItemStack(this, 8, 30), "blockChrome");
+        addReservoirAdvancedRecipe(new ItemStack(this, 8, 31),
+                "blockTungstenSteel");
         if (Mods.Thaumcraft.isAvailable) {
             addReservoirAdvancedRecipe(new ItemStack(this, 8, 32),
                     ItemApi.getBlock("blockCosmeticSolid", 4));

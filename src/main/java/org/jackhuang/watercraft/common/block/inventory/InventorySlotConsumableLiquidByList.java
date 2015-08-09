@@ -1,10 +1,10 @@
-package org.jackhuang.watercraft.common.inventory;
+package org.jackhuang.watercraft.common.block.inventory;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.jackhuang.watercraft.common.tileentity.TileEntityInventory;
+import org.jackhuang.watercraft.common.block.tileentity.TileEntityInventory;
 
 import net.minecraftforge.fluids.Fluid;
 

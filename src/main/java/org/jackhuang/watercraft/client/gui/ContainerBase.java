@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 import org.jackhuang.watercraft.WaterPower;
-import org.jackhuang.watercraft.common.inventory.SlotInventorySlot;
+import org.jackhuang.watercraft.common.block.inventory.SlotInventorySlot;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;

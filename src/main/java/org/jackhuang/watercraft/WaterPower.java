@@ -67,7 +67,7 @@ import cpw.mods.fml.relauncher.SideOnly;
  * WaterPower Main Class.
  * @author jackhuang
  */
-@Mod(modid = Reference.ModID, name = Reference.ModName, version = Reference.Version,
+@Mod(modid = Reference.ModID, name = Reference.ModName, version = Reference.Version, acceptedMinecraftVersions = "[1.7.10, 1.8)", 
 	dependencies = "required-after:Forge@[10.13.0.1199,); after:IC2@[2.2.628,); after:gregtech; after:Thaumcraft@[4.2.3.5,); after:BuildCraftAPI|power[1.1,); after:Forestry; after:craftguide; after:Waila; after:factorization; after:CoFHCore; after:Mekanism; after:ThermalFoundation; after:MineFactoryReloaded; ")
 public class WaterPower implements IWorldGenerator {
 

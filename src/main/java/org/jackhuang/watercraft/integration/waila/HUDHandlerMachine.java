@@ -17,7 +17,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
-import org.jackhuang.watercraft.common.tileentity.TileEntityStandardWaterMachine;
+import org.jackhuang.watercraft.common.block.machines.TileEntityStandardWaterMachine;
 import org.jackhuang.watercraft.util.Mods;
 
 import cpw.mods.fml.common.Optional.Interface;

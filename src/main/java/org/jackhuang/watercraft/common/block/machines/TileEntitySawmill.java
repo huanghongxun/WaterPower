@@ -3,11 +3,10 @@ package org.jackhuang.watercraft.common.block.machines;
 import java.util.ArrayList;
 
 import org.jackhuang.watercraft.client.gui.DefaultGuiIds;
-import org.jackhuang.watercraft.common.inventory.InventorySlotProcessableGeneric;
+import org.jackhuang.watercraft.common.block.inventory.InventorySlotProcessableGeneric;
 import org.jackhuang.watercraft.common.recipe.MyRecipeInputItemStack;
 import org.jackhuang.watercraft.common.recipe.MyRecipeManager;
 import org.jackhuang.watercraft.common.recipe.MyRecipes;
-import org.jackhuang.watercraft.common.tileentity.TileEntityStandardWaterMachine;
 import org.jackhuang.watercraft.util.StackUtil;
 
 import net.minecraft.entity.player.EntityPlayer;

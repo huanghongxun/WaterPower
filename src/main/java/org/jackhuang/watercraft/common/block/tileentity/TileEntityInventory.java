@@ -1,10 +1,10 @@
-package org.jackhuang.watercraft.common.tileentity;
+package org.jackhuang.watercraft.common.block.tileentity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jackhuang.watercraft.common.inventory.InventorySlot;
-import org.jackhuang.watercraft.common.inventory.InventorySlot.InvSide;
+import org.jackhuang.watercraft.common.block.inventory.InventorySlot;
+import org.jackhuang.watercraft.common.block.inventory.InventorySlot.InvSide;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
@@ -14,8 +14,9 @@ import net.minecraft.nbt.NBTTagList;
 
 public abstract class TileEntityInventory extends TileEntityBase implements
 		ISidedInventory {
-	public final List<InventorySlot> invSlots = new ArrayList<InventorySlot>();
+	private final List<InventorySlot> invSlots = new ArrayList<InventorySlot>();
 
+    @Override
 	public void readFromNBT(NBTTagCompound nbtTagCompound) {
 		super.readFromNBT(nbtTagCompound);
 
@@ -25,6 +26,7 @@ public abstract class TileEntityInventory extends TileEntityBase implements
 			invSlot.readFromNBT(invSlotsTag.getCompoundTag(invSlot.name));
 	}
 
+    @Override
 	public void writeToNBT(NBTTagCompound nbtTagCompound) {
 		super.writeToNBT(nbtTagCompound);
 
@@ -41,32 +43,35 @@ public abstract class TileEntityInventory extends TileEntityBase implements
 		nbtTagCompound.setTag("InvSlots", invSlotsTag);
 	}
 	
+	public List<InventorySlot> getInventorySlots() {
+	    return invSlots;
+	}
+	
 	@Override
 	public boolean hasCustomInventoryName() {
 		return true;
 	}
 
+    @Override
 	public int getSizeInventory() {
 		int ret = 0;
-
-		for (InventorySlot invSlot : this.invSlots) {
+		for (InventorySlot invSlot : this.invSlots)
 			ret += invSlot.size();
-		}
-
 		return ret;
 	}
 
+    @Override
 	public ItemStack getStackInSlot(int index) {
 		for (InventorySlot invSlot : this.invSlots) {
-			if (index < invSlot.size()) {
+			if (index < invSlot.size())
 				return invSlot.get(index);
-			}
 			index -= invSlot.size();
 		}
 
 		return null;
 	}
 
+    @Override
 	public ItemStack decrStackSize(int index, int amount) {
 		ItemStack itemStack = getStackInSlot(index);
 		if (itemStack == null)
@@ -86,6 +91,7 @@ public abstract class TileEntityInventory extends TileEntityBase implements
 		return ret;
 	}
 
+    @Override
 	public ItemStack getStackInSlotOnClosing(int index) {
 		ItemStack ret = getStackInSlot(index);
 
@@ -95,6 +101,7 @@ public abstract class TileEntityInventory extends TileEntityBase implements
 		return ret;
 	}
 
+    @Override
 	public void setInventorySlotContents(int index, ItemStack itemStack) {
 		for (InventorySlot invSlot : this.invSlots) {
 			if (index < invSlot.size()) {
@@ -109,10 +116,12 @@ public abstract class TileEntityInventory extends TileEntityBase implements
 		return false;
 	}
 
+    @Override
 	public int getInventoryStackLimit() {
 		return 64;
 	}
 
+    @Override
 	public boolean isUseableByPlayer(EntityPlayer entityPlayer) {
 		return entityPlayer.getDistance(this.xCoord + 0.5D, this.yCoord + 0.5D,
 				this.zCoord + 0.5D) <= 64.0D;
@@ -126,6 +135,7 @@ public abstract class TileEntityInventory extends TileEntityBase implements
 	public void closeInventory() {
 	}
 
+    @Override
 	public boolean isItemValidForSlot(int index, ItemStack itemStack) {
 		InventorySlot invSlot = getInvSlot(index);
 
@@ -133,6 +143,7 @@ public abstract class TileEntityInventory extends TileEntityBase implements
 				&& (invSlot.accepts(itemStack));
 	}
 
+    @Override
 	public int[] getAccessibleSlotsFromSide(int var1) {
 		int[] ret = new int[getSizeInventory()];
 
@@ -143,6 +154,7 @@ public abstract class TileEntityInventory extends TileEntityBase implements
 		return ret;
 	}
 
+    @Override
 	public boolean canInsertItem(int index, ItemStack itemStack, int side) {
 		InventorySlot targetSlot = getInvSlot(index);
 		if (targetSlot == null)
@@ -166,6 +178,7 @@ public abstract class TileEntityInventory extends TileEntityBase implements
 		return true;
 	}
 
+    @Override
 	public boolean canExtractItem(int index, ItemStack itemStack, int side) {
 		InventorySlot targetSlot = getInvSlot(index);
 		if (targetSlot == null)

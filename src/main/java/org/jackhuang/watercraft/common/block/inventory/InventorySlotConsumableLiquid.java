@@ -1,4 +1,4 @@
-package org.jackhuang.watercraft.common.inventory;
+package org.jackhuang.watercraft.common.block.inventory;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -9,7 +9,7 @@ import net.minecraftforge.fluids.IFluidContainerItem;
 import net.minecraftforge.fluids.IFluidTank;
 
 import org.apache.commons.lang3.mutable.MutableObject;
-import org.jackhuang.watercraft.common.tileentity.TileEntityInventory;
+import org.jackhuang.watercraft.common.block.tileentity.TileEntityInventory;
 import org.jackhuang.watercraft.util.StackUtil;
 
 public class InventorySlotConsumableLiquid extends InventorySlotConsumable {
@@ -18,7 +18,7 @@ public class InventorySlotConsumableLiquid extends InventorySlotConsumable {
 	public InventorySlotConsumableLiquid(TileEntityInventory base, String name,
 			int count) {
 		this(base, name, InventorySlot.Access.I, count,
-				InventorySlot.InvSide.TOP, OpType.Drain);
+				InventorySlot.InvSide.TOP, OpType.Both);
 	}
 
 	public InventorySlotConsumableLiquid(TileEntityInventory base, String name,

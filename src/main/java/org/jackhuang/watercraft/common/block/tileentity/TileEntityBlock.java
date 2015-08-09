@@ -1,4 +1,4 @@
-package org.jackhuang.watercraft.common.tileentity;
+package org.jackhuang.watercraft.common.block.tileentity;
 
 import cpw.mods.fml.common.Optional.Interface;
 import cpw.mods.fml.common.Optional.InterfaceList;
@@ -93,15 +93,22 @@ public abstract class TileEntityBlock extends TileEntityLiquidTankInventory impl
 					this.xCoord, this.yCoord, this.zCoord, side);
 		}
 	}
+	
+	/* ---------------------------------------
+	 * 
+	 * WRENCH(INDUSTRIAL CRAFT 2) INTEGRATION BEGINS
+	 * 
+	 * ---------------------------------------
+	 */
+    
+    public short getPrevFacing() {
+        return this.prevFacing;
+    }
 
     @Override
 	@Method(modid = Mods.IDs.IndustrialCraft2API)
 	public short getFacing() {
 		return getDirection();
-	}
-	
-	public short getPrevFacing() {
-		return this.prevFacing;
 	}
 
     @Override
@@ -115,6 +122,31 @@ public abstract class TileEntityBlock extends TileEntityLiquidTankInventory impl
 	public void setFacing(short facing) {
         setDirection(facing);
 	}
+
+    @Override
+    @Method(modid = Mods.IDs.IndustrialCraft2API)
+    public boolean wrenchCanRemove(EntityPlayer entityPlayer) {
+        return true;
+    }
+
+    @Override
+    @Method(modid = Mods.IDs.IndustrialCraft2API)
+    public float getWrenchDropRate() {
+        return 1.0F;
+    }
+
+    @Override
+    @Method(modid = Mods.IDs.IndustrialCraft2API)
+    public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
+        return getDroppedItemStack();
+    }
+    
+    /* ---------------------------------------
+     * 
+     * WRENCH(INDUSTRIAL CRAFT 2) INTEGRATION ENDS
+     * 
+     * ---------------------------------------
+     */
     
     public short getDirection() {
         return facing;
@@ -137,26 +169,6 @@ public abstract class TileEntityBlock extends TileEntityLiquidTankInventory impl
         return flag;
     }
 
-    @Override
-    @Method(modid = Mods.IDs.IndustrialCraft2API)
-	public boolean wrenchCanRemove(EntityPlayer entityPlayer) {
-		return true;
-	}
-
-    @Override
-    @Method(modid = Mods.IDs.IndustrialCraft2API)
-	public float getWrenchDropRate() {
-		return 1.0F;
-	}
-
-    @Override
-    @Method(modid = Mods.IDs.IndustrialCraft2API)
-	public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
-		return new ItemStack(this.worldObj.getBlock(this.xCoord, this.yCoord,
-				this.zCoord), 1, this.worldObj.getBlockMetadata(this.xCoord,
-				this.yCoord, this.zCoord));
-	}
-
 	public void onBlockBreak(int id, int meta) {
 	}
 	
@@ -172,6 +184,8 @@ public abstract class TileEntityBlock extends TileEntityLiquidTankInventory impl
 	
 	@Override
 	public ItemStack getDroppedItemStack() {
-	    return new ItemStack(getBlockType(), 1, getBlockMetadata());
+	    return new ItemStack(this.worldObj.getBlock(this.xCoord, this.yCoord,
+                this.zCoord), 1, this.worldObj.getBlockMetadata(this.xCoord,
+                this.yCoord, this.zCoord));
 	}
 }

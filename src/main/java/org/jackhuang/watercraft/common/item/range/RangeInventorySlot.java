@@ -2,9 +2,9 @@ package org.jackhuang.watercraft.common.item.range;
 
 import net.minecraft.item.ItemStack;
 
-import org.jackhuang.watercraft.common.inventory.InventorySlot;
-import org.jackhuang.watercraft.common.inventory.InventorySlot.Access;
-import org.jackhuang.watercraft.common.tileentity.TileEntityInventory;
+import org.jackhuang.watercraft.common.block.inventory.InventorySlot;
+import org.jackhuang.watercraft.common.block.inventory.InventorySlot.Access;
+import org.jackhuang.watercraft.common.block.tileentity.TileEntityInventory;
 
 public class RangeInventorySlot extends InventorySlot {
 

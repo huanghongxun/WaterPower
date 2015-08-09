@@ -6,11 +6,12 @@ import org.jackhuang.watercraft.client.gui.DefaultGuiIds;
 import org.jackhuang.watercraft.common.block.GlobalBlocks;
 import org.jackhuang.watercraft.common.block.reservoir.Reservoir;
 import org.jackhuang.watercraft.common.block.reservoir.TileEntityReservoir;
+import org.jackhuang.watercraft.common.block.tileentity.TileEntityElectricMetaBlock;
+import org.jackhuang.watercraft.common.block.tileentity.TileEntityGenerator;
+import org.jackhuang.watercraft.common.block.tileentity.TileEntityRotor;
 import org.jackhuang.watercraft.common.block.watermills.WaterType;
 import org.jackhuang.watercraft.common.item.rotors.ItemRotor;
 import org.jackhuang.watercraft.common.item.rotors.RotorInventorySlot;
-import org.jackhuang.watercraft.common.tileentity.TileEntityGenerator;
-import org.jackhuang.watercraft.common.tileentity.TileEntityElectricMetaBlock;
 import org.jackhuang.watercraft.util.Mods;
 import org.jackhuang.watercraft.util.WPLog;
 
@@ -24,24 +25,20 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidRegistry;
 
-public class TileEntityTurbine extends TileEntityElectricMetaBlock {
+public class TileEntityTurbine extends TileEntityRotor {
 
     public static int maxOutput = 32767;
     // public int speed;
     private TurbineType type;
 
-    RotorInventorySlot slotRotor;
-
     boolean sendInitData;
 
     public TileEntityTurbine() {
         super(0, 10000000);
-        addInvSlot(slotRotor = new RotorInventorySlot(this, 1));
     }
 
     public TileEntityTurbine(TurbineType type) {
         super(type.percent, 10000000);
-        addInvSlot(slotRotor = new RotorInventorySlot(this, 1));
     }
 
     @Override
@@ -153,7 +150,7 @@ public class TileEntityTurbine extends TileEntityElectricMetaBlock {
          * -= use; return energy; } return 0;
          */
         TileEntityReservoir pair = getWater(world, x, y, z);
-        if (pair == null || pair.getFluidTank() == null)
+        if (pair == null || pair.getFluidTank() == null || pair.getFluidStackfromTank() == null || pair.getFluidfromTank() == null)
             return 0;
         else {
             WPLog.debugLog("fluidAmount=" + pair.getFluidAmount());
@@ -191,36 +188,6 @@ public class TileEntityTurbine extends TileEntityElectricMetaBlock {
         return 0;
     }
 
-    public boolean hasRotor() {
-        return slotRotor != null && !slotRotor.isEmpty()
-                && slotRotor.get(0).getItem() instanceof ItemRotor;
-    }
-
-    public ItemRotor getRotor() {
-        return (ItemRotor) slotRotor.get(0).getItem();
-    }
-
-    private void damageRotor(int tick) {
-        ItemRotor rotor = getRotor();
-        rotor.tickRotor(slotRotor.get(0), this, worldObj);
-        if (!rotor.type.isInfinite()) {
-            if (slotRotor.get(0).getItemDamage() + tick > slotRotor.get(0)
-                    .getMaxDamage()) {
-                slotRotor.put(0, null);
-            } else {
-                int damage = slotRotor.get(0).getItemDamage() + tick;
-                slotRotor.get(0).setItemDamage(damage);
-            }
-            markDirty();
-        }
-    }
-
-    private double tickRotor() {
-        if (!Reference.General.watermillNeedsRotor)
-            return 1;
-        return hasRotor() ? getRotor().type.getEfficiency() : 0;
-    }
-
     @Override
     public String getInventoryName() {
         return type == null ? "NULL" : type.getShowedName();
@@ -231,12 +198,6 @@ public class TileEntityTurbine extends TileEntityElectricMetaBlock {
         return DefaultGuiIds.get("tileEntityTurbine");
     }
 
-    @Override
-    @Method(modid = Mods.IDs.IndustrialCraft2API)
-    public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
-        return getDroppedItemStack();
-    }
-    
     @Override
     public ItemStack getDroppedItemStack() {
         return new ItemStack(GlobalBlocks.turbine, 1, type == null ? 0 : type.ordinal());

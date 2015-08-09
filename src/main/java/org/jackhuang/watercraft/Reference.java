@@ -26,11 +26,6 @@ public class Reference {
 
     public static final String Version = "0.3n"; // Mod Version
 
-    public static final String MCVersion = "1.7.10"; // Compatible Minecraft
-                                                     // Version
-
-    public static final String configNeedRotor = "watermillNeedRotor";
-
     /**
      * Generate Ores in World.
      */
@@ -85,7 +80,7 @@ public class Reference {
         public static boolean watermillNeedsRotor = true;
 
         static void initConfig(Configuration config) {
-            Property p = config.get("rule", Reference.configNeedRotor, true);
+            Property p = config.get("rule", "watermillNeedRotor", true);
             watermillNeedsRotor = p.getBoolean(true);
             p = config.get("rule", "enableMachines", enableMachines);
             enableMachines = p.getBoolean(enableMachines);

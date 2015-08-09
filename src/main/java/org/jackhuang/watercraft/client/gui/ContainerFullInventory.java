@@ -1,6 +1,6 @@
 package org.jackhuang.watercraft.client.gui;
 
-import org.jackhuang.watercraft.common.tileentity.TileEntityInventory;
+import org.jackhuang.watercraft.common.block.tileentity.TileEntityInventory;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;

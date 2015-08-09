@@ -6,14 +6,17 @@
  * http://www.mod-buildcraft.com/MMPL-1.0.txt
  */
 
-package org.jackhuang.watercraft.common.tileentity;
+package org.jackhuang.watercraft.common.block.tileentity;
+
+import java.util.ArrayList;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.fluids.Fluid;
 
-public abstract class TileEntityElectricMetaBlock extends TileEntityGenerator implements ITileEntityMeta {
-	
-	public TileEntityElectricMetaBlock(int i, int j) {
-		super(i, j);
+public abstract class TileEntityMetaMultiBlock extends TileEntityMultiBlock implements ITileEntityMeta {
+
+	public TileEntityMetaMultiBlock(int tankSize) {
+		super(tankSize);
 	}
 
 	@Override
@@ -21,4 +24,5 @@ public abstract class TileEntityElectricMetaBlock extends TileEntityGenerator im
 		super.readFromNBT(nbt);
 		initNBT(nbt, -1);
 	}
+
 }

@@ -3,7 +3,7 @@ package org.jackhuang.watercraft.common.block.machines;
 import net.minecraft.entity.player.EntityPlayer;
 
 import org.jackhuang.watercraft.client.gui.ContainerStandardMachine;
-import org.jackhuang.watercraft.common.inventory.SlotInventorySlot;
+import org.jackhuang.watercraft.common.block.inventory.SlotInventorySlot;
 
 public class ContainerCentrifuge extends ContainerStandardMachine {
 

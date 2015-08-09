@@ -1,4 +1,4 @@
-package org.jackhuang.watercraft.common.inventory;
+package org.jackhuang.watercraft.common.block.inventory;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
@@ -16,7 +16,7 @@ public class SlotInventorySlot extends Slot {
 
 	public SlotInventorySlot(InventorySlot invSlot, int index,
 			int xDisplayPosition, int yDisplayPosition, int stackLimit) {
-		super(invSlot.base, -1, xDisplayPosition, yDisplayPosition);
+		super(invSlot.getTileEntity(), -1, xDisplayPosition, yDisplayPosition);
 
 		this.invSlot = invSlot;
 		this.index = index;
@@ -57,10 +57,10 @@ public class SlotInventorySlot extends Slot {
 	}
 
 	public boolean isSlotInInventory(IInventory inventory, int index) {
-		if (inventory != this.invSlot.base)
+		if (inventory != this.invSlot.getTileEntity())
 			return false;
 
-		for (InventorySlot invSlot : this.invSlot.base.invSlots) {
+		for (InventorySlot invSlot : invSlot.getTileEntity().getInventorySlots()) {
 			if (index < invSlot.size()) {
 				return index == this.index;
 			}

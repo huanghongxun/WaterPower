@@ -1,7 +1,7 @@
-package org.jackhuang.watercraft.common.inventory;
+package org.jackhuang.watercraft.common.block.inventory;
 
+import org.jackhuang.watercraft.common.block.tileentity.TileEntityInventory;
 import org.jackhuang.watercraft.common.recipe.MyRecipeOutput;
-import org.jackhuang.watercraft.common.tileentity.TileEntityInventory;
 
 import ic2.api.recipe.RecipeOutput;
 import net.minecraft.item.ItemStack;

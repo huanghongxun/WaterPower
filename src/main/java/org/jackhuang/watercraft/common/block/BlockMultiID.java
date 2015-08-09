@@ -7,7 +7,7 @@ import java.util.Random;
 import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.client.gui.IHasGui;
-import org.jackhuang.watercraft.common.tileentity.TileEntityBlock;
+import org.jackhuang.watercraft.common.block.tileentity.TileEntityBlock;
 import org.jackhuang.watercraft.integration.BuildCraftModule;
 import org.jackhuang.watercraft.util.Utils;
 import org.jackhuang.watercraft.util.WPLog;

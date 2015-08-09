@@ -248,7 +248,7 @@ public class EasyRecipeRegistrar extends IRecipeRegistrar {
             addRecipeByOreDictionary(ItemType.WaterUraniumIngot.item(), "SSS",
                     "SAS", "SSS", 'A', "ingotManganese", 'S', "gemLapis");
 
-        if (OreDictionary.doesOreNameExist("ingotUranium")) {
+        if (doesOreNameExist("ingotUranium")) {
             if (Mods.Railcraft.isAvailable)
                 for (ItemStack sasasasa : OreDictionary.getOres("ingotUranium"))
                     RailcraftModule.addRollingMachineRecipe(is2, "SAS", "ASA",
@@ -351,7 +351,7 @@ public class EasyRecipeRegistrar extends IRecipeRegistrar {
                     'A',
                     getUsualItemStack(ICItemFinder.getIC2Item("energyCrystal")),
                     'M',
-                    OreDictionary.doesOreNameExist("blockRuby") ? "blockRuby"
+                    doesOreNameExist("blockRuby") ? "blockRuby"
                             : "blockManganeseSteel", 'G', ItemType.MK4.item());
             addRecipeByOreDictionary(
                     ItemType.MK6.item(),
@@ -366,7 +366,7 @@ public class EasyRecipeRegistrar extends IRecipeRegistrar {
                     getUsualItemStack(ICItemFinder
                             .getIC2Item("lapotronCrystal")),
                     'M',
-                    OreDictionary.doesOreNameExist("blockSapphire") ? "blockSapphire"
+                    doesOreNameExist("blockSapphire") ? "blockSapphire"
                             : "blockVanadium", 'G', ItemType.MK5.item());
             addRecipeByOreDictionary(
                     ItemType.MK7.item(),
@@ -380,7 +380,7 @@ public class EasyRecipeRegistrar extends IRecipeRegistrar {
                     'A',
                     getUsualItemStack(ICItemFinder.getIC2Item("suBattery")),
                     'M',
-                    OreDictionary.doesOreNameExist("blockChrome") ? "blockChrome"
+                    doesOreNameExist("blockChrome") ? "blockChrome"
                             : "blockVanadiumSteel", 'G', ItemType.MK6.item());
         } else {
             addRecipeByOreDictionary(ItemType.MK4.item(), "SMS", "UGU", "SAS",
@@ -392,7 +392,7 @@ public class EasyRecipeRegistrar extends IRecipeRegistrar {
                     'S', "plateSteel", 'U',
                     ItemType.WaterUraniumPlateMK5.item(), 'A', "stickVanadium",
                     'M',
-                    OreDictionary.doesOreNameExist("blockRuby") ? "blockRuby"
+                    doesOreNameExist("blockRuby") ? "blockRuby"
                             : "blockManganeseSteel", 'G', ItemType.MK4.item());
             addRecipeByOreDictionary(
                     ItemType.MK6.item(),
@@ -406,7 +406,7 @@ public class EasyRecipeRegistrar extends IRecipeRegistrar {
                     'A',
                     "stickNeodymium",
                     'M',
-                    OreDictionary.doesOreNameExist("blockSapphire") ? "blockSapphire"
+                    doesOreNameExist("blockSapphire") ? "blockSapphire"
                             : "blockVanadium", 'G', ItemType.MK5.item());
             addRecipeByOreDictionary(
                     ItemType.MK7.item(),
@@ -420,7 +420,7 @@ public class EasyRecipeRegistrar extends IRecipeRegistrar {
                     'A',
                     "NeodymiumMagnet",
                     'M',
-                    OreDictionary.doesOreNameExist("blockChrome") ? "blockChrome"
+                    doesOreNameExist("blockChrome") ? "blockChrome"
                             : "blockVanadiumSteel", 'G', ItemType.MK6.item());
         }
 
@@ -445,7 +445,7 @@ public class EasyRecipeRegistrar extends IRecipeRegistrar {
 
         addRecipeByOreDictionary(ItemType.PlasmaUraniumAlloyPlate.item(),
                 "OPO", "PUP", "OPO", 'O',
-                OreDictionary.doesOreNameExist("plateOsmium") ? "plateOsmium"
+                doesOreNameExist("plateOsmium") ? "plateOsmium"
                         : "plateVanadium", 'P',
                 ItemType.PlasmaUraniumIngot.item(), 'U',
                 ItemType.WaterUraniumAlloyPlate.item());

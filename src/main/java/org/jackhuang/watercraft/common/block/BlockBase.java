@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import org.jackhuang.watercraft.WaterPower;
-import org.jackhuang.watercraft.common.tileentity.TileEntityBase;
-import org.jackhuang.watercraft.common.tileentity.TileEntityBlock;
-import org.jackhuang.watercraft.common.tileentity.TileEntityInventory;
+import org.jackhuang.watercraft.common.block.tileentity.TileEntityBase;
+import org.jackhuang.watercraft.common.block.tileentity.TileEntityBlock;
+import org.jackhuang.watercraft.common.block.tileentity.TileEntityInventory;
 import org.jackhuang.watercraft.util.Utils;
 import org.jackhuang.watercraft.util.WPLog;
 

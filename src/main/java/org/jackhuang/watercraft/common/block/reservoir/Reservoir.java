@@ -5,9 +5,9 @@ import java.util.ArrayList;
 
 import joptsimple.util.KeyValuePair;
 
-import org.jackhuang.watercraft.common.block.turbines.Position;
-import org.jackhuang.watercraft.common.tileentity.TileEntityMultiBlock;
+import org.jackhuang.watercraft.common.block.tileentity.TileEntityMultiBlock;
 import org.jackhuang.watercraft.util.Pair;
+import org.jackhuang.watercraft.util.Position;
 import org.jackhuang.watercraft.util.Utils;
 
 import net.minecraft.block.material.Material;

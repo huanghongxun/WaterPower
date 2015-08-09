@@ -4,26 +4,26 @@ import net.minecraft.item.ItemStack;
 
 import org.jackhuang.watercraft.common.recipe.IRecipeManager;
 
-public class MyRecipeManagerAction extends OneWayAction {
+public class RemoveRecipeAction extends OneWayAction {
     
     IRecipeManager recipeManager;
-    ItemStack in, out;
+    ItemStack in;
     String name;
     
-    public MyRecipeManagerAction(String name, IRecipeManager recipeManager, ItemStack input, ItemStack output) {
+    public RemoveRecipeAction(String name, IRecipeManager recipeManager, ItemStack input) {
         this.recipeManager = recipeManager;
         this.name = name;
-        in = input; out = output;
+        in = input;
     }
 
     @Override
     public void apply() {
-        recipeManager.addRecipe(in, out);
+        recipeManager.removeRecipe(in);
     }
 
     @Override
     public String describe() {
-        return "Adding " + name + " recipe for " + out.getDisplayName(); 
+        return "Removing " + name + " recipe for " + in.getDisplayName(); 
     }
 
 }

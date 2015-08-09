@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.Reference;
+import org.jackhuang.watercraft.common.block.tileentity.TileEntityGenerator;
 import org.jackhuang.watercraft.common.item.ItemBase;
-import org.jackhuang.watercraft.common.tileentity.TileEntityGenerator;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;

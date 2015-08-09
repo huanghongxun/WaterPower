@@ -6,7 +6,7 @@
  * http://www.mod-buildcraft.com/MMPL-1.0.txt
  */
 
-package org.jackhuang.watercraft.common.tileentity;
+package org.jackhuang.watercraft.common.block.machines;
 
 import ic2.api.tile.IWrenchable;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,6 +19,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
 import org.jackhuang.watercraft.api.IWaterReceiver;
+import org.jackhuang.watercraft.common.block.tileentity.TileEntityBlock;
 import org.jackhuang.watercraft.util.Mods;
 
 import cpw.mods.fml.common.Optional.Interface;

@@ -29,15 +29,15 @@ import org.jackhuang.watercraft.api.IWaterReceiver;
 import org.jackhuang.watercraft.client.gui.DefaultGuiIds;
 import org.jackhuang.watercraft.common.block.GlobalBlocks;
 import org.jackhuang.watercraft.common.block.IDroppable;
-import org.jackhuang.watercraft.common.block.turbines.Position;
-import org.jackhuang.watercraft.common.inventory.InventorySlotConsumableLiquid;
-import org.jackhuang.watercraft.common.inventory.InventorySlotConsumableLiquidByList;
-import org.jackhuang.watercraft.common.inventory.InventorySlotOutput;
-import org.jackhuang.watercraft.common.inventory.InventorySlotUpgrade;
-import org.jackhuang.watercraft.common.tileentity.TileEntityMetaMultiBlock;
-import org.jackhuang.watercraft.common.tileentity.TileEntityMultiBlock;
+import org.jackhuang.watercraft.common.block.inventory.InventorySlotConsumableLiquid;
+import org.jackhuang.watercraft.common.block.inventory.InventorySlotConsumableLiquidByList;
+import org.jackhuang.watercraft.common.block.inventory.InventorySlotOutput;
+import org.jackhuang.watercraft.common.block.inventory.InventorySlotUpgrade;
+import org.jackhuang.watercraft.common.block.tileentity.TileEntityMetaMultiBlock;
+import org.jackhuang.watercraft.common.block.tileentity.TileEntityMultiBlock;
 import org.jackhuang.watercraft.util.Mods;
 import org.jackhuang.watercraft.util.Pair;
+import org.jackhuang.watercraft.util.Position;
 import org.jackhuang.watercraft.util.Utils;
 import org.lwjgl.opengl.HPOcclusionTest;
 
@@ -433,6 +433,19 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 
 		}
 
+        MutableObject<ItemStack> output = new MutableObject<ItemStack>();
+        if ((this.getFluidSlot().transferFromTank(this.fluidTank, output,
+                true))
+                && ((output.getValue() == null) || (this.outputSlot
+                        .canAdd(output.getValue())))) {
+            needsInvUpdate = this.getFluidSlot().transferFromTank(
+                    this.fluidTank, output, false);
+
+            if (output.getValue() != null)
+                this.getOutputSlot().add(output.getValue());
+        }
+		
+
 		if (needsInvUpdate) {
 			markDirty();
 		}
@@ -495,7 +508,7 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 		tag.setInteger("maxFluidAmount", getMaxFluidAmount());
 		tag.setInteger("fluidAmount", getFluidAmount());
 		if(getFluidTank() != null && getFluidTank().getFluid() != null)
-			tag.setInteger("fluid", getFluidTank().getFluid().getFluidID());
+			tag.setInteger("fluid", getFluidTank().getFluid().getFluid().getID());
 		else
 			tag.setInteger("fluid", -1);
 		tag.setInteger("extraStorage", extraStorage);

@@ -72,6 +72,10 @@ public enum ReservoirType {
 				StatCollector.translateToLocal("cptwtrml.reservoir.RESERVOIR");
 	}
 	
+	public String getTitle() {
+	    return StatCollector.translateToLocal("cptwtrml.reservoir." + name());
+	}
+	
 	public String tileEntityName() {
 		return "ReservoirType." + name();
 	}

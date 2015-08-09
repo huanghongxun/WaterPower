@@ -1,4 +1,4 @@
-package org.jackhuang.watercraft.common.block.turbines;
+package org.jackhuang.watercraft.util;
 
 public class Position {
 	public Position(int x, int y, int z) {

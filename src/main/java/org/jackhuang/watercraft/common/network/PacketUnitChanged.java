@@ -1,8 +1,8 @@
 package org.jackhuang.watercraft.common.network;
 
 import org.jackhuang.watercraft.common.EnergyType;
-import org.jackhuang.watercraft.common.tileentity.IUnitChangeable;
-import org.jackhuang.watercraft.common.tileentity.TileEntityGenerator;
+import org.jackhuang.watercraft.common.block.tileentity.IUnitChangeable;
+import org.jackhuang.watercraft.common.block.tileentity.TileEntityGenerator;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
