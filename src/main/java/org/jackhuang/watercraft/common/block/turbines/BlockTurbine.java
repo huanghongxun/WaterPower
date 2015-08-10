@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.common.block.BlockMeta;
+import org.jackhuang.watercraft.common.block.BlockRotor;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -17,7 +18,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockTurbine extends BlockMeta {
+public class BlockTurbine extends BlockRotor {
 	
 	public BlockTurbine() {
 		super("cptBlockTurbine", Material.iron, ItemTurbine.class);

@@ -18,6 +18,7 @@ import net.minecraftforge.fluids.IFluidContainerItem;
 
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.common.block.BlockMeta;
+import org.jackhuang.watercraft.common.block.BlockRotor;
 import org.jackhuang.watercraft.common.item.others.ItemType;
 import org.jackhuang.watercraft.common.recipe.IRecipeRegistrar;
 import org.jackhuang.watercraft.integration.ic2.ICItemFinder;
@@ -27,7 +28,7 @@ import org.jackhuang.watercraft.util.StackUtil;
 import thaumcraft.api.ItemApi;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class BlockReservoir extends BlockMeta {
+public class BlockReservoir extends BlockRotor {
 
     public BlockReservoir() {
         super("cptBlockReservoir", Material.iron, ItemReservoir.class);
