@@ -21,7 +21,8 @@ public class TileEntityLathe extends TileEntityStandardWaterMachine {
 		MyRecipes.lathe = new MultiRecipeManager();
 	}
 
-	public String getInventoryName() {
+	@Override
+	public String getInvName() {
 		return "Water-Powered Lathe";
 	}
 

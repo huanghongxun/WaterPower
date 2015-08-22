@@ -16,7 +16,7 @@ import org.jackhuang.watercraft.common.block.tileentity.TileEntityElectricMetaBl
  */
 public abstract class ItemMeta extends ItemBlock {
 
-	public ItemMeta(Block id) {
+	public ItemMeta(int id) {
 		super(id);
 	}
 	
@@ -24,12 +24,12 @@ public abstract class ItemMeta extends ItemBlock {
 	public boolean placeBlockAt(ItemStack aStack, EntityPlayer aPlayer,
 			World aWorld, int aX, int aY, int aZ, int side, float hitX,
 			float hitY, float hitZ, int aMeta) {
-		Block block = Block.getBlockFromItem(this);
+		int block = itemID;
 		int tDamage = aStack.getItemDamage();
 		if (!aWorld.setBlock(aX, aY, aZ, block, 0, 3))
 			return false;
 		ITileEntityMeta tTileEntity = (ITileEntityMeta) aWorld
-				.getTileEntity(aX, aY, aZ);
+				.getBlockTileEntity(aX, aY, aZ);
 		if (tTileEntity != null) {
 			if (WaterPower.isServerSide())
 				tTileEntity.initNBT(aStack.getTagCompound(), tDamage);
@@ -38,10 +38,10 @@ public abstract class ItemMeta extends ItemBlock {
 			}
 		}
 
-		if (aWorld.getBlock(aX, aY, aZ) == block) {
-			block.onBlockPlacedBy(aWorld, aX, aY, aZ,
+		if (aWorld.getBlockId(aX, aY, aZ) == block) {
+			Block.blocksList[block].onBlockPlacedBy(aWorld, aX, aY, aZ,
 					aPlayer, aStack);
-			block.onPostBlockPlaced(aWorld, aX, aY,
+			Block.blocksList[block].onPostBlockPlaced(aWorld, aX, aY,
 					aZ, tDamage);
 		}
 		return true;

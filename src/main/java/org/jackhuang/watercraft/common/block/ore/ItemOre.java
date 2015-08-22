@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 
 public class ItemOre extends ItemBlock {
 
-	public ItemOre(Block par1) {
+	public ItemOre(int par1) {
 		super(par1);
 		
 		setHasSubtypes(true);
@@ -16,7 +16,7 @@ public class ItemOre extends ItemBlock {
 	}
 	
 	@Override
-	public String getItemStackDisplayName(ItemStack par1ItemStack) {
+	public String getItemDisplayName(ItemStack par1ItemStack) {
 		return OreType.values()[par1ItemStack.getItemDamage()].getShowedName();
 	}
 	

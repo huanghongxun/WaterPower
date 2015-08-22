@@ -8,11 +8,12 @@
 
 package org.jackhuang.watercraft.util;
 
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import java.util.logging.Level;
+
 import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.Reference;
+
+import cpw.mods.fml.common.FMLLog;
 
 /**
  * WaterPower log class.
@@ -20,10 +21,6 @@ import org.jackhuang.watercraft.Reference;
  * @author lasm_
  */
 public class WPLog {
-    /**
-     * setting logger.
-     */
-    private static final Logger log = LogManager.getLogger(Reference.ModID);
 
     /**
      * Log Message.
@@ -35,7 +32,7 @@ public class WPLog {
      *            log message
      */
     public static void log(Level level, String message) {
-        log.log(level, message);
+    	FMLLog.log(level, message);
     }
 
     /**
@@ -53,7 +50,7 @@ public class WPLog {
      * @param message
      */
     public static void warn(String message) {
-        log(Level.WARN, message);
+        log(Level.WARNING, message);
     }
 
     /**
@@ -62,7 +59,7 @@ public class WPLog {
      * @param message
      */
     public static void err(String message) {
-        log(Level.ERROR, message);
+        log(Level.SEVERE, message);
     }
 
     /**
@@ -71,7 +68,7 @@ public class WPLog {
      * @param message
      */
     public static void debug(String message) {
-        log(Level.DEBUG, message);
+        log(Level.CONFIG, message);
     }
 
     /**

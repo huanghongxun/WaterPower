@@ -4,8 +4,8 @@ import java.util.logging.Level;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
+import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.Property;
 
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.common.item.GlobalItems;

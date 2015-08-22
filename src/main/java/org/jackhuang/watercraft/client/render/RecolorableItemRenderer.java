@@ -18,7 +18,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.Icon;
 import net.minecraftforge.client.IItemRenderer;
 
 public class RecolorableItemRenderer implements IItemRenderer {
@@ -56,7 +56,7 @@ public class RecolorableItemRenderer implements IItemRenderer {
 
 		GL11.glColor3f(1.0F, 1.0F, 1.0F);
 
-		IIcon icon = stack.getIconIndex();
+		Icon icon = stack.getIconIndex();
 		if (icon == null)
 			return;
 		Minecraft.getMinecraft().renderEngine
@@ -75,12 +75,12 @@ public class RecolorableItemRenderer implements IItemRenderer {
 		GL11.glDisable(GL11.GL_BLEND);
 	}
 
-	public static void renderIcon(IIcon icon, double size, double z, float nx,
+	public static void renderIcon(Icon icon, double size, double z, float nx,
 			float ny, float nz) {
 		renderIcon(icon, 0.0D, 0.0D, size, size, z, nx, ny, nz);
 	}
 
-	public static void renderIcon(IIcon icon, double xStart, double yStart,
+	public static void renderIcon(Icon icon, double xStart, double yStart,
 			double xEnd, double yEnd, double z, float nx, float ny, float nz) {
 		if (icon == null)
 			return;

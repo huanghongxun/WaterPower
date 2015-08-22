@@ -28,7 +28,7 @@ public class CreativeTabWaterCraft extends CreativeTabs {
 
 	@Override
 	public Item getTabIconItem() {
-		return Item.getItemFromBlock(GlobalBlocks.waterMill);
+		return Item.itemsList[GlobalBlocks.waterMill.blockID];
 	}
 	
 }

@@ -61,8 +61,7 @@ public abstract class InventorySlotConsumable extends InventorySlot {
 					if ((!consumeContainers)
 							&& (itemStack.getItem().hasContainerItem()))
 						put(i,
-								itemStack.getItem().getContainerItem(
-										itemStack));
+								new ItemStack(itemStack.getItem().getContainerItem()));
 					else
 						put(i, null);
 				} else {

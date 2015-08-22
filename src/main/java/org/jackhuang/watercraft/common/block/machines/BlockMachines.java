@@ -3,18 +3,18 @@ package org.jackhuang.watercraft.common.block.machines;
 import java.util.List;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.ForgeDirection;
 
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.common.block.BlockWaterPower;
@@ -63,14 +63,14 @@ public class BlockMachines extends BlockWaterPower {
 	}
 
 	@Override
-	public void registerBlockIcons(IIconRegister iconRegister) {
-		this.textures = new IIcon[maxMetaData()][6];
+	public void registerIcons(IconRegister iconRegister) {
+		this.textures = new Icon[maxMetaData()][6];
 		
-		IIcon iconSide = iconRegister.registerIcon(Reference.ModID
+		Icon iconSide = iconRegister.registerIcon(Reference.ModID
 				+ ":machine/SIDE");
-		IIcon iconDown = iconRegister.registerIcon(Reference.ModID
+		Icon iconDown = iconRegister.registerIcon(Reference.ModID
 				+ ":machine/DOWN");
-		IIcon iconUp = iconRegister.registerIcon(Reference.ModID
+		Icon iconUp = iconRegister.registerIcon(Reference.ModID
 				+ ":machine/UP");
 
 		for (int i = 1; i <= 7; i++) {
@@ -122,7 +122,7 @@ public class BlockMachines extends BlockWaterPower {
 
 	public int getComparatorInputOverride(World par1World, int par2, int par3,
 			int par4, int par5) {
-		TileEntity te = par1World.getTileEntity(par2, par3, par4);
+		TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
 		if (te != null) {
 			Class cls = te.getClass();
 
@@ -136,7 +136,7 @@ public class BlockMachines extends BlockWaterPower {
 	}
 
 	@Override
-	public void getSubBlocks(Item item, CreativeTabs p_149666_2_, List itemList) {
+	public void getSubBlocks(int item, CreativeTabs p_149666_2_, List itemList) {
 		for (int i = 1; i <= 7; i++) {
 			ItemStack is = new ItemStack(this, 1, i);
 			itemList.add(is);
@@ -144,7 +144,7 @@ public class BlockMachines extends BlockWaterPower {
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World var1, int var2) {
-		return createTileEntity(var1, var2);
+	public TileEntity createNewTileEntity(World var1) {
+		return createTileEntity(var1, 0);
 	}
 }

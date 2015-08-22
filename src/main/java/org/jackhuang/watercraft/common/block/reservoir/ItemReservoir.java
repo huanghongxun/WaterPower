@@ -11,7 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 
 public class ItemReservoir extends ItemMeta {
-	public ItemReservoir(Block id) {
+	public ItemReservoir(int id) {
 		super(id);
 		setMaxDamage(0);
 		setHasSubtypes(true);
@@ -29,7 +29,7 @@ public class ItemReservoir extends ItemMeta {
 	}
 	
 	@Override
-	public String getItemStackDisplayName(ItemStack par1ItemStack) {
+	public String getItemDisplayName(ItemStack par1ItemStack) {
 		return ReservoirType.values()[par1ItemStack.getItemDamage()].getShowedName();
 	}
 	

@@ -5,13 +5,13 @@ import java.util.List;
 import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.common.block.tileentity.TileEntityGenerator;
-import org.jackhuang.watercraft.common.item.ItemBase;
+import org.jackhuang.watercraft.common.item.ItemWaterPower;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
@@ -26,10 +26,10 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemRotor extends Item {
 	
 	public RotorType type;
-	protected IIcon[] textures;
+	protected Icon[] textures;
 	
-	public ItemRotor(RotorType type) {
-		super();
+	public ItemRotor(int id, RotorType type) {
+		super(id);
 		this.type = type;
 		setMaxDamage(type.maxDamage);
 		setUnlocalizedName(type.unlocalizedName);
@@ -40,13 +40,13 @@ public class ItemRotor extends Item {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister iconRegister) {
+	public void registerIcons(IconRegister iconRegister) {
 		int indexCount = 0;
 
 		while (getTextureName(indexCount) != null)
 			indexCount++;
 
-		this.textures = new IIcon[indexCount];
+		this.textures = new Icon[indexCount];
 		String textureFolder = "rotors/";
 
 		for (int index = 0; index < indexCount; index++)
@@ -64,7 +64,7 @@ public class ItemRotor extends Item {
 	}
 
 	@SideOnly(Side.CLIENT)
-	public IIcon getIconFromDamage(int meta) {
+	public Icon getIconFromDamage(int meta) {
 		if (meta < this.textures.length) {
 			return this.textures[meta];
 		}

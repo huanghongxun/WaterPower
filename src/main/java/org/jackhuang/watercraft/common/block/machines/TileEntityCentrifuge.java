@@ -29,7 +29,7 @@ public class TileEntityCentrifuge extends TileEntityStandardWaterMachine {
 	}
 
 	@Override
-	public String getInventoryName() {
+	public String getInvName() {
 		return "Centrifuge";
 	}
 

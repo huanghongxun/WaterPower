@@ -7,7 +7,6 @@
  */
 package org.jackhuang.watercraft;
 
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.Random;
@@ -29,26 +28,24 @@ import org.jackhuang.watercraft.common.item.others.ItemOthers;
 import org.jackhuang.watercraft.common.item.range.ItemPlugins;
 import org.jackhuang.watercraft.common.item.range.ItemRange;
 import org.jackhuang.watercraft.common.item.rotors.RotorType;
-import org.jackhuang.watercraft.common.network.MessagePacketHandler;
+import org.jackhuang.watercraft.common.network.PacketHandler;
 import org.jackhuang.watercraft.common.recipe.EasyRecipeRegistrar;
 import org.jackhuang.watercraft.common.recipe.IRecipeRegistrar;
 import org.jackhuang.watercraft.common.recipe.NormalRecipeRegistrar;
 import org.jackhuang.watercraft.integration.IntegrationType;
-import org.jackhuang.watercraft.integration.craftguide.CraftGuideWaterPowerObject;
 import org.jackhuang.watercraft.integration.waila.WailaModule;
 import org.jackhuang.watercraft.util.Mods;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
+import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.Property;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.IWorldGenerator;
@@ -59,6 +56,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -67,8 +65,9 @@ import cpw.mods.fml.relauncher.SideOnly;
  * WaterPower Main Class.
  * @author jackhuang
  */
-@Mod(modid = Reference.ModID, name = Reference.ModName, version = Reference.Version, acceptedMinecraftVersions = "[1.7.10, 1.8)", 
-	dependencies = "required-after:Forge@[10.13.0.1199,); after:IC2@[2.2.628,); after:gregtech; after:Thaumcraft@[4.2.3.5,); after:BuildCraftAPI|power[1.1,); after:Forestry; after:craftguide; after:Waila; after:factorization; after:CoFHCore; after:Mekanism; after:ThermalFoundation; after:MineFactoryReloaded; ")
+@Mod(modid = Reference.ModID, name = Reference.ModName, version = Reference.Version,
+	dependencies = "after:IC2; after:gregtech; after:Thaumcraft; after:BuildCraftAPI|power; after:Forestry; after:craftguide; after:Waila; after:factorization; after:CoFHCore; after:Mekanism; after:ThermalFoundation; after:MineFactoryReloaded; ")
+@NetworkMod(channels={Reference.ModChannel}, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 public class WaterPower implements IWorldGenerator {
 
     /**
@@ -97,7 +96,7 @@ public class WaterPower implements IWorldGenerator {
 	/**
 	 * Loaded configuration
 	 */
-	private Configuration config;
+	public Configuration config;
 	
 	/**
 	 * Recipe Handler
@@ -110,8 +109,6 @@ public class WaterPower implements IWorldGenerator {
 		config.load();
 		Reference.initConfig(config);
 		
-		MessagePacketHandler.init();
-
 		config.save();
 
 	}
@@ -126,9 +123,9 @@ public class WaterPower implements IWorldGenerator {
 		
 		init();
 		
-		GameRegistry.registerWorldGenerator(this, 0);
+		GameRegistry.registerWorldGenerator(this);
 
-		NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
+		NetworkRegistry.instance().registerGuiHandler(this, proxy);
 
 		config.save();
 	}
@@ -184,7 +181,7 @@ public class WaterPower implements IWorldGenerator {
     }
 	
 	private static WorldGenMinable getMinable(ItemStack is, int number) {
-		return new WorldGenMinable(Block.getBlockFromItem(is.getItem()), is.getItemDamage(), number, Blocks.stone);
+		return new WorldGenMinable(is.itemID, is.getItemDamage(), number, Block.stone.blockID);
 	}
 	
 	private static void generateOre(ItemStack ore, int number, int baseCount,

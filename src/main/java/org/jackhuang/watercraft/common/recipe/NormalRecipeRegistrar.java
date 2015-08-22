@@ -19,15 +19,12 @@ import org.jackhuang.watercraft.common.item.crafting.LevelTypes;
 import org.jackhuang.watercraft.common.item.crafting.MaterialForms;
 import org.jackhuang.watercraft.common.item.crafting.MaterialTypes;
 import org.jackhuang.watercraft.common.item.others.ItemType;
-import org.jackhuang.watercraft.integration.MekanismModule;
 import org.jackhuang.watercraft.util.Mods;
 
 import mods.railcraft.api.crafting.RailcraftCraftingManager;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
-import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.Configuration;
 import net.minecraftforge.oredict.OreDictionary;
 import static org.jackhuang.watercraft.common.item.crafting.CraftingTypes.*;
 import static org.jackhuang.watercraft.common.item.crafting.LevelTypes.*;

@@ -15,14 +15,13 @@ import org.jackhuang.watercraft.common.item.rotors.RotorInventorySlot;
 import org.jackhuang.watercraft.util.Mods;
 import org.jackhuang.watercraft.util.WPLog;
 
-import cpw.mods.fml.common.Optional.Method;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.FluidRegistry;
 
 public class TileEntityTurbine extends TileEntityRotor {
@@ -96,26 +95,26 @@ public class TileEntityTurbine extends TileEntityRotor {
         case 2:
             // z+1
             if (Reservoir.isRes(world, x, y, z + 1)) {
-                reservoir = (TileEntityReservoir) world.getTileEntity(x, y,
+                reservoir = (TileEntityReservoir) world.getBlockTileEntity(x, y,
                         z + 1);
             }
             break;
         case 5:
             // x-1
             if (Reservoir.isRes(world, x - 1, y, z))
-                reservoir = (TileEntityReservoir) world.getTileEntity(x - 1, y,
+                reservoir = (TileEntityReservoir) world.getBlockTileEntity(x - 1, y,
                         z);
             break;
         case 3:
             // z-1
             if (Reservoir.isRes(world, x, y, z - 1))
-                reservoir = (TileEntityReservoir) world.getTileEntity(x, y,
+                reservoir = (TileEntityReservoir) world.getBlockTileEntity(x, y,
                         z - 1);
             break;
         case 4:
             // x+1
             if (Reservoir.isRes(world, x + 1, y, z))
-                reservoir = (TileEntityReservoir) world.getTileEntity(x + 1, y,
+                reservoir = (TileEntityReservoir) world.getBlockTileEntity(x + 1, y,
                         z);
             break;
         }
@@ -178,7 +177,7 @@ public class TileEntityTurbine extends TileEntityRotor {
     }
 
     @Override
-    public String getInventoryName() {
+    public String getInvName() {
         return type == null ? "NULL" : type.getShowedName();
     }
 

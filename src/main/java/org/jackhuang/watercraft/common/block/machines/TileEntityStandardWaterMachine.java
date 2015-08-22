@@ -71,8 +71,8 @@ public abstract class TileEntityStandardWaterMachine extends
     }
 
     @Override
-    public void markDirty() {
-        super.markDirty();
+    public void onInventoryChanged() {
+        super.onInventoryChanged();
 
         if (isServerSide())
             setOverclockRates();
@@ -128,7 +128,7 @@ public abstract class TileEntityStandardWaterMachine extends
         }
 
         if (needsInvUpdate)
-            super.markDirty();
+            super.onInventoryChanged();
     }
 
     protected void beginProcess(MyRecipeOutput output) {

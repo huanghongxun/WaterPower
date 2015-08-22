@@ -12,8 +12,8 @@ import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.client.ClientProxy;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.util.IIcon;
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
 
 public class RecolorableTextures {
@@ -81,14 +81,14 @@ public class RecolorableTextures {
 		CIRCUIT,
 		CRUSHED;
 		
-		protected IIcon icon = null;
+		protected Icon icon = null;
 		
-		public void registerIcon(IIconRegister iconRegister) {
+		public void registerIcon(IconRegister iconRegister) {
 			icon = iconRegister.registerIcon(Reference.ModID + ":iconsets/" + name());
 		}
 
 		@Override
-		public IIcon getIcon() {
+		public Icon getIcon() {
 			return icon;
 		}
 	}

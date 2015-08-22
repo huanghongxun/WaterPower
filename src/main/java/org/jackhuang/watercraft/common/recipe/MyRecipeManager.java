@@ -75,10 +75,7 @@ public class MyRecipeManager implements IRecipeManager {
                     break;
                 if (adjustInput) {
                     if (input.getItem().hasContainerItem()) {
-                        ItemStack container = input.getItem().getContainerItem(
-                                input);
-
-                        input = container.copy();
+                        input = new ItemStack(input.getItem().getContainerItem());
                     } else {
                         input.stackSize -= recipeInput.getInputAmount();
                     }

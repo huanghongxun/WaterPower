@@ -168,8 +168,8 @@ public final class StackUtil {
 
     public static ItemStack consumeItem(ItemStack stack) {
         if (stack.stackSize == 1) {
-            if (stack.getItem().hasContainerItem(stack)) {
-                return stack.getItem().getContainerItem(stack);
+            if (stack.getItem().hasContainerItem()) {
+                return new ItemStack(stack.getItem().getContainerItem());
             }
             return null;
         }

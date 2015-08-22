@@ -97,7 +97,7 @@ public class EntityWaterWheel extends Entity {
 	public void onUpdate() {
 		super.onUpdate();
 
-		this.parent = ((TileEntityWatermill) this.worldObj.getTileEntity(
+		this.parent = ((TileEntityWatermill) this.worldObj.getBlockTileEntity(
 				this.xParent, this.yParent, this.zParent));
 		
 		if (this.parent == null)

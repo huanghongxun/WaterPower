@@ -14,8 +14,6 @@ import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.client.gui.ContainerRotor;
 import org.jackhuang.watercraft.common.EnergyType;
 import org.jackhuang.watercraft.common.block.tileentity.TileEntityGenerator;
-import org.jackhuang.watercraft.common.network.MessagePacketHandler;
-import org.jackhuang.watercraft.common.network.PacketUnitChanged;
 import org.jackhuang.watercraft.util.Utils;
 import org.jackhuang.watercraft.util.WPLog;
 import org.lwjgl.opengl.GL11;
@@ -70,15 +68,15 @@ public class GuiWatermill extends GuiContainer {
     @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
 
-        fontRendererObj.drawString(gen.getInventoryName(), 8, 6, 0x404040);
-        fontRendererObj.drawString(
+        fontRenderer.drawString(gen.getInvName(), 8, 6, 0x404040);
+        fontRenderer.drawString(
                 StatCollector.translateToLocal("cptwtrml.rotor.ROTOR") + ":",
                 44, 30, 0x404040);
-        fontRendererObj.drawString(
+        fontRenderer.drawString(
                 StatCollector.translateToLocal("cptwtrml.watermill.OUTPUT")
                         + ": " + Utils.DEFAULT_DECIMAL_FORMAT.format(gen.getFromEU(gen.latestOutput))
                         + gen.energyType.name() + "/t", 8, 45, 0x404040);
-        fontRendererObj
+        fontRenderer
                 .drawString(
                         StatCollector
                                 .translateToLocal("cptwtrml.watermill.CHECK_WATER")
@@ -93,7 +91,7 @@ public class GuiWatermill extends GuiContainer {
                         8, 55, 0x404040);
         int a = gen.getRange();
         int b = a * a * a - 1;
-        fontRendererObj.drawString(
+        fontRenderer.drawString(
                 StatCollector.translateToLocal("cptwtrml.watermill.NEED") + ":"
                         + b + "=" + a + "^3-1", 8, 65, 0x404040);
     }

@@ -6,6 +6,7 @@ import java.util.Random;
 
 import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.client.gui.IHasGui;
+import org.jackhuang.watercraft.common.DefaultIDs;
 import org.jackhuang.watercraft.common.block.tileentity.TileEntityBase;
 import org.jackhuang.watercraft.common.block.tileentity.TileEntityBlock;
 import org.jackhuang.watercraft.common.block.tileentity.TileEntityInventory;
@@ -19,7 +20,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
@@ -32,13 +33,13 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.ForgeDirection;
 
 public abstract class BlockWaterPower extends BlockContainer {
     
@@ -51,7 +52,7 @@ public abstract class BlockWaterPower extends BlockContainer {
             { 0, 1, 5, 3, 2, 4 }, { 0, 1, 2, 4, 3, 5 }, { 0, 1, 4, 2, 5, 3 } };
 
     @SideOnly(Side.CLIENT)
-    protected IIcon[][] textures;
+    protected Icon[][] textures;
 
     public BlockWaterPower(String id, Material material) {
         this(id, material, ItemBlock.class);
@@ -59,9 +60,8 @@ public abstract class BlockWaterPower extends BlockContainer {
 
     public BlockWaterPower(String id, Material material,
             Class<? extends ItemBlock> itemClass) {
-        super(material);
+        super(DefaultIDs.getBlockIdFor(id), material);
 
-        setBlockName(id);
         setCreativeTab(WaterPower.creativeTabWaterPower);
         setHardness(3.0f);
 
@@ -69,7 +69,7 @@ public abstract class BlockWaterPower extends BlockContainer {
     }
 
     @SideOnly(Side.CLIENT)
-    public IIcon getIcon(int side, int meta) {
+    public Icon getIcon(int side, int meta) {
         int dir = getDirection(meta);
         int index = getTextureIndex(meta);
         int subIndex = getTextureSubIndex(dir, side);
@@ -89,7 +89,7 @@ public abstract class BlockWaterPower extends BlockContainer {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public IIcon getIcon(IBlockAccess iBlockAccess, int x, int y, int z,
+    public Icon getBlockTexture(IBlockAccess iBlockAccess, int x, int y, int z,
             int side) {
         int direction = getDirection(iBlockAccess, x, y, z);
         int meta = iBlockAccess.getBlockMetadata(x, y, z);
@@ -117,7 +117,7 @@ public abstract class BlockWaterPower extends BlockContainer {
     }
 
     public int getDirection(IBlockAccess iBlockAccess, int x, int y, int z) {
-        TileEntity te = iBlockAccess.getTileEntity(x, y, z);
+        TileEntity te = iBlockAccess.getBlockTileEntity(x, y, z);
 
         if ((te instanceof TileEntityBlock))
             return ((TileEntityBlock) te).getDirection();
@@ -131,7 +131,7 @@ public abstract class BlockWaterPower extends BlockContainer {
     }
 
     protected String getTextureName(int index) {
-        Item item = Item.getItemFromBlock(this);
+        Item item = Item.itemsList[blockID];
 
         if (!item.getHasSubtypes()) {
             if (index == 0) {
@@ -177,7 +177,7 @@ public abstract class BlockWaterPower extends BlockContainer {
             EntityLivingBase entityliving, ItemStack itemStack) {
         if (WaterPower.isClientSide()) return;
         
-        TileEntity tileEntity = world.getTileEntity(x, y, z);
+        TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
 
         if ((tileEntity instanceof TileEntityBlock)) {
             TileEntityBlock te = (TileEntityBlock) tileEntity;
@@ -205,8 +205,8 @@ public abstract class BlockWaterPower extends BlockContainer {
     }
 
     @Override
-    public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
-        TileEntity te = world.getTileEntity(x, y, z);
+    public void breakBlock(World world, int x, int y, int z, int block, int meta) {
+        TileEntity te = world.getBlockTileEntity(x, y, z);
         
         if (te != null) {
             TEMPORARYTILEENTITY_LOCAL.set(te);
@@ -239,16 +239,16 @@ public abstract class BlockWaterPower extends BlockContainer {
     }
 
     @Override
-    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z,
+    public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z,
             int metadata, int fortune) {
         ArrayList<ItemStack> al = new ArrayList<ItemStack>();
-        TileEntity te = world.getTileEntity(x, y, z);
+        TileEntity te = world.getBlockTileEntity(x, y, z);
         if(te == null) te = TEMPORARYTILEENTITY_LOCAL.get();
         TEMPORARYTILEENTITY_LOCAL.remove();
         if (te instanceof IDroppable) {
             al.add(((IDroppable)te).getDroppedItemStack());
         } else {
-            al.addAll(super.getDrops(world, x, y, z, metadata, fortune));
+            al.addAll(super.getBlockDropped(world, x, y, z, metadata, fortune));
         }
         if (te instanceof IInventory) {
             IInventory inv = (IInventory) te;
@@ -265,9 +265,9 @@ public abstract class BlockWaterPower extends BlockContainer {
     }
 
     @Override
-    public void onNeighborChange(IBlockAccess world, int x, int y, int z,
+    public void onNeighborTileChange(World world, int x, int y, int z,
             int tileX, int tileY, int tileZ) {
-        TileEntity localTileEntity = world.getTileEntity(x, y, z);
+        TileEntity localTileEntity = world.getBlockTileEntity(x, y, z);
 
         if ((localTileEntity instanceof TileEntityBase)) {
             ((TileEntityBase) localTileEntity).onNeighborTileChange(tileX,
@@ -278,7 +278,7 @@ public abstract class BlockWaterPower extends BlockContainer {
     @Override
     public boolean rotateBlock(World worldObj, int x, int y, int z,
             ForgeDirection axis) {
-        TileEntity te = worldObj.getTileEntity(x, y, z);
+        TileEntity te = worldObj.getBlockTileEntity(x, y, z);
         if(te != null && te instanceof TileEntityBlock) {
             TileEntityBlock t = (TileEntityBlock) te;
             return t.setDirection(axis.ordinal());
@@ -287,7 +287,7 @@ public abstract class BlockWaterPower extends BlockContainer {
     }
 
     @Override
-    public boolean canCreatureSpawn(EnumCreatureType type, IBlockAccess world,
+    public boolean canCreatureSpawn(EnumCreatureType type, World world,
             int x, int y, int z) {
         return false;
     }
@@ -304,12 +304,12 @@ public abstract class BlockWaterPower extends BlockContainer {
         if(entityPlayer != null) {
             ItemStack is = entityPlayer.inventory.getCurrentItem();
             if(BuildCraftModule.isWrench(entityPlayer, is, x, y, z)&&entityPlayer.isSneaking()) {
-                TileEntity tileEntity = world.getTileEntity(x, y, z);
-                Block b = world.getBlock(x, y, z);
+                TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+                int b = world.getBlockId(x, y, z);
                 if(tileEntity != null && tileEntity instanceof IDroppable) {
                     IDroppable te = (IDroppable) tileEntity;
-                    ArrayList<ItemStack> drops = b.getDrops(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-                    if(b.removedByPlayer(world, entityPlayer, x, y, z, false)) {
+                    ArrayList<ItemStack> drops = Block.blocksList[b].getBlockDropped(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
+                    if(Block.blocksList[b].removeBlockByPlayer(world, entityPlayer, x, y, z)) {
                         Utils.dropItems(world, x, y, z, drops);
                     }
                     return false;
@@ -320,7 +320,7 @@ public abstract class BlockWaterPower extends BlockContainer {
         if (entityPlayer.isSneaking())
             return false;
 
-        TileEntity te = world.getTileEntity(x, y, z);
+        TileEntity te = world.getBlockTileEntity(x, y, z);
 
         if ((te instanceof IHasGui)) {
             entityPlayer.openGui(WaterPower.instance,
@@ -334,14 +334,14 @@ public abstract class BlockWaterPower extends BlockContainer {
     protected abstract int maxMetaData();
 
     @Override
-    public void getSubBlocks(Item item, CreativeTabs p_149666_2_, List itemList) {
-        if (!item.getHasSubtypes())
+    public void getSubBlocks(int item, CreativeTabs p_149666_2_, List itemList) {
+        if (!Item.itemsList[item].getHasSubtypes())
             itemList.add(new ItemStack(this));
         else {
             for (int i = 0; i < maxMetaData(); i++) {
                 ItemStack is = new ItemStack(this, 1, i);
 
-                if (item.getUnlocalizedName(is) == null)
+                if (Item.itemsList[item].getUnlocalizedName(is) == null)
                     break;
                 itemList.add(is);
             }

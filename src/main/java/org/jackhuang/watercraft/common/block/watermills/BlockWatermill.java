@@ -16,10 +16,10 @@ import org.jackhuang.watercraft.common.block.BlockRotor;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -34,7 +34,7 @@ public class BlockWatermill extends BlockRotor {
 	
 	@Override
 	protected int getTextureIndex(IBlockAccess iBlockAccess, int x, int y, int z, int meta) {
-		TileEntity tTileEntity = iBlockAccess.getTileEntity(x, y, z);
+		TileEntity tTileEntity = iBlockAccess.getBlockTileEntity(x, y, z);
 		if(tTileEntity instanceof TileEntityWatermill) {
 			if(((TileEntityWatermill)tTileEntity).getType() == null) return meta;
 			return ((TileEntityWatermill)tTileEntity).getType().ordinal();
@@ -43,11 +43,11 @@ public class BlockWatermill extends BlockRotor {
 	}
 
 	@Override
-	public void registerBlockIcons(IIconRegister iconRegister) {
-		textures = new IIcon[maxMetaData()][6];
+	public void registerIcons(IconRegister iconRegister) {
+		textures = new Icon[maxMetaData()][6];
 		
-		IIcon iconDown = iconRegister.registerIcon(Reference.ModID + ":watermill/DOWN");
-		IIcon iconUp = iconRegister.registerIcon(Reference.ModID + ":watermill/UP");
+		Icon iconDown = iconRegister.registerIcon(Reference.ModID + ":watermill/DOWN");
+		Icon iconUp = iconRegister.registerIcon(Reference.ModID + ":watermill/UP");
 		
 		for (int i = 0; i < maxMetaData(); i++) {
 			textures[i][0] = iconDown;
@@ -58,7 +58,7 @@ public class BlockWatermill extends BlockRotor {
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world, int var2) {
+	public TileEntity createNewTileEntity(World world) {
 		return WaterType.makeTileEntity(0);
 	}
 	
@@ -80,7 +80,7 @@ public class BlockWatermill extends BlockRotor {
 	public ArrayList<String> getDebugInfo(EntityPlayer aPlayer, int aX, int aY,
 			int aZ, int aLogLevel) {
 		ArrayList<String> al = new ArrayList<String>();
-		TileEntity tileEntity = aPlayer.worldObj.getTileEntity(aX, aY, aZ);
+		TileEntity tileEntity = aPlayer.worldObj.getBlockTileEntity(aX, aY, aZ);
 		if(tileEntity instanceof TileEntityWatermill) {
 			TileEntityWatermill te = (TileEntityWatermill) tileEntity;
 			if(te.getType() == null)

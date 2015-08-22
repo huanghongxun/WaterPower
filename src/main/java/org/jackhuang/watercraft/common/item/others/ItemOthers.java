@@ -2,7 +2,6 @@ package org.jackhuang.watercraft.common.item.others;
 
 import java.util.List;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -11,12 +10,12 @@ import net.minecraft.util.ResourceLocation;
 import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.common.item.GlobalItems;
-import org.jackhuang.watercraft.common.item.ItemBase;
+import org.jackhuang.watercraft.common.item.ItemWaterPower;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemOthers extends ItemBase {
+public class ItemOthers extends ItemWaterPower {
 	
 	public ItemOthers() {
 		super("cptItemUpdaters");
@@ -36,7 +35,7 @@ public class ItemOthers extends ItemBase {
 	}
 	
 	@Override
-	public String getItemStackDisplayName(ItemStack itemstack) {
+	public String getItemDisplayName(ItemStack itemstack) {
 		if(itemstack.getItemDamage() >= ItemType.values().length) return null;
 		return ItemType.values()[itemstack.getItemDamage()].getShowedName();
 	}

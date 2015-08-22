@@ -19,7 +19,7 @@ public abstract class BlockRotor extends BlockMeta {
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z,
             EntityPlayer entityPlayer, int s, float f1, float f2, float f3) {
-        TileEntity te = world.getTileEntity(x, y, z);
+        TileEntity te = world.getBlockTileEntity(x, y, z);
         if (te instanceof TileEntityRotor) {
             TileEntityRotor ter = (TileEntityRotor) te;
             ItemStack is = entityPlayer.inventory.getCurrentItem();

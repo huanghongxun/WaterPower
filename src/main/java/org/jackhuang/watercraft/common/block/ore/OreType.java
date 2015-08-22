@@ -6,6 +6,7 @@ import org.jackhuang.watercraft.common.item.GlobalItems;
 import org.jackhuang.watercraft.common.item.crafting.ItemMaterial;
 import org.jackhuang.watercraft.common.item.crafting.MaterialForms;
 import org.jackhuang.watercraft.common.item.crafting.MaterialTypes;
+import org.jackhuang.watercraft.common.recipe.IRecipeRegistrar;
 import org.jackhuang.watercraft.common.recipe.RecipeAdder;
 import org.jackhuang.watercraft.util.Mods;
 
@@ -43,10 +44,10 @@ public enum OreType {
 	public static void registerRecipes() {
 		for(OreType o : OreType.values()) {
 		    RecipeAdder.macerator(new ItemStack(GlobalBlocks.ore, 1, o.ordinal()), new ItemStack(GlobalItems.oreDust, 2, o.ordinal()));
-	        FurnaceRecipes.smelting().func_151394_a(new ItemStack(GlobalBlocks.ore, 1, o.ordinal()),
-	                ItemMaterial.get(o.t, MaterialForms.ingot), 0f);
-	        FurnaceRecipes.smelting().func_151394_a(new ItemStack(GlobalItems.oreDust, 1, o.ordinal()),
-	                ItemMaterial.get(o.t, MaterialForms.ingot), 0f);
+	        IRecipeRegistrar.addSmelting(new ItemStack(GlobalBlocks.ore, 1, o.ordinal()),
+	                ItemMaterial.get(o.t, MaterialForms.ingot));
+	        IRecipeRegistrar.addSmelting(new ItemStack(GlobalItems.oreDust, 1, o.ordinal()),
+	                ItemMaterial.get(o.t, MaterialForms.ingot));
 		}
 	}
 }

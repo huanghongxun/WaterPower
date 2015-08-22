@@ -107,7 +107,7 @@ public class InventorySlotConsumableLiquid extends InventorySlotConsumable {
 				return null;
 
 			if (stack.getItem().hasContainerItem()) {
-				output.setValue(stack.getItem().getContainerItem(stack));
+				output.setValue(new ItemStack(stack.getItem().getContainerItem()));
 			}
 
 			if (!simulate) {

@@ -13,7 +13,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import ic2.api.item.ElectricItem;
 import ic2.api.item.IElectricItem;
 import ic2.api.item.IMetalArmor;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -21,12 +21,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.ISpecialArmor;
 
 public class ItemTrouser extends ItemArmor
@@ -36,8 +36,8 @@ public class ItemTrouser extends ItemArmor
 
 	int saved = 0;
 
-	public ItemTrouser(WaterType type) {
-		super(EnumHelper.addArmorMaterial("CPTWTRMLPANT", 1, new int[] { 1, 1, 1, 1 }, 1), 0, 2);
+	public ItemTrouser(int id, WaterType type) {
+		super(id, EnumHelper.addArmorMaterial("CPTWTRMLPANT", 1, new int[] { 1, 1, 1, 1 }, 1), 0, 2);
 
 		setUnlocalizedName(type.getTrousersUnlocalizedName());
 		setCreativeTab(WaterPower.creativeTabWaterPower);
@@ -66,7 +66,7 @@ public class ItemTrouser extends ItemArmor
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister iconRegister) {
+	public void registerIcons(IconRegister iconRegister) {
 		this.itemIcon = iconRegister.registerIcon(Reference.ModID + ":armor/itemArmorLegs");
 	}
 	
@@ -81,7 +81,7 @@ public class ItemTrouser extends ItemArmor
 	}
 	
 	@Override
-	public void onArmorTick(World world, EntityPlayer player,
+	public void onArmorTickUpdate(World world, EntityPlayer player,
 			ItemStack itemStack) {
 		if(world.isRemote) return;
 		
@@ -118,7 +118,7 @@ public class ItemTrouser extends ItemArmor
 	}
 	
 	@Override
-	public String getItemStackDisplayName(ItemStack itemstack) {
+	public String getItemDisplayName(ItemStack itemstack) {
 		return type.getShowedName() + StatCollector.translateToLocal("cptwtmrl.watermill.TROUSERS");
 	}
 

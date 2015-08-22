@@ -2,7 +2,6 @@ package org.jackhuang.watercraft.util;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import org.apache.logging.log4j.Logger;
 
 public class ReflectionUtil {
 	public static Field getField(Class<?> clazz, String[] names) {

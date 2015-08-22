@@ -13,7 +13,7 @@ import org.jackhuang.watercraft.common.recipe.MyRecipeOutput;
 import org.jackhuang.watercraft.util.StackUtil;
 import org.lwjgl.opengl.GL11;
 
-import codechicken.lib.gui.GuiDraw;
+import codechicken.core.gui.GuiDraw;
 import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.api.API;

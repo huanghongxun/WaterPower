@@ -10,14 +10,14 @@ package org.jackhuang.watercraft.common.recipe;
 
 import static org.jackhuang.watercraft.common.item.crafting.CraftingTypes.*;
 import static org.jackhuang.watercraft.common.item.crafting.LevelTypes.*;
-import gregtech.api.GregTech_API;
+import gregtechmod.api.GregTech_API;
 import mods.railcraft.api.crafting.RailcraftCraftingManager;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
+import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.Property;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
@@ -33,8 +33,6 @@ import org.jackhuang.watercraft.common.item.crafting.LevelTypes;
 import org.jackhuang.watercraft.common.item.crafting.MaterialForms;
 import org.jackhuang.watercraft.common.item.crafting.MaterialTypes;
 import org.jackhuang.watercraft.common.item.others.ItemType;
-import org.jackhuang.watercraft.integration.ImmersiveEngineeringModule;
-import org.jackhuang.watercraft.integration.MekanismModule;
 import org.jackhuang.watercraft.integration.RailcraftModule;
 import org.jackhuang.watercraft.integration.ic2.ICItemFinder;
 import org.jackhuang.watercraft.util.Mods;
@@ -115,9 +113,10 @@ public abstract class IRecipeRegistrar {
         }
 
         for (int i = 0; i < WaterType.values().length; i++) {
+        	if(WaterType.values()[i].trousers != null)
             GameRegistry.addShapelessRecipe(new ItemStack(
                     WaterType.values()[i].trousers, 1, 0), new ItemStack(
-                    GlobalBlocks.waterMill, 1, i), Items.iron_leggings);
+                    GlobalBlocks.waterMill, 1, i), Item.legsIron);
         }
 
         registerBaseMaterialRecipes();
@@ -163,9 +162,9 @@ public abstract class IRecipeRegistrar {
                 "M", "M", 'M', "dustMagnet");
         this.addRecipeByOreDictionary(ItemCrafting.get(casing, LevelTypes.MK1),
                 "WSW", "WSW", "WSW", 'W', ItemType.StoneStruct.item(), 'S',
-                Blocks.stonebrick);
+                Block.stoneBrick);
         this.addRecipeByOreDictionary(ItemType.StoneStruct.item(), "WW ",
-                "WWS", "WW ", 'W', Blocks.stonebrick, 'S',
+                "WWS", "WW ", 'W', Block.stoneBrick, 'S',
                 ItemType.WoodenHammer.item());
         addPaddleBaseRecipe(LevelTypes.MK1);
         this.addRecipeByOreDictionary(
@@ -176,9 +175,9 @@ public abstract class IRecipeRegistrar {
                 "WWW", 'W', "logWood", 'S', "plankWood");
         this.addRecipeByOreDictionary(
                 ItemCrafting.get(fixedTool, LevelTypes.MK1), "WW", "AW", 'W',
-                "logWood", 'A', Items.string);
+                "logWood", 'A', Item.silk);
         this.addRecipeByOreDictionary(ItemType.WoodenHammer.item(6), "WW ",
-                "WWI", "WW ", 'W', "logWood", 'I', Items.stick);
+                "WWI", "WW ", 'W', "logWood", 'I', Item.stick);
         if (Mods.IndustrialCraft2.isAvailable) {
             this.addRecipeByOreDictionary(
                     ItemCrafting.get(outputInterface, LevelTypes.MK1), "GW",
@@ -200,11 +199,11 @@ public abstract class IRecipeRegistrar {
                 ItemType.WaterResistantRubber.item(), "itemRubber",
                 "itemRubber", "itemRubber", "itemRubber");
         this.addShapelessRecipeByOreDictionary(
-                ItemType.WaterResistantRubber.item(), Items.slime_ball,
-                Items.slime_ball, Items.slime_ball, Items.slime_ball);
+                ItemType.WaterResistantRubber.item(), Item.slimeBall,
+                Item.slimeBall, Item.slimeBall, Item.slimeBall);
         this.addRecipeByOreDictionary(
                 ItemCrafting.get(CraftingTypes.rotationAxle, MK1), "SBS",
-                "SHS", "SBS", 'S', Items.stick, 'B', "plankWood", 'H',
+                "SHS", "SBS", 'S', Item.stick, 'B', "plankWood", 'H',
                 ItemType.WoodenHammer.item());
         if (gregtechRecipe) {
             GregTech_API.sRecipeAdder.addBenderRecipe(
@@ -386,7 +385,7 @@ public abstract class IRecipeRegistrar {
         this.addRecipeByOreDictionary(
                 ItemCrafting.get(CraftingTypes.rotor, LevelTypes.MK4), "SPS",
                 "PBP", "SPS", 'S', ItemType.DenseSilverCoil.item(), 'P',
-                "plateIndustrialSteel", 'B', Blocks.diamond_block);
+                "plateIndustrialSteel", 'B', Block.blockDiamond);
 
         // MK5
         addCasingRecipe(LevelTypes.MK5, "plateManganeseSteel",
@@ -457,7 +456,7 @@ public abstract class IRecipeRegistrar {
         this.addRecipeByOreDictionary(
                 ItemCrafting.get(CraftingTypes.rotor, LevelTypes.MK5), "SPS",
                 "PBP", "SPS", 'S', ItemType.DenseSilverCoil.item(), 'P',
-                "plateManganeseSteel", 'B', Blocks.diamond_block);
+                "plateManganeseSteel", 'B', Block.blockDiamond);
 
         // MK7
         addCasingRecipe(LevelTypes.MK7, "plateVanadiumSteel",
@@ -518,7 +517,7 @@ public abstract class IRecipeRegistrar {
         this.addRecipeByOreDictionary(
                 ItemCrafting.get(CraftingTypes.rotor, LevelTypes.MK7), "SPS",
                 "PBP", "SPS", 'S', ItemType.DenseSilverCoil.item(), 'P',
-                "plateVanadiumSteel", 'B', Blocks.diamond_block);
+                "plateVanadiumSteel", 'B', Block.blockDiamond);
 
         if (gregtechRecipe) {
             GregTech_API.sRecipeAdder.addChemicalRecipe(
@@ -553,7 +552,7 @@ public abstract class IRecipeRegistrar {
                             "ingotIron");
                 addRecipeByOreDictionary(ItemType.DenseCoil.item(), " I ",
                         "CCC", " I ", 'C', "ingotCopper", 'I', "ingotIron");
-                RecipeAdder.blastFurnace(new ItemStack(Items.coal),
+                RecipeAdder.blastFurnace(new ItemStack(Item.coal),
                         ItemType.HighPurityCarbonDust.item(), 1000);
             }
 
@@ -606,7 +605,7 @@ public abstract class IRecipeRegistrar {
     }
 
     public static void addSmelting(ItemStack input, ItemStack output) {
-        FurnaceRecipes.smelting().func_151394_a(input, output, 0);
+        FurnaceRecipes.smelting().addSmelting(input.getItem().itemID, input.getItemDamage(), output, 0);
     }
 
     public static void registerOreDict(String name, ItemStack stack) {

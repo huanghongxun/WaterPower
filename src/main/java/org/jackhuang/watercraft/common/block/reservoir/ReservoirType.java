@@ -2,7 +2,6 @@ package org.jackhuang.watercraft.common.block.reservoir;
 
 import net.minecraft.util.StatCollector;
 
-import org.apache.logging.log4j.Level;
 import org.jackhuang.watercraft.common.block.reservoir.*;
 import org.jackhuang.watercraft.util.WPLog;
 

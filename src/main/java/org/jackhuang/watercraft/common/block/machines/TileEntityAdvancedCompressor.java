@@ -32,7 +32,7 @@ public class TileEntityAdvancedCompressor extends TileEntityStandardWaterMachine
 	}
 
 	@Override
-	public String getInventoryName() {
+	public String getInvName() {
 		return "AdvancedCompressor";
 	}
 
@@ -42,7 +42,7 @@ public class TileEntityAdvancedCompressor extends TileEntityStandardWaterMachine
 	}
 	
 	@Override
-	public void markDirty() {
+	public void onInventoryChanged() {
 		if(!inputSlot.isEmpty()) {
 			InventorySlotProcessableGeneric generic = (InventorySlotProcessableGeneric)inputSlot;
 			/*if(generic instanceof InventorySlotProcessableGreg) {
@@ -52,7 +52,7 @@ public class TileEntityAdvancedCompressor extends TileEntityStandardWaterMachine
 			}*/
 		}
 		
-		super.markDirty();
+		super.onInventoryChanged();
 	}
 	
 	@Override

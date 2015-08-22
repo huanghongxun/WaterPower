@@ -17,20 +17,14 @@ import net.minecraftforge.oredict.OreDictionary;
 public class MyRecipeInputOreDictionary implements IMyRecipeInput {
 	public final String input;
 	public final int amount;
-	public final Integer meta;
 
 	public MyRecipeInputOreDictionary(String input1) {
 		this(input1, 1);
 	}
 
 	public MyRecipeInputOreDictionary(String input1, int amount1) {
-		this(input1, amount1, null);
-	}
-
-	public MyRecipeInputOreDictionary(String input1, int amount1, Integer meta) {
 		this.input = input1;
 		this.amount = amount1;
-		this.meta = meta;
 	}
 
 	@Override
@@ -39,8 +33,7 @@ public class MyRecipeInputOreDictionary implements IMyRecipeInput {
 
 		for (ItemStack input1 : inputs) {
 			if (input1.getItem() != null) {
-				int metaRequired = this.meta == null ? input1.getItemDamage()
-						: this.meta.intValue();
+				int metaRequired = input1.getItemDamage();
 
 				if ((subject.getItem() == input1.getItem())
 						&& ((subject.getItemDamage() == metaRequired) || (metaRequired == 32767))) {
@@ -57,7 +50,6 @@ public class MyRecipeInputOreDictionary implements IMyRecipeInput {
 		int result = 1;
 		result = prime * result + amount;
 		result = prime * result + ((input == null) ? 0 : input.hashCode());
-		result = prime * result + ((meta == null) ? 0 : meta.hashCode());
 		return result;
 	}
 
@@ -76,11 +68,6 @@ public class MyRecipeInputOreDictionary implements IMyRecipeInput {
 			if (other.input != null)
 				return false;
 		} else if (!input.equals(other.input))
-			return false;
-		if (meta == null) {
-			if (other.meta != null)
-				return false;
-		} else if (!meta.equals(other.meta))
 			return false;
 		return true;
 	}

@@ -34,17 +34,17 @@ public abstract class GuiMachineBase extends GuiContainer {
 	protected ResourceLocation background;
 
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-		this.fontRendererObj.drawString(this.name,
-				(this.xSize - this.fontRendererObj.getStringWidth(this.name)) / 2,
+		this.fontRenderer.drawString(this.name,
+				(this.xSize - this.fontRenderer.getStringWidth(this.name)) / 2,
 				6, 0x404040);
-		this.fontRendererObj
+		this.fontRenderer
 				.drawString(this.inv, 8, this.ySize - 96 + 2, 0x404040);
 
-		this.fontRendererObj.drawString(StatCollector.translateToLocal("cptwtrml.gui.stored") + ": "
+		this.fontRenderer.drawString(StatCollector.translateToLocal("cptwtrml.gui.stored") + ": "
 				+ this.container.tileEntity.getEnergy() + "mb", 8, this.ySize - 105 + 2,
 				0x404040);
 		
-		this.fontRendererObj.drawString(StatCollector.translateToLocal("cptwtrml.gui.using") + ": "
+		this.fontRenderer.drawString(StatCollector.translateToLocal("cptwtrml.gui.using") + ": "
 				+ this.container.tileEntity.energyConsume + "mb/t", 8, this.ySize - 114 + 2,
 				0x404040);
 	}

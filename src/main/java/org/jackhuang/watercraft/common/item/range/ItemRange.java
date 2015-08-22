@@ -6,9 +6,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
 import org.jackhuang.watercraft.common.item.GlobalItems;
-import org.jackhuang.watercraft.common.item.ItemBase;
+import org.jackhuang.watercraft.common.item.ItemWaterPower;
 
-public class ItemRange extends ItemBase {
+public class ItemRange extends ItemWaterPower {
 	
 	public ItemRange() {
 		super("cptItemRange");
@@ -27,7 +27,7 @@ public class ItemRange extends ItemBase {
 	}
 	
 	@Override
-	public String getItemStackDisplayName(ItemStack itemstack) {
+	public String getItemDisplayName(ItemStack itemstack) {
 		if(itemstack.getItemDamage() >= RangeType.values().length) return null;
 		return RangeType.values()[itemstack.getItemDamage()].getShowedName();
 	}

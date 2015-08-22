@@ -6,13 +6,12 @@ import org.lwjgl.opengl.GL11;
 
 import com.google.common.collect.ImmutableList;
 
-import scala.actors.threadpool.Arrays;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.fluids.FluidStack;
@@ -40,13 +39,13 @@ public class GuiReservoir extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-		fontRendererObj.drawString(gen.getInventoryName(), 8, 6, 0x404040);
-		fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 0x404040);
-		fontRendererObj.drawString(StatCollector.translateToLocal("cptwtrml.gui.reservoir.add") + ": " + gen.getLastAddedWater(), 12, 20, 0x404040);
+		fontRenderer.drawString(gen.getInvName(), 8, 6, 0x404040);
+		fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 0x404040);
+		fontRenderer.drawString(StatCollector.translateToLocal("cptwtrml.gui.reservoir.add") + ": " + gen.getLastAddedWater(), 12, 20, 0x404040);
 		
 		FluidStack f = gen.getFluidStackfromTank();
 		
-		IIcon fluid = RenderUtils.getFluidTexture(gen.getFluidfromTank(), false);
+		Icon fluid = RenderUtils.getFluidTexture(gen.getFluidfromTank(), false);
 		if(fluid == null) return;
 		float percent = (float)gen.getFluidAmount() / gen.getFluidTankCapacity();
 		mc.renderEngine.bindTexture(RenderUtils.getFluidSheet(gen.getFluidfromTank()));
@@ -59,8 +58,8 @@ public class GuiReservoir extends GuiContainer {
         int i1 = (height - ySize) / 2;
         int x = par1 - l, y = par2 - i1;
 		if(x >= 82 && x <= 93 && y >= 36 && y <= 48) {
-		    drawHoveringText(ImmutableList.of((f == null ? StatCollector.translateToLocal("cptwtrml.gui.empty") : f.getLocalizedName()),
-		            gen.getFluidAmount() + "/" + gen.getFluidTankCapacity() + "mb"), x, y, fontRendererObj);
+		    drawHoveringText(ImmutableList.of((f == null ? StatCollector.translateToLocal("cptwtrml.gui.empty") : f.getFluid().getLocalizedName()),
+		            gen.getFluidAmount() + "/" + gen.getFluidTankCapacity() + "mb"), x, y, fontRenderer);
 		}
 	}
 }

@@ -1,8 +1,5 @@
 package org.jackhuang.watercraft.common.block.tileentity;
 
-import cpw.mods.fml.common.Optional.Interface;
-import cpw.mods.fml.common.Optional.InterfaceList;
-import cpw.mods.fml.common.Optional.Method;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ic2.api.tile.IWrenchable;
@@ -19,11 +16,10 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.IIcon;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.util.Icon;
+import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 
-@InterfaceList({ @Interface(iface = "ic2.api.tile.IWrenchable", modid = Mods.IDs.IndustrialCraft2API, striprefs = true) })
 public abstract class TileEntityBlock extends TileEntityLiquidTankInventory
         implements IWrenchable, IDroppable {
 
@@ -38,7 +34,7 @@ public abstract class TileEntityBlock extends TileEntityLiquidTankInventory
     private boolean needsUpdate = false;
 
     @SideOnly(Side.CLIENT)
-    private IIcon[] lastRenderIcons;
+    private Icon[] lastRenderIcons;
 
     public void readFromNBT(NBTTagCompound tag) {
         super.readFromNBT(tag);
@@ -89,10 +85,10 @@ public abstract class TileEntityBlock extends TileEntityLiquidTankInventory
         Block block = getBlockType();
 
         if (this.lastRenderIcons == null)
-            this.lastRenderIcons = new IIcon[6];
+            this.lastRenderIcons = new Icon[6];
 
         for (int side = 0; side < 6; side++) {
-            this.lastRenderIcons[side] = block.getIcon(this.worldObj,
+            this.lastRenderIcons[side] = block.getBlockTexture(this.worldObj,
                     this.xCoord, this.yCoord, this.zCoord, side);
         }
     }
@@ -110,37 +106,31 @@ public abstract class TileEntityBlock extends TileEntityLiquidTankInventory
     }
 
     @Override
-    @Method(modid = Mods.IDs.IndustrialCraft2API)
     public short getFacing() {
         return getDirection();
     }
 
     @Override
-    @Method(modid = Mods.IDs.IndustrialCraft2API)
     public boolean wrenchCanSetFacing(EntityPlayer entityPlayer, int side) {
         return facing != side;
     }
 
     @Override
-    @Method(modid = Mods.IDs.IndustrialCraft2API)
     public void setFacing(short facing) {
         setDirection(facing);
     }
 
     @Override
-    @Method(modid = Mods.IDs.IndustrialCraft2API)
     public boolean wrenchCanRemove(EntityPlayer entityPlayer) {
         return true;
     }
 
     @Override
-    @Method(modid = Mods.IDs.IndustrialCraft2API)
     public float getWrenchDropRate() {
         return 1.0F;
     }
 
     @Override
-    @Method(modid = Mods.IDs.IndustrialCraft2API)
     public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
         return getDroppedItemStack();
     }
@@ -187,7 +177,7 @@ public abstract class TileEntityBlock extends TileEntityLiquidTankInventory
 
     @Override
     public ItemStack getDroppedItemStack() {
-        return new ItemStack(this.worldObj.getBlock(this.xCoord, this.yCoord,
+        return new ItemStack(this.worldObj.getBlockId(this.xCoord, this.yCoord,
                 this.zCoord), 1, this.worldObj.getBlockMetadata(this.xCoord,
                 this.yCoord, this.zCoord));
     }

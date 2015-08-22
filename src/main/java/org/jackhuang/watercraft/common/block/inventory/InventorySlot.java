@@ -32,10 +32,10 @@ public class InventorySlot {
 	}
 
 	public void readFromNBT(NBTTagCompound nbtTagCompound) {
-		NBTTagList contentsTag = nbtTagCompound.getTagList("Contents", 10);
+		NBTTagList contentsTag = nbtTagCompound.getTagList("Contents");
 
 		for (int i = 0; i < contentsTag.tagCount(); i++) {
-			NBTTagCompound contentTag = (NBTTagCompound) contentsTag.getCompoundTagAt(i);
+			NBTTagCompound contentTag = (NBTTagCompound) contentsTag.tagAt(i);
 
 			int index = contentTag.getByte("Index") & 0xFF;
 			ItemStack itemStack = ItemStack.loadItemStackFromNBT(contentTag);

@@ -8,12 +8,9 @@
 
 package org.jackhuang.watercraft.common.recipe;
 
-import gregtech.api.GregTech_API;
+import gregtechmod.api.GregTech_API;
 
 import org.jackhuang.watercraft.common.item.others.ItemType;
-import org.jackhuang.watercraft.integration.AppliedEnergisticsModule;
-import org.jackhuang.watercraft.integration.ImmersiveEngineeringModule;
-import org.jackhuang.watercraft.integration.MekanismModule;
 import org.jackhuang.watercraft.integration.RailcraftModule;
 import org.jackhuang.watercraft.integration.ThermalExpansionModule;
 import org.jackhuang.watercraft.integration.ic2.IndustrialCraftModule;
@@ -21,9 +18,7 @@ import org.jackhuang.watercraft.util.Mods;
 
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.registry.GameRegistry;
-import mekanism.api.recipe.RecipeHelper;
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.oredict.OreDictionary;
@@ -43,21 +38,6 @@ public class RecipeAdder {
         if (Mods.ThermalExpansion.isAvailable) {
             ThermalExpansionModule.addPulverizerRecipe(3200, input, output);
         }
-        if (Mods.Factorization.isAvailable) {
-            try {
-                if (Block.getBlockFromItem(input.getItem()) != Blocks.air)
-                    factorization.oreprocessing.TileEntityGrinder.addRecipe(
-                            input, output, 1);
-            } catch (Throwable ex) {
-                FMLLog.warning("Failed to add pulverization recipe to factorization. Please report this error to https://github.com/huanghongxun/WaterPower/issues!");
-            }
-        }
-        if (Mods.Mekanism.isAvailable) {
-            MekanismModule.addCrusherRecipe(input, output);
-        }
-        if (Mods.AppliedEnergistics2.isAvailable) {
-            AppliedEnergisticsModule.crusher(input, output);
-        }
         if (need) {
             MyRecipes.macerator.addRecipe(input, output);
         }
@@ -65,10 +45,6 @@ public class RecipeAdder {
 
     public static void cutter(ItemStack input, ItemStack output) {
         boolean need = true;
-        if (Mods.IndustrialCraft2.isAvailable) {
-            need = false;
-            IndustrialCraftModule.blockcutter(input, output);
-        }
         if (need) {
             MyRecipes.cutter.addRecipe(input, output);
         }
@@ -86,10 +62,6 @@ public class RecipeAdder {
     }
 
     public static void bender(ItemStack input, ItemStack output) {
-        if (Mods.ExNihilo.isAvailable) {
-            // Incomplete
-
-        }
         if (Mods.GregTech.isAvailable) {
             GregTech_API.sRecipeAdder.addForgeHammerRecipe(input, output, 20,
                     32);
@@ -146,25 +118,12 @@ public class RecipeAdder {
     public static boolean blastFurnace(ItemStack input, ItemStack output,
             int cookTime) {
         boolean flag = false;
-        if (Mods.IndustrialCraft2.isAvailable) {
-            IndustrialCraftModule.blastfurance(input, output);
-            flag = true;
-        }
         if (Mods.Railcraft.isAvailable) {
             RailcraftModule.blastFurnace(input, true, false, cookTime, output);
             flag = true;
         }
-        if (Mods.ImmersiveEngineering.isAvailable) {
-            ImmersiveEngineeringModule.blastFurnace(input, 200, output);
-            flag = true;
-        }
-        if (Mods.Mekanism.isAvailable) {
-            MekanismModule.addMetallurgicInfuserRecipe("CARBON",
-                    Math.round(((float) cookTime) / 100.0f), input, output);
-            flag = true;
-        }
         if (!flag) {
-            FurnaceRecipes.smelting().func_151394_a(input, output, 0);
+            IRecipeRegistrar.addSmelting(input, output);
         }
         return flag;
     }

@@ -126,7 +126,7 @@ public class TileEntitySawmill extends TileEntityStandardWaterMachine {
 	}
 
 	@Override
-	public String getInventoryName() {
+	public String getInvName() {
 		return "Sawmill";
 	}
 

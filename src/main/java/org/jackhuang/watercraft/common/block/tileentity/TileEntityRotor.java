@@ -35,7 +35,7 @@ public abstract class TileEntityRotor extends TileEntityElectricMetaBlock {
                 int damage = slotRotor.get(0).getItemDamage() + tick;
                 slotRotor.get(0).setItemDamage(damage);
             }
-            markDirty();
+            onInventoryChanged();
         }
     }
 

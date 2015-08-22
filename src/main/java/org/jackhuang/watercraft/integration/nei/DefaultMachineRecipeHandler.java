@@ -9,7 +9,6 @@ import org.jackhuang.watercraft.common.recipe.IRecipeManager;
 
 import codechicken.nei.api.API;
 
-
 public class DefaultMachineRecipeHandler extends MachineRecipeHandler {
 	
 	Class<? extends GuiContainer> guiClass;

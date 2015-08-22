@@ -6,7 +6,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 
@@ -14,22 +14,22 @@ import net.minecraftforge.fluids.Fluid;
 public final class RenderUtils {
     private static final ResourceLocation BLOCK_TEXTURE = TextureMap.locationBlocksTexture;
 
-    public static IIcon getSafeIcon(IIcon icon) {
+    public static Icon getSafeIcon(Icon icon) {
         if (icon == null)
             return getMissingIcon();
         return icon;
     }
 
-    public static IIcon getMissingIcon() {
+    public static Icon getMissingIcon() {
         return ((TextureMap) Minecraft.getMinecraft().getTextureManager()
                 .getTexture(TextureMap.locationBlocksTexture))
                 .getAtlasSprite("missingno");
     }
 
-    public static IIcon getFluidTexture(Fluid fluid, boolean flowing) {
+    public static Icon getFluidTexture(Fluid fluid, boolean flowing) {
         if (fluid == null)
             return RenderUtils.getMissingIcon();
-        IIcon icon = flowing ? fluid.getFlowingIcon() : fluid.getStillIcon();
+        Icon icon = flowing ? fluid.getFlowingIcon() : fluid.getStillIcon();
         icon = RenderUtils.getSafeIcon(icon);
         return icon;
     }

@@ -17,7 +17,7 @@ import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeGenOcean;
 import net.minecraft.world.chunk.Chunk;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -41,11 +41,6 @@ import org.jackhuang.watercraft.util.Position;
 import org.jackhuang.watercraft.util.Utils;
 import org.lwjgl.opengl.HPOcclusionTest;
 
-import cpw.mods.fml.common.Optional.Interface;
-import cpw.mods.fml.common.Optional.InterfaceList;
-import cpw.mods.fml.common.Optional.Method;
-
-@InterfaceList({ @Interface(iface = "ic2.api.tile.IWrenchable", modid = Mods.IDs.IndustrialCraft2API, striprefs = true) })
 public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
         IWrenchable, IDroppable {
 
@@ -150,7 +145,7 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
     }
 
     @Override
-    public String getInventoryName() {
+    public String getInvName() {
         if (type == null)
             return "NULL";
         return type.getShowedName();
@@ -396,13 +391,13 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
         }
 
         if (needsInvUpdate) {
-            markDirty();
+            onInventoryChanged();
         }
 
         boolean flag = false;
 
         for (ForgeDirection direction : ForgeDirection.values()) {
-            TileEntity te = worldObj.getTileEntity(xCoord + direction.offsetX,
+            TileEntity te = worldObj.getBlockTileEntity(xCoord + direction.offsetX,
                     yCoord + direction.offsetY, zCoord + direction.offsetZ);
             if (te instanceof IWaterReceiver) {
                 IWaterReceiver te2 = (IWaterReceiver) te;
@@ -440,13 +435,11 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
     }
 
     @Override
-    @Method(modid = Mods.IDs.IndustrialCraft2API)
     public boolean wrenchCanSetFacing(EntityPlayer entityPlayer, int side) {
         return false;
     }
 
     @Override
-    @Method(modid = Mods.IDs.IndustrialCraft2API)
     public short getFacing() {
         return 0;
     }
@@ -456,19 +449,16 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
     }
 
     @Override
-    @Method(modid = Mods.IDs.IndustrialCraft2API)
     public boolean wrenchCanRemove(EntityPlayer entityPlayer) {
         return true;
     }
 
     @Override
-    @Method(modid = Mods.IDs.IndustrialCraft2API)
     public float getWrenchDropRate() {
         return 1;
     }
 
     @Override
-    @Method(modid = Mods.IDs.IndustrialCraft2API)
     public ItemStack getWrenchDrop(EntityPlayer entityPlayer) {
         return getDroppedItemStack();
     }
@@ -494,8 +484,8 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
     }
 
     @Override
-    public void markDirty() {
-        super.markDirty();
+    public void onInventoryChanged() {
+        super.onInventoryChanged();
 
         if (isServerSide())
             refreshPlugins();

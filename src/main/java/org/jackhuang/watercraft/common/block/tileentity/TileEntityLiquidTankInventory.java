@@ -2,7 +2,7 @@ package org.jackhuang.watercraft.common.block.tileentity;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -135,7 +135,7 @@ public abstract class TileEntityLiquidTankInventory extends TileEntityInventory
         for (ForgeDirection side : ForgeDirection.VALID_DIRECTIONS) {
             FluidStack fluidStack = getFluidTank().drain(amount, false);
             if (fluidStack != null && fluidStack.amount > 0) {
-                TileEntity te = worldObj.getTileEntity(xCoord + side.offsetX,
+                TileEntity te = worldObj.getBlockTileEntity(xCoord + side.offsetX,
                         yCoord + side.offsetY, zCoord + side.offsetZ);
                 if (te != null && te instanceof IFluidHandler) {
                     int used = ((IFluidHandler) te).fill(side.getOpposite(),

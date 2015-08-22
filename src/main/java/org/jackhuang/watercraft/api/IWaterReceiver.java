@@ -9,7 +9,7 @@
 package org.jackhuang.watercraft.api;
 
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.common.ForgeDirection;
 
 public interface IWaterReceiver {
 	public int canProvideWater(int canProvide, ForgeDirection side, TileEntity provider);

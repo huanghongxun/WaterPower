@@ -20,7 +20,6 @@ import org.jackhuang.watercraft.common.item.rotors.RotorInventorySlot;
 import org.jackhuang.watercraft.util.Mods;
 import org.jackhuang.watercraft.util.Utils;
 
-import cpw.mods.fml.common.Optional.Method;
 import cpw.mods.fml.relauncher.Side;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -29,7 +28,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -222,7 +221,7 @@ public class TileEntityWatermill extends TileEntityRotor {
     }
 
     @Override
-    public String getInventoryName() {
+    public String getInvName() {
         return type == null ? "NULL" : type.getShowedName();
     }
 
@@ -286,8 +285,9 @@ public class TileEntityWatermill extends TileEntityRotor {
 
     public float getWheelAngle() {
         float rotationSpeed = getRotationSpeed() / 400;
-        if (!Minecraft.getMinecraft().isGamePaused())
-            angle += rotationSpeed;
+        Minecraft mc = Minecraft.getMinecraft();
+        if (mc.isSingleplayer() && mc.currentScreen != null && mc.currentScreen.doesGuiPauseGame() && !mc.getIntegratedServer().getPublic());
+        else angle += rotationSpeed;
         if (angle >= 1)
             angle -= 1;
         return angle * 360;

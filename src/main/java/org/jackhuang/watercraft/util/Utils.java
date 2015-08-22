@@ -18,7 +18,6 @@ import org.jackhuang.watercraft.integration.ic2.ICItemFinder;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -161,13 +160,13 @@ public class Utils {
 	}
 	
 	public static boolean isWater(World world, int x, int y, int z) {
-		Block block = world.getBlock(x, y, z);
-		return block == Blocks.water || block == Blocks.flowing_water;
+		int block = world.getBlockId(x, y, z);
+		return block == Block.waterStill.blockID || block == Block.waterMoving.blockID;
 	}
 	
 	public static boolean isLava(World world, int x, int y, int z) {
-		Block block = world.getBlock(x, y, z);
-		return block == Blocks.lava || block == Blocks.flowing_lava;
+		int block = world.getBlockId(x, y, z);
+		return block == Block.lavaStill.blockID || block == Block.lavaMoving.blockID;
 	}
 	
 	public static final Random rand = new Random();

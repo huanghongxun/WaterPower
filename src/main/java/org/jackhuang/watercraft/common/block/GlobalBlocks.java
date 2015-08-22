@@ -8,11 +8,10 @@
 
 package org.jackhuang.watercraft.common.block;
 
-import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 
 public class GlobalBlocks {
-	public static Block waterMill, turbine, reservoir, ore, machine;
+	public static BlockWaterPower waterMill, turbine, reservoir, ore, machine;
 	
 	public static ItemStack macerator, compressor, centrifuge, advancedCompressor,
 		sawmill, lathe, cutter, waterPump, advancedWaterPump;

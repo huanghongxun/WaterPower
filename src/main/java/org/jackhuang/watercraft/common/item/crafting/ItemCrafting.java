@@ -36,7 +36,7 @@ public class ItemCrafting extends ItemRecolorable {
 	}
 	
 	@Override
-	public String getItemStackDisplayName(ItemStack par1ItemStack) {
+	public String getItemDisplayName(ItemStack par1ItemStack) {
 		int meta = par1ItemStack.getItemDamage();
 		int craftingType = meta / CraftingTypes.space;
 		int levelType = meta % CraftingTypes.space;
@@ -72,7 +72,7 @@ public class ItemCrafting extends ItemRecolorable {
 	}
 	
 	@Override
-	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs,
+	public void getSubItems(int par1, CreativeTabs par2CreativeTabs,
 			List par3List) {
 		for(CraftingTypes c : CraftingTypes.values())
 			for(LevelTypes l : LevelTypes.values())

@@ -17,7 +17,7 @@ import net.minecraft.util.StatCollector;
  */
 public class ItemWatermill extends ItemMeta {
 
-    public ItemWatermill(Block block) {
+    public ItemWatermill(int block) {
         super(block);
         setMaxDamage(0);
         setHasSubtypes(true);
@@ -34,7 +34,7 @@ public class ItemWatermill extends ItemMeta {
     }
 
     @Override
-    public String getItemStackDisplayName(ItemStack par1ItemStack) {
+    public String getItemDisplayName(ItemStack par1ItemStack) {
         return WaterType.values()[par1ItemStack.getItemDamage()]
                 .getShowedName();
     }

@@ -46,11 +46,6 @@ public abstract class TileEntityInventory extends TileEntityBase implements
 	public List<InventorySlot> getInventorySlots() {
 	    return invSlots;
 	}
-	
-	@Override
-	public boolean hasCustomInventoryName() {
-		return true;
-	}
 
     @Override
 	public int getSizeInventory() {
@@ -112,6 +107,7 @@ public abstract class TileEntityInventory extends TileEntityBase implements
 		}
 	}
 
+    @Override
 	public boolean isInvNameLocalized() {
 		return false;
 	}
@@ -128,11 +124,11 @@ public abstract class TileEntityInventory extends TileEntityBase implements
 	}
 
 	@Override
-	public void openInventory() {
+	public void openChest() {
 	}
 
 	@Override
-	public void closeInventory() {
+	public void closeChest() {
 	}
 
     @Override

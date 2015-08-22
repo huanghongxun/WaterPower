@@ -12,11 +12,12 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 
 import org.jackhuang.watercraft.WaterPower;
-import org.jackhuang.watercraft.common.network.MessagePacketHandler;
-import org.jackhuang.watercraft.common.network.PacketTileEntity;
+import org.jackhuang.watercraft.common.network.WaterPowerTileEntityPacket;
 
+import cpw.mods.fml.common.network.PacketDispatcher;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
+import net.minecraft.network.INetworkManager;
+import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityBase extends TileEntity {
@@ -27,13 +28,15 @@ public class TileEntityBase extends TileEntity {
 
     public void sendUpdateToClient() {
         if (isServerSide()) {
-            PacketTileEntity packet = new PacketTileEntity(this);
-            packet.tag = new NBTTagCompound();
-            writePacketData(packet.tag);
-            if (!packet.tag.func_150296_c().isEmpty())
-                MessagePacketHandler.INSTANCE.sendToAll(packet);
+        	WaterPowerTileEntityPacket packet = new WaterPowerTileEntityPacket(this);
+    		PacketDispatcher.sendPacketToAllPlayers(packet.getPacket());
         }
     }
+    
+    @Override
+	public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt) {
+		readPacketData(pkt.data);
+	}
 
     public boolean isServerSide() {
         return WaterPower.isServerSide();
@@ -54,8 +57,8 @@ public class TileEntityBase extends TileEntity {
 
     public void notifyNeighborTileChange() {
         if (getBlockType() != null) {
-            this.worldObj.func_147453_f(this.xCoord, this.yCoord, this.zCoord,
-                    getBlockType());
+            this.worldObj.notifyBlockOfNeighborChange(this.xCoord, this.yCoord, this.zCoord,
+                    getBlockType().blockID);
         }
     }
 

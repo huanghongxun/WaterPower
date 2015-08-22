@@ -17,15 +17,10 @@ import net.minecraft.nbt.NBTTagCompound;
 public class IndustrialCraftModule extends BaseModule {
 
     public static boolean IS_INDUSTRIAL_CRAFT_RECIPES_AVAILABLE = false;
-    public static Object macerator, compressor, cutter;
+    public static Object macerator, compressor;
 
     public static void compressor(ItemStack input, ItemStack output) {
         Recipes.compressor.addRecipe(new RecipeInputItemStack(input), null,
-                output);
-    }
-
-    public static void blastfurance(ItemStack input, ItemStack output) {
-        Recipes.blastfurance.addRecipe(new RecipeInputItemStack(input), null,
                 output);
     }
 
@@ -37,11 +32,6 @@ public class IndustrialCraftModule extends BaseModule {
     public static void metalformerRolling(ItemStack input, ItemStack output) {
         Recipes.metalformerRolling.addRecipe(new RecipeInputItemStack(input),
                 null, output);
-    }
-
-    public static void blockcutter(ItemStack input, ItemStack output) {
-        Recipes.blockcutter.addRecipe(new RecipeInputItemStack(input), null,
-                output);
     }
 
     public static void oreWashing(ItemStack input, ItemStack... output) {
@@ -56,7 +46,6 @@ public class IndustrialCraftModule extends BaseModule {
         try {
             macerator = Recipes.macerator;
             compressor = Recipes.compressor;
-            cutter = Recipes.blockcutter;
             IS_INDUSTRIAL_CRAFT_RECIPES_AVAILABLE = true;
         } catch (Throwable t) {
             t.printStackTrace();

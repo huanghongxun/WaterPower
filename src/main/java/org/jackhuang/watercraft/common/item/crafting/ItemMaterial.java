@@ -2,7 +2,7 @@ package org.jackhuang.watercraft.common.item.crafting;
 
 import java.util.List;
 
-import gregtech.api.GregTech_API;
+import gregtechmod.api.GregTech_API;
 
 import org.jackhuang.watercraft.client.render.IIconContainer;
 import org.jackhuang.watercraft.client.render.RecolorableTextures;
@@ -10,7 +10,6 @@ import org.jackhuang.watercraft.common.item.ItemRecolorable;
 import org.jackhuang.watercraft.common.item.others.ItemType;
 import org.jackhuang.watercraft.common.recipe.IRecipeRegistrar;
 import org.jackhuang.watercraft.common.recipe.RecipeAdder;
-import org.jackhuang.watercraft.integration.MekanismModule;
 import org.jackhuang.watercraft.integration.RailcraftModule;
 import org.jackhuang.watercraft.util.Mods;
 
@@ -18,7 +17,6 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import mods.railcraft.api.crafting.RailcraftCraftingManager;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
@@ -49,7 +47,7 @@ public class ItemMaterial extends ItemRecolorable {
     }
 
     @Override
-    public String getItemStackDisplayName(ItemStack par1ItemStack) {
+    public String getItemDisplayName(ItemStack par1ItemStack) {
         int meta = par1ItemStack.getItemDamage();
         int craftingType = meta / space;
         int levelType = meta % space;
@@ -97,9 +95,6 @@ public class ItemMaterial extends ItemRecolorable {
     }
 
     public void registerAllRecipes() {
-        if (Mods.ExNihilo.isAvailable) {
-
-        }
         if (IRecipeRegistrar.gregtechRecipe) {
             GregTech_API.sRecipeAdder.addAlloySmelterRecipe(
                     get(IndustrialSteel, ingot), get(Neodymium, ingot),
@@ -138,7 +133,7 @@ public class ItemMaterial extends ItemRecolorable {
             for (ItemStack is : steelIngots)
                 flag |= RecipeAdder.blastFurnace(is, get(IndustrialSteel, ingot), 1000);
             if(!flag) {
-                FurnaceRecipes.smelting().func_151394_a(new ItemStack(Items.iron_ingot), get(Steel, ingot), 0);
+                IRecipeRegistrar.addSmelting(new ItemStack(Item.ingotIron), get(Steel, ingot));
             }
         }
 
@@ -166,33 +161,33 @@ public class ItemMaterial extends ItemRecolorable {
             addShapedRecipe(get(types, nugget, 9), // 1 ingot -> 9 nuggets
                     "A", 'A', get(types, ingot));
 
-            addShapedRecipe(get(types, stick, 4), // 2 ingots -> 2 stick
+            addShapedRecipe(get(types, MaterialForms.stick, 4), // 2 ingots -> 2 stick
                     "A", "A", 'A', get(types, ingot));
 
             addShapedRecipe(
                     get(types, gear), // some sticks & plates -> 1 gear
-                    "SPS", "P P", "SPS", 'S', get(types, stick), 'P',
+                    "SPS", "P P", "SPS", 'S', get(types, MaterialForms.stick), 'P',
                     get(types, plate));
 
             addShapedRecipe(get(types, ring), // 4 sticks -> 1 ring
-                    " S ", "S S", " S ", 'S', get(types, stick));
+                    " S ", "S S", " S ", 'S', get(types, MaterialForms.stick));
 
             ItemStack d = get(types, dust);
-            FurnaceRecipes.smelting().func_151394_a(d, get(types, ingot), 0);
+            IRecipeRegistrar.addSmelting(d, get(types, ingot));
             d = get(types, dustTiny);
-            FurnaceRecipes.smelting().func_151394_a(d, get(types, nugget), 0);
+            IRecipeRegistrar.addSmelting(d, get(types, nugget));
 
             RecipeAdder.bender(get(types, ingot), get(types, plate));
             RecipeAdder.bender(get(types, plate, 9), get(types, plateDense));
             RecipeAdder.macerator(get(types, plateDense), get(types, dust, 9));
             RecipeAdder.macerator(get(types, screw), get(types, dustSmall));
             RecipeAdder.cutter(get(types, block), get(types, plate, 9));
-            RecipeAdder.lathe(get(types, stick), get(types, screw, 4));
+            RecipeAdder.lathe(get(types, MaterialForms.stick), get(types, screw, 4));
         }
     }
 
     @Override
-    public void getSubItems(Item par1, CreativeTabs par2CreativeTabs,
+    public void getSubItems(int par1, CreativeTabs par2CreativeTabs,
             List par3List) {
         for (MaterialTypes c : MaterialTypes.values())
             for (MaterialForms l : MaterialForms.values())
@@ -231,7 +226,7 @@ public class ItemMaterial extends ItemRecolorable {
             MaterialTypes t = MaterialTypes.values()[meta / space];
             MaterialForms f = MaterialForms.values()[meta % space];
             if(t == MaterialTypes.Magnet && f == MaterialForms.ingot) {
-                player.inventory.addItemStackToInventory(new ItemStack(Items.iron_ingot));
+                player.inventory.addItemStackToInventory(new ItemStack(Item.ingotIron));
                 stack.stackSize--;
             }
         }

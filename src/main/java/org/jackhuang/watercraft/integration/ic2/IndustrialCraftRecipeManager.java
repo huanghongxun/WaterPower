@@ -66,7 +66,7 @@ public class IndustrialCraftRecipeManager implements IRecipeManager {
 				if(ic2Input instanceof RecipeInputItemStack)
 					input = new MyRecipeInputItemStack(((RecipeInputItemStack) ic2Input).input);
 				else if(ic2Input instanceof RecipeInputOreDict)
-					input = new MyRecipeInputOreDictionary(((RecipeInputOreDict)ic2Input).input, ((RecipeInputOreDict)ic2Input).amount, ((RecipeInputOreDict)ic2Input).meta);
+					input = new MyRecipeInputOreDictionary(((RecipeInputOreDict)ic2Input).input, ((RecipeInputOreDict)ic2Input).amount);
 				else input = null;
 				if(input != null)
 					map.put(input, new MyRecipeOutput(entry.getValue().items));

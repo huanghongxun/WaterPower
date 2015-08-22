@@ -33,7 +33,7 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -42,7 +42,7 @@ import net.minecraftforge.client.MinecraftForgeClient;
 @SideOnly(Side.CLIENT)
 public class ClientProxy extends CommonProxy {
 	
-	public IIconRegister iconRegister;
+	public IconRegister iconRegister;
 
 	public void loadAllIcons() {
 		RecolorableTextures.load();
@@ -51,7 +51,7 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer thePlayer, World world, int X, int Y,
 		int Z) {
-		TileEntity tileEntity = world.getTileEntity(X, Y, Z);
+		TileEntity tileEntity = world.getBlockTileEntity(X, Y, Z);
 		if (tileEntity == null) return null;
 		if(ID == DefaultGuiIds.get("tileEntityTurbine")) {
 			TileEntityTurbine tileEntityT = (TileEntityTurbine) tileEntity;
@@ -93,9 +93,9 @@ public class ClientProxy extends CommonProxy {
 		
 		RenderingRegistry.registerEntityRenderingHandler(EntityWaterWheel.class, new EntityWaterWheelRenderer());
 		
-		MinecraftForgeClient.registerItemRenderer(GlobalItems.meterial, new RecolorableItemRenderer());
-		MinecraftForgeClient.registerItemRenderer(GlobalItems.oreDust, new RecolorableItemRenderer());
-		MinecraftForgeClient.registerItemRenderer(GlobalItems.crafting, new RecolorableItemRenderer());
+		MinecraftForgeClient.registerItemRenderer(GlobalItems.meterial.itemID, new RecolorableItemRenderer());
+		MinecraftForgeClient.registerItemRenderer(GlobalItems.oreDust.itemID, new RecolorableItemRenderer());
+		MinecraftForgeClient.registerItemRenderer(GlobalItems.crafting.itemID, new RecolorableItemRenderer());
 		
 		//ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWatermill.class, new RotorRenderer());
 	}

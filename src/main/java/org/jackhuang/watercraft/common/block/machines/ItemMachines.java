@@ -10,8 +10,8 @@ import net.minecraft.util.StatCollector;
 
 public class ItemMachines extends ItemBlock {
 
-	public ItemMachines(Block blockMachines) {
-		super(blockMachines);
+	public ItemMachines(int i) {
+		super(i);
 		
 		setHasSubtypes(true);
 	}

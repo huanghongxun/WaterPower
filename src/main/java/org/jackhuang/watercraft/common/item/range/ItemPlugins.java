@@ -6,9 +6,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
 import org.jackhuang.watercraft.api.IUpgrade;
-import org.jackhuang.watercraft.common.item.ItemBase;
+import org.jackhuang.watercraft.common.item.ItemWaterPower;
 
-public class ItemPlugins extends ItemBase implements IUpgrade {
+public class ItemPlugins extends ItemWaterPower implements IUpgrade {
 	
 	public ItemPlugins() {
 		super("cptItemPlugins");
@@ -21,7 +21,7 @@ public class ItemPlugins extends ItemBase implements IUpgrade {
 	}
 	
 	@Override
-	public String getItemStackDisplayName(ItemStack itemstack) {
+	public String getItemDisplayName(ItemStack itemstack) {
 		if(itemstack.getItemDamage() >= PluginType.values().length) return null;
 		return PluginType.values()[itemstack.getItemDamage()].getShowedName();
 	}

@@ -16,7 +16,7 @@ import net.minecraft.util.StatCollector;
  */
 public class ItemTurbine extends ItemMeta {
 
-    public ItemTurbine(Block id) {
+    public ItemTurbine(int id) {
         super(id);
         setMaxDamage(0);
         setHasSubtypes(true);
@@ -35,7 +35,7 @@ public class ItemTurbine extends ItemMeta {
     }
 
     @Override
-    public String getItemStackDisplayName(ItemStack par1ItemStack) {
+    public String getItemDisplayName(ItemStack par1ItemStack) {
         return TurbineType.values()[par1ItemStack.getItemDamage()]
                 .getShowedName();
     }

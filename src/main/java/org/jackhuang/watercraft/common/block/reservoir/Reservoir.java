@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import joptsimple.util.KeyValuePair;
 
+import org.jackhuang.watercraft.common.block.GlobalBlocks;
 import org.jackhuang.watercraft.common.block.tileentity.TileEntityMultiBlock;
 import org.jackhuang.watercraft.util.Pair;
 import org.jackhuang.watercraft.util.Position;
@@ -63,11 +64,11 @@ public class Reservoir {
 	}
 	
 	public static boolean isRes(World world, int x, int y, int z) {
-		return world.getBlock(x, y, z) instanceof BlockReservoir;
+		return world.getBlockId(x, y, z) == GlobalBlocks.reservoir.blockID;
 	}
 	
 	public static boolean isRes(World world, int x, int y, int z, int type) {
-		TileEntity tileEntity = world.getTileEntity(x, y, z);
+		TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
 		if(tileEntity instanceof TileEntityReservoir) {
 			TileEntityReservoir te = (TileEntityReservoir) tileEntity;
 			if(te.type == null) return type == 0;
@@ -170,7 +171,7 @@ public class Reservoir {
 		ArrayList<TileEntityMultiBlock> aList = new ArrayList<TileEntityMultiBlock>();
 		for (i = z; i <= z + width - 1; i++)
 			for (j = y; j <= y + height - 1; j++) {
-				aList.add((TileEntityMultiBlock)world.getTileEntity(x, j, i));
+				aList.add((TileEntityMultiBlock)world.getBlockTileEntity(x, j, i));
 			}
 		return aList;
 	}
@@ -203,7 +204,7 @@ public class Reservoir {
 		ArrayList<TileEntityMultiBlock> aList = new ArrayList<TileEntityMultiBlock>();
 		for (i = x; i <= x + width - 1; i++)
 			for (j = y; j <= y + height - 1; j++) {
-				aList.add((TileEntityMultiBlock)world.getTileEntity(i, j, z));
+				aList.add((TileEntityMultiBlock)world.getBlockTileEntity(i, j, z));
 			}
 		return aList;
 	}
@@ -235,7 +236,7 @@ public class Reservoir {
 		ArrayList<TileEntityMultiBlock> aList = new ArrayList<TileEntityMultiBlock>();
 		for (i = x; i <= x + length - 1; i++)
 			for (j = z; j <= z + width - 1; j++) {
-				aList.add((TileEntityMultiBlock)world.getTileEntity(i, y, j));
+				aList.add((TileEntityMultiBlock)world.getBlockTileEntity(i, y, j));
 			}
 		return aList;
 	}
@@ -269,12 +270,12 @@ public class Reservoir {
 		int i;
 		ArrayList<TileEntityMultiBlock> aList = new ArrayList<TileEntityMultiBlock>();
 		for (i = z; i <= z + width - 1; i++) {
-			aList.add((TileEntityMultiBlock)world.getTileEntity(x, y, i));
-			aList.add((TileEntityMultiBlock)world.getTileEntity(x + length - 1, y, i));
+			aList.add((TileEntityMultiBlock)world.getBlockTileEntity(x, y, i));
+			aList.add((TileEntityMultiBlock)world.getBlockTileEntity(x + length - 1, y, i));
 		}
 		for (i = x + 1; i < x + width - 1; i++) {
-			aList.add((TileEntityMultiBlock)world.getTileEntity(i, y, z));
-			aList.add((TileEntityMultiBlock)world.getTileEntity(i, y, z + width - 1));
+			aList.add((TileEntityMultiBlock)world.getBlockTileEntity(i, y, z));
+			aList.add((TileEntityMultiBlock)world.getBlockTileEntity(i, y, z + width - 1));
 		}
 		return aList;
 	}

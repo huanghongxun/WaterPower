@@ -8,8 +8,8 @@
 
 package org.jackhuang.watercraft;
 
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
+import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.Property;
 
 /**
  * WaterPower's References.
