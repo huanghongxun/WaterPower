@@ -6,8 +6,6 @@ import factorization.api.IChargeConductor;
 import ic2.api.energy.event.EnergyTileLoadEvent;
 import ic2.api.energy.event.EnergyTileUnloadEvent;
 import ic2.api.energy.tile.IEnergySource;
-import ic2.api.energy.tile.IHeatSource;
-import ic2.api.energy.tile.IKineticSource;
 
 import java.util.Random;
 
@@ -19,14 +17,12 @@ import org.jackhuang.watercraft.common.network.PacketUnitChanged;
 import org.jackhuang.watercraft.util.Mods;
 import org.jackhuang.watercraft.util.Utils;
 
-/*import buildcraft.api.mj.IBatteryObject;
- import buildcraft.api.mj.MjAPI;
- import buildcraft.api.power.IPowerEmitter;
- import buildcraft.api.power.IPowerReceptor;
- import buildcraft.api.power.PowerHandler;
- import buildcraft.api.power.PowerHandler.PowerReceiver;*/
-import cofh.api.energy.IEnergyConnection;
-import cofh.api.energy.IEnergyHandler;
+import buildcraft.api.mj.IBatteryObject;
+import buildcraft.api.mj.MjAPI;
+import buildcraft.api.power.IPowerEmitter;
+import buildcraft.api.power.IPowerReceptor;
+import buildcraft.api.power.PowerHandler;
+import buildcraft.api.power.PowerHandler.PowerReceiver;
 import cpw.mods.fml.common.Optional.Interface;
 import cpw.mods.fml.common.Optional.InterfaceList;
 import cpw.mods.fml.common.Optional.Method;
@@ -46,13 +42,11 @@ import net.minecraftforge.fluids.IFluidHandler;
 
 @InterfaceList({
         @Interface(iface = "ic2.api.energy.tile.IEnergySource", modid = Mods.IDs.IndustrialCraft2API, striprefs = true),
-        @Interface(iface = "ic2.api.energy.tile.IKineticSource", modid = Mods.IDs.IndustrialCraft2API, striprefs = true),
-        @Interface(iface = "ic2.api.energy.tile.IHeatSource", modid = Mods.IDs.IndustrialCraft2API, striprefs = true),
-        @Interface(iface = "cofh.api.energy.IEnergyConnection", modid = Mods.IDs.CoFHAPIEnergy),
+        @Interface(iface = "buildcraft.api.power.IPowerEmitter", modid = Mods.IDs.BuildCraftPower),
         @Interface(iface = "factorization.api.IChargeConductor", modid = Mods.IDs.Factorization) })
 public abstract class TileEntityGenerator extends TileEntityBlock implements
-        IEnergySource, IHasGui, IKineticSource, IUnitChangeable,
-        IEnergyConnection, IChargeConductor, IFluidHandler, IHeatSource {
+        IEnergySource, IHasGui, IUnitChangeable, IPowerEmitter,
+        IChargeConductor, IFluidHandler {
     public static Random random = new Random();
 
     public double storage = 0.0D;
@@ -83,10 +77,6 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements
     public void onLoaded() {
         // EU INTEGRATION
         needsToAddToEnergyNet = true;
-
-        // RF INTEGRATION
-        deadCache = true;
-        handlerCache = null;
 
         super.onLoaded();
     }
@@ -183,19 +173,11 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements
             if (energyType == EnergyType.EU
                     && Mods.IndustrialCraft2.isAvailable)
                 storage += latestOutput;
-            if (energyType == EnergyType.RF && Mods.CoFHAPIEnergy.isAvailable) {
-                reCache();
-                storage += latestOutput;
-                int j = (int) Math.min(this.production, storage);
-                storage -= j;
-                storage += EnergyType.RF2EU(transmitEnergy((int) EnergyType
-                        .EU2RF(j)));
-            }
-            /*
-             * if (energyType == EnergyType.MJ &&
-             * Mods.BuildCraftPower.isAvailable) { storage += latestOutput;
-             * for(ForgeDirection d : ForgeDirection.values()) sendPower(d); }
-             */
+            
+             if (energyType == EnergyType.MJ &&
+             Mods.BuildCraftPower.isAvailable) { storage += latestOutput;
+             for(ForgeDirection d : ForgeDirection.values()) sendPower(d); }
+             
             if (energyType == EnergyType.Charge
                     && Mods.Factorization.isAvailable) {
                 ((Charge) charge).setValue((int) EnergyType
@@ -285,45 +267,6 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements
         this.storage -= amount;
     }
 
-    @Override
-    @Method(modid = Mods.IDs.IndustrialCraft2API)
-    public int getSourceTier() {
-        return 1;
-    }
-
-    @Override
-    @Method(modid = Mods.IDs.IndustrialCraft2API)
-    public int maxrequestHeatTick(ForgeDirection directionFrom) {
-        if (energyType == EnergyType.HU)
-            return (int) (EnergyType.EU2HU(latestOutput));
-        return 0;
-    }
-
-    @Override
-    @Method(modid = Mods.IDs.IndustrialCraft2API)
-    public int requestHeat(ForgeDirection directionFrom, int requestheat) {
-        if (energyType == EnergyType.HU)
-            return Math.min(requestheat, maxrequestHeatTick(directionFrom));
-        return 0;
-    }
-
-    @Override
-    @Method(modid = Mods.IDs.IndustrialCraft2API)
-    public int maxrequestkineticenergyTick(ForgeDirection directionFrom) {
-        if (energyType == EnergyType.KU)
-            return (int) (EnergyType.EU2KU(latestOutput));
-        return 0;
-    }
-
-    @Override
-    @Method(modid = Mods.IDs.IndustrialCraft2API)
-    public int requestkineticenergy(ForgeDirection directionFrom,
-            int requestkineticenergy) {
-        if (energyType == EnergyType.KU)
-            return Math.min(requestkineticenergy,
-                    maxrequestkineticenergyTick(directionFrom));
-        return 0;
-    }
 
     /**
      * ------------------------------------------------------
@@ -349,77 +292,88 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements
      * 
      * ------------------------------------------------------
      */
-
-    private Object[] handlerCache;
-    private boolean deadCache = true;
-
-    @Override
-    @Method(modid = Mods.IDs.CoFHAPIEnergy)
-    public boolean canConnectEnergy(ForgeDirection d) {
-        return true;
-    }
-
-    @Method(modid = Mods.IDs.CoFHAPIEnergy)
-    protected final int transmitEnergy(int e) {
-        if (this.handlerCache != null) {
-            for (int i = this.handlerCache.length; i-- > 0;) {
-                IEnergyHandler h = (IEnergyHandler) this.handlerCache[i];
-                if (h == null)
-                    continue;
-                ForgeDirection d = ForgeDirection.VALID_DIRECTIONS[i];
-                if (h.receiveEnergy(d, e, true) > 0)
-                    e -= h.receiveEnergy(d, e, false);
-                if (e <= 0)
-                    return 0;
-            }
-        }
-        return e;
-    }
-
-    @Method(modid = Mods.IDs.CoFHAPIEnergy)
-    private void reCache() {
-        if (this.deadCache) {
-            for (ForgeDirection d : ForgeDirection.VALID_DIRECTIONS) {
-                onNeighborTileChange(this.xCoord + d.offsetX, this.yCoord
-                        + d.offsetY, this.zCoord + d.offsetZ);
-            }
-            this.deadCache = false;
-        }
-    }
-
-    @Override
-    @Method(modid = Mods.IDs.CoFHAPIEnergy)
-    public void onNeighborTileChange(int x, int y, int z) {
-        TileEntity t = this.worldObj.getTileEntity(x, y, z);
-
-        if (x < this.xCoord)
-            addCache(t, ForgeDirection.EAST.ordinal());
-        else if (x > this.xCoord)
-            addCache(t, ForgeDirection.WEST.ordinal());
-        else if (y < this.yCoord)
-            addCache(t, ForgeDirection.UP.ordinal());
-        else if (y > this.yCoord)
-            addCache(t, ForgeDirection.DOWN.ordinal());
-        else if (z < this.zCoord)
-            addCache(t, ForgeDirection.NORTH.ordinal());
-        else if (z > this.zCoord)
-            addCache(t, ForgeDirection.SOUTH.ordinal());
-    }
-
-    @Method(modid = Mods.IDs.CoFHAPIEnergy)
-    private void addCache(TileEntity t, int side) {
-        if (this.handlerCache != null) {
-            this.handlerCache[side] = null;
-        }
-        if ((t instanceof IEnergyHandler)) {
-            if (((IEnergyHandler) t)
-                    .canConnectEnergy(ForgeDirection.VALID_DIRECTIONS[side])) {
-                if (this.handlerCache == null)
-                    this.handlerCache = new IEnergyHandler[6];
-                this.handlerCache[side] = ((IEnergyHandler) t);
-            }
-        }
-    }
+    @Method(modid = "BuildCraftAPI|power")
+	public boolean canEmitPowerFrom(ForgeDirection side) {
+		return true;
+	}
+	
+	@Method(modid = "BuildCraftAPI|power")
+	public boolean isPoweredTile(TileEntity tile, ForgeDirection side, ForgeDirection orientation) {
+		if (tile == null) {
+			return false;
+		} else if (MjAPI.getMjBattery(tile, MjAPI.DEFAULT_POWER_FRAMEWORK, orientation.getOpposite()) != null) {
+			return true;
+		} else if (tile instanceof IPowerReceptor) {
+			return ((IPowerReceptor) tile).getPowerReceiver(side.getOpposite()) != null;
+		} else {
+			return false;
+		}
+	}
+	@Method(modid = "BuildCraftAPI|power")
+	public double extractEnergy(double min, double max, boolean doExtract) {
+		double energy = EnergyType.EU2MJ(storage);
+		if (energy < min) {
+			return 0;
+		}
+		double actualMax;
+		if (max > EnergyType.EU2MJ(production)) {
+			actualMax = EnergyType.EU2MJ(production);
+		} else {
+			actualMax = max;
+		}
+		if (actualMax < min) {
+			return 0;
+		}
+		double extracted;
+		if (energy >= actualMax) {
+			extracted = actualMax;
+			if (doExtract) {
+				energy -= actualMax;
+			}
+		} else {
+			extracted = energy;
+			if (doExtract) {
+				energy = 0;
+			}
+		}
+		storage = EnergyType.MJ2EU(energy);
+		return extracted;
+	}
+	@Method(modid = "BuildCraftAPI|power")
+	private double getPowerToExtract(TileEntity tile, ForgeDirection orientation) {
+		IBatteryObject battery = MjAPI.getMjBattery(tile, MjAPI.DEFAULT_POWER_FRAMEWORK, orientation.getOpposite());
+		if (battery != null) {
+			return extractEnergy(0, battery.getEnergyRequested(), false);
+		} else if (tile instanceof IPowerReceptor) {
+			PowerReceiver receptor = ((IPowerReceptor) tile)
+					.getPowerReceiver(orientation.getOpposite());
+			return extractEnergy(receptor.getMinEnergyReceived(),
+					receptor.getMaxEnergyReceived(), false);
+		} else {
+			return 0;
+		}
+	}
+	@Method(modid = "BuildCraftAPI|power")
+	private void sendPower(ForgeDirection orientation) {
+		TileEntity tile = worldObj.getTileEntity(xCoord + orientation.offsetX, yCoord + orientation.offsetY, zCoord + orientation.offsetZ);
+		if (isPoweredTile(tile, orientation, orientation)) {
+			double extracted = getPowerToExtract(tile, orientation);
+			IBatteryObject battery = MjAPI.getMjBattery(tile, MjAPI.DEFAULT_POWER_FRAMEWORK, orientation.getOpposite());
+			if (battery != null) {
+				battery.addEnergy(extractEnergy(0, battery.maxReceivedPerCycle(),
+						true));
+			} else if (tile instanceof IPowerReceptor) {
+				PowerReceiver receptor = ((IPowerReceptor) tile)
+						.getPowerReceiver(orientation.getOpposite());
+				if (extracted > 0) {
+					double needed = receptor.receiveEnergy(
+							PowerHandler.Type.ENGINE, extracted,
+							orientation.getOpposite());
+					extractEnergy(receptor.getMinEnergyReceived(), needed, true);
+				}
+			}
+		}
+	}
 
     /**
      * ------------------------------------------------------

@@ -13,6 +13,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidContainerItem;
 
@@ -90,9 +91,11 @@ public class BlockReservoir extends BlockRotor {
 
             if ((tile instanceof TileEntityReservoir)) {
                 TileEntityReservoir reservoir = (TileEntityReservoir) tile;
-                
-                if(current.getItem() instanceof ItemReservoir) {
-                    if(reservoir.type != null && current.getItemDamage() == reservoir.type.ordinal()) {
+
+                if (current.getItem() instanceof ItemReservoir) {
+                    if (reservoir.type != null
+                            && current.getItemDamage() == reservoir.type
+                                    .ordinal()) {
                         return false;
                     }
                 }
@@ -107,28 +110,9 @@ public class BlockReservoir extends BlockRotor {
 
                         if ((qty != 0)
                                 && (!entityplayer.capabilities.isCreativeMode)) {
-                            if (current.stackSize > 1) {
-                                if (!entityplayer.inventory
-                                        .addItemStackToInventory(FluidContainerRegistry
-                                                .drainFluidContainer(current))) {
-                                    entityplayer
-                                            .dropPlayerItemWithRandomChoice(
-                                                    FluidContainerRegistry
-                                                            .drainFluidContainer(current),
-                                                    false);
-                                }
-
-                                entityplayer.inventory
-                                        .setInventorySlotContents(
-                                                entityplayer.inventory.currentItem,
-                                                StackUtil.consumeItem(current));
-                            } else {
-                                entityplayer.inventory
-                                        .setInventorySlotContents(
-                                                entityplayer.inventory.currentItem,
-                                                FluidContainerRegistry
-                                                        .drainFluidContainer(current));
-                            }
+                            entityplayer.inventory.setInventorySlotContents(
+                                    entityplayer.inventory.currentItem,
+                                    StackUtil.consumeItem(current));
                         }
 
                         return true;
@@ -153,12 +137,14 @@ public class BlockReservoir extends BlockRotor {
                                     entityplayer.inventory
                                             .setInventorySlotContents(
                                                     entityplayer.inventory.currentItem,
-                                                    StackUtil.consumeItem(current));
+                                                    StackUtil
+                                                            .consumeItem(current));
                                 } else {
                                     entityplayer.inventory
                                             .setInventorySlotContents(
                                                     entityplayer.inventory.currentItem,
-                                                    StackUtil.consumeItem(current));
+                                                    StackUtil
+                                                            .consumeItem(current));
                                     entityplayer.inventory
                                             .setInventorySlotContents(
                                                     entityplayer.inventory.currentItem,
@@ -166,8 +152,8 @@ public class BlockReservoir extends BlockRotor {
                                 }
                             }
 
-                            reservoir.drain(ForgeDirection.UNKNOWN, liquid.amount,
-                                    true);
+                            reservoir.drain(ForgeDirection.UNKNOWN,
+                                    liquid.amount, true);
 
                             return true;
                         }

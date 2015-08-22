@@ -9,7 +9,6 @@ import org.jackhuang.watercraft.util.Mods;
 public enum IntegrationType {
     IndustrialCraft(IndustrialCraftModule.class, Mods.IndustrialCraft2),
     BuildCraft(BuildCraftModule.class, Mods.BuildCraftCore),
-    Mekanism(MekanismModule.class, Mods.Mekanism),
     Railcraft(RailcraftModule.class, Mods.Railcraft),
     ThermalExpansion(ThermalExpansionModule.class, Mods.ThermalExpansion),
     Thaumcraft(ThaumcraftModule.class, Mods.Thaumcraft),

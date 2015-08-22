@@ -10,7 +10,6 @@ import org.jackhuang.watercraft.common.item.ItemRecolorable;
 import org.jackhuang.watercraft.common.item.others.ItemType;
 import org.jackhuang.watercraft.common.recipe.IRecipeRegistrar;
 import org.jackhuang.watercraft.common.recipe.RecipeAdder;
-import org.jackhuang.watercraft.integration.MekanismModule;
 import org.jackhuang.watercraft.integration.RailcraftModule;
 import org.jackhuang.watercraft.util.Mods;
 

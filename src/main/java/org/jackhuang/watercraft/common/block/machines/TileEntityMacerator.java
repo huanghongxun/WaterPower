@@ -6,7 +6,6 @@ import org.jackhuang.watercraft.common.recipe.HashMapRecipeManager;
 import org.jackhuang.watercraft.common.recipe.MultiRecipeManager;
 import org.jackhuang.watercraft.common.recipe.MyRecipeManager;
 import org.jackhuang.watercraft.common.recipe.MyRecipes;
-import org.jackhuang.watercraft.integration.MekanismModule;
 import org.jackhuang.watercraft.integration.ic2.IndustrialCraftRecipeManager;
 import org.jackhuang.watercraft.integration.ic2.IndustrialCraftModule;
 import org.jackhuang.watercraft.util.Mods;

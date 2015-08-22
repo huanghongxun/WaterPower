@@ -24,10 +24,6 @@ public class TileEntityCutter extends TileEntityStandardWaterMachine {
 
     public static void init() {
         MyRecipes.cutter = new MultiRecipeManager();
-        if (Mods.IndustrialCraft2.isAvailable)
-            ((MultiRecipeManager) MyRecipes.cutter)
-                    .addRecipeManager(new IndustrialCraftRecipeManager(
-                            IndustrialCraftModule.cutter));
     }
 
     public String getInventoryName() {

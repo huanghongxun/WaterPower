@@ -37,7 +37,7 @@ public class HUDHandlerReservoir implements IWailaDataProvider {
             return arg1;
         FluidStack f = tile.getFluidTank().getFluid();
         arg1.add((f == null ? StatCollector
-                .translateToLocal("cptwtrml.gui.empty") : f.getLocalizedName())
+                .translateToLocal("cptwtrml.gui.empty") : f.getFluid().getLocalizedName())
                 + ": "
                 + tile.getFluidAmount()
                 + "/"
@@ -74,13 +74,6 @@ public class HUDHandlerReservoir implements IWailaDataProvider {
     public List<String> getWailaTail(ItemStack arg0, List<String> arg1,
             IWailaDataAccessor arg2, IWailaConfigHandler arg3) {
         return arg1;
-    }
-
-    @Override
-    @Method(modid = Mods.IDs.Waila)
-    public NBTTagCompound getNBTData(EntityPlayerMP arg0, TileEntity arg1,
-            NBTTagCompound arg2, World arg3, int arg4, int arg5, int arg6) {
-        return null;
     }
 
 }

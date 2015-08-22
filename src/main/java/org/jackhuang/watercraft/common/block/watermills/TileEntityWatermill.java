@@ -136,7 +136,7 @@ public class TileEntityWatermill extends TileEntityRotor {
             return;
 
         int range = getRange();
-        if (range * range * range > 729) {
+        if (range * range * range > 3375) {
             lavaBlocks = waterBlocks = -1;
             return;
         }

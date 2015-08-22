@@ -19,7 +19,6 @@ import org.jackhuang.watercraft.common.item.crafting.LevelTypes;
 import org.jackhuang.watercraft.common.item.crafting.MaterialForms;
 import org.jackhuang.watercraft.common.item.crafting.MaterialTypes;
 import org.jackhuang.watercraft.common.item.others.ItemType;
-import org.jackhuang.watercraft.integration.MekanismModule;
 import org.jackhuang.watercraft.util.Mods;
 
 import mods.railcraft.api.crafting.RailcraftCraftingManager;

@@ -309,7 +309,7 @@ public abstract class BlockWaterPower extends BlockContainer {
                 if(tileEntity != null && tileEntity instanceof IDroppable) {
                     IDroppable te = (IDroppable) tileEntity;
                     ArrayList<ItemStack> drops = b.getDrops(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-                    if(b.removedByPlayer(world, entityPlayer, x, y, z, false)) {
+                    if(b.removedByPlayer(world, entityPlayer, x, y, z)) {
                         Utils.dropItems(world, x, y, z, drops);
                     }
                     return false;

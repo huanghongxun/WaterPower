@@ -16,18 +16,16 @@ buildscript {
 }
 
 apply plugin: 'forge'
-apply plugin: 'curseforge'
-
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 def buildnumber = System.getenv("BUILD_NUMBER") == null ? "" : "-"+System.getenv("BUILD_NUMBER")
 version = "0.3o"+buildnumber
-group = "org.jackhuang.watercraft" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "WaterPower-1.7.10"
+group= "org.jackhuang.waterpower" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "WaterPower-1.7.2"
 
 minecraft {
-    version = "1.7.10-10.13.4.1492-1.7.10"
-    runDir = "eclipse"
+    version = "1.7.2-10.12.2.1161-mc172"
+    assetDir = "eclipse/assets"
 }
 
 dependencies {
@@ -46,13 +44,8 @@ dependencies {
 
 }
 
-curse {
-    projectId = '224579'
-    apiKey = '12298b50-1735-4879-aa1b-803218f289c6'
-    releaseType = 'alpha'
-}
-
-processResources {
+processResources
+{
     // this will ensure that this task is redone when the versions change.
     inputs.property "version", project.version
     inputs.property "mcversion", project.minecraft.version
@@ -69,21 +62,4 @@ processResources {
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
-}
-
-task sourceJar(type: Jar) {
-    from sourceSets.main.allSource
-    classifier = "sources"
-}
-
-task deobfJar(type: Jar) {
-    from sourceSets.main.output
-    classifier = "dev"
-}
-
-build.dependsOn sourceJar, deobfJar
-
-artifacts {
-    archives sourceJar
-    archives deobfJar
 }
