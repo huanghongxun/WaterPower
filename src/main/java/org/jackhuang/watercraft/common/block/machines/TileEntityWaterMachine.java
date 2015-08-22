@@ -33,7 +33,7 @@ public abstract class TileEntityWaterMachine extends TileEntityBlock
 
 	@Override
 	public int canProvideWater(int water, ForgeDirection side, TileEntity provider) {
-		int need = getFluidTankCapacity() - this.getTankAmount();
+		int need = getFluidTankCapacity() - getFluidAmount();
 		need = Math.min(need, water);
 		return need;
 	}

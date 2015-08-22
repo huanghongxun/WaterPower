@@ -41,7 +41,7 @@ public class HUDHandlerMachine implements IWailaDataProvider {
 		TileEntityStandardWaterMachine tile = (TileEntityStandardWaterMachine) te;
 		
 		arg1.add(StatCollector.translateToLocal("cptwtrml.gui.using") + ": " + tile.energyConsume + "mb/t");
-        arg1.add(StatCollector.translateToLocal("cptwtrml.gui.stored") + ": " + tile.getTankAmount() + "mb");
+        arg1.add(StatCollector.translateToLocal("cptwtrml.gui.stored") + ": " + tile.getFluidAmount() + "mb");
         arg1.add(StatCollector.translateToLocal("cptwtrml.gui.capacity") + ": " + tile.getFluidTankCapacity() + "mb");
 		
 		return arg1;

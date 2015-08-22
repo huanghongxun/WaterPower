@@ -55,25 +55,15 @@ public class TileEntityTurbine extends TileEntityRotor {
     public void writeToNBT(NBTTagCompound tag) {
         super.writeToNBT(tag);
 
-        // tag.setInteger("speed", this.speed);
-
         if (type == null)
             tag.setInteger("type", 0);
         else
             tag.setInteger("type", type.ordinal());
     }
 
-    public void readFromNBT(NBTTagCompound tag) {
-        super.readFromNBT(tag);
-
-        // this.speed = tag.getInteger("speed");
-    }
-
     @Override
     public void writePacketData(NBTTagCompound tag) {
         super.writePacketData(tag);
-
-        // tag.setInteger("speed", speed);
 
         if (sendInitData) {
             sendInitData = false;
@@ -88,7 +78,6 @@ public class TileEntityTurbine extends TileEntityRotor {
     @Override
     public void readPacketData(NBTTagCompound tag) {
         super.readPacketData(tag);
-        // speed = tag.getInteger("speed");
 
         if (tag.hasKey("sendInitData")) {
             type = TurbineType.values()[tag.getInteger("type")];
@@ -207,11 +196,10 @@ public class TileEntityTurbine extends TileEntityRotor {
     public boolean isActive() {
         return super.isActive() && (storage < maxStorage);
     }
-    /*
-     * private void calSpeed() { TileEntityReservoir r = getWater(worldObj,
-     * xCoord, yCoord, zCoord); if (r != null && r.getWater() > 0 && hasRotor())
-     * { // canOutput = true; speed++; if (speed > 50) speed = 50; } else {
-     * speed--; if (speed < 0) speed = 0; } if (speed > 0) damageRotor(1); }
-     */
+    
+    @Override
+    protected boolean allowedSendPacketTank() {
+        return false;
+    }
 
 }

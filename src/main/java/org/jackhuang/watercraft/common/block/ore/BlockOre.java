@@ -14,13 +14,13 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import org.jackhuang.watercraft.Reference;
-import org.jackhuang.watercraft.common.block.BlockMultiID;
+import org.jackhuang.watercraft.common.block.BlockWaterPower;
 import org.jackhuang.watercraft.common.block.GlobalBlocks;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockOre extends BlockMultiID {
+public class BlockOre extends BlockWaterPower {
 	public IIcon[] icon = new IIcon[maxMetaData()];
 
 	public BlockOre() {

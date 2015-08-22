@@ -30,10 +30,12 @@ public class Mods {
         public static final String Waila = "Waila";
         public static final String Mekanism = "Mekanism";
         public static final String CraftGuide = "craftguide";
-        public static final String ExNihilo = "ExNihilo";
+        public static final String ExNihilo = "exnihilo";
         public static final String Railcraft = "Railcraft";
         public static final String ImmersiveEngineering = "ImmersiveEngineering";
         public static final String MineTweaker3 = "MineTweaker3";
+        public static final String AppliedEnergistics2 = "appliedenergistics2";
+        
     }
 
     public static final SimpleMod Factorization = new SimpleMod(
@@ -42,6 +44,8 @@ public class Mods {
             IDs.ThermalExpansion);
     public static final SimpleMod IndustrialCraft2 = new SimpleMod(
             IDs.IndustrialCraft2);
+    public static final SimpleMod AppliedEnergistics2 = new SimpleMod(
+            IDs.AppliedEnergistics2);
     public static final SimpleMod MineTweaker3 = new SimpleMod(
             IDs.MineTweaker3);
     public static final SimpleMod BuildCraftCore = new SimpleMod(

@@ -41,7 +41,7 @@ public class HUDHandlerReservoir implements IWailaDataProvider {
                 + ": "
                 + tile.getFluidAmount()
                 + "/"
-                + tile.getMaxFluidAmount()
+                + tile.getFluidTankCapacity()
                 + "mb");
         return arg1;
     }

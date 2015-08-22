@@ -70,7 +70,7 @@ public class Reservoir {
 		TileEntity tileEntity = world.getTileEntity(x, y, z);
 		if(tileEntity instanceof TileEntityReservoir) {
 			TileEntityReservoir te = (TileEntityReservoir) tileEntity;
-			if(te.type == null && type == 0) return true;
+			if(te.type == null) return type == 0;
 			if(te.type.ordinal() == type) return true;
 		}
 		return false;

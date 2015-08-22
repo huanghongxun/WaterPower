@@ -17,10 +17,12 @@ import org.jackhuang.watercraft.util.Mods;
 import cpw.mods.fml.common.registry.GameRegistry;
 import mods.railcraft.api.crafting.RailcraftCraftingManager;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 import static org.jackhuang.watercraft.common.item.crafting.MaterialTypes.*;
 import static org.jackhuang.watercraft.common.item.crafting.MaterialForms.*;
@@ -217,5 +219,22 @@ public class ItemMaterial extends ItemRecolorable {
     @Override
     public IIconContainer[] getIconContainers() {
         return RecolorableTextures.METAL;
+    }
+    
+    @Override
+    public boolean onItemUseFirst(ItemStack stack, EntityPlayer player,
+            World world, int x, int y, int z,
+            int side, float hitX, float hitY,
+            float hitZ) {
+        if(stack.stackSize > 0) {
+            int meta = stack.getItemDamage();
+            MaterialTypes t = MaterialTypes.values()[meta / space];
+            MaterialForms f = MaterialForms.values()[meta % space];
+            if(t == MaterialTypes.Magnet && f == MaterialForms.ingot) {
+                player.inventory.addItemStackToInventory(new ItemStack(Items.iron_ingot));
+                stack.stackSize--;
+            }
+        }
+        return false;
     }
 }

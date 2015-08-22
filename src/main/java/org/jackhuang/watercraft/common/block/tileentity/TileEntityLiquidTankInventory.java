@@ -20,7 +20,7 @@ public abstract class TileEntityLiquidTankInventory extends TileEntityInventory
 
     public void readFromNBT(NBTTagCompound nbttagcompound) {
         super.readFromNBT(nbttagcompound);
-        
+
         this.fluidTank.readFromNBT(nbttagcompound.getCompoundTag("fluidTank"));
     }
 
@@ -31,9 +31,11 @@ public abstract class TileEntityLiquidTankInventory extends TileEntityInventory
         this.fluidTank.writeToNBT(fluidTankTag);
         nbttagcompound.setTag("fluidTank", fluidTankTag);
     }
-    
+
     public int getFluidID() {
-        if(getFluidTank() == null || getFluidTank().getFluid() == null || getFluidTank().getFluid().getFluid() == null) return -1;
+        if (getFluidTank() == null || getFluidTank().getFluid() == null
+                || getFluidTank().getFluid().getFluid() == null)
+            return -1;
         return getFluidTank().getFluid().getFluid().getID();
     }
 
@@ -67,7 +69,7 @@ public abstract class TileEntityLiquidTankInventory extends TileEntityInventory
         return getFluidStackfromTank().getFluid();
     }
 
-    public int getTankAmount() {
+    public int getFluidAmount() {
         if (getFluidTank() == null)
             return -1;
         return getFluidTank().getFluidAmount();
@@ -79,20 +81,13 @@ public abstract class TileEntityLiquidTankInventory extends TileEntityInventory
         return getFluidStackfromTank().getFluid().getID();
     }
 
-    public int gaugeLiquidScaled(int i) {
-        if (getTankAmount() <= 0)
-            return 0;
-
-        return getTankAmount() * i / getFluidTankCapacity();
-    }
-
     public void setTankAmount(int amount, int fluidid) {
         getFluidTank().setFluid(
                 new FluidStack(FluidRegistry.getFluid(fluidid), amount));
     }
 
     public boolean needsFluid() {
-        return getTankAmount() <= getFluidTank().getCapacity();
+        return getFluidAmount() <= getFluidTank().getCapacity();
     }
 
     @Override
@@ -156,19 +151,35 @@ public abstract class TileEntityLiquidTankInventory extends TileEntityInventory
         }
     }
 
+    protected boolean allowedSendPacketTank() {
+        return true;
+    }
+
+    int preTankCapacity = -999;
+
     @Override
     public void readPacketData(NBTTagCompound tag) {
         super.readPacketData(tag);
 
-        getFluidTank().readFromNBT(tag.getCompoundTag("tank"));
+        if (allowedSendPacketTank()) {
+            if (tag.hasKey("tankCapacity"))
+                setFluidTankCapacity(tag.getInteger("tankCapacity"));
+            getFluidTank().readFromNBT(tag.getCompoundTag("tank"));
+        }
     }
 
     @Override
     public void writePacketData(NBTTagCompound tag) {
         super.writePacketData(tag);
 
-        NBTTagCompound n = new NBTTagCompound();
-        getFluidTank().writeToNBT(n);
-        tag.setTag("tank", n);
+        if (allowedSendPacketTank()) {
+            NBTTagCompound n = new NBTTagCompound();
+            getFluidTank().writeToNBT(n);
+            if (preTankCapacity != getFluidTankCapacity()) {
+                tag.setInteger("tankCapacity", getFluidTankCapacity());
+                preTankCapacity = getFluidTankCapacity();
+            }
+            tag.setTag("tank", n);
+        }
     }
 }

@@ -177,7 +177,7 @@ public abstract class IRecipeRegistrar {
         this.addRecipeByOreDictionary(
                 ItemCrafting.get(fixedTool, LevelTypes.MK1), "WW", "AW", 'W',
                 "logWood", 'A', Items.string);
-        this.addRecipeByOreDictionary(ItemType.WoodenHammer.item(), "WW ",
+        this.addRecipeByOreDictionary(ItemType.WoodenHammer.item(6), "WW ",
                 "WWI", "WW ", 'W', "logWood", 'I', Items.stick);
         if (Mods.IndustrialCraft2.isAvailable) {
             this.addRecipeByOreDictionary(

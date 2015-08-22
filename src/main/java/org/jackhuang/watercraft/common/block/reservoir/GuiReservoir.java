@@ -60,7 +60,7 @@ public class GuiReservoir extends GuiContainer {
         int x = par1 - l, y = par2 - i1;
 		if(x >= 82 && x <= 93 && y >= 36 && y <= 48) {
 		    drawHoveringText(ImmutableList.of((f == null ? StatCollector.translateToLocal("cptwtrml.gui.empty") : f.getLocalizedName()),
-		            gen.getFluidAmount() + "/" + gen.getMaxFluidAmount() + "mb"), x, y, fontRendererObj);
+		            gen.getFluidAmount() + "/" + gen.getFluidTankCapacity() + "mb"), x, y, fontRendererObj);
 		}
 	}
 }

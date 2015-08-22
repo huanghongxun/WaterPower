@@ -12,8 +12,10 @@ public enum IntegrationType {
     Mekanism(MekanismModule.class, Mods.Mekanism),
     Railcraft(RailcraftModule.class, Mods.Railcraft),
     ThermalExpansion(ThermalExpansionModule.class, Mods.ThermalExpansion),
+    Thaumcraft(ThaumcraftModule.class, Mods.Thaumcraft),
     Waila(WailaModule.class, Mods.Waila),
     MineTweaker3(MineTweakerModule.class, Mods.MineTweaker3),
+    ExNihilo(ExNihiloModule.class, Mods.ExNihilo),
     CraftGuide(CraftGuideModule.class, Mods.CraftGuide);
     
     public Class<? extends BaseModule> clazz;

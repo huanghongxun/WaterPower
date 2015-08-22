@@ -14,103 +14,181 @@ import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.client.gui.IHasGui;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
-public abstract class TileEntityMultiBlock extends TileEntityLiquidTankInventory
-		implements IHasGui {
+public abstract class TileEntityMultiBlock extends
+        TileEntityLiquidTankInventory implements IHasGui {
 
-	public TileEntityMultiBlock masterBlock;
-	protected boolean tested, isMaster;
-	private int tick = 0, tick2 = WaterPower.updateTick;
-	protected ArrayList<TileEntityMultiBlock> blockList;
+    public TileEntityMultiBlock masterBlock;
+    protected boolean tested;
+    private boolean sendInitDataTileEntityMultiBlock = false;
+    private int masterState, masterX, masterY, masterZ;
+    private int tick = 0, tick2 = WaterPower.updateTick;
+    protected ArrayList<TileEntityMultiBlock> blockList;
 
-	public TileEntityMultiBlock(int tankSize) {
-		super(tankSize);
-		this.tested = isServerSide();
-	}
+    public TileEntityMultiBlock(int tankSize) {
+        super(tankSize);
+        this.tested = isServerSide();
+    }
 
-	protected void setMaster(TileEntityMultiBlock master) {
-		this.masterBlock = master;
-	}
+    protected void setMaster(TileEntityMultiBlock block) {
+        if (block == null) {
+            masterState = 1;
+        } else if (block == this) {
+            masterState = 0;
+        } else {
+            masterState = 2;
+            masterX = block.xCoord;
+            masterY = block.yCoord;
+            masterZ = block.zCoord;
+        }
 
-	@Override
-	public void readFromNBT(NBTTagCompound nbtTagCompound) {
-		super.readFromNBT(nbtTagCompound);
+        sendInitDataTileEntityMultiBlock = true;
+    }
 
-		isMaster = nbtTagCompound.getBoolean("master");
-	}
+    @Override
+    public void readFromNBT(NBTTagCompound tag) {
+        super.readFromNBT(tag);
 
-	@Override
-	public void writeToNBT(NBTTagCompound nbtTagCompound) {
-		super.writeToNBT(nbtTagCompound);
+        masterState = tag.getInteger("master");
 
-		nbtTagCompound.setBoolean("master", isMaster);
-	}
+        if (masterState == 0)
+            masterBlock = this;
+        else if (masterState == 1)
+            masterBlock = null;
+        else {
+            masterX = tag.getInteger("masterX");
+            masterY = tag.getInteger("masterY");
+            masterZ = tag.getInteger("masterZ");
+        }
 
-	protected abstract ArrayList<TileEntityMultiBlock> test();
+        sendInitDataTileEntityMultiBlock = true;
+    }
 
-	protected void onUpdate() {
-	}
+    @Override
+    public void writeToNBT(NBTTagCompound nbtTagCompound) {
+        super.writeToNBT(nbtTagCompound);
 
-	protected boolean canBeMaster() {
-		return true;
-	}
-	
-	@Override
-	public FluidTank getFluidTank() {
-		if(!isServerSide()) return fluidTank;
-		if(isMaster)
-			return fluidTank;
-		else if (masterBlock == null)
-			return fluidTank;
-		else
-			return masterBlock.fluidTank;
-	}
+        if (masterBlock == this)
+            masterState = 0;
+        else if (masterBlock == null)
+            masterState = 1;
+        else
+            masterState = 2;
+        nbtTagCompound.setInteger("master", masterState);
+        if (masterState == 2) {
+            nbtTagCompound.setInteger("masterX", masterBlock.xCoord);
+            nbtTagCompound.setInteger("masterY", masterBlock.yCoord);
+            nbtTagCompound.setInteger("masterZ", masterBlock.zCoord);
+        }
+    }
 
-	@Override
-	public void updateEntity() {
-		super.updateEntity();
+    @Override
+    public void readPacketData(NBTTagCompound tag) {
+        super.readPacketData(tag);
 
-		if (worldObj == null || worldObj.isRemote) return;
+        if (tag.hasKey("sendInitDataTileEntityMultiBlock")) {
+            masterState = tag.getInteger("master");
 
-		if (tick-- == 0) {
-			tick = WaterPower.updateTick;
-			if (canBeMaster()) {
-				tested = true;
-				if(blockList != null) {
-					for (TileEntityMultiBlock block : blockList) {
-						block.tested = false;
-						block.setMaster(null);
-						block.isMaster = false;
-						block.sendUpdateToClient();
-					}
-				}
-				blockList = test();
-				if (blockList == null) {
-					tested = false;
-					isMaster = false;
-					onTestFailed();
-				} else {
-					for (TileEntityMultiBlock block : blockList) {
-						block.tested = true;
-						block.setMaster(this);
-						block.isMaster = false;
-						block.sendUpdateToClient();
-					}
-				}
-				isMaster = true;
-				
-				sendUpdateToClient();
-				
-			}
-		}
+            if (masterState == 0)
+                masterBlock = this;
+            else if (masterState == 1)
+                masterBlock = null;
+            else {
+                masterX = tag.getInteger("masterX");
+                masterY = tag.getInteger("masterY");
+                masterZ = tag.getInteger("masterZ");
+                TileEntity te = worldObj.getTileEntity(masterX, masterY,
+                        masterZ);
+                if (te instanceof TileEntityMultiBlock)
+                    masterBlock = (TileEntityMultiBlock) te;
+            }
+        }
+    }
 
-		if (tick2-- == 0) {
-			tick2 = WaterPower.updateTick;
-			onUpdate();
-		}
-	}
-	
-	protected abstract void onTestFailed();
+    @Override
+    public void writePacketData(NBTTagCompound tag) {
+        super.writePacketData(tag);
+
+        if (sendInitDataTileEntityMultiBlock) {
+            sendInitDataTileEntityMultiBlock = false;
+            tag.setBoolean("sendInitDataTileEntityMultiBlock", true);
+            tag.setInteger("master", masterState);
+            if (masterState == 2) {
+                tag.setInteger("masterX", masterX);
+                tag.setInteger("masterY", masterY);
+                tag.setInteger("masterZ", masterZ);
+                TileEntity te = worldObj.getTileEntity(masterX, masterY,
+                        masterZ);
+                if (te instanceof TileEntityMultiBlock)
+                    masterBlock = (TileEntityMultiBlock) te;
+            }
+        }
+    }
+
+    protected abstract ArrayList<TileEntityMultiBlock> test();
+
+    protected void onUpdate() {
+    }
+
+    protected boolean canBeMaster() {
+        return true;
+    }
+
+    @Override
+    public FluidTank getFluidTank() {
+        if (isMaster())
+            return fluidTank;
+        else
+            return masterBlock.getFluidTank();
+    }
+
+    @Override
+    public void updateEntity() {
+        super.updateEntity();
+
+        if (worldObj == null || worldObj.isRemote)
+            return;
+
+        if (tick-- == 0) {
+            tick = WaterPower.updateTick;
+            if (canBeMaster()) {
+
+                tested = true;
+                ArrayList<TileEntityMultiBlock> newBlockList = test();
+                boolean changed = blockList == null || (blockList != null
+                        && (newBlockList == null || !newBlockList
+                        .equals(blockList)));
+                if (changed && blockList != null) {
+                    for (TileEntityMultiBlock block : blockList) {
+                        block.tested = false;
+                        block.setMaster(null);
+                    }
+                }
+                blockList = newBlockList;
+                if (blockList == null) {
+                    tested = false;
+                    onTestFailed();
+                } else if (changed) {
+                    for (TileEntityMultiBlock block : blockList) {
+                        block.tested = true;
+                        block.setMaster(this);
+                    }
+                }
+            }
+        }
+
+        if (tick2-- == 0) {
+            tick2 = WaterPower.updateTick;
+            onUpdate();
+        }
+    }
+
+    public boolean isMaster() {
+        return masterBlock == null || masterBlock == this;
+    }
+
+    protected abstract void onTestFailed();
 }

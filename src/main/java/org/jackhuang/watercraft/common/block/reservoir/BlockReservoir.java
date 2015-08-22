@@ -90,6 +90,12 @@ public class BlockReservoir extends BlockRotor {
 
             if ((tile instanceof TileEntityReservoir)) {
                 TileEntityReservoir reservoir = (TileEntityReservoir) tile;
+                
+                if(current.getItem() instanceof ItemReservoir) {
+                    if(reservoir.type != null && current.getItemDamage() == reservoir.type.ordinal()) {
+                        return false;
+                    }
+                }
 
                 if (FluidContainerRegistry.isContainer(current)) {
                     FluidStack liquid = FluidContainerRegistry

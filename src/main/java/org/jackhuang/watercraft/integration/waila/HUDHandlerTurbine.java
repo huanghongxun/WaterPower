@@ -33,7 +33,6 @@ public class HUDHandlerTurbine implements IWailaDataProvider {
 		TileEntity te = arg2.getTileEntity();
 		if(!(te instanceof TileEntityTurbine)) return arg1;
 		TileEntityTurbine tile = (TileEntityTurbine) te;
-		arg1.add(StatCollector.translateToLocal("cptwtrml.gui.stored") + ": " + Utils.DEFAULT_DECIMAL_FORMAT.format(tile.getFromEU(tile.storage)) + tile.energyType.name());
 		arg1.add(StatCollector.translateToLocal("cptwtrml.gui.latest_output") + ": " + Utils.DEFAULT_DECIMAL_FORMAT.format(tile.getFromEU(tile.latestOutput)) + tile.energyType.name());
 		return arg1;
 	}

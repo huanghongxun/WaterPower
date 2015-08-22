@@ -5,7 +5,8 @@ public class BaseModule {
     protected void testClassExistence(Class c) {
         c.isInstance(this);
     }
-    
+
     public void init() {} 
+    public void postInit() {} 
 
 }

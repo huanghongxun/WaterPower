@@ -8,7 +8,7 @@ public class MaceratorRecipeHandler extends MachineRecipeHandler {
 
 	@Override
 	public String getRecipeName() {
-		return "Water-Powered Macerator";
+		return "Water-Powered Crusher";
 	}
 
 	@Override
@@ -23,7 +23,7 @@ public class MaceratorRecipeHandler extends MachineRecipeHandler {
 
 	@Override
 	public String getOverlayIdentifier() {
-		return "macerator";
+		return Reference.ModID + "。macerator";
 	}
 
 	@Override

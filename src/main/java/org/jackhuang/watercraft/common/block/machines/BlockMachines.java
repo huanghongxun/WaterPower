@@ -17,14 +17,14 @@ import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import org.jackhuang.watercraft.Reference;
-import org.jackhuang.watercraft.common.block.BlockMultiID;
+import org.jackhuang.watercraft.common.block.BlockWaterPower;
 import org.jackhuang.watercraft.common.block.GlobalBlocks;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockMachines extends BlockMultiID {
+public class BlockMachines extends BlockWaterPower {
 
 	public BlockMachines() {
 		super("cptBlockMachine", Material.iron, ItemMachines.class);

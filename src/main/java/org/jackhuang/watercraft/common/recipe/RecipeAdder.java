@@ -11,6 +11,7 @@ package org.jackhuang.watercraft.common.recipe;
 import gregtech.api.GregTech_API;
 
 import org.jackhuang.watercraft.common.item.others.ItemType;
+import org.jackhuang.watercraft.integration.AppliedEnergisticsModule;
 import org.jackhuang.watercraft.integration.ImmersiveEngineeringModule;
 import org.jackhuang.watercraft.integration.MekanismModule;
 import org.jackhuang.watercraft.integration.RailcraftModule;
@@ -53,6 +54,9 @@ public class RecipeAdder {
         }
         if (Mods.Mekanism.isAvailable) {
             MekanismModule.addCrusherRecipe(input, output);
+        }
+        if (Mods.AppliedEnergistics2.isAvailable) {
+            AppliedEnergisticsModule.crusher(input, output);
         }
         if (need) {
             MyRecipes.macerator.addRecipe(input, output);

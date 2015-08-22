@@ -14,9 +14,10 @@ import java.util.Random;
 import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.client.gui.IHasGui;
 import org.jackhuang.watercraft.common.EnergyType;
+import org.jackhuang.watercraft.common.network.MessagePacketHandler;
+import org.jackhuang.watercraft.common.network.PacketUnitChanged;
 import org.jackhuang.watercraft.util.Mods;
 import org.jackhuang.watercraft.util.Utils;
-
 
 /*import buildcraft.api.mj.IBatteryObject;
  import buildcraft.api.mj.MjAPI;
@@ -29,6 +30,9 @@ import cofh.api.energy.IEnergyHandler;
 import cpw.mods.fml.common.Optional.Interface;
 import cpw.mods.fml.common.Optional.InterfaceList;
 import cpw.mods.fml.common.Optional.Method;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.StatCollector;
@@ -58,6 +62,7 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements
     public boolean addedToEnergyNet = false;
     public EnergyType energyType = EnergyType.EU;
     public boolean needsToAddToEnergyNet = false;
+    boolean sendInitDataGenerator = false;
 
     private Object charge;
 
@@ -108,6 +113,8 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements
 
         if (Mods.Factorization.isAvailable && charge != null)
             ((Charge) charge).readFromNBT(nbttagcompound);
+
+        sendInitDataGenerator = true;
     }
 
     @Override
@@ -121,22 +128,30 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements
             ((Charge) charge).writeToNBT(nbttagcompound);
     }
 
+    double preLatestOutput = -999;
+
     @Override
     public void readPacketData(NBTTagCompound tag) {
         super.readPacketData(tag);
-        production = tag.getInteger("production");
-        storage = tag.getDouble("storage");
-        latestOutput = tag.getDouble("latestOutput");
-        energyType = EnergyType.values()[tag.getInteger("energyType")];
+        if (tag.hasKey("latestOutput"))
+            latestOutput = tag.getDouble("latestOutput");
+        if (tag.hasKey("sendInitDataGenerator")) {
+            energyType = EnergyType.values()[tag.getInteger("energyType")];
+        }
     }
 
     @Override
     public void writePacketData(NBTTagCompound tag) {
         super.writePacketData(tag);
-        tag.setDouble("storage", storage);
-        tag.setInteger("production", production);
-        tag.setDouble("latestOutput", latestOutput);
-        tag.setInteger("energyType", energyType.ordinal());
+        if (preLatestOutput != latestOutput) {
+            tag.setDouble("latestOutput", latestOutput);
+            preLatestOutput = latestOutput;
+        }
+        if (sendInitDataGenerator) {
+            sendInitDataGenerator = false;
+            tag.setBoolean("sendInitDataGenerator", true);
+            tag.setInteger("energyType", energyType.ordinal());
+        }
     }
 
     protected abstract double computeOutput(World world, int x, int y, int z);
@@ -149,11 +164,11 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements
     public void updateEntity() {
         super.updateEntity();
 
-        if (this.storage > this.maxStorage)
-            this.storage = this.maxStorage;
-
         if (!isServerSide())
             return;
+
+        if (this.storage > this.maxStorage)
+            this.storage = this.maxStorage;
 
         if (Mods.IndustrialCraft2.isAvailable)
             loadEnergyTile();
@@ -334,7 +349,7 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements
      * 
      * ------------------------------------------------------
      */
-    
+
     private Object[] handlerCache;
     private boolean deadCache = true;
 
@@ -452,10 +467,10 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements
     @Method(modid = Mods.IDs.Factorization)
     public String getInfo() {
         StringBuilder sb = new StringBuilder();
-        sb.append(StatCollector.translateToLocal("cptwtrml.gui.stored") + "/" + energyType.name() + ": " + Utils.DEFAULT_DECIMAL_FORMAT.format(getFromEU(storage))
+        sb.append(StatCollector.translateToLocal("cptwtrml.gui.latest_output")
+                + "/" + energyType.name() + ": "
+                + Utils.DEFAULT_DECIMAL_FORMAT.format(getFromEU(latestOutput))
                 + "\n");
-        sb.append(StatCollector.translateToLocal("cptwtrml.gui.latest_output") + "/" + energyType.name() + ": "
-                + Utils.DEFAULT_DECIMAL_FORMAT.format(getFromEU(latestOutput)) + "\n");
         return sb.toString();
     }
 
@@ -472,4 +487,12 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements
         return true;
     }
 
+    @SideOnly(Side.CLIENT)
+    public void onUnitChanged(EnergyType t) {
+        energyType = t;
+        MessagePacketHandler.INSTANCE
+                .sendToServer(new PacketUnitChanged(
+                        Minecraft.getMinecraft().thePlayer.worldObj.provider.dimensionId,
+                        xCoord, yCoord, zCoord, energyType.ordinal()));
+    }
 }

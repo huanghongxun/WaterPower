@@ -146,6 +146,12 @@ public class WaterPower implements IWorldGenerator {
         recipe.registerAllRecipes();
         
 		proxy.registerRenderer();
+		
+        for(IntegrationType type : IntegrationType.values()) {
+            if(type.getModule() != null)
+                type.getModule().postInit();
+        }
+        
 	}
 
 	protected void init() {
@@ -198,20 +204,18 @@ public class WaterPower implements IWorldGenerator {
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world,
 			IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
-        int baseHeight = world.provider.getAverageGroundLevel();
-	    int baseScale = Math.round(baseHeight * Reference.WorldGen.oreDensityFactor);
-        int baseCount = 2 * baseScale / 64;
+        int baseCount = Math.round(Reference.WorldGen.oreDensityFactor);
         
         if(Reference.WorldGen.vanadiumOre)
-		    generateOre(GlobalBlocks.vanadiumOre, 5, baseCount, world, random, chunkX, chunkZ, 16, 32);
+		    generateOre(GlobalBlocks.vanadiumOre, 8, baseCount, world, random, chunkX, chunkZ, 10, 13);
         if(Reference.WorldGen.manganeseOre)
-		    generateOre(GlobalBlocks.manganeseOre, 7, baseCount*2, world, random, chunkX, chunkZ, 16, 32);
+		    generateOre(GlobalBlocks.manganeseOre, 8, baseCount*2, world, random, chunkX, chunkZ, 6, 20);
         if(Reference.WorldGen.monaziteOre)
-		    generateOre(GlobalBlocks.monaziteOre, 5, baseCount, world, random, chunkX, chunkZ, 16, 32);
+		    generateOre(GlobalBlocks.monaziteOre, 8, baseCount, world, random, chunkX, chunkZ, 6, 32);
         if(Reference.WorldGen.magnetOre)
-		    generateOre(GlobalBlocks.magnetOre, 7, baseCount*3, world, random, chunkX, chunkZ, 6, 64);
+		    generateOre(GlobalBlocks.magnetOre, 8, baseCount*2, world, random, chunkX, chunkZ, 6, 64);
         if(Reference.WorldGen.zincOre)
-		    generateOre(GlobalBlocks.zincOre, 7, baseCount*3, world, random, chunkX, chunkZ, 6, 64);
+		    generateOre(GlobalBlocks.zincOre, 8, baseCount*2, world, random, chunkX, chunkZ, 6, 64);
 	}
 	
 	@SideOnly(Side.CLIENT)

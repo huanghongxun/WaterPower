@@ -68,14 +68,10 @@ public class GuiTurbine extends GuiContainer {
 
         switch (p_146284_1_.id) {
         case 1:
-            gen.energyType = EnergyType.values()[(gen.energyType.ordinal() + 1)
-                    % EnergyType.values().length];
-            btnEnergyType.displayString = gen.energyType.name();
-            MessagePacketHandler.INSTANCE
-                    .sendToServer(new PacketUnitChanged(
-                            Minecraft.getMinecraft().thePlayer.worldObj.provider.dimensionId,
-                            gen.xCoord, gen.yCoord, gen.zCoord, gen.energyType
-                                    .ordinal()));
+            EnergyType newType = EnergyType.values()[(gen.energyType.ordinal() + 1)
+                                                     % EnergyType.values().length];
+            btnEnergyType.displayString = newType.name();
+            gen.onUnitChanged(newType);
             break;
         }
     }

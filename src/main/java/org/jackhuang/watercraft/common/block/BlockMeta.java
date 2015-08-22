@@ -11,7 +11,7 @@ package org.jackhuang.watercraft.common.block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemBlock;
 
-public abstract class BlockMeta extends BlockMultiID {
+public abstract class BlockMeta extends BlockWaterPower {
 
 	public BlockMeta(String id,
 			Material material, Class<? extends ItemBlock> c) {
