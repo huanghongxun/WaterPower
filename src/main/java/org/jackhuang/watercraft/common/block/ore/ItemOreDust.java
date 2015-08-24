@@ -12,7 +12,8 @@ public class ItemOreDust extends ItemRecolorable {
 
 	public ItemOreDust() {
 		super("cptItemOreDust");
-		
+
+        setHasSubtypes(true);
 		registerOreDict();
 	}
 
