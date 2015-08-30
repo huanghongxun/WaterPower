@@ -34,12 +34,14 @@ public class Mods {
         public static final String Railcraft = "Railcraft";
         public static final String ImmersiveEngineering = "ImmersiveEngineering";
         public static final String MineTweaker3 = "MineTweaker3";
+        public static final String EnderIO = "EnderIO";
         public static final String AppliedEnergistics2 = "appliedenergistics2";
-        
     }
 
     public static final SimpleMod Factorization = new SimpleMod(
             IDs.Factorization);
+    public static final SimpleMod EnderIO = new SimpleMod(
+            IDs.EnderIO);
     public static final SimpleMod ThermalExpansion = new SimpleMod(
             IDs.ThermalExpansion);
     public static final SimpleMod IndustrialCraft2 = new SimpleMod(

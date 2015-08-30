@@ -102,4 +102,9 @@ public class MyRecipeInputOreDictionary implements IMyRecipeInput {
 
 		return ret;
 	}
+
+    @Override
+    public String getEnderIOXML() {
+        return String.format("<itemStack oreDictionary=\"%s\" />", input);
+    }
 }

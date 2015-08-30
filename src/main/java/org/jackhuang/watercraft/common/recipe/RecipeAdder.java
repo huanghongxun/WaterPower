@@ -86,6 +86,7 @@ public class RecipeAdder {
     }
 
     public static void bender(ItemStack input, ItemStack output) {
+        input = input.copy();
         if (Mods.ExNihilo.isAvailable) {
             // Incomplete
 
@@ -139,8 +140,42 @@ public class RecipeAdder {
                 break;
             }
         }
-        GameRegistry.addShapelessRecipe(output, ItemType.WoodenHammer.item(),
-                input);
+        int sz = input.stackSize;
+        input.stackSize = 1;
+        switch (sz) {
+        case 1:
+            GameRegistry.addShapelessRecipe(output, ItemType.WoodenHammer.item(),
+                    input);
+            break;
+        case 2:
+            GameRegistry.addShapelessRecipe(output, ItemType.WoodenHammer.item(),
+                    input, input);
+            break;
+        case 3:
+            GameRegistry.addShapelessRecipe(output, ItemType.WoodenHammer.item(),
+                    input, input, input);
+            break;
+        case 4:
+            GameRegistry.addShapelessRecipe(output, ItemType.WoodenHammer.item(),
+                    input, input, input, input);
+            break;
+        case 5:
+            GameRegistry.addShapelessRecipe(output, ItemType.WoodenHammer.item(),
+                    input, input, input, input, input);
+            break;
+        case 6:
+            GameRegistry.addShapelessRecipe(output, ItemType.WoodenHammer.item(),
+                    input, input, input, input, input, input);
+            break;
+        case 7:
+            GameRegistry.addShapelessRecipe(output, ItemType.WoodenHammer.item(),
+                    input, input, input, input, input, input, input);
+            break;
+        case 8:
+            GameRegistry.addShapelessRecipe(output, ItemType.WoodenHammer.item(),
+                    input, input, input, input, input, input, input, input);
+            break;
+        }
     }
 
     public static boolean blastFurnace(ItemStack input, ItemStack output,

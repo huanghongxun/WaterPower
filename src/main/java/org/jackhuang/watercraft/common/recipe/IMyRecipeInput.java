@@ -18,4 +18,6 @@ public interface IMyRecipeInput {
 	int getInputAmount();
 	
 	List<ItemStack> getInputs();
+	
+	String getEnderIOXML();
 }
