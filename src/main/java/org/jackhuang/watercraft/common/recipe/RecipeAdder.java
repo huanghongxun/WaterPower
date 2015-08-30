@@ -21,7 +21,6 @@ import org.jackhuang.watercraft.util.Mods;
 
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.registry.GameRegistry;
-import mekanism.api.recipe.RecipeHelper;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -53,7 +52,10 @@ public class RecipeAdder {
             }
         }
         if (Mods.Mekanism.isAvailable) {
-            MekanismModule.addCrusherRecipe(input, output);
+            MekanismModule.crusher(input, output);
+        }
+        if (Mods.Railcraft.isAvailable) {
+            RailcraftModule.crusher(input, true, false, output);
         }
         if (Mods.AppliedEnergistics2.isAvailable) {
             AppliedEnergisticsModule.crusher(input, output);
@@ -104,38 +106,38 @@ public class RecipeAdder {
             switch (sz) {
             case 1:
                 RailcraftModule
-                        .addRollingMachineRecipe(output, "A", 'A', input);
+                        .rollingMachine(output, "A", 'A', input);
                 break;
             case 2:
-                RailcraftModule.addRollingMachineRecipe(output, "AA", 'A',
+                RailcraftModule.rollingMachine(output, "AA", 'A',
                         input);
                 break;
             case 3:
-                RailcraftModule.addRollingMachineRecipe(output, "AAA", 'A',
+                RailcraftModule.rollingMachine(output, "AAA", 'A',
                         input);
                 break;
             case 4:
-                RailcraftModule.addRollingMachineRecipe(output, "AA", "AA",
+                RailcraftModule.rollingMachine(output, "AA", "AA",
                         'A', input);
                 break;
             case 5:
-                RailcraftModule.addRollingMachineRecipe(output, "AAA", "AA ",
+                RailcraftModule.rollingMachine(output, "AAA", "AA ",
                         'A', input);
                 break;
             case 6:
-                RailcraftModule.addRollingMachineRecipe(output, "AAA", "AAA",
+                RailcraftModule.rollingMachine(output, "AAA", "AAA",
                         'A', input);
                 break;
             case 7:
-                RailcraftModule.addRollingMachineRecipe(output, "AAA", "AAA",
+                RailcraftModule.rollingMachine(output, "AAA", "AAA",
                         "A  ", 'A', input);
                 break;
             case 8:
-                RailcraftModule.addRollingMachineRecipe(output, "AAA", "AAA",
+                RailcraftModule.rollingMachine(output, "AAA", "AAA",
                         "AA ", 'A', input);
                 break;
             case 9:
-                RailcraftModule.addRollingMachineRecipe(output, "AAA", "AAA",
+                RailcraftModule.rollingMachine(output, "AAA", "AAA",
                         "AAA", 'A', input);
                 break;
             }
@@ -194,7 +196,7 @@ public class RecipeAdder {
             flag = true;
         }
         if (Mods.Mekanism.isAvailable) {
-            MekanismModule.addMetallurgicInfuserRecipe("CARBON",
+            MekanismModule.metallurgicInfuser("CARBON",
                     Math.round(((float) cookTime) / 100.0f), input, output);
             flag = true;
         }

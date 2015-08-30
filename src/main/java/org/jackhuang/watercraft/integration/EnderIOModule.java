@@ -25,7 +25,7 @@ public class EnderIOModule {
                         Reference.ModID, o.getItem().delegate.name().split(":")[1],
                         o.getItemDamage(), o.stackSize);
         FMLInterModComms.sendMessage(Mods.EnderIO.id,
-                crazypants.enderio.api.IMC.ALLOY_RECIPE, value);
+                "recipe:alloysmelter", value);
 
     }
 }
