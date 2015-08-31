@@ -30,47 +30,47 @@ import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.common.ISpecialArmor;
 
 public class ItemTrouser extends ItemArmor
-	implements ISpecialArmor {
-	
-	WaterType type;
+    implements ISpecialArmor {
+    
+    WaterType type;
 
-	int saved = 0;
+    int saved = 0;
 
-	public ItemTrouser(WaterType type) {
-		super(EnumHelper.addArmorMaterial("CPTWTRMLPANT", 1, new int[] { 1, 1, 1, 1 }, 1), 0, 2);
+    public ItemTrouser(WaterType type) {
+        super(EnumHelper.addArmorMaterial("CPTWTRMLPANT", 1, new int[] { 1, 1, 1, 1 }, 1), 0, 2);
 
-		setUnlocalizedName(type.getTrousersUnlocalizedName());
-		setCreativeTab(WaterPower.creativeTabWaterPower);
-		setHasSubtypes(true);
-		
-		GameRegistry.registerItem(this, type.getTrousersUnlocalizedName());
-		
-		this.type = type;
-	}
+        setUnlocalizedName(type.getTrousersUnlocalizedName());
+        setCreativeTab(WaterPower.creativeTabWaterPower);
+        setHasSubtypes(true);
+        
+        GameRegistry.registerItem(this, type.getTrousersUnlocalizedName());
+        
+        this.type = type;
+    }
 
-	@Override
-	public ArmorProperties getProperties(EntityLivingBase player,
-			ItemStack armor, DamageSource source, double damage, int slot) {
-		return new ArmorProperties(0, 0, 0);
-	}
+    @Override
+    public ArmorProperties getProperties(EntityLivingBase player,
+            ItemStack armor, DamageSource source, double damage, int slot) {
+        return new ArmorProperties(0, 0, 0);
+    }
 
-	@Override
-	public int getArmorDisplay(EntityPlayer player, ItemStack armor, int slot) {
-		return 0;
-	}
+    @Override
+    public int getArmorDisplay(EntityPlayer player, ItemStack armor, int slot) {
+        return 0;
+    }
 
-	@Override
-	public void damageArmor(EntityLivingBase entity, ItemStack stack,
-			DamageSource source, int damage, int slot) {
-	}
+    @Override
+    public void damageArmor(EntityLivingBase entity, ItemStack stack,
+            DamageSource source, int damage, int slot) {
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister iconRegister) {
-		this.itemIcon = iconRegister.registerIcon(Reference.ModID + ":armor/itemArmorLegs");
-	}
-	
-	private void tryToCharge(ItemStack is) {
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(IIconRegister iconRegister) {
+        this.itemIcon = iconRegister.registerIcon(Reference.ModID + ":armor/itemArmorLegs");
+    }
+    
+    private void tryToCharge(ItemStack is) {
         if (is != null) {
             if (is.getItem() instanceof IElectricItem) {
                 IElectricItem electricItem = (IElectricItem) is.getItem();
@@ -78,54 +78,54 @@ public class ItemTrouser extends ItemArmor
             }
 
         }
-	}
-	
-	@Override
-	public void onArmorTick(World world, EntityPlayer player,
-			ItemStack itemStack) {
-		if(world.isRemote) return;
-		
-		double percent = 0;
-		
-		double [] d = Utils.getBiomeRaining(player.worldObj, (int)player.posX, (int)player.posZ);
-		double weather = d[0];
-		double biomeGet = d[2];
-		
-		percent += biomeGet * weather / 10.0;
-		
-		if(player.isInWater()) percent += 1;
-		
-		int energy = (int)((double)type.output * percent);
-		saved += energy;
-		for (ItemStack is : player.inventory.armorInventory) {
+    }
+    
+    @Override
+    public void onArmorTick(World world, EntityPlayer player,
+            ItemStack itemStack) {
+        if(world.isRemote) return;
+        
+        double percent = 0;
+        
+        double [] d = Utils.getBiomeRaining(player.worldObj, (int)player.posX, (int)player.posZ);
+        double weather = d[0];
+        double biomeGet = d[2];
+        
+        percent += biomeGet * weather / 10.0;
+        
+        if(player.isInWater()) percent += 1;
+        
+        int energy = (int)((double)type.output * percent);
+        saved += energy;
+        for (ItemStack is : player.inventory.armorInventory) {
             if (is == itemStack)
                 continue;
             if(saved <= 0) break;
             tryToCharge(is);
-		}
-		for (ItemStack is : player.inventory.mainInventory) {
+        }
+        for (ItemStack is : player.inventory.mainInventory) {
             if (is == itemStack)
                 continue;
             if(saved <= 0) break;
             tryToCharge(is);
-		}
-	}
-	
-	@Override
-	public String getArmorTexture(ItemStack stack, Entity entity, int slot,
-			String type) {
-		return Reference.ModID + ":textures/armor/cptwtrml.png"; 
-	}
-	
-	@Override
-	public String getItemStackDisplayName(ItemStack itemstack) {
-		return type.getShowedName() + StatCollector.translateToLocal("cptwtmrl.watermill.TROUSERS");
-	}
+        }
+    }
+    
+    @Override
+    public String getArmorTexture(ItemStack stack, Entity entity, int slot,
+            String type) {
+        return Reference.ModID + ":textures/armor/cptwtrml.png"; 
+    }
+    
+    @Override
+    public String getItemStackDisplayName(ItemStack itemstack) {
+        return type.getShowedName() + StatCollector.translateToLocal("cptwtmrl.watermill.TROUSERS");
+    }
 
-	
-	@SideOnly(Side.CLIENT)
-	public ResourceLocation getRenderTexture() {
-		return new ResourceLocation(Reference.ModID + ":textures/items/armor/"
-			+ "itemArmorLegs");
-	}
+    
+    @SideOnly(Side.CLIENT)
+    public ResourceLocation getRenderTexture() {
+        return new ResourceLocation(Reference.ModID + ":textures/items/armor/"
+            + "itemArmorLegs");
+    }
 }

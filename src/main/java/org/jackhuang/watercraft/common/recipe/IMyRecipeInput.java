@@ -13,11 +13,11 @@ import java.util.List;
 import net.minecraft.item.ItemStack;
 
 public interface IMyRecipeInput {
-	boolean matches(ItemStack input);
-	
-	int getInputAmount();
-	
-	List<ItemStack> getInputs();
-	
-	String getEnderIOXML();
+    boolean matches(ItemStack input);
+    
+    int getInputAmount();
+    
+    List<ItemStack> getInputs();
+    
+    String getEnderIOXML();
 }

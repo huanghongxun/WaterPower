@@ -15,11 +15,11 @@ import java.util.Map;
 import net.minecraft.item.ItemStack;
 
 public class MultiRecipeManager implements IRecipeManager {
-	ArrayList<IRecipeManager> container = new ArrayList();
-	
-	public MultiRecipeManager() {
-		addRecipeManager(new MyRecipeManager());
-	}
+    ArrayList<IRecipeManager> container = new ArrayList();
+    
+    public MultiRecipeManager() {
+        addRecipeManager(new MyRecipeManager());
+    }
 
     @Override
     public boolean addRecipe(ItemStack input, ItemStack... outputs) {
@@ -37,27 +37,27 @@ public class MultiRecipeManager implements IRecipeManager {
         return false;
     }
 
-	@Override
-	public MyRecipeOutput getOutput(ItemStack input, boolean adjustInput) {
-		for(IRecipeManager r : container) {
-			MyRecipeOutput a = r.getOutput(input, adjustInput);
-			if(a != null) return a;
-		}
-		return null;
-	}
+    @Override
+    public MyRecipeOutput getOutput(ItemStack input, boolean adjustInput) {
+        for(IRecipeManager r : container) {
+            MyRecipeOutput a = r.getOutput(input, adjustInput);
+            if(a != null) return a;
+        }
+        return null;
+    }
 
-	@Override
-	public Map<IMyRecipeInput, MyRecipeOutput> getAllRecipes() {
-		HashMap map = new HashMap();
-		for(IRecipeManager r : container) {
-			map.putAll(r.getAllRecipes());
-		}
-		return map;
-	}
-	
-	public MultiRecipeManager addRecipeManager(IRecipeManager rm) {
-		container.add(rm);
-		return this;
-	}
+    @Override
+    public Map<IMyRecipeInput, MyRecipeOutput> getAllRecipes() {
+        HashMap map = new HashMap();
+        for(IRecipeManager r : container) {
+            map.putAll(r.getAllRecipes());
+        }
+        return map;
+    }
+    
+    public MultiRecipeManager addRecipeManager(IRecipeManager rm) {
+        container.add(rm);
+        return this;
+    }
 
 }

@@ -16,29 +16,29 @@ import org.jackhuang.watercraft.client.render.RecolorableTextures;
 import net.minecraft.util.StatCollector;
 
 public enum LevelTypes {
-	/** Stone & Wood*/
-	MK1(255, 255, 255, 0),
-	/** Brass & Zinc */
-	MK3(255, 255, 255, 0),
-	/** Steel & Industrial Steel */
-	MK4(255, 255, 255, 0),
-	/** Maganese Steel */
-	MK5(255, 255, 255, 0),
-	/** Vanadium Steel */
-	MK7(255, 255, 255, 0);
-	
-	public short R, G, B, A;
-	
-	private LevelTypes(int R, int G, int B, int A) {
-		this.R = (short)R;
-		this.G = (short)G;
-		this.B = (short)B;
-		this.A = (short)A;
-	}
-	
-	public String getShowedName() {
-		String format = "cptwtrml.level." + name();
-		String s = StatCollector.translateToLocal(format);
-		return s;
-	}
+    /** Stone & Wood*/
+    MK1(255, 255, 255, 0),
+    /** Brass & Zinc */
+    MK3(255, 255, 255, 0),
+    /** Steel & Industrial Steel */
+    MK4(255, 255, 255, 0),
+    /** Maganese Steel */
+    MK5(255, 255, 255, 0),
+    /** Vanadium Steel */
+    MK7(255, 255, 255, 0);
+    
+    public short R, G, B, A;
+    
+    private LevelTypes(int R, int G, int B, int A) {
+        this.R = (short)R;
+        this.G = (short)G;
+        this.B = (short)B;
+        this.A = (short)A;
+    }
+    
+    public String getShowedName() {
+        String format = "cptwtrml.level." + name();
+        String s = StatCollector.translateToLocal(format);
+        return s;
+    }
 }

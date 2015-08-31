@@ -15,26 +15,26 @@ import net.minecraft.item.ItemStack;
 
 public class TileEntityMacerator extends TileEntityStandardWaterMachine {
 
-	public TileEntityMacerator() {
-		super(80, 10*20);
+    public TileEntityMacerator() {
+        super(80, 10*20);
 
-		this.inputSlot = new InventorySlotProcessableGeneric(this, "input",
-				1, MyRecipes.macerator);
-	}
-	
-	public static void init() {
-		MyRecipes.macerator = new MultiRecipeManager();
-		if(Mods.IndustrialCraft2.isAvailable)
-		    ((MultiRecipeManager)MyRecipes.macerator).addRecipeManager(new IndustrialCraftRecipeManager(IndustrialCraftModule.macerator));
-	}
+        this.inputSlot = new InventorySlotProcessableGeneric(this, "input",
+                1, MyRecipes.macerator);
+    }
+    
+    public static void init() {
+        MyRecipes.macerator = new MultiRecipeManager();
+        if(Mods.IndustrialCraft2.isAvailable)
+            ((MultiRecipeManager)MyRecipes.macerator).addRecipeManager(new IndustrialCraftRecipeManager(IndustrialCraftModule.macerator));
+    }
 
-	@Override
-	public String getInventoryName() {
-		return "Macerator";
-	}
+    @Override
+    public String getInventoryName() {
+        return "Macerator";
+    }
 
-	@Override
-	public int getGuiId() {
-		return DefaultGuiIds.get("tileEntityMacerator");
-	}
+    @Override
+    public int getGuiId() {
+        return DefaultGuiIds.get("tileEntityMacerator");
+    }
 }

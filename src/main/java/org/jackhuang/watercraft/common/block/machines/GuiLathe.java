@@ -12,14 +12,14 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiLathe extends GuiMachineBase {
-	public GuiLathe(EntityPlayer player,
-			TileEntityStandardWaterMachine tileEntity) {
-		super(new ContainerStandardMachine(player, tileEntity));
+    public GuiLathe(EntityPlayer player,
+            TileEntityStandardWaterMachine tileEntity) {
+        super(new ContainerStandardMachine(player, tileEntity));
 
-		this.name = StatCollector
-				.translateToLocal("cptwtrml.machine.lathe.name");
-		this.inv = StatCollector.translateToLocal("container.inventory");
-		this.background = new ResourceLocation(Reference.ModID
-				+ ":textures/gui/GUILathe.png");
-	}
+        this.name = StatCollector
+                .translateToLocal("cptwtrml.machine.lathe.name");
+        this.inv = StatCollector.translateToLocal("container.inventory");
+        this.background = new ResourceLocation(Reference.ModID
+                + ":textures/gui/GUILathe.png");
+    }
 }

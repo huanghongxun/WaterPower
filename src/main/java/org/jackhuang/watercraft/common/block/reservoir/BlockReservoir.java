@@ -25,7 +25,6 @@ import org.jackhuang.watercraft.integration.ic2.ICItemFinder;
 import org.jackhuang.watercraft.util.Mods;
 import org.jackhuang.watercraft.util.StackUtil;
 
-import thaumcraft.api.ItemApi;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class BlockReservoir extends BlockRotor {
@@ -264,6 +263,7 @@ public class BlockReservoir extends BlockRotor {
                 ICItemFinder.getIC2Item("iridiumPlate"));
         addReservoirRecipe(new ItemStack(this, 8, 19), "blockZinc");
         addReservoirRecipe(new ItemStack(this, 8, 20), "blockBrass");
+        addReservoirRecipe(new ItemStack(this, 8, 20), "blockZincAlloy");
         addReservoirRecipe(new ItemStack(this, 8, 21), "blockAluminum");
         addReservoirAdvancedRecipe(new ItemStack(this, 8, 22), "blockSteel");
         addReservoirRecipe(new ItemStack(this, 8, 23), "blockInvar");
@@ -271,14 +271,19 @@ public class BlockReservoir extends BlockRotor {
         addReservoirRecipe(new ItemStack(this, 8, 25), "blockNickel");
         addReservoirAdvancedRecipe(new ItemStack(this, 8, 26), "blockOsmium");
         addReservoirAdvancedRecipe(new ItemStack(this, 8, 27), "blockTitanium");
+        addReservoirAdvancedRecipe(new ItemStack(this, 8, 27), "blockManganese");
         addReservoirAdvancedRecipe(new ItemStack(this, 8, 28), "blockPlatinum");
         addReservoirAdvancedRecipe(new ItemStack(this, 8, 29), "blockTungsten");
+        addReservoirAdvancedRecipe(new ItemStack(this, 8, 29), "blockVanadium");
         addReservoirAdvancedRecipe(new ItemStack(this, 8, 30), "blockChrome");
+        addReservoirAdvancedRecipe(new ItemStack(this, 8, 30), "blockManganeseSteel");
         addReservoirAdvancedRecipe(new ItemStack(this, 8, 31),
                 "blockTungstenSteel");
+        addReservoirAdvancedRecipe(new ItemStack(this, 8, 31),
+                "blockVanadiumSteel");
         if (Mods.Thaumcraft.isAvailable) {
             addReservoirAdvancedRecipe(new ItemStack(this, 8, 32),
-                    ItemApi.getBlock("blockCosmeticSolid", 4));
+                    new ItemStack(GameRegistry.findBlock(Mods.IDs.Thaumcraft, "blockCosmeticSolid"), 1, 4));
         }
     }
 

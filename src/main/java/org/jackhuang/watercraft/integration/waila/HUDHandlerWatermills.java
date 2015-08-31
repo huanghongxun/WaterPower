@@ -30,56 +30,56 @@ import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
 
 @InterfaceList({
-	@Interface(iface = "mcp.mobius.waila.api.IWailaDataProvider", modid = Mods.IDs.Waila)
+    @Interface(iface = "mcp.mobius.waila.api.IWailaDataProvider", modid = Mods.IDs.Waila)
 })
 public class HUDHandlerWatermills implements IWailaDataProvider {
 
-	@Override
-	@Method(modid = Mods.IDs.Waila)
-	public List<String> getWailaBody(ItemStack arg0, List<String> arg1,
-			IWailaDataAccessor arg2, IWailaConfigHandler arg3) {
-		TileEntity te = arg2.getTileEntity();
-		if(!(te instanceof TileEntityWatermill)) return arg1;
-		TileEntityWatermill tile = (TileEntityWatermill) te;
-		arg1.add(StatCollector.translateToLocal("cptwtrml.gui.latest_output") + ": " + Utils.DEFAULT_DECIMAL_FORMAT.format(tile.getFromEU(tile.latestOutput)) + tile.energyType.name());
-		return arg1;
-	}
+    @Override
+    @Method(modid = Mods.IDs.Waila)
+    public List<String> getWailaBody(ItemStack arg0, List<String> arg1,
+            IWailaDataAccessor arg2, IWailaConfigHandler arg3) {
+        TileEntity te = arg2.getTileEntity();
+        if(!(te instanceof TileEntityWatermill)) return arg1;
+        TileEntityWatermill tile = (TileEntityWatermill) te;
+        arg1.add(StatCollector.translateToLocal("cptwtrml.gui.latest_output") + ": " + Utils.DEFAULT_DECIMAL_FORMAT.format(tile.getFromEU(tile.latestOutput)) + tile.energyType.name());
+        return arg1;
+    }
 
-	@Override
-	@Method(modid = Mods.IDs.Waila)
-	public List<String> getWailaHead(ItemStack arg0, List<String> arg1,
-			IWailaDataAccessor arg2, IWailaConfigHandler arg3) {
-		TileEntity te = arg2.getTileEntity();
-		if(!(te instanceof TileEntityWatermill)) return arg1;
-		TileEntityWatermill tile = (TileEntityWatermill) te;
-		arg1.add(StatCollector.translateToLocal("cptwtrml.watermill.WATERMILL") + " " + tile.getType().name());
-		return arg1;
-	}
+    @Override
+    @Method(modid = Mods.IDs.Waila)
+    public List<String> getWailaHead(ItemStack arg0, List<String> arg1,
+            IWailaDataAccessor arg2, IWailaConfigHandler arg3) {
+        TileEntity te = arg2.getTileEntity();
+        if(!(te instanceof TileEntityWatermill)) return arg1;
+        TileEntityWatermill tile = (TileEntityWatermill) te;
+        arg1.add(StatCollector.translateToLocal("cptwtrml.watermill.WATERMILL") + " " + tile.getType().name());
+        return arg1;
+    }
 
-	@Override
-	@Method(modid = Mods.IDs.Waila)
-	public ItemStack getWailaStack(IWailaDataAccessor arg0,
-			IWailaConfigHandler arg1) {
+    @Override
+    @Method(modid = Mods.IDs.Waila)
+    public ItemStack getWailaStack(IWailaDataAccessor arg0,
+            IWailaConfigHandler arg1) {
         TileEntity te = arg0.getTileEntity();
         if(!(te instanceof TileEntityWatermill)) return null;
         TileEntityWatermill tile = (TileEntityWatermill) te;
         return new ItemStack(GlobalBlocks.waterMill, 1, tile.getType().ordinal());
-	}
+    }
 
-	@Override
-	@Method(modid = Mods.IDs.Waila)
-	public List<String> getWailaTail(ItemStack arg0, List<String> arg1,
-			IWailaDataAccessor arg2, IWailaConfigHandler arg3) {
-		// TODO Auto-generated method stub
-		return arg1;
-	}
-
-	@Override
+    @Override
     @Method(modid = Mods.IDs.Waila)
-	public NBTTagCompound getNBTData(EntityPlayerMP arg0, TileEntity arg1,
-			NBTTagCompound arg2, World arg3, int arg4, int arg5, int arg6) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public List<String> getWailaTail(ItemStack arg0, List<String> arg1,
+            IWailaDataAccessor arg2, IWailaConfigHandler arg3) {
+        // TODO Auto-generated method stub
+        return arg1;
+    }
+
+    @Override
+    @Method(modid = Mods.IDs.Waila)
+    public NBTTagCompound getNBTData(EntityPlayerMP arg0, TileEntity arg1,
+            NBTTagCompound arg2, World arg3, int arg4, int arg5, int arg6) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
 }

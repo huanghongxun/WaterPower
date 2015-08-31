@@ -13,208 +13,208 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
 public abstract class TileEntityInventory extends TileEntityBase implements
-		ISidedInventory {
-	private final List<InventorySlot> invSlots = new ArrayList<InventorySlot>();
+        ISidedInventory {
+    private final List<InventorySlot> invSlots = new ArrayList<InventorySlot>();
 
     @Override
-	public void readFromNBT(NBTTagCompound nbtTagCompound) {
-		super.readFromNBT(nbtTagCompound);
+    public void readFromNBT(NBTTagCompound nbtTagCompound) {
+        super.readFromNBT(nbtTagCompound);
 
-		NBTTagCompound invSlotsTag = nbtTagCompound.getCompoundTag("InvSlots");
+        NBTTagCompound invSlotsTag = nbtTagCompound.getCompoundTag("InvSlots");
 
-		for (InventorySlot invSlot : this.invSlots)
-			invSlot.readFromNBT(invSlotsTag.getCompoundTag(invSlot.name));
-	}
-
-    @Override
-	public void writeToNBT(NBTTagCompound nbtTagCompound) {
-		super.writeToNBT(nbtTagCompound);
-
-		NBTTagCompound invSlotsTag = new NBTTagCompound();
-
-		for (InventorySlot invSlot : this.invSlots) {
-			NBTTagCompound invSlotTag = new NBTTagCompound();
-
-			invSlot.writeToNBT(invSlotTag);
-
-			invSlotsTag.setTag(invSlot.name, invSlotTag);
-		}
-
-		nbtTagCompound.setTag("InvSlots", invSlotsTag);
-	}
-	
-	public List<InventorySlot> getInventorySlots() {
-	    return invSlots;
-	}
-	
-	@Override
-	public boolean hasCustomInventoryName() {
-		return true;
-	}
+        for (InventorySlot invSlot : this.invSlots)
+            invSlot.readFromNBT(invSlotsTag.getCompoundTag(invSlot.name));
+    }
 
     @Override
-	public int getSizeInventory() {
-		int ret = 0;
-		for (InventorySlot invSlot : this.invSlots)
-			ret += invSlot.size();
-		return ret;
-	}
+    public void writeToNBT(NBTTagCompound nbtTagCompound) {
+        super.writeToNBT(nbtTagCompound);
+
+        NBTTagCompound invSlotsTag = new NBTTagCompound();
+
+        for (InventorySlot invSlot : this.invSlots) {
+            NBTTagCompound invSlotTag = new NBTTagCompound();
+
+            invSlot.writeToNBT(invSlotTag);
+
+            invSlotsTag.setTag(invSlot.name, invSlotTag);
+        }
+
+        nbtTagCompound.setTag("InvSlots", invSlotsTag);
+    }
+    
+    public List<InventorySlot> getInventorySlots() {
+        return invSlots;
+    }
+    
+    @Override
+    public boolean hasCustomInventoryName() {
+        return true;
+    }
 
     @Override
-	public ItemStack getStackInSlot(int index) {
-		for (InventorySlot invSlot : this.invSlots) {
-			if (index < invSlot.size())
-				return invSlot.get(index);
-			index -= invSlot.size();
-		}
-
-		return null;
-	}
+    public int getSizeInventory() {
+        int ret = 0;
+        for (InventorySlot invSlot : this.invSlots)
+            ret += invSlot.size();
+        return ret;
+    }
 
     @Override
-	public ItemStack decrStackSize(int index, int amount) {
-		ItemStack itemStack = getStackInSlot(index);
-		if (itemStack == null)
-			return null;
+    public ItemStack getStackInSlot(int index) {
+        for (InventorySlot invSlot : this.invSlots) {
+            if (index < invSlot.size())
+                return invSlot.get(index);
+            index -= invSlot.size();
+        }
 
-		if (amount >= itemStack.stackSize) {
-			setInventorySlotContents(index, null);
-
-			return itemStack;
-		}
-
-		itemStack.stackSize -= amount;
-
-		ItemStack ret = itemStack.copy();
-		ret.stackSize = amount;
-
-		return ret;
-	}
+        return null;
+    }
 
     @Override
-	public ItemStack getStackInSlotOnClosing(int index) {
-		ItemStack ret = getStackInSlot(index);
+    public ItemStack decrStackSize(int index, int amount) {
+        ItemStack itemStack = getStackInSlot(index);
+        if (itemStack == null)
+            return null;
 
-		if (ret != null)
-			setInventorySlotContents(index, null);
+        if (amount >= itemStack.stackSize) {
+            setInventorySlotContents(index, null);
 
-		return ret;
-	}
+            return itemStack;
+        }
 
-    @Override
-	public void setInventorySlotContents(int index, ItemStack itemStack) {
-		for (InventorySlot invSlot : this.invSlots) {
-			if (index < invSlot.size()) {
-				invSlot.put(index, itemStack);
-				break;
-			}
-			index -= invSlot.size();
-		}
-	}
+        itemStack.stackSize -= amount;
 
-	public boolean isInvNameLocalized() {
-		return false;
-	}
+        ItemStack ret = itemStack.copy();
+        ret.stackSize = amount;
+
+        return ret;
+    }
 
     @Override
-	public int getInventoryStackLimit() {
-		return 64;
-	}
+    public ItemStack getStackInSlotOnClosing(int index) {
+        ItemStack ret = getStackInSlot(index);
+
+        if (ret != null)
+            setInventorySlotContents(index, null);
+
+        return ret;
+    }
 
     @Override
-	public boolean isUseableByPlayer(EntityPlayer entityPlayer) {
-		return entityPlayer.getDistance(this.xCoord + 0.5D, this.yCoord + 0.5D,
-				this.zCoord + 0.5D) <= 64.0D;
-	}
+    public void setInventorySlotContents(int index, ItemStack itemStack) {
+        for (InventorySlot invSlot : this.invSlots) {
+            if (index < invSlot.size()) {
+                invSlot.put(index, itemStack);
+                break;
+            }
+            index -= invSlot.size();
+        }
+    }
 
-	@Override
-	public void openInventory() {
-	}
-
-	@Override
-	public void closeInventory() {
-	}
-
-    @Override
-	public boolean isItemValidForSlot(int index, ItemStack itemStack) {
-		InventorySlot invSlot = getInvSlot(index);
-
-		return (invSlot != null) && (invSlot.canInput())
-				&& (invSlot.accepts(itemStack));
-	}
+    public boolean isInvNameLocalized() {
+        return false;
+    }
 
     @Override
-	public int[] getAccessibleSlotsFromSide(int var1) {
-		int[] ret = new int[getSizeInventory()];
-
-		for (int i = 0; i < ret.length; i++) {
-			ret[i] = i;
-		}
-
-		return ret;
-	}
+    public int getInventoryStackLimit() {
+        return 64;
+    }
 
     @Override
-	public boolean canInsertItem(int index, ItemStack itemStack, int side) {
-		InventorySlot targetSlot = getInvSlot(index);
-		if (targetSlot == null)
-			return false;
-
-		if ((!targetSlot.canInput()) || (!targetSlot.accepts(itemStack)))
-			return false;
-		if ((targetSlot.preferredSide != InventorySlot.InvSide.ANY)
-				&& (targetSlot.preferredSide.matches(side)))
-			return true;
-
-		for (InventorySlot invSlot : this.invSlots) {
-			if ((invSlot != targetSlot)
-					&& (invSlot.preferredSide != InventorySlot.InvSide.ANY)
-					&& (invSlot.preferredSide.matches(side))
-					&& (invSlot.canInput()) && (invSlot.accepts(itemStack))) {
-				return false;
-			}
-		}
-
-		return true;
-	}
+    public boolean isUseableByPlayer(EntityPlayer entityPlayer) {
+        return entityPlayer.getDistance(this.xCoord + 0.5D, this.yCoord + 0.5D,
+                this.zCoord + 0.5D) <= 64.0D;
+    }
 
     @Override
-	public boolean canExtractItem(int index, ItemStack itemStack, int side) {
-		InventorySlot targetSlot = getInvSlot(index);
-		if (targetSlot == null)
-			return false;
+    public void openInventory() {
+    }
 
-		if (!targetSlot.canOutput())
-			return false;
-		if ((targetSlot.preferredSide != InventorySlot.InvSide.ANY)
-				&& (targetSlot.preferredSide.matches(side)))
-			return true;
+    @Override
+    public void closeInventory() {
+    }
 
-		for (InventorySlot invSlot : this.invSlots) {
-			if ((invSlot != targetSlot)
-					&& (invSlot.preferredSide != InventorySlot.InvSide.ANY)
-					&& (invSlot.preferredSide.matches(side))
-					&& (invSlot.canOutput())) {
-				return false;
-			}
-		}
+    @Override
+    public boolean isItemValidForSlot(int index, ItemStack itemStack) {
+        InventorySlot invSlot = getInvSlot(index);
 
-		return true;
-	}
+        return (invSlot != null) && (invSlot.canInput())
+                && (invSlot.accepts(itemStack));
+    }
 
-	public void addInvSlot(InventorySlot invSlot) {
-		this.invSlots.add(invSlot);
-	}
+    @Override
+    public int[] getAccessibleSlotsFromSide(int var1) {
+        int[] ret = new int[getSizeInventory()];
 
-	private InventorySlot getInvSlot(int index) {
-		for (InventorySlot invSlot : this.invSlots) {
-			if (index < invSlot.size()) {
-				return invSlot;
-			}
-			index -= invSlot.size();
-		}
+        for (int i = 0; i < ret.length; i++) {
+            ret[i] = i;
+        }
 
-		return null;
-	}
+        return ret;
+    }
+
+    @Override
+    public boolean canInsertItem(int index, ItemStack itemStack, int side) {
+        InventorySlot targetSlot = getInvSlot(index);
+        if (targetSlot == null)
+            return false;
+
+        if ((!targetSlot.canInput()) || (!targetSlot.accepts(itemStack)))
+            return false;
+        if ((targetSlot.preferredSide != InventorySlot.InvSide.ANY)
+                && (targetSlot.preferredSide.matches(side)))
+            return true;
+
+        for (InventorySlot invSlot : this.invSlots) {
+            if ((invSlot != targetSlot)
+                    && (invSlot.preferredSide != InventorySlot.InvSide.ANY)
+                    && (invSlot.preferredSide.matches(side))
+                    && (invSlot.canInput()) && (invSlot.accepts(itemStack))) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean canExtractItem(int index, ItemStack itemStack, int side) {
+        InventorySlot targetSlot = getInvSlot(index);
+        if (targetSlot == null)
+            return false;
+
+        if (!targetSlot.canOutput())
+            return false;
+        if ((targetSlot.preferredSide != InventorySlot.InvSide.ANY)
+                && (targetSlot.preferredSide.matches(side)))
+            return true;
+
+        for (InventorySlot invSlot : this.invSlots) {
+            if ((invSlot != targetSlot)
+                    && (invSlot.preferredSide != InventorySlot.InvSide.ANY)
+                    && (invSlot.preferredSide.matches(side))
+                    && (invSlot.canOutput())) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public void addInvSlot(InventorySlot invSlot) {
+        this.invSlots.add(invSlot);
+    }
+
+    private InventorySlot getInvSlot(int index) {
+        for (InventorySlot invSlot : this.invSlots) {
+            if (index < invSlot.size()) {
+                return invSlot;
+            }
+            index -= invSlot.size();
+        }
+
+        return null;
+    }
 
 }

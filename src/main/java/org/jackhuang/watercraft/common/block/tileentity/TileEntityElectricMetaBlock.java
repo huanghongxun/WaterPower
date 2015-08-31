@@ -11,14 +11,14 @@ package org.jackhuang.watercraft.common.block.tileentity;
 import net.minecraft.nbt.NBTTagCompound;
 
 public abstract class TileEntityElectricMetaBlock extends TileEntityGenerator implements ITileEntityMeta {
-	
-	public TileEntityElectricMetaBlock(int i, int j) {
-		super(i, j);
-	}
+    
+    public TileEntityElectricMetaBlock(int i, int j) {
+        super(i, j);
+    }
 
-	@Override
-	public void readFromNBT(NBTTagCompound nbt) {
-		super.readFromNBT(nbt);
-		initNBT(nbt, -1);
-	}
+    @Override
+    public void readFromNBT(NBTTagCompound nbt) {
+        super.readFromNBT(nbt);
+        initNBT(nbt, -1);
+    }
 }
