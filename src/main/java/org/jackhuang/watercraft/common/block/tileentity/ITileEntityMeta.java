@@ -11,5 +11,5 @@ package org.jackhuang.watercraft.common.block.tileentity;
 import net.minecraft.nbt.NBTTagCompound;
 
 public interface ITileEntityMeta {
-	void initNBT(NBTTagCompound nbt, int meta);
+    void initNBT(NBTTagCompound nbt, int meta);
 }

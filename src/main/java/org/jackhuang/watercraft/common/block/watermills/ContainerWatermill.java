@@ -9,14 +9,14 @@ import org.jackhuang.watercraft.common.block.inventory.SlotInventorySlot;
 
 public class ContainerWatermill extends ContainerRotor {
 
-	public ContainerWatermill(EntityPlayer player, TileEntityWatermill tileEntityCW) {
-		super(player, tileEntityCW);
-	}
+    public ContainerWatermill(EntityPlayer player, TileEntityWatermill tileEntityCW) {
+        super(player, tileEntityCW);
+    }
 
-	protected void layoutContainer() {
-	    super.layoutContainer();
-		for (int i = 0; i < 4; i++)
-			addSlotToContainer(new SlotInventorySlot(((TileEntityWatermill)tileEntity).slotUpdater, i,
-					152, 8 + i * 18, 2));
-	}
+    protected void layoutContainer() {
+        super.layoutContainer();
+        for (int i = 0; i < 4; i++)
+            addSlotToContainer(new SlotInventorySlot(((TileEntityWatermill)tileEntity).slotUpdater, i,
+                    152, 8 + i * 18, 2));
+    }
 }

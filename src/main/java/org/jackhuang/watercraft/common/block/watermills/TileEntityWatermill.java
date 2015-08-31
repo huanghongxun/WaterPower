@@ -44,6 +44,7 @@ public class TileEntityWatermill extends TileEntityRotor {
     private EntityWaterWheel wheel;
     private boolean canWheelTurn = false;
     public int waterBlocks, lavaBlocks;
+    public int preWaterBlocks = -999, preLavaBlocks = -999;
 
     RangeInventorySlot slotUpdater;
 
@@ -85,8 +86,10 @@ public class TileEntityWatermill extends TileEntityRotor {
     @Override
     public void writePacketData(NBTTagCompound tag) {
         super.writePacketData(tag);
-        tag.setInteger("waterBlocks", waterBlocks);
-        tag.setInteger("lavaBlocks", lavaBlocks);
+        if (waterBlocks != preWaterBlocks)
+            tag.setInteger("waterBlocks", waterBlocks);
+        if (lavaBlocks != preLavaBlocks)
+            tag.setInteger("lavaBlocks", lavaBlocks);
 
         if (sendInitData) {
             sendInitData = false;
@@ -107,8 +110,10 @@ public class TileEntityWatermill extends TileEntityRotor {
     @Override
     public void readPacketData(NBTTagCompound tag) {
         super.readPacketData(tag);
-        waterBlocks = tag.getInteger("waterBlocks");
-        lavaBlocks = tag.getInteger("lavaBlocks");
+        if (tag.hasKey("waterBlocks"))
+            waterBlocks = tag.getInteger("waterBlocks");
+        if (tag.hasKey("lavaBlocks"))
+            lavaBlocks = tag.getInteger("lavaBlocks");
 
         if (tag.hasKey("sendInitData")) {
             slotRotor.readFromNBT((NBTTagCompound) tag.getTag("rotor"));
@@ -124,12 +129,14 @@ public class TileEntityWatermill extends TileEntityRotor {
     }
 
     private void getWaterBlocks() {
+        preLavaBlocks = lavaBlocks;
+        preWaterBlocks = waterBlocks;
         lavaBlocks = waterBlocks = 0;
         if (type == null)
             return;
 
         int range = getRange();
-        if (range * range * range > 3375) {
+        if (range * range * range > 729) {
             lavaBlocks = waterBlocks = -1;
             return;
         }
@@ -152,7 +159,7 @@ public class TileEntityWatermill extends TileEntityRotor {
         if (type.ordinal() < 2)
             lavaBlocks = 0;
     }
-    
+
     public boolean isRangeSupported() {
         return waterBlocks != -1 && lavaBlocks != -1;
     }
@@ -292,21 +299,13 @@ public class TileEntityWatermill extends TileEntityRotor {
     }
 
     @Override
-    @Method(modid = Mods.IDs.Factorization)
-    public String getInfo() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(super.getInfo());
-        if (getFluidTank() == null)
-            return sb.toString();
-        FluidStack f = getFluidTank().getFluid();
-        sb.append("Stored Fluid: "
-                + (f == null ? "Empty" : f.getLocalizedName()) + "\n");
-        sb.append("Fluid Amount: " + getFluidTank().getFluidAmount() + "mb\n");
-        return sb.toString();
+    public ItemStack getDroppedItemStack() {
+        return new ItemStack(GlobalBlocks.waterMill, 1, type == null ? 0
+                : type.ordinal());
     }
     
     @Override
-    public ItemStack getDroppedItemStack() {
-        return new ItemStack(GlobalBlocks.waterMill, 1, type == null ? 0 : type.ordinal());
+    protected boolean allowedSendPacketTank() {
+        return false;
     }
 }

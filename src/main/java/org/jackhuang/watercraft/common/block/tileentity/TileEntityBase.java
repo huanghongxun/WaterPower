@@ -20,96 +20,103 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityBase extends TileEntity {
-    
+
     public TileEntityBase() {
         tick = WaterPower.updateTick;
     }
 
-	public void sendUpdateToClient() {
-		if(isServerSide())
-			MessagePacketHandler.INSTANCE.sendToAll(new PacketTileEntity(this));
-	}
+    public void sendUpdateToClient() {
+        if (isServerSide()) {
+            PacketTileEntity packet = new PacketTileEntity(this);
+            packet.tag = new NBTTagCompound();
+            writePacketData(packet.tag);
+            if (!packet.tag.func_150296_c().isEmpty())
+                MessagePacketHandler.INSTANCE.sendToAll(packet);
+        }
+    }
 
-	public boolean isServerSide() {
-		return WaterPower.isServerSide();
-	}
+    public boolean isServerSide() {
+        return WaterPower.isServerSide();
+    }
 
-	public void writePacketData(NBTTagCompound tag) {
+    public void writePacketData(NBTTagCompound tag) {
 
-	}
+    }
 
-	public void readPacketData(NBTTagCompound tag) {
+    public void readPacketData(NBTTagCompound tag) {
 
-	}
+    }
 
-	public boolean isRedstonePowered() {
-		return this.worldObj.isBlockIndirectlyGettingPowered(this.xCoord,
-				this.yCoord, this.zCoord);
-	}
+    public boolean isRedstonePowered() {
+        return this.worldObj.isBlockIndirectlyGettingPowered(this.xCoord,
+                this.yCoord, this.zCoord);
+    }
 
-	public void notifyNeighborTileChange() {
-		if (getBlockType() != null) {
-			this.worldObj.func_147453_f(this.xCoord, this.yCoord, this.zCoord,
-					getBlockType());
-		}
-	}
+    public void notifyNeighborTileChange() {
+        if (getBlockType() != null) {
+            this.worldObj.func_147453_f(this.xCoord, this.yCoord, this.zCoord,
+                    getBlockType());
+        }
+    }
 
-	public void onNeighborTileChange(int x, int y, int z) {
-	}
+    public void onNeighborTileChange(int x, int y, int z) {
+    }
 
-	public void onNeighborBlockChange() {
-	}
+    public void onNeighborBlockChange() {
+    }
 
-	public boolean isActive() {
-		return true;
-	}
-	
-	@Override
-	public void validate() {
-	    onLoaded();
-	    
-	    super.validate();
-	}
-	
-	@Override
-	public void invalidate() {
-	    if(loaded) onUnloaded();
-	    super.invalidate();
-	}
-	
-	@Override
-	public void onChunkUnload() {
-        if(loaded) onUnloaded();
-	    super.onChunkUnload();
-	}
-	
-	protected boolean loaded = false; 
-	
-	public void onLoaded() {
-	    loaded = true;
-	}
-	
-	public void onUnloaded() {
-	    loaded = false;
-	}
+    public boolean isActive() {
+        return true;
+    }
+
+    @Override
+    public void validate() {
+        onLoaded();
+
+        super.validate();
+    }
+
+    @Override
+    public void invalidate() {
+        if (loaded)
+            onUnloaded();
+        super.invalidate();
+    }
+
+    @Override
+    public void onChunkUnload() {
+        if (loaded)
+            onUnloaded();
+        super.onChunkUnload();
+    }
+
+    protected boolean loaded = false;
+
+    public void onLoaded() {
+        loaded = true;
+    }
+
+    public void onUnloaded() {
+        loaded = false;
+    }
 
     protected void onUpdate() {
     }
 
     private int tick;
-	
-	@Override
-	public void updateEntity() {
-	    super.updateEntity();
-	    
-	    if(isServerSide() && !isRedstonePowered()) {
+
+    @Override
+    public void updateEntity() {
+        super.updateEntity();
+
+        if (isServerSide() && !isRedstonePowered()) {
             if (tick-- == 0) {
                 onUpdate();
                 tick = WaterPower.updateTick;
-    
+
                 sendUpdateToClient();
             }
-	    }
-	}
+        }
+    }
 
 }

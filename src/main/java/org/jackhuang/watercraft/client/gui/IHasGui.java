@@ -11,5 +11,5 @@ package org.jackhuang.watercraft.client.gui;
 import net.minecraft.inventory.IInventory;
 
 public interface IHasGui extends IInventory {
-	int getGuiId();
+    int getGuiId();
 }

@@ -11,6 +11,7 @@ package org.jackhuang.watercraft.common.recipe;
 import gregtech.api.GregTech_API;
 
 import org.jackhuang.watercraft.common.item.others.ItemType;
+import org.jackhuang.watercraft.integration.AppliedEnergisticsModule;
 import org.jackhuang.watercraft.integration.ImmersiveEngineeringModule;
 import org.jackhuang.watercraft.integration.MekanismModule;
 import org.jackhuang.watercraft.integration.RailcraftModule;
@@ -20,7 +21,6 @@ import org.jackhuang.watercraft.util.Mods;
 
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.registry.GameRegistry;
-import mekanism.api.recipe.RecipeHelper;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -52,7 +52,13 @@ public class RecipeAdder {
             }
         }
         if (Mods.Mekanism.isAvailable) {
-            MekanismModule.addCrusherRecipe(input, output);
+            MekanismModule.crusher(input, output);
+        }
+        if (Mods.Railcraft.isAvailable) {
+            RailcraftModule.crusher(input, true, false, output);
+        }
+        if (Mods.AppliedEnergistics2.isAvailable) {
+            AppliedEnergisticsModule.crusher(input, output);
         }
         if (need) {
             MyRecipes.macerator.addRecipe(input, output);
@@ -82,6 +88,7 @@ public class RecipeAdder {
     }
 
     public static void bender(ItemStack input, ItemStack output) {
+        input = input.copy();
         if (Mods.ExNihilo.isAvailable) {
             // Incomplete
 
@@ -99,44 +106,78 @@ public class RecipeAdder {
             switch (sz) {
             case 1:
                 RailcraftModule
-                        .addRollingMachineRecipe(output, "A", 'A', input);
+                        .rollingMachine(output, "A", 'A', input);
                 break;
             case 2:
-                RailcraftModule.addRollingMachineRecipe(output, "AA", 'A',
+                RailcraftModule.rollingMachine(output, "AA", 'A',
                         input);
                 break;
             case 3:
-                RailcraftModule.addRollingMachineRecipe(output, "AAA", 'A',
+                RailcraftModule.rollingMachine(output, "AAA", 'A',
                         input);
                 break;
             case 4:
-                RailcraftModule.addRollingMachineRecipe(output, "AA", "AA",
+                RailcraftModule.rollingMachine(output, "AA", "AA",
                         'A', input);
                 break;
             case 5:
-                RailcraftModule.addRollingMachineRecipe(output, "AAA", "AA ",
+                RailcraftModule.rollingMachine(output, "AAA", "AA ",
                         'A', input);
                 break;
             case 6:
-                RailcraftModule.addRollingMachineRecipe(output, "AAA", "AAA",
+                RailcraftModule.rollingMachine(output, "AAA", "AAA",
                         'A', input);
                 break;
             case 7:
-                RailcraftModule.addRollingMachineRecipe(output, "AAA", "AAA",
+                RailcraftModule.rollingMachine(output, "AAA", "AAA",
                         "A  ", 'A', input);
                 break;
             case 8:
-                RailcraftModule.addRollingMachineRecipe(output, "AAA", "AAA",
+                RailcraftModule.rollingMachine(output, "AAA", "AAA",
                         "AA ", 'A', input);
                 break;
             case 9:
-                RailcraftModule.addRollingMachineRecipe(output, "AAA", "AAA",
+                RailcraftModule.rollingMachine(output, "AAA", "AAA",
                         "AAA", 'A', input);
                 break;
             }
         }
-        GameRegistry.addShapelessRecipe(output, ItemType.WoodenHammer.item(),
-                input);
+        int sz = input.stackSize;
+        input.stackSize = 1;
+        switch (sz) {
+        case 1:
+            GameRegistry.addShapelessRecipe(output, ItemType.WoodenHammer.item(),
+                    input);
+            break;
+        case 2:
+            GameRegistry.addShapelessRecipe(output, ItemType.WoodenHammer.item(),
+                    input, input);
+            break;
+        case 3:
+            GameRegistry.addShapelessRecipe(output, ItemType.WoodenHammer.item(),
+                    input, input, input);
+            break;
+        case 4:
+            GameRegistry.addShapelessRecipe(output, ItemType.WoodenHammer.item(),
+                    input, input, input, input);
+            break;
+        case 5:
+            GameRegistry.addShapelessRecipe(output, ItemType.WoodenHammer.item(),
+                    input, input, input, input, input);
+            break;
+        case 6:
+            GameRegistry.addShapelessRecipe(output, ItemType.WoodenHammer.item(),
+                    input, input, input, input, input, input);
+            break;
+        case 7:
+            GameRegistry.addShapelessRecipe(output, ItemType.WoodenHammer.item(),
+                    input, input, input, input, input, input, input);
+            break;
+        case 8:
+            GameRegistry.addShapelessRecipe(output, ItemType.WoodenHammer.item(),
+                    input, input, input, input, input, input, input, input);
+            break;
+        }
     }
 
     public static boolean blastFurnace(ItemStack input, ItemStack output,
@@ -155,7 +196,7 @@ public class RecipeAdder {
             flag = true;
         }
         if (Mods.Mekanism.isAvailable) {
-            MekanismModule.addMetallurgicInfuserRecipe("CARBON",
+            MekanismModule.metallurgicInfuser("CARBON",
                     Math.round(((float) cookTime) / 100.0f), input, output);
             flag = true;
         }

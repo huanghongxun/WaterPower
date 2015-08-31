@@ -21,9 +21,9 @@ apply plugin: 'curseforge'
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 def buildnumber = System.getenv("BUILD_NUMBER") == null ? "" : "-"+System.getenv("BUILD_NUMBER")
-version = "1.7.10-0.3n"+buildnumber
+version = "0.3o"+buildnumber
 group = "org.jackhuang.watercraft" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "WaterPower"
+archivesBaseName = "WaterPower-1.7.10"
 
 minecraft {
     version = "1.7.10-10.13.4.1492-1.7.10"

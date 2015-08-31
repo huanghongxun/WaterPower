@@ -19,28 +19,28 @@ import org.jackhuang.watercraft.common.item.crafting.MaterialTypes;
 
 public abstract class ItemRecolorable extends ItemBase {
 
-	
-	public ItemRecolorable(String id) {
-		super(id);
-	}
+    
+    public ItemRecolorable(String id) {
+        super(id);
+    }
 
-	public abstract short[] getRGBA(ItemStack stack);
+    public abstract short[] getRGBA(ItemStack stack);
 
-	public abstract IIconContainer getIconContainer(int meta);
-	public abstract IIconContainer[] getIconContainers();
-	
-	@Override
-	public IIcon getIconFromDamage(int meta) {
-		return getIconContainer(meta).getIcon();
-	}
-	
-	@Override
-	public void registerIcons(IIconRegister iconRegister) {
-		if(WaterPower.proxy instanceof ClientProxy) {
-			ClientProxy proxy = (ClientProxy) WaterPower.proxy;
-			for(IIconContainer i : getIconContainers()) {
-				i.registerIcon(iconRegister);
-			}
-		}
-	}
+    public abstract IIconContainer getIconContainer(int meta);
+    public abstract IIconContainer[] getIconContainers();
+    
+    @Override
+    public IIcon getIconFromDamage(int meta) {
+        return getIconContainer(meta).getIcon();
+    }
+    
+    @Override
+    public void registerIcons(IIconRegister iconRegister) {
+        if(WaterPower.proxy instanceof ClientProxy) {
+            ClientProxy proxy = (ClientProxy) WaterPower.proxy;
+            for(IIconContainer i : getIconContainers()) {
+                i.registerIcon(iconRegister);
+            }
+        }
+    }
 }

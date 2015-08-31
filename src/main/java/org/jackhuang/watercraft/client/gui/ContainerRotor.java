@@ -15,18 +15,18 @@ import org.jackhuang.watercraft.common.block.inventory.SlotInventorySlot;
 import org.jackhuang.watercraft.common.block.tileentity.TileEntityRotor;
 
 public class ContainerRotor extends ContainerFullInventory {
-	public TileEntityRotor tileEntity;
-	
-	public ContainerRotor(EntityPlayer player, TileEntityRotor tileEntityCW) {
-		super(player, tileEntityCW, 166);
-		tileEntity = tileEntityCW;
-		layoutContainer();
-	}
+    public TileEntityRotor tileEntity;
+    
+    public ContainerRotor(EntityPlayer player, TileEntityRotor tileEntityCW) {
+        super(player, tileEntityCW, 166);
+        tileEntity = tileEntityCW;
+        layoutContainer();
+    }
 
-	protected void layoutContainer() {
-		
-		//Rotor inventory drawing
-		addSlotToContainer(new SlotInventorySlot(tileEntity.slotRotor, 0, 80, 26));
-		
-	}
+    protected void layoutContainer() {
+        
+        //Rotor inventory drawing
+        addSlotToContainer(new SlotInventorySlot(tileEntity.slotRotor, 0, 80, 26));
+        
+    }
 }

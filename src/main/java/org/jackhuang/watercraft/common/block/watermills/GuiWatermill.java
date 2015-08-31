@@ -96,10 +96,6 @@ public class GuiWatermill extends GuiContainer {
         fontRendererObj.drawString(
                 StatCollector.translateToLocal("cptwtrml.watermill.NEED") + ":"
                         + b + "=" + a + "^3-1", 8, 65, 0x404040);
-        fontRendererObj.drawString(
-                StatCollector.translateToLocal("cptwtrml.watermill.PRODUCTION")
-                        + ":" + Utils.DEFAULT_DECIMAL_FORMAT.format(gen.getFromEU(gen.production))
-                        + gen.energyType.name(), 8, 75, 0x404040);
     }
 
     @Override
@@ -108,14 +104,10 @@ public class GuiWatermill extends GuiContainer {
 
         switch (p_146284_1_.id) {
         case 1:
-            gen.energyType = EnergyType.values()[(gen.energyType.ordinal() + 1)
+            EnergyType newType = EnergyType.values()[(gen.energyType.ordinal() + 1)
                     % EnergyType.values().length];
-            btnEnergyType.displayString = gen.energyType.name();
-            MessagePacketHandler.INSTANCE
-                    .sendToServer(new PacketUnitChanged(
-                            Minecraft.getMinecraft().thePlayer.worldObj.provider.dimensionId,
-                            gen.xCoord, gen.yCoord, gen.zCoord, gen.energyType
-                                    .ordinal()));
+            btnEnergyType.displayString = newType.name();
+            gen.onUnitChanged(newType);
             break;
         }
     }

@@ -1,1 +1,1 @@
-gradlew build --offline
+gradlew clean build --offline

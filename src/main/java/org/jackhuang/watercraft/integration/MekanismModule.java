@@ -10,8 +10,6 @@ package org.jackhuang.watercraft.integration;
 
 import java.util.HashMap;
 
-import mekanism.api.infuse.InfuseRegistry;
-import mekanism.api.recipe.RecipeHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -22,20 +20,19 @@ import cpw.mods.fml.common.event.FMLInterModComms;
 
 public class MekanismModule extends BaseModule {
 
-    public static void addMetallurgicInfuserRecipe(String infuse, int amount,
+    public static void metallurgicInfuser(String infuse, int amount,
             ItemStack input, ItemStack output) {
-        try {
-            RecipeHelper.addMetallurgicInfuserRecipe(
-                    InfuseRegistry.get(infuse), amount, input, output);
-        } catch (Throwable t) {
-            t.printStackTrace();
-        }
+        NBTTagCompound sendTag = convertToSimpleRecipe(input, output);
+        sendTag.setString("infuseType", infuse);
+        sendTag.setInteger("infuseAmount", amount);
+
+        FMLInterModComms.sendMessage(Mods.Mekanism.id, "MetallurgicInfuserRecipe", sendTag);
     }
 
-    public static void addCrusherRecipe(ItemStack in, ItemStack out) {
+    public static void crusher(ItemStack in, ItemStack out) {
         NBTTagCompound sendTag = convertToSimpleRecipe(in, out);
 
-        FMLInterModComms.sendMessage("mekanism", "CrusherRecipe", sendTag);
+        FMLInterModComms.sendMessage(Mods.Mekanism.id, "CrusherRecipe", sendTag);
     }
 
     private static NBTTagCompound convertToSimpleRecipe(ItemStack in, ItemStack out) {

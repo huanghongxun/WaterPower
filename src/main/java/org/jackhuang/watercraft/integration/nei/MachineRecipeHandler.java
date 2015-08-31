@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) Huang Yuhui, 2014
+ * 
+ * "WaterCraft" is distributed under the terms of the Minecraft Mod Public
+ * License 1.0, or MMPL. Please check the contents of the license located in
+ * http://www.mod-buildcraft.com/MMPL-1.0.txt
+ */
 package org.jackhuang.watercraft.integration.nei;
 
 import java.awt.Rectangle;
@@ -57,7 +64,9 @@ public abstract class MachineRecipeHandler extends TemplateRecipeHandler {
     @Override
     public void loadTransferRects() {
         this.transferRects.add(new TemplateRecipeHandler.RecipeTransferRect(
-                new Rectangle(50, 23, 25, 16), getRecipeId()));
+                new Rectangle(43, 23, 25, 16), getRecipeId()));
+        //this.transferRects.add(new TemplateRecipeHandler.RecipeTransferRect(
+        //        new Rectangle(0, 0, 25, 16), getRecipeId()));
     }
 
     @Override

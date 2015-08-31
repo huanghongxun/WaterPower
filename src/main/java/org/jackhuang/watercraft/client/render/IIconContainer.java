@@ -12,6 +12,6 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 
 public interface IIconContainer {
-	IIcon getIcon();
-	void registerIcon(IIconRegister register);
+    IIcon getIcon();
+    void registerIcon(IIconRegister register);
 }

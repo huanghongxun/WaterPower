@@ -27,56 +27,65 @@ import org.jackhuang.watercraft.common.recipe.MyRecipeInputOreDictionary;
 import org.jackhuang.watercraft.common.recipe.MyRecipeOutput;
 
 public class IndustrialCraftRecipeManager implements IRecipeManager {
-	
-	Object containsIC2Recipe;
-	
-	public IndustrialCraftRecipeManager(Object ic2RecipeManager) {
-		containsIC2Recipe = ic2RecipeManager;
-	}
 
-	@Override
-	public boolean addRecipe(ItemStack input, ItemStack... outputs) {
-		try {
-			((IMachineRecipeManager) containsIC2Recipe).addRecipe(new RecipeInputItemStack(input), null, outputs);
-			return true;
-		} catch(Throwable t) {
-			return false;
-		}
-	}
+    Object containsIC2Recipe;
 
-	@Override
-	public MyRecipeOutput getOutput(ItemStack input, boolean adjustInput) {
-		try {
-			RecipeOutput r = ((IMachineRecipeManager) containsIC2Recipe).getOutputFor(input, adjustInput);
-			if(r == null) return null;
-			return new MyRecipeOutput(r.items);
-		} catch(Throwable t) {
-			t.printStackTrace();
-			return null;
-		}
-	}
+    public IndustrialCraftRecipeManager(Object ic2RecipeManager) {
+        containsIC2Recipe = ic2RecipeManager;
+    }
 
-	@Override
-	public Map<IMyRecipeInput, MyRecipeOutput> getAllRecipes() {
-		HashMap<IMyRecipeInput, MyRecipeOutput> map = new HashMap<IMyRecipeInput, MyRecipeOutput>();
-		try {
-			for(Map.Entry<IRecipeInput, RecipeOutput> entry : ((IMachineRecipeManager) containsIC2Recipe).getRecipes().entrySet()) {
-				IMyRecipeInput input;
-				IRecipeInput ic2Input = entry.getKey();
-				if(ic2Input instanceof RecipeInputItemStack)
-					input = new MyRecipeInputItemStack(((RecipeInputItemStack) ic2Input).input);
-				else if(ic2Input instanceof RecipeInputOreDict)
-					input = new MyRecipeInputOreDictionary(((RecipeInputOreDict)ic2Input).input, ((RecipeInputOreDict)ic2Input).amount, ((RecipeInputOreDict)ic2Input).meta);
-				else input = null;
-				if(input != null)
-					map.put(input, new MyRecipeOutput(entry.getValue().items));
-			}
-			return map;
-		} catch(Throwable t) {
-			t.printStackTrace();
-			return map;
-		}
-	}
+    @Override
+    public boolean addRecipe(ItemStack input, ItemStack... outputs) {
+        try {
+            ((IMachineRecipeManager) containsIC2Recipe).addRecipe(
+                    new RecipeInputItemStack(input), null, outputs);
+            return true;
+        } catch (Throwable t) {
+            return false;
+        }
+    }
+
+    @Override
+    public MyRecipeOutput getOutput(ItemStack input, boolean adjustInput) {
+        try {
+            RecipeOutput r = ((IMachineRecipeManager) containsIC2Recipe)
+                    .getOutputFor(input, adjustInput);
+            if (r == null)
+                return null;
+            return new MyRecipeOutput(r.items);
+        } catch (Throwable t) {
+            t.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public Map<IMyRecipeInput, MyRecipeOutput> getAllRecipes() {
+        HashMap<IMyRecipeInput, MyRecipeOutput> map = new HashMap<IMyRecipeInput, MyRecipeOutput>();
+        try {
+            for (Map.Entry<IRecipeInput, RecipeOutput> entry : ((IMachineRecipeManager) containsIC2Recipe)
+                    .getRecipes().entrySet()) {
+                IMyRecipeInput input;
+                IRecipeInput ic2Input = entry.getKey();
+                if (ic2Input instanceof RecipeInputItemStack)
+                    input = new MyRecipeInputItemStack(
+                            ((RecipeInputItemStack) ic2Input).input);
+                else if (ic2Input instanceof RecipeInputOreDict)
+                    input = new MyRecipeInputOreDictionary(
+                            ((RecipeInputOreDict) ic2Input).input,
+                            ((RecipeInputOreDict) ic2Input).amount,
+                            ((RecipeInputOreDict) ic2Input).meta);
+                else
+                    input = null;
+                if (input != null)
+                    map.put(input, new MyRecipeOutput(entry.getValue().items));
+            }
+            return map;
+        } catch (Throwable t) {
+            t.printStackTrace();
+            return map;
+        }
+    }
 
     @Override
     public boolean removeRecipe(ItemStack input) {

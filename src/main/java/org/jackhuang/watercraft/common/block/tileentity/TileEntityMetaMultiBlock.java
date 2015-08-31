@@ -15,14 +15,14 @@ import net.minecraftforge.fluids.Fluid;
 
 public abstract class TileEntityMetaMultiBlock extends TileEntityMultiBlock implements ITileEntityMeta {
 
-	public TileEntityMetaMultiBlock(int tankSize) {
-		super(tankSize);
-	}
+    public TileEntityMetaMultiBlock(int tankSize) {
+        super(tankSize);
+    }
 
-	@Override
-	public void readFromNBT(NBTTagCompound nbt) {
-		super.readFromNBT(nbt);
-		initNBT(nbt, -1);
-	}
+    @Override
+    public void readFromNBT(NBTTagCompound nbt) {
+        super.readFromNBT(nbt);
+        initNBT(nbt, -1);
+    }
 
 }

@@ -16,63 +16,71 @@ import org.jackhuang.watercraft.Reference;
 
 /**
  * WaterPower log class.
+ * 
  * @author lasm_
  */
 public class WPLog {
-        /**
-         * setting logger.
-         */
-        private static final Logger log = LogManager.getLogger(Reference.ModID);
-        
-        /**
-         * Log Message.
-         * @see org.apache.logging.log4j.Level
-         * @param level log levels
-         * @param message log message
-         */
-        public static void log(Level level, String message) {
-		log.log(level, message);
-        }
-	
-        /**
-         * Log INFO Message.
-         * @param message 
-         */
-	public static void log(String message) {
-		log(Level.INFO, message);
-	}
-	
-        /**
-         * Warn player massage.
-         * @param message 
-         */
-	public static void warn(String message) {
-		log(Level.WARN, message);
-	}
-	
-        /**
-         * Error message.
-         * @param message 
-         */
-	public static void err(String message) {
-		log(Level.ERROR, message);
-	}
-	
-        /**
-         * Debug message.
-         * @param message 
-         */
-	public static void debug(String message) {
-		log(Level.DEBUG, message);
-	}
-	
-        /**
-         * if this is a experience version then
-         * debug message.
-         * @param message 
-         */
-	public static void debugLog(String message) {
-            if(WaterPower.isDeobf())
-                log(message);
-	}
+    /**
+     * setting logger.
+     */
+    private static final Logger log = LogManager.getLogger(Reference.ModID);
+
+    /**
+     * Log Message.
+     * 
+     * @see org.apache.logging.log4j.Level
+     * @param level
+     *            log levels
+     * @param message
+     *            log message
+     */
+    public static void log(Level level, String message) {
+        log.log(level, message);
+    }
+
+    /**
+     * Log INFO Message.
+     * 
+     * @param message
+     */
+    public static void log(String message) {
+        log(Level.INFO, message);
+    }
+
+    /**
+     * Warn player massage.
+     * 
+     * @param message
+     */
+    public static void warn(String message) {
+        log(Level.WARN, message);
+    }
+
+    /**
+     * Error message.
+     * 
+     * @param message
+     */
+    public static void err(String message) {
+        log(Level.ERROR, message);
+    }
+
+    /**
+     * Debug message.
+     * 
+     * @param message
+     */
+    public static void debug(String message) {
+        log(Level.DEBUG, message);
+    }
+
+    /**
+     * if this is a experience version then debug message.
+     * 
+     * @param message
+     */
+    public static void debugLog(String message) {
+        if (WaterPower.isDeobf())
+            log(message);
+    }
 }

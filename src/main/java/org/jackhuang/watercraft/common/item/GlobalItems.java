@@ -23,11 +23,11 @@ import net.minecraft.item.ItemStack;
  */
 public class GlobalItems {
 
-	public static ItemOthers updater;
-	public static ItemRange range;
-	public static ItemOreDust oreDust;
-	public static ItemMaterial meterial;
-	public static ItemCrafting crafting;
-	public static ItemTrouser trousers;
-	public static ItemPlugins plugins;
+    public static ItemOthers updater;
+    public static ItemRange range;
+    public static ItemOreDust oreDust;
+    public static ItemMaterial meterial;
+    public static ItemCrafting crafting;
+    public static ItemTrouser trousers;
+    public static ItemPlugins plugins;
 }

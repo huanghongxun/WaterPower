@@ -26,20 +26,20 @@ import cpw.mods.fml.common.Optional.Interface;
 import cpw.mods.fml.common.Optional.InterfaceList;
 
 public abstract class TileEntityWaterMachine extends TileEntityBlock
-		implements IWaterReceiver {
-	public TileEntityWaterMachine(int maxWater) {
-	    super(maxWater);
-	}
+        implements IWaterReceiver {
+    public TileEntityWaterMachine(int maxWater) {
+        super(maxWater);
+    }
 
-	@Override
-	public int canProvideWater(int water, ForgeDirection side, TileEntity provider) {
-		int need = getFluidTankCapacity() - this.getTankAmount();
-		need = Math.min(need, water);
-		return need;
-	}
+    @Override
+    public int canProvideWater(int water, ForgeDirection side, TileEntity provider) {
+        int need = getFluidTankCapacity() - getFluidAmount();
+        need = Math.min(need, water);
+        return need;
+    }
 
-	@Override
-	public void provideWater(int provide) {
-		this.getFluidTank().fill(new FluidStack(FluidRegistry.WATER, provide), true);
-	}
+    @Override
+    public void provideWater(int provide) {
+        this.getFluidTank().fill(new FluidStack(FluidRegistry.WATER, provide), true);
+    }
 }

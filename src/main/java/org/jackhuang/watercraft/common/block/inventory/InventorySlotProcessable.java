@@ -7,14 +7,14 @@ import ic2.api.recipe.RecipeOutput;
 import net.minecraft.item.ItemStack;
 
 public abstract class InventorySlotProcessable extends InventorySlotConsumable {
-	public InventorySlotProcessable(TileEntityInventory base, String name,
-			int count) {
-		super(base, name, count);
-	}
+    public InventorySlotProcessable(TileEntityInventory base, String name,
+            int count) {
+        super(base, name, count);
+    }
 
-	public abstract boolean accepts(ItemStack paramItemStack);
+    public abstract boolean accepts(ItemStack paramItemStack);
 
-	public abstract MyRecipeOutput process();
+    public abstract MyRecipeOutput process();
 
-	public abstract void consume();
+    public abstract void consume();
 }

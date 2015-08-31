@@ -248,10 +248,10 @@ public class EasyRecipeRegistrar extends IRecipeRegistrar {
             addRecipeByOreDictionary(ItemType.WaterUraniumIngot.item(), "SSS",
                     "SAS", "SSS", 'A', "ingotManganese", 'S', "gemLapis");
 
-        if (doesOreNameExist("ingotUranium")) {
+        if (doesOreNameExist("ingotUranium") && Mods.IndustrialCraft2.isAvailable) {
             if (Mods.Railcraft.isAvailable)
                 for (ItemStack sasasasa : OreDictionary.getOres("ingotUranium"))
-                    RailcraftModule.addRollingMachineRecipe(is2, "SAS", "ASA",
+                    RailcraftModule.rollingMachine(is2, "SAS", "ASA",
                             "SAS", 'A', sasasasa, 'S',
                             ICItemFinder.getIC2Item("electrolyzedWaterCell"));
             else

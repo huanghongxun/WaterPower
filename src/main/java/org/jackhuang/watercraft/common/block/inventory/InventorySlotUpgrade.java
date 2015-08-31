@@ -14,12 +14,12 @@ import org.jackhuang.watercraft.common.block.tileentity.TileEntityInventory;
 import org.jackhuang.watercraft.api.IUpgrade;
 
 public class InventorySlotUpgrade extends InventorySlot {
-	public InventorySlotUpgrade(TileEntityInventory base, String name,
-			int count) {
-		super(base, name, InventorySlot.Access.NONE, count);
-	}
+    public InventorySlotUpgrade(TileEntityInventory base, String name,
+            int count) {
+        super(base, name, InventorySlot.Access.NONE, count);
+    }
 
-	public boolean accepts(ItemStack itemStack) {
-		return itemStack.getItem() instanceof IUpgrade;
-	}
+    public boolean accepts(ItemStack itemStack) {
+        return itemStack.getItem() instanceof IUpgrade;
+    }
 }
