@@ -14,6 +14,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
+import net.minecraftforge.oredict.OreDictionary;
 
 import org.jackhuang.watercraft.client.render.IIconContainer;
 import org.jackhuang.watercraft.client.render.RecolorableTextures;
@@ -99,6 +100,13 @@ public class ItemCrafting extends ItemRecolorable {
     @Override
     public IIconContainer[] getIconContainers() {
         return RecolorableTextures.CRAFTING;
+    }
+    
+    public void registerOre() {
+        OreDictionary.registerOre("circuitBasic", get(CraftingTypes.circuit, LevelTypes.MK1));
+        OreDictionary.registerOre("circuitAdvanced", get(CraftingTypes.circuit, LevelTypes.MK3));
+        OreDictionary.registerOre("circuitElite", get(CraftingTypes.circuit, LevelTypes.MK5));
+        OreDictionary.registerOre("circuitUltimate", get(CraftingTypes.circuit, LevelTypes.MK7));
     }
     
 }

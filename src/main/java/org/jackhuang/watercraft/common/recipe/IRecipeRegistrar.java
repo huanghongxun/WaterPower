@@ -44,9 +44,12 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public abstract class IRecipeRegistrar {
 
-    protected Object electronicCircuit, advancedCircuit, advancedAlloy,
+    protected Object advancedAlloy, 
             carbonPlate, iridiumPlate, machine, industrialDiamond,
             transformerUpgrade;
+    
+    protected ItemStack copperCable = new ItemStack(GameRegistry.findItem(Mods.IDs.Mekanism, "PartTransmitter"), 1, 2),
+            goldCable = new ItemStack(GameRegistry.findItem(Mods.IDs.Mekanism, "PartTransmitter"), 1, 3);
 
     protected static IRecipeRegistrar instance;
 
@@ -67,8 +70,6 @@ public abstract class IRecipeRegistrar {
         thaumcraftRecipe = p.getBoolean(true) && Mods.Thaumcraft.isAvailable;
 
         if (Mods.IndustrialCraft2.isAvailable) {
-            electronicCircuit = ICItemFinder.getIC2Item("electronicCircuit");
-            advancedCircuit = ICItemFinder.getIC2Item("advancedCircuit");
             advancedAlloy = ICItemFinder.getIC2Item("advancedAlloy");
             carbonPlate = ICItemFinder.getIC2Item("carbonPlate");
             iridiumPlate = ICItemFinder.getIC2Item("iridiumPlate");
@@ -80,12 +81,13 @@ public abstract class IRecipeRegistrar {
                     .getIC2Item("industrialDiamond") : ICItemFinder
                     .getIC2Item("coalChunk");
         } else {
-            electronicCircuit = ItemCrafting.get(circuit, MK1);
-            advancedCircuit = ItemCrafting.get(circuit, MK3);
             advancedAlloy = "plateSteel";
             carbonPlate = "gemDiamond";
             iridiumPlate = "plateVanadiumSteel";
-            machine = "blockIron";
+            if(Mods.Mekanism.isAvailable) {
+                machine = new ItemStack(GameRegistry.findItem(Mods.IDs.Mekanism, "BasicBlock"), 1, 8);
+            } else
+                machine = "blockIron";
             industrialDiamond = "gemDiamond";
             transformerUpgrade = ItemCrafting.get(circuit, MK1);
         }
@@ -179,7 +181,9 @@ public abstract class IRecipeRegistrar {
                 "logWood", 'A', Items.string);
         this.addRecipeByOreDictionary(ItemType.WoodenHammer.item(6), "WW ",
                 "WWI", "WW ", 'W', "logWood", 'I', Items.stick);
+        int flag = 0;
         if (Mods.IndustrialCraft2.isAvailable) {
+            flag = 1;
             this.addRecipeByOreDictionary(
                     ItemCrafting.get(outputInterface, LevelTypes.MK1), "GW",
                     " G", "GW", 'G', ICItemFinder.getIC2Item("goldCableItem"),
@@ -187,8 +191,21 @@ public abstract class IRecipeRegistrar {
             this.addShapelessRecipeByOreDictionary(
                     ItemCrafting.get(circuit, MK1),
                     ItemType.WaterResistantRubber.item(),
-                    ICItemFinder.getIC2Item("electronicCircuit"));
-        } else {
+                    "circuitBasic");
+        }
+        if (Mods.Mekanism.isAvailable) {
+            flag = 1;
+            this.addRecipeByOreDictionary(
+                    ItemCrafting.get(outputInterface, LevelTypes.MK1), "GW",
+                    " G", "GW", 'G', goldCable,
+                    'W', "plankWood");
+            this.addShapelessRecipeByOreDictionary(
+                    ItemCrafting.get(circuit, MK1),
+                    ItemType.WaterResistantRubber.item(),
+                    getItem(Mods.IDs.Mekanism, "ControlCircuit", 0));
+        }
+        
+        if (flag == 0) {
             this.addRecipeByOreDictionary(
                     ItemCrafting.get(outputInterface, MK1), " W", "G ", " W",
                     'G', "ingotGold", 'W', "plankWood");
@@ -220,12 +237,22 @@ public abstract class IRecipeRegistrar {
                 ItemType.WaterResistantRubberDensePlate.item());
         RecipeAdder.compressor(ItemType.WaterResistantRubberPlate.item(9),
                 ItemType.WaterResistantRubberDensePlate.item());
+        flag = 0;
         if (Mods.IndustrialCraft2.isAvailable) {
+            flag = 1;
             this.addRecipeByOreDictionary(ItemCrafting.get(rotor, MK1), "CCC",
                     "CAC", "CCC", 'C',
                     ICItemFinder.getIC2Item("copperCableItem"), 'A',
                     "dustMagnet");
-        } else {
+        }
+        if (Mods.Mekanism.isAvailable) {
+            flag = 1;
+            this.addRecipeByOreDictionary(ItemCrafting.get(rotor, MK1), "CCC",
+                    "CAC", "CCC", 'C',
+                    copperCable, 'A',
+                    "dustMagnet");
+        }
+        if (flag == 0) {
             this.addRecipeByOreDictionary(ItemCrafting.get(rotor, MK1), " C ",
                     "CAC", " C ", 'C', "ingotIron", 'A', "dustMagnet");
         }
@@ -285,11 +312,32 @@ public abstract class IRecipeRegistrar {
         this.addRecipeByOreDictionary(ItemCrafting.get(stator, LevelTypes.MK3),
                 "PIS", "PI ", "PIS", 'P', "plateZincAlloy", 'I', "dustMagnet",
                 'S', "stickZincAlloy");
+        flag = 0;
+
         if (Mods.IndustrialCraft2.isAvailable) {
+            flag = 1;
             this.addRecipeByOreDictionary(
                     ItemCrafting.get(rotor, LevelTypes.MK3), "CIC", "GIG",
                     "G G", 'G', ICItemFinder.getIC2Item("goldCableItem"), 'C',
                     ItemType.DenseCoil.item(), 'I', "ingotIron");
+        }
+        
+        if (Mods.Mekanism.isAvailable) {
+            flag = 1;
+            this.addRecipeByOreDictionary(
+                    ItemCrafting.get(rotor, LevelTypes.MK3), "CIC", "GIG",
+                    "G G", 'G', goldCable, 'C',
+                    ItemType.DenseCoil.item(), 'I', "ingotIron");
+        }
+        
+        if(flag == 0) {
+            this.addRecipeByOreDictionary(
+                    ItemCrafting.get(rotor, LevelTypes.MK3), "CIC", " I ",
+                    " G ", 'G', "ingotGold", 'C', ItemType.DenseCoil.item(),
+                    'I', "ingotIron");
+        }
+        
+        if (Mods.IndustrialCraft2.isAvailable) {
             this.addRecipeByOreDictionary(
                     ItemCrafting.get(outputInterface, LevelTypes.MK3), "PRB",
                     "RAI", "PRB", 'P', "plateZincAlloy", 'R', "plateRubber",
@@ -297,10 +345,6 @@ public abstract class IRecipeRegistrar {
                     ICItemFinder.getIC2Item("lvTransformer"), 'B',
                     ICItemFinder.getIC2Item("reBattery"));
         } else {
-            this.addRecipeByOreDictionary(
-                    ItemCrafting.get(rotor, LevelTypes.MK3), "CIC", " I ",
-                    " G ", 'G', "ingotGold", 'C', ItemType.DenseCoil.item(),
-                    'I', "ingotIron");
             this.addRecipeByOreDictionary(
                     ItemCrafting.get(outputInterface, LevelTypes.MK3), "PRB",
                     "RAI", "PRB", 'P', "plateZincAlloy", 'R', "plateRubber",
@@ -370,13 +414,13 @@ public abstract class IRecipeRegistrar {
         this.addRecipeByOreDictionary(
                 ItemCrafting.get(CraftingTypes.circuit, LevelTypes.MK4), "PPP",
                 "CDC", "BPB", 'P', ItemType.DenseRedstonePlate.item(), 'C',
-                advancedCircuit, 'P',
+                "circuitAdvanced", 'P',
                 ItemType.WaterResistantRubberPlate.item(), 'D',
                 ItemType.DataBall.item(), 'B', "platePlatinum");
         this.addRecipeByOreDictionary(
                 ItemCrafting.get(CraftingTypes.circuit, LevelTypes.MK4), "PPP",
                 "CDC", "BPB", 'P', ItemType.DenseRedstonePlate.item(), 'C',
-                advancedCircuit, 'P',
+                "circuitAdvanced", 'P',
                 ItemType.WaterResistantRubberPlate.item(), 'D',
                 ItemType.DataBall.item(), 'B', "plateVanadiumSteel");
         this.addRecipeByOreDictionary(
@@ -401,7 +445,7 @@ public abstract class IRecipeRegistrar {
                     ItemCrafting.get(CraftingTypes.circuit, LevelTypes.MK5),
                     "PDP", "DCD", "PDP", 'P',
                     ItemType.WaterResistantRubberDensePlate.item(), 'C',
-                    ICItemFinder.getIC2Item("energyCrystal"), 'D',
+                    getUsualItemStack(ICItemFinder.getIC2Item("energyCrystal")), 'D',
                     ItemType.DataBall.item());
         } else {
             this.addRecipeByOreDictionary(
@@ -472,7 +516,7 @@ public abstract class IRecipeRegistrar {
                     ItemCrafting.get(CraftingTypes.circuit, LevelTypes.MK7),
                     "PDP", "DCD", "PDP", 'P',
                     ItemType.WaterResistantRubberDensePlate.item(), 'C',
-                    ICItemFinder.getIC2Item("lapotronCrystal"), 'D',
+                    getUsualItemStack(ICItemFinder.getIC2Item("lapotronCrystal")), 'D',
                     ItemType.DataBall.item());
         } else {
             this.addRecipeByOreDictionary(
@@ -529,6 +573,11 @@ public abstract class IRecipeRegistrar {
                     ICItemFinder.getIC2Item("coil"),
                     ICItemFinder.getIC2Item("copperCableItem"),
                     ItemType.DenseCoil.item(), 120 * 20, 2);
+            
+            if(Mods.Mekanism.isAvailable)
+                GregTech_API.sRecipeAdder.addAssemblerRecipe(
+                        ICItemFinder.getIC2Item("coil"), copperCable,
+                        ItemType.DenseCoil.item(), 120 * 20, 2);
 
             GregTech_API.sRecipeAdder.addAssemblerRecipe(
                     ItemType.SilverCoil.item(), ItemType.SilverCoil.item(),
@@ -539,22 +588,31 @@ public abstract class IRecipeRegistrar {
                     ItemType.HighPurityCarbonDust.item(), null, 240 * 20, 512,
                     3000);
         } else {
+            flag = 0;
             if (Mods.IndustrialCraft2.isAvailable) {
+                flag = 1;
                 addShapelessRecipeByOreDictionary(ItemType.DenseCoil.item(),
                         ICItemFinder.getIC2Item("coil"),
                         ICItemFinder.getIC2Item("copperCableItem"));
                 RecipeAdder.blastFurnace(ICItemFinder.getIC2Item("carbonMesh"),
                         ItemType.HighPurityCarbonDust.item(), 1000);
             } else {
-                String ingotCopper = "ingotCopper";
-                if (!doesOreNameExist("ingotCopper"))
+                RecipeAdder.blastFurnace(new ItemStack(Items.coal),
+                        ItemType.HighPurityCarbonDust.item(), 1000);
+            }
+
+            if (Mods.Mekanism.isAvailable) {
+                flag = 1;
+                addShapelessRecipeByOreDictionary(ItemType.DenseCoil.item(),
+                        ICItemFinder.getIC2Item("coil"), copperCable);
+            }
+            
+            if(flag == 0) {
                     addRecipeByOreDictionary(ItemType.DenseCoil.item(), " I ",
                             "CCC", " I ", 'C', "ingotVanadium", 'I',
                             "ingotIron");
                 addRecipeByOreDictionary(ItemType.DenseCoil.item(), " I ",
                         "CCC", " I ", 'C', "ingotCopper", 'I', "ingotIron");
-                RecipeAdder.blastFurnace(new ItemStack(Items.coal),
-                        ItemType.HighPurityCarbonDust.item(), 1000);
             }
 
             addShapelessRecipeByOreDictionary(ItemType.DenseSilverCoil.item(),
@@ -615,6 +673,10 @@ public abstract class IRecipeRegistrar {
     
     public static boolean doesOreNameExist(String name) {
         return OreDictionary.getOres(name).size() > 0;
+    }
+    
+    public static ItemStack getItem(String modId, String itemId, int meta) {
+        return new ItemStack(GameRegistry.findItem(modId, itemId), 1, meta);
     }
 
 }

@@ -1,5 +1,7 @@
 package org.jackhuang.watercraft.common.block.ore;
 
+import java.awt.Color;
+
 import org.jackhuang.watercraft.client.render.RecolorableItemRenderer;
 import org.jackhuang.watercraft.common.block.GlobalBlocks;
 import org.jackhuang.watercraft.common.item.GlobalItems;
@@ -30,6 +32,10 @@ public enum OreType {
         G = t.G;
         B = t.B;
         A = t.A;
+    }
+    
+    public int getColor() {
+        return new Color(R, G, B).getRGB() & 0xffffff;
     }
     
     public String getShowedName() {

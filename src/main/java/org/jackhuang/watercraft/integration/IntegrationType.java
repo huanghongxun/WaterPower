@@ -23,6 +23,7 @@ public enum IntegrationType {
     Waila(WailaModule.class, Mods.Waila),
     MineTweaker3(MineTweakerModule.class, Mods.MineTweaker3),
     ExNihilo(ExNihiloModule.class, Mods.ExNihilo),
+    TinkersConstruct(TinkersConstructModule.class, Mods.TinkersConstruct),
     CraftGuide(CraftGuideModule.class, Mods.CraftGuide);
     
     public Class<? extends BaseModule> clazz;

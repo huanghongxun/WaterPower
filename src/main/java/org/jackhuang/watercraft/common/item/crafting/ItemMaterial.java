@@ -23,7 +23,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 import static org.jackhuang.watercraft.common.item.crafting.MaterialTypes.*;
@@ -165,8 +164,8 @@ public class ItemMaterial extends ItemRecolorable {
                 flag |= RecipeAdder.blastFurnace(is,
                         get(IndustrialSteel, ingot), 1000);
             if (!flag) {
-                FurnaceRecipes.smelting().func_151394_a(
-                        new ItemStack(Items.iron_ingot), get(Steel, ingot), 0);
+                GameRegistry.addSmelting(new ItemStack(Items.iron_ingot),
+                        get(Steel, ingot), 0);
             }
         }
 
@@ -204,11 +203,16 @@ public class ItemMaterial extends ItemRecolorable {
 
             addShapedRecipe(get(types, ring), // 4 sticks -> 1 ring
                     " S ", "S S", " S ", 'S', get(types, stick));
+            
+            addShapelessRecipeByOreDictionary(get(types, ingot, 9), get(types, block));
 
             ItemStack d = get(types, dust);
-            FurnaceRecipes.smelting().func_151394_a(d, get(types, ingot), 0);
+            GameRegistry.addSmelting(d, get(types, ingot), 0);
             d = get(types, dustTiny);
-            FurnaceRecipes.smelting().func_151394_a(d, get(types, nugget), 0);
+            GameRegistry.addSmelting(d, get(types, nugget), 0);
+            
+            
+            GameRegistry.addSmelting(get(types, block), get(types, ingot, 9), 0);
 
             RecipeAdder.bender(get(types, ingot), get(types, plate));
             RecipeAdder.bender(get(types, plate, 9), get(types, plateDense));
@@ -219,8 +223,9 @@ public class ItemMaterial extends ItemRecolorable {
             RecipeAdder.macerator(get(types, screw), get(types, dustSmall));
             RecipeAdder.cutter(get(types, block), get(types, plate, 9));
             RecipeAdder.lathe(get(types, stick), get(types, screw, 4));
-            
-            addShapelessRecipeByOreDictionary(get(types, plateDense), ItemType.WoodenHammer.item(), get(types, block));
+
+            addShapelessRecipeByOreDictionary(get(types, plateDense),
+                    ItemType.WoodenHammer.item(), get(types, block));
         }
     }
 

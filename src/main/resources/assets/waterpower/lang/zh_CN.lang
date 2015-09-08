@@ -290,3 +290,9 @@ item.oreDustVanadium.name=粉碎钒矿石
 item.oreDustManganese.name=粉碎锰矿石
 item.oreDustMonazite.name=粉碎独居石
 item.oreDustMagnet.name=粉碎磁铁矿
+
+fluid.waterpower.moltenMonazite=熔融独居石
+fluid.waterpower.moltenVanadium=熔融钒矿石
+fluid.waterpower.moltenManganese=熔融锰矿石
+fluid.waterpower.moltenMagnet=熔融磁铁矿石
+fluid.waterpower.moltenZinc=熔融锌矿石

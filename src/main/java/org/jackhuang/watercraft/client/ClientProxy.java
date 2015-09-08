@@ -26,6 +26,7 @@ import org.jackhuang.watercraft.common.block.watermills.GuiWatermill;
 import org.jackhuang.watercraft.common.block.watermills.TileEntityWatermill;
 import org.jackhuang.watercraft.common.entity.EntityWaterWheel;
 import org.jackhuang.watercraft.common.item.GlobalItems;
+import org.jackhuang.watercraft.integration.TinkersConstructModule;
 import org.jackhuang.watercraft.integration.waila.WailaModule;
 import org.jackhuang.watercraft.util.Mods;
 
@@ -46,6 +47,8 @@ public class ClientProxy extends CommonProxy {
 
     public void loadAllIcons() {
         RecolorableTextures.load();
+        if (Mods.TinkersConstruct.isAvailable)
+            TinkersConstructModule.registerIcons();
     }
     
     @Override

@@ -41,39 +41,39 @@ public class EasyRecipeRegistrar extends IRecipeRegistrar {
     public void registerWatermills() {
         addRecipeByOreDictionary(new ItemStack(GlobalBlocks.waterMill, 1, 0),
                 "CUC", "SAS", "PMP", 'C', ICItemFinder.getIC2Item("FluidCell"),
-                'A', "blockIron", 'S', "plateIron", 'P', electronicCircuit,
+                'A', "blockIron", 'S', "plateIron", 'P', "circuitBasic",
                 'M', ItemType.MK0.item(), 'U',
                 ItemType.WaterUraniumIngot.item());
 
         addRecipeByOreDictionary(new ItemStack(GlobalBlocks.waterMill, 1, 1),
                 "CUC", "SAS", "PMP", 'C', ICItemFinder.getIC2Item("FluidCell"),
                 'A', new ItemStack(GlobalBlocks.waterMill, 1, 0), 'S',
-                "plateIron", 'P', advancedCircuit, 'M', ItemType.MK0.item(),
+                "plateIron", 'P', "circuitAdvanced", 'M', ItemType.MK0.item(),
                 'U', ItemType.WaterUraniumIngot.item());
 
         addRecipeByOreDictionary(new ItemStack(GlobalBlocks.waterMill, 1, 3),
                 "CUC", "SAS", "PMP", 'C', ICItemFinder.getIC2Item("FluidCell"),
                 'A', new ItemStack(GlobalBlocks.waterMill, 1, 1), 'S',
-                carbonPlate, 'P', advancedCircuit, 'M', ItemType.MK1.item(),
+                carbonPlate, 'P', "circuitAdvanced", 'M', ItemType.MK1.item(),
                 'U', ItemType.WaterUraniumPlateMK1.item());
 
         addRecipeByOreDictionary(new ItemStack(GlobalBlocks.waterMill, 1, 4),
                 "CUC", "SAS", "PMP", 'C', ICItemFinder.getIC2Item("FluidCell"),
                 'A', new ItemStack(GlobalBlocks.waterMill, 1, 3), 'S',
-                advancedAlloy, 'P', advancedCircuit, 'M', ItemType.MK2.item(),
+                advancedAlloy, 'P', "circuitAdvanced", 'M', ItemType.MK2.item(),
                 'U', ItemType.WaterUraniumPlateMK2.item());
 
         addRecipeByOreDictionary(new ItemStack(GlobalBlocks.waterMill, 1, 5),
                 "CUC", "SAS", "PMP", 'C', ICItemFinder.getIC2Item("FluidCell"),
                 'A', new ItemStack(GlobalBlocks.waterMill, 1, 4), 'S',
-                ICItemFinder.getIC2Item("elemotor"), 'P', advancedCircuit, 'M',
+                ICItemFinder.getIC2Item("elemotor"), 'P', "circuitAdvanced", 'M',
                 ItemType.MK2.item(), 'U', ItemType.WaterUraniumPlateMK2.item());
 
         addRecipeByOreDictionary(new ItemStack(GlobalBlocks.waterMill, 1, 6),
                 "CUC", "SAS", "PMP", 'C', ICItemFinder.getIC2Item("FluidCell"),
                 'A', new ItemStack(GlobalBlocks.waterMill, 1, 5), 'S',
                 getUsualItemStack(ICItemFinder.getIC2Item("lapotronCrystal")),
-                'P', advancedCircuit, 'M', ItemType.MK3.item(), 'U',
+                'P', "circuitAdvanced", 'M', ItemType.MK3.item(), 'U',
                 ItemType.WaterUraniumPlateMK3.item());
 
         /*
@@ -170,12 +170,12 @@ public class EasyRecipeRegistrar extends IRecipeRegistrar {
                     "SAS",
                     "WSW",
                     'W',
-                    electronicCircuit,
+                    "circuitBasic",
                     'S',
                     getUsualItemStack(ICItemFinder.getIC2Item("energyCrystal")),
                     'A', machine);
             addRecipeByOreDictionary(new ItemStack(GlobalItems.range, 1, 1),
-                    "WSW", "SAS", "WSW", 'W', advancedCircuit, 'S',
+                    "WSW", "SAS", "WSW", 'W', "circuitAdvanced", 'S',
                     getUsualItemStack(ICItemFinder
                             .getIC2Item("lapotronCrystal")), 'A',
                     new ItemStack(GlobalItems.range, 1, 0));
@@ -196,10 +196,10 @@ public class EasyRecipeRegistrar extends IRecipeRegistrar {
                             GlobalItems.range, 1, 2));
         } else {
             addRecipeByOreDictionary(new ItemStack(GlobalItems.range, 1, 0),
-                    "WSW", "SAS", "WSW", 'W', electronicCircuit, 'S',
+                    "WSW", "SAS", "WSW", 'W', "circuitBasic", 'S',
                     ICItemFinder.getIC2Item("batBox"), 'A', machine);
             addRecipeByOreDictionary(new ItemStack(GlobalItems.range, 1, 1),
-                    "WSW", "SAS", "WSW", 'W', advancedCircuit, 'S',
+                    "WSW", "SAS", "WSW", 'W', "circuitAdvanced", 'S',
                     ICItemFinder.getIC2Item("cesuUnit"), 'A', new ItemStack(
                             GlobalItems.range, 1, 0));
             addRecipeByOreDictionary(
@@ -425,7 +425,7 @@ public class EasyRecipeRegistrar extends IRecipeRegistrar {
         }
 
         addRecipeByOreDictionary(ItemType.ReservoirCore.item(), "ASA", "SMS",
-                "CSC", 'A', electronicCircuit, 'S', advancedAlloy, 'M',
+                "CSC", 'A', "circuitBasic", 'S', advancedAlloy, 'M',
                 machine, 'C', ItemType.WaterUraniumPlateMK1.item());
         if (Mods.IndustrialCraft2.isAvailable) {
             addRecipeByOreDictionary(ItemType.ReservoirCoreAdvanced.item(),
@@ -477,7 +477,7 @@ public class EasyRecipeRegistrar extends IRecipeRegistrar {
         addRecipeByOreDictionary(ItemType.DataBall.item(), " D ", "CIC", " D ",
                 'D', Items.emerald, 'C',
                 ItemCrafting.get(CraftingTypes.circuit, LevelTypes.MK1), 'I',
-                electronicCircuit);
+                "circuitBasic");
         OreDictionary.registerOre("dustCactus", ItemType.DustCactus.item());
         RecipeAdder.macerator(new ItemStack(Blocks.cactus, 1, 16),
                 ItemType.DustCactus.item());
@@ -590,10 +590,10 @@ public class EasyRecipeRegistrar extends IRecipeRegistrar {
                         1, 0), 'I',
                 Mods.IndustrialCraft2.isAvailable ? "plateDenseIron"
                         : "plateDenseSteel", 'U', transformerUpgrade, 'C',
-                advancedCircuit, 'R', ItemType.BaseRotor.item());
+                        "circuitAdvanced", 'R', ItemType.BaseRotor.item());
         addRecipeByOreDictionary(new ItemStack(GlobalBlocks.turbine, 1, 2),
                 "IUI", "TCT", "IRI", 'T', new ItemStack(GlobalBlocks.turbine,
-                        1, 1), 'I', carbonPlate, 'U', advancedCircuit, 'C',
+                        1, 1), 'I', carbonPlate, 'U', "circuitAdvanced", 'C',
                 ICItemFinder.getIC2Item("advancedMachine"), 'R',
                 ItemType.BaseRotor.item());
         addRecipeByOreDictionary(new ItemStack(GlobalBlocks.turbine, 1, 3),
