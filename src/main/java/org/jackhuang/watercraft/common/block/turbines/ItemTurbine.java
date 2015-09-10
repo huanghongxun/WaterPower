@@ -2,12 +2,12 @@ package org.jackhuang.watercraft.common.block.turbines;
 
 import java.util.List;
 
-import org.jackhuang.watercraft.common.item.ItemMeta;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
+
+import org.jackhuang.watercraft.common.item.ItemMeta;
 
 /**
  * 
@@ -26,7 +26,8 @@ public class ItemTurbine extends ItemMeta {
     @Override
     public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
         par3List.add(StatCollector.translateToLocal("cptwtrml.machine.info"));
-        par3List.add(StatCollector.translateToLocal("cptwtrml.watermill.max_output") + ": " + TurbineType.values()[par1ItemStack.getItemDamage()].percent + "EU/t");
+        par3List.add(StatCollector.translateToLocal("cptwtrml.watermill.max_output") + ": " + TurbineType.values()[par1ItemStack.getItemDamage()].percent
+                + "EU/t");
     }
 
     @Override

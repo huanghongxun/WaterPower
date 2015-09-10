@@ -8,14 +8,11 @@
 
 package org.jackhuang.watercraft.integration;
 
-import java.util.HashMap;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 import org.jackhuang.watercraft.util.Mods;
 
-import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.event.FMLInterModComms;
 
 public class MekanismModule extends BaseModule {

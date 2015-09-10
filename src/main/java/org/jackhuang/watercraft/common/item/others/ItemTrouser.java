@@ -1,33 +1,28 @@
 package org.jackhuang.watercraft.common.item.others;
 
-import java.util.List;
-
-import org.jackhuang.watercraft.WaterPower;
-import org.jackhuang.watercraft.Reference;
-import org.jackhuang.watercraft.common.block.watermills.WaterType;
-import org.jackhuang.watercraft.util.Utils;
-
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import ic2.api.item.ElectricItem;
 import ic2.api.item.IElectricItem;
-import ic2.api.item.IMetalArmor;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.common.ISpecialArmor;
+import net.minecraftforge.common.util.EnumHelper;
+
+import org.jackhuang.watercraft.Reference;
+import org.jackhuang.watercraft.WaterPower;
+import org.jackhuang.watercraft.common.block.watermills.WaterType;
+import org.jackhuang.watercraft.util.Utils;
+
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemTrouser extends ItemArmor implements ISpecialArmor {
 

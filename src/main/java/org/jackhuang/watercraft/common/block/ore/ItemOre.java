@@ -1,10 +1,10 @@
 package org.jackhuang.watercraft.common.block.ore;
 
-import org.jackhuang.watercraft.common.recipe.IRecipeRegistrar;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+
+import org.jackhuang.watercraft.common.recipe.IRecipeRegistrar;
 
 public class ItemOre extends ItemBlock {
 

@@ -67,7 +67,8 @@ public class CraftGuideWaterPowerObject extends CraftGuideAPIObject implements R
         }
 
         if ((maxOutput & 1) == 1) {
-            recipeSlots[(columns * 2 + 1)] = new ItemSlot((columns > 1 ? 23 : 32) + columns * 18, 21, 16, 16, true).setSlotType(SlotType.OUTPUT_SLOT).drawOwnBackground();
+            recipeSlots[(columns * 2 + 1)] = new ItemSlot((columns > 1 ? 23 : 32) + columns * 18, 21, 16, 16, true).setSlotType(SlotType.OUTPUT_SLOT)
+                    .drawOwnBackground();
         }
 
         RecipeTemplate template = generator.createRecipeTemplate(recipeSlots, type);

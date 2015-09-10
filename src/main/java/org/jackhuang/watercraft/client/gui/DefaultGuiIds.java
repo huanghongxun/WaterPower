@@ -2,16 +2,6 @@ package org.jackhuang.watercraft.client.gui;
 
 import java.util.HashMap;
 
-import org.jackhuang.watercraft.common.block.machines.*;
-import org.jackhuang.watercraft.common.block.reservoir.ContainerReservoir;
-import org.jackhuang.watercraft.common.block.reservoir.GuiReservoir;
-import org.jackhuang.watercraft.common.block.turbines.GuiTurbine;
-import org.jackhuang.watercraft.common.block.watermills.ContainerWatermill;
-import org.jackhuang.watercraft.common.block.watermills.GuiWatermill;
-
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.inventory.Container;
-
 public final class DefaultGuiIds {
 
     private static HashMap<String, Integer> idMap = new HashMap<String, Integer>();

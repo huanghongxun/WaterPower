@@ -1,8 +1,40 @@
 package org.jackhuang.watercraft.common.item.crafting;
 
+import static cpw.mods.fml.common.registry.GameRegistry.addShapedRecipe;
+import static org.jackhuang.watercraft.common.item.crafting.MaterialForms.block;
+import static org.jackhuang.watercraft.common.item.crafting.MaterialForms.dust;
+import static org.jackhuang.watercraft.common.item.crafting.MaterialForms.dustSmall;
+import static org.jackhuang.watercraft.common.item.crafting.MaterialForms.dustTiny;
+import static org.jackhuang.watercraft.common.item.crafting.MaterialForms.gear;
+import static org.jackhuang.watercraft.common.item.crafting.MaterialForms.ingot;
+import static org.jackhuang.watercraft.common.item.crafting.MaterialForms.nugget;
+import static org.jackhuang.watercraft.common.item.crafting.MaterialForms.plate;
+import static org.jackhuang.watercraft.common.item.crafting.MaterialForms.plateDense;
+import static org.jackhuang.watercraft.common.item.crafting.MaterialForms.ring;
+import static org.jackhuang.watercraft.common.item.crafting.MaterialForms.screw;
+import static org.jackhuang.watercraft.common.item.crafting.MaterialForms.stick;
+import static org.jackhuang.watercraft.common.item.crafting.MaterialTypes.IndustrialSteel;
+import static org.jackhuang.watercraft.common.item.crafting.MaterialTypes.Manganese;
+import static org.jackhuang.watercraft.common.item.crafting.MaterialTypes.ManganeseSteel;
+import static org.jackhuang.watercraft.common.item.crafting.MaterialTypes.Neodymium;
+import static org.jackhuang.watercraft.common.item.crafting.MaterialTypes.NeodymiumMagnet;
+import static org.jackhuang.watercraft.common.item.crafting.MaterialTypes.Steel;
+import static org.jackhuang.watercraft.common.item.crafting.MaterialTypes.Vanadium;
+import static org.jackhuang.watercraft.common.item.crafting.MaterialTypes.VanadiumSteel;
+import static org.jackhuang.watercraft.common.item.crafting.MaterialTypes.ZincAlloy;
+import static org.jackhuang.watercraft.common.item.crafting.MaterialTypes.space;
+import static org.jackhuang.watercraft.common.recipe.IRecipeRegistrar.addShapelessRecipeByOreDictionary;
+import gregtech.api.GregTech_API;
+
 import java.util.List;
 
-import gregtech.api.GregTech_API;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
+import net.minecraftforge.oredict.OreDictionary;
 
 import org.jackhuang.watercraft.client.render.IIconContainer;
 import org.jackhuang.watercraft.client.render.RecolorableTextures;
@@ -12,23 +44,9 @@ import org.jackhuang.watercraft.common.recipe.IRecipeRegistrar;
 import org.jackhuang.watercraft.common.recipe.MyRecipeInputOreDictionary;
 import org.jackhuang.watercraft.common.recipe.RecipeAdder;
 import org.jackhuang.watercraft.integration.EnderIOModule;
-import org.jackhuang.watercraft.integration.MekanismModule;
-import org.jackhuang.watercraft.integration.RailcraftModule;
 import org.jackhuang.watercraft.util.Mods;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import mods.railcraft.api.crafting.RailcraftCraftingManager;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
-import net.minecraftforge.oredict.OreDictionary;
-import static org.jackhuang.watercraft.common.item.crafting.MaterialTypes.*;
-import static org.jackhuang.watercraft.common.item.crafting.MaterialForms.*;
-import static org.jackhuang.watercraft.common.recipe.IRecipeRegistrar.addShapelessRecipeByOreDictionary;
-import static cpw.mods.fml.common.registry.GameRegistry.addShapedRecipe;
 
 public class ItemMaterial extends ItemRecolorable {
 
@@ -99,14 +117,22 @@ public class ItemMaterial extends ItemRecolorable {
             GregTech_API.sRecipeAdder.addBlastRecipe(get(Vanadium, dust), get(Steel, ingot, 2), get(VanadiumSteel, ingot, 3), null, 240 * 20, 512, 2000);
             GregTech_API.sRecipeAdder.addBlastRecipe(get(Manganese, dust), get(Steel, ingot, 2), get(ManganeseSteel, ingot, 3), null, 240 * 20, 512, 2000);
             GregTech_API.sRecipeAdder.addBlastRecipe(get(Steel, dust), get(Steel, ingot), get(IndustrialSteel, ingot, 2), null, 240 * 20, 512, 2000);
-            addShapelessRecipeByOreDictionary(get(ZincAlloy, MaterialForms.dust, 5), "dustSmallMagnesium", "dustSmallAluminium", "dustSmallTitanium", "dustSmallCopper", "dustZinc", "dustZinc", "dustZinc", "dustZinc");
+            addShapelessRecipeByOreDictionary(get(ZincAlloy, MaterialForms.dust, 5), "dustSmallMagnesium", "dustSmallAluminium", "dustSmallTitanium",
+                    "dustSmallCopper", "dustZinc", "dustZinc", "dustZinc", "dustZinc");
         } else {
             if (Mods.EnderIO.isAvailable) {
-                EnderIOModule.alloySmelter("Zinc Alloy Dust", get(VanadiumSteel, ingot, 3), new MyRecipeInputOreDictionary("ingotVanadium"), new MyRecipeInputOreDictionary("ingotSteel"), new MyRecipeInputOreDictionary("ingotSteel"));
-                EnderIOModule.alloySmelter("Neodymium Magnet Dust", get(NeodymiumMagnet, ingot, 2), new MyRecipeInputOreDictionary("ingotNeodymium"), new MyRecipeInputOreDictionary("ingotMagnet"));
-                EnderIOModule.alloySmelter("Vanadium Steel Dust", get(VanadiumSteel, ingot, 3), new MyRecipeInputOreDictionary("ingotVanadium"), new MyRecipeInputOreDictionary("ingotSteel"), new MyRecipeInputOreDictionary("ingotSteel"));
-                EnderIOModule.alloySmelter("Manganese Steel Dust 3", get(ManganeseSteel, ingot, 3), new MyRecipeInputOreDictionary("ingotManganese"), new MyRecipeInputOreDictionary("ingotSteel"), new MyRecipeInputOreDictionary("ingotSteel"));
-                EnderIOModule.alloySmelter("Manganese Steel Dust 4", get(ManganeseSteel, ingot, 4), new MyRecipeInputOreDictionary("ingotManganese"), new MyRecipeInputOreDictionary("ingotSteel"), new MyRecipeInputOreDictionary("ingotSteel"), new MyRecipeInputOreDictionary("ingotCoal"));
+                EnderIOModule.alloySmelter("Zinc Alloy Dust", get(VanadiumSteel, ingot, 3), new MyRecipeInputOreDictionary("ingotVanadium"),
+                        new MyRecipeInputOreDictionary("ingotSteel"), new MyRecipeInputOreDictionary("ingotSteel"));
+                EnderIOModule.alloySmelter("Neodymium Magnet Dust", get(NeodymiumMagnet, ingot, 2), new MyRecipeInputOreDictionary("ingotNeodymium"),
+                        new MyRecipeInputOreDictionary("ingotMagnet"));
+                EnderIOModule.alloySmelter("Vanadium Steel Dust", get(VanadiumSteel, ingot, 3), new MyRecipeInputOreDictionary("ingotVanadium"),
+                        new MyRecipeInputOreDictionary("ingotSteel"), new MyRecipeInputOreDictionary("ingotSteel"));
+                EnderIOModule.alloySmelter("Manganese Steel Dust 3", get(ManganeseSteel, ingot, 3), new MyRecipeInputOreDictionary("ingotManganese"),
+                        new MyRecipeInputOreDictionary("ingotSteel"), new MyRecipeInputOreDictionary("ingotSteel"));
+                EnderIOModule
+                        .alloySmelter("Manganese Steel Dust 4", get(ManganeseSteel, ingot, 4), new MyRecipeInputOreDictionary("ingotManganese"),
+                                new MyRecipeInputOreDictionary("ingotSteel"), new MyRecipeInputOreDictionary("ingotSteel"), new MyRecipeInputOreDictionary(
+                                        "ingotCoal"));
             }
             addShapelessRecipeByOreDictionary(get(ZincAlloy, dust, 5), "dustZinc", "dustZinc", "dustZinc", "dustZinc", "dustCopper");
             addShapelessRecipeByOreDictionary(get(VanadiumSteel, dust, 3), "dustVanadium", "dustSteel", "dustSteel");

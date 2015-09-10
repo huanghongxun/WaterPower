@@ -3,14 +3,12 @@ package org.jackhuang.watercraft.common.block.tileentity;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jackhuang.watercraft.common.block.inventory.InventorySlot;
-import org.jackhuang.watercraft.common.block.inventory.InventorySlot.InvSide;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
+
+import org.jackhuang.watercraft.common.block.inventory.InventorySlot;
 
 public abstract class TileEntityInventory extends TileEntityBase implements ISidedInventory {
     private final List<InventorySlot> invSlots = new ArrayList<InventorySlot>();
@@ -163,7 +161,8 @@ public abstract class TileEntityInventory extends TileEntityBase implements ISid
             return true;
 
         for (InventorySlot invSlot : this.invSlots) {
-            if ((invSlot != targetSlot) && (invSlot.preferredSide != InventorySlot.InvSide.ANY) && (invSlot.preferredSide.matches(side)) && (invSlot.canInput()) && (invSlot.accepts(itemStack))) {
+            if ((invSlot != targetSlot) && (invSlot.preferredSide != InventorySlot.InvSide.ANY) && (invSlot.preferredSide.matches(side))
+                    && (invSlot.canInput()) && (invSlot.accepts(itemStack))) {
                 return false;
             }
         }
@@ -183,7 +182,8 @@ public abstract class TileEntityInventory extends TileEntityBase implements ISid
             return true;
 
         for (InventorySlot invSlot : this.invSlots) {
-            if ((invSlot != targetSlot) && (invSlot.preferredSide != InventorySlot.InvSide.ANY) && (invSlot.preferredSide.matches(side)) && (invSlot.canOutput())) {
+            if ((invSlot != targetSlot) && (invSlot.preferredSide != InventorySlot.InvSide.ANY) && (invSlot.preferredSide.matches(side))
+                    && (invSlot.canOutput())) {
                 return false;
             }
         }

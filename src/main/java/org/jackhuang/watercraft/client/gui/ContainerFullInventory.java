@@ -1,9 +1,9 @@
 package org.jackhuang.watercraft.client.gui;
 
-import org.jackhuang.watercraft.common.block.tileentity.TileEntityInventory;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
+
+import org.jackhuang.watercraft.common.block.tileentity.TileEntityInventory;
 
 public class ContainerFullInventory extends ContainerBase {
 

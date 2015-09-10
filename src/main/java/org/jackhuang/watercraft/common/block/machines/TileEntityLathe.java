@@ -4,9 +4,6 @@ import org.jackhuang.watercraft.client.gui.DefaultGuiIds;
 import org.jackhuang.watercraft.common.block.inventory.InventorySlotProcessableGeneric;
 import org.jackhuang.watercraft.common.recipe.MultiRecipeManager;
 import org.jackhuang.watercraft.common.recipe.MyRecipes;
-import org.jackhuang.watercraft.util.Mods;
-
-import ic2.api.recipe.Recipes;
 
 public class TileEntityLathe extends TileEntityStandardWaterMachine {
 

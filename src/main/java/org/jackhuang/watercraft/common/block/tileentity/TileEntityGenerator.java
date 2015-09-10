@@ -11,7 +11,18 @@ import ic2.api.energy.tile.IKineticSource;
 
 import java.util.Random;
 
-import org.jackhuang.watercraft.WaterPower;
+import net.minecraft.client.Minecraft;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidHandler;
+
 import org.jackhuang.watercraft.client.gui.IHasGui;
 import org.jackhuang.watercraft.common.EnergyType;
 import org.jackhuang.watercraft.common.network.MessagePacketHandler;
@@ -32,20 +43,14 @@ import cpw.mods.fml.common.Optional.InterfaceList;
 import cpw.mods.fml.common.Optional.Method;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.Minecraft;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.IFluidHandler;
 
-@InterfaceList({ @Interface(iface = "ic2.api.energy.tile.IEnergySource", modid = Mods.IDs.IndustrialCraft2API, striprefs = true), @Interface(iface = "ic2.api.energy.tile.IKineticSource", modid = Mods.IDs.IndustrialCraft2API, striprefs = true), @Interface(iface = "ic2.api.energy.tile.IHeatSource", modid = Mods.IDs.IndustrialCraft2API, striprefs = true), @Interface(iface = "cofh.api.energy.IEnergyConnection", modid = Mods.IDs.CoFHAPIEnergy), @Interface(iface = "factorization.api.IChargeConductor", modid = Mods.IDs.Factorization) })
-public abstract class TileEntityGenerator extends TileEntityBlock implements IEnergySource, IHasGui, IKineticSource, IUnitChangeable, IEnergyConnection, IChargeConductor, IFluidHandler, IHeatSource {
+@InterfaceList({ @Interface(iface = "ic2.api.energy.tile.IEnergySource", modid = Mods.IDs.IndustrialCraft2API, striprefs = true),
+        @Interface(iface = "ic2.api.energy.tile.IKineticSource", modid = Mods.IDs.IndustrialCraft2API, striprefs = true),
+        @Interface(iface = "ic2.api.energy.tile.IHeatSource", modid = Mods.IDs.IndustrialCraft2API, striprefs = true),
+        @Interface(iface = "cofh.api.energy.IEnergyConnection", modid = Mods.IDs.CoFHAPIEnergy),
+        @Interface(iface = "factorization.api.IChargeConductor", modid = Mods.IDs.Factorization) })
+public abstract class TileEntityGenerator extends TileEntityBlock implements IEnergySource, IHasGui, IKineticSource, IUnitChangeable, IEnergyConnection,
+        IChargeConductor, IFluidHandler, IHeatSource {
     public static Random random = new Random();
 
     public double storage = 0.0D;
@@ -442,7 +447,8 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements IEn
     @Method(modid = Mods.IDs.Factorization)
     public String getInfo() {
         StringBuilder sb = new StringBuilder();
-        sb.append(StatCollector.translateToLocal("cptwtrml.gui.latest_output") + "/" + energyType.name() + ": " + Utils.DEFAULT_DECIMAL_FORMAT.format(getFromEU(latestOutput)) + "\n");
+        sb.append(StatCollector.translateToLocal("cptwtrml.gui.latest_output") + "/" + energyType.name() + ": "
+                + Utils.DEFAULT_DECIMAL_FORMAT.format(getFromEU(latestOutput)) + "\n");
         return sb.toString();
     }
 
@@ -462,6 +468,7 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements IEn
     @SideOnly(Side.CLIENT)
     public void onUnitChanged(EnergyType t) {
         energyType = t;
-        MessagePacketHandler.INSTANCE.sendToServer(new PacketUnitChanged(Minecraft.getMinecraft().thePlayer.worldObj.provider.dimensionId, xCoord, yCoord, zCoord, energyType.ordinal()));
+        MessagePacketHandler.INSTANCE.sendToServer(new PacketUnitChanged(Minecraft.getMinecraft().thePlayer.worldObj.provider.dimensionId, xCoord, yCoord,
+                zCoord, energyType.ordinal()));
     }
 }

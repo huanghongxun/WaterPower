@@ -1,10 +1,9 @@
 package org.jackhuang.watercraft.common.item.rotors;
 
-import org.jackhuang.watercraft.common.block.inventory.InventorySlot;
-import org.jackhuang.watercraft.common.block.inventory.InventorySlot.Access;
-import org.jackhuang.watercraft.common.block.tileentity.TileEntityInventory;
-
 import net.minecraft.item.ItemStack;
+
+import org.jackhuang.watercraft.common.block.inventory.InventorySlot;
+import org.jackhuang.watercraft.common.block.tileentity.TileEntityInventory;
 
 public class RotorInventorySlot extends InventorySlot {
 

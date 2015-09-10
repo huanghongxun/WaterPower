@@ -2,18 +2,15 @@ package org.jackhuang.watercraft.common.block.machines;
 
 import java.util.List;
 
-import ic2.api.recipe.RecipeOutput;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 
-import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.api.IUpgrade;
 import org.jackhuang.watercraft.client.gui.IHasGui;
 import org.jackhuang.watercraft.common.block.inventory.InventorySlotOutput;
 import org.jackhuang.watercraft.common.block.inventory.InventorySlotProcessable;
 import org.jackhuang.watercraft.common.block.inventory.InventorySlotUpgrade;
 import org.jackhuang.watercraft.common.recipe.MyRecipeOutput;
-
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 
 public abstract class TileEntityStandardWaterMachine extends TileEntityWaterMachine implements IHasGui {
     protected short progress = 0;
@@ -181,7 +178,8 @@ public abstract class TileEntityStandardWaterMachine extends TileEntityWaterMach
         this.operationLength = (int) Math.round(stackOpLen * this.operationsPerTick / 64.0D);
 
         this.energyConsume = applyModifier(this.defaultEnergyConsume, extraEnergyDemand, energyDemandMultiplier);
-        this.setFluidTankCapacity(applyModifier(this.defaultEnergyStorage, extraEnergyStorage + this.operationLength * this.energyConsume, energyStorageMultiplier));
+        this.setFluidTankCapacity(applyModifier(this.defaultEnergyStorage, extraEnergyStorage + this.operationLength * this.energyConsume,
+                energyStorageMultiplier));
 
         if (this.operationLength < 1)
             this.operationLength = 1;

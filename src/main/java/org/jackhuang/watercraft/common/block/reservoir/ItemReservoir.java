@@ -2,13 +2,12 @@ package org.jackhuang.watercraft.common.block.reservoir;
 
 import java.util.List;
 
-import org.jackhuang.watercraft.common.item.ItemMeta;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
+
+import org.jackhuang.watercraft.common.item.ItemMeta;
 
 public class ItemReservoir extends ItemMeta {
     public ItemReservoir(Block id) {

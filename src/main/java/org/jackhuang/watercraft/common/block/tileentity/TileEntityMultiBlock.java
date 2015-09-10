@@ -10,13 +10,12 @@ package org.jackhuang.watercraft.common.block.tileentity;
 
 import java.util.ArrayList;
 
-import org.jackhuang.watercraft.WaterPower;
-import org.jackhuang.watercraft.client.gui.IHasGui;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
+
+import org.jackhuang.watercraft.WaterPower;
+import org.jackhuang.watercraft.client.gui.IHasGui;
 
 public abstract class TileEntityMultiBlock extends TileEntityLiquidTankInventory implements IHasGui {
 

@@ -7,14 +7,10 @@
  */
 package org.jackhuang.watercraft.integration.nei;
 
-import java.util.Map;
-
 import net.minecraft.client.gui.inventory.GuiContainer;
 
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.common.recipe.IRecipeManager;
-
-import codechicken.nei.api.API;
 
 public class DefaultMachineRecipeHandler extends MachineRecipeHandler {
 
@@ -30,7 +26,8 @@ public class DefaultMachineRecipeHandler extends MachineRecipeHandler {
         this(guiClass, id, Reference.ModID + "." + id.toLowerCase(), Reference.ModID + ":textures/gui/GUI" + id + ".png", id.toLowerCase(), recipeManager);
     }
 
-    public DefaultMachineRecipeHandler(Class<? extends GuiContainer> guiClass, String recipeName, String recipeId, String guiTexture, String overlayIdentifier, IRecipeManager recipeManager) {
+    public DefaultMachineRecipeHandler(Class<? extends GuiContainer> guiClass, String recipeName, String recipeId, String guiTexture, String overlayIdentifier,
+            IRecipeManager recipeManager) {
         super();
         this.guiClass = guiClass;
         this.recipeName = recipeName;

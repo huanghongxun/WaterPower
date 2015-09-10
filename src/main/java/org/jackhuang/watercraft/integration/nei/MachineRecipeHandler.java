@@ -172,9 +172,11 @@ public abstract class MachineRecipeHandler extends TemplateRecipeHandler {
 
             for (int i = 1; i < output1.items.size(); i++)
                 if (MachineRecipeHandler.this.isOutputsVertical())
-                    this.otherStacks.add(new PositionedStack(output1.items.get(i), MachineRecipeHandler.this.getOutputPosX(), MachineRecipeHandler.this.getOutputPosY() + i * 18));
+                    this.otherStacks.add(new PositionedStack(output1.items.get(i), MachineRecipeHandler.this.getOutputPosX(), MachineRecipeHandler.this
+                            .getOutputPosY() + i * 18));
                 else
-                    this.otherStacks.add(new PositionedStack(output1.items.get(i), MachineRecipeHandler.this.getOutputPosX() + i * 18, MachineRecipeHandler.this.getOutputPosY()));
+                    this.otherStacks.add(new PositionedStack(output1.items.get(i), MachineRecipeHandler.this.getOutputPosX() + i * 18,
+                            MachineRecipeHandler.this.getOutputPosY()));
         }
     }
 

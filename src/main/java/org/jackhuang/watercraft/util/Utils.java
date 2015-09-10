@@ -13,16 +13,15 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import org.jackhuang.watercraft.WaterPower;
-import org.jackhuang.watercraft.integration.ic2.ICItemFinder;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+
+import org.jackhuang.watercraft.WaterPower;
+import org.jackhuang.watercraft.integration.ic2.ICItemFinder;
 
 public class Utils {
     public static <T> T[] concat(T[] first, T[] second) {

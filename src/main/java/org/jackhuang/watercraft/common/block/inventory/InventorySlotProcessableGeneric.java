@@ -3,11 +3,11 @@ package org.jackhuang.watercraft.common.block.inventory;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.item.ItemStack;
+
 import org.jackhuang.watercraft.common.block.tileentity.TileEntityInventory;
 import org.jackhuang.watercraft.common.recipe.IRecipeManager;
 import org.jackhuang.watercraft.common.recipe.MyRecipeOutput;
-
-import net.minecraft.item.ItemStack;
 
 public class InventorySlotProcessableGeneric extends InventorySlotProcessable {
     public IRecipeManager recipeManager;

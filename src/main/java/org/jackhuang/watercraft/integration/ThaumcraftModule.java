@@ -30,14 +30,17 @@ public class ThaumcraftModule extends BaseModule {
     public void postInit() {
         for (int i = 0; i < WaterType.values().length; i++) {
             int b = 16 * (i + 1);
-            ThaumcraftApi.registerObjectTag(new ItemStack(GlobalBlocks.waterMill, 1, i), new AspectList().add(Aspect.WATER, b).add(Aspect.ENERGY, b).add(Aspect.METAL, b).add(Aspect.TOOL, b));
+            ThaumcraftApi.registerObjectTag(new ItemStack(GlobalBlocks.waterMill, 1, i),
+                    new AspectList().add(Aspect.WATER, b).add(Aspect.ENERGY, b).add(Aspect.METAL, b).add(Aspect.TOOL, b));
         }
         for (int i = 0; i < TurbineType.values().length; i++) {
             int b = 16 * (i + 5);
-            ThaumcraftApi.registerObjectTag(new ItemStack(GlobalBlocks.turbine, 1, i), new AspectList().add(Aspect.WATER, b).add(Aspect.ENERGY, b).add(Aspect.METAL, b).add(Aspect.TOOL, b));
+            ThaumcraftApi.registerObjectTag(new ItemStack(GlobalBlocks.turbine, 1, i),
+                    new AspectList().add(Aspect.WATER, b).add(Aspect.ENERGY, b).add(Aspect.METAL, b).add(Aspect.TOOL, b));
         }
         for (int i = 1; i <= 7; i++) {
-            ThaumcraftApi.registerObjectTag(new ItemStack(GlobalBlocks.machine, 1, i), new AspectList().add(Aspect.WATER, 8).add(Aspect.ENERGY, 8).add(Aspect.METAL, 8).add(Aspect.TOOL, 8));
+            ThaumcraftApi.registerObjectTag(new ItemStack(GlobalBlocks.machine, 1, i),
+                    new AspectList().add(Aspect.WATER, 8).add(Aspect.ENERGY, 8).add(Aspect.METAL, 8).add(Aspect.TOOL, 8));
         }
         for (int i = 0; i <= OreType.values().length; i++) {
             ThaumcraftApi.registerObjectTag(new ItemStack(GlobalBlocks.ore, 1, i), new AspectList().add(Aspect.METAL, 2));
@@ -48,7 +51,8 @@ public class ThaumcraftModule extends BaseModule {
 
         for (int i = 0; i <= LevelTypes.values().length; i++) {
             for (CraftingTypes t : CraftingTypes.values())
-                ThaumcraftApi.registerObjectTag(ItemCrafting.get(t, LevelTypes.values()[i]), new AspectList().add(Aspect.METAL, 2 * i).add(Aspect.MECHANISM, 2 * i));
+                ThaumcraftApi.registerObjectTag(ItemCrafting.get(t, LevelTypes.values()[i]),
+                        new AspectList().add(Aspect.METAL, 2 * i).add(Aspect.MECHANISM, 2 * i));
         }
     }
 

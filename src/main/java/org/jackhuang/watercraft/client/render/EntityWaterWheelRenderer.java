@@ -1,12 +1,6 @@
 package org.jackhuang.watercraft.client.render;
 
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
@@ -16,6 +10,10 @@ import org.jackhuang.watercraft.common.entity.EntityWaterWheel;
 import org.jackhuang.watercraft.common.item.rotors.RotorType;
 import org.jackhuang.watercraft.util.WPLog;
 import org.lwjgl.opengl.GL11;
+
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class EntityWaterWheelRenderer extends Render {

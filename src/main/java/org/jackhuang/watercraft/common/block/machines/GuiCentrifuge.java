@@ -5,7 +5,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
 import org.jackhuang.watercraft.Reference;
-import org.jackhuang.watercraft.client.gui.ContainerStandardMachine;
 
 public class GuiCentrifuge extends GuiMachineBase {
     public GuiCentrifuge(EntityPlayer player, TileEntityCentrifuge tileEntity) {

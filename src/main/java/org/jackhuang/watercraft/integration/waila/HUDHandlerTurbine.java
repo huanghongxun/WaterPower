@@ -9,6 +9,16 @@ package org.jackhuang.watercraft.integration.waila;
 
 import java.util.List;
 
+import mcp.mobius.waila.api.IWailaConfigHandler;
+import mcp.mobius.waila.api.IWailaDataAccessor;
+import mcp.mobius.waila.api.IWailaDataProvider;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
+
 import org.jackhuang.watercraft.common.block.turbines.TileEntityTurbine;
 import org.jackhuang.watercraft.util.Mods;
 import org.jackhuang.watercraft.util.Utils;
@@ -16,17 +26,6 @@ import org.jackhuang.watercraft.util.Utils;
 import cpw.mods.fml.common.Optional.Interface;
 import cpw.mods.fml.common.Optional.InterfaceList;
 import cpw.mods.fml.common.Optional.Method;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-import mcp.mobius.waila.api.IWailaConfigHandler;
-import mcp.mobius.waila.api.IWailaDataAccessor;
-import mcp.mobius.waila.api.IWailaDataProvider;
 
 @InterfaceList({ @Interface(iface = "mcp.mobius.waila.api.IWailaDataProvider", modid = Mods.IDs.Waila) })
 public class HUDHandlerTurbine implements IWailaDataProvider {
@@ -38,7 +37,8 @@ public class HUDHandlerTurbine implements IWailaDataProvider {
         if (!(te instanceof TileEntityTurbine))
             return arg1;
         TileEntityTurbine tile = (TileEntityTurbine) te;
-        arg1.add(StatCollector.translateToLocal("cptwtrml.gui.latest_output") + ": " + Utils.DEFAULT_DECIMAL_FORMAT.format(tile.getFromEU(tile.latestOutput)) + tile.energyType.name());
+        arg1.add(StatCollector.translateToLocal("cptwtrml.gui.latest_output") + ": " + Utils.DEFAULT_DECIMAL_FORMAT.format(tile.getFromEU(tile.latestOutput))
+                + tile.energyType.name());
         return arg1;
     }
 

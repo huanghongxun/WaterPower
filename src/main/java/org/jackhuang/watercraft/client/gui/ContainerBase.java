@@ -1,17 +1,15 @@
 package org.jackhuang.watercraft.client.gui;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ListIterator;
-
-import org.jackhuang.watercraft.WaterPower;
-import org.jackhuang.watercraft.common.block.inventory.SlotInventorySlot;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+
+import org.jackhuang.watercraft.WaterPower;
+import org.jackhuang.watercraft.common.block.inventory.SlotInventorySlot;
 
 public abstract class ContainerBase extends Container {
     public final IInventory base;
@@ -32,7 +30,8 @@ public abstract class ContainerBase extends Container {
                     if (run < 2)
                         for (Object o : inventorySlots) {
                             Slot targetSlot = (Slot) o;
-                            if (((targetSlot instanceof SlotInventorySlot)) && (((SlotInventorySlot) targetSlot).invSlot.canInput()) && (targetSlot.isItemValid(sourceItemStack))) {
+                            if (((targetSlot instanceof SlotInventorySlot)) && (((SlotInventorySlot) targetSlot).invSlot.canInput())
+                                    && (targetSlot.isItemValid(sourceItemStack))) {
                                 if ((targetSlot.getStack() != null) || (run == 1)) {
                                     mergeItemStack(sourceItemStack, targetSlot.slotNumber, targetSlot.slotNumber + 1, false);
 

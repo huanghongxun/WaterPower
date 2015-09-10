@@ -8,6 +8,10 @@
 
 package org.jackhuang.watercraft.common;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+
 import org.jackhuang.watercraft.client.gui.ContainerRotor;
 import org.jackhuang.watercraft.client.gui.ContainerStandardMachine;
 import org.jackhuang.watercraft.client.gui.DefaultGuiIds;
@@ -25,10 +29,6 @@ import org.jackhuang.watercraft.common.block.turbines.TileEntityTurbine;
 import org.jackhuang.watercraft.common.block.watermills.ContainerWatermill;
 import org.jackhuang.watercraft.common.block.watermills.TileEntityWatermill;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
 
 public class CommonProxy implements IGuiHandler {

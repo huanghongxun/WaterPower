@@ -8,9 +8,9 @@
 
 package org.jackhuang.watercraft.integration;
 
-import cpw.mods.fml.common.event.FMLInterModComms;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import cpw.mods.fml.common.event.FMLInterModComms;
 
 public class ThermalExpansionModule extends BaseModule {
     public static void addFurnaceRecipe(int energy, ItemStack input, ItemStack output) {
@@ -79,7 +79,8 @@ public class ThermalExpansionModule extends BaseModule {
         addSmelterRecipe(energy, primaryInput, secondaryInput, primaryOutput, secondaryOutput, 100);
     }
 
-    public static void addSmelterRecipe(int energy, ItemStack primaryInput, ItemStack secondaryInput, ItemStack primaryOutput, ItemStack secondaryOutput, int secondaryChance) {
+    public static void addSmelterRecipe(int energy, ItemStack primaryInput, ItemStack secondaryInput, ItemStack primaryOutput, ItemStack secondaryOutput,
+            int secondaryChance) {
         if ((primaryInput == null) || (secondaryInput == null) || (primaryOutput == null))
             return;
         NBTTagCompound toSend = new NBTTagCompound();

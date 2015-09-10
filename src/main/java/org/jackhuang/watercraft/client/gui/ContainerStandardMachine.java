@@ -1,7 +1,5 @@
 package org.jackhuang.watercraft.client.gui;
 
-import java.util.List;
-
 import net.minecraft.entity.player.EntityPlayer;
 
 import org.jackhuang.watercraft.common.block.inventory.SlotInventorySlot;
@@ -19,7 +17,8 @@ public class ContainerStandardMachine extends ContainerFullInventory {
         this(entityPlayer, tileEntity, 166, 26, 34, 86, 35, 152, 8, outputNum);
     }
 
-    public ContainerStandardMachine(EntityPlayer entityPlayer, TileEntityStandardWaterMachine tileEntity, int height, int inputX, int inputY, int outputX, int outputY, int upgradeX, int upgradeY, int outputNum) {
+    public ContainerStandardMachine(EntityPlayer entityPlayer, TileEntityStandardWaterMachine tileEntity, int height, int inputX, int inputY, int outputX,
+            int outputY, int upgradeX, int upgradeY, int outputNum) {
         super(entityPlayer, tileEntity, height);
 
         this.tileEntity = tileEntity;

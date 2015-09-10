@@ -17,7 +17,6 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidContainerItem;
 
 import org.jackhuang.watercraft.Reference;
-import org.jackhuang.watercraft.common.block.BlockMeta;
 import org.jackhuang.watercraft.common.block.BlockRotor;
 import org.jackhuang.watercraft.common.item.others.ItemType;
 import org.jackhuang.watercraft.common.recipe.IRecipeRegistrar;
@@ -41,7 +40,8 @@ public class BlockReservoir extends BlockRotor {
     public void registerBlockIcons(IIconRegister iconRegister) {
         textures = new IIcon[maxMetaData()][6];
         for (int i = 0; i < maxMetaData(); i++) {
-            textures[i][0] = textures[i][1] = textures[i][2] = textures[i][3] = textures[i][4] = textures[i][5] = iconRegister.registerIcon(Reference.ModID + ":reservoir/" + ReservoirType.values()[i].name());
+            textures[i][0] = textures[i][1] = textures[i][2] = textures[i][3] = textures[i][4] = textures[i][5] = iconRegister.registerIcon(Reference.ModID
+                    + ":reservoir/" + ReservoirType.values()[i].name());
         }
     }
 
@@ -105,7 +105,8 @@ public class BlockReservoir extends BlockRotor {
 
                                 entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, StackUtil.consumeItem(current));
                             } else {
-                                entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, FluidContainerRegistry.drainFluidContainer(current));
+                                entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem,
+                                        FluidContainerRegistry.drainFluidContainer(current));
                             }
                         }
 

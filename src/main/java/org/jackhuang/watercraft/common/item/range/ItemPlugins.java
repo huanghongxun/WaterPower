@@ -1,8 +1,5 @@
 package org.jackhuang.watercraft.common.item.range;
 
-import java.util.List;
-
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
 import org.jackhuang.watercraft.api.IUpgrade;

@@ -1,17 +1,9 @@
 package org.jackhuang.watercraft.common.block.machines;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-
-import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.client.gui.DefaultGuiIds;
 import org.jackhuang.watercraft.common.block.inventory.InventorySlotProcessableGeneric;
 import org.jackhuang.watercraft.common.recipe.MultiRecipeManager;
 import org.jackhuang.watercraft.common.recipe.MyRecipes;
-import org.jackhuang.watercraft.util.Mods;
-import org.jackhuang.watercraft.util.StackUtil;
 
 public class TileEntityAdvancedCompressor extends TileEntityStandardWaterMachine {
 

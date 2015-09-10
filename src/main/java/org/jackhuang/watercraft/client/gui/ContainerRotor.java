@@ -9,7 +9,6 @@
 package org.jackhuang.watercraft.client.gui;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
 
 import org.jackhuang.watercraft.common.block.inventory.SlotInventorySlot;
 import org.jackhuang.watercraft.common.block.tileentity.TileEntityRotor;

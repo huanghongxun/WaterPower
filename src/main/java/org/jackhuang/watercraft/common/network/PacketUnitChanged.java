@@ -1,13 +1,12 @@
 package org.jackhuang.watercraft.common.network;
 
-import org.jackhuang.watercraft.common.EnergyType;
-import org.jackhuang.watercraft.common.block.tileentity.IUnitChangeable;
-import org.jackhuang.watercraft.common.block.tileentity.TileEntityGenerator;
-
+import io.netty.buffer.ByteBuf;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
-import io.netty.buffer.ByteBuf;
+
+import org.jackhuang.watercraft.common.block.tileentity.IUnitChangeable;
+
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;

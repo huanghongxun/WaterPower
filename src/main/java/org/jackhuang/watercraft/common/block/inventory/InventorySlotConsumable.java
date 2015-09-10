@@ -2,11 +2,11 @@ package org.jackhuang.watercraft.common.block.inventory;
 
 import java.util.Random;
 
-import org.jackhuang.watercraft.common.block.tileentity.TileEntityInventory;
-import org.jackhuang.watercraft.util.StackUtil;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
+
+import org.jackhuang.watercraft.common.block.tileentity.TileEntityInventory;
+import org.jackhuang.watercraft.util.StackUtil;
 
 public abstract class InventorySlotConsumable extends InventorySlot {
     private static final Random random = new Random();
@@ -35,7 +35,8 @@ public abstract class InventorySlotConsumable extends InventorySlot {
         for (int i = 0; i < size(); i++) {
             ItemStack itemStack = get(i);
 
-            if ((itemStack == null) || (itemStack.stackSize < 1) || (!accepts(itemStack)) || ((ret != null) && (!StackUtil.isStackEqual(itemStack, ret))) || ((itemStack.stackSize != 1) && (!consumeContainers) && (itemStack.getItem().hasContainerItem()))) {
+            if ((itemStack == null) || (itemStack.stackSize < 1) || (!accepts(itemStack)) || ((ret != null) && (!StackUtil.isStackEqual(itemStack, ret)))
+                    || ((itemStack.stackSize != 1) && (!consumeContainers) && (itemStack.getItem().hasContainerItem()))) {
                 continue;
             }
 
@@ -78,7 +79,8 @@ public abstract class InventorySlotConsumable extends InventorySlot {
         for (int i = 0; i < size(); i++) {
             ItemStack itemStack = get(i);
 
-            if ((itemStack == null) || (!accepts(itemStack)) || (!itemStack.getItem().isDamageable()) || ((ret != null) && ((itemStack.getItem() != ret.getItem()) || (!ItemStack.areItemStackTagsEqual(itemStack, ret))))) {
+            if ((itemStack == null) || (!accepts(itemStack)) || (!itemStack.getItem().isDamageable())
+                    || ((ret != null) && ((itemStack.getItem() != ret.getItem()) || (!ItemStack.areItemStackTagsEqual(itemStack, ret))))) {
                 continue;
             }
             int currentAmount = Math.min(amount, itemStack.getMaxDamage() - itemStack.getItemDamage());

@@ -2,10 +2,10 @@ package org.jackhuang.watercraft.common.block.inventory;
 
 import java.util.List;
 
+import net.minecraft.item.ItemStack;
+
 import org.jackhuang.watercraft.common.block.tileentity.TileEntityInventory;
 import org.jackhuang.watercraft.util.StackUtil;
-
-import net.minecraft.item.ItemStack;
 
 public class InventorySlotOutput extends InventorySlot {
     public InventorySlotOutput(TileEntityInventory base, String name, int count) {

@@ -8,12 +8,11 @@
 
 package org.jackhuang.watercraft.client.gui;
 
-import org.jackhuang.watercraft.WaterPower;
-import org.jackhuang.watercraft.common.block.GlobalBlocks;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
+import org.jackhuang.watercraft.common.block.GlobalBlocks;
 
 public class CreativeTabWaterCraft extends CreativeTabs {
 

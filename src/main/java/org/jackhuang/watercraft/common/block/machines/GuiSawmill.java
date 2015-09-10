@@ -1,13 +1,14 @@
 package org.jackhuang.watercraft.common.block.machines;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.client.gui.ContainerStandardMachine;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiSawmill extends GuiMachineBase {

@@ -4,9 +4,9 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.jackhuang.watercraft.common.block.tileentity.TileEntityInventory;
-
 import net.minecraftforge.fluids.Fluid;
+
+import org.jackhuang.watercraft.common.block.tileentity.TileEntityInventory;
 
 public class InventorySlotConsumableLiquidByList extends InventorySlotConsumableLiquid {
     private final Set<Fluid> acceptedFluids;
@@ -17,7 +17,8 @@ public class InventorySlotConsumableLiquidByList extends InventorySlotConsumable
         this.acceptedFluids = new HashSet<Fluid>(Arrays.asList(fluidlist));
     }
 
-    public InventorySlotConsumableLiquidByList(TileEntityInventory base, String name, InventorySlot.Access access, int count, InventorySlot.InvSide preferredSide, InventorySlotConsumableLiquid.OpType opType, Fluid[] fluidlist) {
+    public InventorySlotConsumableLiquidByList(TileEntityInventory base, String name, InventorySlot.Access access, int count,
+            InventorySlot.InvSide preferredSide, InventorySlotConsumableLiquid.OpType opType, Fluid[] fluidlist) {
         super(base, name, access, count, preferredSide, opType);
 
         this.acceptedFluids = new HashSet<Fluid>(Arrays.asList(fluidlist));

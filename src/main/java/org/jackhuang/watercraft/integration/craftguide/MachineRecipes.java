@@ -12,15 +12,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import net.minecraft.item.ItemStack;
+
 import org.jackhuang.watercraft.common.block.GlobalBlocks;
 import org.jackhuang.watercraft.common.recipe.IMyRecipeInput;
 import org.jackhuang.watercraft.common.recipe.IRecipeManager;
 import org.jackhuang.watercraft.common.recipe.MyRecipeOutput;
 import org.jackhuang.watercraft.common.recipe.MyRecipes;
 
-import net.minecraft.item.ItemStack;
-import cpw.mods.fml.common.Optional.Interface;
-import cpw.mods.fml.common.Optional.InterfaceList;
 import uristqwerty.CraftGuide.api.CraftGuideAPIObject;
 import uristqwerty.CraftGuide.api.EUSlot;
 import uristqwerty.CraftGuide.api.ExtraSlot;
@@ -62,7 +61,8 @@ public class MachineRecipes extends CraftGuideAPIObject implements RecipeProvide
         }
 
         if ((maxOutput & 0x1) == 1) {
-            recipeSlots[(columns * 2 + 1)] = new ItemSlot((columns > 1 ? 23 : 32) + columns * 18, 21, 16, 16, true).setSlotType(SlotType.OUTPUT_SLOT).drawOwnBackground();
+            recipeSlots[(columns * 2 + 1)] = new ItemSlot((columns > 1 ? 23 : 32) + columns * 18, 21, 16, 16, true).setSlotType(SlotType.OUTPUT_SLOT)
+                    .drawOwnBackground();
         }
 
         RecipeTemplate template = generator.createRecipeTemplate(recipeSlots, type);

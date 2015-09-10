@@ -11,12 +11,10 @@ package org.jackhuang.watercraft.common.item;
 import org.jackhuang.watercraft.common.block.ore.ItemOreDust;
 import org.jackhuang.watercraft.common.item.crafting.ItemCrafting;
 import org.jackhuang.watercraft.common.item.crafting.ItemMaterial;
-import org.jackhuang.watercraft.common.item.others.ItemTrouser;
 import org.jackhuang.watercraft.common.item.others.ItemOthers;
+import org.jackhuang.watercraft.common.item.others.ItemTrouser;
 import org.jackhuang.watercraft.common.item.range.ItemPlugins;
 import org.jackhuang.watercraft.common.item.range.ItemRange;
-
-import net.minecraft.item.ItemStack;
 
 /**
  * @author hyh

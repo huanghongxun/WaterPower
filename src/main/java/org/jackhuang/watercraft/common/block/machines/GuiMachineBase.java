@@ -9,7 +9,6 @@
 package org.jackhuang.watercraft.common.block.machines;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
@@ -37,9 +36,11 @@ public abstract class GuiMachineBase extends GuiContainer {
         this.fontRendererObj.drawString(this.name, (this.xSize - this.fontRendererObj.getStringWidth(this.name)) / 2, 6, 0x404040);
         this.fontRendererObj.drawString(this.inv, 8, this.ySize - 96 + 2, 0x404040);
 
-        this.fontRendererObj.drawString(StatCollector.translateToLocal("cptwtrml.gui.stored") + ": " + this.container.tileEntity.getEnergy() + "mb", 8, this.ySize - 105 + 2, 0x404040);
+        this.fontRendererObj.drawString(StatCollector.translateToLocal("cptwtrml.gui.stored") + ": " + this.container.tileEntity.getEnergy() + "mb", 8,
+                this.ySize - 105 + 2, 0x404040);
 
-        this.fontRendererObj.drawString(StatCollector.translateToLocal("cptwtrml.gui.using") + ": " + this.container.tileEntity.energyConsume + "mb/t", 8, this.ySize - 114 + 2, 0x404040);
+        this.fontRendererObj.drawString(StatCollector.translateToLocal("cptwtrml.gui.using") + ": " + this.container.tileEntity.energyConsume + "mb/t", 8,
+                this.ySize - 114 + 2, 0x404040);
     }
 
     protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {

@@ -7,13 +7,14 @@
  */
 package org.jackhuang.watercraft.integration;
 
+import mods.railcraft.api.crafting.RailcraftCraftingManager;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+
 import org.jackhuang.watercraft.util.Mods;
 
 import cpw.mods.fml.common.Optional.Method;
 import cpw.mods.fml.common.event.FMLInterModComms;
-import mods.railcraft.api.crafting.RailcraftCraftingManager;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 
 public class RailcraftModule extends BaseModule {
 

@@ -2,22 +2,20 @@ package org.jackhuang.watercraft.common.block.ore;
 
 import java.awt.Color;
 
-import org.jackhuang.watercraft.client.render.RecolorableItemRenderer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraft.util.StatCollector;
+
 import org.jackhuang.watercraft.common.block.GlobalBlocks;
 import org.jackhuang.watercraft.common.item.GlobalItems;
 import org.jackhuang.watercraft.common.item.crafting.ItemMaterial;
 import org.jackhuang.watercraft.common.item.crafting.MaterialForms;
 import org.jackhuang.watercraft.common.item.crafting.MaterialTypes;
 import org.jackhuang.watercraft.common.recipe.RecipeAdder;
-import org.jackhuang.watercraft.util.Mods;
-
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.StatCollector;
 
 public enum OreType {
-    Monazite(MaterialTypes.Neodymium), Vanadium(MaterialTypes.Vanadium), Manganese(MaterialTypes.Manganese), Magnet(MaterialTypes.Magnet), Zinc(MaterialTypes.Zinc);
+    Monazite(MaterialTypes.Neodymium), Vanadium(MaterialTypes.Vanadium), Manganese(MaterialTypes.Manganese), Magnet(MaterialTypes.Magnet), Zinc(
+            MaterialTypes.Zinc);
 
     public short R, G, B, A;
     public MaterialTypes t;

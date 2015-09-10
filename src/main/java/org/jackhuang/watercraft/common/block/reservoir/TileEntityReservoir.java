@@ -3,20 +3,13 @@ package org.jackhuang.watercraft.common.block.reservoir;
 import ic2.api.tile.IWrenchable;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.swing.plaf.metal.OceanTheme;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
-import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.biome.BiomeGenOcean;
-import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -30,7 +23,6 @@ import org.jackhuang.watercraft.client.gui.DefaultGuiIds;
 import org.jackhuang.watercraft.common.block.GlobalBlocks;
 import org.jackhuang.watercraft.common.block.IDroppable;
 import org.jackhuang.watercraft.common.block.inventory.InventorySlotConsumableLiquid;
-import org.jackhuang.watercraft.common.block.inventory.InventorySlotConsumableLiquidByList;
 import org.jackhuang.watercraft.common.block.inventory.InventorySlotOutput;
 import org.jackhuang.watercraft.common.block.inventory.InventorySlotUpgrade;
 import org.jackhuang.watercraft.common.block.tileentity.TileEntityMetaMultiBlock;
@@ -39,7 +31,6 @@ import org.jackhuang.watercraft.util.Mods;
 import org.jackhuang.watercraft.util.Pair;
 import org.jackhuang.watercraft.util.Position;
 import org.jackhuang.watercraft.util.Utils;
-import org.lwjgl.opengl.HPOcclusionTest;
 
 import cpw.mods.fml.common.Optional.Interface;
 import cpw.mods.fml.common.Optional.InterfaceList;
@@ -166,7 +157,8 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements IWr
     protected boolean canBeMaster() {
         if (type == null)
             return false;
-        if (Reservoir.isRes(worldObj, xCoord, yCoord - 1, zCoord, type.ordinal()) || Reservoir.isRes(worldObj, xCoord - 1, yCoord, zCoord, type.ordinal()) || Reservoir.isRes(worldObj, xCoord, yCoord, zCoord - 1, type.ordinal())) {
+        if (Reservoir.isRes(worldObj, xCoord, yCoord - 1, zCoord, type.ordinal()) || Reservoir.isRes(worldObj, xCoord - 1, yCoord, zCoord, type.ordinal())
+                || Reservoir.isRes(worldObj, xCoord, yCoord, zCoord - 1, type.ordinal())) {
             return false;
         }
         return true;
@@ -338,7 +330,8 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements IWr
         if (needsFluid()) {
             MutableObject<ItemStack> output = new MutableObject<ItemStack>();
 
-            if ((this.getFluidSlot().transferToTank(this.fluidTank, output, true)) && ((output.getValue() == null) || (this.outputSlot.canAdd(output.getValue())))) {
+            if ((this.getFluidSlot().transferToTank(this.fluidTank, output, true))
+                    && ((output.getValue() == null) || (this.outputSlot.canAdd(output.getValue())))) {
                 needsInvUpdate = this.getFluidSlot().transferToTank(this.fluidTank, output, false);
 
                 if (output.getValue() != null)
@@ -348,7 +341,8 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements IWr
         }
 
         MutableObject<ItemStack> output = new MutableObject<ItemStack>();
-        if ((this.getFluidSlot().transferFromTank(this.fluidTank, output, true)) && ((output.getValue() == null) || (this.outputSlot.canAdd(output.getValue())))) {
+        if ((this.getFluidSlot().transferFromTank(this.fluidTank, output, true))
+                && ((output.getValue() == null) || (this.outputSlot.canAdd(output.getValue())))) {
             needsInvUpdate = this.getFluidSlot().transferFromTank(this.fluidTank, output, false);
 
             if (output.getValue() != null)

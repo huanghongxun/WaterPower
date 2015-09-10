@@ -8,28 +8,19 @@
 
 package org.jackhuang.watercraft.common.block.watermills;
 
-import java.text.DecimalFormat;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 
 import org.jackhuang.watercraft.Reference;
-import org.jackhuang.watercraft.client.gui.ContainerRotor;
 import org.jackhuang.watercraft.common.EnergyType;
-import org.jackhuang.watercraft.common.block.tileentity.TileEntityGenerator;
-import org.jackhuang.watercraft.common.network.MessagePacketHandler;
-import org.jackhuang.watercraft.common.network.PacketUnitChanged;
 import org.jackhuang.watercraft.util.Utils;
-import org.jackhuang.watercraft.util.WPLog;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
-import net.minecraftforge.common.DimensionManager;
 
 @SideOnly(Side.CLIENT)
 public class GuiWatermill extends GuiContainer {
@@ -70,8 +61,17 @@ public class GuiWatermill extends GuiContainer {
 
         fontRendererObj.drawString(gen.getInventoryName(), 8, 6, 0x404040);
         fontRendererObj.drawString(StatCollector.translateToLocal("cptwtrml.rotor.ROTOR") + ":", 44, 30, 0x404040);
-        fontRendererObj.drawString(StatCollector.translateToLocal("cptwtrml.watermill.OUTPUT") + ": " + Utils.DEFAULT_DECIMAL_FORMAT.format(gen.getFromEU(gen.latestOutput)) + gen.energyType.name() + "/t", 8, 45, 0x404040);
-        fontRendererObj.drawString(StatCollector.translateToLocal("cptwtrml.watermill.CHECK_WATER") + "," + StatCollector.translateToLocal("cptwtrml.watermill.CHECK_LAVA") + ":" + (gen.isRangeSupported() ? gen.waterBlocks + "," + gen.lavaBlocks : StatCollector.translateToLocal("cptwtrml.watermill.CANNOT_CHECK")), 8, 55, 0x404040);
+        fontRendererObj.drawString(
+                StatCollector.translateToLocal("cptwtrml.watermill.OUTPUT") + ": " + Utils.DEFAULT_DECIMAL_FORMAT.format(gen.getFromEU(gen.latestOutput))
+                        + gen.energyType.name() + "/t", 8, 45, 0x404040);
+        fontRendererObj
+                .drawString(
+                        StatCollector.translateToLocal("cptwtrml.watermill.CHECK_WATER")
+                                + ","
+                                + StatCollector.translateToLocal("cptwtrml.watermill.CHECK_LAVA")
+                                + ":"
+                                + (gen.isRangeSupported() ? gen.waterBlocks + "," + gen.lavaBlocks : StatCollector
+                                        .translateToLocal("cptwtrml.watermill.CANNOT_CHECK")), 8, 55, 0x404040);
         int a = gen.getRange();
         int b = a * a * a - 1;
         fontRendererObj.drawString(StatCollector.translateToLocal("cptwtrml.watermill.NEED") + ":" + b + "=" + a + "^3-1", 8, 65, 0x404040);

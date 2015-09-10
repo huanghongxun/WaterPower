@@ -2,13 +2,6 @@ package org.jackhuang.watercraft.common.block.machines;
 
 import java.util.ArrayList;
 
-import org.jackhuang.watercraft.client.gui.DefaultGuiIds;
-import org.jackhuang.watercraft.common.block.inventory.InventorySlotProcessableGeneric;
-import org.jackhuang.watercraft.common.recipe.MyRecipeInputItemStack;
-import org.jackhuang.watercraft.common.recipe.MyRecipeManager;
-import org.jackhuang.watercraft.common.recipe.MyRecipes;
-import org.jackhuang.watercraft.util.StackUtil;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.InventoryCrafting;
@@ -18,6 +11,12 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
+
+import org.jackhuang.watercraft.client.gui.DefaultGuiIds;
+import org.jackhuang.watercraft.common.block.inventory.InventorySlotProcessableGeneric;
+import org.jackhuang.watercraft.common.recipe.MyRecipeManager;
+import org.jackhuang.watercraft.common.recipe.MyRecipes;
+import org.jackhuang.watercraft.util.StackUtil;
 
 public class TileEntitySawmill extends TileEntityStandardWaterMachine {
 
@@ -94,7 +93,8 @@ public class TileEntitySawmill extends TileEntityStandardWaterMachine {
 
         if (dmgItems[0] == null)
             return null;
-        if ((dmgItems[1] != null) && (dmgItems[0].getItem().equals(dmgItems[1].getItem())) && (dmgItems[0].stackSize == 1) && (dmgItems[1].stackSize == 1) && (dmgItems[0].getItem().isRepairable())) {
+        if ((dmgItems[1] != null) && (dmgItems[0].getItem().equals(dmgItems[1].getItem())) && (dmgItems[0].stackSize == 1) && (dmgItems[1].stackSize == 1)
+                && (dmgItems[0].getItem().isRepairable())) {
             Item theItem = dmgItems[0].getItem();
             int var13 = theItem.getMaxDamage() - dmgItems[0].getItemDamageForDisplay();
             int var8 = theItem.getMaxDamage() - dmgItems[1].getItemDamageForDisplay();

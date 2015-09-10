@@ -14,7 +14,11 @@ import org.jackhuang.watercraft.integration.waila.WailaModule;
 import org.jackhuang.watercraft.util.Mods;
 
 public enum IntegrationType {
-    IndustrialCraft(IndustrialCraftModule.class, Mods.IndustrialCraft2), BuildCraft(BuildCraftModule.class, Mods.BuildCraftCore), Mekanism(MekanismModule.class, Mods.Mekanism), Railcraft(RailcraftModule.class, Mods.Railcraft), ThermalExpansion(ThermalExpansionModule.class, Mods.ThermalExpansion), Thaumcraft(ThaumcraftModule.class, Mods.Thaumcraft), Waila(WailaModule.class, Mods.Waila), MineTweaker3(MineTweakerModule.class, Mods.MineTweaker3), ExNihilo(ExNihiloModule.class, Mods.ExNihilo), TinkersConstruct(TinkersConstructModule.class, Mods.TinkersConstruct), CraftGuide(CraftGuideModule.class, Mods.CraftGuide);
+    IndustrialCraft(IndustrialCraftModule.class, Mods.IndustrialCraft2), BuildCraft(BuildCraftModule.class, Mods.BuildCraftCore), Mekanism(
+            MekanismModule.class, Mods.Mekanism), Railcraft(RailcraftModule.class, Mods.Railcraft), ThermalExpansion(ThermalExpansionModule.class,
+            Mods.ThermalExpansion), Thaumcraft(ThaumcraftModule.class, Mods.Thaumcraft), Waila(WailaModule.class, Mods.Waila), MineTweaker3(
+            MineTweakerModule.class, Mods.MineTweaker3), ExNihilo(ExNihiloModule.class, Mods.ExNihilo), TinkersConstruct(TinkersConstructModule.class,
+            Mods.TinkersConstruct), CraftGuide(CraftGuideModule.class, Mods.CraftGuide);
 
     public Class<? extends BaseModule> clazz;
     public Mods.SimpleMod mod;

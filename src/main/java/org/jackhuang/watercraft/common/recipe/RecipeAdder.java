@@ -9,6 +9,10 @@
 package org.jackhuang.watercraft.common.recipe;
 
 import gregtech.api.GregTech_API;
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 
 import org.jackhuang.watercraft.common.item.others.ItemType;
 import org.jackhuang.watercraft.integration.AppliedEnergisticsModule;
@@ -21,11 +25,6 @@ import org.jackhuang.watercraft.util.Mods;
 
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
-import net.minecraftforge.oredict.OreDictionary;
 
 public class RecipeAdder {
 

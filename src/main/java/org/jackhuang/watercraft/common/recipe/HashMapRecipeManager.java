@@ -12,10 +12,9 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
-import org.jackhuang.watercraft.util.StackUtil;
-
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
+import org.jackhuang.watercraft.util.StackUtil;
 
 public class HashMapRecipeManager implements IRecipeManager {
     HashMap<ItemStack, ItemStack> recipes;

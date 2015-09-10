@@ -1,5 +1,11 @@
 package org.jackhuang.watercraft.client;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+import net.minecraftforge.client.MinecraftForgeClient;
+
 import org.jackhuang.watercraft.client.gui.DefaultGuiIds;
 import org.jackhuang.watercraft.client.render.EntityWaterWheelRenderer;
 import org.jackhuang.watercraft.client.render.RecolorableItemRenderer;
@@ -26,18 +32,11 @@ import org.jackhuang.watercraft.common.block.watermills.TileEntityWatermill;
 import org.jackhuang.watercraft.common.entity.EntityWaterWheel;
 import org.jackhuang.watercraft.common.item.GlobalItems;
 import org.jackhuang.watercraft.integration.TinkersConstructModule;
-import org.jackhuang.watercraft.integration.waila.WailaModule;
 import org.jackhuang.watercraft.util.Mods;
 
-import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
-import net.minecraftforge.client.MinecraftForgeClient;
 
 @SideOnly(Side.CLIENT)
 public class ClientProxy extends CommonProxy {

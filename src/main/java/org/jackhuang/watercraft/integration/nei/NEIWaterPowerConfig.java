@@ -8,8 +8,11 @@
 package org.jackhuang.watercraft.integration.nei;
 
 import org.jackhuang.watercraft.Reference;
-import org.jackhuang.watercraft.common.block.machines.*;
-import org.jackhuang.watercraft.common.recipe.MyRecipes;
+import org.jackhuang.watercraft.common.block.machines.GuiCompressor;
+import org.jackhuang.watercraft.common.block.machines.GuiCutter;
+import org.jackhuang.watercraft.common.block.machines.GuiLathe;
+import org.jackhuang.watercraft.common.block.machines.GuiMacerator;
+import org.jackhuang.watercraft.common.block.machines.GuiSawmill;
 
 import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;

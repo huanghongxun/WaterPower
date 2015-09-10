@@ -7,11 +7,12 @@
  */
 package org.jackhuang.watercraft.integration;
 
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+
 import org.jackhuang.watercraft.util.Mods;
 
 import cpw.mods.fml.common.event.FMLInterModComms;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 
 public class AppliedEnergisticsModule extends BaseModule {
 

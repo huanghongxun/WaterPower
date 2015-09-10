@@ -1,9 +1,16 @@
 package org.jackhuang.watercraft.integration;
 
-import org.jackhuang.watercraft.Reference;
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
+
 import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.client.ClientProxy;
-import org.jackhuang.watercraft.client.render.IIconContainer;
 import org.jackhuang.watercraft.common.block.GlobalBlocks;
 import org.jackhuang.watercraft.common.block.ore.OreType;
 import org.jackhuang.watercraft.common.item.crafting.ItemMaterial;
@@ -14,17 +21,6 @@ import tconstruct.library.crafting.Smeltery;
 import tconstruct.smeltery.TinkerSmeltery;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.StatCollector;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.oredict.OreDictionary;
 
 public class TinkersConstructModule extends BaseModule {
 
@@ -57,7 +53,8 @@ public class TinkersConstructModule extends BaseModule {
         addMeltingRecipe(new ItemStack(GlobalBlocks.ore, 1, ore.ordinal()), temp, new FluidStack(fluid, oreLiquidValue));
 
         tryAddMelting(MaterialForms.ingot, ore, block, fluid, temp, ingotLiquidValue);
-        TConstructRegistry.getTableCasting().addCastingRecipe(ItemMaterial.get(ore.t, MaterialForms.ingot), new FluidStack(fluid, ingotLiquidValue), new ItemStack(TinkerSmeltery.metalPattern), 50);
+        TConstructRegistry.getTableCasting().addCastingRecipe(ItemMaterial.get(ore.t, MaterialForms.ingot), new FluidStack(fluid, ingotLiquidValue),
+                new ItemStack(TinkerSmeltery.metalPattern), 50);
 
         tryAddMelting(MaterialForms.nugget, ore, block, fluid, temp, nuggetLiquidValue);
         tryAddCasting(MaterialForms.nugget, ore, new FluidStack(fluid, nuggetLiquidValue), 27);
@@ -67,14 +64,16 @@ public class TinkersConstructModule extends BaseModule {
 
     private void tryAddMelting(MaterialForms prefix, OreType ore, ItemStack block, Fluid fluid, int temp, int fluidAmount) {
         try {
-            Smeltery.addMelting(ItemMaterial.get(ore.t, prefix), Block.getBlockFromItem(block.getItem()), block.getItemDamage(), temp, new FluidStack(fluid, fluidAmount));
+            Smeltery.addMelting(ItemMaterial.get(ore.t, prefix), Block.getBlockFromItem(block.getItem()), block.getItemDamage(), temp, new FluidStack(fluid,
+                    fluidAmount));
         } catch (NullPointerException e) {
         }
     }
 
     private void tryAddCasting(MaterialForms prefix, OreType ore, FluidStack fluid, int patternMeta) {
         try {
-            TConstructRegistry.getTableCasting().addCastingRecipe(ItemMaterial.get(ore.t, prefix), fluid, new ItemStack(TinkerSmeltery.metalPattern, 1, patternMeta), 50);
+            TConstructRegistry.getTableCasting().addCastingRecipe(ItemMaterial.get(ore.t, prefix), fluid,
+                    new ItemStack(TinkerSmeltery.metalPattern, 1, patternMeta), 50);
         } catch (NullPointerException e) {
         }
     }

@@ -8,22 +8,13 @@
 
 package org.jackhuang.watercraft.common.block.machines;
 
-import ic2.api.tile.IWrenchable;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTank;
 
 import org.jackhuang.watercraft.api.IWaterReceiver;
 import org.jackhuang.watercraft.common.block.tileentity.TileEntityBlock;
-import org.jackhuang.watercraft.util.Mods;
-
-import cpw.mods.fml.common.Optional.Interface;
-import cpw.mods.fml.common.Optional.InterfaceList;
 
 public abstract class TileEntityWaterMachine extends TileEntityBlock implements IWaterReceiver {
     public TileEntityWaterMachine(int maxWater) {

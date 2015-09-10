@@ -8,16 +8,12 @@
 
 package org.jackhuang.watercraft.common.block.tileentity;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 
 import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.common.network.MessagePacketHandler;
 import org.jackhuang.watercraft.common.network.PacketTileEntity;
-
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityBase extends TileEntity {
 

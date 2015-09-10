@@ -31,7 +31,8 @@ public class ItemOreDust extends ItemRecolorable {
 
     @Override
     public String getItemStackDisplayName(ItemStack itemstack) {
-        return StatCollector.translateToLocal(OreType.values()[itemstack.getItemDamage()].getUnlocalizedName()) + " " + StatCollector.translateToLocal("cptwtrml.forms.dust");
+        return StatCollector.translateToLocal(OreType.values()[itemstack.getItemDamage()].getUnlocalizedName()) + " "
+                + StatCollector.translateToLocal("cptwtrml.forms.dust");
     }
 
     public ItemStack get(OreType type) {

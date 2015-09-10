@@ -10,7 +10,13 @@ package org.jackhuang.watercraft.integration.waila;
 
 import mcp.mobius.waila.api.impl.ModuleRegistrar;
 
-import org.jackhuang.watercraft.common.block.machines.*;
+import org.jackhuang.watercraft.common.block.machines.TileEntityAdvancedCompressor;
+import org.jackhuang.watercraft.common.block.machines.TileEntityCentrifuge;
+import org.jackhuang.watercraft.common.block.machines.TileEntityCompressor;
+import org.jackhuang.watercraft.common.block.machines.TileEntityCutter;
+import org.jackhuang.watercraft.common.block.machines.TileEntityLathe;
+import org.jackhuang.watercraft.common.block.machines.TileEntityMacerator;
+import org.jackhuang.watercraft.common.block.machines.TileEntitySawmill;
 import org.jackhuang.watercraft.common.block.reservoir.TileEntityReservoir;
 import org.jackhuang.watercraft.common.block.turbines.TileEntityTurbine;
 import org.jackhuang.watercraft.common.block.watermills.TileEntityWatermill;

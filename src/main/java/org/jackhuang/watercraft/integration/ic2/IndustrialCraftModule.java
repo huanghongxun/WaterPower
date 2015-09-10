@@ -9,17 +9,14 @@ package org.jackhuang.watercraft.integration.ic2;
 
 import ic2.api.recipe.RecipeInputItemStack;
 import ic2.api.recipe.Recipes;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 
 import org.jackhuang.watercraft.common.block.ore.OreType;
 import org.jackhuang.watercraft.common.item.GlobalItems;
 import org.jackhuang.watercraft.common.item.crafting.ItemMaterial;
 import org.jackhuang.watercraft.common.item.crafting.MaterialForms;
 import org.jackhuang.watercraft.integration.BaseModule;
-import org.jackhuang.watercraft.util.Mods;
-import org.jackhuang.watercraft.util.WPLog;
-
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 
 public class IndustrialCraftModule extends BaseModule {
 

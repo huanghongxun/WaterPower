@@ -1,11 +1,11 @@
 package org.jackhuang.watercraft.common.block.inventory;
 
-import org.jackhuang.watercraft.common.block.tileentity.TileEntityInventory;
-import org.jackhuang.watercraft.util.StackUtil;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+
+import org.jackhuang.watercraft.common.block.tileentity.TileEntityInventory;
+import org.jackhuang.watercraft.util.StackUtil;
 
 public class InventorySlot {
     private final TileEntityInventory base;

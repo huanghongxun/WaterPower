@@ -8,10 +8,7 @@
 
 package org.jackhuang.watercraft.common.block.tileentity;
 
-import java.util.ArrayList;
-
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.fluids.Fluid;
 
 public abstract class TileEntityMetaMultiBlock extends TileEntityMultiBlock implements ITileEntityMeta {
 

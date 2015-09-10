@@ -1,37 +1,18 @@
 package org.jackhuang.watercraft.common.block.watermills;
 
-import java.util.List;
-
-import org.jackhuang.watercraft.Reference;
-import org.jackhuang.watercraft.WaterPower;
-import org.jackhuang.watercraft.client.gui.DefaultGuiIds;
-import org.jackhuang.watercraft.client.render.ModelWaterWheel;
-import org.jackhuang.watercraft.common.block.GlobalBlocks;
-import org.jackhuang.watercraft.common.block.tileentity.TileEntityElectricMetaBlock;
-import org.jackhuang.watercraft.common.block.tileentity.TileEntityRotor;
-import org.jackhuang.watercraft.common.entity.EntityWaterWheel;
-import org.jackhuang.watercraft.common.item.others.ItemOthers;
-import org.jackhuang.watercraft.common.item.others.ItemType;
-import org.jackhuang.watercraft.common.item.range.ItemRange;
-import org.jackhuang.watercraft.common.item.range.RangeInventorySlot;
-import org.jackhuang.watercraft.common.item.range.RangeType;
-import org.jackhuang.watercraft.common.item.rotors.ItemRotor;
-import org.jackhuang.watercraft.common.item.rotors.RotorInventorySlot;
-import org.jackhuang.watercraft.util.Mods;
-import org.jackhuang.watercraft.util.Utils;
-
-import cpw.mods.fml.common.Optional.Method;
-import cpw.mods.fml.relauncher.Side;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.oredict.OreDictionary;
+
+import org.jackhuang.watercraft.client.gui.DefaultGuiIds;
+import org.jackhuang.watercraft.common.block.GlobalBlocks;
+import org.jackhuang.watercraft.common.block.tileentity.TileEntityRotor;
+import org.jackhuang.watercraft.common.entity.EntityWaterWheel;
+import org.jackhuang.watercraft.common.item.range.ItemRange;
+import org.jackhuang.watercraft.common.item.range.RangeInventorySlot;
+import org.jackhuang.watercraft.common.item.range.RangeType;
+import org.jackhuang.watercraft.util.Utils;
 
 /**
  * 

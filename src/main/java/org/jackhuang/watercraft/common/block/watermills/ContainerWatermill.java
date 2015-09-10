@@ -1,9 +1,7 @@
 package org.jackhuang.watercraft.common.block.watermills;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
 
-import org.jackhuang.watercraft.client.gui.ContainerFullInventory;
 import org.jackhuang.watercraft.client.gui.ContainerRotor;
 import org.jackhuang.watercraft.common.block.inventory.SlotInventorySlot;
 

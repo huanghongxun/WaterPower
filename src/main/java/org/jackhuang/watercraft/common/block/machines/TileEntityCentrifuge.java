@@ -3,17 +3,8 @@ package org.jackhuang.watercraft.common.block.machines;
 import org.jackhuang.watercraft.client.gui.DefaultGuiIds;
 import org.jackhuang.watercraft.common.block.inventory.InventorySlotProcessableGeneric;
 import org.jackhuang.watercraft.common.recipe.MultiRecipeManager;
-import org.jackhuang.watercraft.common.recipe.MyRecipeManager;
 import org.jackhuang.watercraft.common.recipe.MyRecipeOutput;
 import org.jackhuang.watercraft.common.recipe.MyRecipes;
-import org.jackhuang.watercraft.util.Mods;
-import org.jackhuang.watercraft.util.StackUtil;
-
-import ic2.api.recipe.IRecipeInput;
-import ic2.api.recipe.Recipes;
-import net.minecraft.inventory.Container;
-import net.minecraft.item.Item;
-import net.minecraft.world.World;
 
 public class TileEntityCentrifuge extends TileEntityStandardWaterMachine {
 

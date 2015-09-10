@@ -2,13 +2,6 @@ package org.jackhuang.watercraft.common.block.turbines;
 
 import java.util.ArrayList;
 
-import org.jackhuang.watercraft.Reference;
-import org.jackhuang.watercraft.common.block.BlockMeta;
-import org.jackhuang.watercraft.common.block.BlockRotor;
-
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,7 +9,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
+
+import org.jackhuang.watercraft.Reference;
+import org.jackhuang.watercraft.common.block.BlockRotor;
+
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class BlockTurbine extends BlockRotor {
 

@@ -1,18 +1,12 @@
 package org.jackhuang.watercraft.common.entity;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
+
 import org.jackhuang.watercraft.common.block.watermills.TileEntityWatermill;
 import org.jackhuang.watercraft.common.item.rotors.RotorType;
 import org.jackhuang.watercraft.util.Utils;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldProvider;
 
 public class EntityWaterWheel extends Entity {
     public RotorType wheelType;

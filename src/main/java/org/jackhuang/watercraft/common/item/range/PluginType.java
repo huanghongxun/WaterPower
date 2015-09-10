@@ -1,12 +1,13 @@
 package org.jackhuang.watercraft.common.item.range;
 
-import org.jackhuang.watercraft.common.item.GlobalItems;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 
+import org.jackhuang.watercraft.common.item.GlobalItems;
+
 public enum PluginType {
-    UnderMK1(1, 0, 0, 0, 0, 0), OverMK1(0, 1, 0, 0, 0, 0), RainMK1(0, 0, 1, 0, 0, 0), StorageMK1(0, 0, 0, 0, 1, 0), StorageMK2(0, 0, 0, 0, 4, 0), StorageMK3(0, 0, 0, 0, 16, 0), StorageMK4(0, 0, 0, 0, 64, 0), AllRoundMK1(1, 1, 1, 0, 1, 0), SpeedMK1(0, 0, 0, 0.7, 0, 1.6), ;
+    UnderMK1(1, 0, 0, 0, 0, 0), OverMK1(0, 1, 0, 0, 0, 0), RainMK1(0, 0, 1, 0, 0, 0), StorageMK1(0, 0, 0, 0, 1, 0), StorageMK2(0, 0, 0, 0, 4, 0), StorageMK3(0,
+            0, 0, 0, 16, 0), StorageMK4(0, 0, 0, 0, 64, 0), AllRoundMK1(1, 1, 1, 0, 1, 0), SpeedMK1(0, 0, 0, 0.7, 0, 1.6), ;
 
     int under, over, rain, storage;
     double demand, speed;

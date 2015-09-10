@@ -1,20 +1,6 @@
 package org.jackhuang.watercraft.common.block.tileentity;
 
-import cpw.mods.fml.common.Optional.Interface;
-import cpw.mods.fml.common.Optional.InterfaceList;
-import cpw.mods.fml.common.Optional.Method;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import ic2.api.tile.IWrenchable;
-
-import java.util.List;
-import java.util.Vector;
-
-import org.jackhuang.watercraft.WaterPower;
-import org.jackhuang.watercraft.common.block.IDroppable;
-import org.jackhuang.watercraft.util.Mods;
-import org.jackhuang.watercraft.util.Utils;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -22,6 +8,15 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
+
+import org.jackhuang.watercraft.common.block.IDroppable;
+import org.jackhuang.watercraft.util.Mods;
+
+import cpw.mods.fml.common.Optional.Interface;
+import cpw.mods.fml.common.Optional.InterfaceList;
+import cpw.mods.fml.common.Optional.Method;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @InterfaceList({ @Interface(iface = "ic2.api.tile.IWrenchable", modid = Mods.IDs.IndustrialCraft2API, striprefs = true) })
 public abstract class TileEntityBlock extends TileEntityLiquidTankInventory implements IWrenchable, IDroppable {
@@ -184,6 +179,7 @@ public abstract class TileEntityBlock extends TileEntityLiquidTankInventory impl
 
     @Override
     public ItemStack getDroppedItemStack() {
-        return new ItemStack(this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord), 1, this.worldObj.getBlockMetadata(this.xCoord, this.yCoord, this.zCoord));
+        return new ItemStack(this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord), 1, this.worldObj.getBlockMetadata(this.xCoord, this.yCoord,
+                this.zCoord));
     }
 }

@@ -1,5 +1,11 @@
 package org.jackhuang.watercraft.common.item.rotors;
 
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
+
 import org.jackhuang.watercraft.common.item.others.ItemType;
 import org.jackhuang.watercraft.common.recipe.IRecipeRegistrar;
 import org.jackhuang.watercraft.integration.ic2.ICItemFinder;
@@ -8,11 +14,6 @@ import org.jackhuang.watercraft.util.WPLog;
 
 import thaumcraft.api.ItemApi;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
 
 /**
  * http://zhidao.baidu.com/link?url=
@@ -24,9 +25,17 @@ import net.minecraft.util.StatCollector;
  */
 public enum RotorType {
     // 1 - IndustrialCraft
-    WOOD(0.125, 12000, "waterRotorWood"), STONE(0.2, 10000, "waterRotorStone"), LEAD(0.215, 10000, "waterRotorLead"), TIN(0.23, 60000, "waterRotorTin"), GOLD(0.7, 40000, "waterRotorGold"), COPPER(0.25, 80000, "waterRotorCopper"), SILVER(0.3, 50000, "waterRotorSilver"), IRON(0.35, 100000, "waterRotorIron"), REFINEDIRON(0.4, 120000, "waterRotorRefinedIron"), OBSIDIAN(0.45, 200000, "waterRotorObsidian"), BRONZE(0.5, 70000, "waterRotorBronze"), LAPIS(0.55, 30000, "waterRotorLapis"), QUARTZ(0.6, 180000, "waterRotorQuartz"), CARBON(0.65, 100000, "waterRotorCarbon"), ADVANCED(0.7, 60000, "waterRotorAdvanced"), EMERALD(0.75, 150000, "waterRotorEmerald"), DIAMOND(0.8, 250000, "waterRotorDiamond"), IRIDIUM(0.9, 340000, "waterRotorIridium"), IRIDIUMIRON(1, 107374182, "waterRotorIridiumIron"),
+    WOOD(0.125, 12000, "waterRotorWood"), STONE(0.2, 10000, "waterRotorStone"), LEAD(0.215, 10000, "waterRotorLead"), TIN(0.23, 60000, "waterRotorTin"), GOLD(
+            0.7, 40000, "waterRotorGold"), COPPER(0.25, 80000, "waterRotorCopper"), SILVER(0.3, 50000, "waterRotorSilver"), IRON(0.35, 100000, "waterRotorIron"), REFINEDIRON(
+            0.4, 120000, "waterRotorRefinedIron"), OBSIDIAN(0.45, 200000, "waterRotorObsidian"), BRONZE(0.5, 70000, "waterRotorBronze"), LAPIS(0.55, 30000,
+            "waterRotorLapis"), QUARTZ(0.6, 180000, "waterRotorQuartz"), CARBON(0.65, 100000, "waterRotorCarbon"), ADVANCED(0.7, 60000, "waterRotorAdvanced"), EMERALD(
+            0.75, 150000, "waterRotorEmerald"), DIAMOND(0.8, 250000, "waterRotorDiamond"), IRIDIUM(0.9, 340000, "waterRotorIridium"), IRIDIUMIRON(1, 107374182,
+            "waterRotorIridiumIron"),
     // 2 - GregTech
-    ZINC(0.23, 70000, "waterRotorZinc"), BRASS(0.5, 77500, "waterRotorBrass"), ALUMINUM(0.4, 50000, "waterRotorAluminum"), ELECTRUM(0.45, 45000, "waterRotorElectrum"), STEEL(0.5, 150000, "waterRotorSteel"), INVAR(0.55, 120000, "waterRotorInvar"), NICKEL(0.6, 160000, "waterRotorNickel"), TITANIUM(0.65, 230000, "waterRotorTitanium"), PLATINUM(0.7, 80000, "waterRotorPlatinum"), TUNGSTEN(0.75, 700000, "waterRotorTungsten"), CHROME(1, 1000000, "waterRotorChrome"), TUNGSTEN_STEEL(1, 1000000, "waterRotorTungstenSteel"), OSMIUM(0.9, 2000000, "waterRotorOsmium"),
+    ZINC(0.23, 70000, "waterRotorZinc"), BRASS(0.5, 77500, "waterRotorBrass"), ALUMINUM(0.4, 50000, "waterRotorAluminum"), ELECTRUM(0.45, 45000,
+            "waterRotorElectrum"), STEEL(0.5, 150000, "waterRotorSteel"), INVAR(0.55, 120000, "waterRotorInvar"), NICKEL(0.6, 160000, "waterRotorNickel"), TITANIUM(
+            0.65, 230000, "waterRotorTitanium"), PLATINUM(0.7, 80000, "waterRotorPlatinum"), TUNGSTEN(0.75, 700000, "waterRotorTungsten"), CHROME(1, 1000000,
+            "waterRotorChrome"), TUNGSTEN_STEEL(1, 1000000, "waterRotorTungstenSteel"), OSMIUM(0.9, 2000000, "waterRotorOsmium"),
     // 3 - Thaumcraft
     THAUMIUM(0.7, 200000, "waterRotorThaumium");
 

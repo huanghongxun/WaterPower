@@ -1,5 +1,7 @@
 package org.jackhuang.watercraft.common.network;
 
+import io.netty.buffer.ByteBuf;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
@@ -14,7 +16,6 @@ import net.minecraft.world.World;
 import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.common.block.tileentity.TileEntityBase;
 
-import io.netty.buffer.ByteBuf;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;

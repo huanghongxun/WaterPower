@@ -11,8 +11,8 @@ package org.jackhuang.watercraft.util;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.Reference;
+import org.jackhuang.watercraft.WaterPower;
 
 /**
  * WaterPower log class.

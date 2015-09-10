@@ -9,6 +9,7 @@
 package org.jackhuang.watercraft.util;
 
 import java.util.Random;
+
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -126,7 +127,11 @@ public final class StackUtil {
     }
 
     public static boolean isStackEqual(ItemStack stack1, ItemStack stack2) {
-        return (stack1 != null) && (stack2 != null) && (stack1.getItem().equals(stack2.getItem())) && (((!stack1.getHasSubtypes()) && (!stack1.isItemStackDamageable())) || ((stack1.getItemDamage() == stack2.getItemDamage()) && (ItemStack.areItemStackTagsEqual(stack1, stack2))));
+        return (stack1 != null)
+                && (stack2 != null)
+                && (stack1.getItem().equals(stack2.getItem()))
+                && (((!stack1.getHasSubtypes()) && (!stack1.isItemStackDamageable())) || ((stack1.getItemDamage() == stack2.getItemDamage()) && (ItemStack
+                        .areItemStackTagsEqual(stack1, stack2))));
     }
 
     public static boolean isStacksEqual(ItemStack[] is, ItemStack[] is2) {

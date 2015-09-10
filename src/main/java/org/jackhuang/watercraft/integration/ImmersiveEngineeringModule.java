@@ -21,7 +21,8 @@ public class ImmersiveEngineeringModule extends BaseModule {
     public static void blastFurnace(Object input, int cookTime, ItemStack output) {
         if (addRecipe == null) {
             try {
-                addRecipe = Class.forName("blusunrize.immersiveengineering.api.crafting.BlastFurnaceRecipe").getDeclaredMethod("addRecipe", ItemStack.class, Object.class, int.class);
+                addRecipe = Class.forName("blusunrize.immersiveengineering.api.crafting.BlastFurnaceRecipe").getDeclaredMethod("addRecipe", ItemStack.class,
+                        Object.class, int.class);
                 addRecipe.setAccessible(true);
             } catch (Exception e) {
                 e.printStackTrace();

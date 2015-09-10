@@ -2,11 +2,6 @@ package org.jackhuang.watercraft.common.item.rotors;
 
 import java.util.List;
 
-import org.jackhuang.watercraft.WaterPower;
-import org.jackhuang.watercraft.Reference;
-import org.jackhuang.watercraft.common.block.tileentity.TileEntityGenerator;
-import org.jackhuang.watercraft.common.item.ItemBase;
-
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -15,6 +10,11 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+
+import org.jackhuang.watercraft.Reference;
+import org.jackhuang.watercraft.WaterPower;
+import org.jackhuang.watercraft.common.block.tileentity.TileEntityGenerator;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -86,7 +86,8 @@ public class ItemRotor extends Item {
         } else {
             par3List.add(StatCollector.translateToLocal("cptwtrml.rotor.INFINITE"));
         }
-        par3List.add(StatCollector.translateToLocal("cptwtrml.rotor.GOT_EFFICIENCY") + " " + (int) (((ItemRotor) par1ItemStack.getItem()).type.getEfficiency() * 100) + "%");
+        par3List.add(StatCollector.translateToLocal("cptwtrml.rotor.GOT_EFFICIENCY") + " "
+                + (int) (((ItemRotor) par1ItemStack.getItem()).type.getEfficiency() * 100) + "%");
     }
 
     @Override

@@ -1,21 +1,20 @@
 package org.jackhuang.watercraft.common.block.reservoir;
 
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.IIcon;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
+import net.minecraftforge.fluids.FluidStack;
+
 import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.client.render.RenderUtils;
 import org.lwjgl.opengl.GL11;
 
 import com.google.common.collect.ImmutableList;
 
-import scala.actors.threadpool.Arrays;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
-import net.minecraftforge.fluids.FluidStack;
 
 @SideOnly(Side.CLIENT)
 public class GuiReservoir extends GuiContainer {
@@ -59,7 +58,9 @@ public class GuiReservoir extends GuiContainer {
         int i1 = (height - ySize) / 2;
         int x = par1 - l, y = par2 - i1;
         if (x >= 82 && x <= 93 && y >= 36 && y <= 48) {
-            drawHoveringText(ImmutableList.of((f == null ? StatCollector.translateToLocal("cptwtrml.gui.empty") : f.getLocalizedName()), gen.getFluidAmount() + "/" + gen.getFluidTankCapacity() + "mb"), x, y, fontRendererObj);
+            drawHoveringText(
+                    ImmutableList.of((f == null ? StatCollector.translateToLocal("cptwtrml.gui.empty") : f.getLocalizedName()), gen.getFluidAmount() + "/"
+                            + gen.getFluidTankCapacity() + "mb"), x, y, fontRendererObj);
         }
     }
 }

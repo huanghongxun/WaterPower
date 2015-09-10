@@ -1,14 +1,14 @@
 package org.jackhuang.watercraft.common.block;
 
-import org.jackhuang.watercraft.common.block.tileentity.TileEntityRotor;
-import org.jackhuang.watercraft.common.item.rotors.ItemRotor;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+
+import org.jackhuang.watercraft.common.block.tileentity.TileEntityRotor;
+import org.jackhuang.watercraft.common.item.rotors.ItemRotor;
 
 public abstract class BlockRotor extends BlockMeta {
 

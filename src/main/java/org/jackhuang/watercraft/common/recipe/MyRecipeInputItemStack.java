@@ -3,11 +3,10 @@ package org.jackhuang.watercraft.common.recipe;
 import java.util.Arrays;
 import java.util.List;
 
-import org.jackhuang.watercraft.Reference;
-
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
+
+import org.jackhuang.watercraft.Reference;
 
 public class MyRecipeInputItemStack implements IMyRecipeInput {
     public MyRecipeInputItemStack(ItemStack aInput) {
@@ -21,7 +20,8 @@ public class MyRecipeInputItemStack implements IMyRecipeInput {
 
     @Override
     public boolean matches(ItemStack subject) {
-        return subject.getItem() == input.getItem() && (subject.getItemDamage() == input.getItemDamage() || input.getItemDamage() == OreDictionary.WILDCARD_VALUE);
+        return subject.getItem() == input.getItem()
+                && (subject.getItemDamage() == input.getItemDamage() || input.getItemDamage() == OreDictionary.WILDCARD_VALUE);
     }
 
     @Override
@@ -67,6 +67,7 @@ public class MyRecipeInputItemStack implements IMyRecipeInput {
 
     @Override
     public String getEnderIOXML() {
-        return String.format("<itemStack modID=\"%s\" itemName=\"%s\" itemMeta=\"%d\"", Reference.ModID, input.getItem().delegate.name(), input.getItemDamage());
+        return String
+                .format("<itemStack modID=\"%s\" itemName=\"%s\" itemMeta=\"%d\"", Reference.ModID, input.getItem().delegate.name(), input.getItemDamage());
     }
 }

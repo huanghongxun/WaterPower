@@ -1,10 +1,9 @@
 package org.jackhuang.watercraft.common.block.inventory;
 
+import net.minecraft.item.ItemStack;
+
 import org.jackhuang.watercraft.common.block.tileentity.TileEntityInventory;
 import org.jackhuang.watercraft.common.recipe.MyRecipeOutput;
-
-import ic2.api.recipe.RecipeOutput;
-import net.minecraft.item.ItemStack;
 
 public abstract class InventorySlotProcessable extends InventorySlotConsumable {
     public InventorySlotProcessable(TileEntityInventory base, String name, int count) {

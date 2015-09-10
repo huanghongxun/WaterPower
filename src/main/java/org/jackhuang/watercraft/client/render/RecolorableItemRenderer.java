@@ -8,10 +8,6 @@
 
 package org.jackhuang.watercraft.client.render;
 
-import org.jackhuang.watercraft.common.item.ItemRecolorable;
-import org.jackhuang.watercraft.common.item.crafting.ItemMaterial;
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.Tessellator;
@@ -21,11 +17,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.client.IItemRenderer;
 
+import org.jackhuang.watercraft.common.item.ItemRecolorable;
+import org.lwjgl.opengl.GL11;
+
 public class RecolorableItemRenderer implements IItemRenderer {
 
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {
-        return type == ItemRenderType.EQUIPPED || type == ItemRenderType.EQUIPPED_FIRST_PERSON || type == ItemRenderType.ENTITY || type == ItemRenderType.INVENTORY;
+        return type == ItemRenderType.EQUIPPED || type == ItemRenderType.EQUIPPED_FIRST_PERSON || type == ItemRenderType.ENTITY
+                || type == ItemRenderType.INVENTORY;
     }
 
     @Override
@@ -62,7 +62,8 @@ public class RecolorableItemRenderer implements IItemRenderer {
         if (type.equals(IItemRenderer.ItemRenderType.INVENTORY))
             renderIcon(icon, 16.0D, 0.001D, 0.0F, 0.0F, -1.0F);
         else
-            ItemRenderer.renderItemIn2D(Tessellator.instance, icon.getMaxU(), icon.getMinV(), icon.getMinU(), icon.getMaxV(), icon.getIconWidth(), icon.getIconHeight(), 0.0625F);
+            ItemRenderer.renderItemIn2D(Tessellator.instance, icon.getMaxU(), icon.getMinV(), icon.getMinU(), icon.getMaxV(), icon.getIconWidth(),
+                    icon.getIconHeight(), 0.0625F);
         GL11.glColor3f(1.0F, 1.0F, 1.0F);
 
         GL11.glDisable(GL11.GL_BLEND);

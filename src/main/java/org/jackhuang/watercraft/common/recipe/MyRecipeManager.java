@@ -9,17 +9,11 @@
 package org.jackhuang.watercraft.common.recipe;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 
 public class MyRecipeManager implements IRecipeManager {
     private final Map<IMyRecipeInput, MyRecipeOutput> recipes = new HashMap();
@@ -67,7 +61,8 @@ public class MyRecipeManager implements IRecipeManager {
             IMyRecipeInput recipeInput = (IMyRecipeInput) entry.getKey();
 
             if (recipeInput.matches(input)) {
-                if ((input.stackSize < recipeInput.getInputAmount()) || ((input.getItem().hasContainerItem()) && (input.stackSize != recipeInput.getInputAmount())))
+                if ((input.stackSize < recipeInput.getInputAmount())
+                        || ((input.getItem().hasContainerItem()) && (input.stackSize != recipeInput.getInputAmount())))
                     break;
                 if (adjustInput) {
                     if (input.getItem().hasContainerItem()) {

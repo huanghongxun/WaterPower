@@ -7,16 +7,15 @@
  */
 package org.jackhuang.watercraft.integration.minetweaker;
 
+import minetweaker.MineTweakerAPI;
+import minetweaker.api.item.IItemStack;
+import minetweaker.api.minecraft.MineTweakerMC;
 import net.minecraft.item.ItemStack;
 
 import org.jackhuang.watercraft.common.recipe.IRecipeManager;
 import org.jackhuang.watercraft.common.recipe.MyRecipeOutput;
 import org.jackhuang.watercraft.common.recipe.MyRecipes;
-import org.jackhuang.watercraft.util.WPLog;
 
-import minetweaker.MineTweakerAPI;
-import minetweaker.api.item.IItemStack;
-import minetweaker.api.minecraft.MineTweakerMC;
 import stanhebben.zenscript.annotations.NotNull;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
@@ -26,7 +25,8 @@ public class Machines {
 
     @ZenMethod
     public static void addCrusherRecipe(@NotNull IItemStack input, @NotNull IItemStack output) {
-        MineTweakerAPI.apply(new AddRecipeAction("WaterPower Crusher", MyRecipes.macerator, MineTweakerMC.getItemStack(input), MineTweakerMC.getItemStack(output)));
+        MineTweakerAPI.apply(new AddRecipeAction("WaterPower Crusher", MyRecipes.macerator, MineTweakerMC.getItemStack(input), MineTweakerMC
+                .getItemStack(output)));
     }
 
     @ZenMethod
@@ -41,22 +41,26 @@ public class Machines {
 
     @ZenMethod
     public static void addCompressorRecipe(@NotNull IItemStack input, @NotNull IItemStack output) {
-        MineTweakerAPI.apply(new AddRecipeAction("WaterPower Compressor", MyRecipes.compressor, MineTweakerMC.getItemStack(input), MineTweakerMC.getItemStack(output)));
+        MineTweakerAPI.apply(new AddRecipeAction("WaterPower Compressor", MyRecipes.compressor, MineTweakerMC.getItemStack(input), MineTweakerMC
+                .getItemStack(output)));
     }
 
     @ZenMethod
     public static void addCentrifugeRecipe(@NotNull IItemStack input, @NotNull IItemStack output) {
-        MineTweakerAPI.apply(new AddRecipeAction("WaterPower Centrifuge", MyRecipes.centrifuge, MineTweakerMC.getItemStack(input), MineTweakerMC.getItemStack(output)));
+        MineTweakerAPI.apply(new AddRecipeAction("WaterPower Centrifuge", MyRecipes.centrifuge, MineTweakerMC.getItemStack(input), MineTweakerMC
+                .getItemStack(output)));
     }
 
     @ZenMethod
     public static void addAdvancedCompressorRecipe(@NotNull IItemStack input, @NotNull IItemStack output) {
-        MineTweakerAPI.apply(new AddRecipeAction("WaterPower Advanced Compressor", MyRecipes.implosion, MineTweakerMC.getItemStack(input), MineTweakerMC.getItemStack(output)));
+        MineTweakerAPI.apply(new AddRecipeAction("WaterPower Advanced Compressor", MyRecipes.implosion, MineTweakerMC.getItemStack(input), MineTweakerMC
+                .getItemStack(output)));
     }
 
     @ZenMethod
     public static void addSawmillRecipe(@NotNull IItemStack input, @NotNull IItemStack output) {
-        MineTweakerAPI.apply(new AddRecipeAction("WaterPower Sawmill", MyRecipes.sawmill, MineTweakerMC.getItemStack(input), MineTweakerMC.getItemStack(output)));
+        MineTweakerAPI
+                .apply(new AddRecipeAction("WaterPower Sawmill", MyRecipes.sawmill, MineTweakerMC.getItemStack(input), MineTweakerMC.getItemStack(output)));
     }
 
     @ZenMethod

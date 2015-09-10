@@ -19,7 +19,8 @@ public class InventorySlotConsumableLiquid extends InventorySlotConsumable {
         this(base, name, InventorySlot.Access.I, count, InventorySlot.InvSide.TOP, OpType.Both);
     }
 
-    public InventorySlotConsumableLiquid(TileEntityInventory base, String name, InventorySlot.Access access, int count, InventorySlot.InvSide preferredSide, OpType opType) {
+    public InventorySlotConsumableLiquid(TileEntityInventory base, String name, InventorySlot.Access access, int count, InventorySlot.InvSide preferredSide,
+            OpType opType) {
         super(base, name, access, count, preferredSide);
 
         this.opType = opType;

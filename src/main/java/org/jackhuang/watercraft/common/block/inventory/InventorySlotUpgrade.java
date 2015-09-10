@@ -10,8 +10,8 @@ package org.jackhuang.watercraft.common.block.inventory;
 
 import net.minecraft.item.ItemStack;
 
-import org.jackhuang.watercraft.common.block.tileentity.TileEntityInventory;
 import org.jackhuang.watercraft.api.IUpgrade;
+import org.jackhuang.watercraft.common.block.tileentity.TileEntityInventory;
 
 public class InventorySlotUpgrade extends InventorySlot {
     public InventorySlotUpgrade(TileEntityInventory base, String name, int count) {

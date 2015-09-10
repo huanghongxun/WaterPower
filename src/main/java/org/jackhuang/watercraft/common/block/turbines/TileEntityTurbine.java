@@ -1,29 +1,16 @@
 package org.jackhuang.watercraft.common.block.turbines;
 
-import org.jackhuang.watercraft.WaterPower;
-import org.jackhuang.watercraft.Reference;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidRegistry;
+
 import org.jackhuang.watercraft.client.gui.DefaultGuiIds;
 import org.jackhuang.watercraft.common.block.GlobalBlocks;
 import org.jackhuang.watercraft.common.block.reservoir.Reservoir;
 import org.jackhuang.watercraft.common.block.reservoir.TileEntityReservoir;
-import org.jackhuang.watercraft.common.block.tileentity.TileEntityElectricMetaBlock;
-import org.jackhuang.watercraft.common.block.tileentity.TileEntityGenerator;
 import org.jackhuang.watercraft.common.block.tileentity.TileEntityRotor;
-import org.jackhuang.watercraft.common.block.watermills.WaterType;
-import org.jackhuang.watercraft.common.item.rotors.ItemRotor;
-import org.jackhuang.watercraft.common.item.rotors.RotorInventorySlot;
-import org.jackhuang.watercraft.util.Mods;
 import org.jackhuang.watercraft.util.WPLog;
-
-import cpw.mods.fml.common.Optional.Method;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.fluids.FluidRegistry;
 
 public class TileEntityTurbine extends TileEntityRotor {
 
@@ -145,7 +132,8 @@ public class TileEntityTurbine extends TileEntityRotor {
             int multiple = 0;
             if (pair.getFluidfromTank() == FluidRegistry.WATER)
                 multiple = 1;
-            else if (FluidRegistry.isFluidRegistered("steam") && pair.getFluidfromTank() == FluidRegistry.getFluid("steam") || FluidRegistry.isFluidRegistered("ic2steam") && pair.getFluidfromTank() == FluidRegistry.getFluid("ic2steam"))
+            else if (FluidRegistry.isFluidRegistered("steam") && pair.getFluidfromTank() == FluidRegistry.getFluid("steam")
+                    || FluidRegistry.isFluidRegistered("ic2steam") && pair.getFluidfromTank() == FluidRegistry.getFluid("ic2steam"))
                 multiple = 5;
             if (multiple == 0)
                 return 0;
