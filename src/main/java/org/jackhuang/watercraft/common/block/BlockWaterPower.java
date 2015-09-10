@@ -41,14 +41,12 @@ import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public abstract class BlockWaterPower extends BlockContainer {
-    
+
     private static final ThreadLocal<TileEntity> TEMPORARYTILEENTITY_LOCAL = new ThreadLocal<TileEntity>();
 
     // 0-bottom 1-top 2-left 3-front 4-right 5-back
 
-    private static final int[][] facingAndSideToSpriteOffset = {
-            { 3, 5, 1, 0, 4, 2 }, { 5, 3, 1, 0, 2, 4 }, { 0, 1, 3, 5, 4, 2 },
-            { 0, 1, 5, 3, 2, 4 }, { 0, 1, 2, 4, 3, 5 }, { 0, 1, 4, 2, 5, 3 } };
+    private static final int[][] facingAndSideToSpriteOffset = { { 3, 5, 1, 0, 4, 2 }, { 5, 3, 1, 0, 2, 4 }, { 0, 1, 3, 5, 4, 2 }, { 0, 1, 5, 3, 2, 4 }, { 0, 1, 2, 4, 3, 5 }, { 0, 1, 4, 2, 5, 3 } };
 
     @SideOnly(Side.CLIENT)
     protected IIcon[][] textures;
@@ -57,8 +55,7 @@ public abstract class BlockWaterPower extends BlockContainer {
         this(id, material, ItemBlock.class);
     }
 
-    public BlockWaterPower(String id, Material material,
-            Class<? extends ItemBlock> itemClass) {
+    public BlockWaterPower(String id, Material material, Class<? extends ItemBlock> itemClass) {
         super(material);
 
         setBlockName(id);
@@ -79,9 +76,7 @@ public abstract class BlockWaterPower extends BlockContainer {
         try {
             return this.textures[index][subIndex];
         } catch (Exception e) {
-            WPLog.warn("Failed to get texture: block: " + this
-                    + "; meta=" + meta + "; dir=" + dir + "; side=" + side
-                    + "; idx=" + index + "subidx=" + subIndex);
+            WPLog.warn("Failed to get texture: block: " + this + "; meta=" + meta + "; dir=" + dir + "; side=" + side + "; idx=" + index + "subidx=" + subIndex);
         }
 
         return null;
@@ -89,8 +84,7 @@ public abstract class BlockWaterPower extends BlockContainer {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public IIcon getIcon(IBlockAccess iBlockAccess, int x, int y, int z,
-            int side) {
+    public IIcon getIcon(IBlockAccess iBlockAccess, int x, int y, int z, int side) {
         int direction = getDirection(iBlockAccess, x, y, z);
         int meta = iBlockAccess.getBlockMetadata(x, y, z);
 
@@ -99,10 +93,7 @@ public abstract class BlockWaterPower extends BlockContainer {
         try {
             return textures[index][subIndex];
         } catch (Exception e) {
-            WPLog.err(
-                    "Failed to get texture at: " + x + ", "
-                            + y + ", " + z + "; dir=" + direction + "; side="
-                            + side + "; meta=" + meta);
+            WPLog.err("Failed to get texture at: " + x + ", " + y + ", " + z + "; dir=" + direction + "; side=" + side + "; meta=" + meta);
         }
 
         return null;
@@ -159,8 +150,7 @@ public abstract class BlockWaterPower extends BlockContainer {
         return meta;
     }
 
-    protected int getTextureIndex(IBlockAccess world, int x, int y, int z,
-            int meta) {
+    protected int getTextureIndex(IBlockAccess world, int x, int y, int z, int meta) {
         return meta;
     }
 
@@ -173,10 +163,10 @@ public abstract class BlockWaterPower extends BlockContainer {
     }
 
     @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z,
-            EntityLivingBase entityliving, ItemStack itemStack) {
-        if (WaterPower.isClientSide()) return;
-        
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityliving, ItemStack itemStack) {
+        if (WaterPower.isClientSide())
+            return;
+
         TileEntity tileEntity = world.getTileEntity(x, y, z);
 
         if ((tileEntity instanceof TileEntityBlock)) {
@@ -184,8 +174,7 @@ public abstract class BlockWaterPower extends BlockContainer {
             if (entityliving == null) {
                 te.setDirection(2);
             } else {
-                int l = MathHelper
-                        .floor_double(entityliving.rotationYaw * 4.0F / 360.0F + 0.5D) & 0x3;
+                int l = MathHelper.floor_double(entityliving.rotationYaw * 4.0F / 360.0F + 0.5D) & 0x3;
 
                 switch (l) {
                 case 0:
@@ -207,23 +196,22 @@ public abstract class BlockWaterPower extends BlockContainer {
     @Override
     public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
         TileEntity te = world.getTileEntity(x, y, z);
-        
+
         if (te != null) {
             TEMPORARYTILEENTITY_LOCAL.set(te);
-            if(te instanceof TileEntityInventory) {
+            if (te instanceof TileEntityInventory) {
                 TileEntityInventory t = (TileEntityInventory) te;
-        
+
                 for (int i = 0; i < t.getSizeInventory(); i++) {
                     ItemStack item = t.getStackInSlot(i);
-        
+
                     if ((item != null) && (item.stackSize > 0)) {
                         float rx = Utils.rand.nextFloat() * 0.8F + 0.1F;
                         float ry = Utils.rand.nextFloat() * 0.8F + 0.1F;
                         float rz = Utils.rand.nextFloat() * 0.8F + 0.1F;
-        
-                        EntityItem entityItem = new EntityItem(world, x + rx, y + ry, z
-                                + rz, item.copy());
-        
+
+                        EntityItem entityItem = new EntityItem(world, x + rx, y + ry, z + rz, item.copy());
+
                         float factor = 0.05F;
                         entityItem.motionX = (Utils.rand.nextGaussian() * factor);
                         entityItem.motionY = (Utils.rand.nextGaussian() * factor + 0.2);
@@ -239,14 +227,14 @@ public abstract class BlockWaterPower extends BlockContainer {
     }
 
     @Override
-    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z,
-            int metadata, int fortune) {
+    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
         ArrayList<ItemStack> al = new ArrayList<ItemStack>();
         TileEntity te = world.getTileEntity(x, y, z);
-        if(te == null) te = TEMPORARYTILEENTITY_LOCAL.get();
+        if (te == null)
+            te = TEMPORARYTILEENTITY_LOCAL.get();
         TEMPORARYTILEENTITY_LOCAL.remove();
         if (te instanceof IDroppable) {
-            al.add(((IDroppable)te).getDroppedItemStack());
+            al.add(((IDroppable) te).getDroppedItemStack());
         } else {
             al.addAll(super.getDrops(world, x, y, z, metadata, fortune));
         }
@@ -265,21 +253,18 @@ public abstract class BlockWaterPower extends BlockContainer {
     }
 
     @Override
-    public void onNeighborChange(IBlockAccess world, int x, int y, int z,
-            int tileX, int tileY, int tileZ) {
+    public void onNeighborChange(IBlockAccess world, int x, int y, int z, int tileX, int tileY, int tileZ) {
         TileEntity localTileEntity = world.getTileEntity(x, y, z);
 
         if ((localTileEntity instanceof TileEntityBase)) {
-            ((TileEntityBase) localTileEntity).onNeighborTileChange(tileX,
-                    tileY, tileZ);
+            ((TileEntityBase) localTileEntity).onNeighborTileChange(tileX, tileY, tileZ);
         }
     }
 
     @Override
-    public boolean rotateBlock(World worldObj, int x, int y, int z,
-            ForgeDirection axis) {
+    public boolean rotateBlock(World worldObj, int x, int y, int z, ForgeDirection axis) {
         TileEntity te = worldObj.getTileEntity(x, y, z);
-        if(te != null && te instanceof TileEntityBlock) {
+        if (te != null && te instanceof TileEntityBlock) {
             TileEntityBlock t = (TileEntityBlock) te;
             return t.setDirection(axis.ordinal());
         }
@@ -287,44 +272,40 @@ public abstract class BlockWaterPower extends BlockContainer {
     }
 
     @Override
-    public boolean canCreatureSpawn(EnumCreatureType type, IBlockAccess world,
-            int x, int y, int z) {
+    public boolean canCreatureSpawn(EnumCreatureType type, IBlockAccess world, int x, int y, int z) {
         return false;
     }
 
     @Override
-    public ItemStack getPickBlock(MovingObjectPosition target, World world,
-            int x, int y, int z) {
+    public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
         return new ItemStack(this, 1, world.getBlockMetadata(x, y, z));
     }
 
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z,
-            EntityPlayer entityPlayer, int s, float f1, float f2, float f3) {
-        if(entityPlayer != null) {
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int s, float f1, float f2, float f3) {
+        if (entityPlayer != null) {
             ItemStack is = entityPlayer.inventory.getCurrentItem();
-            if(BuildCraftModule.isWrench(entityPlayer, is, x, y, z)&&entityPlayer.isSneaking()) {
+            if (BuildCraftModule.isWrench(entityPlayer, is, x, y, z) && entityPlayer.isSneaking()) {
                 TileEntity tileEntity = world.getTileEntity(x, y, z);
                 Block b = world.getBlock(x, y, z);
-                if(tileEntity != null && tileEntity instanceof IDroppable) {
+                if (tileEntity != null && tileEntity instanceof IDroppable) {
                     IDroppable te = (IDroppable) tileEntity;
                     ArrayList<ItemStack> drops = b.getDrops(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-                    if(b.removedByPlayer(world, entityPlayer, x, y, z, false)) {
+                    if (b.removedByPlayer(world, entityPlayer, x, y, z, false)) {
                         Utils.dropItems(world, x, y, z, drops);
                     }
                     return false;
                 }
             }
         }
-        
+
         if (entityPlayer.isSneaking())
             return false;
 
         TileEntity te = world.getTileEntity(x, y, z);
 
         if ((te instanceof IHasGui)) {
-            entityPlayer.openGui(WaterPower.instance,
-                    ((IHasGui) te).getGuiId(), world, x, y, z);
+            entityPlayer.openGui(WaterPower.instance, ((IHasGui) te).getGuiId(), world, x, y, z);
             return true;
         }
 

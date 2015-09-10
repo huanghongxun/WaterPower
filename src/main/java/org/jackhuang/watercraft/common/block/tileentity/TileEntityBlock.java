@@ -24,8 +24,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 
 @InterfaceList({ @Interface(iface = "ic2.api.tile.IWrenchable", modid = Mods.IDs.IndustrialCraft2API, striprefs = true) })
-public abstract class TileEntityBlock extends TileEntityLiquidTankInventory
-        implements IWrenchable, IDroppable {
+public abstract class TileEntityBlock extends TileEntityLiquidTankInventory implements IWrenchable, IDroppable {
 
     public TileEntityBlock(int tanksize) {
         super(tanksize);
@@ -92,8 +91,7 @@ public abstract class TileEntityBlock extends TileEntityLiquidTankInventory
             this.lastRenderIcons = new IIcon[6];
 
         for (int side = 0; side < 6; side++) {
-            this.lastRenderIcons[side] = block.getIcon(this.worldObj,
-                    this.xCoord, this.yCoord, this.zCoord, side);
+            this.lastRenderIcons[side] = block.getIcon(this.worldObj, this.xCoord, this.yCoord, this.zCoord, side);
         }
     }
 
@@ -165,8 +163,7 @@ public abstract class TileEntityBlock extends TileEntityLiquidTankInventory
                 needsUpdate = true;
                 sendUpdateToClient();
             } else {
-                this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord,
-                        this.zCoord);
+                this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
             }
         }
 
@@ -187,8 +184,6 @@ public abstract class TileEntityBlock extends TileEntityLiquidTankInventory
 
     @Override
     public ItemStack getDroppedItemStack() {
-        return new ItemStack(this.worldObj.getBlock(this.xCoord, this.yCoord,
-                this.zCoord), 1, this.worldObj.getBlockMetadata(this.xCoord,
-                this.yCoord, this.zCoord));
+        return new ItemStack(this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord), 1, this.worldObj.getBlockMetadata(this.xCoord, this.yCoord, this.zCoord));
     }
 }

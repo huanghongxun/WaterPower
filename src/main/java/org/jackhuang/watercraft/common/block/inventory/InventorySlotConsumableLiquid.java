@@ -15,15 +15,11 @@ import org.jackhuang.watercraft.util.StackUtil;
 public class InventorySlotConsumableLiquid extends InventorySlotConsumable {
     private OpType opType;
 
-    public InventorySlotConsumableLiquid(TileEntityInventory base, String name,
-            int count) {
-        this(base, name, InventorySlot.Access.I, count,
-                InventorySlot.InvSide.TOP, OpType.Both);
+    public InventorySlotConsumableLiquid(TileEntityInventory base, String name, int count) {
+        this(base, name, InventorySlot.Access.I, count, InventorySlot.InvSide.TOP, OpType.Both);
     }
 
-    public InventorySlotConsumableLiquid(TileEntityInventory base, String name,
-            InventorySlot.Access access, int count,
-            InventorySlot.InvSide preferredSide, OpType opType) {
+    public InventorySlotConsumableLiquid(TileEntityInventory base, String name, InventorySlot.Access access, int count, InventorySlot.InvSide preferredSide, OpType opType) {
         super(base, name, access, count, preferredSide);
 
         this.opType = opType;
@@ -38,14 +34,12 @@ public class InventorySlotConsumableLiquid extends InventorySlotConsumable {
             FluidStack containerFluid = null;
 
             if (FluidContainerRegistry.isFilledContainer(stack))
-                containerFluid = FluidContainerRegistry
-                        .getFluidForFilledItem(stack);
+                containerFluid = FluidContainerRegistry.getFluidForFilledItem(stack);
             else if ((item instanceof IFluidContainerItem)) {
                 containerFluid = ((IFluidContainerItem) item).getFluid(stack);
             }
 
-            if ((containerFluid != null) && (containerFluid.amount > 0)
-                    && (acceptsLiquid(containerFluid.getFluid()))) {
+            if ((containerFluid != null) && (containerFluid.amount > 0) && (acceptsLiquid(containerFluid.getFluid()))) {
                 return true;
             }
         }
@@ -56,8 +50,7 @@ public class InventorySlotConsumableLiquid extends InventorySlotConsumable {
                     return true;
                 }
                 for (Fluid fluid : getPossibleFluids()) {
-                    if (FluidContainerRegistry.fillFluidContainer(
-                            new FluidStack(fluid, 1), stack) != null) {
+                    if (FluidContainerRegistry.fillFluidContainer(new FluidStack(fluid, 1), stack) != null) {
                         return true;
                     }
                 }
@@ -65,14 +58,12 @@ public class InventorySlotConsumableLiquid extends InventorySlotConsumable {
                 containerItem = (IFluidContainerItem) item;
                 FluidStack prevFluid = containerItem.getFluid(stack);
 
-                if ((prevFluid == null)
-                        || (containerItem.getCapacity(stack) > prevFluid.amount)) {
+                if ((prevFluid == null) || (containerItem.getCapacity(stack) > prevFluid.amount)) {
                     if (getPossibleFluids() == null) {
                         return true;
                     }
                     for (Fluid fluid : getPossibleFluids()) {
-                        if (containerItem.fill(stack, new FluidStack(fluid, 1),
-                                false) > 0) {
+                        if (containerItem.fill(stack, new FluidStack(fluid, 1), false) > 0) {
                             return true;
                         }
                     }
@@ -84,8 +75,7 @@ public class InventorySlotConsumableLiquid extends InventorySlotConsumable {
         return false;
     }
 
-    public FluidStack drain(Fluid fluid, int maxAmount,
-            MutableObject<ItemStack> output, boolean simulate) {
+    public FluidStack drain(Fluid fluid, int maxAmount, MutableObject<ItemStack> output, boolean simulate) {
         output.setValue(null);
 
         if ((this.opType != OpType.Drain) && (this.opType != OpType.Both))
@@ -96,10 +86,8 @@ public class InventorySlotConsumableLiquid extends InventorySlotConsumable {
             return null;
 
         if (FluidContainerRegistry.isFilledContainer(stack)) {
-            FluidStack fluidStack = FluidContainerRegistry
-                    .getFluidForFilledItem(stack);
-            if ((fluidStack == null)
-                    || ((fluid != null) && (fluid != fluidStack.getFluid())))
+            FluidStack fluidStack = FluidContainerRegistry.getFluidForFilledItem(stack);
+            if ((fluidStack == null) || ((fluid != null) && (fluid != fluidStack.getFluid())))
                 return null;
             if (!acceptsLiquid(fluidStack.getFluid()))
                 return null;
@@ -119,21 +107,18 @@ public class InventorySlotConsumableLiquid extends InventorySlotConsumable {
             return fluidStack;
         }
         if ((stack.getItem() instanceof IFluidContainerItem)) {
-            IFluidContainerItem container = (IFluidContainerItem) stack
-                    .getItem();
+            IFluidContainerItem container = (IFluidContainerItem) stack.getItem();
             if (container.getFluid(stack) == null)
                 return null;
 
-            if ((fluid != null)
-                    && (container.getFluid(stack).getFluid() != fluid))
+            if ((fluid != null) && (container.getFluid(stack).getFluid() != fluid))
                 return null;
             if (!acceptsLiquid(container.getFluid(stack).getFluid()))
                 return null;
 
             ItemStack singleStack = StackUtil.copyWithSize(stack, 1);
 
-            FluidStack fluidStack = container.drain(singleStack, maxAmount,
-                    true);
+            FluidStack fluidStack = container.drain(singleStack, maxAmount, true);
             if ((fluidStack == null) || (fluidStack.amount <= 0))
                 return null;
 
@@ -162,8 +147,7 @@ public class InventorySlotConsumableLiquid extends InventorySlotConsumable {
         return null;
     }
 
-    public int fill(Fluid fluid, int maxAmount,
-            MutableObject<ItemStack> output, boolean simulate) {
+    public int fill(Fluid fluid, int maxAmount, MutableObject<ItemStack> output, boolean simulate) {
         if (fluid == null)
             throw new NullPointerException("fluid is null");
 
@@ -177,8 +161,7 @@ public class InventorySlotConsumableLiquid extends InventorySlotConsumable {
             return 0;
 
         if (FluidContainerRegistry.isEmptyContainer(stack)) {
-            ItemStack filled = FluidContainerRegistry.fillFluidContainer(
-                    new FluidStack(fluid, maxAmount), stack);
+            ItemStack filled = FluidContainerRegistry.fillFluidContainer(new FluidStack(fluid, maxAmount), stack);
             if (filled == null)
                 return 0;
 
@@ -193,19 +176,16 @@ public class InventorySlotConsumableLiquid extends InventorySlotConsumable {
             return FluidContainerRegistry.getFluidForFilledItem(filled).amount;
         }
         if ((stack.getItem() instanceof IFluidContainerItem)) {
-            IFluidContainerItem container = (IFluidContainerItem) stack
-                    .getItem();
+            IFluidContainerItem container = (IFluidContainerItem) stack.getItem();
             ItemStack singleStack = StackUtil.copyWithSize(stack, 1);
 
-            int amount = container.fill(singleStack, new FluidStack(fluid,
-                    maxAmount), true);
+            int amount = container.fill(singleStack, new FluidStack(fluid, maxAmount), true);
             if (amount <= 0)
                 return 0;
 
             assert (singleStack.stackSize == 1);
 
-            if (container.getFluid(singleStack).amount == container
-                    .getCapacity(singleStack)) {
+            if (container.getFluid(singleStack).amount == container.getCapacity(singleStack)) {
                 output.setValue(singleStack);
 
                 if (!simulate)
@@ -226,8 +206,7 @@ public class InventorySlotConsumableLiquid extends InventorySlotConsumable {
         return 0;
     }
 
-    public boolean transferToTank(IFluidTank tank,
-            MutableObject<ItemStack> output, boolean simulate) {
+    public boolean transferToTank(IFluidTank tank, MutableObject<ItemStack> output, boolean simulate) {
         int space = tank.getCapacity();
         Fluid fluidRequired = null;
 
@@ -252,14 +231,12 @@ public class InventorySlotConsumableLiquid extends InventorySlotConsumable {
         return true;
     }
 
-    public boolean transferFromTank(IFluidTank tank,
-            MutableObject<ItemStack> output, boolean simulate) {
+    public boolean transferFromTank(IFluidTank tank, MutableObject<ItemStack> output, boolean simulate) {
         FluidStack tankFluid = tank.drain(tank.getFluidAmount(), false);
         if ((tankFluid == null) || (tankFluid.amount <= 0))
             return false;
 
-        int amount = fill(tankFluid.getFluid(), tankFluid.amount, output,
-                simulate);
+        int amount = fill(tankFluid.getFluid(), tankFluid.amount, output, simulate);
         if (amount <= 0)
             return false;
 

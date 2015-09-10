@@ -291,8 +291,8 @@ item.oreDustManganese.name=Crushed Manganese Ore
 item.oreDustMonazite.name=Crushed Monazite
 item.oreDustMagnet.name=Crushed Magnet Ore
 
-fluid.waterpower.moltenMonazite=Molten Neodymium
-fluid.waterpower.moltenVanadium=Molten Vanadium
-fluid.waterpower.moltenManganese=Molten Manganese
-fluid.waterpower.moltenMagnet=Molten Magnet
-fluid.waterpower.moltenZinc=Molten Zinc
+fluid.waterpower.molten.Monazite=Molten Neodymium
+fluid.waterpower.molten.Vanadium=Molten Vanadium
+fluid.waterpower.molten.Manganese=Molten Manganese
+fluid.waterpower.molten.Magnet=Molten Magnet
+fluid.waterpower.molten.Zinc=Molten Zinc

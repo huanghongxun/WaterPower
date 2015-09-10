@@ -32,31 +32,22 @@ public class HUDHandlerReservoir implements IWailaDataProvider {
 
     @Override
     @Method(modid = Mods.IDs.Waila)
-    public List<String> getWailaBody(ItemStack arg0, List<String> arg1,
-            IWailaDataAccessor arg2, IWailaConfigHandler arg3) {
+    public List<String> getWailaBody(ItemStack arg0, List<String> arg1, IWailaDataAccessor arg2, IWailaConfigHandler arg3) {
         TileEntity te = arg2.getTileEntity();
         if (!(te instanceof TileEntityReservoir))
             return arg1;
         TileEntityReservoir tile = (TileEntityReservoir) te;
-        arg1.add(StatCollector.translateToLocal("cptwtrml.gui.reservoir.add")
-                + ": " + tile.getLastAddedWater());
+        arg1.add(StatCollector.translateToLocal("cptwtrml.gui.reservoir.add") + ": " + tile.getLastAddedWater());
         if (tile.getFluidTank() == null)
             return arg1;
         FluidStack f = tile.getFluidTank().getFluid();
-        arg1.add((f == null ? StatCollector
-                .translateToLocal("cptwtrml.gui.empty") : f.getLocalizedName())
-                + ": "
-                + tile.getFluidAmount()
-                + "/"
-                + tile.getFluidTankCapacity()
-                + "mb");
+        arg1.add((f == null ? StatCollector.translateToLocal("cptwtrml.gui.empty") : f.getLocalizedName()) + ": " + tile.getFluidAmount() + "/" + tile.getFluidTankCapacity() + "mb");
         return arg1;
     }
 
     @Override
     @Method(modid = Mods.IDs.Waila)
-    public List<String> getWailaHead(ItemStack arg0, List<String> arg1,
-            IWailaDataAccessor arg2, IWailaConfigHandler arg3) {
+    public List<String> getWailaHead(ItemStack arg0, List<String> arg1, IWailaDataAccessor arg2, IWailaConfigHandler arg3) {
         TileEntity te = arg2.getTileEntity();
         if (!(te instanceof TileEntityReservoir))
             return arg1;
@@ -67,8 +58,7 @@ public class HUDHandlerReservoir implements IWailaDataProvider {
 
     @Override
     @Method(modid = Mods.IDs.Waila)
-    public ItemStack getWailaStack(IWailaDataAccessor arg0,
-            IWailaConfigHandler arg1) {
+    public ItemStack getWailaStack(IWailaDataAccessor arg0, IWailaConfigHandler arg1) {
         TileEntity te = arg0.getTileEntity();
         if (!(te instanceof TileEntityReservoir))
             return null;
@@ -78,15 +68,13 @@ public class HUDHandlerReservoir implements IWailaDataProvider {
 
     @Override
     @Method(modid = Mods.IDs.Waila)
-    public List<String> getWailaTail(ItemStack arg0, List<String> arg1,
-            IWailaDataAccessor arg2, IWailaConfigHandler arg3) {
+    public List<String> getWailaTail(ItemStack arg0, List<String> arg1, IWailaDataAccessor arg2, IWailaConfigHandler arg3) {
         return arg1;
     }
 
     @Override
     @Method(modid = Mods.IDs.Waila)
-    public NBTTagCompound getNBTData(EntityPlayerMP arg0, TileEntity arg1,
-            NBTTagCompound arg2, World arg3, int arg4, int arg5, int arg6) {
+    public NBTTagCompound getNBTData(EntityPlayerMP arg0, TileEntity arg1, NBTTagCompound arg2, World arg3, int arg4, int arg5, int arg6) {
         return null;
     }
 

@@ -19,17 +19,14 @@ public abstract class ItemMeta extends ItemBlock {
     public ItemMeta(Block id) {
         super(id);
     }
-    
+
     @Override
-    public boolean placeBlockAt(ItemStack aStack, EntityPlayer aPlayer,
-            World aWorld, int aX, int aY, int aZ, int side, float hitX,
-            float hitY, float hitZ, int aMeta) {
+    public boolean placeBlockAt(ItemStack aStack, EntityPlayer aPlayer, World aWorld, int aX, int aY, int aZ, int side, float hitX, float hitY, float hitZ, int aMeta) {
         Block block = Block.getBlockFromItem(this);
         int tDamage = aStack.getItemDamage();
         if (!aWorld.setBlock(aX, aY, aZ, block, 0, 3))
             return false;
-        ITileEntityMeta tTileEntity = (ITileEntityMeta) aWorld
-                .getTileEntity(aX, aY, aZ);
+        ITileEntityMeta tTileEntity = (ITileEntityMeta) aWorld.getTileEntity(aX, aY, aZ);
         if (tTileEntity != null) {
             if (WaterPower.isServerSide())
                 tTileEntity.initNBT(aStack.getTagCompound(), tDamage);
@@ -39,10 +36,8 @@ public abstract class ItemMeta extends ItemBlock {
         }
 
         if (aWorld.getBlock(aX, aY, aZ) == block) {
-            block.onBlockPlacedBy(aWorld, aX, aY, aZ,
-                    aPlayer, aStack);
-            block.onPostBlockPlaced(aWorld, aX, aY,
-                    aZ, tDamage);
+            block.onBlockPlacedBy(aWorld, aX, aY, aZ, aPlayer, aStack);
+            block.onPostBlockPlaced(aWorld, aX, aY, aZ, tDamage);
         }
         return true;
     }

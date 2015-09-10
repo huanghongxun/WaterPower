@@ -48,14 +48,12 @@ public class TileEntityBase extends TileEntity {
     }
 
     public boolean isRedstonePowered() {
-        return this.worldObj.isBlockIndirectlyGettingPowered(this.xCoord,
-                this.yCoord, this.zCoord);
+        return this.worldObj.isBlockIndirectlyGettingPowered(this.xCoord, this.yCoord, this.zCoord);
     }
 
     public void notifyNeighborTileChange() {
         if (getBlockType() != null) {
-            this.worldObj.func_147453_f(this.xCoord, this.yCoord, this.zCoord,
-                    getBlockType());
+            this.worldObj.func_147453_f(this.xCoord, this.yCoord, this.zCoord, getBlockType());
         }
     }
 

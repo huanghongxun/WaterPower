@@ -9,9 +9,10 @@ import net.minecraft.nbt.NBTTagCompound;
 public class MyRecipeOutput {
     public MyRecipeOutput(int power, List<ItemStack> items1) {
         this.items = items1;
-        
+
         this.power = power;
     }
+
     public MyRecipeOutput(List<ItemStack> items1) {
         this(-1, items1);
     }

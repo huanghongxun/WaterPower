@@ -19,20 +19,20 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockTurbine extends BlockRotor {
-    
+
     public BlockTurbine() {
         super("cptBlockTurbine", Material.iron, ItemTurbine.class);
-        
-        GameRegistry.registerTileEntity(TileEntityTurbine.class,
-                "cptwtrml.turbine");
+
+        GameRegistry.registerTileEntity(TileEntityTurbine.class, "cptwtrml.turbine");
     }
-    
+
     @Override
     protected int getTextureIndex(IBlockAccess iBlockAccess, int x, int y, int z, int meta) {
         TileEntity tTileEntity = iBlockAccess.getTileEntity(x, y, z);
-        if(tTileEntity instanceof TileEntityTurbine) {
-            if(((TileEntityTurbine)tTileEntity).getType() == null) return meta;
-            return ((TileEntityTurbine)tTileEntity).getType().ordinal();
+        if (tTileEntity instanceof TileEntityTurbine) {
+            if (((TileEntityTurbine) tTileEntity).getType() == null)
+                return meta;
+            return ((TileEntityTurbine) tTileEntity).getType().ordinal();
         }
         return meta;
     }
@@ -40,26 +40,26 @@ public class BlockTurbine extends BlockRotor {
     @Override
     public void registerBlockIcons(IIconRegister iconRegister) {
         textures = new IIcon[maxMetaData()][6];
-        
+
         IIcon iconNorth = iconRegister.registerIcon(Reference.ModID + ":turbine/BACK");
         IIcon iconDown = iconRegister.registerIcon(Reference.ModID + ":turbine/DOWN");
         IIcon iconSide = iconRegister.registerIcon(Reference.ModID + ":turbine/SIDE");
         IIcon iconSouth = iconRegister.registerIcon(Reference.ModID + ":turbine/SOUTH");
-        
+
         for (int i = 0; i < maxMetaData(); i++) {
             textures[i][0] = iconDown;
-            textures[i][3] = 
-                    iconRegister.registerIcon(Reference.ModID + ":turbine/SOUTH_" + getTextureName(i));;
+            textures[i][3] = iconRegister.registerIcon(Reference.ModID + ":turbine/SOUTH_" + getTextureName(i));
+            ;
             textures[i][5] = iconNorth;
             textures[i][1] = textures[i][4] = textures[i][2] = iconSide;
         }
     }
-    
+
     @Override
     public TileEntity createNewTileEntity(World world, int var2) {
         return new TileEntityTurbine();
     }
-    
+
     @Override
     public TileEntity createTileEntity(World world, int metadata) {
         return new TileEntityTurbine();
@@ -75,13 +75,12 @@ public class BlockTurbine extends BlockRotor {
         return TurbineType.values().length;
     }
 
-    public ArrayList<String> getDebugInfo(EntityPlayer aPlayer, int aX, int aY,
-            int aZ, int aLogLevel) {
+    public ArrayList<String> getDebugInfo(EntityPlayer aPlayer, int aX, int aY, int aZ, int aLogLevel) {
         ArrayList<String> al = new ArrayList<String>();
         TileEntity tileEntity = aPlayer.worldObj.getTileEntity(aX, aY, aZ);
-        if(tileEntity instanceof TileEntityTurbine) {
+        if (tileEntity instanceof TileEntityTurbine) {
             TileEntityTurbine te = (TileEntityTurbine) tileEntity;
-            if(te.getType() == null)
+            if (te.getType() == null)
                 al.add("Type: null");
             else
                 al.add("Type: " + te.getType().name());

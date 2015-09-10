@@ -16,11 +16,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class CreativeTabWaterCraft extends CreativeTabs {
-    
+
     public CreativeTabWaterCraft(String name) {
         super(name);
     }
-    
+
     @Override
     public ItemStack getIconItemStack() {
         return new ItemStack(GlobalBlocks.waterMill);
@@ -30,5 +30,5 @@ public class CreativeTabWaterCraft extends CreativeTabs {
     public Item getTabIconItem() {
         return Item.getItemFromBlock(GlobalBlocks.waterMill);
     }
-    
+
 }

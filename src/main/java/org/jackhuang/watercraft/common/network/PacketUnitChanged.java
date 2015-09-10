@@ -12,14 +12,13 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
-public class PacketUnitChanged
-    implements IMessage, IMessageHandler<PacketUnitChanged, IMessage> {
+public class PacketUnitChanged implements IMessage, IMessageHandler<PacketUnitChanged, IMessage> {
     private int dim, x, y, z, unitId;
-    
-    public PacketUnitChanged() {}
 
-    public PacketUnitChanged(int dim, int x, int y, int z,
-            int unitId) {
+    public PacketUnitChanged() {
+    }
+
+    public PacketUnitChanged(int dim, int x, int y, int z, int unitId) {
         super();
         this.dim = dim;
         this.x = x;
@@ -29,11 +28,10 @@ public class PacketUnitChanged
     }
 
     @Override
-    public IMessage onMessage(PacketUnitChanged message,
-            MessageContext ctx) {
+    public IMessage onMessage(PacketUnitChanged message, MessageContext ctx) {
         World world = DimensionManager.getWorld(message.dim);
         TileEntity te = world.getTileEntity(message.x, message.y, message.z);
-        if(te instanceof IUnitChangeable) {
+        if (te instanceof IUnitChangeable) {
             IUnitChangeable tebg = (IUnitChangeable) te;
             tebg.setUnitId(message.unitId);
         }

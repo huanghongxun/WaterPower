@@ -60,8 +60,7 @@ public class ReflectionUtil {
         }
     }
 
-    public static Object getValueRecursive(Object object, String fieldName)
-            throws NoSuchFieldException {
+    public static Object getValueRecursive(Object object, String fieldName) throws NoSuchFieldException {
         Field field = getFieldRecursive(object.getClass(), fieldName);
         if (field == null)
             throw new NoSuchFieldException(fieldName);
@@ -74,8 +73,7 @@ public class ReflectionUtil {
         }
     }
 
-    public static Method getMethod(Class<?> clazz, String[] names,
-            Class<?>[] parameterTypes) {
+    public static Method getMethod(Class<?> clazz, String[] names, Class<?>[] parameterTypes) {
         for (String name : names) {
             try {
                 Method ret = clazz.getDeclaredMethod(name, parameterTypes);

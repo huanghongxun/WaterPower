@@ -12,8 +12,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
 public class BuildCraftModule extends BaseModule {
-    public static boolean isWrench(EntityPlayer player, ItemStack is, int x,
-            int y, int z) {
+    public static boolean isWrench(EntityPlayer player, ItemStack is, int x, int y, int z) {
         if (is != null) {
             try {
                 if (is.getItem() instanceof IToolWrench) {

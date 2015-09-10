@@ -23,15 +23,14 @@ public class Pair {
         this.k = k;
         this.t = t;
     }
-    
+
     public void clear() {
         k = t = 0;
     }
-    
+
     public void add(Pair p2) {
         this.k += p2.k;
         this.t += p2.t;
     }
-    
 
 }

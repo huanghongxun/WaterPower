@@ -11,11 +11,11 @@ public class RotorInventorySlot extends InventorySlot {
     public RotorInventorySlot(TileEntityInventory base) {
         this(base, 1);
     }
-    
+
     public RotorInventorySlot(TileEntityInventory base, int count) {
         super(base, "rotor", Access.IO, count);
     }
-    
+
     @Override
     public boolean accepts(ItemStack itemStack) {
         if (itemStack == null) {

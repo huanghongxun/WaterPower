@@ -7,7 +7,7 @@ import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
 
 public class MessagePacketHandler {
-    
+
     public static final SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.ModName.toLowerCase());
 
     public static void init() {
@@ -16,5 +16,5 @@ public class MessagePacketHandler {
         INSTANCE.registerMessage(PacketUnitChanged.class, PacketUnitChanged.class, idx++, Side.SERVER);
         INSTANCE.registerMessage(PacketTileEntity.class, PacketTileEntity.class, idx++, Side.CLIENT);
     }
-    
+
 }

@@ -23,17 +23,10 @@ public class ExNihiloModule extends BaseModule {
     @Override
     public void postInit() {
         for (OreType o : OreType.values()) {
-            SieveRegistry.register(Blocks.gravel, 0, GlobalItems.meterial,
-                    ItemMaterial.get(o.t, MaterialForms.dustSmall)
-                            .getItemDamage(), 48);
-            SieveRegistry.register(Blocks.sand, 0, GlobalItems.oreDust,
-                    o.ordinal(), 48);
-            HammerRegistry.register(GlobalBlocks.ore, o.ordinal(),
-                    GlobalItems.meterial,
-                    ItemMaterial.get(o.t, MaterialForms.dust).getItemDamage(), 1, 0);
-            HammerRegistry.register(GlobalBlocks.ore, o.ordinal(),
-                    GlobalItems.meterial,
-                    ItemMaterial.get(o.t, MaterialForms.dust).getItemDamage(), 1, 0);
+            SieveRegistry.register(Blocks.gravel, 0, GlobalItems.meterial, ItemMaterial.get(o.t, MaterialForms.dustSmall).getItemDamage(), 48);
+            SieveRegistry.register(Blocks.sand, 0, GlobalItems.oreDust, o.ordinal(), 48);
+            HammerRegistry.register(GlobalBlocks.ore, o.ordinal(), GlobalItems.meterial, ItemMaterial.get(o.t, MaterialForms.dust).getItemDamage(), 1, 0);
+            HammerRegistry.register(GlobalBlocks.ore, o.ordinal(), GlobalItems.meterial, ItemMaterial.get(o.t, MaterialForms.dust).getItemDamage(), 1, 0);
         }
     }
 

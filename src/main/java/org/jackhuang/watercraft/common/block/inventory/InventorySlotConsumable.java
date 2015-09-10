@@ -11,44 +11,31 @@ import net.minecraft.item.ItemStack;
 public abstract class InventorySlotConsumable extends InventorySlot {
     private static final Random random = new Random();
 
-    public InventorySlotConsumable(TileEntityInventory base, String name,
-            int count) {
-        super(base, name, InventorySlot.Access.I, count,
-                InventorySlot.InvSide.TOP);
+    public InventorySlotConsumable(TileEntityInventory base, String name, int count) {
+        super(base, name, InventorySlot.Access.I, count, InventorySlot.InvSide.TOP);
     }
 
-    public InventorySlotConsumable(TileEntityInventory base, String name,
-            InventorySlot.Access access, int count,
-            InventorySlot.InvSide preferredSide) {
+    public InventorySlotConsumable(TileEntityInventory base, String name, InventorySlot.Access access, int count, InventorySlot.InvSide preferredSide) {
         super(base, name, access, count, preferredSide);
     }
 
     public abstract boolean accepts(ItemStack paramItemStack);
 
     public boolean canOutput() {
-        return (super.canOutput())
-                || ((this.access != InventorySlot.Access.NONE)
-                        && (get() != null) && (!accepts(get())));
+        return (super.canOutput()) || ((this.access != InventorySlot.Access.NONE) && (get() != null) && (!accepts(get())));
     }
 
     public ItemStack consume(int amount) {
         return consume(amount, false, false);
     }
 
-    public ItemStack consume(int amount, boolean simulate,
-            boolean consumeContainers) {
+    public ItemStack consume(int amount, boolean simulate, boolean consumeContainers) {
         ItemStack ret = null;
 
         for (int i = 0; i < size(); i++) {
             ItemStack itemStack = get(i);
 
-            if ((itemStack == null)
-                    || (itemStack.stackSize < 1)
-                    || (!accepts(itemStack))
-                    || ((ret != null) && (!StackUtil.isStackEqual(itemStack,
-                            ret)))
-                    || ((itemStack.stackSize != 1) && (!consumeContainers) && (itemStack
-                            .getItem().hasContainerItem()))) {
+            if ((itemStack == null) || (itemStack.stackSize < 1) || (!accepts(itemStack)) || ((ret != null) && (!StackUtil.isStackEqual(itemStack, ret))) || ((itemStack.stackSize != 1) && (!consumeContainers) && (itemStack.getItem().hasContainerItem()))) {
                 continue;
             }
 
@@ -58,11 +45,8 @@ public abstract class InventorySlotConsumable extends InventorySlot {
 
             if (!simulate) {
                 if (itemStack.stackSize == currentAmount) {
-                    if ((!consumeContainers)
-                            && (itemStack.getItem().hasContainerItem()))
-                        put(i,
-                                itemStack.getItem().getContainerItem(
-                                        itemStack));
+                    if ((!consumeContainers) && (itemStack.getItem().hasContainerItem()))
+                        put(i, itemStack.getItem().getContainerItem(itemStack));
                     else
                         put(i, null);
                 } else {
@@ -94,15 +78,10 @@ public abstract class InventorySlotConsumable extends InventorySlot {
         for (int i = 0; i < size(); i++) {
             ItemStack itemStack = get(i);
 
-            if ((itemStack == null)
-                    || (!accepts(itemStack))
-                    || (!itemStack.getItem().isDamageable())
-                    || ((ret != null) && ((itemStack.getItem() != ret.getItem()) || (!ItemStack
-                            .areItemStackTagsEqual(itemStack, ret))))) {
+            if ((itemStack == null) || (!accepts(itemStack)) || (!itemStack.getItem().isDamageable()) || ((ret != null) && ((itemStack.getItem() != ret.getItem()) || (!ItemStack.areItemStackTagsEqual(itemStack, ret))))) {
                 continue;
             }
-            int currentAmount = Math.min(amount, itemStack.getMaxDamage()
-                    - itemStack.getItemDamage());
+            int currentAmount = Math.min(amount, itemStack.getMaxDamage() - itemStack.getItemDamage());
 
             damageApplied += currentAmount;
             amount -= currentAmount;

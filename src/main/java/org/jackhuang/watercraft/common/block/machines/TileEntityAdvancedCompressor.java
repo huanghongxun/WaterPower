@@ -16,17 +16,16 @@ import org.jackhuang.watercraft.util.StackUtil;
 public class TileEntityAdvancedCompressor extends TileEntityStandardWaterMachine {
 
     public TileEntityAdvancedCompressor() {
-        super(5000, 64*20);
+        super(5000, 64 * 20);
 
-        /*if(Mods.GregTech.isAvailable) {
-            this.inputSlot = new InventorySlotProcessableGreg(this, "input",
-                    2, MyRecipes.implosion_gt, GT_Recipe_Map.sImplosionRecipes);
-        }
-        else*/
-            this.inputSlot = new InventorySlotProcessableGeneric(this, "input",
-                    1, MyRecipes.implosion);
+        /*
+         * if(Mods.GregTech.isAvailable) { this.inputSlot = new
+         * InventorySlotProcessableGreg(this, "input", 2,
+         * MyRecipes.implosion_gt, GT_Recipe_Map.sImplosionRecipes); } else
+         */
+        this.inputSlot = new InventorySlotProcessableGeneric(this, "input", 1, MyRecipes.implosion);
     }
-    
+
     public static void init() {
         MyRecipes.implosion = new MultiRecipeManager();
     }
@@ -40,30 +39,33 @@ public class TileEntityAdvancedCompressor extends TileEntityStandardWaterMachine
     public int getGuiId() {
         return DefaultGuiIds.get("tileEntityAdvancedCompressor");
     }
-    
+
     @Override
     public void markDirty() {
-        if(!inputSlot.isEmpty()) {
-            InventorySlotProcessableGeneric generic = (InventorySlotProcessableGeneric)inputSlot;
-            /*if(generic instanceof InventorySlotProcessableGreg) {
-                GT_Recipe recipe = ((InventorySlotProcessableGreg)generic).getGTRecipeOutput();
-                if(recipe == null) operationLength = 1;
-                else defaultOperationLength = recipe.mInputs[1].stackSize * 20;
-            }*/
+        if (!inputSlot.isEmpty()) {
+            InventorySlotProcessableGeneric generic = (InventorySlotProcessableGeneric) inputSlot;
+            /*
+             * if(generic instanceof InventorySlotProcessableGreg) { GT_Recipe
+             * recipe =
+             * ((InventorySlotProcessableGreg)generic).getGTRecipeOutput();
+             * if(recipe == null) operationLength = 1; else
+             * defaultOperationLength = recipe.mInputs[1].stackSize * 20; }
+             */
         }
-        
+
         super.markDirty();
     }
-    
+
     @Override
     public void updateEntity() {
         super.updateEntity();
-        
-        /*if(Mods.GregTech.isAvailable) {
-            InventorySlotProcessableGreg greg = ((InventorySlotProcessableGreg)inputSlot);
-            if(greg.get(1) == null || greg.get(1).stackSize < 64)
-                greg.put(1, StackUtil.copyWithSize(IC2Items.getItem("industrialTnt"), 64));
-        }*/
+
+        /*
+         * if(Mods.GregTech.isAvailable) { InventorySlotProcessableGreg greg =
+         * ((InventorySlotProcessableGreg)inputSlot); if(greg.get(1) == null ||
+         * greg.get(1).stackSize < 64) greg.put(1,
+         * StackUtil.copyWithSize(IC2Items.getItem("industrialTnt"), 64)); }
+         */
     }
 
 }

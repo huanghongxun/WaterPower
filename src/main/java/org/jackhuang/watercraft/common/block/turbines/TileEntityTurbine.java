@@ -96,27 +96,23 @@ public class TileEntityTurbine extends TileEntityRotor {
         case 2:
             // z+1
             if (Reservoir.isRes(world, x, y, z + 1)) {
-                reservoir = (TileEntityReservoir) world.getTileEntity(x, y,
-                        z + 1);
+                reservoir = (TileEntityReservoir) world.getTileEntity(x, y, z + 1);
             }
             break;
         case 5:
             // x-1
             if (Reservoir.isRes(world, x - 1, y, z))
-                reservoir = (TileEntityReservoir) world.getTileEntity(x - 1, y,
-                        z);
+                reservoir = (TileEntityReservoir) world.getTileEntity(x - 1, y, z);
             break;
         case 3:
             // z-1
             if (Reservoir.isRes(world, x, y, z - 1))
-                reservoir = (TileEntityReservoir) world.getTileEntity(x, y,
-                        z - 1);
+                reservoir = (TileEntityReservoir) world.getTileEntity(x, y, z - 1);
             break;
         case 4:
             // x+1
             if (Reservoir.isRes(world, x + 1, y, z))
-                reservoir = (TileEntityReservoir) world.getTileEntity(x + 1, y,
-                        z);
+                reservoir = (TileEntityReservoir) world.getTileEntity(x + 1, y, z);
             break;
         }
         return reservoir;
@@ -149,12 +145,7 @@ public class TileEntityTurbine extends TileEntityRotor {
             int multiple = 0;
             if (pair.getFluidfromTank() == FluidRegistry.WATER)
                 multiple = 1;
-            else if (FluidRegistry.isFluidRegistered("steam")
-                    && pair.getFluidfromTank() == FluidRegistry
-                            .getFluid("steam")
-                    || FluidRegistry.isFluidRegistered("ic2steam")
-                    && pair.getFluidfromTank() == FluidRegistry
-                            .getFluid("ic2steam"))
+            else if (FluidRegistry.isFluidRegistered("steam") && pair.getFluidfromTank() == FluidRegistry.getFluid("steam") || FluidRegistry.isFluidRegistered("ic2steam") && pair.getFluidfromTank() == FluidRegistry.getFluid("ic2steam"))
                 multiple = 5;
             if (multiple == 0)
                 return 0;
@@ -196,7 +187,7 @@ public class TileEntityTurbine extends TileEntityRotor {
     public boolean isActive() {
         return super.isActive() && (storage < maxStorage);
     }
-    
+
     @Override
     protected boolean allowedSendPacketTank() {
         return false;

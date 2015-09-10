@@ -31,8 +31,7 @@ public class GuiReservoir extends GuiContainer {
     protected void drawGuiContainerBackgroundLayer(float f, int i, int j) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        mc.renderEngine.bindTexture(new ResourceLocation(Reference.ModID
-                + ":textures/gui/GUIReservoir.png"));
+        mc.renderEngine.bindTexture(new ResourceLocation(Reference.ModID + ":textures/gui/GUIReservoir.png"));
         int l = (width - xSize) / 2;
         int i1 = (height - ySize) / 2;
         drawTexturedModalRect(l, i1, 0, 0, xSize, ySize);
@@ -43,24 +42,24 @@ public class GuiReservoir extends GuiContainer {
         fontRendererObj.drawString(gen.getInventoryName(), 8, 6, 0x404040);
         fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 0x404040);
         fontRendererObj.drawString(StatCollector.translateToLocal("cptwtrml.gui.reservoir.add") + ": " + gen.getLastAddedWater(), 12, 20, 0x404040);
-        
+
         FluidStack f = gen.getFluidStackfromTank();
-        
+
         IIcon fluid = RenderUtils.getFluidTexture(gen.getFluidfromTank(), false);
-        if(fluid == null) return;
-        float percent = (float)gen.getFluidAmount() / gen.getFluidTankCapacity();
+        if (fluid == null)
+            return;
+        float percent = (float) gen.getFluidAmount() / gen.getFluidTankCapacity();
         mc.renderEngine.bindTexture(RenderUtils.getFluidSheet(gen.getFluidfromTank()));
-        
+
         GL11.glColor4f(1, 1, 1, 1);
-        int h = (int)(13.0 * percent);
-        drawTexturedModelRectFromIcon(82, 49 - h, fluid, 12, h); 
+        int h = (int) (13.0 * percent);
+        drawTexturedModelRectFromIcon(82, 49 - h, fluid, 12, h);
 
         int l = (width - xSize) / 2;
         int i1 = (height - ySize) / 2;
         int x = par1 - l, y = par2 - i1;
-        if(x >= 82 && x <= 93 && y >= 36 && y <= 48) {
-            drawHoveringText(ImmutableList.of((f == null ? StatCollector.translateToLocal("cptwtrml.gui.empty") : f.getLocalizedName()),
-                    gen.getFluidAmount() + "/" + gen.getFluidTankCapacity() + "mb"), x, y, fontRendererObj);
+        if (x >= 82 && x <= 93 && y >= 36 && y <= 48) {
+            drawHoveringText(ImmutableList.of((f == null ? StatCollector.translateToLocal("cptwtrml.gui.empty") : f.getLocalizedName()), gen.getFluidAmount() + "/" + gen.getFluidTankCapacity() + "mb"), x, y, fontRendererObj);
         }
     }
 }

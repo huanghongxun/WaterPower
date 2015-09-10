@@ -30,8 +30,7 @@ public class Reference {
      * Generate Ores in World.
      */
     public static class WorldGen {
-        public static boolean vanadiumOre = true, manganeseOre = true,
-                monaziteOre = true, magnetOre = true, zincOre = true;
+        public static boolean vanadiumOre = true, manganeseOre = true, monaziteOre = true, magnetOre = true, zincOre = true;
 
         public static float oreDensityFactor = 1;
 
@@ -53,8 +52,7 @@ public class Reference {
      * Energy to Water mills.
      */
     public static class Energy {
-        public static double mj = 2.5, rf = 0.12, charge = 0.1, ku = 0.25,
-                hu = 1, steam = 0.1, water = 0.01;
+        public static double mj = 2.5, rf = 0.12, charge = 0.1, ku = 0.25, hu = 1, steam = 0.1, water = 0.01;
 
         static void initConfig(Configuration config) {
             Property p = config.get("energy", "mj", mj);

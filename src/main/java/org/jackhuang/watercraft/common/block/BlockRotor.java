@@ -17,8 +17,7 @@ public abstract class BlockRotor extends BlockMeta {
     }
 
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z,
-            EntityPlayer entityPlayer, int s, float f1, float f2, float f3) {
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int s, float f1, float f2, float f3) {
         TileEntity te = world.getTileEntity(x, y, z);
         if (te instanceof TileEntityRotor) {
             TileEntityRotor ter = (TileEntityRotor) te;
@@ -27,7 +26,8 @@ public abstract class BlockRotor extends BlockMeta {
             if (is != null && is.getItem() instanceof ItemRotor) {
                 ter.slotRotor.put(is);
                 int id = entityPlayer.inventory.currentItem;
-                if(0 <= id && id < 9) entityPlayer.inventory.mainInventory[id] = null;
+                if (0 <= id && id < 9)
+                    entityPlayer.inventory.mainInventory[id] = null;
                 if (now != null)
                     entityPlayer.inventory.addItemStackToInventory(now);
                 return true;
@@ -37,7 +37,6 @@ public abstract class BlockRotor extends BlockMeta {
                     entityPlayer.inventory.addItemStackToInventory(now);
             }
         }
-        return super.onBlockActivated(world, x, y, z, entityPlayer, s, f1, f2,
-                f3);
+        return super.onBlockActivated(world, x, y, z, entityPlayer, s, f1, f2, f3);
     }
 }

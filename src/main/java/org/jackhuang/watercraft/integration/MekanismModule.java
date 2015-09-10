@@ -20,8 +20,7 @@ import cpw.mods.fml.common.event.FMLInterModComms;
 
 public class MekanismModule extends BaseModule {
 
-    public static void metallurgicInfuser(String infuse, int amount,
-            ItemStack input, ItemStack output) {
+    public static void metallurgicInfuser(String infuse, int amount, ItemStack input, ItemStack output) {
         NBTTagCompound sendTag = convertToSimpleRecipe(input, output);
         sendTag.setString("infuseType", infuse);
         sendTag.setInteger("infuseAmount", amount);

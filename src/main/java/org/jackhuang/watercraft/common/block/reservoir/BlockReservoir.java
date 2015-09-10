@@ -34,23 +34,19 @@ public class BlockReservoir extends BlockRotor {
 
         registerReservoir();
 
-        GameRegistry.registerTileEntity(TileEntityReservoir.class,
-                "cptwtrml.reservoir");
+        GameRegistry.registerTileEntity(TileEntityReservoir.class, "cptwtrml.reservoir");
     }
 
     @Override
     public void registerBlockIcons(IIconRegister iconRegister) {
         textures = new IIcon[maxMetaData()][6];
         for (int i = 0; i < maxMetaData(); i++) {
-            textures[i][0] = textures[i][1] = textures[i][2] = textures[i][3] = textures[i][4] = textures[i][5] = iconRegister
-                    .registerIcon(Reference.ModID + ":reservoir/"
-                            + ReservoirType.values()[i].name());
+            textures[i][0] = textures[i][1] = textures[i][2] = textures[i][3] = textures[i][4] = textures[i][5] = iconRegister.registerIcon(Reference.ModID + ":reservoir/" + ReservoirType.values()[i].name());
         }
     }
 
     @Override
-    protected int getTextureIndex(IBlockAccess iBlockAccess, int x, int y,
-            int z, int meta) {
+    protected int getTextureIndex(IBlockAccess iBlockAccess, int x, int y, int z, int meta) {
         TileEntity tTileEntity = iBlockAccess.getTileEntity(x, y, z);
         if (tTileEntity instanceof TileEntityReservoir) {
             TileEntityReservoir te = (TileEntityReservoir) tTileEntity;
@@ -81,52 +77,35 @@ public class BlockReservoir extends BlockRotor {
     }
 
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z,
-            EntityPlayer entityplayer, int s, float f1, float f2, float f3) {
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityplayer, int s, float f1, float f2, float f3) {
         ItemStack current = entityplayer.inventory.getCurrentItem();
         if (current != null) {
             TileEntity tile = world.getTileEntity(x, y, z);
 
             if ((tile instanceof TileEntityReservoir)) {
                 TileEntityReservoir reservoir = (TileEntityReservoir) tile;
-                
-                if(current.getItem() instanceof ItemReservoir) {
-                    if(reservoir.type != null && current.getItemDamage() == reservoir.type.ordinal()) {
+
+                if (current.getItem() instanceof ItemReservoir) {
+                    if (reservoir.type != null && current.getItemDamage() == reservoir.type.ordinal()) {
                         return false;
                     }
                 }
 
                 if (FluidContainerRegistry.isContainer(current)) {
-                    FluidStack liquid = FluidContainerRegistry
-                            .getFluidForFilledItem(current);
+                    FluidStack liquid = FluidContainerRegistry.getFluidForFilledItem(current);
 
                     if (liquid != null) {
-                        int qty = reservoir.fill(ForgeDirection.UNKNOWN,
-                                liquid, true);
+                        int qty = reservoir.fill(ForgeDirection.UNKNOWN, liquid, true);
 
-                        if ((qty != 0)
-                                && (!entityplayer.capabilities.isCreativeMode)) {
+                        if ((qty != 0) && (!entityplayer.capabilities.isCreativeMode)) {
                             if (current.stackSize > 1) {
-                                if (!entityplayer.inventory
-                                        .addItemStackToInventory(FluidContainerRegistry
-                                                .drainFluidContainer(current))) {
-                                    entityplayer
-                                            .dropPlayerItemWithRandomChoice(
-                                                    FluidContainerRegistry
-                                                            .drainFluidContainer(current),
-                                                    false);
+                                if (!entityplayer.inventory.addItemStackToInventory(FluidContainerRegistry.drainFluidContainer(current))) {
+                                    entityplayer.dropPlayerItemWithRandomChoice(FluidContainerRegistry.drainFluidContainer(current), false);
                                 }
 
-                                entityplayer.inventory
-                                        .setInventorySlotContents(
-                                                entityplayer.inventory.currentItem,
-                                                StackUtil.consumeItem(current));
+                                entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, StackUtil.consumeItem(current));
                             } else {
-                                entityplayer.inventory
-                                        .setInventorySlotContents(
-                                                entityplayer.inventory.currentItem,
-                                                FluidContainerRegistry
-                                                        .drainFluidContainer(current));
+                                entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, FluidContainerRegistry.drainFluidContainer(current));
                             }
                         }
 
@@ -136,37 +115,24 @@ public class BlockReservoir extends BlockRotor {
                     FluidStack available = reservoir.getFluidStackfromTank();
 
                     if (available != null) {
-                        ItemStack filled = FluidContainerRegistry
-                                .fillFluidContainer(available, current);
+                        ItemStack filled = FluidContainerRegistry.fillFluidContainer(available, current);
 
-                        liquid = FluidContainerRegistry
-                                .getFluidForFilledItem(filled);
+                        liquid = FluidContainerRegistry.getFluidForFilledItem(filled);
 
                         if (liquid != null) {
                             if (!entityplayer.capabilities.isCreativeMode) {
                                 if (current.stackSize > 1) {
-                                    if (!entityplayer.inventory
-                                            .addItemStackToInventory(filled)) {
+                                    if (!entityplayer.inventory.addItemStackToInventory(filled)) {
                                         return false;
                                     }
-                                    entityplayer.inventory
-                                            .setInventorySlotContents(
-                                                    entityplayer.inventory.currentItem,
-                                                    StackUtil.consumeItem(current));
+                                    entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, StackUtil.consumeItem(current));
                                 } else {
-                                    entityplayer.inventory
-                                            .setInventorySlotContents(
-                                                    entityplayer.inventory.currentItem,
-                                                    StackUtil.consumeItem(current));
-                                    entityplayer.inventory
-                                            .setInventorySlotContents(
-                                                    entityplayer.inventory.currentItem,
-                                                    filled);
+                                    entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, StackUtil.consumeItem(current));
+                                    entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, filled);
                                 }
                             }
 
-                            reservoir.drain(ForgeDirection.UNKNOWN, liquid.amount,
-                                    true);
+                            reservoir.drain(ForgeDirection.UNKNOWN, liquid.amount, true);
 
                             return true;
                         }
@@ -177,30 +143,19 @@ public class BlockReservoir extends BlockRotor {
                     }
 
                     if (!world.isRemote) {
-                        IFluidContainerItem container = (IFluidContainerItem) current
-                                .getItem();
+                        IFluidContainerItem container = (IFluidContainerItem) current.getItem();
                         FluidStack liquid = container.getFluid(current);
-                        FluidStack tankLiquid = reservoir
-                                .getFluidStackfromTank();
-                        boolean mustDrain = (liquid == null)
-                                || (liquid.amount == 0);
-                        boolean mustFill = (tankLiquid == null)
-                                || (tankLiquid.amount == 0);
+                        FluidStack tankLiquid = reservoir.getFluidStackfromTank();
+                        boolean mustDrain = (liquid == null) || (liquid.amount == 0);
+                        boolean mustFill = (tankLiquid == null) || (tankLiquid.amount == 0);
                         if ((!mustDrain) || (!mustFill)) {
                             if ((mustDrain) || (!entityplayer.isSneaking())) {
-                                liquid = reservoir.drain(
-                                        ForgeDirection.UNKNOWN, 1000, false);
-                                int qtyToFill = container.fill(current, liquid,
-                                        true);
-                                reservoir.drain(ForgeDirection.UNKNOWN,
-                                        qtyToFill, true);
-                            } else if (((mustFill) || (entityplayer
-                                    .isSneaking())) && (liquid.amount > 0)) {
-                                int qty = reservoir.fill(
-                                        ForgeDirection.UNKNOWN, liquid, false);
-                                reservoir.fill(ForgeDirection.UNKNOWN,
-                                        container.drain(current, qty, true),
-                                        true);
+                                liquid = reservoir.drain(ForgeDirection.UNKNOWN, 1000, false);
+                                int qtyToFill = container.fill(current, liquid, true);
+                                reservoir.drain(ForgeDirection.UNKNOWN, qtyToFill, true);
+                            } else if (((mustFill) || (entityplayer.isSneaking())) && (liquid.amount > 0)) {
+                                int qty = reservoir.fill(ForgeDirection.UNKNOWN, liquid, false);
+                                reservoir.fill(ForgeDirection.UNKNOWN, container.drain(current, qty, true), true);
                             }
                         }
                     }
@@ -212,12 +167,10 @@ public class BlockReservoir extends BlockRotor {
 
         }
 
-        return super.onBlockActivated(world, x, y, z, entityplayer, s, f1, f2,
-                f3);
+        return super.onBlockActivated(world, x, y, z, entityplayer, s, f1, f2, f3);
     }
 
-    public ArrayList<String> getDebugInfo(EntityPlayer aPlayer, int aX, int aY,
-            int aZ, int aLogLevel) {
+    public ArrayList<String> getDebugInfo(EntityPlayer aPlayer, int aX, int aY, int aZ, int aLogLevel) {
         ArrayList<String> al = new ArrayList<String>();
         TileEntity tileEntity = aPlayer.worldObj.getTileEntity(aX, aY, aZ);
         if (tileEntity instanceof TileEntityReservoir) {
@@ -249,18 +202,12 @@ public class BlockReservoir extends BlockRotor {
         addReservoirRecipe(new ItemStack(this, 8, 10), Blocks.obsidian);
         addReservoirRecipe(new ItemStack(this, 8, 11), "blockSilver");
         addReservoirRecipe(new ItemStack(this, 8, 12), Blocks.gold_block);
-        addReservoirRecipe(new ItemStack(this, 8, 13),
-                ICItemFinder.getIC2Item("carbonPlate"));
-        addReservoirAdvancedRecipe(new ItemStack(this, 8, 14),
-                ICItemFinder.getIC2Item("advancedAlloy"));
-        addReservoirAdvancedRecipe(new ItemStack(this, 8, 15),
-                Blocks.emerald_block);
-        addReservoirAdvancedRecipe(new ItemStack(this, 8, 16),
-                Blocks.diamond_block);
-        addReservoirAdvancedRecipe(new ItemStack(this, 8, 17),
-                ICItemFinder.getIC2Item("iridiumOre"));
-        addReservoirAdvancedRecipe(new ItemStack(this, 8, 18),
-                ICItemFinder.getIC2Item("iridiumPlate"));
+        addReservoirRecipe(new ItemStack(this, 8, 13), ICItemFinder.getIC2Item("carbonPlate"));
+        addReservoirAdvancedRecipe(new ItemStack(this, 8, 14), ICItemFinder.getIC2Item("advancedAlloy"));
+        addReservoirAdvancedRecipe(new ItemStack(this, 8, 15), Blocks.emerald_block);
+        addReservoirAdvancedRecipe(new ItemStack(this, 8, 16), Blocks.diamond_block);
+        addReservoirAdvancedRecipe(new ItemStack(this, 8, 17), ICItemFinder.getIC2Item("iridiumOre"));
+        addReservoirAdvancedRecipe(new ItemStack(this, 8, 18), ICItemFinder.getIC2Item("iridiumPlate"));
         addReservoirRecipe(new ItemStack(this, 8, 19), "blockZinc");
         addReservoirRecipe(new ItemStack(this, 8, 20), "blockBrass");
         addReservoirRecipe(new ItemStack(this, 8, 20), "blockZincAlloy");
@@ -277,28 +224,23 @@ public class BlockReservoir extends BlockRotor {
         addReservoirAdvancedRecipe(new ItemStack(this, 8, 29), "blockVanadium");
         addReservoirAdvancedRecipe(new ItemStack(this, 8, 30), "blockChrome");
         addReservoirAdvancedRecipe(new ItemStack(this, 8, 30), "blockManganeseSteel");
-        addReservoirAdvancedRecipe(new ItemStack(this, 8, 31),
-                "blockTungstenSteel");
-        addReservoirAdvancedRecipe(new ItemStack(this, 8, 31),
-                "blockVanadiumSteel");
+        addReservoirAdvancedRecipe(new ItemStack(this, 8, 31), "blockTungstenSteel");
+        addReservoirAdvancedRecipe(new ItemStack(this, 8, 31), "blockVanadiumSteel");
         if (Mods.Thaumcraft.isAvailable) {
-            addReservoirAdvancedRecipe(new ItemStack(this, 8, 32),
-                    new ItemStack(GameRegistry.findBlock(Mods.IDs.Thaumcraft, "blockCosmeticSolid"), 1, 4));
+            addReservoirAdvancedRecipe(new ItemStack(this, 8, 32), new ItemStack(GameRegistry.findBlock(Mods.IDs.Thaumcraft, "blockCosmeticSolid"), 1, 4));
         }
     }
 
     void addReservoirRecipe(ItemStack output, Object S) {
         if (S == null)
             return;
-        IRecipeRegistrar.addRecipeByOreDictionary(output, "SSS", "SIS", "SSS",
-                'S', S, 'I', ItemType.ReservoirCore.item());
+        IRecipeRegistrar.addRecipeByOreDictionary(output, "SSS", "SIS", "SSS", 'S', S, 'I', ItemType.ReservoirCore.item());
     }
 
     void addReservoirAdvancedRecipe(ItemStack output, Object S) {
         if (S == null)
             return;
-        IRecipeRegistrar.addRecipeByOreDictionary(output, "SSS", "SIS", "SSS",
-                'S', S, 'I', ItemType.ReservoirCoreAdvanced.item());
+        IRecipeRegistrar.addRecipeByOreDictionary(output, "SSS", "SIS", "SSS", 'S', S, 'I', ItemType.ReservoirCoreAdvanced.item());
     }
 
 }

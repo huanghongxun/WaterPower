@@ -43,8 +43,7 @@ public class Utils {
         return result;
     }
 
-    public static int[] moveForward(World world, int xCoord, int yCoord,
-            int zCoord, short facing, int step) {
+    public static int[] moveForward(World world, int xCoord, int yCoord, int zCoord, short facing, int step) {
         int x = xCoord;
         int y = yCoord;
         int z = zCoord;
@@ -72,21 +71,20 @@ public class Utils {
 
         return new int[] { x, y, z };
     }
-    
+
     public static boolean isITNT(ItemStack is) {
-        if(!Mods.IndustrialCraft2.isAvailable) return false;
+        if (!Mods.IndustrialCraft2.isAvailable)
+            return false;
         ItemStack b = ICItemFinder.getIC2Item("industrialTnt");
-        if(b.getItem() == is.getItem() && b.getItemDamage() == is.getItemDamage())
+        if (b.getItem() == is.getItem() && b.getItemDamage() == is.getItemDamage())
             return true;
         else
             return false;
     }
 
     // 0 - weather, 1 - biomeID, 2 - biomeGet, 3 - biomePut
-    public static double[] getBiomeRaining(World worldObj, int xCoord,
-            int zCoord) {
-        int weather = worldObj.isThundering() ? 2 : worldObj.isRaining() ? 1
-                : 0;
+    public static double[] getBiomeRaining(World worldObj, int xCoord, int zCoord) {
+        int weather = worldObj.isThundering() ? 2 : worldObj.isRaining() ? 1 : 0;
         int biomeID = worldObj.getBiomeGenForCoords(xCoord, zCoord).biomeID;
         double biomeGet = 0, biomePut = 0;
         if (biomeID == BiomeGenBase.beach.biomeID) {
@@ -159,30 +157,29 @@ public class Utils {
 
         return new double[] { weather, biomeID, biomeGet, biomePut };
     }
-    
+
     public static boolean isWater(World world, int x, int y, int z) {
         Block block = world.getBlock(x, y, z);
         return block == Blocks.water || block == Blocks.flowing_water;
     }
-    
+
     public static boolean isLava(World world, int x, int y, int z) {
         Block block = world.getBlock(x, y, z);
         return block == Blocks.lava || block == Blocks.flowing_lava;
     }
-    
+
     public static final Random rand = new Random();
     public static final DecimalFormat DEFAULT_DECIMAL_FORMAT = new DecimalFormat("#.00");
-    
+
     public static void dropItems(World world, int x, int y, int z, List<ItemStack> drops) {
-        if(WaterPower.isServerSide()) {
-            for(ItemStack item : drops) {
-                if(item != null && item.stackSize > 0) {
+        if (WaterPower.isServerSide()) {
+            for (ItemStack item : drops) {
+                if (item != null && item.stackSize > 0) {
                     float rx = rand.nextFloat() * 0.8F + 0.1F;
                     float ry = rand.nextFloat() * 0.8F + 0.1F;
                     float rz = rand.nextFloat() * 0.8F + 0.1F;
 
-                    EntityItem entityItem = new EntityItem(world, x + rx, y + ry, z
-                            + rz, item.copy());
+                    EntityItem entityItem = new EntityItem(world, x + rx, y + ry, z + rz, item.copy());
 
                     float factor = 0.05F;
                     entityItem.motionX = (rand.nextGaussian() * factor);
@@ -193,9 +190,8 @@ public class Utils {
             }
         }
     }
-    
+
     public static int convertFacingAndForgeDirection(int facing) {
         return facing + (facing % 2 * -2 + 1);
     }
 }
-

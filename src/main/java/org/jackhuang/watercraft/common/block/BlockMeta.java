@@ -13,8 +13,7 @@ import net.minecraft.item.ItemBlock;
 
 public abstract class BlockMeta extends BlockWaterPower {
 
-    public BlockMeta(String id,
-            Material material, Class<? extends ItemBlock> c) {
+    public BlockMeta(String id, Material material, Class<? extends ItemBlock> c) {
         super(id, material, c);
     }
 

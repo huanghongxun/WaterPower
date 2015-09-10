@@ -18,16 +18,13 @@ public class TileEntityCutter extends TileEntityStandardWaterMachine {
          * InventorySlotProcessableGreg(this, "input", 1,
          * Recipes.matterAmplifier, GT_Recipe_Map.sCutterRecipes); else
          */
-        this.inputSlot = new InventorySlotProcessableGeneric(this, "input", 1,
-                MyRecipes.cutter);
+        this.inputSlot = new InventorySlotProcessableGeneric(this, "input", 1, MyRecipes.cutter);
     }
 
     public static void init() {
         MyRecipes.cutter = new MultiRecipeManager();
         if (Mods.IndustrialCraft2.isAvailable)
-            ((MultiRecipeManager) MyRecipes.cutter)
-                    .addRecipeManager(new IndustrialCraftRecipeManager(
-                            IndustrialCraftModule.cutter));
+            ((MultiRecipeManager) MyRecipes.cutter).addRecipeManager(new IndustrialCraftRecipeManager(IndustrialCraftModule.cutter));
     }
 
     public String getInventoryName() {

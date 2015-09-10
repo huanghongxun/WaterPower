@@ -44,15 +44,8 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidHandler;
 
-@InterfaceList({
-        @Interface(iface = "ic2.api.energy.tile.IEnergySource", modid = Mods.IDs.IndustrialCraft2API, striprefs = true),
-        @Interface(iface = "ic2.api.energy.tile.IKineticSource", modid = Mods.IDs.IndustrialCraft2API, striprefs = true),
-        @Interface(iface = "ic2.api.energy.tile.IHeatSource", modid = Mods.IDs.IndustrialCraft2API, striprefs = true),
-        @Interface(iface = "cofh.api.energy.IEnergyConnection", modid = Mods.IDs.CoFHAPIEnergy),
-        @Interface(iface = "factorization.api.IChargeConductor", modid = Mods.IDs.Factorization) })
-public abstract class TileEntityGenerator extends TileEntityBlock implements
-        IEnergySource, IHasGui, IKineticSource, IUnitChangeable,
-        IEnergyConnection, IChargeConductor, IFluidHandler, IHeatSource {
+@InterfaceList({ @Interface(iface = "ic2.api.energy.tile.IEnergySource", modid = Mods.IDs.IndustrialCraft2API, striprefs = true), @Interface(iface = "ic2.api.energy.tile.IKineticSource", modid = Mods.IDs.IndustrialCraft2API, striprefs = true), @Interface(iface = "ic2.api.energy.tile.IHeatSource", modid = Mods.IDs.IndustrialCraft2API, striprefs = true), @Interface(iface = "cofh.api.energy.IEnergyConnection", modid = Mods.IDs.CoFHAPIEnergy), @Interface(iface = "factorization.api.IChargeConductor", modid = Mods.IDs.Factorization) })
+public abstract class TileEntityGenerator extends TileEntityBlock implements IEnergySource, IHasGui, IKineticSource, IUnitChangeable, IEnergyConnection, IChargeConductor, IFluidHandler, IHeatSource {
     public static Random random = new Random();
 
     public double storage = 0.0D;
@@ -108,8 +101,7 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements
     public void readFromNBT(NBTTagCompound nbttagcompound) {
         super.readFromNBT(nbttagcompound);
         this.storage = nbttagcompound.getDouble("storage");
-        this.energyType = EnergyType.values()[nbttagcompound
-                .getInteger("energyType")];
+        this.energyType = EnergyType.values()[nbttagcompound.getInteger("energyType")];
 
         if (Mods.Factorization.isAvailable && charge != null)
             ((Charge) charge).readFromNBT(nbttagcompound);
@@ -180,33 +172,27 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements
 
         if (!isRedstonePowered()) {
             latestOutput = computeOutput(worldObj, xCoord, yCoord, zCoord);
-            if (energyType == EnergyType.EU
-                    && Mods.IndustrialCraft2.isAvailable)
+            if (energyType == EnergyType.EU && Mods.IndustrialCraft2.isAvailable)
                 storage += latestOutput;
             if (energyType == EnergyType.RF && Mods.CoFHAPIEnergy.isAvailable) {
                 reCache();
                 storage += latestOutput;
                 int j = (int) Math.min(this.production, storage);
                 storage -= j;
-                storage += EnergyType.RF2EU(transmitEnergy((int) EnergyType
-                        .EU2RF(j)));
+                storage += EnergyType.RF2EU(transmitEnergy((int) EnergyType.EU2RF(j)));
             }
             /*
              * if (energyType == EnergyType.MJ &&
              * Mods.BuildCraftPower.isAvailable) { storage += latestOutput;
              * for(ForgeDirection d : ForgeDirection.values()) sendPower(d); }
              */
-            if (energyType == EnergyType.Charge
-                    && Mods.Factorization.isAvailable) {
-                ((Charge) charge).setValue((int) EnergyType
-                        .EU2Charge(latestOutput));
+            if (energyType == EnergyType.Charge && Mods.Factorization.isAvailable) {
+                ((Charge) charge).setValue((int) EnergyType.EU2Charge(latestOutput));
             }
             if (energyType == EnergyType.Water) {
                 if (getFluidID() != FluidRegistry.WATER.getID())
                     getFluidTank().setFluid(null);
-                getFluidTank().fill(
-                        new FluidStack(FluidRegistry.WATER,
-                                (int) EnergyType.EU2Water(latestOutput)), true);
+                getFluidTank().fill(new FluidStack(FluidRegistry.WATER, (int) EnergyType.EU2Water(latestOutput)), true);
             }
             if (energyType == EnergyType.Steam) {
                 boolean outputed = false;
@@ -215,20 +201,14 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements
                     if (getFluidID() != f.getID())
                         getFluidTank().setFluid(null);
                     outputed = true;
-                    getFluidTank().fill(
-                            new FluidStack(f,
-                                    (int) EnergyType.EU2Steam(latestOutput)),
-                            true);
+                    getFluidTank().fill(new FluidStack(f, (int) EnergyType.EU2Steam(latestOutput)), true);
                 }
                 if (FluidRegistry.isFluidRegistered("ic2steam") && !outputed) {
                     Fluid f = FluidRegistry.getFluid("ic2steam");
                     if (getFluidID() != f.getID())
                         getFluidTank().setFluid(null);
                     outputed = true;
-                    getFluidTank().fill(
-                            new FluidStack(FluidRegistry.getFluid("ic2steam"),
-                                    (int) EnergyType.EU2Steam(latestOutput)),
-                            true);
+                    getFluidTank().fill(new FluidStack(FluidRegistry.getFluid("ic2steam"), (int) EnergyType.EU2Steam(latestOutput)), true);
                 }
             }
         }
@@ -317,11 +297,9 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements
 
     @Override
     @Method(modid = Mods.IDs.IndustrialCraft2API)
-    public int requestkineticenergy(ForgeDirection directionFrom,
-            int requestkineticenergy) {
+    public int requestkineticenergy(ForgeDirection directionFrom, int requestkineticenergy) {
         if (energyType == EnergyType.KU)
-            return Math.min(requestkineticenergy,
-                    maxrequestkineticenergyTick(directionFrom));
+            return Math.min(requestkineticenergy, maxrequestkineticenergyTick(directionFrom));
         return 0;
     }
 
@@ -335,8 +313,7 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements
 
     @Override
     public void setUnitId(int id) {
-        if (EnergyType.values()[id] != EnergyType.EU
-                && Mods.IndustrialCraft2.isAvailable) {
+        if (EnergyType.values()[id] != EnergyType.EU && Mods.IndustrialCraft2.isAvailable) {
             unloadEnergyTile();
         }
         energyType = EnergyType.values()[id];
@@ -380,8 +357,7 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements
     private void reCache() {
         if (this.deadCache) {
             for (ForgeDirection d : ForgeDirection.VALID_DIRECTIONS) {
-                onNeighborTileChange(this.xCoord + d.offsetX, this.yCoord
-                        + d.offsetY, this.zCoord + d.offsetZ);
+                onNeighborTileChange(this.xCoord + d.offsetX, this.yCoord + d.offsetY, this.zCoord + d.offsetZ);
             }
             this.deadCache = false;
         }
@@ -412,8 +388,7 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements
             this.handlerCache[side] = null;
         }
         if ((t instanceof IEnergyHandler)) {
-            if (((IEnergyHandler) t)
-                    .canConnectEnergy(ForgeDirection.VALID_DIRECTIONS[side])) {
+            if (((IEnergyHandler) t).canConnectEnergy(ForgeDirection.VALID_DIRECTIONS[side])) {
                 if (this.handlerCache == null)
                     this.handlerCache = new IEnergyHandler[6];
                 this.handlerCache[side] = ((IEnergyHandler) t);
@@ -467,10 +442,7 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements
     @Method(modid = Mods.IDs.Factorization)
     public String getInfo() {
         StringBuilder sb = new StringBuilder();
-        sb.append(StatCollector.translateToLocal("cptwtrml.gui.latest_output")
-                + "/" + energyType.name() + ": "
-                + Utils.DEFAULT_DECIMAL_FORMAT.format(getFromEU(latestOutput))
-                + "\n");
+        sb.append(StatCollector.translateToLocal("cptwtrml.gui.latest_output") + "/" + energyType.name() + ": " + Utils.DEFAULT_DECIMAL_FORMAT.format(getFromEU(latestOutput)) + "\n");
         return sb.toString();
     }
 
@@ -490,9 +462,6 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements
     @SideOnly(Side.CLIENT)
     public void onUnitChanged(EnergyType t) {
         energyType = t;
-        MessagePacketHandler.INSTANCE
-                .sendToServer(new PacketUnitChanged(
-                        Minecraft.getMinecraft().thePlayer.worldObj.provider.dimensionId,
-                        xCoord, yCoord, zCoord, energyType.ordinal()));
+        MessagePacketHandler.INSTANCE.sendToServer(new PacketUnitChanged(Minecraft.getMinecraft().thePlayer.worldObj.provider.dimensionId, xCoord, yCoord, zCoord, energyType.ordinal()));
     }
 }

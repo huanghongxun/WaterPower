@@ -34,7 +34,7 @@ public class NEIWaterPowerConfig implements IConfigureNEI {
         new CompressorRecipeHandler().registerSelf();
         new SawmillRecipeHandler().registerSelf();
         new CutterRecipeHandler().registerSelf();
-        
+
         API.registerGuiOverlay(GuiMacerator.class, id + ".macerator", 5, 11);
         API.registerGuiOverlay(GuiCompressor.class, id + ".compressor", 5, 11);
         API.registerGuiOverlay(GuiSawmill.class, id + ".sawmill", 5, 11);

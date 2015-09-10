@@ -21,9 +21,7 @@ public final class RenderUtils {
     }
 
     public static IIcon getMissingIcon() {
-        return ((TextureMap) Minecraft.getMinecraft().getTextureManager()
-                .getTexture(TextureMap.locationBlocksTexture))
-                .getAtlasSprite("missingno");
+        return ((TextureMap) Minecraft.getMinecraft().getTextureManager().getTexture(TextureMap.locationBlocksTexture)).getAtlasSprite("missingno");
     }
 
     public static IIcon getFluidTexture(Fluid fluid, boolean flowing) {

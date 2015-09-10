@@ -24,8 +24,7 @@ public class TileEntitySawmill extends TileEntityStandardWaterMachine {
     public TileEntitySawmill() {
         super(80, 10 * 20);
 
-        this.inputSlot = new InventorySlotProcessableGeneric(this, "input", 1,
-                MyRecipes.sawmill);
+        this.inputSlot = new InventorySlotProcessableGeneric(this, "input", 1, MyRecipes.sawmill);
     }
 
     public static void init() {
@@ -41,10 +40,8 @@ public class TileEntitySawmill extends TileEntityStandardWaterMachine {
                 return false;
             }
         };
-        InventoryCrafting tempCrafting = new InventoryCrafting(tempContainer,
-                3, 3);
-        ArrayList recipeList = (ArrayList) CraftingManager.getInstance()
-                .getRecipeList();
+        InventoryCrafting tempCrafting = new InventoryCrafting(tempContainer, 3, 3);
+        ArrayList recipeList = (ArrayList) CraftingManager.getInstance().getRecipeList();
 
         for (int i = 1; i < 9; i++) {
             tempCrafting.setInventorySlotContents(i, null);
@@ -58,8 +55,7 @@ public class TileEntitySawmill extends TileEntityStandardWaterMachine {
                 for (int j = 0; j < 16; j++) {
                     ItemStack log = new ItemStack(logEntry.getItem(), 1, j);
                     tempCrafting.setInventorySlotContents(0, log);
-                    ItemStack resultEntry = findMatchingRecipe(tempCrafting,
-                            null);
+                    ItemStack resultEntry = findMatchingRecipe(tempCrafting, null);
 
                     if (resultEntry != null) {
                         ItemStack result = resultEntry.copy();
@@ -83,8 +79,7 @@ public class TileEntitySawmill extends TileEntityStandardWaterMachine {
         }
     }
 
-    public static ItemStack findMatchingRecipe(InventoryCrafting inv,
-            World world) {
+    public static ItemStack findMatchingRecipe(InventoryCrafting inv, World world) {
         ItemStack[] dmgItems = new ItemStack[2];
         for (int i = 0; i < inv.getSizeInventory(); i++) {
             if (inv.getStackInSlot(i) != null) {
@@ -99,24 +94,17 @@ public class TileEntitySawmill extends TileEntityStandardWaterMachine {
 
         if (dmgItems[0] == null)
             return null;
-        if ((dmgItems[1] != null)
-                && (dmgItems[0].getItem().equals(dmgItems[1].getItem()))
-                && (dmgItems[0].stackSize == 1) && (dmgItems[1].stackSize == 1)
-                && (dmgItems[0].getItem().isRepairable())) {
+        if ((dmgItems[1] != null) && (dmgItems[0].getItem().equals(dmgItems[1].getItem())) && (dmgItems[0].stackSize == 1) && (dmgItems[1].stackSize == 1) && (dmgItems[0].getItem().isRepairable())) {
             Item theItem = dmgItems[0].getItem();
-            int var13 = theItem.getMaxDamage()
-                    - dmgItems[0].getItemDamageForDisplay();
-            int var8 = theItem.getMaxDamage()
-                    - dmgItems[1].getItemDamageForDisplay();
+            int var13 = theItem.getMaxDamage() - dmgItems[0].getItemDamageForDisplay();
+            int var8 = theItem.getMaxDamage() - dmgItems[1].getItemDamageForDisplay();
             int var9 = var13 + var8 + theItem.getMaxDamage() * 5 / 100;
             int var10 = Math.max(0, theItem.getMaxDamage() - var9);
             return new ItemStack(theItem, 1, var10);
         }
 
-        for (int i = 0; i < CraftingManager.getInstance().getRecipeList()
-                .size(); i++) {
-            IRecipe recipe = (IRecipe) CraftingManager.getInstance()
-                    .getRecipeList().get(i);
+        for (int i = 0; i < CraftingManager.getInstance().getRecipeList().size(); i++) {
+            IRecipe recipe = (IRecipe) CraftingManager.getInstance().getRecipeList().get(i);
 
             if (recipe.matches(inv, world)) {
                 return recipe.getCraftingResult(inv);

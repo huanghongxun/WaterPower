@@ -3,7 +3,6 @@ package org.jackhuang.watercraft.client;
 import org.jackhuang.watercraft.client.gui.DefaultGuiIds;
 import org.jackhuang.watercraft.client.render.EntityWaterWheelRenderer;
 import org.jackhuang.watercraft.client.render.RecolorableItemRenderer;
-import org.jackhuang.watercraft.client.render.RecolorableTextures;
 import org.jackhuang.watercraft.common.CommonProxy;
 import org.jackhuang.watercraft.common.block.machines.GuiCentrifuge;
 import org.jackhuang.watercraft.common.block.machines.GuiCompressor;
@@ -42,65 +41,68 @@ import net.minecraftforge.client.MinecraftForgeClient;
 
 @SideOnly(Side.CLIENT)
 public class ClientProxy extends CommonProxy {
-    
-    public IIconRegister iconRegister;
 
-    public void loadAllIcons() {
-        RecolorableTextures.load();
+    public IIconRegister itemIconRegister, blockIconRegister;
+
+    public void loadItemIcons() {
+    }
+
+    public void loadBlockIcons() {
         if (Mods.TinkersConstruct.isAvailable)
             TinkersConstructModule.registerIcons();
     }
-    
+
     @Override
-    public Object getClientGuiElement(int ID, EntityPlayer thePlayer, World world, int X, int Y,
-        int Z) {
+    public Object getClientGuiElement(int ID, EntityPlayer thePlayer, World world, int X, int Y, int Z) {
         TileEntity tileEntity = world.getTileEntity(X, Y, Z);
-        if (tileEntity == null) return null;
-        if(ID == DefaultGuiIds.get("tileEntityTurbine")) {
+        if (tileEntity == null)
+            return null;
+        if (ID == DefaultGuiIds.get("tileEntityTurbine")) {
             TileEntityTurbine tileEntityT = (TileEntityTurbine) tileEntity;
             return new GuiTurbine(thePlayer, tileEntityT);
-        } else if(ID == DefaultGuiIds.get("tileEntityWatermill")) {
+        } else if (ID == DefaultGuiIds.get("tileEntityWatermill")) {
             TileEntityWatermill tileEntityCW = (TileEntityWatermill) tileEntity;
             return new GuiWatermill(thePlayer, tileEntityCW);
-        } else if(ID == DefaultGuiIds.get("tileEntityReservoir")) {
+        } else if (ID == DefaultGuiIds.get("tileEntityReservoir")) {
             TileEntityReservoir tileEntityR = (TileEntityReservoir) tileEntity;
             return new GuiReservoir(thePlayer, tileEntityR);
-        } else if(ID == DefaultGuiIds.get("tileEntityMacerator")) {
+        } else if (ID == DefaultGuiIds.get("tileEntityMacerator")) {
             TileEntityMacerator tileEntityR = (TileEntityMacerator) tileEntity;
             return new GuiMacerator(thePlayer, tileEntityR);
-        } else if(ID == DefaultGuiIds.get("tileEntityCompressor")) {
+        } else if (ID == DefaultGuiIds.get("tileEntityCompressor")) {
             TileEntityCompressor tileEntityR = (TileEntityCompressor) tileEntity;
             return new GuiCompressor(thePlayer, tileEntityR);
-        } else if(ID == DefaultGuiIds.get("tileEntitySawmill")) {
+        } else if (ID == DefaultGuiIds.get("tileEntitySawmill")) {
             TileEntitySawmill tileEntityR = (TileEntitySawmill) tileEntity;
             return new GuiSawmill(thePlayer, tileEntityR);
-        } else if(ID == DefaultGuiIds.get("tileEntityLathe")) {
+        } else if (ID == DefaultGuiIds.get("tileEntityLathe")) {
             TileEntityLathe tileEntityR = (TileEntityLathe) tileEntity;
             return new GuiLathe(thePlayer, tileEntityR);
-        } else if(ID == DefaultGuiIds.get("tileEntityCutter")) {
+        } else if (ID == DefaultGuiIds.get("tileEntityCutter")) {
             TileEntityCutter tileEntityR = (TileEntityCutter) tileEntity;
             return new GuiCutter(thePlayer, tileEntityR);
-        } else if(ID == DefaultGuiIds.get("tileEntityAdvancedCompressor")) {
+        } else if (ID == DefaultGuiIds.get("tileEntityAdvancedCompressor")) {
             TileEntityAdvancedCompressor tileEntityR = (TileEntityAdvancedCompressor) tileEntity;
             return new GuiCompressor(thePlayer, tileEntityR);
-        } else if(ID == DefaultGuiIds.get("tileEntityCentrifuge")) {
+        } else if (ID == DefaultGuiIds.get("tileEntityCentrifuge")) {
             TileEntityCentrifuge tileEntityR = (TileEntityCentrifuge) tileEntity;
             return new GuiCentrifuge(thePlayer, tileEntityR);
         }
         return null;
     }
-    
+
     @Override
     public void registerRenderer() {
         super.registerRenderer();
-        
+
         RenderingRegistry.registerEntityRenderingHandler(EntityWaterWheel.class, new EntityWaterWheelRenderer());
-        
+
         MinecraftForgeClient.registerItemRenderer(GlobalItems.meterial, new RecolorableItemRenderer());
         MinecraftForgeClient.registerItemRenderer(GlobalItems.oreDust, new RecolorableItemRenderer());
         MinecraftForgeClient.registerItemRenderer(GlobalItems.crafting, new RecolorableItemRenderer());
-        
-        //ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWatermill.class, new RotorRenderer());
+
+        // ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWatermill.class,
+        // new RotorRenderer());
     }
 
 }

@@ -39,32 +39,19 @@ public class Mods {
         public static final String AppliedEnergistics2 = "appliedenergistics2";
     }
 
-    public static final SimpleMod Factorization = new SimpleMod(
-            IDs.Factorization);
-    public static final SimpleMod TinkersConstruct = new SimpleMod(
-            IDs.TinkersConstruct);
-    public static final SimpleMod EnderIO = new SimpleMod(
-            IDs.EnderIO);
-    public static final SimpleMod ThermalExpansion = new SimpleMod(
-            IDs.ThermalExpansion);
-    public static final SimpleMod IndustrialCraft2 = new SimpleMod(
-            IDs.IndustrialCraft2);
-    public static final SimpleMod AppliedEnergistics2 = new SimpleMod(
-            IDs.AppliedEnergistics2);
-    public static final SimpleMod MineTweaker3 = new SimpleMod(
-            IDs.MineTweaker3);
-    public static final SimpleMod BuildCraftCore = new SimpleMod(
-            IDs.BuildCraftCore);
-    public static final SimpleMod BuildCraftFactory = new SimpleMod(
-            IDs.BuildCraftFactory);
-    public static final SimpleMod Railcraft = new SimpleMod(
-            IDs.Railcraft);
-    public static final SimpleMod BuildCraftPower = new SimpleMod(
-            IDs.BuildCraftPower);
-    public static final SimpleMod CoFHAPIEnergy = new SimpleMod(
-            IDs.CoFHAPIEnergy);
-    public static final SimpleMod ImmersiveEngineering = new SimpleMod(
-            IDs.ImmersiveEngineering);
+    public static final SimpleMod Factorization = new SimpleMod(IDs.Factorization);
+    public static final SimpleMod TinkersConstruct = new SimpleMod(IDs.TinkersConstruct);
+    public static final SimpleMod EnderIO = new SimpleMod(IDs.EnderIO);
+    public static final SimpleMod ThermalExpansion = new SimpleMod(IDs.ThermalExpansion);
+    public static final SimpleMod IndustrialCraft2 = new SimpleMod(IDs.IndustrialCraft2);
+    public static final SimpleMod AppliedEnergistics2 = new SimpleMod(IDs.AppliedEnergistics2);
+    public static final SimpleMod MineTweaker3 = new SimpleMod(IDs.MineTweaker3);
+    public static final SimpleMod BuildCraftCore = new SimpleMod(IDs.BuildCraftCore);
+    public static final SimpleMod BuildCraftFactory = new SimpleMod(IDs.BuildCraftFactory);
+    public static final SimpleMod Railcraft = new SimpleMod(IDs.Railcraft);
+    public static final SimpleMod BuildCraftPower = new SimpleMod(IDs.BuildCraftPower);
+    public static final SimpleMod CoFHAPIEnergy = new SimpleMod(IDs.CoFHAPIEnergy);
+    public static final SimpleMod ImmersiveEngineering = new SimpleMod(IDs.ImmersiveEngineering);
     public static final SimpleMod Thaumcraft = new SimpleMod(IDs.Thaumcraft);
     public static final SimpleMod GregTech = new SimpleMod(IDs.GregTech);
     public static final SimpleMod Waila = new SimpleMod(IDs.Waila);
@@ -81,9 +68,7 @@ public class Mods {
 
             ArtifactVersion version = VersionParser.parseVersionReference(id);
             if (Loader.isModLoaded(version.getLabel()))
-                isAvailable = version.containsVersion(Loader.instance()
-                        .getIndexedModList().get(version.getLabel())
-                        .getProcessedVersion());
+                isAvailable = version.containsVersion(Loader.instance().getIndexedModList().get(version.getLabel()).getProcessedVersion());
             else
                 isAvailable = ModAPIManager.INSTANCE.hasAPI(version.getLabel());
         }

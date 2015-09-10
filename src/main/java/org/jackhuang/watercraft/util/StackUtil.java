@@ -19,16 +19,14 @@ public final class StackUtil {
 
     private static final Random random = new Random();
 
-    public static ItemStack getFromInventory(IInventory inventory,
-            ItemStack itemStackDestination, boolean simulate) {
+    public static ItemStack getFromInventory(IInventory inventory, ItemStack itemStackDestination, boolean simulate) {
         ItemStack ret = null;
         int toTransfer = itemStackDestination.stackSize;
 
         for (int i = 0; i < inventory.getSizeInventory(); i++) {
             ItemStack itemStack = inventory.getStackInSlot(i);
 
-            if ((itemStack != null)
-                    && (isStackEqual(itemStack, itemStackDestination))) {
+            if ((itemStack != null) && (isStackEqual(itemStack, itemStackDestination))) {
                 if (ret == null)
                     ret = copyWithSize(itemStack, 0);
 
@@ -51,8 +49,7 @@ public final class StackUtil {
         return ret;
     }
 
-    public static int putInInventory(IInventory inventory,
-            ItemStack itemStackSource, boolean simulate) {
+    public static int putInInventory(IInventory inventory, ItemStack itemStackSource, boolean simulate) {
         int transferred = 0;
 
         for (int i = 0; i < inventory.getSizeInventory(); i++) {
@@ -61,9 +58,7 @@ public final class StackUtil {
             ItemStack itemStack = inventory.getStackInSlot(i);
 
             if ((itemStack != null) && (itemStack.isItemEqual(itemStackSource))) {
-                int transfer = Math.min(
-                        itemStackSource.stackSize - transferred,
-                        itemStack.getMaxStackSize() - itemStack.stackSize);
+                int transfer = Math.min(itemStackSource.stackSize - transferred, itemStack.getMaxStackSize() - itemStack.stackSize);
 
                 if (!simulate)
                     itemStack.stackSize += transfer;
@@ -81,9 +76,7 @@ public final class StackUtil {
             ItemStack itemStack = inventory.getStackInSlot(i);
 
             if (itemStack == null) {
-                int transfer = Math.min(
-                        itemStackSource.stackSize - transferred,
-                        itemStackSource.getMaxStackSize());
+                int transfer = Math.min(itemStackSource.stackSize - transferred, itemStackSource.getMaxStackSize());
 
                 if (!simulate) {
                     ItemStack dest = copyWithSize(itemStackSource, transfer);
@@ -100,8 +93,7 @@ public final class StackUtil {
         return transferred;
     }
 
-    public static void dropAsEntity(World world, int x, int y, int z,
-            ItemStack itemStack) {
+    public static void dropAsEntity(World world, int x, int y, int z, ItemStack itemStack) {
         if (itemStack == null)
             return;
 
@@ -110,8 +102,7 @@ public final class StackUtil {
         double dy = world.rand.nextFloat() * f + (1.0D - f) * 0.5D;
         double dz = world.rand.nextFloat() * f + (1.0D - f) * 0.5D;
 
-        EntityItem entityItem = new EntityItem(world, x + dx, y + dy, z + dz,
-                itemStack.copy());
+        EntityItem entityItem = new EntityItem(world, x + dx, y + dy, z + dz, itemStack.copy());
         entityItem.delayBeforeCanPickup = 10;
         world.spawnEntityInWorld(entityItem);
     }
@@ -135,13 +126,7 @@ public final class StackUtil {
     }
 
     public static boolean isStackEqual(ItemStack stack1, ItemStack stack2) {
-        return (stack1 != null)
-                && (stack2 != null)
-                && (stack1.getItem().equals(stack2.getItem()))
-                && (((!stack1.getHasSubtypes()) && (!stack1
-                        .isItemStackDamageable())) || ((stack1.getItemDamage() == stack2
-                        .getItemDamage()) && (ItemStack.areItemStackTagsEqual(
-                        stack1, stack2))));
+        return (stack1 != null) && (stack2 != null) && (stack1.getItem().equals(stack2.getItem())) && (((!stack1.getHasSubtypes()) && (!stack1.isItemStackDamageable())) || ((stack1.getItemDamage() == stack2.getItemDamage()) && (ItemStack.areItemStackTagsEqual(stack1, stack2))));
     }
 
     public static boolean isStacksEqual(ItemStack[] is, ItemStack[] is2) {

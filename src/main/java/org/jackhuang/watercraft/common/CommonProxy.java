@@ -34,14 +34,12 @@ import cpw.mods.fml.common.network.IGuiHandler;
 public class CommonProxy implements IGuiHandler {
 
     @Override
-    public Object getClientGuiElement(int ID, EntityPlayer player, World world,
-            int x, int y, int z) {
+    public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         return null;
     }
 
     @Override
-    public Object getServerGuiElement(int ID, EntityPlayer thePlayer,
-            World world, int x, int y, int z) {
+    public Object getServerGuiElement(int ID, EntityPlayer thePlayer, World world, int x, int y, int z) {
         TileEntity tileEntity = world.getTileEntity(x, y, z);
         if (tileEntity == null)
             return null;
@@ -56,35 +54,36 @@ public class CommonProxy implements IGuiHandler {
         } else if (ID == DefaultGuiIds.get("tileEntityReservoir")) {
             TileEntityReservoir tileEntityR = (TileEntityReservoir) tileEntity;
             return new ContainerReservoir(thePlayer, tileEntityR);
-        } else if(ID == DefaultGuiIds.get("tileEntityMacerator")) {
+        } else if (ID == DefaultGuiIds.get("tileEntityMacerator")) {
             TileEntityMacerator tileEntityR = (TileEntityMacerator) tileEntity;
             return new ContainerStandardMachine(thePlayer, tileEntityR);
-        } else if(ID == DefaultGuiIds.get("tileEntityCompressor")) {
+        } else if (ID == DefaultGuiIds.get("tileEntityCompressor")) {
             TileEntityCompressor tileEntityR = (TileEntityCompressor) tileEntity;
             return new ContainerStandardMachine(thePlayer, tileEntityR);
-        } else if(ID == DefaultGuiIds.get("tileEntityAdvancedCompressor")) {
+        } else if (ID == DefaultGuiIds.get("tileEntityAdvancedCompressor")) {
             TileEntityAdvancedCompressor tileEntityR = (TileEntityAdvancedCompressor) tileEntity;
             return new ContainerStandardMachine(thePlayer, tileEntityR);
-        } else if(ID == DefaultGuiIds.get("tileEntitySawmill")) {
+        } else if (ID == DefaultGuiIds.get("tileEntitySawmill")) {
             TileEntitySawmill tileEntityR = (TileEntitySawmill) tileEntity;
             return new ContainerStandardMachine(thePlayer, tileEntityR);
-        } else if(ID == DefaultGuiIds.get("tileEntityLathe")) {
+        } else if (ID == DefaultGuiIds.get("tileEntityLathe")) {
             TileEntityLathe tileEntityR = (TileEntityLathe) tileEntity;
             return new ContainerStandardMachine(thePlayer, tileEntityR);
-        } else if(ID == DefaultGuiIds.get("tileEntityCutter")) {
+        } else if (ID == DefaultGuiIds.get("tileEntityCutter")) {
             TileEntityCutter tileEntityR = (TileEntityCutter) tileEntity;
             return new ContainerStandardMachine(thePlayer, tileEntityR);
-        } else if(ID == DefaultGuiIds.get("tileEntityCentrifuge")) {
+        } else if (ID == DefaultGuiIds.get("tileEntityCentrifuge")) {
             TileEntityCentrifuge tileEntityR = (TileEntityCentrifuge) tileEntity;
             return new ContainerCentrifuge(thePlayer, tileEntityR);
         }
         return null;
     }
-    
+
     public void registerRenderer() {
-        
+
     }
-    
-    public void loadAllIcons() {}
+
+    public void loadAllIcons() {
+    }
 
 }

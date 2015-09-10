@@ -25,8 +25,7 @@ import org.jackhuang.watercraft.util.Mods;
 import cpw.mods.fml.common.Optional.Interface;
 import cpw.mods.fml.common.Optional.InterfaceList;
 
-public abstract class TileEntityWaterMachine extends TileEntityBlock
-        implements IWaterReceiver {
+public abstract class TileEntityWaterMachine extends TileEntityBlock implements IWaterReceiver {
     public TileEntityWaterMachine(int maxWater) {
         super(maxWater);
     }

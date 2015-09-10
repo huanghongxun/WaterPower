@@ -8,14 +8,12 @@ public class SlotInventorySlot extends Slot {
     public final InventorySlot invSlot;
     public final int index;
     public final int stackLimit;
-    
-    public SlotInventorySlot(InventorySlot invSlot, int index,
-            int xDisplayPosition, int yDisplayPosition) {
+
+    public SlotInventorySlot(InventorySlot invSlot, int index, int xDisplayPosition, int yDisplayPosition) {
         this(invSlot, index, xDisplayPosition, yDisplayPosition, -9999);
     }
 
-    public SlotInventorySlot(InventorySlot invSlot, int index,
-            int xDisplayPosition, int yDisplayPosition, int stackLimit) {
+    public SlotInventorySlot(InventorySlot invSlot, int index, int xDisplayPosition, int yDisplayPosition, int stackLimit) {
         super(invSlot.getTileEntity(), -1, xDisplayPosition, yDisplayPosition);
 
         this.invSlot = invSlot;
@@ -69,10 +67,11 @@ public class SlotInventorySlot extends Slot {
 
         return false;
     }
-    
+
     @Override
     public int getSlotStackLimit() {
-        if(stackLimit == -9999) return super.getSlotStackLimit();
+        if (stackLimit == -9999)
+            return super.getSlotStackLimit();
         return stackLimit;
     }
 }

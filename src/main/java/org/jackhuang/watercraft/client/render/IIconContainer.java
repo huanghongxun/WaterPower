@@ -13,5 +13,6 @@ import net.minecraft.util.IIcon;
 
 public interface IIconContainer {
     IIcon getIcon();
+
     void registerIcon(IIconRegister register);
 }

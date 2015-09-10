@@ -14,13 +14,11 @@ public class InventorySlot {
     protected final Access access;
     public final InvSide preferredSide;
 
-    public InventorySlot(TileEntityInventory base, String name,
-            Access access, int count) {
+    public InventorySlot(TileEntityInventory base, String name, Access access, int count) {
         this(base, name, access, count, InvSide.ANY);
     }
 
-    public InventorySlot(TileEntityInventory base, String name,
-             Access access, int count, InvSide preferredSide) {
+    public InventorySlot(TileEntityInventory base, String name, Access access, int count, InvSide preferredSide) {
         this.contents = new ItemStack[count];
 
         this.base = base;
@@ -39,7 +37,7 @@ public class InventorySlot {
 
             int index = contentTag.getByte("Index") & 0xFF;
             ItemStack itemStack = ItemStack.loadItemStackFromNBT(contentTag);
-            
+
             if (itemStack == null) {
                 continue;
             }
@@ -156,15 +154,15 @@ public class InventorySlot {
 
         return ret;
     }
-    
+
     public TileEntityInventory getTileEntity() {
         return base;
     }
-    
+
     public ItemStack[] getCopiedContent() {
         return StackUtil.getCopiedStacks(contents);
     }
-    
+
     public boolean isEquals(ItemStack[] is) {
         return StackUtil.isStacksEqual(is, contents);
     }
@@ -173,9 +171,7 @@ public class InventorySlot {
         ANY, TOP, BOTTOM, SIDE;
 
         public boolean matches(int side) {
-            return (this == ANY) || ((side == 0) && (this == BOTTOM))
-                    || ((side == 1) && (this == TOP))
-                    || ((side >= 2) && (side <= 5) && (this == SIDE));
+            return (this == ANY) || ((side == 0) && (this == BOTTOM)) || ((side == 1) && (this == TOP)) || ((side >= 2) && (side <= 5) && (this == SIDE));
         }
     }
 

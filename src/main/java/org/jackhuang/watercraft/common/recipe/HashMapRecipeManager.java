@@ -54,8 +54,7 @@ public class HashMapRecipeManager implements IRecipeManager {
         HashMap<IMyRecipeInput, MyRecipeOutput> map = new HashMap<IMyRecipeInput, MyRecipeOutput>();
         for (Map.Entry entry : recipes.entrySet()) {
             if (entry.getKey() instanceof ItemStack)
-                map.put(new MyRecipeInputItemStack((ItemStack) entry.getKey()),
-                        new MyRecipeOutput((ItemStack) entry.getValue()));
+                map.put(new MyRecipeInputItemStack((ItemStack) entry.getKey()), new MyRecipeOutput((ItemStack) entry.getValue()));
         }
         return map;
     }

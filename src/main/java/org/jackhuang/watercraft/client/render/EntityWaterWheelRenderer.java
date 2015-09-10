@@ -22,8 +22,7 @@ public class EntityWaterWheelRenderer extends Render {
     public ModelWaterWheel model = new ModelWaterWheel();
     float ratio = 0.0625F;
 
-    public void doRender(Entity entity, double x, double y, double z, float f,
-            float f1) {
+    public void doRender(Entity entity, double x, double y, double z, float f, float f1) {
         EntityWaterWheel wheel = (EntityWaterWheel) entity;
         if (wheel.parent == null || wheel.wheelType == null) {
             WPLog.debugLog("rendering terminated...");
@@ -44,7 +43,7 @@ public class EntityWaterWheelRenderer extends Render {
         float wheelRotate = 90f;
         float[] translateWheel = { wheelf, wheelf, wheelf };
 
-        //System.out.println(facing);
+        // System.out.println(facing);
         switch (facing) {
         case 5:
             translateWheel[0] += 0.25;
@@ -71,18 +70,15 @@ public class EntityWaterWheelRenderer extends Render {
             break;
         }
 
-        GL11.glTranslatef(translateWheel[0], translateWheel[1],
-                translateWheel[2]);
+        GL11.glTranslatef(translateWheel[0], translateWheel[1], translateWheel[2]);
         GL11.glRotatef(wheelRotate, wheelAngle[0], wheelAngle[1], wheelAngle[2]);
 
-        FMLClientHandler.instance().getClient().renderEngine
-                .bindTexture(getTexture(wheel.wheelType));
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(getTexture(wheel.wheelType));
 
-        GL11.glRotatef(wheel.parent.getWheelAngle(), 0.0F, rotationAngle[0],
-                rotationAngle[1]);
-        
+        GL11.glRotatef(wheel.parent.getWheelAngle(), 0.0F, rotationAngle[0], rotationAngle[1]);
+
         this.model.trunk.render(this.ratio);
-        
+
         this.model.initPlankWithLength(wheel.parent.getRange());
 
         GL11.glTranslatef(0.0F, 0.0F, 0.0F);

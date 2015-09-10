@@ -11,12 +11,11 @@ import ic2.api.recipe.Recipes;
 public class TileEntityLathe extends TileEntityStandardWaterMachine {
 
     public TileEntityLathe() {
-        super(80, 10*20);
+        super(80, 10 * 20);
 
-        this.inputSlot = new InventorySlotProcessableGeneric(this, "input",
-                1, MyRecipes.lathe);
+        this.inputSlot = new InventorySlotProcessableGeneric(this, "input", 1, MyRecipes.lathe);
     }
-    
+
     public static void init() {
         MyRecipes.lathe = new MultiRecipeManager();
     }

@@ -16,7 +16,7 @@ import org.jackhuang.watercraft.common.block.tileentity.TileEntityRotor;
 
 public class ContainerRotor extends ContainerFullInventory {
     public TileEntityRotor tileEntity;
-    
+
     public ContainerRotor(EntityPlayer player, TileEntityRotor tileEntityCW) {
         super(player, tileEntityCW, 166);
         tileEntity = tileEntityCW;
@@ -24,9 +24,9 @@ public class ContainerRotor extends ContainerFullInventory {
     }
 
     protected void layoutContainer() {
-        
-        //Rotor inventory drawing
+
+        // Rotor inventory drawing
         addSlotToContainer(new SlotInventorySlot(tileEntity.slotRotor, 0, 80, 26));
-        
+
     }
 }

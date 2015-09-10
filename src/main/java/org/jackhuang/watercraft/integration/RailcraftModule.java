@@ -22,35 +22,35 @@ public class RailcraftModule extends BaseModule {
         for (Object o : args)
             if (o == null)
                 return;
-        if (output == null) return;
+        if (output == null)
+            return;
         RailcraftCraftingManager.rollingMachine.addRecipe(output, args);
     }
 
     @Method(modid = Mods.IDs.Railcraft)
-    public static void blastFurnace(ItemStack input, boolean matchDamage,
-            boolean matchNBT, int cookTime, ItemStack output) {
-        if(input == null || output == null) return;
-        RailcraftCraftingManager.blastFurnace.addRecipe(input, matchDamage,
-                matchNBT, cookTime, output);
+    public static void blastFurnace(ItemStack input, boolean matchDamage, boolean matchNBT, int cookTime, ItemStack output) {
+        if (input == null || output == null)
+            return;
+        RailcraftCraftingManager.blastFurnace.addRecipe(input, matchDamage, matchNBT, cookTime, output);
     }
 
     @Method(modid = Mods.IDs.Railcraft)
-    public static void crusher(ItemStack input, boolean matchDamage,
-            boolean matchNBT, ItemStack... output) {
-        if(input == null || output == null) return;
+    public static void crusher(ItemStack input, boolean matchDamage, boolean matchNBT, ItemStack... output) {
+        if (input == null || output == null)
+            return;
         NBTTagCompound data = new NBTTagCompound();
         NBTTagCompound in = new NBTTagCompound();
         input.writeToNBT(in);
         data.setTag("input", in);
         data.setBoolean("matchMeta", matchDamage);
         data.setBoolean("matchNBT", matchNBT);
-        for(int i = 0; i < output.length; i++) {
+        for (int i = 0; i < output.length; i++) {
             NBTTagCompound out = new NBTTagCompound();
             output[i].writeToNBT(out);
             out.setFloat("chance", 1);
             data.setTag("output" + i, out);
         }
-        
+
         FMLInterModComms.sendMessage(Mods.Railcraft.id, "rock-crusher", data);
     }
 }

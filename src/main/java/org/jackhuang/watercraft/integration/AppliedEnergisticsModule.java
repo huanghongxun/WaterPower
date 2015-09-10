@@ -17,15 +17,15 @@ public class AppliedEnergisticsModule extends BaseModule {
 
     public static void crusher(ItemStack in, ItemStack out) {
         NBTTagCompound tag = new NBTTagCompound();
-        
+
         NBTTagCompound inTag = new NBTTagCompound();
         in.writeToNBT(inTag);
         tag.setTag("in", inTag);
-        
+
         NBTTagCompound outTag = new NBTTagCompound();
         out.writeToNBT(outTag);
         tag.setTag("out", outTag);
-        
+
         tag.setInteger("turns", 7);
         FMLInterModComms.sendMessage(Mods.IDs.AppliedEnergistics2, "add-grindable", tag);
     }

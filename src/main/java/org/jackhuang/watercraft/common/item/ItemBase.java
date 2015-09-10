@@ -31,7 +31,7 @@ public abstract class ItemBase extends Item {
 
         setCreativeTab(WaterPower.creativeTabWaterPower);
         setNoRepair();
-        
+
         GameRegistry.registerItem(this, id);
     }
 
@@ -45,19 +45,22 @@ public abstract class ItemBase extends Item {
     }
 
     public abstract String getTextureFolder();
-    
+
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister iconRegister) {
+        ClientProxy cp = (ClientProxy) WaterPower.proxy;
+        if (cp.itemIconRegister == null) {
+            cp.itemIconRegister = iconRegister;
+            cp.loadItemIcons();
+        }
+
         this.textures = new IIcon[32768];
         String textureFolder = getTextureFolder() + "/";
 
         for (int index = 0; index < 32768; index++) {
-            String resource = Reference.ModID
-                    + ":" + textureFolder + getTextureName(index);
-            this.textures[index] = getTextureName(index) != null ? 
-                    iconRegister.registerIcon(resource)
-                    : null;
+            String resource = Reference.ModID + ":" + textureFolder + getTextureName(index);
+            this.textures[index] = getTextureName(index) != null ? iconRegister.registerIcon(resource) : null;
         }
     }
 
@@ -71,13 +74,11 @@ public abstract class ItemBase extends Item {
 
     @SideOnly(Side.CLIENT)
     public ResourceLocation getRenderTexture() {
-        return new ResourceLocation(Reference.ModID + ":textures/items/"
-                + this.getUnlocalizedName() + ".png");
+        return new ResourceLocation(Reference.ModID + ":textures/items/" + this.getUnlocalizedName() + ".png");
     }
 
     @Override
-    public void getSubItems(Item item, CreativeTabs par2CreativeTabs,
-            List par3List) {
+    public void getSubItems(Item item, CreativeTabs par2CreativeTabs, List par3List) {
         for (int meta = 0; meta < 32767; meta++) {
             ItemStack stack = new ItemStack(item, 1, meta);
             if (stopScanning(stack))
@@ -86,19 +87,19 @@ public abstract class ItemBase extends Item {
                 par3List.add(stack);
         }
     }
-    
+
     public boolean stopScanning(ItemStack stack) {
         return getUnlocalizedName(stack) == null;
     }
-    
+
     public boolean validStack(ItemStack stack) {
         return getUnlocalizedName(stack) != null;
     }
-    
+
     public ItemStack get(int i) {
         return get(i, 1);
     }
-    
+
     public ItemStack get(int i, int j) {
         return new ItemStack(this, j, i);
     }

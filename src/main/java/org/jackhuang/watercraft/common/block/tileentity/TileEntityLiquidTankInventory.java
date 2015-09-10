@@ -10,8 +10,7 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
-public abstract class TileEntityLiquidTankInventory extends TileEntityInventory
-        implements IFluidHandler {
+public abstract class TileEntityLiquidTankInventory extends TileEntityInventory implements IFluidHandler {
     protected FluidTank fluidTank;
 
     public TileEntityLiquidTankInventory(int tanksize) {
@@ -33,8 +32,7 @@ public abstract class TileEntityLiquidTankInventory extends TileEntityInventory
     }
 
     public int getFluidID() {
-        if (getFluidTank() == null || getFluidTank().getFluid() == null
-                || getFluidTank().getFluid().getFluid() == null)
+        if (getFluidTank() == null || getFluidTank().getFluid() == null || getFluidTank().getFluid().getFluid() == null)
             return -1;
         return getFluidTank().getFluid().getFluid().getID();
     }
@@ -82,8 +80,7 @@ public abstract class TileEntityLiquidTankInventory extends TileEntityInventory
     }
 
     public void setTankAmount(int amount, int fluidid) {
-        getFluidTank().setFluid(
-                new FluidStack(FluidRegistry.getFluid(fluidid), amount));
+        getFluidTank().setFluid(new FluidStack(FluidRegistry.getFluid(fluidid), amount));
     }
 
     public boolean needsFluid() {
@@ -99,10 +96,8 @@ public abstract class TileEntityLiquidTankInventory extends TileEntityInventory
     }
 
     @Override
-    public FluidStack drain(ForgeDirection from, FluidStack resource,
-            boolean doDrain) {
-        if ((resource == null)
-                || (!resource.isFluidEqual(getFluidTank().getFluid()))) {
+    public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
+        if ((resource == null) || (!resource.isFluidEqual(getFluidTank().getFluid()))) {
             return null;
         }
 
@@ -123,23 +118,19 @@ public abstract class TileEntityLiquidTankInventory extends TileEntityInventory
     }
 
     @Override
-    public abstract boolean canFill(ForgeDirection paramForgeDirection,
-            Fluid paramFluid);
+    public abstract boolean canFill(ForgeDirection paramForgeDirection, Fluid paramFluid);
 
     @Override
-    public abstract boolean canDrain(ForgeDirection paramForgeDirection,
-            Fluid paramFluid);
+    public abstract boolean canDrain(ForgeDirection paramForgeDirection, Fluid paramFluid);
 
     public void pushFluidToConsumers(int flowCapacity) {
         int amount = flowCapacity;
         for (ForgeDirection side : ForgeDirection.VALID_DIRECTIONS) {
             FluidStack fluidStack = getFluidTank().drain(amount, false);
             if (fluidStack != null && fluidStack.amount > 0) {
-                TileEntity te = worldObj.getTileEntity(xCoord + side.offsetX,
-                        yCoord + side.offsetY, zCoord + side.offsetZ);
+                TileEntity te = worldObj.getTileEntity(xCoord + side.offsetX, yCoord + side.offsetY, zCoord + side.offsetZ);
                 if (te != null && te instanceof IFluidHandler) {
-                    int used = ((IFluidHandler) te).fill(side.getOpposite(),
-                            fluidStack, true);
+                    int used = ((IFluidHandler) te).fill(side.getOpposite(), fluidStack, true);
                     if (used > 0) {
                         amount -= used;
                         getFluidTank().drain(used, true);

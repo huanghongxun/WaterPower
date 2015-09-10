@@ -12,41 +12,48 @@ public class ItemMachines extends ItemBlock {
 
     public ItemMachines(Block blockMachines) {
         super(blockMachines);
-        
+
         setHasSubtypes(true);
     }
-    
+
     @Override
     public int getMetadata(int par1) {
-        if(par1 > 7) return 0;
+        if (par1 > 7)
+            return 0;
         return par1;
     }
-    
+
     @Override
-    public void addInformation(ItemStack par1ItemStack,
-            EntityPlayer par2EntityPlayer, List list, boolean par4) {
+    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List list, boolean par4) {
         list.add(StatCollector.translateToLocal("cptwtrml.machine.info"));
         int metadata = par1ItemStack.getItemDamage();
         switch (metadata) {
         case 1:
-            list.add("80mb/t, 60s, tot: 96000mb, storage: 96000mb"); break;
+            list.add("80mb/t, 60s, tot: 96000mb, storage: 96000mb");
+            break;
         case 2:
-            list.add("2000mb/t, 2s, tot: 80000mb, storage: 80000mb"); break;
+            list.add("2000mb/t, 2s, tot: 80000mb, storage: 80000mb");
+            break;
         case 3:
-            list.add("1000mb/t, 1s, tot: 20000mb, storage: 20000mb"); break;
+            list.add("1000mb/t, 1s, tot: 20000mb, storage: 20000mb");
+            break;
         case 4:
-            list.add("5000mb/t, (itnt)s, tot: ?, storage: 1000000mb"); break;
+            list.add("5000mb/t, (itnt)s, tot: ?, storage: 1000000mb");
+            break;
         case 5:
-            list.add("500*(gt)mb/t, 0.2*(gt)s, tot: ?, storage: 1000000mb"); break;
+            list.add("500*(gt)mb/t, 0.2*(gt)s, tot: ?, storage: 1000000mb");
+            break;
         case 6:
-            list.add("8000mb/t, 1s, tot: 160000mb, storage: 160000mb"); break;
+            list.add("8000mb/t, 1s, tot: 160000mb, storage: 160000mb");
+            break;
         case 7:
-            list.add("8000mb/t, 1s, tot: 160000mb, storage: 160000mb"); break;
+            list.add("8000mb/t, 1s, tot: 160000mb, storage: 160000mb");
+            break;
         default:
             break;
         }
     }
-    
+
     @Override
     public String getUnlocalizedName(ItemStack par1ItemStack) {
         int metadata = par1ItemStack.getItemDamage();

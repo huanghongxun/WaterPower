@@ -72,7 +72,7 @@ import cpw.mods.fml.relauncher.SideOnly;
  * 
  * @author jackhuang
  */
-@Mod(modid = Reference.ModID, name = Reference.ModName, version = Reference.Version, acceptedMinecraftVersions = "[1.7.10, 1.8)", dependencies = "required-after:Forge@[10.13.0.1199,); after:IC2@[2.2.628,); after:gregtech; after:Thaumcraft@[4.2.3.5,); after:BuildCraftAPI|power[1.1,); after:Forestry; after:craftguide; after:Waila; after:factorization; after:CoFHCore; after:Mekanism; after:ThermalFoundation; after:MineFactoryReloaded; ")
+@Mod(modid = Reference.ModID, name = Reference.ModName, version = Reference.Version, acceptedMinecraftVersions = "[1.7.10, 1.8)", dependencies = "required-after:Forge@[10.13.0.1199,); after:IC2@[2.2.628,); after:gregtech; after:Thaumcraft@[4.2.3.5,); after:BuildCraftAPI|power[1.1,); after:Forestry; after:craftguide; after:Waila; after:factorization; after:CoFHCore; after:Mekanism; after:ThermalFoundation; after:MineFactoryReloaded; after: TConstruct; ")
 public class WaterPower implements IWorldGenerator {
 
     /**
@@ -91,8 +91,7 @@ public class WaterPower implements IWorldGenerator {
     /**
      * Instance of the creative tab of Water Power.
      */
-    public static final CreativeTabs creativeTabWaterPower = new CreativeTabWaterCraft(
-            "creativeTabWaterPower");
+    public static final CreativeTabs creativeTabWaterPower = new CreativeTabWaterCraft("creativeTabWaterPower");
 
     /**
      * Watermills & turbines update interval
@@ -119,6 +118,7 @@ public class WaterPower implements IWorldGenerator {
 
         config.save();
 
+        MinecraftForge.EVENT_BUS.register(this);
     }
 
     @Mod.EventHandler
@@ -141,12 +141,10 @@ public class WaterPower implements IWorldGenerator {
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
 
-        Property enableEasyRecipe = config.get("recipe", "enableEasyRecipe",
-                false);
+        Property enableEasyRecipe = config.get("recipe", "enableEasyRecipe", false);
         if (enableEasyRecipe.getBoolean(false))
             recipe = new EasyRecipeRegistrar(config);
-        Property enableNormalRecipe = config.get("recipe",
-                "enableNormalRecipe", true);
+        Property enableNormalRecipe = config.get("recipe", "enableNormalRecipe", true);
         if (enableNormalRecipe.getBoolean(true))
             recipe = new NormalRecipeRegistrar(config);
 
@@ -192,16 +190,12 @@ public class WaterPower implements IWorldGenerator {
     }
 
     private static WorldGenMinable getMinable(ItemStack is, int number) {
-        return new WorldGenMinable(Block.getBlockFromItem(is.getItem()),
-                is.getItemDamage(), number, Blocks.stone);
+        return new WorldGenMinable(Block.getBlockFromItem(is.getItem()), is.getItemDamage(), number, Blocks.stone);
     }
 
-    private static void generateOre(ItemStack ore, int number, int baseCount,
-            World world, Random random, int chunkX, int chunkZ, int low,
-            int high) {
+    private static void generateOre(ItemStack ore, int number, int baseCount, World world, Random random, int chunkX, int chunkZ, int low, int high) {
         if (ore != null) {
-            int count = (int) Math.round(random.nextGaussian()
-                    * Math.sqrt(baseCount) + baseCount);
+            int count = (int) Math.round(random.nextGaussian() * Math.sqrt(baseCount) + baseCount);
 
             for (int n = 0; n < count; n++) {
                 int x = chunkX * 16 + random.nextInt(16);
@@ -213,25 +207,19 @@ public class WaterPower implements IWorldGenerator {
     }
 
     @Override
-    public void generate(Random random, int chunkX, int chunkZ, World world,
-            IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
+    public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
         int baseCount = Math.round(Reference.WorldGen.oreDensityFactor);
 
         if (Reference.WorldGen.vanadiumOre)
-            generateOre(GlobalBlocks.vanadiumOre, 8, baseCount, world, random,
-                    chunkX, chunkZ, 10, 13);
+            generateOre(GlobalBlocks.vanadiumOre, 8, baseCount, world, random, chunkX, chunkZ, 10, 13);
         if (Reference.WorldGen.manganeseOre)
-            generateOre(GlobalBlocks.manganeseOre, 8, baseCount * 2, world,
-                    random, chunkX, chunkZ, 6, 20);
+            generateOre(GlobalBlocks.manganeseOre, 8, baseCount * 2, world, random, chunkX, chunkZ, 6, 20);
         if (Reference.WorldGen.monaziteOre)
-            generateOre(GlobalBlocks.monaziteOre, 8, baseCount, world, random,
-                    chunkX, chunkZ, 6, 32);
+            generateOre(GlobalBlocks.monaziteOre, 8, baseCount, world, random, chunkX, chunkZ, 6, 32);
         if (Reference.WorldGen.magnetOre)
-            generateOre(GlobalBlocks.magnetOre, 8, baseCount * 2, world,
-                    random, chunkX, chunkZ, 6, 64);
+            generateOre(GlobalBlocks.magnetOre, 8, baseCount * 2, world, random, chunkX, chunkZ, 6, 64);
         if (Reference.WorldGen.zincOre)
-            generateOre(GlobalBlocks.zincOre, 8, baseCount * 2, world, random,
-                    chunkX, chunkZ, 6, 64);
+            generateOre(GlobalBlocks.zincOre, 8, baseCount * 2, world, random, chunkX, chunkZ, 6, 64);
     }
 
     @SideOnly(Side.CLIENT)
@@ -244,10 +232,8 @@ public class WaterPower implements IWorldGenerator {
 
     public static boolean isDeobf() {
         try {
-            Class c = ChunkCoordinates.class.getClassLoader().loadClass(
-                    "net.minecraft.util.ChunkCoordinates");
-            Constructor co = c.getConstructor(Integer.class, Integer.class,
-                    Integer.class);
+            Class c = ChunkCoordinates.class.getClassLoader().loadClass("net.minecraft.util.ChunkCoordinates");
+            Constructor co = c.getConstructor(Integer.class, Integer.class, Integer.class);
             ChunkCoordinates cc = (ChunkCoordinates) co.newInstance(1, 2, 3);
             Method f = c.getMethod("set");
             f.invoke(cc, 4, 5, 6);

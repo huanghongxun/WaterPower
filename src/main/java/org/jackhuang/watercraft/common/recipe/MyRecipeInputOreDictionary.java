@@ -39,11 +39,9 @@ public class MyRecipeInputOreDictionary implements IMyRecipeInput {
 
         for (ItemStack input1 : inputs) {
             if (input1.getItem() != null) {
-                int metaRequired = this.meta == null ? input1.getItemDamage()
-                        : this.meta.intValue();
+                int metaRequired = this.meta == null ? input1.getItemDamage() : this.meta.intValue();
 
-                if ((subject.getItem() == input1.getItem())
-                        && ((subject.getItemDamage() == metaRequired) || (metaRequired == 32767))) {
+                if ((subject.getItem() == input1.getItem()) && ((subject.getItemDamage() == metaRequired) || (metaRequired == 32767))) {
                     return true;
                 }
             }

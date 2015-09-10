@@ -14,12 +14,12 @@ import org.jackhuang.watercraft.util.Mods;
 import cpw.mods.fml.common.Optional.Method;
 
 public class ImmersiveEngineeringModule extends BaseModule {
-    
+
     public static java.lang.reflect.Method addRecipe;
 
     @Method(modid = Mods.IDs.ImmersiveEngineering)
     public static void blastFurnace(Object input, int cookTime, ItemStack output) {
-        if(addRecipe == null) {
+        if (addRecipe == null) {
             try {
                 addRecipe = Class.forName("blusunrize.immersiveengineering.api.crafting.BlastFurnaceRecipe").getDeclaredMethod("addRecipe", ItemStack.class, Object.class, int.class);
                 addRecipe.setAccessible(true);

@@ -9,26 +9,28 @@ import org.jackhuang.watercraft.api.IUpgrade;
 import org.jackhuang.watercraft.common.item.ItemBase;
 
 public class ItemPlugins extends ItemBase implements IUpgrade {
-    
+
     public ItemPlugins() {
         super("cptItemPlugins");
         setHasSubtypes(true);
     }
-    
+
     @Override
     public String getTextureFolder() {
         return "plugins";
     }
-    
+
     @Override
     public String getItemStackDisplayName(ItemStack itemstack) {
-        if(itemstack.getItemDamage() >= PluginType.values().length) return null;
+        if (itemstack.getItemDamage() >= PluginType.values().length)
+            return null;
         return PluginType.values()[itemstack.getItemDamage()].getShowedName();
     }
-    
+
     @Override
     public String getUnlocalizedName(ItemStack itemstack) {
-        if(itemstack.getItemDamage() >= PluginType.values().length) return null;
+        if (itemstack.getItemDamage() >= PluginType.values().length)
+            return null;
         return PluginType.values()[itemstack.getItemDamage()].getUnlocalizedName();
     }
 

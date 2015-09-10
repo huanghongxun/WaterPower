@@ -11,11 +11,11 @@ public class RangeInventorySlot extends InventorySlot {
     public RangeInventorySlot(TileEntityInventory base) {
         this(base, 1);
     }
-    
+
     public RangeInventorySlot(TileEntityInventory base, int count) {
         super(base, "range", Access.IO, count);
     }
-    
+
     @Override
     public boolean accepts(ItemStack itemStack) {
         if (itemStack == null) {

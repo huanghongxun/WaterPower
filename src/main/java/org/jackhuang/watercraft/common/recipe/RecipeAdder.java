@@ -45,8 +45,7 @@ public class RecipeAdder {
         if (Mods.Factorization.isAvailable) {
             try {
                 if (Block.getBlockFromItem(input.getItem()) != Blocks.air)
-                    factorization.oreprocessing.TileEntityGrinder.addRecipe(
-                            input, output, 1);
+                    factorization.oreprocessing.TileEntityGrinder.addRecipe(input, output, 1);
             } catch (Throwable ex) {
                 FMLLog.warning("Failed to add pulverization recipe to factorization. Please report this error to https://github.com/huanghongxun/WaterPower/issues!");
             }
@@ -94,8 +93,7 @@ public class RecipeAdder {
 
         }
         if (Mods.GregTech.isAvailable) {
-            GregTech_API.sRecipeAdder.addForgeHammerRecipe(input, output, 20,
-                    32);
+            GregTech_API.sRecipeAdder.addForgeHammerRecipe(input, output, 20, 32);
         }
         if (Mods.IndustrialCraft2.isAvailable) {
             IndustrialCraftModule.metalformerRolling(input, output);
@@ -105,40 +103,31 @@ public class RecipeAdder {
             input.stackSize = 1;
             switch (sz) {
             case 1:
-                RailcraftModule
-                        .rollingMachine(output, "A", 'A', input);
+                RailcraftModule.rollingMachine(output, "A", 'A', input);
                 break;
             case 2:
-                RailcraftModule.rollingMachine(output, "AA", 'A',
-                        input);
+                RailcraftModule.rollingMachine(output, "AA", 'A', input);
                 break;
             case 3:
-                RailcraftModule.rollingMachine(output, "AAA", 'A',
-                        input);
+                RailcraftModule.rollingMachine(output, "AAA", 'A', input);
                 break;
             case 4:
-                RailcraftModule.rollingMachine(output, "AA", "AA",
-                        'A', input);
+                RailcraftModule.rollingMachine(output, "AA", "AA", 'A', input);
                 break;
             case 5:
-                RailcraftModule.rollingMachine(output, "AAA", "AA ",
-                        'A', input);
+                RailcraftModule.rollingMachine(output, "AAA", "AA ", 'A', input);
                 break;
             case 6:
-                RailcraftModule.rollingMachine(output, "AAA", "AAA",
-                        'A', input);
+                RailcraftModule.rollingMachine(output, "AAA", "AAA", 'A', input);
                 break;
             case 7:
-                RailcraftModule.rollingMachine(output, "AAA", "AAA",
-                        "A  ", 'A', input);
+                RailcraftModule.rollingMachine(output, "AAA", "AAA", "A  ", 'A', input);
                 break;
             case 8:
-                RailcraftModule.rollingMachine(output, "AAA", "AAA",
-                        "AA ", 'A', input);
+                RailcraftModule.rollingMachine(output, "AAA", "AAA", "AA ", 'A', input);
                 break;
             case 9:
-                RailcraftModule.rollingMachine(output, "AAA", "AAA",
-                        "AAA", 'A', input);
+                RailcraftModule.rollingMachine(output, "AAA", "AAA", "AAA", 'A', input);
                 break;
             }
         }
@@ -146,42 +135,33 @@ public class RecipeAdder {
         input.stackSize = 1;
         switch (sz) {
         case 1:
-            GameRegistry.addShapelessRecipe(output, ItemType.WoodenHammer.item(),
-                    input);
+            GameRegistry.addShapelessRecipe(output, ItemType.WoodenHammer.item(), input);
             break;
         case 2:
-            GameRegistry.addShapelessRecipe(output, ItemType.WoodenHammer.item(),
-                    input, input);
+            GameRegistry.addShapelessRecipe(output, ItemType.WoodenHammer.item(), input, input);
             break;
         case 3:
-            GameRegistry.addShapelessRecipe(output, ItemType.WoodenHammer.item(),
-                    input, input, input);
+            GameRegistry.addShapelessRecipe(output, ItemType.WoodenHammer.item(), input, input, input);
             break;
         case 4:
-            GameRegistry.addShapelessRecipe(output, ItemType.WoodenHammer.item(),
-                    input, input, input, input);
+            GameRegistry.addShapelessRecipe(output, ItemType.WoodenHammer.item(), input, input, input, input);
             break;
         case 5:
-            GameRegistry.addShapelessRecipe(output, ItemType.WoodenHammer.item(),
-                    input, input, input, input, input);
+            GameRegistry.addShapelessRecipe(output, ItemType.WoodenHammer.item(), input, input, input, input, input);
             break;
         case 6:
-            GameRegistry.addShapelessRecipe(output, ItemType.WoodenHammer.item(),
-                    input, input, input, input, input, input);
+            GameRegistry.addShapelessRecipe(output, ItemType.WoodenHammer.item(), input, input, input, input, input, input);
             break;
         case 7:
-            GameRegistry.addShapelessRecipe(output, ItemType.WoodenHammer.item(),
-                    input, input, input, input, input, input, input);
+            GameRegistry.addShapelessRecipe(output, ItemType.WoodenHammer.item(), input, input, input, input, input, input, input);
             break;
         case 8:
-            GameRegistry.addShapelessRecipe(output, ItemType.WoodenHammer.item(),
-                    input, input, input, input, input, input, input, input);
+            GameRegistry.addShapelessRecipe(output, ItemType.WoodenHammer.item(), input, input, input, input, input, input, input, input);
             break;
         }
     }
 
-    public static boolean blastFurnace(ItemStack input, ItemStack output,
-            int cookTime) {
+    public static boolean blastFurnace(ItemStack input, ItemStack output, int cookTime) {
         boolean flag = false;
         if (Mods.IndustrialCraft2.isAvailable) {
             IndustrialCraftModule.blastfurance(input, output);
@@ -196,8 +176,7 @@ public class RecipeAdder {
             flag = true;
         }
         if (Mods.Mekanism.isAvailable) {
-            MekanismModule.metallurgicInfuser("CARBON",
-                    Math.round(((float) cookTime) / 100.0f), input, output);
+            MekanismModule.metallurgicInfuser("CARBON", Math.round(((float) cookTime) / 100.0f), input, output);
             flag = true;
         }
         if (!flag) {

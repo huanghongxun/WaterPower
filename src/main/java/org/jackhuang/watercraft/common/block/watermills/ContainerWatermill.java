@@ -16,7 +16,6 @@ public class ContainerWatermill extends ContainerRotor {
     protected void layoutContainer() {
         super.layoutContainer();
         for (int i = 0; i < 4; i++)
-            addSlotToContainer(new SlotInventorySlot(((TileEntityWatermill)tileEntity).slotUpdater, i,
-                    152, 8 + i * 18, 2));
+            addSlotToContainer(new SlotInventorySlot(((TileEntityWatermill) tileEntity).slotUpdater, i, 152, 8 + i * 18, 2));
     }
 }

@@ -16,36 +16,35 @@ public class ItemReservoir extends ItemMeta {
         setMaxDamage(0);
         setHasSubtypes(true);
     }
-    
-    @SuppressWarnings({"rawtypes", "unchecked"})
+
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
-    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer,
-        List par3List, boolean par4) {
+    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
         par3List.add(StatCollector.translateToLocal("cptwtrml.reservoir.info"));
         par3List.add(StatCollector.translateToLocal("cptwtrml.reservoir.info2"));
         ReservoirType t = ReservoirType.values()[par1ItemStack.getItemDamage()];
         par3List.add(StatCollector.translateToLocal("cptwtrml.reservoir.MAXSOTRE") + ": " + t.capacity + "mb");
         par3List.add(StatCollector.translateToLocal("cptwtrml.reservoir.MAXUSE") + ": " + t.maxUse + "mb/s");
     }
-    
+
     @Override
     public String getItemStackDisplayName(ItemStack par1ItemStack) {
         return ReservoirType.values()[par1ItemStack.getItemDamage()].getShowedName();
     }
-    
+
     @Override
     public int getMetadata(int i) {
         if (i < ReservoirType.values().length) {
             return i;
-        }
-        else {
+        } else {
             return 0;
         }
     }
-    
+
     @Override
     public String getUnlocalizedName(ItemStack itemstack) {
-        if(itemstack.getItemDamage() >= ReservoirType.values().length) return null;
+        if (itemstack.getItemDamage() >= ReservoirType.values().length)
+            return null;
         return ReservoirType.values()[itemstack.getItemDamage()].name();
     }
 }

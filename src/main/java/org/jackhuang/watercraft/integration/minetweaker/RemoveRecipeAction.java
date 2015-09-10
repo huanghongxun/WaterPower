@@ -12,11 +12,11 @@ import net.minecraft.item.ItemStack;
 import org.jackhuang.watercraft.common.recipe.IRecipeManager;
 
 public class RemoveRecipeAction extends OneWayAction {
-    
+
     IRecipeManager recipeManager;
     ItemStack in;
     String name;
-    
+
     public RemoveRecipeAction(String name, IRecipeManager recipeManager, ItemStack input) {
         this.recipeManager = recipeManager;
         this.name = name;
@@ -30,7 +30,7 @@ public class RemoveRecipeAction extends OneWayAction {
 
     @Override
     public String describe() {
-        return "Removing " + name + " recipe for " + in.getDisplayName(); 
+        return "Removing " + name + " recipe for " + in.getDisplayName();
     }
 
 }

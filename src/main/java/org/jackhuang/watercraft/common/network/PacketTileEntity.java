@@ -19,8 +19,7 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
-public class PacketTileEntity implements IMessage,
-        IMessageHandler<PacketTileEntity, IMessage> {
+public class PacketTileEntity implements IMessage, IMessageHandler<PacketTileEntity, IMessage> {
 
     public int x, y, z;
     public TileEntityBase base;
@@ -63,8 +62,7 @@ public class PacketTileEntity implements IMessage,
         byte[] data = new byte[len];
         buf.readBytes(data);
         try {
-            tag = CompressedStreamTools.read(new DataInputStream(
-                    new ByteArrayInputStream(data)));
+            tag = CompressedStreamTools.read(new DataInputStream(new ByteArrayInputStream(data)));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

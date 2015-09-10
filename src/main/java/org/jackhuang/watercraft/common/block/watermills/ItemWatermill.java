@@ -24,19 +24,13 @@ public class ItemWatermill extends ItemMeta {
     }
 
     @Override
-    public void addInformation(ItemStack par1ItemStack,
-            EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
-        par3List.add(StatCollector
-                .translateToLocal("cptwtrml.watermill.max_output")
-                + ": "
-                + WaterType.values()[par1ItemStack.getItemDamage()].output
-                + "EU/t");
+    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
+        par3List.add(StatCollector.translateToLocal("cptwtrml.watermill.max_output") + ": " + WaterType.values()[par1ItemStack.getItemDamage()].output + "EU/t");
     }
 
     @Override
     public String getItemStackDisplayName(ItemStack par1ItemStack) {
-        return WaterType.values()[par1ItemStack.getItemDamage()]
-                .getShowedName();
+        return WaterType.values()[par1ItemStack.getItemDamage()].getShowedName();
     }
 
     @Override

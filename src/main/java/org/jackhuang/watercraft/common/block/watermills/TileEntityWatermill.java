@@ -145,11 +145,9 @@ public class TileEntityWatermill extends TileEntityRotor {
         for (int xTest = -range; xTest <= range; xTest++) {
             for (int yTest = -range; yTest <= range; yTest++) {
                 for (int zTest = -range; zTest <= range; zTest++) {
-                    if (Utils.isWater(worldObj, xCoord + xTest, yCoord + yTest,
-                            zCoord + zTest)) {
+                    if (Utils.isWater(worldObj, xCoord + xTest, yCoord + yTest, zCoord + zTest)) {
                         waterBlocks++;
-                    } else if (Utils.isLava(worldObj, xCoord + xTest, yCoord
-                            + yTest, zCoord + zTest)) {
+                    } else if (Utils.isLava(worldObj, xCoord + xTest, yCoord + yTest, zCoord + zTest)) {
                         lavaBlocks++;
                     }
                 }
@@ -192,8 +190,7 @@ public class TileEntityWatermill extends TileEntityRotor {
     public boolean hasRangeUpdater() {
         if (slotUpdater != null && !slotUpdater.isEmpty()) {
             for (int i = 0; i < slotUpdater.size(); i++)
-                if (slotUpdater.get(i) != null
-                        && slotUpdater.get(i).getItem() instanceof ItemRange)
+                if (slotUpdater.get(i) != null && slotUpdater.get(i).getItem() instanceof ItemRange)
                     return true;
         }
         return false;
@@ -208,12 +205,10 @@ public class TileEntityWatermill extends TileEntityRotor {
                 ItemStack is = slotUpdater.get(i);
                 if (is == null)
                     continue;
-                if (is != null
-                        && slotUpdater.get(i).getItem() instanceof ItemRange)
+                if (is != null && slotUpdater.get(i).getItem() instanceof ItemRange)
                     if (is.getItemDamage() >= RangeType.values().length)
                         return type.length;
-                range -= is.stackSize
-                        * RangeType.values()[is.getItemDamage()].range;
+                range -= is.stackSize * RangeType.values()[is.getItemDamage()].range;
             }
         }
         if (range < 3)
@@ -300,10 +295,9 @@ public class TileEntityWatermill extends TileEntityRotor {
 
     @Override
     public ItemStack getDroppedItemStack() {
-        return new ItemStack(GlobalBlocks.waterMill, 1, type == null ? 0
-                : type.ordinal());
+        return new ItemStack(GlobalBlocks.waterMill, 1, type == null ? 0 : type.ordinal());
     }
-    
+
     @Override
     protected boolean allowedSendPacketTank() {
         return false;

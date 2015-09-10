@@ -54,8 +54,7 @@ public class ItemMaterial extends ItemRecolorable {
         int meta = par1ItemStack.getItemDamage();
         int craftingType = meta / space;
         int levelType = meta % space;
-        return MaterialTypes.values()[craftingType].getShowedName() + " "
-                + MaterialForms.values()[levelType].getShowedName();
+        return MaterialTypes.values()[craftingType].getShowedName() + " " + MaterialForms.values()[levelType].getShowedName();
     }
 
     @Override
@@ -64,9 +63,7 @@ public class ItemMaterial extends ItemRecolorable {
             int meta = itemstack.getItemDamage();
             int meterialType = meta / space;
             int meterialForm = meta % space;
-            return "item." + "watermill."
-                    + MaterialTypes.values()[meterialType].name() + "."
-                    + MaterialForms.values()[meterialForm].name();
+            return "item." + "watermill." + MaterialTypes.values()[meterialType].name() + "." + MaterialForms.values()[meterialForm].name();
         } catch (Exception e) {
             return null;
         }
@@ -77,22 +74,18 @@ public class ItemMaterial extends ItemRecolorable {
         return false;
     }
 
-    public static ItemStack get(MaterialTypes craftingTypes,
-            MaterialForms levelTypes) {
+    public static ItemStack get(MaterialTypes craftingTypes, MaterialForms levelTypes) {
         return get(craftingTypes, levelTypes, 1);
     }
 
-    public static ItemStack get(MaterialTypes craftingTypes,
-            MaterialForms levelTypes, int mount) {
-        return new ItemStack(instance, mount, craftingTypes.ind()
-                + levelTypes.ordinal());
+    public static ItemStack get(MaterialTypes craftingTypes, MaterialForms levelTypes, int mount) {
+        return new ItemStack(instance, mount, craftingTypes.ind() + levelTypes.ordinal());
     }
 
     public void registerOreDict() {
         for (MaterialForms forms : MaterialForms.values()) {
             for (MaterialTypes types : MaterialTypes.values()) {
-                IRecipeRegistrar.registerOreDict(forms.name() + types.name(),
-                        get(types, forms));
+                IRecipeRegistrar.registerOreDict(forms.name() + types.name(), get(types, forms));
             }
         }
     }
@@ -102,79 +95,44 @@ public class ItemMaterial extends ItemRecolorable {
 
         }
         if (IRecipeRegistrar.gregtechRecipe) {
-            GregTech_API.sRecipeAdder.addAlloySmelterRecipe(
-                    get(IndustrialSteel, ingot), get(Neodymium, ingot),
-                    get(NeodymiumMagnet, ingot, 2), 240 * 20, 128);
-            GregTech_API.sRecipeAdder.addBlastRecipe(get(Vanadium, dust),
-                    get(Steel, ingot, 2), get(VanadiumSteel, ingot, 3), null,
-                    240 * 20, 512, 2000);
-            GregTech_API.sRecipeAdder.addBlastRecipe(get(Manganese, dust),
-                    get(Steel, ingot, 2), get(ManganeseSteel, ingot, 3), null,
-                    240 * 20, 512, 2000);
-            GregTech_API.sRecipeAdder.addBlastRecipe(get(Steel, dust),
-                    get(Steel, ingot), get(IndustrialSteel, ingot, 2), null,
-                    240 * 20, 512, 2000);
-            addShapelessRecipeByOreDictionary(
-                    get(ZincAlloy, MaterialForms.dust, 5),
-                    "dustSmallMagnesium", "dustSmallAluminium",
-                    "dustSmallTitanium", "dustSmallCopper", "dustZinc",
-                    "dustZinc", "dustZinc", "dustZinc");
+            GregTech_API.sRecipeAdder.addAlloySmelterRecipe(get(IndustrialSteel, ingot), get(Neodymium, ingot), get(NeodymiumMagnet, ingot, 2), 240 * 20, 128);
+            GregTech_API.sRecipeAdder.addBlastRecipe(get(Vanadium, dust), get(Steel, ingot, 2), get(VanadiumSteel, ingot, 3), null, 240 * 20, 512, 2000);
+            GregTech_API.sRecipeAdder.addBlastRecipe(get(Manganese, dust), get(Steel, ingot, 2), get(ManganeseSteel, ingot, 3), null, 240 * 20, 512, 2000);
+            GregTech_API.sRecipeAdder.addBlastRecipe(get(Steel, dust), get(Steel, ingot), get(IndustrialSteel, ingot, 2), null, 240 * 20, 512, 2000);
+            addShapelessRecipeByOreDictionary(get(ZincAlloy, MaterialForms.dust, 5), "dustSmallMagnesium", "dustSmallAluminium", "dustSmallTitanium", "dustSmallCopper", "dustZinc", "dustZinc", "dustZinc", "dustZinc");
         } else {
             if (Mods.EnderIO.isAvailable) {
-                EnderIOModule.alloySmelter("Zinc Alloy Dust",
-                        get(VanadiumSteel, ingot, 3),
-                        new MyRecipeInputOreDictionary("ingotVanadium"),
-                        new MyRecipeInputOreDictionary("ingotSteel"),
-                        new MyRecipeInputOreDictionary("ingotSteel"));
-                EnderIOModule.alloySmelter("Neodymium Magnet Dust",
-                        get(NeodymiumMagnet, ingot, 2),
-                        new MyRecipeInputOreDictionary("ingotNeodymium"),
-                        new MyRecipeInputOreDictionary("ingotMagnet"));
-                EnderIOModule.alloySmelter("Vanadium Steel Dust",
-                        get(VanadiumSteel, ingot, 3),
-                        new MyRecipeInputOreDictionary("ingotVanadium"),
-                        new MyRecipeInputOreDictionary("ingotSteel"),
-                        new MyRecipeInputOreDictionary("ingotSteel"));
-                EnderIOModule.alloySmelter("Manganese Steel Dust 3",
-                        get(ManganeseSteel, ingot, 3),
-                        new MyRecipeInputOreDictionary("ingotManganese"),
-                        new MyRecipeInputOreDictionary("ingotSteel"),
-                        new MyRecipeInputOreDictionary("ingotSteel"));
-                EnderIOModule.alloySmelter("Manganese Steel Dust 4",
-                        get(ManganeseSteel, ingot, 4),
-                        new MyRecipeInputOreDictionary("ingotManganese"),
-                        new MyRecipeInputOreDictionary("ingotSteel"),
-                        new MyRecipeInputOreDictionary("ingotSteel"),
-                        new MyRecipeInputOreDictionary("ingotCoal"));
+                EnderIOModule.alloySmelter("Zinc Alloy Dust", get(VanadiumSteel, ingot, 3), new MyRecipeInputOreDictionary("ingotVanadium"), new MyRecipeInputOreDictionary("ingotSteel"), new MyRecipeInputOreDictionary("ingotSteel"));
+                EnderIOModule.alloySmelter("Neodymium Magnet Dust", get(NeodymiumMagnet, ingot, 2), new MyRecipeInputOreDictionary("ingotNeodymium"), new MyRecipeInputOreDictionary("ingotMagnet"));
+                EnderIOModule.alloySmelter("Vanadium Steel Dust", get(VanadiumSteel, ingot, 3), new MyRecipeInputOreDictionary("ingotVanadium"), new MyRecipeInputOreDictionary("ingotSteel"), new MyRecipeInputOreDictionary("ingotSteel"));
+                EnderIOModule.alloySmelter("Manganese Steel Dust 3", get(ManganeseSteel, ingot, 3), new MyRecipeInputOreDictionary("ingotManganese"), new MyRecipeInputOreDictionary("ingotSteel"), new MyRecipeInputOreDictionary("ingotSteel"));
+                EnderIOModule.alloySmelter("Manganese Steel Dust 4", get(ManganeseSteel, ingot, 4), new MyRecipeInputOreDictionary("ingotManganese"), new MyRecipeInputOreDictionary("ingotSteel"), new MyRecipeInputOreDictionary("ingotSteel"), new MyRecipeInputOreDictionary("ingotCoal"));
             }
-            addShapelessRecipeByOreDictionary(get(ZincAlloy, dust, 5),
-                    "dustZinc", "dustZinc", "dustZinc", "dustZinc",
-                    "dustCopper");
-            addShapelessRecipeByOreDictionary(get(VanadiumSteel, dust, 3),
-                    "dustVanadium", "dustSteel", "dustSteel");
-            addShapelessRecipeByOreDictionary(get(NeodymiumMagnet, dust, 2),
-                    "dustNeodymium", "dustMagnet");
-            addShapelessRecipeByOreDictionary(get(ManganeseSteel, dust, 4),
-                    "dustManganese", "dustSteel", "dustSteel", "dustCoal");
-            addShapelessRecipeByOreDictionary(get(ManganeseSteel, dust, 3),
-                    "dustManganese", "dustSteel", "dustSteel");
+            addShapelessRecipeByOreDictionary(get(ZincAlloy, dust, 5), "dustZinc", "dustZinc", "dustZinc", "dustZinc", "dustCopper");
+            addShapelessRecipeByOreDictionary(get(VanadiumSteel, dust, 3), "dustVanadium", "dustSteel", "dustSteel");
+            addShapelessRecipeByOreDictionary(get(NeodymiumMagnet, dust, 2), "dustNeodymium", "dustMagnet");
+            addShapelessRecipeByOreDictionary(get(ManganeseSteel, dust, 4), "dustManganese", "dustSteel", "dustSteel", "dustCoal");
+            addShapelessRecipeByOreDictionary(get(ManganeseSteel, dust, 3), "dustManganese", "dustSteel", "dustSteel");
             List<ItemStack> steelIngots = OreDictionary.getOres("ingotSteel");
             boolean flag = false;
             for (ItemStack is : steelIngots)
-                flag |= RecipeAdder.blastFurnace(is,
-                        get(IndustrialSteel, ingot), 1000);
+                flag |= RecipeAdder.blastFurnace(is, get(IndustrialSteel, ingot), 1000);
             if (!flag) {
-                GameRegistry.addSmelting(new ItemStack(Items.iron_ingot),
-                        get(Steel, ingot), 0);
+                GameRegistry.addSmelting(new ItemStack(Items.iron_ingot), get(Steel, ingot), 0);
             }
         }
 
         for (MaterialTypes types : MaterialTypes.values()) {
-            addShapedRecipe(get(types, dust), // 4 small dusts -> 1 dust
-                    "AA", "AA", 'A', get(types, dustSmall));
+            addShapelessRecipeByOreDictionary(get(types, dust), // 4 small dusts
+                                                                // -> 1 dust
+                    get(types, dustSmall), get(types, dustSmall), get(types, dustSmall), get(types, dustSmall));
 
-            addShapedRecipe(get(types, dustSmall, 4), // 1 dust -> 4 small dusts
-                    "A", 'A', get(types, dust));
+            addShapelessRecipeByOreDictionary(get(types, dustSmall, 4), // 1
+                                                                        // dust
+                                                                        // -> 4
+                                                                        // small
+                                                                        // dusts
+                    get(types, dust));
 
             addShapedRecipe(get(types, dust), // 9 tiny dusts -> 1 dust
                     "AAA", "AAA", "AAA", 'A', get(types, dustTiny));
@@ -190,28 +148,24 @@ public class ItemMaterial extends ItemRecolorable {
                     "AAA", "AAA", "AAA", 'A', get(types, nugget));
             RecipeAdder.compressor(get(types, nugget, 9), get(types, ingot));
 
-            addShapedRecipe(get(types, nugget, 9), // 1 ingot -> 9 nuggets
-                    "A", 'A', get(types, ingot));
+            addShapelessRecipeByOreDictionary(get(types, nugget, 9), // 1 ingot
+                                                                     // -> 9
+                                                                     // nuggets
+                    get(types, ingot));
 
-            addShapedRecipe(get(types, stick, 4), // 2 ingots -> 2 stick
+            addShapedRecipe(get(types, stick, 4), // 2 ingots -> 4 stick
                     "A", "A", 'A', get(types, ingot));
 
-            addShapedRecipe(
-                    get(types, gear), // some sticks & plates -> 1 gear
-                    "SPS", "P P", "SPS", 'S', get(types, stick), 'P',
-                    get(types, plate));
+            addShapedRecipe(get(types, gear), // 4 sticks & 4 plates -> 1 gear
+                    "SPS", "P P", "SPS", 'S', get(types, stick), 'P', get(types, plate));
 
             addShapedRecipe(get(types, ring), // 4 sticks -> 1 ring
                     " S ", "S S", " S ", 'S', get(types, stick));
-            
+
             addShapelessRecipeByOreDictionary(get(types, ingot, 9), get(types, block));
 
-            ItemStack d = get(types, dust);
-            GameRegistry.addSmelting(d, get(types, ingot), 0);
-            d = get(types, dustTiny);
-            GameRegistry.addSmelting(d, get(types, nugget), 0);
-            
-            
+            GameRegistry.addSmelting(get(types, dust), get(types, ingot), 0);
+            GameRegistry.addSmelting(get(types, dustTiny), get(types, nugget), 0);
             GameRegistry.addSmelting(get(types, block), get(types, ingot, 9), 0);
 
             RecipeAdder.bender(get(types, ingot), get(types, plate));
@@ -224,14 +178,12 @@ public class ItemMaterial extends ItemRecolorable {
             RecipeAdder.cutter(get(types, block), get(types, plate, 9));
             RecipeAdder.lathe(get(types, stick), get(types, screw, 4));
 
-            addShapelessRecipeByOreDictionary(get(types, plateDense),
-                    ItemType.WoodenHammer.item(), get(types, block));
+            addShapelessRecipeByOreDictionary(get(types, plateDense), ItemType.WoodenHammer.item(), get(types, block));
         }
     }
 
     @Override
-    public void getSubItems(Item par1, CreativeTabs par2CreativeTabs,
-            List par3List) {
+    public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List par3List) {
         for (MaterialTypes c : MaterialTypes.values())
             for (MaterialForms l : MaterialForms.values())
                 par3List.add(get(c, l));
@@ -260,16 +212,13 @@ public class ItemMaterial extends ItemRecolorable {
     }
 
     @Override
-    public boolean onItemUseFirst(ItemStack stack, EntityPlayer player,
-            World world, int x, int y, int z, int side, float hitX, float hitY,
-            float hitZ) {
+    public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
         if (stack.stackSize > 0) {
             int meta = stack.getItemDamage();
             MaterialTypes t = MaterialTypes.values()[meta / space];
             MaterialForms f = MaterialForms.values()[meta % space];
             if (t == MaterialTypes.Magnet && f == MaterialForms.ingot) {
-                player.inventory.addItemStackToInventory(new ItemStack(
-                        Items.iron_ingot));
+                player.inventory.addItemStackToInventory(new ItemStack(Items.iron_ingot));
                 stack.stackSize--;
             }
         }

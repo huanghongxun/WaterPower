@@ -13,13 +13,12 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.inventory.Container;
 
 public final class DefaultGuiIds {
-    
+
     private static HashMap<String, Integer> idMap = new HashMap<String, Integer>();
 
     public static int get(String name) {
         if (!idMap.containsKey(name)) {
-            throw new IllegalArgumentException("default id for " + name
-                    + " is not registered.");
+            throw new IllegalArgumentException("default id for " + name + " is not registered.");
         }
         return idMap.get(name);
     }

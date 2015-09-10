@@ -33,15 +33,13 @@ public class MyRecipeManager implements IRecipeManager {
         for (int i = 0; i < outputs.length; i++) {
             if (outputs[i] != null)
                 continue;
-            throw new NullPointerException("The output ItemStack #" + i
-                    + " is null (counting from 0)");
+            throw new NullPointerException("The output ItemStack #" + i + " is null (counting from 0)");
         }
 
         for (IMyRecipeInput existingInput : this.recipes.keySet())
             if (existingInput.matches(input))
                 return false;
-        this.recipes.put(new MyRecipeInputItemStack(input), new MyRecipeOutput(
-                outputs));
+        this.recipes.put(new MyRecipeInputItemStack(input), new MyRecipeOutput(outputs));
         return true;
     }
 
@@ -69,14 +67,11 @@ public class MyRecipeManager implements IRecipeManager {
             IMyRecipeInput recipeInput = (IMyRecipeInput) entry.getKey();
 
             if (recipeInput.matches(input)) {
-                if ((input.stackSize < recipeInput.getInputAmount())
-                        || ((input.getItem().hasContainerItem()) && (input.stackSize != recipeInput
-                                .getInputAmount())))
+                if ((input.stackSize < recipeInput.getInputAmount()) || ((input.getItem().hasContainerItem()) && (input.stackSize != recipeInput.getInputAmount())))
                     break;
                 if (adjustInput) {
                     if (input.getItem().hasContainerItem()) {
-                        ItemStack container = input.getItem().getContainerItem(
-                                input);
+                        ItemStack container = input.getItem().getContainerItem(input);
 
                         input = container.copy();
                     } else {

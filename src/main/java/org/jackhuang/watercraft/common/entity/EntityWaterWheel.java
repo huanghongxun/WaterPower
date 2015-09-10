@@ -40,55 +40,34 @@ public class EntityWaterWheel extends Entity {
         this.yParent = parent.yCoord;
         this.zParent = parent.zCoord;
 
-        int[] actualCoords = Utils.moveForward(world, parent.xCoord,
-                parent.yCoord, parent.zCoord, parent.getDirection(), 1);
+        int[] actualCoords = Utils.moveForward(world, parent.xCoord, parent.yCoord, parent.zCoord, parent.getDirection(), 1);
         setPosition(actualCoords[0], actualCoords[1], actualCoords[2]);
 
-        //this.boundingBox.setBB(getBoundingBox());
+        // this.boundingBox.setBB(getBoundingBox());
     }
 
-    /*@Override
-    public AxisAlignedBB getBoundingBox() {
-        double halfS = (this.parent.getType().length - 1) / 2;
-        double def = 1.0D;
-        double[] exp = { 0.0D, 0.0D };
-        double[] offset = new double[]{ 0, 0, 0 };
-
-        if (this.parent == null) {
-            return null;
-        }
-
-        //System.out.println(this.parent.getDirection());
-        switch (this.parent.getDirection()) {
-        case 5:
-            offset[0] += 1;
-            offset[2] -= 4;
-            exp[1] += halfS;
-            break;
-        case 2:
-            exp[0] += halfS;
-            offset[2] -= 1;
-            offset[0] += 4;
-            break;
-        case 3:
-            offset[2] += 1;
-            offset[0] += 10;
-            exp[0] += halfS;
-            break;
-        case 4:
-            offset[0] -= 1;
-            offset[2] += 4;
-            exp[1] += halfS;
-            break;
-        }
-        
-        double x = parent.xCoord + offset[0], y = parent.yCoord + offset[1], z = parent.zCoord + offset[2];
-
-        AxisAlignedBB aabb = AxisAlignedBB.getBoundingBox(x, y,
-                z, x + def, y + def, z + def)
-                .expand(exp[0], halfS, exp[1]);
-        return aabb;//AxisAlignedBB.getBoundingBox(posX, posY, posZ, posX, posY, posZ).expand(0, 0, 0);
-    }*/
+    /*
+     * @Override public AxisAlignedBB getBoundingBox() { double halfS =
+     * (this.parent.getType().length - 1) / 2; double def = 1.0D; double[] exp =
+     * { 0.0D, 0.0D }; double[] offset = new double[]{ 0, 0, 0 };
+     * 
+     * if (this.parent == null) { return null; }
+     * 
+     * //System.out.println(this.parent.getDirection()); switch
+     * (this.parent.getDirection()) { case 5: offset[0] += 1; offset[2] -= 4;
+     * exp[1] += halfS; break; case 2: exp[0] += halfS; offset[2] -= 1;
+     * offset[0] += 4; break; case 3: offset[2] += 1; offset[0] += 10; exp[0] +=
+     * halfS; break; case 4: offset[0] -= 1; offset[2] += 4; exp[1] += halfS;
+     * break; }
+     * 
+     * double x = parent.xCoord + offset[0], y = parent.yCoord + offset[1], z =
+     * parent.zCoord + offset[2];
+     * 
+     * AxisAlignedBB aabb = AxisAlignedBB.getBoundingBox(x, y, z, x + def, y +
+     * def, z + def) .expand(exp[0], halfS, exp[1]); return
+     * aabb;//AxisAlignedBB.getBoundingBox(posX, posY, posZ, posX, posY,
+     * posZ).expand(0, 0, 0); }
+     */
 
     protected void entityInit() {
     }
@@ -97,15 +76,13 @@ public class EntityWaterWheel extends Entity {
     public void onUpdate() {
         super.onUpdate();
 
-        this.parent = ((TileEntityWatermill) this.worldObj.getTileEntity(
-                this.xParent, this.yParent, this.zParent));
-        
+        this.parent = ((TileEntityWatermill) this.worldObj.getTileEntity(this.xParent, this.yParent, this.zParent));
+
         if (this.parent == null)
             destroy();
         else {
             parentFacing = parent.getDirection();
-            int[] actualCoords = Utils.moveForward(worldObj, parent.xCoord,
-                    parent.yCoord, parent.zCoord, parent.getDirection(), 1);
+            int[] actualCoords = Utils.moveForward(worldObj, parent.xCoord, parent.yCoord, parent.zCoord, parent.getDirection(), 1);
             setPosition(actualCoords[0], actualCoords[1], actualCoords[2]);
         }
         updateParameters();
@@ -146,7 +123,7 @@ public class EntityWaterWheel extends Entity {
             return;
         }
         this.wheelType = this.parent.getRotor().type;
-        //this.boundingBox.setBB(getBoundingBox());
+        // this.boundingBox.setBB(getBoundingBox());
     }
 
     public void destroy() {

@@ -57,15 +57,7 @@ public class NormalRecipeRegistrar extends EasyRecipeRegistrar {
     }
 
     private void addWatermillRecipe(int meta, LevelTypes level) {
-        this.addRecipeByOreDictionary(new ItemStack(GlobalBlocks.waterMill, 1,
-                meta), "CBC", "IAT", "SRS", 'C', ItemCrafting.get(
-                CraftingTypes.casing, level), 'I', ItemCrafting.get(
-                CraftingTypes.outputInterface, level), 'A', ItemCrafting.get(
-                CraftingTypes.rotationAxle, level), 'B', ItemCrafting.get(
-                CraftingTypes.paddleBase, level), 'S', ItemCrafting.get(
-                CraftingTypes.stator, level), 'R', ItemCrafting.get(
-                CraftingTypes.rotor, level), 'T', ItemCrafting.get(
-                CraftingTypes.circuit, level));
+        this.addRecipeByOreDictionary(new ItemStack(GlobalBlocks.waterMill, 1, meta), "CBC", "IAT", "SRS", 'C', ItemCrafting.get(CraftingTypes.casing, level), 'I', ItemCrafting.get(CraftingTypes.outputInterface, level), 'A', ItemCrafting.get(CraftingTypes.rotationAxle, level), 'B', ItemCrafting.get(CraftingTypes.paddleBase, level), 'S', ItemCrafting.get(CraftingTypes.stator, level), 'R', ItemCrafting.get(CraftingTypes.rotor, level), 'T', ItemCrafting.get(CraftingTypes.circuit, level));
     }
 
 }

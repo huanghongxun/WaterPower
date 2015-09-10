@@ -52,45 +52,29 @@ public class TinkersConstructModule extends BaseModule {
         ItemStack block = ItemMaterial.get(ore.t, MaterialForms.block);
 
         addMeltingRecipe(block, temp, new FluidStack(fluid, blockLiquidValue));
-        TConstructRegistry.getBasinCasting().addCastingRecipe(block,
-                new FluidStack(fluid, blockLiquidValue), 50);
+        TConstructRegistry.getBasinCasting().addCastingRecipe(block, new FluidStack(fluid, blockLiquidValue), 50);
 
-        addMeltingRecipe(new ItemStack(GlobalBlocks.ore, 1, ore.ordinal()),
-                temp, new FluidStack(fluid, oreLiquidValue));
+        addMeltingRecipe(new ItemStack(GlobalBlocks.ore, 1, ore.ordinal()), temp, new FluidStack(fluid, oreLiquidValue));
 
-        tryAddMelting(MaterialForms.ingot, ore, block, fluid, temp,
-                ingotLiquidValue);
-        TConstructRegistry.getTableCasting().addCastingRecipe(
-                ItemMaterial.get(ore.t, MaterialForms.ingot),
-                new FluidStack(fluid, ingotLiquidValue),
-                new ItemStack(TinkerSmeltery.metalPattern), 50);
+        tryAddMelting(MaterialForms.ingot, ore, block, fluid, temp, ingotLiquidValue);
+        TConstructRegistry.getTableCasting().addCastingRecipe(ItemMaterial.get(ore.t, MaterialForms.ingot), new FluidStack(fluid, ingotLiquidValue), new ItemStack(TinkerSmeltery.metalPattern), 50);
 
-        tryAddMelting(MaterialForms.nugget, ore, block, fluid, temp,
-                nuggetLiquidValue);
-        tryAddCasting(MaterialForms.nugget, ore, new FluidStack(fluid,
-                nuggetLiquidValue), 27);
+        tryAddMelting(MaterialForms.nugget, ore, block, fluid, temp, nuggetLiquidValue);
+        tryAddCasting(MaterialForms.nugget, ore, new FluidStack(fluid, nuggetLiquidValue), 27);
 
-        tryAddMelting(MaterialForms.dust, ore, block, fluid, temp,
-                ingotLiquidValue);
+        tryAddMelting(MaterialForms.dust, ore, block, fluid, temp, ingotLiquidValue);
     }
 
-    private void tryAddMelting(MaterialForms prefix, OreType ore,
-            ItemStack block, Fluid fluid, int temp, int fluidAmount) {
+    private void tryAddMelting(MaterialForms prefix, OreType ore, ItemStack block, Fluid fluid, int temp, int fluidAmount) {
         try {
-            Smeltery.addMelting(ItemMaterial.get(ore.t, prefix), Block
-                    .getBlockFromItem(block.getItem()), block.getItemDamage(),
-                    temp, new FluidStack(fluid, fluidAmount));
+            Smeltery.addMelting(ItemMaterial.get(ore.t, prefix), Block.getBlockFromItem(block.getItem()), block.getItemDamage(), temp, new FluidStack(fluid, fluidAmount));
         } catch (NullPointerException e) {
         }
     }
 
-    private void tryAddCasting(MaterialForms prefix, OreType ore,
-            FluidStack fluid, int patternMeta) {
+    private void tryAddCasting(MaterialForms prefix, OreType ore, FluidStack fluid, int patternMeta) {
         try {
-            TConstructRegistry.getTableCasting().addCastingRecipe(
-                    ItemMaterial.get(ore.t, prefix), fluid,
-                    new ItemStack(TinkerSmeltery.metalPattern, 1, patternMeta),
-                    50);
+            TConstructRegistry.getTableCasting().addCastingRecipe(ItemMaterial.get(ore.t, prefix), fluid, new ItemStack(TinkerSmeltery.metalPattern, 1, patternMeta), 50);
         } catch (NullPointerException e) {
         }
     }
@@ -108,8 +92,8 @@ public class TinkersConstructModule extends BaseModule {
     @SideOnly(Side.CLIENT)
     public static void registerIcons() {
         ClientProxy proxy = (ClientProxy) WaterPower.proxy;
-        still = proxy.iconRegister.registerIcon("waterpower:fluid_still");
-        flow = proxy.iconRegister.registerIcon("waterpower:fluid_flow");
+        still = proxy.blockIconRegister.registerIcon("waterpower:fluid_still");
+        flow = proxy.blockIconRegister.registerIcon("waterpower:fluid_flow");
     }
 
     private static class MoltenMetal extends Fluid {

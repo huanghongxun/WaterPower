@@ -12,15 +12,16 @@ import net.minecraft.item.ItemStack;
 import org.jackhuang.watercraft.common.recipe.IRecipeManager;
 
 public class AddRecipeAction extends OneWayAction {
-    
+
     IRecipeManager recipeManager;
     ItemStack in, out;
     String name;
-    
+
     public AddRecipeAction(String name, IRecipeManager recipeManager, ItemStack input, ItemStack output) {
         this.recipeManager = recipeManager;
         this.name = name;
-        in = input; out = output;
+        in = input;
+        out = output;
     }
 
     @Override
@@ -30,7 +31,7 @@ public class AddRecipeAction extends OneWayAction {
 
     @Override
     public String describe() {
-        return "Adding " + name + " recipe for " + out.getDisplayName(); 
+        return "Adding " + name + " recipe for " + out.getDisplayName();
     }
 
 }

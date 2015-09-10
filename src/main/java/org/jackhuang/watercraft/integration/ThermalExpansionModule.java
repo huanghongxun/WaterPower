@@ -13,31 +13,25 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class ThermalExpansionModule extends BaseModule {
-    public static void addFurnaceRecipe(int energy, ItemStack input,
-            ItemStack output) {
+    public static void addFurnaceRecipe(int energy, ItemStack input, ItemStack output) {
         NBTTagCompound toSend = new NBTTagCompound();
         toSend.setInteger("energy", energy);
         toSend.setTag("input", new NBTTagCompound());
         toSend.setTag("output", new NBTTagCompound());
         input.writeToNBT(toSend.getCompoundTag("input"));
         output.writeToNBT(toSend.getCompoundTag("output"));
-        FMLInterModComms.sendMessage("ThermalExpansion", "FurnaceRecipe",
-                toSend);
+        FMLInterModComms.sendMessage("ThermalExpansion", "FurnaceRecipe", toSend);
     }
 
-    public static void addPulverizerRecipe(int energy, ItemStack input,
-            ItemStack primaryOutput) {
+    public static void addPulverizerRecipe(int energy, ItemStack input, ItemStack primaryOutput) {
         addPulverizerRecipe(energy, input, primaryOutput, null, 0);
     }
 
-    public static void addPulverizerRecipe(int energy, ItemStack input,
-            ItemStack primaryOutput, ItemStack secondaryOutput) {
+    public static void addPulverizerRecipe(int energy, ItemStack input, ItemStack primaryOutput, ItemStack secondaryOutput) {
         addPulverizerRecipe(energy, input, primaryOutput, secondaryOutput, 100);
     }
 
-    public static void addPulverizerRecipe(int energy, ItemStack input,
-            ItemStack primaryOutput, ItemStack secondaryOutput,
-            int secondaryChance) {
+    public static void addPulverizerRecipe(int energy, ItemStack input, ItemStack primaryOutput, ItemStack secondaryOutput, int secondaryChance) {
         if ((input == null) || (primaryOutput == null))
             return;
         NBTTagCompound toSend = new NBTTagCompound();
@@ -48,26 +42,20 @@ public class ThermalExpansionModule extends BaseModule {
         input.writeToNBT(toSend.getCompoundTag("input"));
         primaryOutput.writeToNBT(toSend.getCompoundTag("primaryOutput"));
         if (secondaryOutput != null)
-            secondaryOutput
-                    .writeToNBT(toSend.getCompoundTag("secondaryOutput"));
+            secondaryOutput.writeToNBT(toSend.getCompoundTag("secondaryOutput"));
         toSend.setInteger("secondaryChance", secondaryChance);
-        FMLInterModComms.sendMessage("ThermalExpansion", "PulverizerRecipe",
-                toSend);
+        FMLInterModComms.sendMessage("ThermalExpansion", "PulverizerRecipe", toSend);
     }
 
-    public static void addSawmillRecipe(int energy, ItemStack input,
-            ItemStack primaryOutput) {
+    public static void addSawmillRecipe(int energy, ItemStack input, ItemStack primaryOutput) {
         addSawmillRecipe(energy, input, primaryOutput, null, 0);
     }
 
-    public static void addSawmillRecipe(int energy, ItemStack input,
-            ItemStack primaryOutput, ItemStack secondaryOutput) {
+    public static void addSawmillRecipe(int energy, ItemStack input, ItemStack primaryOutput, ItemStack secondaryOutput) {
         addSawmillRecipe(energy, input, primaryOutput, secondaryOutput, 100);
     }
 
-    public static void addSawmillRecipe(int energy, ItemStack input,
-            ItemStack primaryOutput, ItemStack secondaryOutput,
-            int secondaryChance) {
+    public static void addSawmillRecipe(int energy, ItemStack input, ItemStack primaryOutput, ItemStack secondaryOutput, int secondaryChance) {
         if ((input == null) || (primaryOutput == null))
             return;
         NBTTagCompound toSend = new NBTTagCompound();
@@ -78,31 +66,21 @@ public class ThermalExpansionModule extends BaseModule {
         input.writeToNBT(toSend.getCompoundTag("input"));
         primaryOutput.writeToNBT(toSend.getCompoundTag("primaryOutput"));
         if (secondaryOutput != null)
-            secondaryOutput
-                    .writeToNBT(toSend.getCompoundTag("secondaryOutput"));
+            secondaryOutput.writeToNBT(toSend.getCompoundTag("secondaryOutput"));
         toSend.setInteger("secondaryChance", secondaryChance);
-        FMLInterModComms.sendMessage("ThermalExpansion", "SawmillRecipe",
-                toSend);
+        FMLInterModComms.sendMessage("ThermalExpansion", "SawmillRecipe", toSend);
     }
 
-    public static void addSmelterRecipe(int energy, ItemStack primaryInput,
-            ItemStack secondaryInput, ItemStack primaryOutput) {
-        addSmelterRecipe(energy, primaryInput, secondaryInput, primaryOutput,
-                null, 0);
+    public static void addSmelterRecipe(int energy, ItemStack primaryInput, ItemStack secondaryInput, ItemStack primaryOutput) {
+        addSmelterRecipe(energy, primaryInput, secondaryInput, primaryOutput, null, 0);
     }
 
-    public static void addSmelterRecipe(int energy, ItemStack primaryInput,
-            ItemStack secondaryInput, ItemStack primaryOutput,
-            ItemStack secondaryOutput) {
-        addSmelterRecipe(energy, primaryInput, secondaryInput, primaryOutput,
-                secondaryOutput, 100);
+    public static void addSmelterRecipe(int energy, ItemStack primaryInput, ItemStack secondaryInput, ItemStack primaryOutput, ItemStack secondaryOutput) {
+        addSmelterRecipe(energy, primaryInput, secondaryInput, primaryOutput, secondaryOutput, 100);
     }
 
-    public static void addSmelterRecipe(int energy, ItemStack primaryInput,
-            ItemStack secondaryInput, ItemStack primaryOutput,
-            ItemStack secondaryOutput, int secondaryChance) {
-        if ((primaryInput == null) || (secondaryInput == null)
-                || (primaryOutput == null))
+    public static void addSmelterRecipe(int energy, ItemStack primaryInput, ItemStack secondaryInput, ItemStack primaryOutput, ItemStack secondaryOutput, int secondaryChance) {
+        if ((primaryInput == null) || (secondaryInput == null) || (primaryOutput == null))
             return;
         NBTTagCompound toSend = new NBTTagCompound();
         toSend.setInteger("energy", energy);
@@ -114,10 +92,8 @@ public class ThermalExpansionModule extends BaseModule {
         secondaryInput.writeToNBT(toSend.getCompoundTag("secondaryInput"));
         primaryOutput.writeToNBT(toSend.getCompoundTag("primaryOutput"));
         if (secondaryOutput != null)
-            secondaryOutput
-                    .writeToNBT(toSend.getCompoundTag("secondaryOutput"));
+            secondaryOutput.writeToNBT(toSend.getCompoundTag("secondaryOutput"));
         toSend.setInteger("secondaryChance", secondaryChance);
-        FMLInterModComms.sendMessage("ThermalExpansion", "SmelterRecipe",
-                toSend);
+        FMLInterModComms.sendMessage("ThermalExpansion", "SmelterRecipe", toSend);
     }
 }

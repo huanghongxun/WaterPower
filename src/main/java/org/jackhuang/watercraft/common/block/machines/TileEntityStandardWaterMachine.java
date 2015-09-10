@@ -15,8 +15,7 @@ import org.jackhuang.watercraft.common.recipe.MyRecipeOutput;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-public abstract class TileEntityStandardWaterMachine extends
-        TileEntityWaterMachine implements IHasGui {
+public abstract class TileEntityStandardWaterMachine extends TileEntityWaterMachine implements IHasGui {
     protected short progress = 0;
     public int defaultEnergyConsume;
     public int defaultOperationLength;
@@ -38,8 +37,7 @@ public abstract class TileEntityStandardWaterMachine extends
         this(waterPerTick, length, 2);
     }
 
-    public TileEntityStandardWaterMachine(int waterPerTick, int length,
-            int outputSlots) {
+    public TileEntityStandardWaterMachine(int waterPerTick, int length, int outputSlots) {
         super(waterPerTick * length);
 
         this.defaultEnergyConsume = this.energyConsume = waterPerTick;
@@ -170,35 +168,25 @@ public abstract class TileEntityStandardWaterMachine extends
                 continue;
             IUpgrade upgrade = (IUpgrade) stack.getItem();
 
-            processTimeMultiplier *= Math.pow(
-                    upgrade.getSpeedAdditionalValue(stack), stack.stackSize);
-            energyDemandMultiplier *= Math.pow(
-                    upgrade.getEnergyDemandMultiplier(stack), stack.stackSize);
-            extraEnergyStorage += upgrade.getStorageAdditionalValue(stack)
-                    * stack.stackSize;
+            processTimeMultiplier *= Math.pow(upgrade.getSpeedAdditionalValue(stack), stack.stackSize);
+            energyDemandMultiplier *= Math.pow(upgrade.getEnergyDemandMultiplier(stack), stack.stackSize);
+            extraEnergyStorage += upgrade.getStorageAdditionalValue(stack) * stack.stackSize;
             energyStorageMultiplier *= Math.pow(1, stack.stackSize);
         }
 
         double previousProgress = this.progress / this.operationLength;
 
-        double stackOpLen = (this.defaultOperationLength + extraProcessTime)
-                * 64.0D * processTimeMultiplier;
-        this.operationsPerTick = (int) Math.min(Math.ceil(64.0D / stackOpLen),
-                2147483647.0D);
-        this.operationLength = (int) Math.round(stackOpLen
-                * this.operationsPerTick / 64.0D);
+        double stackOpLen = (this.defaultOperationLength + extraProcessTime) * 64.0D * processTimeMultiplier;
+        this.operationsPerTick = (int) Math.min(Math.ceil(64.0D / stackOpLen), 2147483647.0D);
+        this.operationLength = (int) Math.round(stackOpLen * this.operationsPerTick / 64.0D);
 
-        this.energyConsume = applyModifier(this.defaultEnergyConsume,
-                extraEnergyDemand, energyDemandMultiplier);
-        this.setFluidTankCapacity(applyModifier(this.defaultEnergyStorage,
-                extraEnergyStorage + this.operationLength * this.energyConsume,
-                energyStorageMultiplier));
+        this.energyConsume = applyModifier(this.defaultEnergyConsume, extraEnergyDemand, energyDemandMultiplier);
+        this.setFluidTankCapacity(applyModifier(this.defaultEnergyStorage, extraEnergyStorage + this.operationLength * this.energyConsume, energyStorageMultiplier));
 
         if (this.operationLength < 1)
             this.operationLength = 1;
 
-        this.progress = (short) (int) Math.floor(previousProgress
-                * this.operationLength + 0.1D);
+        this.progress = (short) (int) Math.floor(previousProgress * this.operationLength + 0.1D);
     }
 
     private int applyModifier(int base, int extra, double multiplier) {

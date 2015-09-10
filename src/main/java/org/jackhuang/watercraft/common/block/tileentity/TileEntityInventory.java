@@ -12,8 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
-public abstract class TileEntityInventory extends TileEntityBase implements
-        ISidedInventory {
+public abstract class TileEntityInventory extends TileEntityBase implements ISidedInventory {
     private final List<InventorySlot> invSlots = new ArrayList<InventorySlot>();
 
     @Override
@@ -42,11 +41,11 @@ public abstract class TileEntityInventory extends TileEntityBase implements
 
         nbtTagCompound.setTag("InvSlots", invSlotsTag);
     }
-    
+
     public List<InventorySlot> getInventorySlots() {
         return invSlots;
     }
-    
+
     @Override
     public boolean hasCustomInventoryName() {
         return true;
@@ -123,8 +122,7 @@ public abstract class TileEntityInventory extends TileEntityBase implements
 
     @Override
     public boolean isUseableByPlayer(EntityPlayer entityPlayer) {
-        return entityPlayer.getDistance(this.xCoord + 0.5D, this.yCoord + 0.5D,
-                this.zCoord + 0.5D) <= 64.0D;
+        return entityPlayer.getDistance(this.xCoord + 0.5D, this.yCoord + 0.5D, this.zCoord + 0.5D) <= 64.0D;
     }
 
     @Override
@@ -139,8 +137,7 @@ public abstract class TileEntityInventory extends TileEntityBase implements
     public boolean isItemValidForSlot(int index, ItemStack itemStack) {
         InventorySlot invSlot = getInvSlot(index);
 
-        return (invSlot != null) && (invSlot.canInput())
-                && (invSlot.accepts(itemStack));
+        return (invSlot != null) && (invSlot.canInput()) && (invSlot.accepts(itemStack));
     }
 
     @Override
@@ -162,15 +159,11 @@ public abstract class TileEntityInventory extends TileEntityBase implements
 
         if ((!targetSlot.canInput()) || (!targetSlot.accepts(itemStack)))
             return false;
-        if ((targetSlot.preferredSide != InventorySlot.InvSide.ANY)
-                && (targetSlot.preferredSide.matches(side)))
+        if ((targetSlot.preferredSide != InventorySlot.InvSide.ANY) && (targetSlot.preferredSide.matches(side)))
             return true;
 
         for (InventorySlot invSlot : this.invSlots) {
-            if ((invSlot != targetSlot)
-                    && (invSlot.preferredSide != InventorySlot.InvSide.ANY)
-                    && (invSlot.preferredSide.matches(side))
-                    && (invSlot.canInput()) && (invSlot.accepts(itemStack))) {
+            if ((invSlot != targetSlot) && (invSlot.preferredSide != InventorySlot.InvSide.ANY) && (invSlot.preferredSide.matches(side)) && (invSlot.canInput()) && (invSlot.accepts(itemStack))) {
                 return false;
             }
         }
@@ -186,15 +179,11 @@ public abstract class TileEntityInventory extends TileEntityBase implements
 
         if (!targetSlot.canOutput())
             return false;
-        if ((targetSlot.preferredSide != InventorySlot.InvSide.ANY)
-                && (targetSlot.preferredSide.matches(side)))
+        if ((targetSlot.preferredSide != InventorySlot.InvSide.ANY) && (targetSlot.preferredSide.matches(side)))
             return true;
 
         for (InventorySlot invSlot : this.invSlots) {
-            if ((invSlot != targetSlot)
-                    && (invSlot.preferredSide != InventorySlot.InvSide.ANY)
-                    && (invSlot.preferredSide.matches(side))
-                    && (invSlot.canOutput())) {
+            if ((invSlot != targetSlot) && (invSlot.preferredSide != InventorySlot.InvSide.ANY) && (invSlot.preferredSide.matches(side)) && (invSlot.canOutput())) {
                 return false;
             }
         }

@@ -12,12 +12,10 @@ import org.jackhuang.watercraft.client.gui.ContainerStandardMachine;
 @SideOnly(Side.CLIENT)
 public class GuiCompressor extends GuiMachineBase {
 
-    public GuiCompressor(EntityPlayer player,
-            TileEntityStandardWaterMachine tileEntity) {
+    public GuiCompressor(EntityPlayer player, TileEntityStandardWaterMachine tileEntity) {
         super(new ContainerStandardMachine(player, tileEntity));
 
-        this.name = StatCollector
-                .translateToLocal("cptwtrml.machine.compressor.name");
+        this.name = StatCollector.translateToLocal("cptwtrml.machine.compressor.name");
         this.inv = StatCollector.translateToLocal("container.inventory");
         this.background = new ResourceLocation(Reference.ModID + ":textures/gui/GUICompressor.png");
     }

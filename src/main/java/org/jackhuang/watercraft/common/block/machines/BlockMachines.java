@@ -39,45 +39,34 @@ public class BlockMachines extends BlockWaterPower {
         GlobalBlocks.lathe = new ItemStack(this, 1, 6);
         GlobalBlocks.cutter = new ItemStack(this, 1, 7);
 
-        GameRegistry.registerTileEntity(TileEntityMacerator.class,
-                "cptwtrml.machine.macerator");
+        GameRegistry.registerTileEntity(TileEntityMacerator.class, "cptwtrml.machine.macerator");
         TileEntityMacerator.init();
-        GameRegistry.registerTileEntity(TileEntityCompressor.class,
-                "cptwtrml.machine.compressor");
+        GameRegistry.registerTileEntity(TileEntityCompressor.class, "cptwtrml.machine.compressor");
         TileEntityCompressor.init();
-        GameRegistry.registerTileEntity(TileEntitySawmill.class,
-                "cptwtrml.machine.sawmill");
+        GameRegistry.registerTileEntity(TileEntitySawmill.class, "cptwtrml.machine.sawmill");
         TileEntitySawmill.init();
-        GameRegistry.registerTileEntity(TileEntityAdvancedCompressor.class,
-                "cptwtrml.machine.advancedCompressor");
+        GameRegistry.registerTileEntity(TileEntityAdvancedCompressor.class, "cptwtrml.machine.advancedCompressor");
         TileEntityAdvancedCompressor.init();
-        GameRegistry.registerTileEntity(TileEntityCentrifuge.class,
-                "cptwtrml.machine.centrifuge");
+        GameRegistry.registerTileEntity(TileEntityCentrifuge.class, "cptwtrml.machine.centrifuge");
         TileEntityCentrifuge.init();
-        GameRegistry.registerTileEntity(TileEntityLathe.class,
-                "cptwtrml.machine.lathe");
+        GameRegistry.registerTileEntity(TileEntityLathe.class, "cptwtrml.machine.lathe");
         TileEntityLathe.init();
-        GameRegistry.registerTileEntity(TileEntityCutter.class,
-                "cptwtrml.machine.cutter");
+        GameRegistry.registerTileEntity(TileEntityCutter.class, "cptwtrml.machine.cutter");
         TileEntityCutter.init();
     }
 
     @Override
     public void registerBlockIcons(IIconRegister iconRegister) {
         this.textures = new IIcon[maxMetaData()][6];
-        
-        IIcon iconSide = iconRegister.registerIcon(Reference.ModID
-                + ":machine/SIDE");
-        IIcon iconDown = iconRegister.registerIcon(Reference.ModID
-                + ":machine/DOWN");
-        IIcon iconUp = iconRegister.registerIcon(Reference.ModID
-                + ":machine/UP");
+
+        IIcon iconSide = iconRegister.registerIcon(Reference.ModID + ":machine/SIDE");
+        IIcon iconDown = iconRegister.registerIcon(Reference.ModID + ":machine/DOWN");
+        IIcon iconUp = iconRegister.registerIcon(Reference.ModID + ":machine/UP");
 
         for (int i = 1; i <= 7; i++) {
             textures[i][0] = iconDown;
             textures[i][1] = iconUp;
-            textures[i][3] = iconRegister.registerIcon(Reference.ModID
-                    + ":machine/" + getTextureName(i));
+            textures[i][3] = iconRegister.registerIcon(Reference.ModID + ":machine/" + getTextureName(i));
             textures[i][2] = textures[i][4] = textures[i][5] = iconSide;
         }
     }
@@ -88,8 +77,7 @@ public class BlockMachines extends BlockWaterPower {
     }
 
     @Override
-    protected int getTextureIndex(IBlockAccess world, int x, int y, int z,
-            int meta) {
+    protected int getTextureIndex(IBlockAccess world, int x, int y, int z, int meta) {
         return meta;
     }
 
@@ -120,8 +108,7 @@ public class BlockMachines extends BlockWaterPower {
         }
     }
 
-    public int getComparatorInputOverride(World par1World, int par2, int par3,
-            int par4, int par5) {
+    public int getComparatorInputOverride(World par1World, int par2, int par3, int par4, int par5) {
         TileEntity te = par1World.getTileEntity(par2, par3, par4);
         if (te != null) {
             Class cls = te.getClass();

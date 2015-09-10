@@ -16,23 +16,21 @@ import org.jackhuang.watercraft.common.recipe.IRecipeManager;
 
 import codechicken.nei.api.API;
 
-
 public class DefaultMachineRecipeHandler extends MachineRecipeHandler {
-    
+
     Class<? extends GuiContainer> guiClass;
     String recipeName, recipeId, guiTexture, overlayIdentifier;
     IRecipeManager recipeManager;
 
-    public DefaultMachineRecipeHandler() { super(); }
-    
-    public DefaultMachineRecipeHandler(Class<? extends GuiContainer> guiClass, String id,
-            IRecipeManager recipeManager) {
+    public DefaultMachineRecipeHandler() {
+        super();
+    }
+
+    public DefaultMachineRecipeHandler(Class<? extends GuiContainer> guiClass, String id, IRecipeManager recipeManager) {
         this(guiClass, id, Reference.ModID + "." + id.toLowerCase(), Reference.ModID + ":textures/gui/GUI" + id + ".png", id.toLowerCase(), recipeManager);
     }
-    
-    public DefaultMachineRecipeHandler(Class<? extends GuiContainer> guiClass, String recipeName, String recipeId,
-            String guiTexture, String overlayIdentifier,
-            IRecipeManager recipeManager) {
+
+    public DefaultMachineRecipeHandler(Class<? extends GuiContainer> guiClass, String recipeName, String recipeId, String guiTexture, String overlayIdentifier, IRecipeManager recipeManager) {
         super();
         this.guiClass = guiClass;
         this.recipeName = recipeName;
@@ -41,7 +39,7 @@ public class DefaultMachineRecipeHandler extends MachineRecipeHandler {
         this.overlayIdentifier = overlayIdentifier;
         this.recipeManager = recipeManager;
     }
-    
+
     @Override
     public Class<? extends GuiContainer> getGuiClass() {
         return guiClass == null ? super.getGuiClass() : guiClass;
@@ -55,7 +53,7 @@ public class DefaultMachineRecipeHandler extends MachineRecipeHandler {
     public IRecipeManager getRecipeManager() {
         return recipeManager;
     }
-    
+
     public DefaultMachineRecipeHandler setGuiClass(Class<? extends GuiContainer> guiClass) {
         this.guiClass = guiClass;
         return this;

@@ -12,10 +12,8 @@ import net.minecraft.item.ItemStack;
 public class InventorySlotProcessableGeneric extends InventorySlotProcessable {
     public IRecipeManager recipeManager;
 
-    public InventorySlotProcessableGeneric(TileEntityInventory base,
-            String name, int count,
-            IRecipeManager recipeManager) {
-        super(base, name,  count);
+    public InventorySlotProcessableGeneric(TileEntityInventory base, String name, int count, IRecipeManager recipeManager) {
+        super(base, name, count);
 
         this.recipeManager = recipeManager;
     }
@@ -52,8 +50,7 @@ public class InventorySlotProcessableGeneric extends InventorySlotProcessable {
 
         MyRecipeOutput output = getOutput(input, true, false);
         if (output == null)
-            throw new IllegalStateException(
-                    "consume without a processing result");
+            throw new IllegalStateException("consume without a processing result");
 
         if ((input != null) && (input.stackSize <= 0))
             put(null);
@@ -63,14 +60,14 @@ public class InventorySlotProcessableGeneric extends InventorySlotProcessable {
         this.recipeManager = recipeManager;
     }
 
-    protected MyRecipeOutput getOutput(ItemStack input, boolean adjustInput,
-            boolean forAccept) {
+    protected MyRecipeOutput getOutput(ItemStack input, boolean adjustInput, boolean forAccept) {
         return this.recipeManager.getOutput(input, adjustInput);
     }
-    
+
     public MyRecipeOutput getRecipeOutput() {
         ItemStack input = get();
-        if(input == null) return null;
+        if (input == null)
+            return null;
         return getOutput(input, false, false);
     }
 

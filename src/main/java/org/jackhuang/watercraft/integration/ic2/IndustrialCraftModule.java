@@ -27,35 +27,29 @@ public class IndustrialCraftModule extends BaseModule {
     public static Object macerator, compressor, cutter;
 
     public static void compressor(ItemStack input, ItemStack output) {
-        Recipes.compressor.addRecipe(new RecipeInputItemStack(input), null,
-                output);
+        Recipes.compressor.addRecipe(new RecipeInputItemStack(input), null, output);
     }
 
     public static void blastfurance(ItemStack input, ItemStack output) {
-        Recipes.blastfurance.addRecipe(new RecipeInputItemStack(input), null,
-                output);
+        Recipes.blastfurance.addRecipe(new RecipeInputItemStack(input), null, output);
     }
 
     public static void macerator(ItemStack input, ItemStack output) {
-        Recipes.macerator.addRecipe(new RecipeInputItemStack(input), null,
-                output);
+        Recipes.macerator.addRecipe(new RecipeInputItemStack(input), null, output);
     }
 
     public static void metalformerRolling(ItemStack input, ItemStack output) {
-        Recipes.metalformerRolling.addRecipe(new RecipeInputItemStack(input),
-                null, output);
+        Recipes.metalformerRolling.addRecipe(new RecipeInputItemStack(input), null, output);
     }
 
     public static void blockcutter(ItemStack input, ItemStack output) {
-        Recipes.blockcutter.addRecipe(new RecipeInputItemStack(input), null,
-                output);
+        Recipes.blockcutter.addRecipe(new RecipeInputItemStack(input), null, output);
     }
 
     public static void oreWashing(ItemStack input, ItemStack... output) {
         NBTTagCompound metadata = new NBTTagCompound();
         metadata.setInteger("amount", 1000);
-        Recipes.oreWashing.addRecipe(new RecipeInputItemStack(input), metadata,
-                output);
+        Recipes.oreWashing.addRecipe(new RecipeInputItemStack(input), metadata, output);
     }
 
     @Override
@@ -72,13 +66,10 @@ public class IndustrialCraftModule extends BaseModule {
 
     @Override
     public void postInit() {
-        ItemStack item = ICItemFinder.getIC2Item("stoneDust"), iron = ICItemFinder
-                .getIC2Item("smallIronDust");
+        ItemStack item = ICItemFinder.getIC2Item("stoneDust"), iron = ICItemFinder.getIC2Item("smallIronDust");
 
         for (OreType o : OreType.values())
-            IndustrialCraftModule.oreWashing(new ItemStack(GlobalItems.oreDust,
-                    1, o.ordinal()), ItemMaterial.get(o.t, MaterialForms.dust),
-                    iron, item);
+            IndustrialCraftModule.oreWashing(new ItemStack(GlobalItems.oreDust, 1, o.ordinal()), ItemMaterial.get(o.t, MaterialForms.dust), iron, item);
     }
 
 }

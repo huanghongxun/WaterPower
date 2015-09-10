@@ -13,10 +13,15 @@ import net.minecraft.item.ItemStack;
 public interface IUpgrade {
 
     int getUnderworldAdditionalValue(ItemStack is);
+
     int getOverworldAdditionalValue(ItemStack is);
+
     int getRainAdditionalValue(ItemStack is);
+
     double getEnergyDemandMultiplier(ItemStack is);
+
     double getSpeedAdditionalValue(ItemStack is);
+
     int getStorageAdditionalValue(ItemStack is);
-    
+
 }

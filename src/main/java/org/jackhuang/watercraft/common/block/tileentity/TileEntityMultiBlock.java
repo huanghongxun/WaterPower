@@ -18,8 +18,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
-public abstract class TileEntityMultiBlock extends
-        TileEntityLiquidTankInventory implements IHasGui {
+public abstract class TileEntityMultiBlock extends TileEntityLiquidTankInventory implements IHasGui {
 
     public TileEntityMultiBlock masterBlock;
     protected boolean tested;
@@ -100,8 +99,7 @@ public abstract class TileEntityMultiBlock extends
                 masterX = tag.getInteger("masterX");
                 masterY = tag.getInteger("masterY");
                 masterZ = tag.getInteger("masterZ");
-                TileEntity te = worldObj.getTileEntity(masterX, masterY,
-                        masterZ);
+                TileEntity te = worldObj.getTileEntity(masterX, masterY, masterZ);
                 if (te instanceof TileEntityMultiBlock)
                     masterBlock = (TileEntityMultiBlock) te;
             }
@@ -120,8 +118,7 @@ public abstract class TileEntityMultiBlock extends
                 tag.setInteger("masterX", masterX);
                 tag.setInteger("masterY", masterY);
                 tag.setInteger("masterZ", masterZ);
-                TileEntity te = worldObj.getTileEntity(masterX, masterY,
-                        masterZ);
+                TileEntity te = worldObj.getTileEntity(masterX, masterY, masterZ);
                 if (te instanceof TileEntityMultiBlock)
                     masterBlock = (TileEntityMultiBlock) te;
             }
@@ -158,9 +155,7 @@ public abstract class TileEntityMultiBlock extends
 
                 tested = true;
                 ArrayList<TileEntityMultiBlock> newBlockList = test();
-                boolean changed = blockList == null || (blockList != null
-                        && (newBlockList == null || !newBlockList
-                        .equals(blockList)));
+                boolean changed = blockList == null || (blockList != null && (newBlockList == null || !newBlockList.equals(blockList)));
                 if (changed && blockList != null) {
                     for (TileEntityMultiBlock block : blockList) {
                         block.tested = false;

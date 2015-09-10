@@ -11,8 +11,7 @@ import org.jackhuang.watercraft.client.gui.ContainerStandardMachine;
 
 @SideOnly(Side.CLIENT)
 public class GuiSawmill extends GuiMachineBase {
-    public GuiSawmill(EntityPlayer player,
-            TileEntitySawmill tileEntity) {
+    public GuiSawmill(EntityPlayer player, TileEntitySawmill tileEntity) {
         super(new ContainerStandardMachine(player, tileEntity));
 
         this.name = StatCollector.translateToLocal("cptwtrml.machine.sawmill.name");

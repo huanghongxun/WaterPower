@@ -23,16 +23,17 @@ public class ModelWaterWheel extends ModelBase {
         this.trunk.addBox(0.0F, 0.0F, -1.0F, 1, 12, 1);
         this.trunk.addBox(-1.0F, 0.0F, -1.0F, 1, 12, 1);
 
-        /*this.plank = new ModelRenderer[WaterType.values().length];
-        for (int i = 0; i < plank.length; i++) {
-        }*/
+        /*
+         * this.plank = new ModelRenderer[WaterType.values().length]; for (int i
+         * = 0; i < plank.length; i++) { }
+         */
     }
-    
+
     public void initPlankWithLength(int length) {
-        if(length == plankPreviousLength) return;
+        if (length == plankPreviousLength)
+            return;
         this.plank = new ModelRenderer(this, 0, 0);
-        this.plank.addBox(-1.0F, 0.0F, 1.0F, 2, 10,
-                length * 6);
+        this.plank.addBox(-1.0F, 0.0F, 1.0F, 2, 10, length * 6);
         this.plank.setRotationPoint(0.0F, 0.0F, 0.0F);
     }
 

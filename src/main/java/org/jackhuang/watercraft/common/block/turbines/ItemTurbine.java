@@ -24,20 +24,14 @@ public class ItemTurbine extends ItemMeta {
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
-    public void addInformation(ItemStack par1ItemStack,
-            EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
+    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
         par3List.add(StatCollector.translateToLocal("cptwtrml.machine.info"));
-        par3List.add(StatCollector
-                .translateToLocal("cptwtrml.watermill.max_output")
-                + ": "
-                + TurbineType.values()[par1ItemStack.getItemDamage()].percent
-                + "EU/t");
+        par3List.add(StatCollector.translateToLocal("cptwtrml.watermill.max_output") + ": " + TurbineType.values()[par1ItemStack.getItemDamage()].percent + "EU/t");
     }
 
     @Override
     public String getItemStackDisplayName(ItemStack par1ItemStack) {
-        return TurbineType.values()[par1ItemStack.getItemDamage()]
-                .getShowedName();
+        return TurbineType.values()[par1ItemStack.getItemDamage()].getShowedName();
     }
 
     @Override

@@ -46,8 +46,7 @@ import cpw.mods.fml.common.Optional.InterfaceList;
 import cpw.mods.fml.common.Optional.Method;
 
 @InterfaceList({ @Interface(iface = "ic2.api.tile.IWrenchable", modid = Mods.IDs.IndustrialCraft2API, striprefs = true) })
-public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
-        IWrenchable, IDroppable {
+public class TileEntityReservoir extends TileEntityMetaMultiBlock implements IWrenchable, IDroppable {
 
     public Direction side;
     public ReservoirType type;
@@ -167,19 +166,13 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
     protected boolean canBeMaster() {
         if (type == null)
             return false;
-        if (Reservoir.isRes(worldObj, xCoord, yCoord - 1, zCoord,
-                type.ordinal())
-                || Reservoir.isRes(worldObj, xCoord - 1, yCoord, zCoord,
-                        type.ordinal())
-                || Reservoir.isRes(worldObj, xCoord, yCoord, zCoord - 1,
-                        type.ordinal())) {
+        if (Reservoir.isRes(worldObj, xCoord, yCoord - 1, zCoord, type.ordinal()) || Reservoir.isRes(worldObj, xCoord - 1, yCoord, zCoord, type.ordinal()) || Reservoir.isRes(worldObj, xCoord, yCoord, zCoord - 1, type.ordinal())) {
             return false;
         }
         return true;
     }
 
-    private ArrayList<TileEntityMultiBlock> setSide(
-            ArrayList<TileEntityMultiBlock> a, Direction d) {
+    private ArrayList<TileEntityMultiBlock> setSide(ArrayList<TileEntityMultiBlock> a, Direction d) {
         for (TileEntityMultiBlock block : a) {
             TileEntityReservoir te = (TileEntityReservoir) block;
             te.side = d;
@@ -194,8 +187,7 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 
         int length = 1;
         while (length < 65) {
-            if (Reservoir.isRes(worldObj, xCoord + length, yCoord, zCoord,
-                    type.ordinal()))
+            if (Reservoir.isRes(worldObj, xCoord + length, yCoord, zCoord, type.ordinal()))
                 length++;
             else
                 break;
@@ -203,55 +195,47 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 
         int width = 1;
         while (width < 65)
-            if (Reservoir.isRes(worldObj, xCoord, yCoord, zCoord + width,
-                    type.ordinal()))
+            if (Reservoir.isRes(worldObj, xCoord, yCoord, zCoord + width, type.ordinal()))
                 width++;
             else
                 break;
 
         int height = 1;
         while (height < 65)
-            if (Reservoir.isRes(worldObj, xCoord, yCoord + height, zCoord,
-                    type.ordinal()))
+            if (Reservoir.isRes(worldObj, xCoord, yCoord + height, zCoord, type.ordinal()))
                 height++;
             else
                 break;
 
-        ArrayList<Position> l1 = Reservoir.getNotHorizontalWall(worldObj,
-                xCoord, yCoord, zCoord, length, height, type.ordinal());
+        ArrayList<Position> l1 = Reservoir.getNotHorizontalWall(worldObj, xCoord, yCoord, zCoord, length, height, type.ordinal());
         if (l1.size() != 0) {
             size = null;
             lastHeight = lastWidth = lastLength = -1;
             return null;
         }
 
-        ArrayList<Position> l2 = Reservoir.getNotHorizontalWall(worldObj,
-                xCoord, yCoord, zCoord + width - 1, length, height,
-                type.ordinal());
+        ArrayList<Position> l2 = Reservoir.getNotHorizontalWall(worldObj, xCoord, yCoord, zCoord + width - 1, length, height, type.ordinal());
         if (l2.size() != 0) {
             size = null;
             lastHeight = lastWidth = lastLength = -1;
             return null;
         }
 
-        ArrayList<Position> l3 = Reservoir.getNotVerticalWall(worldObj, xCoord,
-                yCoord, zCoord, width, height, type.ordinal());
+        ArrayList<Position> l3 = Reservoir.getNotVerticalWall(worldObj, xCoord, yCoord, zCoord, width, height, type.ordinal());
         if (l3.size() != 0) {
             size = null;
             lastHeight = lastWidth = lastLength = -1;
             return null;
         }
 
-        ArrayList<Position> l4 = Reservoir.getNotVerticalWall(worldObj, xCoord
-                + length - 1, yCoord, zCoord, width, height, type.ordinal());
+        ArrayList<Position> l4 = Reservoir.getNotVerticalWall(worldObj, xCoord + length - 1, yCoord, zCoord, width, height, type.ordinal());
         if (l4.size() != 0) {
             size = null;
             lastHeight = lastWidth = lastLength = -1;
             return null;
         }
 
-        ArrayList<Position> lfloor = Reservoir.getNotFloor(worldObj, xCoord,
-                yCoord, zCoord, length, width, type.ordinal());
+        ArrayList<Position> lfloor = Reservoir.getNotFloor(worldObj, xCoord, yCoord, zCoord, length, width, type.ordinal());
         if (lfloor.size() != 0) {
             size = null;
             lastHeight = lastWidth = lastLength = -1;
@@ -274,35 +258,24 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
             return null;
 
         ocean.clear();
-        tmp = Reservoir.getHorizontalWall(worldObj, xCoord, yCoord, zCoord,
-                length, height, type.ordinal());
+        tmp = Reservoir.getHorizontalWall(worldObj, xCoord, yCoord, zCoord, length, height, type.ordinal());
         al.addAll(tmp);
-        ocean.add(Reservoir.getHorizontalWallWater(worldObj, xCoord, yCoord,
-                zCoord - 1, length, height, type.ordinal()));
-        tmp = Reservoir.getHorizontalWall(worldObj, xCoord, yCoord, zCoord
-                + width - 1, length, height, type.ordinal());
+        ocean.add(Reservoir.getHorizontalWallWater(worldObj, xCoord, yCoord, zCoord - 1, length, height, type.ordinal()));
+        tmp = Reservoir.getHorizontalWall(worldObj, xCoord, yCoord, zCoord + width - 1, length, height, type.ordinal());
         al.addAll(tmp);
-        ocean.add(Reservoir.getHorizontalWallWater(worldObj, xCoord, yCoord,
-                zCoord + width, length, height, type.ordinal()));
-        tmp = Reservoir.getVerticalWall(worldObj, xCoord, yCoord, zCoord,
-                width, height, type.ordinal());
+        ocean.add(Reservoir.getHorizontalWallWater(worldObj, xCoord, yCoord, zCoord + width, length, height, type.ordinal()));
+        tmp = Reservoir.getVerticalWall(worldObj, xCoord, yCoord, zCoord, width, height, type.ordinal());
         al.addAll(tmp);
-        ocean.add(Reservoir.getVerticalWallWater(worldObj, xCoord - 1, yCoord,
-                zCoord, width, height, type.ordinal()));
-        tmp = Reservoir.getVerticalWall(worldObj, xCoord + length - 1, yCoord,
-                zCoord, width, height, type.ordinal());
+        ocean.add(Reservoir.getVerticalWallWater(worldObj, xCoord - 1, yCoord, zCoord, width, height, type.ordinal()));
+        tmp = Reservoir.getVerticalWall(worldObj, xCoord + length - 1, yCoord, zCoord, width, height, type.ordinal());
         al.addAll(tmp);
-        ocean.add(Reservoir.getVerticalWallWater(worldObj, xCoord + length,
-                yCoord, zCoord, width, height, type.ordinal()));
-        tmp = Reservoir.getFloor(worldObj, xCoord, yCoord, zCoord, length,
-                width, type.ordinal());
+        ocean.add(Reservoir.getVerticalWallWater(worldObj, xCoord + length, yCoord, zCoord, width, height, type.ordinal()));
+        tmp = Reservoir.getFloor(worldObj, xCoord, yCoord, zCoord, length, width, type.ordinal());
         al.addAll(tmp);
         if (yCoord > 0)
-            ocean.add(Reservoir.getFloorWater(worldObj, xCoord, yCoord - 1,
-                    zCoord, length, width, type.ordinal()));
+            ocean.add(Reservoir.getFloorWater(worldObj, xCoord, yCoord - 1, zCoord, length, width, type.ordinal()));
 
-        size = new Reservoir(length, width, height, Reservoir.getNonAirBlock(
-                worldObj, xCoord, yCoord, zCoord, length, width, height));
+        size = new Reservoir(length, width, height, Reservoir.getNonAirBlock(worldObj, xCoord, yCoord, zCoord, length, width, height));
 
         defaultStorage = size.getCapacity() * type.capacity;
         setFluidTankCapacity(defaultStorage + extraStorage);
@@ -325,9 +298,7 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
         int length = size.getLength() - 2;
         int width = size.getWidth() - 2;
         int area = length * width;
-        int cover = Reservoir.getCoverBlock(worldObj, xCoord,
-                yCoord + size.getHeight(), zCoord, size.getLength(),
-                size.getWidth());
+        int cover = Reservoir.getCoverBlock(worldObj, xCoord, yCoord + size.getHeight(), zCoord, size.getLength(), size.getWidth());
 
         double addWater = 0;
         double add = (double) type.capacity / 10000.0;
@@ -336,14 +307,11 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
         // Tide Receiving
         addWater += Math.min(this.ocean.k, this.ocean.t) * type.capacity / 100;
         // Underground water receiving
-        addWater += underLevel * (1D - this.yCoord / 256) * add
-                * (area - cover) * biomeGet;
+        addWater += underLevel * (1D - this.yCoord / 256) * add * (area - cover) * biomeGet;
         // Surface water receiving
-        addWater += overLevel * (1D - Math.abs(64 - this.yCoord) / 64)
-                * (area - cover) * biomeGet * add;
+        addWater += overLevel * (1D - Math.abs(64 - this.yCoord) / 64) * (area - cover) * biomeGet * add;
 
-        if (biomeID == BiomeGenBase.ocean.biomeID
-                || biomeID == BiomeGenBase.river.biomeID) {
+        if (biomeID == BiomeGenBase.ocean.biomeID || biomeID == BiomeGenBase.river.biomeID) {
             if (yCoord < 64)
                 addWater += length * width * 0.5;
         }
@@ -354,8 +322,7 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
         lastAddedWater = (int) ((addWater - delWater) * WaterPower.updateTick);
 
         if ((int) addWater * WaterPower.updateTick >= 1)
-            fluidTank.fill(new FluidStack(FluidRegistry.WATER, (int) addWater
-                    * WaterPower.updateTick), true);
+            fluidTank.fill(new FluidStack(FluidRegistry.WATER, (int) addWater * WaterPower.updateTick), true);
         fluidTank.drain(delWater * WaterPower.updateTick, true);
     }
 
@@ -371,12 +338,8 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
         if (needsFluid()) {
             MutableObject<ItemStack> output = new MutableObject<ItemStack>();
 
-            if ((this.getFluidSlot().transferToTank(this.fluidTank, output,
-                    true))
-                    && ((output.getValue() == null) || (this.outputSlot
-                            .canAdd(output.getValue())))) {
-                needsInvUpdate = this.getFluidSlot().transferToTank(
-                        this.fluidTank, output, false);
+            if ((this.getFluidSlot().transferToTank(this.fluidTank, output, true)) && ((output.getValue() == null) || (this.outputSlot.canAdd(output.getValue())))) {
+                needsInvUpdate = this.getFluidSlot().transferToTank(this.fluidTank, output, false);
 
                 if (output.getValue() != null)
                     this.getOutputSlot().add(output.getValue());
@@ -385,11 +348,8 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
         }
 
         MutableObject<ItemStack> output = new MutableObject<ItemStack>();
-        if ((this.getFluidSlot().transferFromTank(this.fluidTank, output, true))
-                && ((output.getValue() == null) || (this.outputSlot
-                        .canAdd(output.getValue())))) {
-            needsInvUpdate = this.getFluidSlot().transferFromTank(
-                    this.fluidTank, output, false);
+        if ((this.getFluidSlot().transferFromTank(this.fluidTank, output, true)) && ((output.getValue() == null) || (this.outputSlot.canAdd(output.getValue())))) {
+            needsInvUpdate = this.getFluidSlot().transferFromTank(this.fluidTank, output, false);
 
             if (output.getValue() != null)
                 this.getOutputSlot().add(output.getValue());
@@ -402,12 +362,10 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
         boolean flag = false;
 
         for (ForgeDirection direction : ForgeDirection.values()) {
-            TileEntity te = worldObj.getTileEntity(xCoord + direction.offsetX,
-                    yCoord + direction.offsetY, zCoord + direction.offsetZ);
+            TileEntity te = worldObj.getTileEntity(xCoord + direction.offsetX, yCoord + direction.offsetY, zCoord + direction.offsetZ);
             if (te instanceof IWaterReceiver) {
                 IWaterReceiver te2 = (IWaterReceiver) te;
-                int i = te2.canProvideWater(this.getFluidAmount(),
-                        direction.getOpposite(), this);
+                int i = te2.canProvideWater(this.getFluidAmount(), direction.getOpposite(), this);
                 if (i > 0) {
                     te2.provideWater(i);
                     this.useLiquid(i);
@@ -524,8 +482,7 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements
 
     @Override
     public ItemStack getDroppedItemStack() {
-        return new ItemStack(GlobalBlocks.reservoir, 1, type == null ? 0
-                : type.ordinal());
+        return new ItemStack(GlobalBlocks.reservoir, 1, type == null ? 0 : type.ordinal());
     }
 
     @Override

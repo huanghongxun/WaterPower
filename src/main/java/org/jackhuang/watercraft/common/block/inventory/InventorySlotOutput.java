@@ -8,10 +8,8 @@ import org.jackhuang.watercraft.util.StackUtil;
 import net.minecraft.item.ItemStack;
 
 public class InventorySlotOutput extends InventorySlot {
-    public InventorySlotOutput(TileEntityInventory base, String name,
-            int count) {
-        super(base, name, InventorySlot.Access.O, count,
-                InventorySlot.InvSide.BOTTOM);
+    public InventorySlotOutput(TileEntityInventory base, String name, int count) {
+        super(base, name, InventorySlot.Access.O, count, InventorySlot.InvSide.BOTTOM);
     }
 
     public boolean accepts(ItemStack itemStack) {
@@ -48,12 +46,9 @@ public class InventorySlotOutput extends InventorySlot {
                     ItemStack existingItemStack = get(i);
 
                     if ((pass == 0) && (existingItemStack != null)) {
-                        int space = existingItemStack.getMaxStackSize()
-                                - existingItemStack.stackSize;
+                        int space = existingItemStack.getMaxStackSize() - existingItemStack.stackSize;
 
-                        if ((space > 0)
-                                && (StackUtil.isStackEqual(itemStack,
-                                        existingItemStack))) {
+                        if ((space > 0) && (StackUtil.isStackEqual(itemStack, existingItemStack))) {
                             if (space >= amount) {
                                 if (!simulate)
                                     existingItemStack.stackSize += amount;

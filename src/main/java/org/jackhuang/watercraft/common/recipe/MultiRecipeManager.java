@@ -16,32 +16,35 @@ import net.minecraft.item.ItemStack;
 
 public class MultiRecipeManager implements IRecipeManager {
     ArrayList<IRecipeManager> container = new ArrayList();
-    
+
     public MultiRecipeManager() {
         addRecipeManager(new MyRecipeManager());
     }
 
     @Override
     public boolean addRecipe(ItemStack input, ItemStack... outputs) {
-        for(IRecipeManager r : container) {
-            if(r.addRecipe(input, outputs)) return true;
+        for (IRecipeManager r : container) {
+            if (r.addRecipe(input, outputs))
+                return true;
         }
         return false;
     }
 
     @Override
     public boolean removeRecipe(ItemStack input) {
-        for(IRecipeManager r : container) {
-            if(r.removeRecipe(input)) return true;
+        for (IRecipeManager r : container) {
+            if (r.removeRecipe(input))
+                return true;
         }
         return false;
     }
 
     @Override
     public MyRecipeOutput getOutput(ItemStack input, boolean adjustInput) {
-        for(IRecipeManager r : container) {
+        for (IRecipeManager r : container) {
             MyRecipeOutput a = r.getOutput(input, adjustInput);
-            if(a != null) return a;
+            if (a != null)
+                return a;
         }
         return null;
     }
@@ -49,12 +52,12 @@ public class MultiRecipeManager implements IRecipeManager {
     @Override
     public Map<IMyRecipeInput, MyRecipeOutput> getAllRecipes() {
         HashMap map = new HashMap();
-        for(IRecipeManager r : container) {
+        for (IRecipeManager r : container) {
             map.putAll(r.getAllRecipes());
         }
         return map;
     }
-    
+
     public MultiRecipeManager addRecipeManager(IRecipeManager rm) {
         container.add(rm);
         return this;
