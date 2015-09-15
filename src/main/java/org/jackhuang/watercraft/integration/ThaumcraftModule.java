@@ -49,7 +49,7 @@ public class ThaumcraftModule extends BaseModule {
             for (MaterialTypes t : MaterialTypes.values())
                 ThaumcraftApi.registerObjectTag(ItemMaterial.get(t, f), new AspectList().add(Aspect.METAL, 1));
 
-        for (int i = 0; i <= LevelTypes.values().length; i++) {
+        for (int i = 0; i < LevelTypes.values().length; i++) {
             for (CraftingTypes t : CraftingTypes.values())
                 ThaumcraftApi.registerObjectTag(ItemCrafting.get(t, LevelTypes.values()[i]),
                         new AspectList().add(Aspect.METAL, 2 * i).add(Aspect.MECHANISM, 2 * i));

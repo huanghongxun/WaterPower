@@ -37,7 +37,7 @@ import org.jackhuang.watercraft.util.Utils;
  import buildcraft.api.power.PowerHandler;
  import buildcraft.api.power.PowerHandler.PowerReceiver;*/
 import cofh.api.energy.IEnergyConnection;
-import cofh.api.energy.IEnergyHandler;
+import cofh.api.energy.IEnergyReceiver;
 import cpw.mods.fml.common.Optional.Interface;
 import cpw.mods.fml.common.Optional.InterfaceList;
 import cpw.mods.fml.common.Optional.Method;
@@ -345,7 +345,7 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements IEn
     protected final int transmitEnergy(int e) {
         if (this.handlerCache != null) {
             for (int i = this.handlerCache.length; i-- > 0;) {
-                IEnergyHandler h = (IEnergyHandler) this.handlerCache[i];
+                IEnergyReceiver h = (IEnergyReceiver) this.handlerCache[i];
                 if (h == null)
                     continue;
                 ForgeDirection d = ForgeDirection.VALID_DIRECTIONS[i];
@@ -392,11 +392,11 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements IEn
         if (this.handlerCache != null) {
             this.handlerCache[side] = null;
         }
-        if ((t instanceof IEnergyHandler)) {
-            if (((IEnergyHandler) t).canConnectEnergy(ForgeDirection.VALID_DIRECTIONS[side])) {
+        if ((t instanceof IEnergyReceiver)) {
+            if (((IEnergyReceiver) t).canConnectEnergy(ForgeDirection.VALID_DIRECTIONS[side])) {
                 if (this.handlerCache == null)
-                    this.handlerCache = new IEnergyHandler[6];
-                this.handlerCache[side] = ((IEnergyHandler) t);
+                    this.handlerCache = new IEnergyReceiver[6];
+                this.handlerCache[side] = ((IEnergyReceiver) t);
             }
         }
     }
