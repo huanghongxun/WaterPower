@@ -30,6 +30,10 @@ import org.jackhuang.watercraft.common.network.PacketUnitChanged;
 import org.jackhuang.watercraft.util.Mods;
 import org.jackhuang.watercraft.util.Utils;
 
+import thaumcraft.api.aspects.Aspect;
+import thaumcraft.api.aspects.AspectList;
+import thaumcraft.api.aspects.IAspectContainer;
+import thaumcraft.api.aspects.IEssentiaTransport;
 /*import buildcraft.api.mj.IBatteryObject;
  import buildcraft.api.mj.MjAPI;
  import buildcraft.api.power.IPowerEmitter;
@@ -48,9 +52,11 @@ import cpw.mods.fml.relauncher.SideOnly;
         @Interface(iface = "ic2.api.energy.tile.IKineticSource", modid = Mods.IDs.IndustrialCraft2API, striprefs = true),
         @Interface(iface = "ic2.api.energy.tile.IHeatSource", modid = Mods.IDs.IndustrialCraft2API, striprefs = true),
         @Interface(iface = "cofh.api.energy.IEnergyConnection", modid = Mods.IDs.CoFHAPIEnergy),
-        @Interface(iface = "factorization.api.IChargeConductor", modid = Mods.IDs.Factorization) })
+        @Interface(iface = "factorization.api.IChargeConductor", modid = Mods.IDs.Factorization),
+        @Interface(iface = "thaumcraft.api.aspects.IEssentiaTransport", modid = Mods.IDs.Thaumcraft),
+        @Interface(iface = "thaumcraft.api.aspects.IAspectContainer", modid = Mods.IDs.Thaumcraft) })
 public abstract class TileEntityGenerator extends TileEntityBlock implements IEnergySource, IHasGui, IKineticSource, IUnitChangeable, IEnergyConnection,
-        IChargeConductor, IFluidHandler, IHeatSource {
+        IChargeConductor, IFluidHandler, IHeatSource, IEssentiaTransport, IAspectContainer {
     public static Random random = new Random();
 
     public double storage = 0.0D;
@@ -60,7 +66,6 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements IEn
     public boolean addedToEnergyNet = false;
     public EnergyType energyType = EnergyType.EU;
     public boolean needsToAddToEnergyNet = false;
-    boolean sendInitDataGenerator = false;
 
     private Object charge;
 
@@ -103,52 +108,40 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements IEn
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound nbttagcompound) {
-        super.readFromNBT(nbttagcompound);
-        this.storage = nbttagcompound.getDouble("storage");
-        this.energyType = EnergyType.values()[nbttagcompound.getInteger("energyType")];
+    public void readFromNBT(NBTTagCompound tag) {
+        super.readFromNBT(tag);
+        this.storage = tag.getDouble("storage");
+        this.energyType = EnergyType.values()[tag.getInteger("energyType")];
 
         if (Mods.Factorization.isAvailable && charge != null)
-            ((Charge) charge).readFromNBT(nbttagcompound);
-
-        sendInitDataGenerator = true;
+            ((Charge) charge).readFromNBT(tag);
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound nbttagcompound) {
-        super.writeToNBT(nbttagcompound);
+    public void writeToNBT(NBTTagCompound tag) {
+        super.writeToNBT(tag);
 
-        nbttagcompound.setDouble("storage", this.storage);
-        nbttagcompound.setInteger("energyType", energyType.ordinal());
+        tag.setDouble("storage", this.storage);
+        tag.setInteger("energyType", energyType.ordinal());
 
         if (Mods.Factorization.isAvailable && charge != null)
-            ((Charge) charge).writeToNBT(nbttagcompound);
+            ((Charge) charge).writeToNBT(tag);
     }
-
-    double preLatestOutput = -999;
 
     @Override
     public void readPacketData(NBTTagCompound tag) {
         super.readPacketData(tag);
-        if (tag.hasKey("latestOutput"))
-            latestOutput = tag.getDouble("latestOutput");
-        if (tag.hasKey("sendInitDataGenerator")) {
-            energyType = EnergyType.values()[tag.getInteger("energyType")];
-        }
+        latestOutput = tag.getDouble("latestOutput");
+        storage = tag.getDouble("storage");
+        energyType = EnergyType.values()[tag.getInteger("energyType")];
     }
 
     @Override
     public void writePacketData(NBTTagCompound tag) {
         super.writePacketData(tag);
-        if (preLatestOutput != latestOutput) {
-            tag.setDouble("latestOutput", latestOutput);
-            preLatestOutput = latestOutput;
-        }
-        if (sendInitDataGenerator) {
-            sendInitDataGenerator = false;
-            tag.setBoolean("sendInitDataGenerator", true);
-            tag.setInteger("energyType", energyType.ordinal());
-        }
+        tag.setDouble("latestOutput", latestOutput);
+        tag.setDouble("storage", this.storage);
+        tag.setInteger("energyType", energyType.ordinal());
     }
 
     protected abstract double computeOutput(World world, int x, int y, int z);
@@ -179,6 +172,9 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements IEn
             latestOutput = computeOutput(worldObj, xCoord, yCoord, zCoord);
             if (energyType == EnergyType.EU && Mods.IndustrialCraft2.isAvailable)
                 storage += latestOutput;
+            if (energyType == EnergyType.AspectWater && Mods.Thaumcraft.isAvailable)
+                storage += latestOutput;
+
             if (energyType == EnergyType.RF && Mods.CoFHAPIEnergy.isAvailable) {
                 reCache();
                 storage += latestOutput;
@@ -459,6 +455,121 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements IEn
      * 
      * ------------------------------------------------------
      */
+
+    /**
+     * ------------------------------------------------------
+     * 
+     * ESSENTIA(THAUMCRAFT) INTEGRATION BEGINS
+     * 
+     * ------------------------------------------------------
+     */
+
+    @Override
+    public boolean isConnectable(ForgeDirection arg0) {
+        return true;
+    }
+
+    @Override
+    public boolean canInputFrom(ForgeDirection arg0) {
+        return false;
+    }
+
+    @Override
+    public boolean canOutputTo(ForgeDirection arg0) {
+        return true;
+    }
+
+    @Override
+    public void setSuction(Aspect arg0, int arg1) {
+    }
+
+    @Override
+    public Aspect getSuctionType(ForgeDirection arg0) {
+        return null;
+    }
+
+    @Override
+    public int getSuctionAmount(ForgeDirection arg0) {
+        return 0;
+    }
+
+    @Override
+    public int takeEssentia(Aspect arg0, int arg1, ForgeDirection arg2) {
+        return takeFromContainer(arg0, arg1) ? arg1 : 0;
+    }
+
+    @Override
+    public int addEssentia(Aspect arg0, int arg1, ForgeDirection arg2) {
+        return 0;
+    }
+
+    @Override
+    public AspectList getAspects() {
+        return new AspectList().add(Aspect.WATER, (int) EnergyType.EU2Vis(storage));
+    }
+
+    @Override
+    public void setAspects(AspectList arg0) {
+    }
+
+    @Override
+    public boolean takeFromContainer(Aspect arg0, int arg1) {
+        double eu = EnergyType.Vis2EU(arg1);
+        if (eu > storage)
+            return false;
+        storage -= eu;
+        return true;
+    }
+
+    @Override
+    public boolean doesContainerContain(AspectList arg0) {
+        return storage > 0 && arg0.getAmount(Aspect.WATER) > 0;
+    }
+
+    @Override
+    public boolean doesContainerContainAmount(Aspect arg0, int arg1) {
+        return Aspect.WATER == arg0 && EnergyType.EU2Vis(storage) >= arg1;
+    }
+
+    @Override
+    public int containerContains(Aspect arg0) {
+        return Aspect.WATER == arg0 ? (int) EnergyType.EU2Vis(storage) : 0;
+    }
+
+    @Override
+    public boolean doesContainerAccept(Aspect arg0) {
+        return false;
+    }
+
+    @Override
+    public boolean takeFromContainer(AspectList arg0) {
+        return false;
+    }
+
+    @Override
+    public Aspect getEssentiaType(ForgeDirection arg0) {
+        return Aspect.WATER;
+    }
+
+    @Override
+    public int getEssentiaAmount(ForgeDirection arg0) {
+        return (int) EnergyType.EU2Vis(storage);
+    }
+
+    @Override
+    public int getMinimumSuction() {
+        return 0;
+    }
+
+    @Override
+    public boolean renderExtendedTube() {
+        return false;
+    }
+
+    @Override
+    public int addToContainer(Aspect arg0, int arg1) {
+        return arg1;
+    }
 
     @Override
     public boolean canDrain(ForgeDirection paramForgeDirection, Fluid paramFluid) {

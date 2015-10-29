@@ -11,6 +11,7 @@ package org.jackhuang.watercraft.common.block.tileentity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
+import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.common.network.MessagePacketHandler;
 import org.jackhuang.watercraft.common.network.PacketTileEntity;
@@ -18,7 +19,7 @@ import org.jackhuang.watercraft.common.network.PacketTileEntity;
 public class TileEntityBase extends TileEntity {
 
     public TileEntityBase() {
-        tick = WaterPower.updateTick;
+        tick = Reference.General.updateTick;
     }
 
     public void sendUpdateToClient() {
@@ -106,7 +107,7 @@ public class TileEntityBase extends TileEntity {
         if (isServerSide() && !isRedstonePowered()) {
             if (tick-- == 0) {
                 onUpdate();
-                tick = WaterPower.updateTick;
+                tick = Reference.General.updateTick;
 
                 sendUpdateToClient();
             }

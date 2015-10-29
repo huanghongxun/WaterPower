@@ -57,6 +57,12 @@ public enum EnergyType {
         public double getFromEU(double eu) {
             return EU2Water(eu);
         }
+    },
+    AspectWater("Water/vis") {
+        @Override
+        public double getFromEU(double eu) {
+            return EU2Vis(eu);
+        }
     };
 
     public String showedName;
@@ -83,6 +89,10 @@ public enum EnergyType {
         return rf * Reference.Energy.rf;
     }
 
+    public static double Vis2EU(double vis) {
+        return vis * Reference.Energy.vis;
+    }
+
     public static double EU2Charge(double eu) {
         return eu / Reference.Energy.charge;
     }
@@ -101,6 +111,10 @@ public enum EnergyType {
 
     public static double EU2Water(double eu) {
         return eu / Reference.Energy.water;
+    }
+
+    public static double EU2Vis(double eu) {
+        return eu / Reference.Energy.vis;
     }
 
 }

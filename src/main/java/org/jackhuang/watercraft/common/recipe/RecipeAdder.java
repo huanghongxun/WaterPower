@@ -16,6 +16,7 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 
 import org.jackhuang.watercraft.common.item.others.ItemType;
 import org.jackhuang.watercraft.integration.AppliedEnergisticsModule;
+import org.jackhuang.watercraft.integration.GregTechModule;
 import org.jackhuang.watercraft.integration.ImmersiveEngineeringModule;
 import org.jackhuang.watercraft.integration.MekanismModule;
 import org.jackhuang.watercraft.integration.RailcraftModule;
@@ -177,6 +178,9 @@ public class RecipeAdder {
         if (Mods.Mekanism.isAvailable) {
             MekanismModule.metallurgicInfuser("CARBON", Math.round(((float) cookTime) / 100.0f), input, output);
             flag = true;
+        }
+        if (Mods.GregTech.isAvailable) {
+            flag |= GregTechModule.blastFurnace(input, output, cookTime);
         }
         if (!flag) {
             FurnaceRecipes.smelting().func_151394_a(input, output, 0);

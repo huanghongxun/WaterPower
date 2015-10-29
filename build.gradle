@@ -21,7 +21,7 @@ apply plugin: 'curseforge'
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 def buildnumber = System.getenv("BUILD_NUMBER") == null ? "" : "-"+System.getenv("BUILD_NUMBER")
-version = "0.3p"+buildnumber
+version = "0.3q"+buildnumber
 group = "org.jackhuang.watercraft" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "WaterPower-1.7.10"
 

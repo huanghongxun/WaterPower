@@ -5,6 +5,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
+import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.client.gui.DefaultGuiIds;
 import org.jackhuang.watercraft.common.block.GlobalBlocks;
 import org.jackhuang.watercraft.common.block.tileentity.TileEntityRotor;
@@ -26,18 +27,17 @@ public class TileEntityWatermill extends TileEntityRotor {
     private boolean canWheelTurn = false;
     public int waterBlocks, lavaBlocks;
     public int preWaterBlocks = -999, preLavaBlocks = -999;
+    public int range = 0, rotor = -1;
 
     RangeInventorySlot slotUpdater;
 
-    boolean sendInitData;
-
     public TileEntityWatermill() {
-        super(0, 32767);
+        super(0, 2097152);
         addInvSlot(slotUpdater = new RangeInventorySlot(this, 4));
     }
 
     public TileEntityWatermill(WaterType type) {
-        super(type.output, 32767);
+        super(type.output, 2097152);
         this.type = type;
         slotUpdater = new RangeInventorySlot(this);
         addInvSlot(slotUpdater);
@@ -45,64 +45,42 @@ public class TileEntityWatermill extends TileEntityRotor {
 
     @Override
     public void initNBT(NBTTagCompound tag, int meta) {
-        if (meta == -1) {
-            type = WaterType.values()[tag.getInteger("type")];
-        } else {
-            type = WaterType.values()[meta];
-        }
-        this.production = type.output;
-        sendInitData = true;
+        type = WaterType.values()[meta == -1 ? tag.getInteger("type") : meta];
+        production = type.output;
     }
 
     @Override
     public void writeToNBT(NBTTagCompound tag) {
         super.writeToNBT(tag);
 
-        if (type == null)
-            tag.setInteger("type", 0);
-        else
-            tag.setInteger("type", type.ordinal());
+        tag.setInteger("type", type == null ? 0 : type.ordinal());
     }
 
     @Override
     public void writePacketData(NBTTagCompound tag) {
         super.writePacketData(tag);
-        if (waterBlocks != preWaterBlocks)
-            tag.setInteger("waterBlocks", waterBlocks);
-        if (lavaBlocks != preLavaBlocks)
-            tag.setInteger("lavaBlocks", lavaBlocks);
+        tag.setInteger("waterBlocks", waterBlocks);
+        tag.setInteger("lavaBlocks", lavaBlocks);
 
-        if (sendInitData) {
-            sendInitData = false;
-            tag.setBoolean("sendInitData", true);
-            NBTTagCompound nbt = new NBTTagCompound();
-            slotRotor.writeToNBT(nbt);
-            tag.setTag("rotor", nbt);
-            nbt = new NBTTagCompound();
-            slotUpdater.writeToNBT(nbt);
-            tag.setTag("updater", nbt);
-            if (type == null)
-                tag.setInteger("type", 0);
-            else
-                tag.setInteger("type", type.ordinal());
-        }
+        rotor = hasRotor() ? getRotor().type.ordinal() : -1;
+        tag.setInteger("rotor", rotor);
+        tag.setInteger("range", range);
+        tag.setInteger("type", type == null ? 0 : type.ordinal());
     }
 
     @Override
     public void readPacketData(NBTTagCompound tag) {
         super.readPacketData(tag);
-        if (tag.hasKey("waterBlocks"))
-            waterBlocks = tag.getInteger("waterBlocks");
-        if (tag.hasKey("lavaBlocks"))
-            lavaBlocks = tag.getInteger("lavaBlocks");
+        waterBlocks = tag.getInteger("waterBlocks");
+        lavaBlocks = tag.getInteger("lavaBlocks");
 
-        if (tag.hasKey("sendInitData")) {
-            slotRotor.readFromNBT((NBTTagCompound) tag.getTag("rotor"));
-            slotUpdater.readFromNBT((NBTTagCompound) tag.getTag("updater"));
-            type = WaterType.values()[tag.getInteger("type")];
+        rotor = tag.getInteger("rotor");
+        range = tag.getInteger("range");
+        WaterType wt = type;
+        type = WaterType.values()[tag.getInteger("type")];
 
+        if (wt == null || !wt.equals(type))
             worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-        }
     }
 
     public WaterType getType() {
@@ -178,6 +156,8 @@ public class TileEntityWatermill extends TileEntityRotor {
     }
 
     public int getRange() {
+        if (WaterPower.isClientSide() && range != 0)
+            return range;
         if (type == null)
             return 0;
         int range = type.length;

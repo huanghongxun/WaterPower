@@ -14,16 +14,15 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fluids.FluidTank;
 
-import org.jackhuang.watercraft.WaterPower;
+import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.client.gui.IHasGui;
 
 public abstract class TileEntityMultiBlock extends TileEntityLiquidTankInventory implements IHasGui {
 
     public TileEntityMultiBlock masterBlock;
     protected boolean tested;
-    private boolean sendInitDataTileEntityMultiBlock = false;
     private int masterState, masterX, masterY, masterZ;
-    private int tick = 0, tick2 = WaterPower.updateTick;
+    private int tick = 0, tick2 = Reference.General.updateTick;
     protected ArrayList<TileEntityMultiBlock> blockList;
 
     public TileEntityMultiBlock(int tankSize) {
@@ -42,8 +41,6 @@ public abstract class TileEntityMultiBlock extends TileEntityLiquidTankInventory
             masterY = block.yCoord;
             masterZ = block.zCoord;
         }
-
-        sendInitDataTileEntityMultiBlock = true;
     }
 
     @Override
@@ -61,8 +58,6 @@ public abstract class TileEntityMultiBlock extends TileEntityLiquidTankInventory
             masterY = tag.getInteger("masterY");
             masterZ = tag.getInteger("masterZ");
         }
-
-        sendInitDataTileEntityMultiBlock = true;
     }
 
     @Override
@@ -87,21 +82,19 @@ public abstract class TileEntityMultiBlock extends TileEntityLiquidTankInventory
     public void readPacketData(NBTTagCompound tag) {
         super.readPacketData(tag);
 
-        if (tag.hasKey("sendInitDataTileEntityMultiBlock")) {
-            masterState = tag.getInteger("master");
+        masterState = tag.getInteger("master");
 
-            if (masterState == 0)
-                masterBlock = this;
-            else if (masterState == 1)
-                masterBlock = null;
-            else {
-                masterX = tag.getInteger("masterX");
-                masterY = tag.getInteger("masterY");
-                masterZ = tag.getInteger("masterZ");
-                TileEntity te = worldObj.getTileEntity(masterX, masterY, masterZ);
-                if (te instanceof TileEntityMultiBlock)
-                    masterBlock = (TileEntityMultiBlock) te;
-            }
+        if (masterState == 0)
+            masterBlock = this;
+        else if (masterState == 1)
+            masterBlock = null;
+        else {
+            masterX = tag.getInteger("masterX");
+            masterY = tag.getInteger("masterY");
+            masterZ = tag.getInteger("masterZ");
+            TileEntity te = worldObj.getTileEntity(masterX, masterY, masterZ);
+            if (te instanceof TileEntityMultiBlock)
+                masterBlock = (TileEntityMultiBlock) te;
         }
     }
 
@@ -109,18 +102,14 @@ public abstract class TileEntityMultiBlock extends TileEntityLiquidTankInventory
     public void writePacketData(NBTTagCompound tag) {
         super.writePacketData(tag);
 
-        if (sendInitDataTileEntityMultiBlock) {
-            sendInitDataTileEntityMultiBlock = false;
-            tag.setBoolean("sendInitDataTileEntityMultiBlock", true);
-            tag.setInteger("master", masterState);
-            if (masterState == 2) {
-                tag.setInteger("masterX", masterX);
-                tag.setInteger("masterY", masterY);
-                tag.setInteger("masterZ", masterZ);
-                TileEntity te = worldObj.getTileEntity(masterX, masterY, masterZ);
-                if (te instanceof TileEntityMultiBlock)
-                    masterBlock = (TileEntityMultiBlock) te;
-            }
+        tag.setInteger("master", masterState);
+        if (masterState == 2) {
+            tag.setInteger("masterX", masterX);
+            tag.setInteger("masterY", masterY);
+            tag.setInteger("masterZ", masterZ);
+            TileEntity te = worldObj.getTileEntity(masterX, masterY, masterZ);
+            if (te instanceof TileEntityMultiBlock)
+                masterBlock = (TileEntityMultiBlock) te;
         }
     }
 
@@ -149,7 +138,7 @@ public abstract class TileEntityMultiBlock extends TileEntityLiquidTankInventory
             return;
 
         if (tick-- == 0) {
-            tick = WaterPower.updateTick;
+            tick = Reference.General.updateTick;
             if (canBeMaster()) {
 
                 tested = true;
@@ -175,7 +164,7 @@ public abstract class TileEntityMultiBlock extends TileEntityLiquidTankInventory
         }
 
         if (tick2-- == 0) {
-            tick2 = WaterPower.updateTick;
+            tick2 = Reference.General.updateTick;
             onUpdate();
         }
     }

@@ -45,7 +45,7 @@ public class ItemOreDust extends ItemRecolorable {
 
     public void registerOreDict() {
         for (OreType type : OreType.values()) {
-            OreDictionary.registerOre("oreDust" + type.name(), get(type));
+            OreDictionary.registerOre("oreDust" + type.t.getName(), get(type));
         }
     }
 

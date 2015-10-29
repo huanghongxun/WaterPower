@@ -153,8 +153,7 @@ public abstract class TileEntityLiquidTankInventory extends TileEntityInventory 
         super.readPacketData(tag);
 
         if (allowedSendPacketTank()) {
-            if (tag.hasKey("tankCapacity"))
-                setFluidTankCapacity(tag.getInteger("tankCapacity"));
+            setFluidTankCapacity(tag.getInteger("tankCapacity"));
             getFluidTank().readFromNBT(tag.getCompoundTag("tank"));
         }
     }
@@ -166,10 +165,7 @@ public abstract class TileEntityLiquidTankInventory extends TileEntityInventory 
         if (allowedSendPacketTank()) {
             NBTTagCompound n = new NBTTagCompound();
             getFluidTank().writeToNBT(n);
-            if (preTankCapacity != getFluidTankCapacity()) {
-                tag.setInteger("tankCapacity", getFluidTankCapacity());
-                preTankCapacity = getFluidTankCapacity();
-            }
+            tag.setInteger("tankCapacity", getFluidTankCapacity());
             tag.setTag("tank", n);
         }
     }

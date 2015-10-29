@@ -16,6 +16,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 import org.apache.commons.lang3.mutable.MutableObject;
+import org.jackhuang.watercraft.Reference;
 import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.api.IUpgrade;
 import org.jackhuang.watercraft.api.IWaterReceiver;
@@ -68,54 +69,36 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements IWr
     }
 
     @Override
-    public void initNBT(NBTTagCompound nbt, int meta) {
-        if (meta == -1) {
-            type = ReservoirType.values()[nbt.getInteger("type")];
-        } else {
-            type = ReservoirType.values()[meta];
-        }
-
-        sendInitData = true;
+    public void initNBT(NBTTagCompound tag, int meta) {
+        type = ReservoirType.values()[meta == -1 ? tag.getInteger("type") : meta];
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound nbttagcompound) {
-        super.writeToNBT(nbttagcompound);
-        if (type == null)
-            nbttagcompound.setInteger("type", 0);
-        else
-            nbttagcompound.setInteger("type", type.ordinal());
+    public void writeToNBT(NBTTagCompound tag) {
+        super.writeToNBT(tag);
+        tag.setInteger("type", type == null ? 0 : type.ordinal());
     }
 
     @Override
     public void readPacketData(NBTTagCompound tag) {
         super.readPacketData(tag);
 
-        if (tag.hasKey("lastAddedWater"))
-            lastAddedWater = tag.getInteger("lastAddedWater");
+        lastAddedWater = tag.getInteger("lastAddedWater");
 
-        if (tag.hasKey("sendInitData")) {
-            type = ReservoirType.values()[tag.getInteger("type")];
+        ReservoirType rt = type;
+        type = ReservoirType.values()[tag.getInteger("type")];
 
+        if (rt == null || !rt.equals(type))
             worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-        }
     }
 
     @Override
     public void writePacketData(NBTTagCompound tag) {
         super.writePacketData(tag);
 
-        if (preLastAddedWater != lastAddedWater)
-            tag.setInteger("lastAddedWater", lastAddedWater);
+        tag.setInteger("lastAddedWater", lastAddedWater);
 
-        if (sendInitData) {
-            sendInitData = false;
-            tag.setBoolean("sendInitData", true);
-            if (type == null)
-                tag.setInteger("type", 0);
-            else
-                tag.setInteger("type", type.ordinal());
-        }
+        tag.setInteger("type", type == null ? 0 : type.ordinal());
     }
 
     public InventorySlotConsumableLiquid getFluidSlot() {
@@ -311,11 +294,11 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements IWr
         int delWater = (int) (weather == 0 ? area * 0.02 * biomePut : 0);
 
         preLastAddedWater = lastAddedWater;
-        lastAddedWater = (int) ((addWater - delWater) * WaterPower.updateTick);
+        lastAddedWater = (int) ((addWater - delWater) * Reference.General.updateTick);
 
-        if ((int) addWater * WaterPower.updateTick >= 1)
-            fluidTank.fill(new FluidStack(FluidRegistry.WATER, (int) addWater * WaterPower.updateTick), true);
-        fluidTank.drain(delWater * WaterPower.updateTick, true);
+        if ((int) addWater * Reference.General.updateTick >= 1)
+            fluidTank.fill(new FluidStack(FluidRegistry.WATER, (int) addWater * Reference.General.updateTick), true);
+        fluidTank.drain(delWater * Reference.General.updateTick, true);
     }
 
     @Override

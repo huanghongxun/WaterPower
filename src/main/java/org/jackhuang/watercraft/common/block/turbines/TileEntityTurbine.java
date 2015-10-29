@@ -18,8 +18,6 @@ public class TileEntityTurbine extends TileEntityRotor {
     // public int speed;
     private TurbineType type;
 
-    boolean sendInitData;
-
     public TileEntityTurbine() {
         super(0, 10000000);
     }
@@ -30,47 +28,32 @@ public class TileEntityTurbine extends TileEntityRotor {
 
     @Override
     public void initNBT(NBTTagCompound tag, int meta) {
-        if (meta == -1) {
-            type = TurbineType.values()[tag.getInteger("type")];
-        } else {
-            type = TurbineType.values()[meta];
-        }
+        type = TurbineType.values()[meta == -1 ? tag.getInteger("type") : meta];
         this.production = type.percent;
-        sendInitData = true;
     }
 
     public void writeToNBT(NBTTagCompound tag) {
         super.writeToNBT(tag);
 
-        if (type == null)
-            tag.setInteger("type", 0);
-        else
-            tag.setInteger("type", type.ordinal());
+        tag.setInteger("type", type == null ? 0 : type.ordinal());
     }
 
     @Override
     public void writePacketData(NBTTagCompound tag) {
         super.writePacketData(tag);
 
-        if (sendInitData) {
-            sendInitData = false;
-            tag.setBoolean("sendInitData", true);
-            if (type == null)
-                tag.setInteger("type", 0);
-            else
-                tag.setInteger("type", type.ordinal());
-        }
+        tag.setInteger("type", type == null ? 0 : type.ordinal());
     }
 
     @Override
     public void readPacketData(NBTTagCompound tag) {
         super.readPacketData(tag);
 
-        if (tag.hasKey("sendInitData")) {
-            type = TurbineType.values()[tag.getInteger("type")];
+        TurbineType tt = type;
+        type = TurbineType.values()[tag.getInteger("type")];
 
+        if (tt == null || !tt.equals(type))
             worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-        }
     }
 
     public TurbineType getType() {

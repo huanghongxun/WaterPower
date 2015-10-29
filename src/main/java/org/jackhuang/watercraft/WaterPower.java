@@ -48,6 +48,7 @@ import org.jackhuang.watercraft.common.recipe.NormalRecipeRegistrar;
 import org.jackhuang.watercraft.integration.IntegrationType;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.IWorldGenerator;
 import cpw.mods.fml.common.Mod;
@@ -56,6 +57,7 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -88,11 +90,6 @@ public class WaterPower implements IWorldGenerator {
     public static final CreativeTabs creativeTabWaterPower = new CreativeTabWaterCraft("creativeTabWaterPower");
 
     /**
-     * Watermills & turbines update interval
-     */
-    public static final int updateTick = 20;
-
-    /**
      * Loaded configuration
      */
     private Configuration config;
@@ -113,6 +110,7 @@ public class WaterPower implements IWorldGenerator {
         config.save();
 
         MinecraftForge.EVENT_BUS.register(this);
+        FMLCommonHandler.instance().bus().register(this);
     }
 
     @Mod.EventHandler
@@ -151,6 +149,13 @@ public class WaterPower implements IWorldGenerator {
                 type.getModule().postInit();
         }
 
+    }
+
+    @SubscribeEvent
+    public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
+        if (event.modID.equals(Reference.ModID)) {
+            Reference.initConfig(config);
+        }
     }
 
     protected void init() {

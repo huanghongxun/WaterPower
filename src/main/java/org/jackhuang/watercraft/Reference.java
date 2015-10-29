@@ -24,7 +24,7 @@ public class Reference {
 
     public static final String ModName = "WaterPower"; // Mod Name
 
-    public static final String Version = "0.3p"; // Mod Version
+    public static final String Version = "0.3q"; // Mod Version
 
     /**
      * Generate Ores in World.
@@ -52,7 +52,7 @@ public class Reference {
      * Energy to Water mills.
      */
     public static class Energy {
-        public static double mj = 2.5, rf = 0.12, charge = 0.1, ku = 0.25, hu = 1, steam = 0.1, water = 0.01;
+        public static double mj = 2.5, rf = 0.12, charge = 0.1, ku = 0.25, hu = 1, steam = 0.1, water = 0.01, vis = 10000;
 
         static void initConfig(Configuration config) {
             Property p = config.get("energy", "mj", mj);
@@ -69,6 +69,8 @@ public class Reference {
             water = p.getDouble(water);
             p = config.get("energy", "hu", hu);
             hu = p.getDouble(hu);
+            p = config.get("energy", "vis", vis);
+            vis = p.getDouble(vis);
         }
     }
 
@@ -77,11 +79,18 @@ public class Reference {
 
         public static boolean watermillNeedsRotor = true;
 
+        /**
+         * TileEntity update interval.
+         */
+        public static int updateTick = 20;
+
         static void initConfig(Configuration config) {
             Property p = config.get("rule", "watermillNeedRotor", true);
             watermillNeedsRotor = p.getBoolean(true);
             p = config.get("rule", "enableMachines", enableMachines);
             enableMachines = p.getBoolean(enableMachines);
+            p = config.get("rule", "updateTick", updateTick);
+            updateTick = p.getInt(updateTick);
         }
     }
 

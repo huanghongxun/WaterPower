@@ -113,23 +113,15 @@ public class EntityWaterWheel extends Entity {
      */
 
     public void updateParameters() {
-        if ((this.parent == null) || (!this.parent.hasRotor())) {
+        if ((this.parent == null) || this.parent.rotor == -1) {
             return;
         }
-        this.wheelType = this.parent.getRotor().type;
-        // this.boundingBox.setBB(getBoundingBox());
+        this.wheelType = RotorType.values()[this.parent.rotor];
     }
 
     public void destroy() {
         setDead();
         this.worldObj.removeEntity(this);
-        /* remove rotor */
-        /*
-         * PacketDispatcher.sendPacketToAllAround(this.posX, this.posY,
-         * this.posZ, 128.0D, this.worldObj.provider.dimensionId,
-         * BCTPacketHandler.PacketType.fillPacket(new PacketEntityUpdate(
-         * this.field_70157_k, PacketEntityUpdate.UpdateType.DESTROY)));
-         */
     }
 
     @Override
