@@ -67,11 +67,6 @@ public class BlockReservoir extends BlockRotor {
     }
 
     @Override
-    protected String getTextureFolder(int index) {
-        return "reservoir";
-    }
-
-    @Override
     protected int maxMetaData() {
         return ReservoirType.values().length;
     }

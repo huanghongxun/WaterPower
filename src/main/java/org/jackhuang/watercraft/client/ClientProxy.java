@@ -100,8 +100,6 @@ public class ClientProxy extends CommonProxy {
         MinecraftForgeClient.registerItemRenderer(GlobalItems.oreDust, new RecolorableItemRenderer());
         MinecraftForgeClient.registerItemRenderer(GlobalItems.crafting, new RecolorableItemRenderer());
 
-        // ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWatermill.class,
-        // new RotorRenderer());
     }
 
 }

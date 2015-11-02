@@ -11,7 +11,17 @@ package org.jackhuang.watercraft.common.item.crafting;
 import net.minecraft.util.StatCollector;
 
 public enum MaterialForms {
-    plate, dust, dustTiny, dustSmall, plateDense, ingot, block, stick, screw, gear, nugget, ring;
+    plate, dust, dustTiny, dustSmall, plateDense, ingot, block(false), stick, screw, gear, nugget, ring;
+
+    public final boolean REGISTER_ORE_DICT;
+
+    private MaterialForms() {
+        REGISTER_ORE_DICT = true;
+    }
+
+    private MaterialForms(boolean b) {
+        REGISTER_ORE_DICT = b;
+    }
 
     public String getShowedName() {
         String format = "cptwtrml.forms." + name();

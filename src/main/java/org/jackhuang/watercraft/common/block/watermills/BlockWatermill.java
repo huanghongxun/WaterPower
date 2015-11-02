@@ -67,11 +67,6 @@ public class BlockWatermill extends BlockRotor {
     }
 
     @Override
-    protected String getTextureFolder(int index) {
-        return "watermill";
-    }
-
-    @Override
     protected int maxMetaData() {
         return WaterType.values().length;
     }

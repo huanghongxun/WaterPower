@@ -45,7 +45,7 @@ public class TinkersConstructModule extends BaseModule {
         int ingotLiquidValue = 144;
         int nuggetLiquidValue = 16;
 
-        ItemStack block = ItemMaterial.get(ore.t, MaterialForms.block);
+        ItemStack block = new ItemStack(GlobalBlocks.material, 1, ore.t.ordinal());
 
         addMeltingRecipe(block, temp, new FluidStack(fluid, blockLiquidValue));
         TConstructRegistry.getBasinCasting().addCastingRecipe(block, new FluidStack(fluid, blockLiquidValue), 50);

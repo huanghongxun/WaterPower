@@ -35,11 +35,6 @@ public class BlockOre extends BlockWaterPower {
     }
 
     @Override
-    protected String getTextureFolder(int index) {
-        return "ore";
-    }
-
-    @Override
     protected int getTextureIndex(IBlockAccess world, int x, int y, int z, int meta) {
         return meta;
     }

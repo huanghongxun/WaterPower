@@ -34,6 +34,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import org.jackhuang.watercraft.client.render.IIconContainer;
 import org.jackhuang.watercraft.client.render.RecolorableTextures;
+import org.jackhuang.watercraft.common.block.GlobalBlocks;
 import org.jackhuang.watercraft.common.item.ItemRecolorable;
 import org.jackhuang.watercraft.common.item.others.ItemType;
 import org.jackhuang.watercraft.common.recipe.IRecipeRegistrar;
@@ -98,6 +99,8 @@ public class ItemMaterial extends ItemRecolorable {
 
     public void registerOreDict() {
         for (MaterialForms forms : MaterialForms.values()) {
+            if (!forms.REGISTER_ORE_DICT)
+                continue;
             for (MaterialTypes types : MaterialTypes.values()) {
                 IRecipeRegistrar.registerOreDict(forms.name() + types.getName(), get(types, forms));
             }
@@ -131,38 +134,23 @@ public class ItemMaterial extends ItemRecolorable {
         }
 
         for (MaterialTypes types : MaterialTypes.values()) {
-            addShapelessRecipeByOreDictionary(get(types, dust), // 4 small dusts
-                                                                // -> 1 dust
-                    get(types, dustSmall), get(types, dustSmall), get(types, dustSmall), get(types, dustSmall));
+            addShapelessRecipeByOreDictionary(get(types, dust), get(types, dustSmall), get(types, dustSmall), get(types, dustSmall), get(types, dustSmall));
 
-            addShapelessRecipeByOreDictionary(get(types, dustSmall, 4), // 1
-                                                                        // dust
-                                                                        // -> 4
-                                                                        // small
-                                                                        // dusts
-                    get(types, dust));
+            addShapelessRecipeByOreDictionary(get(types, dustSmall, 4), get(types, dust));
 
-            addShapedRecipe(get(types, dust), // 9 tiny dusts -> 1 dust
-                    "AAA", "AAA", "AAA", 'A', get(types, dustTiny));
+            addShapedRecipe(get(types, dust), "AAA", "AAA", "AAA", 'A', get(types, dustTiny));
 
-            addShapedRecipe(get(types, dustTiny, 9), // 1 dust -> 9 tiny dust
-                    "A", 'A', get(types, dust));
+            addShapedRecipe(get(types, dustTiny, 9), "A", 'A', get(types, dust));
 
-            addShapedRecipe(get(types, block), // 9 ingots -> 1 block
-                    "AAA", "AAA", "AAA", 'A', get(types, ingot));
-            RecipeAdder.compressor(get(types, ingot, 9), get(types, block));
+            addShapedRecipe(new ItemStack(GlobalBlocks.material, 1, types.ordinal()), "AAA", "AAA", "AAA", 'A', get(types, ingot));
+            RecipeAdder.compressor(get(types, ingot, 9), new ItemStack(GlobalBlocks.material, 1, types.ordinal()));
 
-            addShapedRecipe(get(types, ingot), // 9 nuggets -> 1 ingot
-                    "AAA", "AAA", "AAA", 'A', get(types, nugget));
+            addShapedRecipe(get(types, ingot), "AAA", "AAA", "AAA", 'A', get(types, nugget));
             RecipeAdder.compressor(get(types, nugget, 9), get(types, ingot));
 
-            addShapelessRecipeByOreDictionary(get(types, nugget, 9), // 1 ingot
-                                                                     // -> 9
-                                                                     // nuggets
-                    get(types, ingot));
+            addShapelessRecipeByOreDictionary(get(types, nugget, 9), get(types, ingot));
 
-            addShapedRecipe(get(types, stick, 4), // 2 ingots -> 4 stick
-                    "A", "A", 'A', get(types, ingot));
+            addShapedRecipe(get(types, stick, 4), "A", "A", 'A', get(types, ingot));
 
             addShapedRecipe(get(types, gear), // 4 sticks & 4 plates -> 1 gear
                     "SPS", "P P", "SPS", 'S', get(types, stick), 'P', get(types, plate));
@@ -170,24 +158,26 @@ public class ItemMaterial extends ItemRecolorable {
             addShapedRecipe(get(types, ring), // 4 sticks -> 1 ring
                     " S ", "S S", " S ", 'S', get(types, stick));
 
-            addShapelessRecipeByOreDictionary(get(types, ingot, 9), get(types, block));
+            addShapelessRecipeByOreDictionary(get(types, ingot, 9), new ItemStack(GlobalBlocks.material, 1, types.ordinal()));
 
             GameRegistry.addSmelting(get(types, dust), get(types, ingot), 0);
             GameRegistry.addSmelting(get(types, dustTiny), get(types, nugget), 0);
-            GameRegistry.addSmelting(get(types, block), get(types, ingot, 9), 0);
+            GameRegistry.addSmelting(new ItemStack(GlobalBlocks.material, 1, types.ordinal()), get(types, ingot, 9), 0);
 
             RecipeAdder.bender(get(types, ingot), get(types, plate));
             RecipeAdder.bender(get(types, plate, 9), get(types, plateDense));
             RecipeAdder.macerator(get(types, ingot), get(types, dust));
             RecipeAdder.macerator(get(types, plate), get(types, dust));
-            RecipeAdder.macerator(get(types, block), get(types, dust, 9));
+            RecipeAdder.macerator(new ItemStack(GlobalBlocks.material, 1, types.ordinal()), get(types, dust, 9));
             RecipeAdder.macerator(get(types, plateDense), get(types, dust, 9));
             RecipeAdder.macerator(get(types, screw), get(types, dustSmall));
-            RecipeAdder.cutter(get(types, block), get(types, plate, 9));
             RecipeAdder.lathe(get(types, stick), get(types, screw, 4));
 
-            addShapelessRecipeByOreDictionary(get(types, plateDense), ItemType.WoodenHammer.item(), get(types, block));
+            addShapelessRecipeByOreDictionary(get(types, plateDense), ItemType.WoodenHammer.item(), new ItemStack(GlobalBlocks.material, 1, types.ordinal()));
+            addShapelessRecipeByOreDictionary(new ItemStack(GlobalBlocks.material, 1, types.ordinal()), get(types, block));
+            addShapelessRecipeByOreDictionary(get(types, block), new ItemStack(GlobalBlocks.material, 1, types.ordinal()));
         }
+
     }
 
     @Override

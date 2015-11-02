@@ -115,10 +115,6 @@ public abstract class BlockWaterPower extends BlockContainer {
         return getDirection(meta);
     }
 
-    protected String getTextureFolder(int index) {
-        return null;
-    }
-
     protected String getTextureName(int index) {
         Item item = Item.getItemFromBlock(this);
 

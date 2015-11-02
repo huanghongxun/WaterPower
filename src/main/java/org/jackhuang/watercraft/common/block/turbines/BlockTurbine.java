@@ -63,11 +63,6 @@ public class BlockTurbine extends BlockRotor {
     }
 
     @Override
-    protected String getTextureFolder(int index) {
-        return "turbine";
-    }
-
-    @Override
     protected int maxMetaData() {
         return TurbineType.values().length;
     }

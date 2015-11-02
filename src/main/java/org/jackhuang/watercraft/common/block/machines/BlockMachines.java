@@ -76,11 +76,6 @@ public class BlockMachines extends BlockWaterPower {
     }
 
     @Override
-    protected String getTextureFolder(int index) {
-        return "machine";
-    }
-
-    @Override
     public TileEntity createTileEntity(World world, int metadata) {
         switch (metadata) {
         case 1:

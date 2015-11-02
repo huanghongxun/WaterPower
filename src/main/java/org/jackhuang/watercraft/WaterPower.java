@@ -28,6 +28,7 @@ import org.jackhuang.watercraft.client.gui.CreativeTabWaterCraft;
 import org.jackhuang.watercraft.common.CommonProxy;
 import org.jackhuang.watercraft.common.block.GlobalBlocks;
 import org.jackhuang.watercraft.common.block.machines.BlockMachines;
+import org.jackhuang.watercraft.common.block.ore.BlockMaterial;
 import org.jackhuang.watercraft.common.block.ore.BlockOre;
 import org.jackhuang.watercraft.common.block.ore.ItemOreDust;
 import org.jackhuang.watercraft.common.block.reservoir.BlockReservoir;
@@ -164,6 +165,7 @@ public class WaterPower implements IWorldGenerator {
 
         GlobalBlocks.reservoir = new BlockReservoir();
         GlobalBlocks.machine = new BlockMachines();
+        GlobalBlocks.material = new BlockMaterial();
 
         GlobalItems.crafting = new ItemCrafting();
         GlobalItems.meterial = new ItemMaterial();
