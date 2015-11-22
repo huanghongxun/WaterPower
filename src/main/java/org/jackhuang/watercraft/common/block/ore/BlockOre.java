@@ -13,6 +13,7 @@ import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.client.ClientProxy;
 import org.jackhuang.watercraft.common.block.BlockWaterPower;
 import org.jackhuang.watercraft.common.block.GlobalBlocks;
+import org.jackhuang.watercraft.common.recipe.IRecipeRegistrar;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -32,6 +33,7 @@ public class BlockOre extends BlockWaterPower {
         GlobalBlocks.zincOre = new ItemStack(this, 1, 4);
 
         OreType.registerRecipes();
+        registerOreDict();
     }
 
     @Override
@@ -74,5 +76,11 @@ public class BlockOre extends BlockWaterPower {
     public IIcon getIcon(IBlockAccess iBlockAccess, int x, int y, int z, int side) {
         int meta = iBlockAccess.getBlockMetadata(x, y, z);
         return getIcon(side, meta);
+    }
+
+    public void registerOreDict() {
+        for (OreType value : OreType.values()) {
+            IRecipeRegistrar.registerOreDict(value.name(), new ItemStack(this, 1, value.ordinal()));
+        }
     }
 }

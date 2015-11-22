@@ -24,7 +24,7 @@ public class Reference {
 
     public static final String ModName = "WaterPower"; // Mod Name
 
-    public static final String Version = "0.3r"; // Mod Version
+    public static final String Version = "0.3s"; // Mod Version
 
     /**
      * Generate Ores in World.

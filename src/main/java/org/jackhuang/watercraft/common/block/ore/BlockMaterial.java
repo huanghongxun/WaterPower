@@ -2,6 +2,7 @@ package org.jackhuang.watercraft.common.block.ore;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
@@ -12,6 +13,7 @@ import org.jackhuang.watercraft.WaterPower;
 import org.jackhuang.watercraft.client.ClientProxy;
 import org.jackhuang.watercraft.common.block.BlockWaterPower;
 import org.jackhuang.watercraft.common.item.crafting.MaterialTypes;
+import org.jackhuang.watercraft.common.recipe.IRecipeRegistrar;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -21,6 +23,8 @@ public class BlockMaterial extends BlockWaterPower {
 
     public BlockMaterial() {
         super("cptBlockMaterial", Material.rock, ItemBlockMaterial.class);
+
+        registerOreDict();
     }
 
     @Override
@@ -75,5 +79,11 @@ public class BlockMaterial extends BlockWaterPower {
     public IIcon getIcon(IBlockAccess iBlockAccess, int x, int y, int z, int side) {
         int meta = iBlockAccess.getBlockMetadata(x, y, z);
         return getIcon(side, meta);
+    }
+
+    public void registerOreDict() {
+        for (MaterialTypes value : MaterialTypes.values()) {
+            IRecipeRegistrar.registerOreDict("block" + value.getName(), new ItemStack(this, 1, value.ordinal()));
+        }
     }
 }

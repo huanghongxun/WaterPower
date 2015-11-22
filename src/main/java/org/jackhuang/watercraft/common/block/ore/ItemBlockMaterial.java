@@ -6,7 +6,6 @@ import net.minecraft.item.ItemStack;
 
 import org.jackhuang.watercraft.common.item.crafting.MaterialForms;
 import org.jackhuang.watercraft.common.item.crafting.MaterialTypes;
-import org.jackhuang.watercraft.common.recipe.IRecipeRegistrar;
 
 public class ItemBlockMaterial extends ItemBlock {
 
@@ -14,7 +13,6 @@ public class ItemBlockMaterial extends ItemBlock {
         super(par1);
 
         setHasSubtypes(true);
-        registerOreDict();
     }
 
     @Override
@@ -35,12 +33,6 @@ public class ItemBlockMaterial extends ItemBlock {
         if (itemstack.getItemDamage() >= MaterialTypes.values().length)
             return null;
         return MaterialTypes.values()[itemstack.getItemDamage()].getShowedName();
-    }
-
-    public void registerOreDict() {
-        for (MaterialTypes value : MaterialTypes.values()) {
-            IRecipeRegistrar.registerOreDict("block" + value.getName(), new ItemStack(this, 1, value.ordinal()));
-        }
     }
 
 }
