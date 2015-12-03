@@ -6,9 +6,7 @@
  * http://www.mod-buildcraft.com/MMPL-1.0.txt
  */
 package org.jackhuang.watercraft;
-
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
+;
 import java.util.Random;
 
 import org.jackhuang.watercraft.client.gui.CreativeTabWaterCraft;
