@@ -6,9 +6,7 @@
  * http://www.mod-buildcraft.com/MMPL-1.0.txt
  */
 package org.jackhuang.watercraft;
-
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
+;
 import java.util.Random;
 
 import org.jackhuang.watercraft.client.gui.CreativeTabWaterCraft;
@@ -46,6 +44,7 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
+import net.minecraftforge.classloading.FMLForgePlugin;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 import cpw.mods.fml.client.FMLClientHandler;
@@ -239,17 +238,6 @@ public class WaterPower implements IWorldGenerator {
     }
 
     public static boolean isDeobf() {
-        try {
-            Class c = ChunkCoordinates.class.getClassLoader().loadClass(
-                    "net.minecraft.util.ChunkCoordinates");
-            Constructor co = c.getConstructor(Integer.class, Integer.class,
-                    Integer.class);
-            ChunkCoordinates cc = (ChunkCoordinates) co.newInstance(1, 2, 3);
-            Method f = c.getMethod("set");
-            f.invoke(cc, 4, 5, 6);
-            return true;
-        } catch (Throwable e) {
-            return false;
-        }
+        return FMLForgePlugin.RUNTIME_DEOBF;
     }
 }
