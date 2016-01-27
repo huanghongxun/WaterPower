@@ -80,7 +80,7 @@ public class BlockOre extends BlockWaterPower {
 
     public void registerOreDict() {
         for (OreType value : OreType.values()) {
-            IRecipeRegistrar.registerOreDict(value.name(), new ItemStack(this, 1, value.ordinal()));
+            IRecipeRegistrar.registerOreDict("ore" + value.name(), new ItemStack(this, 1, value.ordinal()));
         }
     }
 }
