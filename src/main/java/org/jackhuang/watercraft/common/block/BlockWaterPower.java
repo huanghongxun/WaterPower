@@ -192,7 +192,9 @@ public abstract class BlockWaterPower extends BlockContainer {
         TileEntity te = world.getTileEntity(x, y, z);
 
         if (te != null) {
-            TEMPORARYTILEENTITY_LOCAL.set(te);
+        	if (!alreadyGet) {
+        		TEMPORARYTILEENTITY_LOCAL.set(te);
+        	}
             if (te instanceof TileEntityInventory) {
                 TileEntityInventory t = (TileEntityInventory) te;
 
@@ -200,6 +202,7 @@ public abstract class BlockWaterPower extends BlockContainer {
                     ItemStack item = t.getStackInSlot(i);
 
                     if ((item != null) && (item.stackSize > 0)) {
+                    	System.out.println("breakBlock: drop item");
                         float rx = Utils.rand.nextFloat() * 0.8F + 0.1F;
                         float ry = Utils.rand.nextFloat() * 0.8F + 0.1F;
                         float rz = Utils.rand.nextFloat() * 0.8F + 0.1F;
@@ -216,23 +219,32 @@ public abstract class BlockWaterPower extends BlockContainer {
                     }
                 }
             }
-        }
+        } else
+        	TEMPORARYTILEENTITY_LOCAL.remove();
         super.breakBlock(world, x, y, z, block, meta);
+        
+        alreadyGet = false;
     }
+    
+    static boolean alreadyGet = false; 
 
     @Override
     public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
+    	alreadyGet = false;
         ArrayList<ItemStack> al = new ArrayList<ItemStack>();
         TileEntity te = world.getTileEntity(x, y, z);
-        if (te == null)
+        if (te == null) {
             te = TEMPORARYTILEENTITY_LOCAL.get();
+            alreadyGet = true;
+        }
         TEMPORARYTILEENTITY_LOCAL.remove();
         if (te instanceof IDroppable) {
             al.add(((IDroppable) te).getDroppedItemStack());
         } else {
             al.addAll(super.getDrops(world, x, y, z, metadata, fortune));
-        }
+        }/*
         if (te instanceof IInventory) {
+        	System.out.println("getDrops: drop item");
             IInventory inv = (IInventory) te;
             for (int i = 0; i < inv.getSizeInventory(); i++) {
                 ItemStack is = inv.getStackInSlot(i);
@@ -242,7 +254,7 @@ public abstract class BlockWaterPower extends BlockContainer {
                     inv.setInventorySlotContents(i, null);
                 }
             }
-        }
+        }*/
         return al;
     }
 

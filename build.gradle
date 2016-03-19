@@ -21,13 +21,17 @@ apply plugin: 'curseforge'
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 def buildnumber = System.getenv("BUILD_NUMBER") == null ? "" : "-"+System.getenv("BUILD_NUMBER")
-version = "0.3s"+buildnumber
+def mod_version = "0.3t"+buildnumber
+version = mod_version
 group = "org.jackhuang.watercraft" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "WaterPower-1.7.10"
 
 minecraft {
     version = "1.7.10-10.13.4.1566-1.7.10"
     runDir = "eclipse"
+
+    replaceIn "Reference.java"
+    replace "@version@", mod_version
 }
 
 dependencies {
