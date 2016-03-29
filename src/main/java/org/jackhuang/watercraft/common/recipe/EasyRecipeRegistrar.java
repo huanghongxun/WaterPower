@@ -156,7 +156,7 @@ public class EasyRecipeRegistrar extends IRecipeRegistrar {
             addRecipeByOreDictionary(new ItemStack(GlobalItems.range, 1, 3), "WSW", "SAS", "WSW", 'W',
                     getUsualItemStack(ICItemFinder.getIC2Item("lapotronCrystal")), 'S', ICItemFinder.getIC2Item("mfsUnit"), 'A', new ItemStack(
                             GlobalItems.range, 1, 2));
-        } else {
+        } else if (Mods.IndustrialCraft2.isAvailable) {
             addRecipeByOreDictionary(new ItemStack(GlobalItems.range, 1, 0), "WSW", "SAS", "WSW", 'W', "circuitBasic", 'S', ICItemFinder.getIC2Item("batBox"),
                     'A', machine);
             addRecipeByOreDictionary(new ItemStack(GlobalItems.range, 1, 1), "WSW", "SAS", "WSW", 'W', "circuitAdvanced", 'S',
@@ -166,6 +166,17 @@ public class EasyRecipeRegistrar extends IRecipeRegistrar {
                             1, 1));
             addRecipeByOreDictionary(new ItemStack(GlobalItems.range, 1, 3), "WSW", "SAS", "WSW", 'W',
                     getUsualItemStack(ICItemFinder.getIC2Item("lapotronCrystal")), 'S', ICItemFinder.getIC2Item("mfsUnit"), 'A', new ItemStack(
+                            GlobalItems.range, 1, 2));
+        } else {
+            addRecipeByOreDictionary(new ItemStack(GlobalItems.range, 1, 0), "WSW", "SAS", "WSW", 'W', ItemCrafting.get(CraftingTypes.circuit, LevelTypes.MK1), 'S', ItemCrafting.get(CraftingTypes.rotationAxle, LevelTypes.MK3),
+                    'A', machine);
+            addRecipeByOreDictionary(new ItemStack(GlobalItems.range, 1, 1), "WSW", "SAS", "WSW", 'W', ItemCrafting.get(CraftingTypes.circuit, LevelTypes.MK3), 'S',
+                    ItemCrafting.get(CraftingTypes.rotationAxle, LevelTypes.MK4), 'A', new ItemStack(GlobalItems.range, 1, 0));
+            addRecipeByOreDictionary(new ItemStack(GlobalItems.range, 1, 2), "WSW", "SAS", "WSW", 'W',
+                    ItemCrafting.get(CraftingTypes.circuit, LevelTypes.MK4), 'S', ItemCrafting.get(CraftingTypes.rotationAxle, LevelTypes.MK5), 'A', new ItemStack(GlobalItems.range,
+                            1, 1));
+            addRecipeByOreDictionary(new ItemStack(GlobalItems.range, 1, 3), "WSW", "SAS", "WSW", 'W',
+                    ItemCrafting.get(CraftingTypes.circuit, LevelTypes.MK5), 'S', ItemCrafting.get(CraftingTypes.rotationAxle, LevelTypes.MK7), 'A', new ItemStack(
                             GlobalItems.range, 1, 2));
         }
     }

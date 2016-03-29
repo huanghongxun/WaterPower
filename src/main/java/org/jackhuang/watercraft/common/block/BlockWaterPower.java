@@ -189,12 +189,13 @@ public abstract class BlockWaterPower extends BlockContainer {
 
     @Override
     public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
+        TEMPORARYTILEENTITY_LOCAL.remove();
+        
         TileEntity te = world.getTileEntity(x, y, z);
 
         if (te != null) {
-        	if (!alreadyGet) {
-        		TEMPORARYTILEENTITY_LOCAL.set(te);
-        	}
+            if (!alreadyGet)
+                TEMPORARYTILEENTITY_LOCAL.set(te);
             if (te instanceof TileEntityInventory) {
                 TileEntityInventory t = (TileEntityInventory) te;
 
@@ -219,8 +220,7 @@ public abstract class BlockWaterPower extends BlockContainer {
                     }
                 }
             }
-        } else
-        	TEMPORARYTILEENTITY_LOCAL.remove();
+        }
         super.breakBlock(world, x, y, z, block, meta);
         
         alreadyGet = false;
@@ -230,7 +230,7 @@ public abstract class BlockWaterPower extends BlockContainer {
 
     @Override
     public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
-    	alreadyGet = false;
+        alreadyGet = false;
         ArrayList<ItemStack> al = new ArrayList<ItemStack>();
         TileEntity te = world.getTileEntity(x, y, z);
         if (te == null) {
@@ -238,23 +238,10 @@ public abstract class BlockWaterPower extends BlockContainer {
             alreadyGet = true;
         }
         TEMPORARYTILEENTITY_LOCAL.remove();
-        if (te instanceof IDroppable) {
+        if (te instanceof IDroppable)
             al.add(((IDroppable) te).getDroppedItemStack());
-        } else {
+        else
             al.addAll(super.getDrops(world, x, y, z, metadata, fortune));
-        }/*
-        if (te instanceof IInventory) {
-        	System.out.println("getDrops: drop item");
-            IInventory inv = (IInventory) te;
-            for (int i = 0; i < inv.getSizeInventory(); i++) {
-                ItemStack is = inv.getStackInSlot(i);
-                if (is != null) {
-                    al.add(is.copy());
-                    is.stackSize = 0;
-                    inv.setInventorySlotContents(i, null);
-                }
-            }
-        }*/
         return al;
     }
 
