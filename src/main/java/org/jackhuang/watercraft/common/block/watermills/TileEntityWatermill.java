@@ -166,9 +166,8 @@ public class TileEntityWatermill extends TileEntityRotor {
                 ItemStack is = slotUpdater.get(i);
                 if (is == null)
                     continue;
-                if (is != null && slotUpdater.get(i).getItem() instanceof ItemRange)
-                    if (is.getItemDamage() >= RangeType.values().length)
-                        return type.length;
+                if (is != null && slotUpdater.get(i).getItem() instanceof ItemRange && is.getItemDamage() >= RangeType.values().length)
+                    return type.length;
                 range -= is.stackSize * RangeType.values()[is.getItemDamage()].range;
             }
         }

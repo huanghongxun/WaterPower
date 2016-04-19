@@ -104,13 +104,11 @@ public class TileEntityBase extends TileEntity {
     public void updateEntity() {
         super.updateEntity();
 
-        if (isServerSide() && !isRedstonePowered()) {
-            if (tick-- == 0) {
-                onUpdate();
-                tick = Reference.General.updateTick;
+        if (isServerSide() && !isRedstonePowered() && tick-- == 0) {
+            onUpdate();
+            tick = Reference.General.updateTick;
 
-                sendUpdateToClient();
-            }
+            sendUpdateToClient();
         }
     }
 
