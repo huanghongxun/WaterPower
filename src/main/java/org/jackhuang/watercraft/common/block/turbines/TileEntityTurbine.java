@@ -14,7 +14,7 @@ import org.jackhuang.watercraft.util.WPLog;
 
 public class TileEntityTurbine extends TileEntityRotor {
 
-    public static int maxOutput = 32767;
+    public static final int MAX_OUTPUT = 32767;
     // public int speed;
     private TurbineType type;
 

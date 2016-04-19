@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public final class DefaultGuiIds {
 
-    private static HashMap<String, Integer> idMap = new HashMap<String, Integer>();
+    private static final HashMap<String, Integer> idMap = new HashMap<String, Integer>();
 
     public static int get(String name) {
         if (!idMap.containsKey(name)) {
