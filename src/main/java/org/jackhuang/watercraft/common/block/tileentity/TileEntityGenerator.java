@@ -388,7 +388,7 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements IEn
         if (this.handlerCache != null) {
             this.handlerCache[side] = null;
         }
-        if ((t instanceof IEnergyReceiver)) {
+        if (t instanceof IEnergyReceiver) {
             if (((IEnergyReceiver) t).canConnectEnergy(ForgeDirection.VALID_DIRECTIONS[side])) {
                 if (this.handlerCache == null)
                     this.handlerCache = new IEnergyReceiver[6];

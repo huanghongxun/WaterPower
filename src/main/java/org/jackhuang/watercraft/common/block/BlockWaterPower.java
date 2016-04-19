@@ -108,7 +108,7 @@ public abstract class BlockWaterPower extends BlockContainer {
     public int getDirection(IBlockAccess iBlockAccess, int x, int y, int z) {
         TileEntity te = iBlockAccess.getTileEntity(x, y, z);
 
-        if ((te instanceof TileEntityBlock))
+        if (te instanceof TileEntityBlock)
             return ((TileEntityBlock) te).getDirection();
         int meta = iBlockAccess.getBlockMetadata(x, y, z);
 
@@ -163,7 +163,7 @@ public abstract class BlockWaterPower extends BlockContainer {
 
         TileEntity tileEntity = world.getTileEntity(x, y, z);
 
-        if ((tileEntity instanceof TileEntityBlock)) {
+        if (tileEntity instanceof TileEntityBlock) {
             TileEntityBlock te = (TileEntityBlock) tileEntity;
             if (entityliving == null) {
                 te.setDirection(2);
@@ -202,7 +202,7 @@ public abstract class BlockWaterPower extends BlockContainer {
                 for (int i = 0; i < t.getSizeInventory(); i++) {
                     ItemStack item = t.getStackInSlot(i);
 
-                    if ((item != null) && (item.stackSize > 0)) {
+                    if (item != null && item.stackSize > 0) {
                     	System.out.println("breakBlock: drop item");
                         float rx = Utils.rand.nextFloat() * 0.8F + 0.1F;
                         float ry = Utils.rand.nextFloat() * 0.8F + 0.1F;
@@ -249,7 +249,7 @@ public abstract class BlockWaterPower extends BlockContainer {
     public void onNeighborChange(IBlockAccess world, int x, int y, int z, int tileX, int tileY, int tileZ) {
         TileEntity localTileEntity = world.getTileEntity(x, y, z);
 
-        if ((localTileEntity instanceof TileEntityBase)) {
+        if (localTileEntity instanceof TileEntityBase) {
             ((TileEntityBase) localTileEntity).onNeighborTileChange(tileX, tileY, tileZ);
         }
     }
@@ -297,7 +297,7 @@ public abstract class BlockWaterPower extends BlockContainer {
 
         TileEntity te = world.getTileEntity(x, y, z);
 
-        if ((te instanceof IHasGui)) {
+        if (te instanceof IHasGui) {
             entityPlayer.openGui(WaterPower.instance, ((IHasGui) te).getGuiId(), world, x, y, z);
             return true;
         }
