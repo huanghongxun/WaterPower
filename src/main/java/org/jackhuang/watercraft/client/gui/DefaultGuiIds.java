@@ -6,6 +6,9 @@ public final class DefaultGuiIds {
 
     private static HashMap<String, Integer> idMap = new HashMap<String, Integer>();
 
+    private DefaultGuiIds() {
+    }
+
     public static int get(String name) {
         if (!idMap.containsKey(name)) {
             throw new IllegalArgumentException("default id for " + name + " is not registered.");

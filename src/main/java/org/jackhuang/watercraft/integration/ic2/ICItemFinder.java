@@ -15,6 +15,9 @@ public class ICItemFinder {
 
     private static Class<?> Ic2Items;
 
+    private ICItemFinder() {
+    }
+
     public static ItemStack getIC2Item(String name) {
         try {
             if (Ic2Items == null)

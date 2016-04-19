@@ -23,6 +23,9 @@ import stanhebben.zenscript.annotations.ZenMethod;
 @ZenClass("mods.waterpower.Machines")
 public class Machines {
 
+    private Machines() {
+    }
+
     @ZenMethod
     public static void addCrusherRecipe(@NotNull IItemStack input, @NotNull IItemStack output) {
         MineTweakerAPI.apply(new AddRecipeAction("WaterPower Crusher", MyRecipes.macerator, MineTweakerMC.getItemStack(input), MineTweakerMC

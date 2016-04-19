@@ -4,6 +4,9 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 public class ReflectionUtil {
+    private ReflectionUtil() {
+    }
+
     public static Field getField(Class<?> clazz, String[] names) {
         for (String name : names) {
             try {

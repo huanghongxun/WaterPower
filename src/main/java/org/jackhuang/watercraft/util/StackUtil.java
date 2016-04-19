@@ -20,6 +20,9 @@ public final class StackUtil {
 
     private static final Random random = new Random();
 
+    private StackUtil() {
+    }
+
     public static ItemStack getFromInventory(IInventory inventory, ItemStack itemStackDestination, boolean simulate) {
         ItemStack ret = null;
         int toTransfer = itemStackDestination.stackSize;

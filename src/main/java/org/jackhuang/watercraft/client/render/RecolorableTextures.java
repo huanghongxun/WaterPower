@@ -22,6 +22,9 @@ public class RecolorableTextures {
     public static final IIconContainer[] CRAFTING = { ItemIcons.PADDLE_BASE, ItemIcons.DRAINAGE_PLATE, ItemIcons.FIXED_FRAME, ItemIcons.FIXED_TOOL,
             ItemIcons.ROTATION_AXLE, ItemIcons.OUTPUT_INTERFACE, ItemIcons.ROTOR, ItemIcons.STATOR, ItemIcons.CASING, ItemIcons.CIRCUIT };
 
+    private RecolorableTextures() {
+    }
+
     public static enum ItemIcons implements IIconContainer {
         INGOT, PLATE, PLATE_DENSE, NUGGET, BLOCK, STICK, GEAR, DUST, DUST_SMALL, DUST_TINY, SCREW, RING, PADDLE_BASE, DRAINAGE_PLATE, FIXED_FRAME, FIXED_TOOL, ROTATION_AXLE, OUTPUT_INTERFACE, ROTOR, STATOR, CASING, CIRCUIT, CRUSHED;
 
