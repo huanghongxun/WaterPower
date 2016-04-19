@@ -3,6 +3,7 @@ package org.jackhuang.watercraft.common.block.reservoir;
 import ic2.api.tile.IWrenchable;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -182,35 +183,35 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements IWr
             else
                 break;
 
-        ArrayList<Position> l1 = Reservoir.getNotHorizontalWall(worldObj, xCoord, yCoord, zCoord, length, height, type.ordinal());
+        List<Position> l1 = Reservoir.getNotHorizontalWall(worldObj, xCoord, yCoord, zCoord, length, height, type.ordinal());
         if (l1.size() != 0) {
             size = null;
             lastHeight = lastWidth = lastLength = -1;
             return null;
         }
 
-        ArrayList<Position> l2 = Reservoir.getNotHorizontalWall(worldObj, xCoord, yCoord, zCoord + width - 1, length, height, type.ordinal());
+        List<Position> l2 = Reservoir.getNotHorizontalWall(worldObj, xCoord, yCoord, zCoord + width - 1, length, height, type.ordinal());
         if (l2.size() != 0) {
             size = null;
             lastHeight = lastWidth = lastLength = -1;
             return null;
         }
 
-        ArrayList<Position> l3 = Reservoir.getNotVerticalWall(worldObj, xCoord, yCoord, zCoord, width, height, type.ordinal());
+        List<Position> l3 = Reservoir.getNotVerticalWall(worldObj, xCoord, yCoord, zCoord, width, height, type.ordinal());
         if (l3.size() != 0) {
             size = null;
             lastHeight = lastWidth = lastLength = -1;
             return null;
         }
 
-        ArrayList<Position> l4 = Reservoir.getNotVerticalWall(worldObj, xCoord + length - 1, yCoord, zCoord, width, height, type.ordinal());
+        List<Position> l4 = Reservoir.getNotVerticalWall(worldObj, xCoord + length - 1, yCoord, zCoord, width, height, type.ordinal());
         if (l4.size() != 0) {
             size = null;
             lastHeight = lastWidth = lastLength = -1;
             return null;
         }
 
-        ArrayList<Position> lfloor = Reservoir.getNotFloor(worldObj, xCoord, yCoord, zCoord, length, width, type.ordinal());
+        List<Position> lfloor = Reservoir.getNotFloor(worldObj, xCoord, yCoord, zCoord, length, width, type.ordinal());
         if (lfloor.size() != 0) {
             size = null;
             lastHeight = lastWidth = lastLength = -1;

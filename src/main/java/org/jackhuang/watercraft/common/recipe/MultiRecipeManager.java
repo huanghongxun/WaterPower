@@ -10,12 +10,13 @@ package org.jackhuang.watercraft.common.recipe;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import net.minecraft.item.ItemStack;
 
 public class MultiRecipeManager implements IRecipeManager {
-    ArrayList<IRecipeManager> container = new ArrayList();
+    List<IRecipeManager> container = new ArrayList();
 
     public MultiRecipeManager() {
         addRecipeManager(new MyRecipeManager());
@@ -51,7 +52,7 @@ public class MultiRecipeManager implements IRecipeManager {
 
     @Override
     public Map<IMyRecipeInput, MyRecipeOutput> getAllRecipes() {
-        HashMap map = new HashMap();
+        Map map = new HashMap();
         for (IRecipeManager r : container) {
             map.putAll(r.getAllRecipes());
         }

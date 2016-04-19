@@ -17,7 +17,7 @@ import net.minecraft.item.ItemStack;
 import org.jackhuang.watercraft.util.StackUtil;
 
 public class HashMapRecipeManager implements IRecipeManager {
-    HashMap<ItemStack, ItemStack> recipes;
+    Map<ItemStack, ItemStack> recipes;
 
     public HashMapRecipeManager(HashMap<ItemStack, ItemStack> recipes) {
         this.recipes = recipes;
@@ -50,7 +50,7 @@ public class HashMapRecipeManager implements IRecipeManager {
 
     @Override
     public Map<IMyRecipeInput, MyRecipeOutput> getAllRecipes() {
-        HashMap<IMyRecipeInput, MyRecipeOutput> map = new HashMap<IMyRecipeInput, MyRecipeOutput>();
+        Map<IMyRecipeInput, MyRecipeOutput> map = new HashMap<IMyRecipeInput, MyRecipeOutput>();
         for (Map.Entry entry : recipes.entrySet()) {
             if (entry.getKey() instanceof ItemStack)
                 map.put(new MyRecipeInputItemStack((ItemStack) entry.getKey()), new MyRecipeOutput((ItemStack) entry.getValue()));

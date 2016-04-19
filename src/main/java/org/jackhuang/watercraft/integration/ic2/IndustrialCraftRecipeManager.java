@@ -58,7 +58,7 @@ public class IndustrialCraftRecipeManager implements IRecipeManager {
 
     @Override
     public Map<IMyRecipeInput, MyRecipeOutput> getAllRecipes() {
-        HashMap<IMyRecipeInput, MyRecipeOutput> map = new HashMap<IMyRecipeInput, MyRecipeOutput>();
+        Map<IMyRecipeInput, MyRecipeOutput> map = new HashMap<IMyRecipeInput, MyRecipeOutput>();
         try {
             for (Map.Entry<IRecipeInput, RecipeOutput> entry : ((IMachineRecipeManager) containsIC2Recipe).getRecipes().entrySet()) {
                 IMyRecipeInput input;
