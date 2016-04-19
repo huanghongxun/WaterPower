@@ -225,7 +225,7 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements IWr
 
     public ArrayList<TileEntityMultiBlock> clientSetMultiBlocks() {
         ArrayList<TileEntityMultiBlock> al = new ArrayList<TileEntityMultiBlock>();
-        ArrayList<TileEntityMultiBlock> tmp = new ArrayList<TileEntityMultiBlock>();
+        ArrayList<TileEntityMultiBlock> tmp;
 
         int length = lastLength, width = lastWidth, height = lastHeight;
 

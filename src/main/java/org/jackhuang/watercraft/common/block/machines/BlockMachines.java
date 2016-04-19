@@ -100,7 +100,6 @@ public class BlockMachines extends BlockWaterPower {
     public int getComparatorInputOverride(World par1World, int par2, int par3, int par4, int par5) {
         TileEntity te = par1World.getTileEntity(par2, par3, par4);
         if (te != null) {
-            Class cls = te.getClass();
 
             if ((te instanceof TileEntityStandardWaterMachine)) {
                 TileEntityStandardWaterMachine tem = (TileEntityStandardWaterMachine) te;
