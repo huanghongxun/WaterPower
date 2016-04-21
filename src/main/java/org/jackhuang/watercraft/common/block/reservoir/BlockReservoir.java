@@ -77,7 +77,7 @@ public class BlockReservoir extends BlockRotor {
         if (current != null) {
             TileEntity tile = world.getTileEntity(x, y, z);
 
-            if ((tile instanceof TileEntityReservoir)) {
+            if (tile instanceof TileEntityReservoir) {
                 TileEntityReservoir reservoir = (TileEntityReservoir) tile;
 
                 if (current.getItem() instanceof ItemReservoir) {
@@ -92,7 +92,7 @@ public class BlockReservoir extends BlockRotor {
                     if (liquid != null) {
                         int qty = reservoir.fill(ForgeDirection.UNKNOWN, liquid, true);
 
-                        if ((qty != 0) && (!entityplayer.capabilities.isCreativeMode)) {
+                        if (qty != 0 && !entityplayer.capabilities.isCreativeMode) {
                             if (current.stackSize > 1) {
                                 if (!entityplayer.inventory.addItemStackToInventory(FluidContainerRegistry.drainFluidContainer(current))) {
                                     entityplayer.dropPlayerItemWithRandomChoice(FluidContainerRegistry.drainFluidContainer(current), false);
@@ -133,7 +133,7 @@ public class BlockReservoir extends BlockRotor {
                             return true;
                         }
                     }
-                } else if ((current.getItem() instanceof IFluidContainerItem)) {
+                } else if (current.getItem() instanceof IFluidContainerItem) {
                     if (current.stackSize != 1) {
                         return false;
                     }
@@ -142,14 +142,14 @@ public class BlockReservoir extends BlockRotor {
                         IFluidContainerItem container = (IFluidContainerItem) current.getItem();
                         FluidStack liquid = container.getFluid(current);
                         FluidStack tankLiquid = reservoir.getFluidStackfromTank();
-                        boolean mustDrain = (liquid == null) || (liquid.amount == 0);
-                        boolean mustFill = (tankLiquid == null) || (tankLiquid.amount == 0);
-                        if ((!mustDrain) || (!mustFill)) {
-                            if ((mustDrain) || (!entityplayer.isSneaking())) {
+                        boolean mustDrain = liquid == null || liquid.amount == 0;
+                        boolean mustFill = tankLiquid == null || tankLiquid.amount == 0;
+                        if (!mustDrain || !mustFill) {
+                            if (mustDrain || !entityplayer.isSneaking()) {
                                 liquid = reservoir.drain(ForgeDirection.UNKNOWN, 1000, false);
                                 int qtyToFill = container.fill(current, liquid, true);
                                 reservoir.drain(ForgeDirection.UNKNOWN, qtyToFill, true);
-                            } else if (((mustFill) || (entityplayer.isSneaking())) && (liquid.amount > 0)) {
+                            } else if ((mustFill || entityplayer.isSneaking()) && liquid.amount > 0) {
                                 int qty = reservoir.fill(ForgeDirection.UNKNOWN, liquid, false);
                                 reservoir.fill(ForgeDirection.UNKNOWN, container.drain(current, qty, true), true);
                             }

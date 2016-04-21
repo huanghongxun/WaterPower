@@ -21,7 +21,7 @@ public abstract class ContainerBase extends Container {
     public final ItemStack transferStackInSlot(EntityPlayer player, int sourceSlotIndex) {
         Slot sourceSlot = (Slot) this.inventorySlots.get(sourceSlotIndex);
 
-        if ((sourceSlot != null) && (sourceSlot.getHasStack())) {
+        if (sourceSlot != null && sourceSlot.getHasStack()) {
             ItemStack sourceItemStack = sourceSlot.getStack();
             int oldSourceItemStackSize = sourceItemStack.stackSize;
 
