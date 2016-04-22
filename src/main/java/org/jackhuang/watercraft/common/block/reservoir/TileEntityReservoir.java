@@ -286,9 +286,8 @@ public class TileEntityReservoir extends TileEntityMetaMultiBlock implements IWr
         // Surface water receiving
         addWater += overLevel * (1D - Math.abs(64 - this.yCoord) / 64) * (area - cover) * biomeGet * add;
 
-        if (biomeID == BiomeGenBase.ocean.biomeID || biomeID == BiomeGenBase.river.biomeID) {
-            if (yCoord < 64)
-                addWater += length * width * 0.5;
+        if ((biomeID == BiomeGenBase.ocean.biomeID || biomeID == BiomeGenBase.river.biomeID) && yCoord < 64) {
+            addWater += length * width * 0.5;
         }
 
         int delWater = (int) (weather == 0 ? area * 0.02 * biomePut : 0);

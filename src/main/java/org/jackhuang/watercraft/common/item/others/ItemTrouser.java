@@ -63,11 +63,10 @@ public class ItemTrouser extends ItemArmor implements ISpecialArmor {
     }
 
     private void tryToCharge(ItemStack is) {
-        if (is != null) {
-            if (is.getItem() instanceof IElectricItem) {
-                IElectricItem electricItem = (IElectricItem) is.getItem();
-                saved -= ElectricItem.manager.charge(is, saved, 2147483647, true, false);
-            }
+        if (is != null && is.getItem() instanceof IElectricItem) {
+            IElectricItem electricItem = (IElectricItem) is.getItem();
+            saved -= ElectricItem.manager.charge(is, saved, 2147483647, true, false);
+        
 
         }
     }
