@@ -29,7 +29,6 @@ public class EntityWaterWheelRenderer extends Render {
         GL11.glPushMatrix();
         GL11.glTranslatef((float) x, (float) y, (float) z);
 
-        TileEntityWatermill tile = wheel.parent;
 
         int facing = wheel.parentFacing;
 
