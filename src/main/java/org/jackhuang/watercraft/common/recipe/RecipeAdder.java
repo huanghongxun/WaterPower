@@ -29,6 +29,9 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public class RecipeAdder {
 
+    private RecipeAdder() {
+    }
+
     public static void lathe(ItemStack input, ItemStack output) {
         MyRecipes.lathe.addRecipe(input, output);
     }

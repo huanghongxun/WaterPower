@@ -10,6 +10,9 @@ public class MessagePacketHandler {
 
     public static final SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.ModName.toLowerCase());
 
+    private MessagePacketHandler() {
+    }
+
     public static void init() {
         int idx = 0;
 

@@ -13,4 +13,6 @@ public class MyRecipes {
     public static IRecipeManager centrifuge, sawmill, lathe, implosion;
     public static IRecipeManager macerator, compressor, cutter;
 
+    private MyRecipes() {
+    }
 }

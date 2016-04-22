@@ -20,6 +20,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 public final class RenderUtils {
     private static final ResourceLocation BLOCK_TEXTURE = TextureMap.locationBlocksTexture;
 
+    private RenderUtils() {
+    }
+
     public static IIcon getSafeIcon(IIcon icon) {
         if (icon == null)
             return getMissingIcon();
