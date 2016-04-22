@@ -57,7 +57,7 @@ import cpw.mods.fml.relauncher.SideOnly;
         @Interface(iface = "thaumcraft.api.aspects.IAspectContainer", modid = Mods.IDs.Thaumcraft) })
 public abstract class TileEntityGenerator extends TileEntityBlock implements IEnergySource, IHasGui, IKineticSource, IUnitChangeable, IEnergyConnection,
         IChargeConductor, IFluidHandler, IHeatSource, IEssentiaTransport, IAspectContainer {
-    public static Random random = new Random();
+    public static final Random random = new Random();
 
     public double storage = 0.0D;
     public double maxStorage;
