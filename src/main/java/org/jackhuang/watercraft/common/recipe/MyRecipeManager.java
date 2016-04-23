@@ -11,13 +11,14 @@ package org.jackhuang.watercraft.common.recipe;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import net.minecraft.item.ItemStack;
 
 public class MyRecipeManager implements IRecipeManager {
     private final Map<IMyRecipeInput, MyRecipeOutput> recipes = new HashMap();
-    private ArrayList<HashMap<ItemStack, ItemStack>> singleOutputRecipes = new ArrayList();
+    private List<HashMap<ItemStack, ItemStack>> singleOutputRecipes = new ArrayList();
 
     @Override
     public boolean addRecipe(ItemStack input, ItemStack... outputs) {
