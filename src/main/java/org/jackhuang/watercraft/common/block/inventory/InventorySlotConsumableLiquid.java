@@ -55,7 +55,7 @@ public class InventorySlotConsumableLiquid extends InventorySlotConsumable {
                         return true;
                     }
                 }
-            } else if ((item instanceof IFluidContainerItem)) {
+            } else if (item instanceof IFluidContainerItem) {
                 containerItem = (IFluidContainerItem) item;
                 FluidStack prevFluid = containerItem.getFluid(stack);
 
@@ -176,7 +176,7 @@ public class InventorySlotConsumableLiquid extends InventorySlotConsumable {
 
             return FluidContainerRegistry.getFluidForFilledItem(filled).amount;
         }
-        if ((stack.getItem() instanceof IFluidContainerItem)) {
+        if (stack.getItem() instanceof IFluidContainerItem) {
             IFluidContainerItem container = (IFluidContainerItem) stack.getItem();
             ItemStack singleStack = StackUtil.copyWithSize(stack, 1);
 

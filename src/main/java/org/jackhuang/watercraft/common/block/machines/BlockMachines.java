@@ -101,7 +101,7 @@ public class BlockMachines extends BlockWaterPower {
         TileEntity te = par1World.getTileEntity(par2, par3, par4);
         if (te != null) {
 
-            if ((te instanceof TileEntityStandardWaterMachine)) {
+            if (te instanceof TileEntityStandardWaterMachine) {
                 TileEntityStandardWaterMachine tem = (TileEntityStandardWaterMachine) te;
                 return (int) Math.floor(tem.getProgress() * 15.0F);
             }
