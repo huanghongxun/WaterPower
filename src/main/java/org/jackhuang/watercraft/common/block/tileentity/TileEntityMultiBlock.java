@@ -9,6 +9,7 @@
 package org.jackhuang.watercraft.common.block.tileentity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -23,7 +24,7 @@ public abstract class TileEntityMultiBlock extends TileEntityLiquidTankInventory
     protected boolean tested;
     private int masterState, masterX, masterY, masterZ;
     private int tick = 0, tick2 = Reference.General.updateTick;
-    protected ArrayList<TileEntityMultiBlock> blockList;
+    protected List<TileEntityMultiBlock> blockList;
 
     public TileEntityMultiBlock(int tankSize) {
         super(tankSize);
