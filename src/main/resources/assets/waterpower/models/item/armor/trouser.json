@@ -1,0 +1,6 @@
+{
+    "parent": "waterpower:item/default",
+    "textures": {
+        "layer0": "waterpower:items/armor/itemArmorLegs"
+    }
+}

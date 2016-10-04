@@ -1,0 +1,35 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "model": "cube",
+        "textures": {
+            "particle": "#side",
+            "west": "#side",
+            "east": "#side",
+            "south": "#side",
+            "side": "waterpower:blocks/machine/SIDE",
+            "down": "waterpower:blocks/machine/DOWN",
+            "up": "waterpower:blocks/machine/UP"
+        }
+    }, 
+    "variants": {
+        "type": {
+            "macerator":  { "textures": { "north": "waterpower:blocks/machine/macerator" } },
+            "compressor": { "textures": { "north": "waterpower:blocks/machine/compressor" } },
+            "sawmill":    { "textures": { "north": "waterpower:blocks/machine/sawmill" } },
+            "centrifuge": { "textures": { "north": "waterpower:blocks/machine/centrifuge" } },
+            "lathe":      { "textures": { "north": "waterpower:blocks/machine/lathe" } },
+            "cutter":     { "textures": { "north": "waterpower:blocks/machine/cutter" } },
+            "advcompressor": { "textures": { "north": "waterpower:blocks/machine/advcompressor" } }
+        },
+        "facing": {
+            "down": { "x": 90 },
+            "up": { "x": 270 },
+            "north": { "transform": "forge:default-block" },
+            "south": { "y": 180 },
+            "west": { "y": 270 },
+            "east": { "y": 90 }
+        },
+        "inventory": [{}]
+    }
+}
