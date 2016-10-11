@@ -33,7 +33,7 @@ import waterpower.util.Utils;
 public class TileEntityReservoir extends TileEntityMultiBlock {
 
     public EnumFacing side;
-    public Reservoir size;
+    public Reservoir size = new Reservoir();
 
     private int lastLength = -1, lastWidth = -1, lastHeight = -1;
     private double rainLevel, underLevel, overLevel;
@@ -60,6 +60,10 @@ public class TileEntityReservoir extends TileEntityMultiBlock {
         super.readPacketData(tag);
 
         lastAddedWater = tag.getInteger("lastAddedWater");
+        size.width = tag.getInteger("reservoirWidth");
+        size.length = tag.getInteger("reservoirLength");
+        size.height = tag.getInteger("reservoirHeight");
+        size.valid = tag.getBoolean("reservoirValid");
     }
 
     @Override
@@ -67,6 +71,11 @@ public class TileEntityReservoir extends TileEntityMultiBlock {
         super.writePacketData(tag);
 
         tag.setInteger("lastAddedWater", lastAddedWater);
+        
+        tag.setInteger("reservoirWidth", size.width);
+        tag.setInteger("reservoirLength", size.length);
+        tag.setInteger("reservoirHeight", size.height);
+        tag.setBoolean("reservoirValid", size.valid);
     }
 
     public InventorySlotConsumableLiquid getFluidSlot() {
@@ -152,35 +161,35 @@ public class TileEntityReservoir extends TileEntityMultiBlock {
 
         List<BlockPos> l1 = Reservoir.getNotHorizontalWall(worldObj, pos.getX(), pos.getY(), pos.getZ(), length, height, getType());
         if (l1.size() != 0) {
-            size = null;
+            size.valid = false;
             lastHeight = lastWidth = lastLength = -1;
             return null;
         }
 
         List<BlockPos> l2 = Reservoir.getNotHorizontalWall(worldObj, pos.getX(), pos.getY(), pos.getZ() + width - 1, length, height, getType());
         if (l2.size() != 0) {
-            size = null;
+            size.valid = false;
             lastHeight = lastWidth = lastLength = -1;
             return null;
         }
 
         List<BlockPos> l3 = Reservoir.getNotVerticalWall(worldObj, pos.getX(), pos.getY(), pos.getZ(), width, height, getType());
         if (l3.size() != 0) {
-            size = null;
+            size.valid = false;
             lastHeight = lastWidth = lastLength = -1;
             return null;
         }
 
         List<BlockPos> l4 = Reservoir.getNotVerticalWall(worldObj, pos.getX() + length - 1, pos.getY(), pos.getZ(), width, height, getType());
         if (l4.size() != 0) {
-            size = null;
+            size.valid = false;
             lastHeight = lastWidth = lastLength = -1;
             return null;
         }
 
         List<BlockPos> lfloor = Reservoir.getNotFloor(worldObj, pos.getX(), pos.getY(), pos.getZ(), length, width, getType());
         if (lfloor.size() != 0) {
-            size = null;
+            size.valid = false;
             lastHeight = lastWidth = lastLength = -1;
             return null;
         }
@@ -218,7 +227,11 @@ public class TileEntityReservoir extends TileEntityMultiBlock {
         if (pos.getY() > 0)
             ocean.add(Reservoir.getFloorWater(worldObj, pos.getX(), pos.getY() - 1, pos.getZ(), length, width, getType()));
 
-        size = new Reservoir(length, width, height, Reservoir.getNonAirBlock(worldObj, pos.getX(), pos.getY(), pos.getZ(), length, width, height));
+        size.valid = true;
+        size.length = length;
+        size.width = width;
+        size.height = height;
+        size.nonAirBlock = Reservoir.getNonAirBlock(worldObj, pos.getX(), pos.getY(), pos.getZ(), length, width, height);
 
         defaultStorage = size.getCapacity() * getType().capacity;
         setFluidTankCapacity(defaultStorage + extraStorage);
@@ -229,7 +242,7 @@ public class TileEntityReservoir extends TileEntityMultiBlock {
     @Override
     protected void onUpdate() {
 
-        if (!isMaster() || WaterPower.isClientSide() || size == null)
+        if (!isMaster() || WaterPower.isClientSide() || !size.valid)
             return;
 
         double[] ds = Utils.getBiomeRaining(worldObj, pos);

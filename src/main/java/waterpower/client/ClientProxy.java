@@ -15,11 +15,14 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import waterpower.client.gui.DefaultGuiIds;
+import waterpower.client.render.BlockColor;
 import waterpower.client.render.IconRegisterService;
 import waterpower.client.render.RecolorableTextures;
+import waterpower.client.render.RenderReservoir;
 import waterpower.common.CommonProxy;
 import waterpower.common.block.BlockWaterPower;
 import waterpower.common.block.GlobalBlocks;
@@ -111,8 +114,10 @@ public class ClientProxy extends CommonProxy {
         IconRegisterService.setupItemModels();
         
         BlockMaterial material = (BlockMaterial) GlobalBlocks.material;
-        Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler(material, material);
+        Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler(new BlockColor(), material);
 
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityReservoir.class, new RenderReservoir());
+        
 		for (Item item : GlobalItems.items) {
 			if (item instanceof IItemColor) {
 				Minecraft.getMinecraft().getItemColors().registerItemColorHandler(((IItemColor) item), item);

@@ -8,6 +8,7 @@
 package waterpower.integration;
 
 import waterpower.integration.ic2.IndustrialCraftModule;
+import waterpower.integration.minetweaker.MineTweakerModule;
 import waterpower.integration.waila.WailaModule;
 import waterpower.util.Mods;
 
@@ -15,6 +16,8 @@ public enum IntegrationType {
     IndustrialCraft(IndustrialCraftModule.class, Mods.IndustrialCraft2),
     BuildCraft(BuildCraftModule.class, Mods.BuildCraftCore),
     Mekanism(MekanismModule.class, Mods.Mekanism),
+    Railcraft(RailcraftModule.class, Mods.Railcraft),
+    MineTweaker(MineTweakerModule.class, Mods.MineTweaker3),
     ThermalExpansion(ThermalExpansionModule.class, Mods.ThermalExpansion),
     TinkersConstruct(TinkersConstructModule.class, Mods.TinkersConstruct),
     Thaumcraft(ThaumcraftModule.class, Mods.Thaumcraft),

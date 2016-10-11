@@ -15,7 +15,8 @@ public class Reservoir {
         return "Reservoir [width=" + width + ", height=" + height + ", length=" + length + ", blockType=" + blockType + "]";
     }
 
-    private int width, height, length, nonAirBlock;
+    public int width, height, length, nonAirBlock;
+    public boolean valid;
     private ReservoirType blockType;
 
     public int getWidth() {

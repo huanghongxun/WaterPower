@@ -8,12 +8,15 @@
 
 package waterpower.common.recipe;
 
+import gregtech.api.GregTech_API;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import waterpower.common.item.other.ItemType;
 import waterpower.integration.AppliedEnergisticsModule;
+import waterpower.integration.GregTechModule;
 import waterpower.integration.ImmersiveEngineeringModule;
 import waterpower.integration.MekanismModule;
+import waterpower.integration.RailcraftModule;
 import waterpower.integration.ThermalExpansionModule;
 import waterpower.integration.ic2.IndustrialCraftModule;
 import waterpower.util.Mods;
@@ -47,9 +50,9 @@ public class RecipeAdder {
         if (Mods.Mekanism.isAvailable) {
             MekanismModule.crusher(input, output);
         }
-        /*if (Mods.Railcraft.isAvailable) {
+        if (Mods.Railcraft.isAvailable) {
             RailcraftModule.crusher(input, true, false, output);
-        }*/
+        }
         if (Mods.AppliedEnergistics2.isAvailable) {
             AppliedEnergisticsModule.crusher(input, output);
         }
@@ -86,13 +89,16 @@ public class RecipeAdder {
             // Incomplete
 
         }
-        /*if (Mods.GregTech.isAvailable) {
-            GregTech_API.sRecipeAdder.addForgeHammerRecipe(input, output, 20, 32);
-        }*/
+        if (Mods.GregTech.isAvailable) {
+        	try {
+        		GregTech_API.sRecipeAdder.addForgeHammerRecipe(input, output, 20, 32);
+        	} catch(Throwable t) {
+        	}
+        }
         if (Mods.IndustrialCraft2.isAvailable) {
             IndustrialCraftModule.metalformerRolling(input, output);
         }
-        /*if (Mods.Railcraft.isAvailable) {
+        if (Mods.Railcraft.isAvailable) {
             int sz = input.stackSize;
             input.stackSize = 1;
             switch (sz) {
@@ -124,7 +130,7 @@ public class RecipeAdder {
                 RailcraftModule.rollingMachine(output, "AAA", "AAA", "AAA", 'A', input);
                 break;
             }
-        }*/
+        }
         int sz = input.stackSize;
         input.stackSize = 1;
         switch (sz) {
@@ -161,21 +167,21 @@ public class RecipeAdder {
             IndustrialCraftModule.blastfurance(input, output);
             flag = true;
         }
-        /*if (Mods.Railcraft.isAvailable) {
+        if (Mods.Railcraft.isAvailable) {
             RailcraftModule.blastFurnace(input, true, false, cookTime, output);
             flag = true;
-        }*/
+        }
         if (Mods.ImmersiveEngineering.isAvailable) {
-            ImmersiveEngineeringModule.blastFurnace(input, 200, output);
+            ImmersiveEngineeringModule.blastFurnace(input, 200, output, null);
             flag = true;
         }
         if (Mods.Mekanism.isAvailable) {
             MekanismModule.metallurgicInfuser("CARBON", Math.round((cookTime) / 100.0f), input, output);
             flag = true;
         }
-        /*if (Mods.GregTech.isAvailable) {
+        if (Mods.GregTech.isAvailable) {
             flag |= GregTechModule.blastFurnace(input, output, cookTime);
-        }*/
+        }
         if (!flag) {
             IRecipeRegistrar.addSmelting(input, output);
         }

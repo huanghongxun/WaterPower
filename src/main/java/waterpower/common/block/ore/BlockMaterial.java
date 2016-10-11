@@ -20,7 +20,7 @@ import waterpower.common.block.BlockWaterPower;
 import waterpower.common.item.crafting.MaterialTypes;
 import waterpower.common.recipe.IRecipeRegistrar;
 
-public class BlockMaterial extends BlockWaterPower implements IBlockColor {
+public class BlockMaterial extends BlockWaterPower {
 	private static final PropertyEnum<MaterialTypes> MATERIAL_TYPES = PropertyEnum.create("type", MaterialTypes.class);
 
     public BlockMaterial() {

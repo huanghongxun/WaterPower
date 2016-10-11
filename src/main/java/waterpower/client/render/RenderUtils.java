@@ -1,14 +1,20 @@
 package waterpower.client.render;
 
+import net.minecraft.client.renderer.BlockRendererDispatcher;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.renderer.vertex.VertexFormat;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.client.model.pipeline.UnpackedBakedQuad;
-
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -17,12 +23,59 @@ import org.lwjgl.opengl.GL11;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import static org.lwjgl.opengl.GL11.*;
+import static net.minecraft.util.math.MathHelper.*;
+
 @SideOnly(Side.CLIENT)
 public final class RenderUtils {
     private static final ResourceLocation BLOCK_TEXTURE = TextureMap.LOCATION_BLOCKS_TEXTURE;
 
     private RenderUtils() {
     }
+
+	public static void renderBlock(IBlockState state, BlockPos pos) {
+
+		Tessellator tessellator = Tessellator.getInstance();
+
+		VertexBuffer vertexbuffer = tessellator.getBuffer();
+
+		vertexbuffer.begin(GL_QUADS, DefaultVertexFormats.BLOCK);
+
+		Minecraft minecraft = Minecraft.getMinecraft();
+
+		BlockRendererDispatcher dispatcher = minecraft.getBlockRendererDispatcher();
+
+		dispatcher.renderBlock(state, pos, minecraft.theWorld, vertexbuffer);
+
+		tessellator.draw();
+
+	}
+	
+	public static float getRenderPartialTicks() {
+		return Minecraft.getMinecraft().getRenderPartialTicks();
+	}
+	
+	public static float calculateRenderOffset(float now, float last, float partialTicks) {
+		return last + (now - last) * partialTicks;
+	}
+	
+	public static void translateToZero() {
+		EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+		float partialTicks = getRenderPartialTicks();
+		glTranslatef(
+				-calculateRenderOffset((float) player.posX, (float) player.lastTickPosX, partialTicks),
+				-calculateRenderOffset((float) player.posY, (float) player.lastTickPosY, partialTicks),
+				-calculateRenderOffset((float) player.posZ, (float) player.lastTickPosZ, partialTicks)
+		);
+	}
+
+	public static void scaleAndCorrectThePosition(float x, float y, float z, float dx, float dy, float dz) {
+
+		glTranslatef(dx * (1F - x), dy * (1F - y), dz * (1F - z));
+
+		glScalef(x, y, z);
+
+	}
     
     @SideOnly(Side.CLIENT)
     public static IIconContainer sprite2Container(final TextureAtlasSprite sprite) {

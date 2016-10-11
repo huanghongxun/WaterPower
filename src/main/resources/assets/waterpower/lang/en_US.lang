@@ -221,13 +221,13 @@ cptwtrml.material.Vanadium=Vanadium
 cptwtrml.material.Steel=Steel
 
 # machines
-cptwtrml.machine.macerator.name=Water-power Crusher
-cptwtrml.machine.compressor.name=Water-power Compressor
-cptwtrml.machine.sawmill.name=Water-power Sawmill
-cptwtrml.machine.advancedCompressor.name=Water-power Advanced Compressor
-cptwtrml.machine.centrifuge.name=Water-power Centrifuge
-cptwtrml.machine.lathe.name=Water-power Lathe
-cptwtrml.machine.cutter.name=Water-power Cutter
+cptwtrml.machine.macerator.name=Water-powered Crusher
+cptwtrml.machine.compressor.name=Water-powered Compressor
+cptwtrml.machine.sawmill.name=Water-powered Sawmill
+cptwtrml.machine.advancedCompressor.name=Water-powered Advanced Compressor
+cptwtrml.machine.centrifuge.name=Water-powered Centrifuge
+cptwtrml.machine.lathe.name=Water-powered Lathe
+cptwtrml.machine.cutter.name=Water-powered Cutter
 
 cptwtrml.machine.info=Must next to the valid reservoir to receive energy
 

@@ -12,6 +12,7 @@ import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyDirection;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -43,7 +44,7 @@ import waterpower.util.Mods;
 import waterpower.util.Utils;
 
 public abstract class BlockWaterPower extends Block implements IWrenchable, ITileEntityProvider, IBlockModelProvider {
-    public static final PropertyUnlistedDirection FACING = new PropertyUnlistedDirection("facing", Lists.newArrayList(EnumFacing.Plane.HORIZONTAL.facings()));
+    public static final PropertyDirection FACING = PropertyDirection.create("facing", Lists.newArrayList(EnumFacing.Plane.HORIZONTAL.facings()));
     private static final ThreadLocal<TileEntity> TEMPORARYTILEENTITY_LOCAL = new ThreadLocal<TileEntity>();
 
     public BlockWaterPower(String id, Material material) {
@@ -282,7 +283,9 @@ public abstract class BlockWaterPower extends Block implements IWrenchable, ITil
         }
     }
     
-    
+    public int colorMultiplier(IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex) {
+    	return 0;
+    }
 
     /*
      * ---------------------------------------

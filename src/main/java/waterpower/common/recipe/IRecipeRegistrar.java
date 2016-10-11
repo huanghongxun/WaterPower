@@ -20,6 +20,7 @@ import static waterpower.common.item.crafting.CraftingTypes.stator;
 import static waterpower.common.item.crafting.LevelTypes.MK1;
 import static waterpower.common.item.crafting.LevelTypes.MK3;
 
+import gregtech.api.GregTech_API;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -175,15 +176,15 @@ public abstract class IRecipeRegistrar {
         IRecipeRegistrar.addShapelessRecipeByOreDictionary(ItemType.WaterResistantRubber.item(), Items.SLIME_BALL, Items.SLIME_BALL, Items.SLIME_BALL, Items.SLIME_BALL);
         IRecipeRegistrar.addRecipeByOreDictionary(ItemCrafting.get(CraftingTypes.rotationAxle, MK1), "SBS", "SHS", "SBS", 'S', Items.STICK, 'B', "plankWood", 'H',
                 ItemType.WoodenHammer.item());
-        /*if (gregtechRecipe) {
+        if (gregtechRecipe) {
             try {
                 GregTech_API.sRecipeAdder.addBenderRecipe(ItemType.WaterResistantRubber.item(), ItemType.WaterResistantRubberPlate.item(), 2 * 20, 2);
             } catch (Throwable e) {
                 e.printStackTrace();
             }
-        } else {*/
+        } else {
             RecipeAdder.compressor(ItemType.WaterResistantRubber.item(), ItemType.WaterResistantRubberPlate.item());
-        //}
+        }
         OreDictionary.registerOre("plateRubber", ItemType.WaterResistantRubberPlate.item());
         OreDictionary.registerOre("plateDenseRubber", ItemType.WaterResistantRubberDensePlate.item());
         RecipeAdder.compressor(ItemType.WaterResistantRubberPlate.item(9), ItemType.WaterResistantRubberDensePlate.item());
@@ -212,7 +213,7 @@ public abstract class IRecipeRegistrar {
             IRecipeRegistrar.addRecipeByOreDictionary(ItemCrafting.get(drainagePlate, MK3), "WW", "AW", "KW", 'W', "plateZincAlloy", 'A', "stickZincAlloy", 'K',
                     "screwZinc");
         }
-        /*if (gregtechRecipe) {
+        if (gregtechRecipe) {
             try {
                 GregTech_API.sRecipeAdder.addAssemblerRecipe(ItemMaterial.get(MaterialTypes.Zinc, MaterialForms.plate, 4),
                         ItemMaterial.get(MaterialTypes.Zinc, MaterialForms.screw, 4), ItemCrafting.get(CraftingTypes.fixedFrame, LevelTypes.MK3), 4000, 5);
@@ -221,12 +222,12 @@ public abstract class IRecipeRegistrar {
             } catch (Throwable e) {
                 e.printStackTrace();
             }
-        } else {*/
+        } else {
             addRecipeByOreDictionary(ItemCrafting.get(fixedFrame, LevelTypes.MK3), "PSP", "S S", "PSP", 'P',
                     ItemMaterial.get(MaterialTypes.Zinc, MaterialForms.plate), 'S', ItemMaterial.get(MaterialTypes.Zinc, MaterialForms.screw));
             addRecipeByOreDictionary(ItemCrafting.get(fixedTool, LevelTypes.MK3), "PSP", "   ", "PSP", 'P',
                     ItemMaterial.get(MaterialTypes.Zinc, MaterialForms.ingot), 'P', ItemMaterial.get(MaterialTypes.Zinc, MaterialForms.screw));
-        //}
+        }
         IRecipeRegistrar.addRecipeByOreDictionary(ItemCrafting.get(rotationAxle, LevelTypes.MK3), "GPG", "ICI", "GPG", 'G', "gearZincAlloy", 'P', "plateZincAlloy", 'I',
                 "plateIron", 'C', ItemCrafting.get(casing, LevelTypes.MK3));
         IRecipeRegistrar.addRecipeByOreDictionary(ItemCrafting.get(rotationAxle, LevelTypes.MK3), "GPG", "ICI", "GPG", 'G', "gearZincAlloy", 'P', "plateZincAlloy", 'I',
@@ -270,7 +271,7 @@ public abstract class IRecipeRegistrar {
                 "blockIndustrialSteel");
         IRecipeRegistrar.addRecipeByOreDictionary(ItemCrafting.get(CraftingTypes.fixedFrame, LevelTypes.MK4), "P  ", "DP ", "SDP", 'P', "plateIndustrialSteel", 'D',
                 "plateDenseIndustrialSteel", 'S', "screwIndustrialSteel");
-        /*if (gregtechRecipe) {
+        if (gregtechRecipe) {
             try {
                 GregTech_API.sRecipeAdder.addAssemblerRecipe(ItemMaterial.get(MaterialTypes.IndustrialSteel, MaterialForms.plateDense),
                         ItemMaterial.get(MaterialTypes.IndustrialSteel, MaterialForms.ingot), ItemCrafting.get(CraftingTypes.fixedTool, LevelTypes.MK4), 6000,
@@ -278,10 +279,10 @@ public abstract class IRecipeRegistrar {
             } catch (Throwable e) {
                 e.printStackTrace();
             }
-        } else {*/
+        } else {
             IRecipeRegistrar.addShapelessRecipeByOreDictionary(ItemCrafting.get(CraftingTypes.fixedTool, LevelTypes.MK4), "plateDenseIndustrialSteel",
                     "ingotIndustrialSteel");
-        //}
+        }
         if (Mods.IndustrialCraft2.isAvailable) {
             IRecipeRegistrar.addRecipeByOreDictionary(ItemCrafting.get(CraftingTypes.outputInterface, LevelTypes.MK4), "SSP", "PTB", "SSP", 'S', "blockSilver", 'P',
                     "plateIndustrialSteel", 'T', ICItemFinder.getItem("te", "mv_transformer"), 'B', ICItemFinder.getItem("single_use_battery"));
@@ -321,7 +322,7 @@ public abstract class IRecipeRegistrar {
         }
         IRecipeRegistrar.addRecipeByOreDictionary(ItemCrafting.get(CraftingTypes.fixedFrame, LevelTypes.MK5), "P  ", "DP ", "SDP", 'P', "plateManganeseSteel", 'D',
                 "plateDenseManganeseSteel", 'S', "screwManganeseSteel");
-        /*if (gregtechRecipe) {
+        if (gregtechRecipe) {
             try {
                 GregTech_API.sRecipeAdder
                         .addAssemblerRecipe(ItemMaterial.get(MaterialTypes.ManganeseSteel, MaterialForms.plateDense),
@@ -330,9 +331,9 @@ public abstract class IRecipeRegistrar {
             } catch (Throwable e) {
                 e.printStackTrace();
             }
-        } else {*/
+        } else {
             IRecipeRegistrar.addShapelessRecipeByOreDictionary(ItemCrafting.get(CraftingTypes.fixedTool, LevelTypes.MK5), "plateDenseManganeseSteel", "ingotManganeseSteel");
-        //}
+        }
         IRecipeRegistrar.addRecipeByOreDictionary(ItemCrafting.get(CraftingTypes.stator, LevelTypes.MK5), "PP", "PB", "PP", 'P', "plateManganeseSteel", 'B',
                 "blockNeodymiumMagnet");
 
@@ -365,16 +366,16 @@ public abstract class IRecipeRegistrar {
         }
         IRecipeRegistrar.addRecipeByOreDictionary(ItemCrafting.get(CraftingTypes.fixedFrame, LevelTypes.MK7), "P  ", "DP ", "SDP", 'P', "plateVanadiumSteel", 'D',
                 "plateDenseVanadiumSteel", 'S', "screwVanadiumSteel");
-        /*if (gregtechRecipe) {
+        if (gregtechRecipe) {
             try {
                 GregTech_API.sRecipeAdder.addAssemblerRecipe(ItemMaterial.get(MaterialTypes.VanadiumSteel, MaterialForms.plateDense),
                         ItemMaterial.get(MaterialTypes.VanadiumSteel, MaterialForms.ingot), ItemCrafting.get(CraftingTypes.fixedTool, LevelTypes.MK7), 6000, 5);
             } catch (Throwable e) {
                 e.printStackTrace();
             }
-        } else {*/
+        } else {
             IRecipeRegistrar.addShapelessRecipeByOreDictionary(ItemCrafting.get(CraftingTypes.fixedTool, LevelTypes.MK7), "plateDenseVanadiumSteel", "ingotVanadiumSteel");
-        //}
+        }
         IRecipeRegistrar.addRecipeByOreDictionary(ItemCrafting.get(CraftingTypes.stator, LevelTypes.MK7), "PP", "PB", "PP", 'P', "plateVanadiumSteel", 'B',
                 "blockNeodymiumMagnet");
 
@@ -387,25 +388,25 @@ public abstract class IRecipeRegistrar {
         IRecipeRegistrar.addRecipeByOreDictionary(ItemCrafting.get(CraftingTypes.rotor, LevelTypes.MK7), "SPS", "PBP", "SPS", 'S', ItemType.DenseSilverCoil.item(), 'P',
                 "plateVanadiumSteel", 'B', Blocks.DIAMOND_BLOCK);
 
-        /*if (gregtechRecipe) {
+        if (gregtechRecipe) {
             try {
-                GregTech_API.sRecipeAdder.addChemicalRecipe(changeMount(ICItemFinder.getIC2Item("airCell"), 3), ICItemFinder.getIC2Item("biofuelCell"),
+                GregTech_API.sRecipeAdder.addChemicalRecipe(changeMount(ICItemFinder.getItem("fluid_cell,ic2air"), 3), ICItemFinder.getItem("fluid_cell,ic2biogas"),
                         ItemType.OxygenEthanolFuel.item(4), 20);
-                GregTech_API.sRecipeAdder.addAssemblerRecipe(ICItemFinder.getIC2Item("coil"), ICItemFinder.getIC2Item("copperCableItem"),
+                GregTech_API.sRecipeAdder.addAssemblerRecipe(ICItemFinder.getItem("crafting,coil"), ICItemFinder.getItem("cable", "type:copper,insulation:0"),
                         ItemType.DenseCoil.item(), 120 * 20, 2);
 
                 if (Mods.Mekanism.isAvailable)
-                    GregTech_API.sRecipeAdder.addAssemblerRecipe(ICItemFinder.getIC2Item("coil"), copperCable, ItemType.DenseCoil.item(), 120 * 20, 2);
+                    GregTech_API.sRecipeAdder.addAssemblerRecipe(ICItemFinder.getItem("crafting,coil"), copperCable, ItemType.DenseCoil.item(), 120 * 20, 2);
 
                 GregTech_API.sRecipeAdder.addAssemblerRecipe(ItemType.SilverCoil.item(), ItemType.SilverCoil.item(), ItemType.DenseSilverCoil.item(), 240 * 20,
                         4);
 
-                GregTech_API.sRecipeAdder.addBlastRecipe(ICItemFinder.getIC2Item("carbonMesh"), null, ItemType.HighPurityCarbonDust.item(), null, 240 * 20,
+                GregTech_API.sRecipeAdder.addBlastRecipe(ICItemFinder.getItem("crafting,carbon_mesh"), null, ItemType.HighPurityCarbonDust.item(), null, 240 * 20,
                         512, 3000);
             } catch (Throwable e) {
                 e.printStackTrace();
             }
-        } else {*/
+        } else {
             flag = 0;
             if (Mods.IndustrialCraft2.isAvailable) {
                 flag = 1;
@@ -426,7 +427,7 @@ public abstract class IRecipeRegistrar {
             }
 
             addShapelessRecipeByOreDictionary(ItemType.DenseSilverCoil.item(), ItemType.SilverCoil.item(), ItemType.SilverCoil.item());
-        //}
+        }
         addRecipeByOreDictionary(ItemType.SilverCoil.item(), "SSS", "SIS", "SSS", 'S', "ingotSilver", 'I', "ingotIndustrialSteel");
         addRecipeByOreDictionary(ItemType.SilverCoil.item(), "SSS", "SIS", "SSS", 'S', "ingotNeodymium", 'I', "ingotIndustrialSteel");
 
