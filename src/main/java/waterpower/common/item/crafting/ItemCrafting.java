@@ -15,6 +15,8 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 import waterpower.client.render.IIconContainer;
 import waterpower.client.render.RecolorableTextures;
@@ -32,6 +34,7 @@ public class ItemCrafting extends ItemRecolorable {
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public String getTextureFolder() {
         return "crafting";
     }
@@ -71,6 +74,7 @@ public class ItemCrafting extends ItemRecolorable {
     }
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public int getColorFromItemstack(ItemStack stack, int tintIndex) {
         int meta = stack.getItemDamage();
         int levelType = meta % CraftingTypes.space;
@@ -85,17 +89,20 @@ public class ItemCrafting extends ItemRecolorable {
                 par3List.add(get(c, l));
     }
 
+	@SideOnly(Side.CLIENT)
     public IIconContainer getIconContainer(int meta, LevelTypes type) {
         return getIconContainers()[meta / CraftingTypes.space];
     }
 
     @Override
+	@SideOnly(Side.CLIENT)
     public IIconContainer getIconContainer(ItemStack stk) {
     	int meta = stk.getItemDamage();
         return getIconContainer(meta, LevelTypes.values()[meta % CraftingTypes.space]);
     }
 
     @Override
+	@SideOnly(Side.CLIENT)
     public IIconContainer[] getIconContainers() {
         return RecolorableTextures.CRAFTING;
     }

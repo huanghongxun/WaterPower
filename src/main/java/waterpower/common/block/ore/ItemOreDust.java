@@ -4,6 +4,8 @@ import java.awt.Color;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 import waterpower.client.render.IIconContainer;
 import waterpower.client.render.RecolorableTextures;
@@ -19,6 +21,7 @@ public class ItemOreDust extends ItemRecolorable {
     }
 
     @Override
+	@SideOnly(Side.CLIENT)
     public String getTextureFolder() {
         return "ore";
     }
@@ -51,6 +54,7 @@ public class ItemOreDust extends ItemRecolorable {
     }
 
     @Override
+	@SideOnly(Side.CLIENT)
 	public int getColorFromItemstack(ItemStack stack, int tintIndex) {
         int meta = stack.getItemDamage();
         OreType o = OreType.values()[meta];
@@ -58,11 +62,13 @@ public class ItemOreDust extends ItemRecolorable {
     }
 
     @Override
+	@SideOnly(Side.CLIENT)
     public IIconContainer getIconContainer(ItemStack stack) {
         return getIconContainers()[0];
     }
 
     @Override
+	@SideOnly(Side.CLIENT)
     public IIconContainer[] getIconContainers() {
         return RecolorableTextures.CRUSHED;
     }

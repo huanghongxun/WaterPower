@@ -16,6 +16,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ISpecialArmor;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import waterpower.WaterPower;
 import waterpower.client.render.IIconRegister;
 import waterpower.client.render.item.IItemIconProvider;
@@ -96,15 +98,18 @@ public class ItemTrouser extends ItemArmor implements ISpecialArmor, IIconRegist
             tryToCharge(is);
         }
     }
-    
+
+    @SideOnly(Side.CLIENT)
     TextureAtlasSprite icon;
     
     @Override
+    @SideOnly(Side.CLIENT)
     public void registerIcons(TextureMap textureMap) {
     	icon = textureMap.registerSprite(new ResourceLocation("waterpower:items/armor/itemArmorLegs"));
     }
     
     @Override
+    @SideOnly(Side.CLIENT)
     public TextureAtlasSprite getIcon(ItemStack stack, int pass) {
     	return icon;
     }

@@ -1,14 +1,17 @@
 package waterpower.integration.jei;
 
+import mezz.jei.api.BlankModPlugin;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiRuntime;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
+import mezz.jei.api.ISubtypeRegistry;
+import mezz.jei.api.ingredients.IModIngredientRegistration;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeHandler;
 import waterpower.common.recipe.MyRecipes;
 
-public class JeiModule implements IModPlugin {
+public class JeiModule extends BlankModPlugin {
 
 	@Override
 	public void register(IModRegistry registry) {
@@ -24,10 +27,6 @@ public class JeiModule implements IModPlugin {
 		registry.addRecipeCategories(new IRecipeCategory[] { category });
 		registry.addRecipeHandlers(new IRecipeHandler[] { new MyRecipeHandler(category) });
 		registry.addRecipes(MyRecipeWrapper.createRecipes(category));
-	}
-
-	@Override
-	public void onRuntimeAvailable(IJeiRuntime jeiRuntime) {
 	}
 
 }

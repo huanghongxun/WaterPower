@@ -55,6 +55,7 @@ public class ItemRotor extends Item implements IItemIconProvider, IIconRegister 
             this.textures[index] = register.registerSprite(new ResourceLocation(Reference.ModID + ":items/rotors/" + getTextureName(index)));
     }
 
+	@SideOnly(Side.CLIENT)
     public String getTextureName(int index) {
         if (this.hasSubtypes)
             return getUnlocalizedName(new ItemStack(this, 1, index));

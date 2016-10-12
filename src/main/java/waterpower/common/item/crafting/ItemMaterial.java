@@ -46,6 +46,8 @@ import waterpower.common.recipe.RecipeAdder;
 import waterpower.integration.EnderIOModule;
 import waterpower.util.Mods;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemMaterial extends ItemRecolorable {
 
@@ -62,6 +64,7 @@ public class ItemMaterial extends ItemRecolorable {
     }
 
     @Override
+	@SideOnly(Side.CLIENT)
     public String getTextureFolder() {
         return "material";
     }
@@ -185,17 +188,20 @@ public class ItemMaterial extends ItemRecolorable {
                 par3List.add(get(c, l));
     }
 
+	@SideOnly(Side.CLIENT)
     public IIconContainer getIconContainer(int meta, MaterialTypes type) {
         return getIconContainers()[meta % space];
     }
 
     @Override
+	@SideOnly(Side.CLIENT)
     public IIconContainer getIconContainer(ItemStack stk) {
     	int meta = stk.getItemDamage();
         return getIconContainer(meta, MaterialTypes.values()[meta / space]);
     }
 
     @Override
+	@SideOnly(Side.CLIENT)
 	public int getColorFromItemstack(ItemStack stack, int tintIndex) {
         int meta = stack.getItemDamage();
         int craftingType = meta / space;
@@ -204,6 +210,7 @@ public class ItemMaterial extends ItemRecolorable {
     }
 
     @Override
+	@SideOnly(Side.CLIENT)
     public IIconContainer[] getIconContainers() {
         return RecolorableTextures.METAL;
     }

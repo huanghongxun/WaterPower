@@ -4,6 +4,8 @@ import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import waterpower.client.render.IIconRegister;
 import waterpower.client.render.item.IItemIconProvider;
 import waterpower.common.item.ItemBase;
@@ -16,6 +18,7 @@ public class ItemRange extends ItemBase implements IItemIconProvider, IIconRegis
     }
 
     @Override
+	@SideOnly(Side.CLIENT)
     public String getTextureFolder() {
         return "range";
     }

@@ -1,6 +1,8 @@
 package waterpower.common.item.range;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import waterpower.api.IUpgrade;
 import waterpower.client.render.IIconRegister;
 import waterpower.client.render.item.IItemIconProvider;
@@ -14,6 +16,7 @@ public class ItemPlugins extends ItemBase implements IItemIconProvider, IIconReg
     }
 
     @Override
+	@SideOnly(Side.CLIENT)
     public String getTextureFolder() {
         return "plugins";
     }

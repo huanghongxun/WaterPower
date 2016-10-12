@@ -21,7 +21,7 @@ import waterpower.client.render.item.IItemIconContainerProvider;
  */
 public abstract class ItemBase extends Item {
 
-    public static int id;
+    @SideOnly(Side.CLIENT)
     protected TextureAtlasSprite[] textures;
 
     public ItemBase(String id) {
@@ -34,6 +34,7 @@ public abstract class ItemBase extends Item {
         GlobalItems.items.add(this);
     }
 
+    @SideOnly(Side.CLIENT)
     public String getTextureName(int index) {
         if (this.hasSubtypes)
             return getUnlocalizedName(new ItemStack(this, 1, index));
@@ -43,6 +44,7 @@ public abstract class ItemBase extends Item {
         return null;
     }
 
+    @SideOnly(Side.CLIENT)
     public abstract String getTextureFolder();
 
     @SideOnly(Side.CLIENT)

@@ -7,7 +7,9 @@ import net.minecraft.world.IBlockAccess;
 import waterpower.common.block.BlockWaterPower;
 
 public class BlockColor implements IBlockColor {
-
+	public static final BlockColor INSTANCE = new BlockColor();
+	private BlockColor() {
+	}
 	@Override
 	public int colorMultiplier(IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex) {
 		if (state.getBlock() instanceof BlockWaterPower) {

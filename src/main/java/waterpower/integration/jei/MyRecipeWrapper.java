@@ -1,11 +1,13 @@
 package waterpower.integration.jei;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Nonnull;
 
+import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.BlankRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
@@ -26,8 +28,8 @@ public class MyRecipeWrapper extends BlankRecipeWrapper {
 
 	@Override
 	@Nonnull
-	public List<ItemStack> getInputs() {
-		return this.container.getKey().getInputs();
+	public List<List<ItemStack>> getInputs() {
+		return Collections.singletonList(this.container.getKey().getInputs());
 	}
 
 	@Override
@@ -53,5 +55,11 @@ public class MyRecipeWrapper extends BlankRecipeWrapper {
 			recipes.add(new MyRecipeWrapper(container, category));
 		}
 		return recipes;
+	}
+
+	@Override
+	public void getIngredients(IIngredients arg0) {
+		arg0.setInputLists(ItemStack.class, getInputs());
+		arg0.setOutputs(ItemStack.class, getOutputs());
 	}
 }

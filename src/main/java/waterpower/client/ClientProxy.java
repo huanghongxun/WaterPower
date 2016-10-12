@@ -23,6 +23,7 @@ import waterpower.client.render.BlockColor;
 import waterpower.client.render.IconRegisterService;
 import waterpower.client.render.RecolorableTextures;
 import waterpower.client.render.RenderReservoir;
+import waterpower.client.render.item.ItemColor;
 import waterpower.common.CommonProxy;
 import waterpower.common.block.BlockWaterPower;
 import waterpower.common.block.GlobalBlocks;
@@ -47,6 +48,7 @@ import waterpower.common.block.turbines.TileEntityTurbine;
 import waterpower.common.block.watermills.GuiWatermill;
 import waterpower.common.block.watermills.TileEntityWatermill;
 import waterpower.common.item.GlobalItems;
+import waterpower.common.item.ItemRecolorable;
 
 @SideOnly(Side.CLIENT)
 public class ClientProxy extends CommonProxy {
@@ -114,13 +116,13 @@ public class ClientProxy extends CommonProxy {
         IconRegisterService.setupItemModels();
         
         BlockMaterial material = (BlockMaterial) GlobalBlocks.material;
-        Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler(new BlockColor(), material);
+        Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler(BlockColor.INSTANCE, material);
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityReservoir.class, new RenderReservoir());
         
 		for (Item item : GlobalItems.items) {
-			if (item instanceof IItemColor) {
-				Minecraft.getMinecraft().getItemColors().registerItemColorHandler(((IItemColor) item), item);
+			if (item instanceof ItemRecolorable) {
+				Minecraft.getMinecraft().getItemColors().registerItemColorHandler(ItemColor.INSTANCE, item);
 			}
 		}
     }
