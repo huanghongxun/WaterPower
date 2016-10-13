@@ -22,6 +22,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional.Interface;
 import net.minecraftforge.fml.common.Optional.InterfaceList;
 import net.minecraftforge.fml.common.Optional.Method;
+import waterpower.client.Local;
 import waterpower.common.block.watermills.TileEntityWatermill;
 import waterpower.util.Mods;
 import waterpower.util.Utils;
@@ -36,7 +37,7 @@ public class HUDHandlerWatermills implements IWailaDataProvider {
         if (!(te instanceof TileEntityWatermill))
             return arg1;
         TileEntityWatermill tile = (TileEntityWatermill) te;
-        arg1.add(I18n.format("cptwtrml.gui.latest_output") + ": " + Utils.DEFAULT_DECIMAL_FORMAT.format(tile.getFromEU(tile.latestOutput))
+        arg1.add(Local.get("cptwtrml.gui.latest_output") + ": " + Utils.DEFAULT_DECIMAL_FORMAT.format(tile.getFromEU(tile.latestOutput))
                 + tile.energyType.name());
         return arg1;
     }

@@ -23,6 +23,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.Optional.Interface;
 import net.minecraftforge.fml.common.Optional.InterfaceList;
 import net.minecraftforge.fml.common.Optional.Method;
+import waterpower.client.Local;
 import waterpower.common.block.reservoir.TileEntityReservoir;
 import waterpower.util.Mods;
 
@@ -36,11 +37,11 @@ public class HUDHandlerReservoir implements IWailaDataProvider {
         if (!(te instanceof TileEntityReservoir))
             return arg1;
         TileEntityReservoir tile = (TileEntityReservoir) te;
-        arg1.add(I18n.format("cptwtrml.gui.reservoir.add") + ": " + tile.getLastAddedWater());
+        arg1.add(Local.get("cptwtrml.gui.reservoir.add") + ": " + tile.getLastAddedWater());
         if (tile.getFluidTank() == null)
             return arg1;
         FluidStack f = tile.getFluidTank().getFluid();
-        arg1.add((f == null ? I18n.format("cptwtrml.gui.empty") : f.getLocalizedName()) + ": " + tile.getFluidAmount() + "/"
+        arg1.add((f == null ? Local.get("cptwtrml.gui.empty") : f.getLocalizedName()) + ": " + tile.getFluidAmount() + "/"
                 + tile.getFluidTankCapacity() + "mb");
         return arg1;
     }

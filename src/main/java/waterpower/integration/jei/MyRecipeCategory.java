@@ -10,6 +10,7 @@ import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
+import waterpower.client.Local;
 import waterpower.common.recipe.IRecipeManager;
 
 public abstract class MyRecipeCategory implements IRecipeCategory {
@@ -29,7 +30,7 @@ public abstract class MyRecipeCategory implements IRecipeCategory {
 
 	@Override
 	public String getTitle() {
-		return I18n.format("waterpower." + this.machineName + ".gui.name");
+		return Local.get("waterpower." + this.machineName + ".gui.name");
 	}
 
 	@Override

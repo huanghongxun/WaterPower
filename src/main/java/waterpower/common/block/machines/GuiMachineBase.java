@@ -16,6 +16,7 @@ import org.lwjgl.opengl.GL11;
 
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import waterpower.client.Local;
 import waterpower.client.gui.ContainerStandardMachine;
 
 @SideOnly(Side.CLIENT)
@@ -37,10 +38,10 @@ public abstract class GuiMachineBase extends GuiContainer {
         this.fontRendererObj.drawString(this.name, (this.xSize - this.fontRendererObj.getStringWidth(this.name)) / 2, 6, 0x404040);
         this.fontRendererObj.drawString(this.inv, 8, this.ySize - 96 + 2, 0x404040);
 
-        this.fontRendererObj.drawString(I18n.format("cptwtrml.gui.stored") + ": " + this.container.tileEntity.getEnergy() + "mb", 8,
+        this.fontRendererObj.drawString(Local.get("cptwtrml.gui.stored") + ": " + this.container.tileEntity.getEnergy() + "mb", 8,
                 this.ySize - 105 + 2, 0x404040);
 
-        this.fontRendererObj.drawString(I18n.format("cptwtrml.gui.using") + ": " + this.container.tileEntity.energyConsume + "mb/t", 8,
+        this.fontRendererObj.drawString(Local.get("cptwtrml.gui.using") + ": " + this.container.tileEntity.energyConsume + "mb/t", 8,
                 this.ySize - 114 + 2, 0x404040);
     }
 

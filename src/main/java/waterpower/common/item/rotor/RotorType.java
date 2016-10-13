@@ -6,6 +6,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import waterpower.client.Local;
 import waterpower.common.recipe.IRecipeRegistrar;
 import waterpower.util.WPLog;
 
@@ -59,8 +60,8 @@ public enum RotorType {
 	}
 
 	public String getShowedName() {
-		return I18n.format("cptwtrml.reservoir." + name()) + ' '
-				+ I18n.format("cptwtrml.rotor.ROTOR");
+		return Local.get("cptwtrml.reservoir." + name()) + ' '
+				+ Local.get("cptwtrml.rotor.ROTOR");
 	}
 
 	public double getEfficiency() {

@@ -3,10 +3,10 @@ package waterpower.common.block.reservoir;
 import java.util.List;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import waterpower.client.Local;
 
 public class ItemReservoir extends ItemBlock {
     public ItemReservoir(Block id) {
@@ -17,11 +17,11 @@ public class ItemReservoir extends ItemBlock {
 
     @Override
     public void addInformation(ItemStack s, EntityPlayer player, List par3List, boolean par4) {
-        par3List.add(I18n.format("cptwtrml.reservoir.info"));
-        par3List.add(I18n.format("cptwtrml.reservoir.info2"));
+        par3List.add(Local.get("cptwtrml.reservoir.info"));
+        par3List.add(Local.get("cptwtrml.reservoir.info2"));
         ReservoirType t = ReservoirType.values()[s.getItemDamage()];
-        par3List.add(I18n.format("cptwtrml.reservoir.MAXSOTRE") + ": " + t.capacity + "mb");
-        par3List.add(I18n.format("cptwtrml.reservoir.MAXUSE") + ": " + t.maxUse + "mb/s");
+        par3List.add(Local.get("cptwtrml.reservoir.MAXSOTRE") + ": " + t.capacity + "mb");
+        par3List.add(Local.get("cptwtrml.reservoir.MAXUSE") + ": " + t.maxUse + "mb/s");
     }
 
     @Override

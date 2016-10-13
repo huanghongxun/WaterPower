@@ -21,6 +21,7 @@ import org.lwjgl.opengl.GL11;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import waterpower.Reference;
+import waterpower.client.Local;
 import waterpower.common.EnergyType;
 import waterpower.util.Utils;
 
@@ -62,20 +63,20 @@ public class GuiWatermill extends GuiContainer {
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
 
         fontRendererObj.drawString(gen.getName(), 8, 6, 0x404040);
-        fontRendererObj.drawString(I18n.format("cptwtrml.rotor.ROTOR") + ":", 44, 30, 0x404040);
+        fontRendererObj.drawString(Local.get("cptwtrml.rotor.ROTOR") + ":", 44, 30, 0x404040);
         fontRendererObj.drawString(
-                I18n.format("cptwtrml.watermill.OUTPUT") + ": " + Utils.DEFAULT_DECIMAL_FORMAT.format(gen.getFromEU(gen.latestOutput))
+                Local.get("cptwtrml.watermill.OUTPUT") + ": " + Utils.DEFAULT_DECIMAL_FORMAT.format(gen.getFromEU(gen.latestOutput))
                         + gen.energyType.name() + "/t", 8, 45, 0x404040);
         fontRendererObj
                 .drawString(
-                        I18n.format("cptwtrml.watermill.CHECK_WATER")
+                        Local.get("cptwtrml.watermill.CHECK_WATER")
                                 + ","
-                                + I18n.format("cptwtrml.watermill.CHECK_LAVA")
+                                + Local.get("cptwtrml.watermill.CHECK_LAVA")
                                 + ":"
-                                + (gen.isRangeSupported() ? gen.waterBlocks + "," + gen.lavaBlocks : I18n.format("cptwtrml.watermill.CANNOT_CHECK")), 8, 55, 0x404040);
+                                + (gen.isRangeSupported() ? gen.waterBlocks + "," + gen.lavaBlocks : Local.get("cptwtrml.watermill.CANNOT_CHECK")), 8, 55, 0x404040);
         int a = gen.getRange();
         int b = a * a * a - 1;
-        fontRendererObj.drawString(I18n.format("cptwtrml.watermill.NEED") + ":" + b + "=" + a + "^3-1", 8, 65, 0x404040);
+        fontRendererObj.drawString(Local.get("cptwtrml.watermill.NEED") + ":" + b + "=" + a + "^3-1", 8, 65, 0x404040);
     }
 
     @Override

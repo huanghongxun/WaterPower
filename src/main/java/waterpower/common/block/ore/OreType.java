@@ -5,6 +5,7 @@ import java.awt.Color;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
+import waterpower.client.Local;
 import waterpower.common.block.GlobalBlocks;
 import waterpower.common.item.GlobalItems;
 import waterpower.common.item.crafting.ItemMaterial;
@@ -33,7 +34,7 @@ public enum OreType implements IStringSerializable {
     }
 
     public String getShowedName() {
-        return I18n.format(getUnlocalizedName());
+        return Local.get(getUnlocalizedName());
     }
 
     public String getUnlocalizedName() {

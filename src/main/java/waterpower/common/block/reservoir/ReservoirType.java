@@ -1,7 +1,7 @@
 package waterpower.common.block.reservoir;
 
-import net.minecraft.client.resources.I18n;
 import net.minecraft.util.IStringSerializable;
+import waterpower.client.Local;
 
 public enum ReservoirType implements IStringSerializable {
 	WOOD     (100000, 100, 8  ), 
@@ -30,11 +30,11 @@ public enum ReservoirType implements IStringSerializable {
 	}
 
 	public String getShowedName() {
-		return I18n.format("cptwtrml.reservoir." + name()) + ' ' + I18n.format("cptwtrml.reservoir.RESERVOIR");
+		return Local.get("cptwtrml.reservoir." + name()) + ' ' + Local.get("cptwtrml.reservoir.RESERVOIR");
 	}
 
 	public String getTitle() {
-		return I18n.format("cptwtrml.reservoir." + name());
+		return Local.get("cptwtrml.reservoir." + name());
 	}
 
 	public String tileEntityName() {

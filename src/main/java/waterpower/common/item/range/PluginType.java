@@ -2,6 +2,7 @@ package waterpower.common.item.range;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
+import waterpower.client.Local;
 import waterpower.common.item.GlobalItems;
 
 public enum PluginType {
@@ -25,7 +26,7 @@ public enum PluginType {
     }
 
     public String getShowedName() {
-        return I18n.format(getUnlocalizedName());
+        return Local.get(getUnlocalizedName());
     }
 
     public ItemStack item() {

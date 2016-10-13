@@ -7,19 +7,22 @@
  */
 package waterpower.integration;
 
-import blusunrize.immersiveengineering.api.crafting.BlastFurnaceRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Optional.Method;
 import waterpower.util.Mods;
 
 public class ImmersiveEngineeringModule extends BaseModule {
+	private static java.lang.reflect.Method method = null;
 
     @Method(modid = Mods.IDs.ImmersiveEngineering)
     public static void blastFurnace(Object input, int cookTime, ItemStack output, ItemStack slag) {
-        try {
-        	BlastFurnaceRecipe.addRecipe(output, input, cookTime, slag);
-        } catch (Throwable t) {
-            t.printStackTrace();
-        }
+		try {
+	    	if (method == null) {
+				Class clz = Class.forName("blusunrize.immersiveengineering.api.crafting.BlastFurnaceRecipe");
+	    		method = clz.getMethod("addRecipe", ItemStack.class, Object.class, int.class, ItemStack.class);
+	    	}
+        	method.invoke(null, output, input, cookTime, slag);
+		} catch (Throwable e) {
+		}
     }
 }

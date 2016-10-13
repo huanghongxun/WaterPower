@@ -9,13 +9,14 @@
 package waterpower.common.item.crafting;
 
 import net.minecraft.client.resources.I18n;
+import waterpower.client.Local;
 
 public enum MaterialForms {
     plate, dust, dustTiny, dustSmall, plateDense, ingot, stick, screw, gear, nugget, ring;
 
     public String getShowedName() {
         String format = "cptwtrml.forms." + name();
-        String s = I18n.format(format);
+        String s = Local.get(format);
         return s;
     }
 }

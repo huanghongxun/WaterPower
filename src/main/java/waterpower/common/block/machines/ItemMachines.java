@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import waterpower.client.Local;
 import net.minecraft.client.resources.I18n;
 
 public class ItemMachines extends ItemBlock {
@@ -25,7 +26,7 @@ public class ItemMachines extends ItemBlock {
 
     @Override
     public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List list, boolean par4) {
-        list.add(I18n.format("cptwtrml.machine.info"));
+        list.add(Local.get("cptwtrml.machine.info"));
         int metadata = par1ItemStack.getItemDamage();
         switch (metadata) {
         case 1:

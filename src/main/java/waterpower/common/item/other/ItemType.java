@@ -2,6 +2,7 @@ package waterpower.common.item.other;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
+import waterpower.client.Local;
 import waterpower.common.item.GlobalItems;
 
 public enum ItemType {
@@ -43,15 +44,15 @@ public enum ItemType {
 
     public String getShowedName() {
         String format = "cptwtrml.updater." + name();
-        String s = I18n.format(format);
+        String s = Local.get(format);
         return s;
     }
 
     public String getInformation() {
         String format = "cptwtrml.updater.info." + name();
-        String s = I18n.format(format);
+        String s = Local.get(format);
         if (format.equals(s)) {
-            return I18n.format("cptwtrml.updater.info");
+            return Local.get("cptwtrml.updater.info");
         }
         return s;
     }

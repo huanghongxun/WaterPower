@@ -428,7 +428,7 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements IEn
     @Method(modid = Mods.IDs.Factorization)
     public String getInfo() {
         StringBuilder sb = new StringBuilder();
-        sb.append(I18n.format("cptwtrml.gui.latest_output") + "/" + energyType.name() + ": "
+        sb.append(Local.get("cptwtrml.gui.latest_output") + "/" + energyType.name() + ": "
                 + Utils.DEFAULT_DECIMAL_FORMAT.format(getFromEU(latestOutput)) + "\n");
         return sb.toString();
     }*/

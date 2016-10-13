@@ -2,6 +2,7 @@ package waterpower.common.block.turbines;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.IStringSerializable;
+import waterpower.client.Local;
 
 public enum TurbineType implements IStringSerializable {
     MK1(512, "turbineMK1"), MK2(2048, "turbineMK2"), MK3(8192, "turbineMK3"), MK4(32768, "turbineMK4"), MK5(131072, "turbineMK5"), MK6(524288, "turbineMK6"), MK7(
@@ -17,7 +18,7 @@ public enum TurbineType implements IStringSerializable {
     }
 
     public String getShowedName() {
-        return I18n.format("cptwtrml.watermill.TURBINE") + ' ' + name();
+        return Local.get("cptwtrml.watermill.TURBINE") + ' ' + name();
     }
     
     @Override

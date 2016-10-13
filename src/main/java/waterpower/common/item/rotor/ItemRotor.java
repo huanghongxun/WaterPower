@@ -14,6 +14,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import waterpower.Reference;
 import waterpower.WaterPower;
+import waterpower.client.Local;
 import waterpower.client.render.IIconRegister;
 import waterpower.client.render.item.IItemIconProvider;
 import waterpower.common.block.tileentity.TileEntityGenerator;
@@ -79,18 +80,18 @@ public class ItemRotor extends Item implements IItemIconProvider, IIconRegister 
     public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
         if (!type.isInfinite()) {
             int leftOverTicks = par1ItemStack.getMaxDamage() - par1ItemStack.getItemDamage();
-            par3List.add(I18n.format("cptwtrml.rotor.REMAINTIME") + leftOverTicks + "tick");
+            par3List.add(Local.get("cptwtrml.rotor.REMAINTIME") + leftOverTicks + "tick");
 
             String str = "(";
-            str = str + (leftOverTicks / 72000) + " " + I18n.format("cptwtrml.rotor.HOUR");
-            str = str + ((leftOverTicks % 72000) / 1200) + " " + I18n.format("cptwtrml.rotor.MINUTE");
-            str = str + ((leftOverTicks % 1200) / 20) + " " + I18n.format("cptwtrml.rotor.SECOND");
+            str = str + (leftOverTicks / 72000) + " " + Local.get("cptwtrml.rotor.HOUR");
+            str = str + ((leftOverTicks % 72000) / 1200) + " " + Local.get("cptwtrml.rotor.MINUTE");
+            str = str + ((leftOverTicks % 1200) / 20) + " " + Local.get("cptwtrml.rotor.SECOND");
             str = str + ").";
             par3List.add(str);
         } else {
-            par3List.add(I18n.format("cptwtrml.rotor.INFINITE"));
+            par3List.add(Local.get("cptwtrml.rotor.INFINITE"));
         }
-        par3List.add(I18n.format("cptwtrml.rotor.GOT_EFFICIENCY") + " "
+        par3List.add(Local.get("cptwtrml.rotor.GOT_EFFICIENCY") + " "
                 + (int) (((ItemRotor) par1ItemStack.getItem()).type.getEfficiency() * 100) + "%");
     }
 

@@ -3,10 +3,10 @@ package waterpower.common.block.turbines;
 import java.util.List;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import waterpower.client.Local;
 
 /**
  * 
@@ -23,8 +23,8 @@ public class ItemTurbine extends ItemBlock {
     @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
     public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
-        par3List.add(I18n.format("cptwtrml.machine.info"));
-        par3List.add(I18n.format("cptwtrml.watermill.max_output") + ": " + TurbineType.values()[par1ItemStack.getItemDamage()].percent
+        par3List.add(Local.get("cptwtrml.machine.info"));
+        par3List.add(Local.get("cptwtrml.watermill.max_output") + ": " + TurbineType.values()[par1ItemStack.getItemDamage()].percent
                 + "EU/t");
     }
 

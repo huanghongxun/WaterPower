@@ -19,6 +19,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import waterpower.WaterPower;
+import waterpower.client.Local;
 import waterpower.client.render.IIconRegister;
 import waterpower.client.render.item.IItemIconProvider;
 import waterpower.common.block.watermills.WaterType;
@@ -116,7 +117,7 @@ public class ItemTrouser extends ItemArmor implements ISpecialArmor, IIconRegist
 
     @Override
     public String getItemStackDisplayName(ItemStack itemstack) {
-        return type.getShowedName() + I18n.format("cptwtmrl.watermill.TROUSERS");
+        return type.getShowedName() + Local.get("cptwtmrl.watermill.TROUSERS");
     }
     
     @Override

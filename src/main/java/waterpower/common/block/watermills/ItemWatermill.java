@@ -7,6 +7,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import waterpower.client.Local;
 
 /**
  * 
@@ -22,7 +23,7 @@ public class ItemWatermill extends ItemBlock {
 
     @Override
     public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
-        par3List.add(I18n.format("cptwtrml.watermill.max_output") + ": " + WaterType.values()[par1ItemStack.getItemDamage()].output + "EU/t");
+        par3List.add(Local.get("cptwtrml.watermill.max_output") + ": " + WaterType.values()[par1ItemStack.getItemDamage()].output + "EU/t");
     }
 
     @Override

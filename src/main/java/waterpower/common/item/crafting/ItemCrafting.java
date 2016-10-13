@@ -18,6 +18,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
+import waterpower.client.Local;
 import waterpower.client.render.IIconContainer;
 import waterpower.client.render.RecolorableTextures;
 import waterpower.common.item.ItemRecolorable;
@@ -45,7 +46,7 @@ public class ItemCrafting extends ItemRecolorable {
         int craftingType = meta / CraftingTypes.space;
         int levelType = meta % CraftingTypes.space;
         String temp = "cptwtrml.crafting." + LevelTypes.values()[levelType].name() + CraftingTypes.values()[craftingType].name();
-        String temp2 = I18n.format(temp);
+        String temp2 = Local.get(temp);
         if (temp2.equals(temp))
             return LevelTypes.values()[levelType].getShowedName() + " " + CraftingTypes.values()[craftingType].getShowedName();
         else

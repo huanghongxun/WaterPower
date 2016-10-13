@@ -10,6 +10,7 @@ package waterpower.common.item.crafting;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.IStringSerializable;
+import waterpower.client.Local;
 
 public enum MaterialTypes implements IStringSerializable {
     Zinc(182, 201, 206, 0, false), ZincAlloy(226, 226, 226, 0, false), Neodymium(210, 221, 221, 0, false), NeodymiumMagnet(
@@ -39,7 +40,7 @@ public enum MaterialTypes implements IStringSerializable {
     }
 
     public String getShowedName() {
-        return I18n.format("cptwtrml.material." + name());
+        return Local.get("cptwtrml.material." + name());
     }
     
     @Override

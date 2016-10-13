@@ -9,6 +9,7 @@
 package waterpower.common.item.crafting;
 
 import net.minecraft.client.resources.I18n;
+import waterpower.client.Local;
 
 public enum LevelTypes {
     /** Stone & Wood */
@@ -33,7 +34,7 @@ public enum LevelTypes {
 
     public String getShowedName() {
         String format = "cptwtrml.level." + name();
-        String s = I18n.format(format);
+        String s = Local.get(format);
         return s;
     }
 }

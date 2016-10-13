@@ -1,5 +1,6 @@
 package waterpower.common.block.watermills;
 
+import waterpower.client.Local;
 import waterpower.common.item.other.ItemTrouser;
 import waterpower.util.WPLog;
 
@@ -50,7 +51,7 @@ public enum WaterType implements IStringSerializable {
     }
 
     public String getShowedName() {
-        return I18n.format("cptwtrml.watermill.WATERMILL") + ' ' + name();
+        return Local.get("cptwtrml.watermill.WATERMILL") + ' ' + name();
     }
     
     @Override

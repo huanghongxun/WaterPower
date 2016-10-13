@@ -13,6 +13,7 @@ import org.lwjgl.opengl.GL11;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import waterpower.Reference;
+import waterpower.client.Local;
 import waterpower.client.gui.ContainerRotor;
 import waterpower.common.EnergyType;
 import waterpower.util.Utils;
@@ -52,10 +53,10 @@ public class GuiTurbine extends GuiContainer {
     @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
         fontRendererObj.drawString(gen.getName(), 8, 6, 0x404040);
-        fontRendererObj.drawString(I18n.format("cptwtrml.watermill.ROTOR") + ":", 44, 30, 0x404040);
-        fontRendererObj.drawString(I18n.format("container.inventory"), 8, ySize - 96 + 2, 0x404040);
+        fontRendererObj.drawString(Local.get("cptwtrml.watermill.ROTOR") + ":", 44, 30, 0x404040);
+        fontRendererObj.drawString(Local.get("container.inventory"), 8, ySize - 96 + 2, 0x404040);
         fontRendererObj.drawString(
-        		I18n.format("cptwtrml.watermill.OUTPUT") + ": " + Utils.DEFAULT_DECIMAL_FORMAT.format(gen.getFromEU(gen.latestOutput))
+        		Local.get("cptwtrml.watermill.OUTPUT") + ": " + Utils.DEFAULT_DECIMAL_FORMAT.format(gen.getFromEU(gen.latestOutput))
                         + gen.energyType.name() + "/t", 8, 50, 0x404040);
     }
 

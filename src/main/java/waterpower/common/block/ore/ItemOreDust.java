@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
+import waterpower.client.Local;
 import waterpower.client.render.IIconContainer;
 import waterpower.client.render.RecolorableTextures;
 import waterpower.common.item.ItemRecolorable;
@@ -35,8 +36,8 @@ public class ItemOreDust extends ItemRecolorable {
 
     @Override
     public String getItemStackDisplayName(ItemStack itemstack) {
-        return I18n.format(OreType.values()[itemstack.getItemDamage()].getUnlocalizedName()) + " "
-                + I18n.format("cptwtrml.forms.dust");
+        return Local.get(OreType.values()[itemstack.getItemDamage()].getUnlocalizedName()) + " "
+                + Local.get("cptwtrml.forms.dust");
     }
 
     public ItemStack get(OreType type) {

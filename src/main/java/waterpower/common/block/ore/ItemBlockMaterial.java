@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import waterpower.client.Local;
 import waterpower.common.item.crafting.MaterialTypes;
 
 public class ItemBlockMaterial extends ItemBlock {
@@ -16,7 +17,7 @@ public class ItemBlockMaterial extends ItemBlock {
 
     @Override
     public String getItemStackDisplayName(ItemStack par1ItemStack) {
-        return MaterialTypes.values()[par1ItemStack.getItemDamage()].getShowedName() + " " + I18n.format("cptwtrml.forms.block");
+        return MaterialTypes.values()[par1ItemStack.getItemDamage()].getShowedName() + " " + Local.get("cptwtrml.forms.block");
     }
 
     @Override

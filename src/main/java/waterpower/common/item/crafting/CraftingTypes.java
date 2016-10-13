@@ -9,6 +9,7 @@
 package waterpower.common.item.crafting;
 
 import net.minecraft.client.resources.I18n;
+import waterpower.client.Local;
 
 public enum CraftingTypes {
 
@@ -22,7 +23,7 @@ public enum CraftingTypes {
 
     public String getShowedName() {
         String format = "cptwtrml.crafting." + name();
-        String s = I18n.format(format);
+        String s = Local.get(format);
         /*
          * if(format.equals(s)) { return showedName; }
          */

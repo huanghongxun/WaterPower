@@ -23,6 +23,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional.Interface;
 import net.minecraftforge.fml.common.Optional.InterfaceList;
 import net.minecraftforge.fml.common.Optional.Method;
+import waterpower.client.Local;
 import waterpower.common.block.machines.TileEntityStandardWaterMachine;
 import waterpower.util.Mods;
 
@@ -37,9 +38,9 @@ public class HUDHandlerMachine implements IWailaDataProvider {
             return arg1;
         TileEntityStandardWaterMachine tile = (TileEntityStandardWaterMachine) te;
 
-        arg1.add(I18n.format("cptwtrml.gui.using") + ": " + tile.energyConsume + "mb/t");
-        arg1.add(I18n.format("cptwtrml.gui.stored") + ": " + tile.getFluidAmount() + "mb");
-        arg1.add(I18n.format("cptwtrml.gui.capacity") + ": " + tile.getFluidTankCapacity() + "mb");
+        arg1.add(Local.get("cptwtrml.gui.using") + ": " + tile.energyConsume + "mb/t");
+        arg1.add(Local.get("cptwtrml.gui.stored") + ": " + tile.getFluidAmount() + "mb");
+        arg1.add(Local.get("cptwtrml.gui.capacity") + ": " + tile.getFluidTankCapacity() + "mb");
 
         return arg1;
     }
