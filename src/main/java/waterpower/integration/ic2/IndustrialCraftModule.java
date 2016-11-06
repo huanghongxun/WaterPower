@@ -8,6 +8,7 @@
 package waterpower.integration.ic2;
 
 import ic2.api.recipe.RecipeInputItemStack;
+import ic2.api.recipe.RecipeInputOreDict;
 import ic2.api.recipe.Recipes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -28,6 +29,10 @@ public class IndustrialCraftModule extends BaseModule {
 
     public static void blastfurance(ItemStack input, ItemStack output) {
         Recipes.blastfurnace.addRecipe(new RecipeInputItemStack(input), null, false, output);
+    }
+
+    public static void blastfurance(String input, ItemStack output) {
+        Recipes.blastfurnace.addRecipe(new RecipeInputOreDict(input), null, false, output);
     }
 
     public static void macerator(ItemStack input, ItemStack output) {

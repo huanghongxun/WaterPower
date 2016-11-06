@@ -155,7 +155,7 @@ public abstract class IRecipeRegistrar {
         IRecipeRegistrar.addRecipeByOreDictionary(ItemCrafting.get(fixedTool, LevelTypes.MK1), "WW", "AW", 'W', "logWood", 'A', Items.STRING);
         IRecipeRegistrar.addRecipeByOreDictionary(ItemType.WoodenHammer.item(6), "WW ", "WWI", "WW ", 'W', "logWood", 'I', Items.STICK);
         int flag = 0;
-        if (Mods.IndustrialCraft2.isAvailable) {
+        if (Mods.IndustrialCraft2.isAvailable && !Mods.GregTech.isAvailable) {
             flag = 1;
             IRecipeRegistrar.addRecipeByOreDictionary(ItemCrafting.get(outputInterface, LevelTypes.MK1), "GW", " G", "GW", 'G', ICItemFinder.getItem("cable", "type:gold,insulation:0"),
                     'W', "plankWood");
@@ -189,7 +189,7 @@ public abstract class IRecipeRegistrar {
         OreDictionary.registerOre("plateDenseRubber", ItemType.WaterResistantRubberDensePlate.item());
         RecipeAdder.compressor(ItemType.WaterResistantRubberPlate.item(9), ItemType.WaterResistantRubberDensePlate.item());
         flag = 0;
-        if (Mods.IndustrialCraft2.isAvailable) {
+        if (Mods.IndustrialCraft2.isAvailable && !Mods.GregTech.isAvailable) {
             flag = 1;
             IRecipeRegistrar.addRecipeByOreDictionary(ItemCrafting.get(rotor, MK1), "CCC", "CAC", "CCC", 'C', ICItemFinder.getItem("cable", "type:copper,insulation:0"), 'A',
                     "dustMagnetite");
@@ -234,11 +234,11 @@ public abstract class IRecipeRegistrar {
                 "plateSteel", 'C', ItemCrafting.get(casing, LevelTypes.MK3));
         IRecipeRegistrar.addRecipeByOreDictionary(ItemCrafting.get(circuit, LevelTypes.MK3), "PPP", "CDC", "PPP", 'P', ItemType.WaterResistantRubberDensePlate.item(), 'C',
                 ItemCrafting.get(circuit, LevelTypes.MK1), 'P', ItemType.WaterResistantRubberPlate.item(), 'D', ItemCrafting.get(casing, LevelTypes.MK3));
-        IRecipeRegistrar.addRecipeByOreDictionary(ItemCrafting.get(stator, LevelTypes.MK3), "PIS", "PI ", "PIS", 'P', "plateZincAlloy", 'I', "dustMagnetile", 'S',
+        IRecipeRegistrar.addRecipeByOreDictionary(ItemCrafting.get(stator, LevelTypes.MK3), "PIS", "PI ", "PIS", 'P', "plateZincAlloy", 'I', "dustMagnetite", 'S',
                 "stickZincAlloy");
         flag = 0;
 
-        if (Mods.IndustrialCraft2.isAvailable) {
+        if (Mods.IndustrialCraft2.isAvailable && !Mods.GregTech.isAvailable) {
             flag = 1;
             IRecipeRegistrar.addRecipeByOreDictionary(ItemCrafting.get(rotor, LevelTypes.MK3), "CIC", "GIG", "G G", 'G', ICItemFinder.getItem("cable", "type:gold,insulation:0"), 'C',
                     ItemType.DenseCoil.item(), 'I', "ingotIron");
@@ -392,7 +392,7 @@ public abstract class IRecipeRegistrar {
             try {
                 GregTech_API.sRecipeAdder.addChemicalRecipe(changeMount(ICItemFinder.getItem("fluid_cell,ic2air"), 3), ICItemFinder.getItem("fluid_cell,ic2biogas"),
                         ItemType.OxygenEthanolFuel.item(4), 20);
-                GregTech_API.sRecipeAdder.addAssemblerRecipe(ICItemFinder.getItem("crafting,coil"), ICItemFinder.getItem("cable", "type:copper,insulation:0"),
+                GregTech_API.sRecipeAdder.addAssemblerRecipe(ICItemFinder.getItem("crafting,coil"), ICItemFinder.getItem("crafting,coil"),
                         ItemType.DenseCoil.item(), 120 * 20, 2);
 
                 if (Mods.Mekanism.isAvailable)
@@ -408,12 +408,12 @@ public abstract class IRecipeRegistrar {
             }
         } else {
             flag = 0;
-            if (Mods.IndustrialCraft2.isAvailable) {
+            if (Mods.IndustrialCraft2.isAvailable && !Mods.GregTech.isAvailable) {
                 flag = 1;
                 addShapelessRecipeByOreDictionary(ItemType.DenseCoil.item(), ICItemFinder.getItem("crafting", "coil"), ICItemFinder.getItem("cable", "type:copper,insulation:0"));
-                RecipeAdder.blastFurnace(ICItemFinder.getItem("crafting", "carbon_mesh"), ItemType.HighPurityCarbonDust.item(), 1000);
+                RecipeAdder.blastFurnace(ICItemFinder.getItem("crafting", "carbon_mesh"), null, ItemType.HighPurityCarbonDust.item(), 1000);
             } else {
-                RecipeAdder.blastFurnace(new ItemStack(Items.COAL), ItemType.HighPurityCarbonDust.item(), 1000);
+                RecipeAdder.blastFurnace(new ItemStack(Items.COAL), null, ItemType.HighPurityCarbonDust.item(), 1000);
             }
 
             if (Mods.Mekanism.isAvailable) {

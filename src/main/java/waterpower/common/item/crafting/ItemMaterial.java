@@ -59,8 +59,8 @@ public class ItemMaterial extends ItemRecolorable {
 
         instance = this;
 
-        registerAllRecipes();
         registerOreDict();
+        registerAllRecipes();
     }
 
     @Override
@@ -98,14 +98,14 @@ public class ItemMaterial extends ItemRecolorable {
         return get(craftingTypes, levelTypes, 1);
     }
 
-    public static ItemStack get(MaterialTypes craftingTypes, MaterialForms levelTypes, int mount) {
-        return new ItemStack(instance, mount, craftingTypes.ind() + levelTypes.ordinal());
+    public static ItemStack get(MaterialTypes craftingTypes, MaterialForms levelTypes, int amount) {
+        return new ItemStack(instance, amount, craftingTypes.ind() + levelTypes.ordinal());
     }
 
     public void registerOreDict() {
         for (MaterialForms forms : MaterialForms.values()) {
             for (MaterialTypes types : MaterialTypes.values()) {
-                IRecipeRegistrar.registerOreDict(forms.name() + types.getName(), get(types, forms));
+                IRecipeRegistrar.registerOreDict(forms.name() + types.getOre(), get(types, forms));
             }
         }
     }
@@ -131,7 +131,7 @@ public class ItemMaterial extends ItemRecolorable {
         List<ItemStack> steelIngots = OreDictionary.getOres("ingotSteel");
         boolean flag = false;
         for (ItemStack is : steelIngots)
-            flag |= RecipeAdder.blastFurnace(is, get(IndustrialSteel, ingot), 1000);
+            flag |= RecipeAdder.blastFurnace(is, "ingotSteel", get(IndustrialSteel, ingot), 1000);
         if (!flag) {
             GameRegistry.addSmelting(new ItemStack(Items.IRON_INGOT), get(Steel, ingot), 0);
         }
@@ -146,10 +146,8 @@ public class ItemMaterial extends ItemRecolorable {
             addShapedRecipe(get(types, dustTiny, 9), "A", 'A', get(types, dust));
 
             addShapedRecipe(new ItemStack(GlobalBlocks.material, 1, types.ordinal()), "AAA", "AAA", "AAA", 'A', get(types, ingot));
-            RecipeAdder.compressor(get(types, ingot, 9), new ItemStack(GlobalBlocks.material, 1, types.ordinal()));
 
             addShapedRecipe(get(types, ingot), "AAA", "AAA", "AAA", 'A', get(types, nugget));
-            RecipeAdder.compressor(get(types, nugget, 9), get(types, ingot));
 
             addShapelessRecipeByOreDictionary(get(types, nugget, 9), get(types, ingot));
 
@@ -167,13 +165,16 @@ public class ItemMaterial extends ItemRecolorable {
             GameRegistry.addSmelting(get(types, dustTiny), get(types, nugget), 0);
             GameRegistry.addSmelting(new ItemStack(GlobalBlocks.material, 1, types.ordinal()), get(types, ingot, 9), 0);
 
-            RecipeAdder.bender(get(types, ingot), get(types, plate));
-            RecipeAdder.bender(get(types, plate, 9), get(types, plateDense));
-            RecipeAdder.macerator(get(types, ingot), get(types, dust));
-            RecipeAdder.macerator(get(types, plate), get(types, dust));
-            RecipeAdder.macerator(new ItemStack(GlobalBlocks.material, 1, types.ordinal()), get(types, dust, 9));
-            RecipeAdder.macerator(get(types, plateDense), get(types, dust, 9));
+            RecipeAdder.bender(get(types, ingot), get(types, plate), types != MaterialTypes.Steel);
+            RecipeAdder.bender(get(types, plate, 9), get(types, plateDense), types != MaterialTypes.Steel);
+            RecipeAdder.macerator(get(types, ingot), get(types, dust), types != MaterialTypes.Steel);
+            RecipeAdder.macerator(get(types, plate), get(types, dust), types != MaterialTypes.Steel);
+            RecipeAdder.macerator(new ItemStack(GlobalBlocks.material, 1, types.ordinal()), get(types, dust, 9), types != MaterialTypes.Steel);
+            RecipeAdder.macerator(get(types, plateDense), get(types, dust, 9), types != MaterialTypes.Steel);
             RecipeAdder.macerator(get(types, screw), get(types, dustSmall));
+            RecipeAdder.macerator(get(types, nugget), get(types, dustSmall));
+            RecipeAdder.macerator(get(types, gear), get(types, dust, 6));
+            RecipeAdder.macerator(get(types, ring), get(types, dust, 2));
             RecipeAdder.lathe(get(types, stick), get(types, screw, 4));
 
             addShapelessRecipeByOreDictionary(get(types, plateDense), ItemType.WoodenHammer.item(), new ItemStack(GlobalBlocks.material, 1, types.ordinal()));

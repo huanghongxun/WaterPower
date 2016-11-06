@@ -8,6 +8,8 @@
 
 package waterpower.common.recipe;
 
+import javax.annotation.Nullable;
+
 import gregtech.api.GregTech_API;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -31,8 +33,12 @@ public class RecipeAdder {
     }
 
     public static void macerator(ItemStack input, ItemStack output) {
+    	macerator(input, output, true);
+    }
+
+    public static void macerator(ItemStack input, ItemStack output, boolean enableIC2) {
         boolean need = true;
-        if (Mods.IndustrialCraft2.isAvailable) {
+        if (Mods.IndustrialCraft2.isAvailable && enableIC2) {
             need = false;
             IndustrialCraftModule.macerator(input, output);
         }
@@ -62,6 +68,10 @@ public class RecipeAdder {
     }
 
     public static void cutter(ItemStack input, ItemStack output) {
+    	cutter(input, output, true);
+    }
+
+    public static void cutter(ItemStack input, ItemStack output, boolean enableIC2) {
         boolean need = true;
         if (Mods.IndustrialCraft2.isAvailable) {
             need = false;
@@ -73,8 +83,12 @@ public class RecipeAdder {
     }
 
     public static void compressor(ItemStack input, ItemStack output) {
+    	compressor(input, output, true);
+    }
+
+    public static void compressor(ItemStack input, ItemStack output, boolean enableIC2) {
         boolean need = true;
-        if (Mods.IndustrialCraft2.isAvailable) {
+        if (Mods.IndustrialCraft2.isAvailable && enableIC2) {
             need = false;
             IndustrialCraftModule.compressor(input, output);
         }
@@ -82,8 +96,12 @@ public class RecipeAdder {
             MyRecipes.compressor.addRecipe(input, output);
         }
     }
-
+    
     public static void bender(ItemStack input, ItemStack output) {
+    	bender(input, output, true);
+    }
+
+    public static void bender(ItemStack input, ItemStack output, boolean enableIC2) {
         input = input.copy();
         if (Mods.ExNihilo.isAvailable) {
             // Incomplete
@@ -95,7 +113,7 @@ public class RecipeAdder {
         	} catch(Throwable t) {
         	}
         }
-        if (Mods.IndustrialCraft2.isAvailable) {
+        if (Mods.IndustrialCraft2.isAvailable && enableIC2) {
             IndustrialCraftModule.metalformerRolling(input, output);
         }
         if (Mods.Railcraft.isAvailable) {
@@ -161,10 +179,13 @@ public class RecipeAdder {
         }
     }
 
-    public static boolean blastFurnace(ItemStack input, ItemStack output, int cookTime) {
+    public static boolean blastFurnace(ItemStack input, @Nullable String inOre, ItemStack output, int cookTime) {
         boolean flag = false;
         if (Mods.IndustrialCraft2.isAvailable) {
-            IndustrialCraftModule.blastfurance(input, output);
+        	if (inOre != null)
+        		IndustrialCraftModule.blastfurance(inOre, output);
+        	else
+        		IndustrialCraftModule.blastfurance(input, output);
             flag = true;
         }
         if (Mods.Railcraft.isAvailable) {

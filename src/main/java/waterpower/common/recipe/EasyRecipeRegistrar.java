@@ -278,7 +278,7 @@ public class EasyRecipeRegistrar extends IRecipeRegistrar {
             addRecipeByOreDictionary(ItemType.MK6.item(), "SMS", "UGU", "SAS", 'S', "plateSteel", 'U', ItemType.WaterUraniumPlateMK6.item(), 'A',
                     "stickNeodymium", 'M', doesOreNameExist("blockSapphire") ? "blockSapphire" : "blockVanadium", 'G', ItemType.MK5.item());
             addRecipeByOreDictionary(ItemType.MK7.item(), "SMS", "UGU", "SAS", 'S', "plateSteel", 'U', ItemType.WaterUraniumPlateMK7.item(), 'A',
-                    "NeodymiumMagnet", 'M', doesOreNameExist("blockChrome") ? "blockChrome" : "blockVanadiumSteel", 'G', ItemType.MK6.item());
+                    "stickNeodymiumMagnet", 'M', doesOreNameExist("blockChrome") ? "blockChrome" : "blockVanadiumSteel", 'G', ItemType.MK6.item());
         }
 
         addRecipeByOreDictionary(ItemType.ReservoirCore.item(), "ASA", "SMS", "CSC", 'A', "circuitBasic", 'S', advancedAlloy, 'M', machine, 'C',

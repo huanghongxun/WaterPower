@@ -14,7 +14,7 @@ import waterpower.client.Local;
 
 public enum MaterialTypes implements IStringSerializable {
     Zinc(182, 201, 206, 0, false), ZincAlloy(226, 226, 226, 0, false), Neodymium(210, 221, 221, 0, false), NeodymiumMagnet(
-            162, 170, 171, 0, true), IndustrialSteel(221, 243, 249, 0, true), Magnet(80, 83, 91, 0, false), Vanadium(
+            162, 170, 171, 0, true), IndustrialSteel(221, 243, 249, 0, true), Magnet(80, 83, 91, 0, false, "Magnetite"), Vanadium(
             189, 197, 202, 0, true), VanadiumSteel(166, 176, 183, 0, true), Manganese(137, 156, 167, 0, false), ManganeseSteel(
             174, 181, 194, 0, true), Steel(75, 83, 94, 0, false);
 
@@ -22,17 +22,23 @@ public enum MaterialTypes implements IStringSerializable {
 
     public short R, G, B, A;
     public boolean blastFurnaceRequired;
+    public String ore;
 
     public static final MaterialTypes[] MATERIALS_SORTED_BY_VALUE = {
 
     };
-
+    
     private MaterialTypes(int R, int G, int B, int A, boolean blastFurnaceRequired) {
+    	this(R, G, B, A, blastFurnaceRequired, null);
+    }
+
+    private MaterialTypes(int R, int G, int B, int A, boolean blastFurnaceRequired, String ore) {
         this.R = (short) R;
         this.G = (short) G;
         this.B = (short) B;
         this.A = (short) A;
         this.blastFurnaceRequired = blastFurnaceRequired;
+        this.ore = ore;
     }
 
     public int ind() {
@@ -41,6 +47,10 @@ public enum MaterialTypes implements IStringSerializable {
 
     public String getShowedName() {
         return Local.get("cptwtrml.material." + name());
+    }
+    
+    public String getOre() {
+    	return ore == null ? name() : ore;
     }
     
     @Override
