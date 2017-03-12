@@ -390,8 +390,6 @@ public abstract class IRecipeRegistrar {
 
         if (gregtechRecipe) {
             try {
-                GregTech_API.sRecipeAdder.addChemicalRecipe(changeMount(ICItemFinder.getItem("fluid_cell,ic2air"), 3), ICItemFinder.getItem("fluid_cell,ic2biogas"),
-                        ItemType.OxygenEthanolFuel.item(4), 20);
                 GregTech_API.sRecipeAdder.addAssemblerRecipe(ICItemFinder.getItem("crafting,coil"), ICItemFinder.getItem("crafting,coil"),
                         ItemType.DenseCoil.item(), 120 * 20, 2);
 

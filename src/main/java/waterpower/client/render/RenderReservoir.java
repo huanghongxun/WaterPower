@@ -25,30 +25,31 @@ public class RenderReservoir extends TileEntitySpecialRenderer<TileEntityReservo
 	@Override
 
 	public void renderTileEntityAt(TileEntityReservoir te, double tx, double ty, double tz, float partialTicks, int destroyStage) {
-		if (!te.isMaster()) return;
-		FluidStack stack = te.getFluidStackfromTank();
+		if (te.masterBlock == null) return;
+		TileEntityReservoir master = (TileEntityReservoir) te.masterBlock;
+		FluidStack stack = master.getFluidStackfromTank();
 
-		if (stack != null) {
+		if (stack != null && master.lastRenderedTick != partialTicks) {
+			master.lastRenderedTick = partialTicks;
 
-			float offset = (float) stack.amount / te.getFluidTankCapacity() * (te.size.height - 1);
-			for (int i = 1; i <= te.size.getLength() - 2; ++i)
-				for (int j = 1; j <= te.size.getWidth() - 2; ++j) {
+			float offset = (float) stack.amount / master.getFluidTankCapacity() * (master.size.height - 1);
+			for (int i = 1; i <= master.size.getLength() - 2; ++i)
+				for (int j = 1; j <= master.size.getWidth() - 2; ++j) {
 					pushMatrix();
 					enableBlend();
 					tryBlendFuncSeparate(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA, SourceFactor.ONE, DestFactor.ZERO);
-					BlockPos renderPos = te.getPos().add(i, 1, j);
+					BlockPos renderPos = master.getPos().add(i, 1, j);
 					RenderUtils.translateToZero();
 					translate(0, offset, 0);
 					RenderUtils.scaleAndCorrectThePosition(1, offset, 1, renderPos.getX(), renderPos.getY(), renderPos.getZ());
 					RenderHelper.disableStandardItemLighting();
-					RenderUtils.renderBlock(te.getFluidfromTank().getBlock().getDefaultState(), renderPos);
+					RenderUtils.renderBlock(master.getFluidfromTank().getBlock().getDefaultState(), renderPos);
 					RenderHelper.enableStandardItemLighting();
 					disableBlend();
 					popMatrix();
 				}
 
 		}
-
 	}
 
 

@@ -39,9 +39,9 @@ import net.minecraftforge.fml.common.Optional.Method;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@InterfaceList({ @Interface(iface = "ic2.api.energy.tile.IEnergySource", modid = Mods.IDs.IndustrialCraft2API, striprefs = true),
-        @Interface(iface = "ic2.api.energy.tile.IKineticSource", modid = Mods.IDs.IndustrialCraft2API, striprefs = true),
-        @Interface(iface = "ic2.api.energy.tile.IHeatSource", modid = Mods.IDs.IndustrialCraft2API, striprefs = true),
+@InterfaceList({ @Interface(iface = "ic2.api.energy.tile.IEnergySource", modid = Mods.IDs.IndustrialCraft2, striprefs = true),
+        @Interface(iface = "ic2.api.energy.tile.IKineticSource", modid = Mods.IDs.IndustrialCraft2, striprefs = true),
+        @Interface(iface = "ic2.api.energy.tile.IHeatSource", modid = Mods.IDs.IndustrialCraft2, striprefs = true),
         @Interface(iface = "cofh.api.energy.IEnergyConnection", modid = Mods.IDs.CoFHAPIEnergy),
         //@Interface(iface = "factorization.api.IChargeConductor", modid = Mods.IDs.Factorization),
         @Interface(iface = "thaumcraft.api.aspects.IEssentiaTransport", modid = Mods.IDs.Thaumcraft),
@@ -220,12 +220,12 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements IEn
      */
 
     @Override
-    @Method(modid = Mods.IDs.IndustrialCraft2API)
+    @Method(modid = Mods.IDs.IndustrialCraft2)
     public boolean emitsEnergyTo(IEnergyAcceptor receiver, EnumFacing side) {
         return energyType == EnergyType.EU;
     }
 
-    @Method(modid = Mods.IDs.IndustrialCraft2API)
+    @Method(modid = Mods.IDs.IndustrialCraft2)
     public void loadEnergyTile() {
 
         if (isServerSide()) {
@@ -235,7 +235,7 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements IEn
         }
     }
 
-    @Method(modid = Mods.IDs.IndustrialCraft2API)
+    @Method(modid = Mods.IDs.IndustrialCraft2)
     public void unloadEnergyTile() {
         if (isServerSide() && this.addedToEnergyNet) {
             MinecraftForge.EVENT_BUS.post(new EnergyTileUnloadEvent(this));
@@ -245,7 +245,7 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements IEn
     }
 
     @Override
-    @Method(modid = Mods.IDs.IndustrialCraft2API)
+    @Method(modid = Mods.IDs.IndustrialCraft2)
     public double getOfferedEnergy() {
         if (energyType == EnergyType.EU)
             return Math.min(this.getProduction(), this.storage);
@@ -253,19 +253,19 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements IEn
     }
 
     @Override
-    @Method(modid = Mods.IDs.IndustrialCraft2API)
+    @Method(modid = Mods.IDs.IndustrialCraft2)
     public void drawEnergy(double amount) {
         this.storage -= amount;
     }
 
     @Override
-    @Method(modid = Mods.IDs.IndustrialCraft2API)
+    @Method(modid = Mods.IDs.IndustrialCraft2)
     public int getSourceTier() {
         return 1;
     }
 
     @Override
-    @Method(modid = Mods.IDs.IndustrialCraft2API)
+    @Method(modid = Mods.IDs.IndustrialCraft2)
     public int maxrequestHeatTick(EnumFacing directionFrom) {
         if (energyType == EnergyType.HU)
             return (int) (EnergyType.EU2HU(latestOutput));
@@ -273,7 +273,7 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements IEn
     }
 
     @Override
-    @Method(modid = Mods.IDs.IndustrialCraft2API)
+    @Method(modid = Mods.IDs.IndustrialCraft2)
     public int requestHeat(EnumFacing directionFrom, int requestheat) {
         if (energyType == EnergyType.HU)
             return Math.min(requestheat, maxrequestHeatTick(directionFrom));
@@ -281,7 +281,7 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements IEn
     }
 
     @Override
-    @Method(modid = Mods.IDs.IndustrialCraft2API)
+    @Method(modid = Mods.IDs.IndustrialCraft2)
     public int maxrequestkineticenergyTick(EnumFacing directionFrom) {
         if (energyType == EnergyType.KU)
             return (int) (EnergyType.EU2KU(latestOutput));
@@ -289,7 +289,7 @@ public abstract class TileEntityGenerator extends TileEntityBlock implements IEn
     }
 
     @Override
-    @Method(modid = Mods.IDs.IndustrialCraft2API)
+    @Method(modid = Mods.IDs.IndustrialCraft2)
     public int requestkineticenergy(EnumFacing directionFrom, int requestkineticenergy) {
         if (energyType == EnergyType.KU)
             return Math.min(requestkineticenergy, maxrequestkineticenergyTick(directionFrom));

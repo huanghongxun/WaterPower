@@ -57,7 +57,7 @@ public class Utils {
     // 0 - weather, 1 - biomeGet, 2 - biomePut, BlockPos needn't coord y
     public static double[] getBiomeRaining(World worldObj, BlockPos pos) {
         int weather = worldObj.isThundering() ? 2 : worldObj.isRaining() ? 1 : 0;
-        String biomeID = worldObj.getBiomeGenForCoords(pos).getBiomeName();
+        String biomeID = worldObj.getBiomeGenForCoords(pos).getBiomeName().toLowerCase();
         double biomeGet = 0, biomePut = 0;
         switch (biomeID) {
         case "beach":

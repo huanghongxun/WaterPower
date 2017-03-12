@@ -29,7 +29,6 @@ import waterpower.util.Mods;
 import waterpower.util.Pair;
 import waterpower.util.Utils;
 
-@InterfaceList({ @Interface(iface = "ic2.api.tile.IWrenchable", modid = Mods.IDs.IndustrialCraft2API, striprefs = true) })
 public class TileEntityReservoir extends TileEntityMultiBlock {
 
     public EnumFacing side;

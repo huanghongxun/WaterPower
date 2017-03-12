@@ -23,7 +23,7 @@ plugins {
 }
 */
 def buildnumber = System.getenv("BUILD_NUMBER") == null ? "" : "-"+System.getenv("BUILD_NUMBER")
-def mod_version = "0.4.5"+buildnumber
+def mod_version = "0.4.6"+buildnumber
 version = mod_version
 group = "waterpower" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "WaterPower-1.10.2"
@@ -34,7 +34,7 @@ compileJava {
 }
 
 minecraft {
-    version = "1.10.2-12.18.1.2094"
+    version = "1.10.2-12.18.2.2179"
     runDir = "run"
 
     replaceIn "Reference.java"

@@ -109,7 +109,7 @@ public class BlockReservoir extends BlockWaterPower {
     }
 
     @Override
-    @Method(modid = Mods.IDs.IndustrialCraft2API)
+    @Method(modid = Mods.IDs.IndustrialCraft2)
     public boolean wrenchCanRemove(World world, BlockPos pos, EntityPlayer player) {
         return true;
     }

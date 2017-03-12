@@ -31,6 +31,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import ic2.api.tile.IWrenchable;
+import net.minecraftforge.fml.common.Optional.Interface;
+import net.minecraftforge.fml.common.Optional.InterfaceList;
 import net.minecraftforge.fml.common.Optional.Method;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import waterpower.WaterPower;
@@ -43,6 +45,7 @@ import waterpower.integration.BuildCraftModule;
 import waterpower.util.Mods;
 import waterpower.util.Utils;
 
+@InterfaceList({ @Interface(iface = "ic2.api.tile.IWrenchable", modid = Mods.IDs.IndustrialCraft2, striprefs = true) })
 public abstract class BlockWaterPower extends Block implements IWrenchable, ITileEntityProvider, IBlockModelProvider {
     public static final PropertyDirection FACING = PropertyDirection.create("facing", Lists.newArrayList(EnumFacing.Plane.HORIZONTAL.facings()));
     private static final ThreadLocal<TileEntity> TEMPORARYTILEENTITY_LOCAL = new ThreadLocal<TileEntity>();
@@ -296,25 +299,25 @@ public abstract class BlockWaterPower extends Block implements IWrenchable, ITil
      */
 
     @Override
-    @Method(modid = Mods.IDs.IndustrialCraft2API)
+    @Method(modid = Mods.IDs.IndustrialCraft2)
     public EnumFacing getFacing(World world, BlockPos pos) {
         return getDirection(world, pos);
     }
 
     @Override
-    @Method(modid = Mods.IDs.IndustrialCraft2API)
+    @Method(modid = Mods.IDs.IndustrialCraft2)
     public boolean setFacing(World world, BlockPos pos, EnumFacing facing, EntityPlayer player) {
     	return setDirection(world, pos, facing);
     }
 
     @Override
-    @Method(modid = Mods.IDs.IndustrialCraft2API)
+    @Method(modid = Mods.IDs.IndustrialCraft2)
     public boolean wrenchCanRemove(World world, BlockPos pos, EntityPlayer player) {
         return true;
     }
 
     @Override
-    @Method(modid = Mods.IDs.IndustrialCraft2API)
+    @Method(modid = Mods.IDs.IndustrialCraft2)
 	public List<ItemStack> getWrenchDrops(World world, BlockPos pos, IBlockState state, TileEntity te, EntityPlayer player, int fortune) {
         return getDropsImpl(world, pos, state, te, fortune);
     }

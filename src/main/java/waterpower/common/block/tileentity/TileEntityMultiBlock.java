@@ -23,8 +23,9 @@ public abstract class TileEntityMultiBlock extends TileEntityLiquidTankInventory
     public TileEntityMultiBlock masterBlock;
     protected boolean tested;
     private int masterState;
+    public float lastRenderedTick;
     private BlockPos master;
-    private int tick = 0, tick2 = Reference.General.updateTick;
+    private int tick = Reference.General.updateTick, tick2 = Reference.General.updateTick;
     protected List<TileEntityMultiBlock> blockList;
 
     public TileEntityMultiBlock(int tankSize) {
@@ -97,12 +98,14 @@ public abstract class TileEntityMultiBlock extends TileEntityLiquidTankInventory
     public void writePacketData(NBTTagCompound tag) {
         super.writePacketData(tag);
 
+        checkMaster();
         tag.setInteger("master", masterState);
         if (masterState == 2) {
             TileEntity te = worldObj.getTileEntity(master);
-            if (te instanceof TileEntityMultiBlock)
+            if (te instanceof TileEntityMultiBlock) {
                 masterBlock = (TileEntityMultiBlock) te;
-            tag.setLong("masterPos", masterBlock.pos.toLong());
+                tag.setLong("masterPos", masterBlock.pos.toLong());
+            }
         }
     }
 
@@ -123,6 +126,14 @@ public abstract class TileEntityMultiBlock extends TileEntityLiquidTankInventory
         else
             return masterBlock.getFluidTank();
     }
+    
+    void checkMaster() {
+        if (masterState == 2) {
+            TileEntity te = worldObj.getTileEntity(master);
+            if (!(te instanceof TileEntityMultiBlock))
+                setMaster(null);
+        }
+    }
 
     @Override
     public void update() {
@@ -130,7 +141,8 @@ public abstract class TileEntityMultiBlock extends TileEntityLiquidTankInventory
     	
         if (worldObj == null || worldObj.isRemote)
             return;
-
+        
+        checkMaster();
         if (tick-- == 0) {
             tick = Reference.General.updateTick;
             if (canBeMaster()) {

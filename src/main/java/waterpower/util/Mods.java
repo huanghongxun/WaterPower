@@ -21,7 +21,6 @@ public class Mods {
         public static final String BuildCraftFactory = "BuildCraft|Factory";
         public static final String Factorization = "factorization";
         public static final String IndustrialCraft2 = "IC2";
-        public static final String IndustrialCraft2API = "IC2";
         public static final String Thaumcraft = "Thaumcraft";
         public static final String ThermalExpansion = "ThermalExpansion";
         public static final String RotaryCraft = "RotaryCraft";

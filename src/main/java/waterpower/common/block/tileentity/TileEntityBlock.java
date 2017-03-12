@@ -9,7 +9,6 @@ import net.minecraftforge.fml.common.Optional.InterfaceList;
 import waterpower.common.block.BlockWaterPower;
 import waterpower.util.Mods;
 
-@InterfaceList({ @Interface(iface = "ic2.api.tile.IWrenchable", modid = Mods.IDs.IndustrialCraft2API, striprefs = true) })
 public abstract class TileEntityBlock extends TileEntityLiquidTankInventory {
 
     public TileEntityBlock(int tanksize) {
