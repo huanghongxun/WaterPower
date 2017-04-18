@@ -124,10 +124,10 @@ public class ItemMaterial extends ItemRecolorable {
                     new MyRecipeInputOreDictionary("ingotSteel"), new MyRecipeInputOreDictionary("ingotSteel"), new MyRecipeInputOreDictionary("ingotCoal"));
         }
         addShapelessRecipeByOreDictionary(get(ZincAlloy, dust, 5), "dustZinc", "dustZinc", "dustZinc", "dustZinc", "dustCopper");
-        addShapelessRecipeByOreDictionary(get(VanadiumSteel, dust, 3), "dustVanadium", "dustSteel", "dustSteel");
+        addShapelessRecipeByOreDictionary(get(VanadiumSteel, dust, 3), "dustVanadium", "dustIron", "dustIron");
         addShapelessRecipeByOreDictionary(get(NeodymiumMagnet, dust, 2), "dustNeodymium", "dustMagnetite");
-        addShapelessRecipeByOreDictionary(get(ManganeseSteel, dust, 4), "dustManganese", "dustSteel", "dustSteel", "dustCoal");
-        addShapelessRecipeByOreDictionary(get(ManganeseSteel, dust, 3), "dustManganese", "dustSteel", "dustSteel");
+        addShapelessRecipeByOreDictionary(get(ManganeseSteel, dust, 4), "dustManganese", "dustIron", "dustIron", "dustCoal");
+        addShapelessRecipeByOreDictionary(get(ManganeseSteel, dust, 3), "dustManganese", "dustIron", "dustIron");
         List<ItemStack> steelIngots = OreDictionary.getOres("ingotSteel");
         boolean flag = false;
         for (ItemStack is : steelIngots)
@@ -163,23 +163,38 @@ public class ItemMaterial extends ItemRecolorable {
 
             GameRegistry.addSmelting(get(types, dust), get(types, ingot), 0);
             GameRegistry.addSmelting(get(types, dustTiny), get(types, nugget), 0);
+            GameRegistry.addSmelting(get(types, screw), get(types, nugget), 0);
             GameRegistry.addSmelting(new ItemStack(GlobalBlocks.material, 1, types.ordinal()), get(types, ingot, 9), 0);
 
-            RecipeAdder.bender(get(types, ingot), get(types, plate), types != MaterialTypes.Steel);
-            RecipeAdder.bender(get(types, plate, 9), get(types, plateDense), types != MaterialTypes.Steel);
-            RecipeAdder.macerator(get(types, ingot), get(types, dust), types != MaterialTypes.Steel);
-            RecipeAdder.macerator(get(types, plate), get(types, dust), types != MaterialTypes.Steel);
-            RecipeAdder.macerator(new ItemStack(GlobalBlocks.material, 1, types.ordinal()), get(types, dust, 9), types != MaterialTypes.Steel);
-            RecipeAdder.macerator(get(types, plateDense), get(types, dust, 9), types != MaterialTypes.Steel);
-            RecipeAdder.macerator(get(types, screw), get(types, dustSmall));
-            RecipeAdder.macerator(get(types, nugget), get(types, dustSmall));
-            RecipeAdder.macerator(get(types, gear), get(types, dust, 6));
-            RecipeAdder.macerator(get(types, ring), get(types, dust, 2));
             RecipeAdder.lathe(get(types, stick), get(types, screw, 4));
+            
+            if (types != MaterialTypes.Steel) {
+                RecipeAdder.bender(get(types, ingot), get(types, plate));
+                RecipeAdder.bender(get(types, plate, 9), get(types, plateDense));
+	            RecipeAdder.macerator(get(types, screw), get(types, dustTiny));
+	            RecipeAdder.macerator(get(types, nugget), get(types, dustTiny));
+	
+	            RecipeAdder.macerator(get(types, ingot), get(types, dust));
+	            RecipeAdder.macerator(get(types, plate), get(types, dust));
+	            RecipeAdder.macerator(new ItemStack(GlobalBlocks.material, 1, types.ordinal()), get(types, dust, 9));
+	            RecipeAdder.macerator(get(types, plateDense), get(types, dust, 9));
+	            RecipeAdder.macerator(get(types, gear), get(types, dust, 6));
+	            RecipeAdder.macerator(get(types, ring), get(types, dust, 2));
+            }
 
             addShapelessRecipeByOreDictionary(get(types, plateDense), ItemType.WoodenHammer.item(), new ItemStack(GlobalBlocks.material, 1, types.ordinal()));
         }
 
+        if (!Mods.IndustrialCraft2.isAvailable) {
+            RecipeAdder.bender(get(MaterialTypes.Steel, ingot), get(MaterialTypes.Steel, plate));
+            RecipeAdder.bender(get(MaterialTypes.Steel, plate, 9), get(MaterialTypes.Steel, plateDense));
+        	RecipeAdder.macerator(get(MaterialTypes.Steel, ingot), ItemType.DustIron.item());
+        	RecipeAdder.macerator(get(MaterialTypes.Steel, plate), ItemType.DustIron.item());
+        	RecipeAdder.macerator(new ItemStack(GlobalBlocks.material, 1, MaterialTypes.Steel.ordinal()), ItemType.DustIron.item(9));
+        	RecipeAdder.macerator(get(MaterialTypes.Steel, plateDense), ItemType.DustIron.item(9));
+        	RecipeAdder.macerator(get(MaterialTypes.Steel, gear), ItemType.DustIron.item(6));
+        	RecipeAdder.macerator(get(MaterialTypes.Steel, ring), ItemType.DustIron.item(2));
+        }
     }
 
     @Override
