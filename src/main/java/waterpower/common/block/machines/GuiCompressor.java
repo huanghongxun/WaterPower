@@ -11,12 +11,14 @@ import waterpower.client.gui.ContainerStandardMachine;
 
 @SideOnly(Side.CLIENT)
 public class GuiCompressor extends GuiMachineBase {
+	
+	public static final String TITLE_I18N = "cptwtrml.machine.compressor.name";
+	public static final ResourceLocation GUI =  new ResourceLocation(Reference.ModID + ":textures/gui/GUICompressor.png");
 
     public GuiCompressor(EntityPlayer player, TileEntityStandardWaterMachine tileEntity) {
         super(new ContainerStandardMachine(player, tileEntity));
 
-        this.name = Local.get("cptwtrml.machine.compressor.name");
-        this.inv = Local.get("container.inventory");
-        this.background = new ResourceLocation(Reference.ModID + ":textures/gui/GUICompressor.png");
+        this.name = Local.get(TITLE_I18N);
+        this.background = GUI;
     }
 }

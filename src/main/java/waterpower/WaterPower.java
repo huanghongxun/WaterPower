@@ -161,8 +161,8 @@ public class WaterPower implements IWorldGenerator {
         GlobalItems.updater = new ItemOthers();
 
         GlobalBlocks.reservoir = new BlockReservoir();
-        GlobalBlocks.machine = new BlockMachines();
         GlobalBlocks.material = new BlockMaterial();
+        GlobalBlocks.machine = new BlockMachines();
 
         GlobalItems.crafting = new ItemCrafting();
         GlobalItems.meterial = new ItemMaterial();

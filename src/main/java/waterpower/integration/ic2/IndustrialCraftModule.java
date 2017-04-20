@@ -21,7 +21,6 @@ import waterpower.integration.BaseModule;
 public class IndustrialCraftModule extends BaseModule {
 
 	public static boolean IS_INDUSTRIAL_CRAFT_RECIPES_AVAILABLE = false;
-	public static Object macerator, compressor, cutter;
 
 	public static void compressor(ItemStack input, ItemStack output) {
 		try {
@@ -81,15 +80,27 @@ public class IndustrialCraftModule extends BaseModule {
 		}
 	}
 
-	@Override
-	public void init() {
+	public static Object getMaceratorMachineManager() {
 		try {
-			macerator = Recipes.macerator;
-			compressor = Recipes.compressor;
-			cutter = Recipes.blockcutter;
-			IS_INDUSTRIAL_CRAFT_RECIPES_AVAILABLE = true;
+			return Recipes.macerator;
 		} catch (Throwable t) {
-			t.printStackTrace();
+			return null;
+		}
+	}
+
+	public static Object getCompressorMachineManager() {
+		try {
+			return Recipes.compressor;
+		} catch (Throwable t) {
+			return null;
+		}
+	}
+
+	public static Object getCutterMachineManager() {
+		try {
+			return Recipes.blockcutter;
+		} catch (Throwable t) {
+			return null;
 		}
 	}
 

@@ -31,19 +31,15 @@ public class BlockMachines extends BlockWaterPower {
         GlobalBlocks.lathe = new ItemStack(this, 1, 5);
         GlobalBlocks.cutter = new ItemStack(this, 1, 6);
 
-        GameRegistry.registerTileEntity(TileEntityMacerator.class, "cptwtrml.machine.macerator");
+        for (MachineType type : MachineType.values())
+        	type.registerTileEntity();
+        
         TileEntityMacerator.init();
-        GameRegistry.registerTileEntity(TileEntityCompressor.class, "cptwtrml.machine.compressor");
         TileEntityCompressor.init();
-        GameRegistry.registerTileEntity(TileEntitySawmill.class, "cptwtrml.machine.sawmill");
         TileEntitySawmill.init();
-        GameRegistry.registerTileEntity(TileEntityAdvancedCompressor.class, "cptwtrml.machine.advancedCompressor");
         TileEntityAdvancedCompressor.init();
-        GameRegistry.registerTileEntity(TileEntityCentrifuge.class, "cptwtrml.machine.centrifuge");
         TileEntityCentrifuge.init();
-        GameRegistry.registerTileEntity(TileEntityLathe.class, "cptwtrml.machine.lathe");
         TileEntityLathe.init();
-        GameRegistry.registerTileEntity(TileEntityCutter.class, "cptwtrml.machine.cutter");
         TileEntityCutter.init();
 
         setDefaultState(blockState.getBaseState().withProperty(MACHINE_TYPES, MachineType.MACERATOR).withProperty(FACING, EnumFacing.NORTH));
@@ -84,23 +80,7 @@ public class BlockMachines extends BlockWaterPower {
 
     @Override
     public TileEntity createNewTileEntity(World world, int meta) {
-        switch (meta) {
-        case 0:
-            return new TileEntityMacerator();
-        case 1:
-            return new TileEntityCompressor();
-        case 2:
-            return new TileEntitySawmill();
-        case 3:
-            return new TileEntityAdvancedCompressor();
-        case 4:
-            return new TileEntityCentrifuge();
-        case 5:
-            return new TileEntityLathe();
-        case 6:
-            return new TileEntityCutter();
-        default:
-            return null;
-        }
+    	if (meta >= maxMetaData()) return null;
+    	else return MachineType.values()[meta].newInstance();
     }
 }

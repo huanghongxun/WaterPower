@@ -30,7 +30,7 @@ public abstract class GuiMachineBase extends GuiContainer {
 
     public ContainerStandardMachine container;
     public String name;
-    public String inv;
+    public String inv = Local.get("container.inventory");
     protected ResourceLocation background;
 
     @Override

@@ -11,11 +11,14 @@ import waterpower.client.gui.ContainerStandardMachine;
 
 @SideOnly(Side.CLIENT)
 public class GuiSawmill extends GuiMachineBase {
+	
+	public static final String TITLE_I18N = "cptwtrml.machine.sawmill.name";
+	public static final ResourceLocation GUI = new ResourceLocation(Reference.ModID + ":textures/gui/GUISawmill.png");
+	
     public GuiSawmill(EntityPlayer player, TileEntitySawmill tileEntity) {
         super(new ContainerStandardMachine(player, tileEntity));
 
-        this.name = Local.get("cptwtrml.machine.sawmill.name");
-        this.inv = Local.get("container.inventory");
-        this.background = new ResourceLocation(Reference.ModID + ":textures/gui/GUISawmill.png");
+        this.name = Local.get(TITLE_I18N);
+        this.background = GUI;
     }
 }

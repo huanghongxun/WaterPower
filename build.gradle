@@ -23,7 +23,7 @@ plugins {
 }
 */
 def buildnumber = System.getenv("BUILD_NUMBER") == null ? "" : "-"+System.getenv("BUILD_NUMBER")
-def mod_version = "0.4.6"+buildnumber
+def mod_version = "0.4.7"+buildnumber
 version = mod_version
 group = "waterpower" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "WaterPower-1.10.2"

@@ -25,7 +25,7 @@ public class TileEntityCompressor extends TileEntityStandardWaterMachine {
     public static void init() {
         MyRecipes.compressor = new MultiRecipeManager();
         if (Mods.IndustrialCraft2.isAvailable)
-            ((MultiRecipeManager) MyRecipes.compressor).addRecipeManager(new IndustrialCraftRecipeManager(IndustrialCraftModule.compressor));
+            ((MultiRecipeManager) MyRecipes.compressor).addRecipeManager(new IndustrialCraftRecipeManager(IndustrialCraftModule.getCompressorMachineManager()));
     }
 
 	@Override
