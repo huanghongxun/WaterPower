@@ -7,12 +7,6 @@ import mezz.jei.api.recipe.IRecipeWrapper;
 
 public class MyRecipeHandler implements IRecipeHandler<MyRecipeWrapper> {
 
-	private final MyRecipeCategory category;
-
-	public MyRecipeHandler(MyRecipeCategory category) {
-		this.category = category;
-	}
-
 	@Override
 	public Class<MyRecipeWrapper> getRecipeClass() {
 		return MyRecipeWrapper.class;
@@ -21,7 +15,7 @@ public class MyRecipeHandler implements IRecipeHandler<MyRecipeWrapper> {
 	@Override
 	@Nonnull
 	public String getRecipeCategoryUid() {
-		return this.category.getUid();
+		return "waterpower";
 	}
 
 	@Override
@@ -32,12 +26,12 @@ public class MyRecipeHandler implements IRecipeHandler<MyRecipeWrapper> {
 
 	@Override
 	public boolean isRecipeValid(@Nonnull MyRecipeWrapper recipe) {
-		return recipe.category == this.category;
+		return !recipe.getInputs().isEmpty();
 	}
 
 	@Override
-	public String getRecipeCategoryUid(MyRecipeWrapper arg0) {
-		return this.category.getUid();
+	public String getRecipeCategoryUid(MyRecipeWrapper wrapper) {
+		return wrapper.category.getUid();
 	}
 
 }

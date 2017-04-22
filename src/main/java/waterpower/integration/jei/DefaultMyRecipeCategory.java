@@ -1,5 +1,9 @@
 package waterpower.integration.jei;
 
+import java.awt.Point;
+import java.util.Arrays;
+import java.util.List;
+
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -12,19 +16,19 @@ import waterpower.common.recipe.IRecipeManager;
 public class DefaultMyRecipeCategory extends MyRecipeCategory {
 	private IDrawable background;
 
-	public DefaultMyRecipeCategory(String machineName, IRecipeManager recipeManager, IGuiHelper guiHelper, ResourceLocation image) {
-		super(machineName, recipeManager);
-		this.background = guiHelper.createDrawable(image, 55, 15, 85, 56);
+	public DefaultMyRecipeCategory(String uid, String title, IRecipeManager recipeManager, IGuiHelper guiHelper, ResourceLocation image) {
+		super(uid, title, recipeManager);
+		this.background = guiHelper.createDrawable(image, 3, 15, 140, 60);
 	}
 
 	@Override
-	public boolean horizontalOutput() {
-		return false;
+	public List<Point> getInputSlotPositions() {
+		return Arrays.asList(new Point(22, 34 - 16));
 	}
-
+	
 	@Override
-	public int getAmountOutputSlots() {
-		return 1;
+	public List<Point> getOutputSlotPositions() {
+		return Arrays.asList(new Point(82, 35 - 16));
 	}
 
 	@Override

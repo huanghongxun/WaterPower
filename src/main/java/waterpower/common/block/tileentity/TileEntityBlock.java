@@ -68,8 +68,10 @@ public abstract class TileEntityBlock extends TileEntityLiquidTankInventory {
     public void writePacketData(NBTTagCompound tag) {
         super.writePacketData(tag);
 
-        if (prevFacing != facing)
+        if (prevFacing != facing) {
             tag.setByte("facing", (byte) facing.ordinal());
+            needsUpdate = true;
+        }
         if (needsUpdate) {
             tag.setBoolean("needsUpdate", needsUpdate);
             needsUpdate = false;

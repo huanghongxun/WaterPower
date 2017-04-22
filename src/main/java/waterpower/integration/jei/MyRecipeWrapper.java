@@ -58,8 +58,8 @@ public class MyRecipeWrapper extends BlankRecipeWrapper {
 	}
 
 	@Override
-	public void getIngredients(IIngredients arg0) {
-		arg0.setInputLists(ItemStack.class, getInputs());
-		arg0.setOutputs(ItemStack.class, getOutputs());
+	public void getIngredients(IIngredients ingredients) {
+		ingredients.setInputLists(ItemStack.class, getInputs());
+		ingredients.setOutputs(ItemStack.class, getOutputs());
 	}
 }
