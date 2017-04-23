@@ -55,7 +55,7 @@ public class HUDHandlerReservoir implements IWailaDataProvider {
     @Override
     @Method(modid = Mods.IDs.Waila)
     public ItemStack getWailaStack(IWailaDataAccessor arg0, IWailaConfigHandler arg1) {
-    	return arg0.getStack();
+    	return null;
     }
 
     @Override
@@ -66,8 +66,8 @@ public class HUDHandlerReservoir implements IWailaDataProvider {
 
     @Override
     @Method(modid = Mods.IDs.Waila)
-    public NBTTagCompound getNBTData(EntityPlayerMP arg0, TileEntity arg1, NBTTagCompound arg2, World arg3, BlockPos pos) {
-        return null;
+    public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity te, NBTTagCompound tag, World world, BlockPos pos) {
+        return tag;
     }
 
 }

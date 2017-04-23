@@ -21,6 +21,7 @@ import waterpower.WaterPower;
 import waterpower.api.IUpgrade;
 import waterpower.api.IWaterReceiver;
 import waterpower.client.gui.DefaultGuiIds;
+import waterpower.common.block.IDroppable;
 import waterpower.common.block.inventory.InventorySlotConsumableLiquid;
 import waterpower.common.block.inventory.InventorySlotOutput;
 import waterpower.common.block.inventory.InventorySlotUpgrade;

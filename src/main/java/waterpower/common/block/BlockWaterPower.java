@@ -14,6 +14,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -126,7 +127,16 @@ public abstract class BlockWaterPower extends Block implements IWrenchable, ITil
     public int damageDropped(IBlockState state) {
     	return getMetaFromState(state);
     }
-    
+
+    @Override
+    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+        TileEntity te = world.getTileEntity(pos);
+        if (te instanceof IDroppable)
+            return ((IDroppable) te).getDroppedItemStack();
+        else
+            return super.getPickBlock(state, target, world, pos, player);
+    }
+
     @Override
     public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ,
     		int meta, EntityLivingBase placer) {

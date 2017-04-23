@@ -33,15 +33,13 @@ public class HUDHandlerMachine implements IWailaDataProvider {
     @Override
     @Method(modid = Mods.IDs.Waila)
     public List<String> getWailaBody(ItemStack arg0, List<String> arg1, IWailaDataAccessor arg2, IWailaConfigHandler arg3) {
-        TileEntity te = arg2.getTileEntity();
-        if (!(te instanceof TileEntityStandardWaterMachine))
-            return arg1;
-        TileEntityStandardWaterMachine tile = (TileEntityStandardWaterMachine) te;
+        NBTTagCompound tag = arg2.getNBTData();
 
-        arg1.add(Local.get("cptwtrml.gui.using") + ": " + tile.energyConsume + "mb/t");
-        arg1.add(Local.get("cptwtrml.gui.stored") + ": " + tile.getFluidAmount() + "mb");
-        arg1.add(Local.get("cptwtrml.gui.capacity") + ": " + tile.getFluidTankCapacity() + "mb");
-
+        if (tag.hasKey("using")) {
+            arg1.add(Local.get("cptwtrml.gui.using") + ": " + tag.getInteger("using") + "mb/t");
+            arg1.add(Local.get("cptwtrml.gui.stored") + ": " + tag.getInteger("stored") + "mb");
+            arg1.add(Local.get("cptwtrml.gui.capacity") + ": " + tag.getInteger("capacity") + "mb");
+        }
         return arg1;
     }
 
@@ -54,7 +52,7 @@ public class HUDHandlerMachine implements IWailaDataProvider {
     @Override
     @Method(modid = Mods.IDs.Waila)
     public ItemStack getWailaStack(IWailaDataAccessor arg0, IWailaConfigHandler arg1) {
-        return arg0.getStack();
+        return null;
     }
 
     @Override
@@ -65,8 +63,14 @@ public class HUDHandlerMachine implements IWailaDataProvider {
 
     @Override
     @Method(modid = Mods.IDs.Waila)
-    public NBTTagCompound getNBTData(EntityPlayerMP arg0, TileEntity arg1, NBTTagCompound arg2, World arg3, BlockPos pos) {
-        return null;
+    public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity te, NBTTagCompound tag, World world, BlockPos pos) {
+        if (te instanceof TileEntityStandardWaterMachine) {
+            TileEntityStandardWaterMachine tile = (TileEntityStandardWaterMachine) te;
+            tag.setInteger("using", tile.energyConsume);
+            tag.setInteger("stored", tile.getFluidAmount());
+            tag.setInteger("capacity", tile.getFluidTankCapacity());
+        }
+        return tag;
     }
 
 }

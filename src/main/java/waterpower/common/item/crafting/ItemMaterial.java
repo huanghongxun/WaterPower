@@ -171,15 +171,15 @@ public class ItemMaterial extends ItemRecolorable {
             if (types != MaterialTypes.Steel) {
                 RecipeAdder.bender(get(types, ingot), get(types, plate));
                 RecipeAdder.bender(get(types, plate, 9), get(types, plateDense));
-	            RecipeAdder.macerator(get(types, screw), get(types, dustTiny));
-	            RecipeAdder.macerator(get(types, nugget), get(types, dustTiny));
+	            RecipeAdder.macerator(get(types, screw), get(types, dustTiny)); // no tiny steel dust
+	            RecipeAdder.macerator(get(types, nugget), get(types, dustTiny)); // no tiny steel dust
 	
-	            RecipeAdder.macerator(get(types, ingot), get(types, dust));
-	            RecipeAdder.macerator(get(types, plate), get(types, dust));
-	            RecipeAdder.macerator(new ItemStack(GlobalBlocks.material, 1, types.ordinal()), get(types, dust, 9));
-	            RecipeAdder.macerator(get(types, plateDense), get(types, dust, 9));
-	            RecipeAdder.macerator(get(types, gear), get(types, dust, 6));
-	            RecipeAdder.macerator(get(types, ring), get(types, dust, 2));
+	            RecipeAdder.macerator(get(types, ingot), get(types, dust)); // steel -> iron dust
+	            RecipeAdder.macerator(get(types, plate), get(types, dust)); // steel -> iron dust
+	            RecipeAdder.macerator(new ItemStack(GlobalBlocks.material, 1, types.ordinal()), get(types, dust, 9)); // steel -> iron dust
+	            RecipeAdder.macerator(get(types, plateDense), get(types, dust, 9)); // steel -> iron dust
+	            RecipeAdder.macerator(get(types, gear), get(types, dust, 6)); // steel -> iron dust
+	            RecipeAdder.macerator(get(types, ring), get(types, dust, 2)); // steel -> iron dust
             }
 
             addShapelessRecipeByOreDictionary(get(types, plateDense), ItemType.WoodenHammer.item(), new ItemStack(GlobalBlocks.material, 1, types.ordinal()));

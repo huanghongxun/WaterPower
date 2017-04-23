@@ -62,8 +62,8 @@ public class HUDHandlerTurbine implements IWailaDataProvider {
 
     @Override
     @Method(modid = Mods.IDs.Waila)
-    public NBTTagCompound getNBTData(EntityPlayerMP arg0, TileEntity arg1, NBTTagCompound arg2, World arg3, BlockPos pos) {
-        return null;
+    public NBTTagCompound getNBTData(EntityPlayerMP arg0, TileEntity arg1, NBTTagCompound tag, World arg3, BlockPos pos) {
+        return tag;
     }
 
 }

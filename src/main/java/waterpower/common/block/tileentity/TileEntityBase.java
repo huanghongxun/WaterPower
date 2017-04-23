@@ -9,16 +9,18 @@
 package waterpower.common.block.tileentity;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.ITickable;
 import waterpower.Reference;
 import waterpower.WaterPower;
+import waterpower.common.block.IDroppable;
 import waterpower.common.network.MessagePacketHandler;
 import waterpower.common.network.PacketTileEntity;
 
-public class TileEntityBase extends TileEntity implements ITickable {
+public class TileEntityBase extends TileEntity implements ITickable, IDroppable {
 
     public TileEntityBase() {
         tick = Reference.General.updateTick;
@@ -44,6 +46,11 @@ public class TileEntityBase extends TileEntity implements ITickable {
 
     public void readPacketData(NBTTagCompound tag) {
 
+    }
+
+    @Override
+    public ItemStack getDroppedItemStack() {
+        return new ItemStack(getBlockState().getBlock(), 1, getBlockMetadata());
     }
 
     public boolean isRedstonePowered() {
