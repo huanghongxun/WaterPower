@@ -1,25 +1,27 @@
 [
-{
-  "modid": "WaterPower",
-  "name": "WaterPower",
-  "description": "Adds many watermills(support RF,EU,Steam&Water), reservoirs, trousers, machines, materials.",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
-  "url": "http://minecraft.curseforge.com/mc-mods/224579-water-power",
-  "updateUrl": "http://minecraft.curseforge.com/mc-mods/224579-water-power/files",
-  "authorList": ["huanghongxun"],
-  "credits": "huanghongxun",
-  "logoFile": "http://media-elerium.cursecdn.com/avatars/11/360/635487730096588163.png",
-  "screenshots": [
-    "http://media-elerium.cursecdn.com/attachments/25/310/the-gui-of-a-water-powered-machine.png",
-    "http://media-elerium.cursecdn.com/attachments/25/309/water-powered-machines-must-next-to-a-valid.png",
-    "http://media-elerium.cursecdn.com/attachments/25/308/watermill-trousers-charges-ic2-tools-battery.png",
-    "http://media-elerium.cursecdn.com/attachments/25/307/watemill-outputs-rf-eu-steam-water.png",
-    "http://media-elerium.cursecdn.com/attachments/25/306/zinc-ore-will-be-generated-in-y-coord-in-6-64.png",
-    "http://media-elerium.cursecdn.com/attachments/25/305/vanadium-manganese-monazite-magnet-ore-will-be.png",
-    "http://media-elerium.cursecdn.com/attachments/25/304/turbine-outputs-rf-eu-steam-water-next-to-a.png",
-    "http://media-elerium.cursecdn.com/attachments/25/303/5x5x4-capacity-3x3x3-reservoir.png"
-  ],
-  "dependencies": []
-}
+  {
+    "modid": "WaterPower",
+    "name": "WaterPower",
+    "description": "Adds many watermills(support RF,EU,Steam&Water), reservoirs, trousers, machines, materials.",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "http://minecraft.curseforge.com/mc-mods/224579-water-power",
+    "updateUrl": "http://minecraft.curseforge.com/mc-mods/224579-water-power/files",
+    "authorList": [
+      "huanghongxun"
+    ],
+    "credits": "huanghongxun",
+    "logoFile": "http://media-elerium.cursecdn.com/avatars/11/360/635487730096588163.png",
+    "screenshots": [
+      "http://media-elerium.cursecdn.com/attachments/25/310/the-gui-of-a-water-powered-machine.png",
+      "http://media-elerium.cursecdn.com/attachments/25/309/water-powered-machines-must-next-to-a-valid.png",
+      "http://media-elerium.cursecdn.com/attachments/25/308/watermill-trousers-charges-ic2-tools-battery.png",
+      "http://media-elerium.cursecdn.com/attachments/25/307/watemill-outputs-rf-eu-steam-water.png",
+      "http://media-elerium.cursecdn.com/attachments/25/306/zinc-ore-will-be-generated-in-y-coord-in-6-64.png",
+      "http://media-elerium.cursecdn.com/attachments/25/305/vanadium-manganese-monazite-magnet-ore-will-be.png",
+      "http://media-elerium.cursecdn.com/attachments/25/304/turbine-outputs-rf-eu-steam-water-next-to-a.png",
+      "http://media-elerium.cursecdn.com/attachments/25/303/5x5x4-capacity-3x3x3-reservoir.png"
+    ],
+    "dependencies": []
+  }
 ]

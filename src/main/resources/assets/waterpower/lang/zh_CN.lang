@@ -43,233 +43,237 @@ tc.research_name.cptwtrmlMK15=高级水力发电机MK15
 tc.research_name.cptwtrmlMK16=高级水力发电机MK16
 
 # Thaumcraft integration: research pages
-cptwtrml.research.waterUraniumIngot=神秘使现在能够利用他们的要素来快速获取水之铀锭了。
-cptwtrml.research.industrialDiamond=神秘使现在能够利用他们的要素来快速获取工业钻石了。
-cptwtrml.research.reservoirCore=神秘使现在能够利用他们的要素来快速获取水库核心了。
-cptwtrml.research.reservoirCoreAdvanced=神秘使现在能够利用他们的要素来快速获取高级水库核心了。
+waterpower.research.waterUraniumIngot=神秘使现在能够利用他们的要素来快速获取水之铀锭了。
+waterpower.research.industrialDiamond=神秘使现在能够利用他们的要素来快速获取工业钻石了。
+waterpower.research.reservoirCore=神秘使现在能够利用他们的要素来快速获取水库核心了。
+waterpower.research.reservoirCoreAdvanced=神秘使现在能够利用他们的要素来快速获取高级水库核心了。
 
 # reservoir block & rotor
-cptwtrml.reservoir.RESERVOIR=水库方块
-cptwtrml.reservoir.WOOD=木
-cptwtrml.reservoir.STONE=石
-cptwtrml.reservoir.LAPIS=青金石
-cptwtrml.reservoir.TIN=锡
-cptwtrml.reservoir.COPPER=铜
-cptwtrml.reservoir.QUARTZ=石英
-cptwtrml.reservoir.ZINC=锌
-cptwtrml.reservoir.BRONZE=青铜
-cptwtrml.reservoir.NETHER=地狱砖块
-cptwtrml.reservoir.IRON=铁
-cptwtrml.reservoir.OBSIDIAN=黑曜石
-cptwtrml.reservoir.STEEL=钢
-cptwtrml.reservoir.GOLD=金
-cptwtrml.reservoir.MANGANESE=锰钢
-cptwtrml.reservoir.DIAMOND=钻石
-cptwtrml.reservoir.VANADIUM=钒钢
+waterpower.reservoir.reservoir=水库方块
+waterpower.reservoir.wood=木
+waterpower.reservoir.stone=石
+waterpower.reservoir.lapis=青金石
+waterpower.reservoir.tin=锡
+waterpower.reservoir.copper=铜
+waterpower.reservoir.quartz=石英
+waterpower.reservoir.zinc=锌
+waterpower.reservoir.bronze=青铜
+waterpower.reservoir.iron=铁
+waterpower.reservoir.obsidian=黑曜石
+waterpower.reservoir.steel=钢
+waterpower.reservoir.gold=金
+waterpower.reservoir.manganese_steel=锰钢
+waterpower.reservoir.diamond=钻石
+waterpower.reservoir.vanadium_steel=钒钢
 
-cptwtrml.reservoir.MAXSOTRE=最大存储
-cptwtrml.reservoir.MAXUSE=水轮机最大用水
+waterpower.reservoir.MAXSOTRE=最大存储
+waterpower.reservoir.MAXUSE=水轮机最大用水
 
-cptwtrml.reservoir.info=多方块结构，像个桶
-cptwtrml.reservoir.info2=下雨或在河流或海洋中接收水  
+waterpower.reservoir.info=多方块结构，像个桶
+waterpower.reservoir.info2=下雨或在河流或海洋中接收水  
 
 # rotor
-cptwtrml.rotor.ROTOR=转子
-cptwtrml.rotor.INFINITE=永久
-cptwtrml.rotor.REMAINTIME=剩余时间
-cptwtrml.rotor.HOUR=小时
-cptwtrml.rotor.MINUTE=分钟
-cptwtrml.rotor.SECOND=秒
-cptwtrml.rotor.GOT_EFFICIENCY=获得效率
+waterpower.rotor=转子
+waterpower.rotor.infinite=永久
+waterpower.rotor.remain=剩余时间
+waterpower.rotor.hour=小时
+waterpower.rotor.minute=分钟
+waterpower.rotor.second=秒
+waterpower.rotor.efficiency=获得效率
 
 # updater
-cptwtrml.updater.WaterUraniumIngot=水之铀锭
-cptwtrml.updater.WaterUraniumPlateMK1=水之铀锭板MK1
-cptwtrml.updater.WaterUraniumPlateMK2=水之铀锭板MK2
-cptwtrml.updater.WaterUraniumPlateMK3=水之铀锭板MK3
-cptwtrml.updater.WaterUraniumPlateMK4=水之铀锭板MK4
-cptwtrml.updater.WaterUraniumPlateMK5=水之铀锭板MK5
-cptwtrml.updater.WaterUraniumPlateMK6=水之铀锭板MK6
-cptwtrml.updater.WaterUraniumPlateMK7=水之铀锭板MK7
-cptwtrml.updater.IR_FE=铱铁合金板
-cptwtrml.updater.MK0=升级插件MK0
-cptwtrml.updater.MK1=升级插件MK1
-cptwtrml.updater.MK2=升级插件MK2
-cptwtrml.updater.MK3=升级插件MK3
-cptwtrml.updater.MK4=升级插件MK4
-cptwtrml.updater.MK5=升级插件MK5
-cptwtrml.updater.MK6=升级插件MK6
-cptwtrml.updater.MK7=升级插件MK7
-cptwtrml.updater.ReservoirCore=水库方块核心
-cptwtrml.updater.ReservoirCoreAdvanced=高级水库方块核心
-cptwtrml.updater.PlasmaUraniumAlloyPlate=氦铀等离子合金板
-cptwtrml.updater.PlasmaUraniumIngot=氦铀等离子锭
-cptwtrml.updater.WaterUraniumAlloyPlate=水之铀锭合金板
-cptwtrml.updater.BaseRotor=基础转子
-cptwtrml.updater.StoneStruct=石制支柱
-cptwtrml.updater.WoodenHammer=木棰
-cptwtrml.updater.WaterResistantRubber=压缩橡胶
-cptwtrml.updater.WaterResistantRubberPlate=压缩橡胶板
-cptwtrml.updater.WaterResistantRubberDensePlate=厚压缩橡胶板
-cptwtrml.updater.DenseRedstonePlate=致密红石合金板
-cptwtrml.updater.DenseCoil=致密线圈
-cptwtrml.updater.OxygenEthanolFuel=氧-乙醇焰燃料
-cptwtrml.updater.SilverCoil=银线圈
-cptwtrml.updater.DenseSilverCoil=厚实银线圈
-cptwtrml.updater.FerricOxideDust=氧化铁粉
-cptwtrml.updater.FerroferricOxideDust=四氧化三铁粉
-cptwtrml.updater.FerricOxideSmallDust=小堆氧化铁粉
-cptwtrml.updater.FerroferricOxideSmallDust=小堆四氧化三铁粉
-cptwtrml.updater.HighPurityCarbonDust=高纯碳粉
-cptwtrml.updater.TungstenCarbideIngot=碳化钨锭
-cptwtrml.updater.DiamondBlade=钻石锯片
-cptwtrml.updater.DiamondGlazingWheel=钻石研磨轮
-cptwtrml.updater.BrassCentrifugePot=黄铜离心锅
-cptwtrml.updater.VSteelWaterPipe=钒钢水管
-cptwtrml.updater.RubyWaterHole=红宝石喷水口
-cptwtrml.updater.DataBall=数据球
-cptwtrml.updater.DustDiamond=钻石粉
-cptwtrml.updater.IndustrialSteelHydraulicCylinder=工业钢液压缸
-cptwtrml.updater.VSteelPistonCylinder=钒钢活塞缸
-cptwtrml.updater.DustCactus=仙人掌粉
-cptwtrml.updater.DustIron=铁粉
-cptwtrml.updater.DustGold=金粉
-cptwtrml.updater.DrawingWaterPart=汲水零件
-cptwtrml.updater.DrawingWaterComponent=汲水组件
+waterpower.crafting.water_uranium_ingot=水之铀锭
+waterpower.crafting.water_uranium_plate_mk1=水之铀锭板MK1
+waterpower.crafting.water_uranium_plate_mk2=水之铀锭板MK2
+waterpower.crafting.water_uranium_plate_mk3=水之铀锭板MK3
+waterpower.crafting.water_uranium_plate_mk4=水之铀锭板MK4
+waterpower.crafting.water_uranium_plate_mk5=水之铀锭板MK5
+waterpower.crafting.water_uranium_plate_mk6=水之铀锭板MK6
+waterpower.crafting.water_uranium_plate_mk7=水之铀锭板MK7
+waterpower.crafting.water_uranium_alloy_plate=水之铀锭合金板
+waterpower.crafting.plasma_uranium_ingot=氦铀等离子锭
+waterpower.crafting.plasma_uranium_alloy_plate=氦铀等离子合金板
+waterpower.crafting.iridium_iron_alloy_plate=铱铁合金板
+waterpower.crafting.updater_mk0=升级插件MK0
+waterpower.crafting.updater_mk1=升级插件MK1
+waterpower.crafting.updater_mk2=升级插件MK2
+waterpower.crafting.updater_mk3=升级插件MK3
+waterpower.crafting.updater_mk4=升级插件MK4
+waterpower.crafting.updater_mk5=升级插件MK5
+waterpower.crafting.updater_mk6=升级插件MK6
+waterpower.crafting.updater_mk7=升级插件MK7
+waterpower.crafting.reservoir_core=水库方块核心
+waterpower.crafting.reservoir_core_advanced=高级水库方块核心
+waterpower.crafting.base_rotor=基础转子
+waterpower.crafting.stone_structure=石制支柱
+waterpower.crafting.wooden_hammer=木棰
+waterpower.crafting.water_resistant_rubber=压缩橡胶
+waterpower.crafting.water_resistant_rubber_plate=压缩橡胶板
+waterpower.crafting.water_resistant_rubber_dense_plate=厚压缩橡胶板
+waterpower.crafting.dense_redstone_plate=致密红石合金板
+waterpower.crafting.dense_copper_coil=致密线圈
+waterpower.crafting.oxygen_ethanol_fuel=氧-乙醇焰燃料
+waterpower.crafting.silver_coil=银线圈
+waterpower.crafting.dense_silver_coil=厚实银线圈
+waterpower.crafting.high_purity_carbon_dust=高纯碳粉
+waterpower.crafting.tungsten_carbide_ingot=碳化钨锭
+waterpower.crafting.diamond_blade=钻石锯片
+waterpower.crafting.diamond_glazing_wheel=钻石研磨轮
+waterpower.crafting.brass_centrifuge_pot=黄铜离心锅
+waterpower.crafting.industrial_steel_hydraulic_cylinder=工业钢液压缸
+waterpower.crafting.vanadium_steel_piston_cylinder=钒钢活塞缸
+waterpower.crafting.vanadium_steel_water_pipe=钒钢水管
+waterpower.crafting.ruby_water_hole=红宝石喷水口
+waterpower.crafting.data_ball=数据球
+waterpower.crafting.cactus_dust=仙人掌粉
+waterpower.crafting.iron_dust=铁粉
+waterpower.crafting.gold_dust=金粉
+waterpower.crafting.diamond_dust=钻石粉
 
-cptwtrml.updater.info=用于合成
+waterpower.tooltip.crafting=用于合成
+
+waterpower.tooltip.uses_left=剩余使用次数: %d
 
 # range
-cptwtrml.range.info.MK1=缩小2格水要求
-cptwtrml.range.info.MK2=缩小16格水要求
-cptwtrml.range.info.MK3=缩小128格水要求
-cptwtrml.range.name.MK1=范围缩小插件MK1
-cptwtrml.range.name.MK2=范围缩小插件MK2
-cptwtrml.range.name.MK3=范围缩小插件MK3
+waterpower.range.MK1=范围缩小插件MK1
+waterpower.range.MK1.info=缩小2格水要求
+
+waterpower.range.MK2=范围缩小插件MK2
+waterpower.range.MK2.info=缩小16格水要求
+
+waterpower.range.MK3=范围缩小插件MK3
+waterpower.range.MK3.info=缩小128格水要求
 
 # watermill
-cptwtrml.watermill.WATERMILL=高级水力发电机
-cptwtrml.watermill.TURBINE=水轮机
-cptwtrml.watermill.NEED=需求
-cptwtrml.watermill.CHECK_WATER=水
-cptwtrml.watermill.CHECK_LAVA=岩浆
-cptwtrml.watermill.CANNOT_CHECK=无法检测,范围太大
-cptwtrml.watermill.OUTPUT=输出
-cptwtrml.watermill.PRODUCTION=输出限制
-cptwtmrl.watermill.TROUSERS=裤子
-cptwtrml.watermill.ROTOR=转子
+waterpower.watermill.watermill=高级水力发电机
+waterpower.watermill.turbine=水轮机
+waterpower.watermill.need=需求
+waterpower.watermill.check_water=水
+waterpower.watermill.checK_lava=岩浆
+waterpower.watermill.cannot_check=无法检测,需要范围缩小插件
+waterpower.watermill.output=输出
+waterpower.watermill.production=输出限制
+waterpower.watermill.rotor=转子
+waterpower.watermill.trouser=%s裤子
 
-cptwtrml.watermill.max_output=最大输出
+waterpower.watermill.max_output=最大输出 %dEU/t
+waterpower.watermill.in_water=为泡在水里的玩家物品栏中的电池充电
 
-cptwtrml.gui.reservoir.add=增加
-cptwtrml.gui.reservoir.hpWater=高能水
+waterpower.gui.reservoir.add=增加
+waterpower.gui.reservoir.hpWater=高能水
 
-cptwtrml.gui.capacity=容积
-cptwtrml.gui.stored=已存储
-cptwtrml.gui.latest_output=上次输出
-cptwtrml.gui.stored_fluid=已存储液体
-cptwtrml.gui.fluid_amount=液量
-cptwtrml.gui.empty=空
-cptwtrml.gui.using=使用能量
+waterpower.gui.capacity=容积
+waterpower.gui.stored=已存储
+waterpower.gui.latest_output=上次输出
+waterpower.gui.stored_fluid=已存储液体
+waterpower.gui.fluid_amount=液量
+waterpower.gui.empty=空
+waterpower.gui.using=使用能量
 
-cptwtrml.rotor.RANGE=范围缩小
+waterpower.rotor.RANGE=范围缩小
 
-# crafting
-cptwtrml.crafting.paddleBase=桨叶座
-cptwtrml.crafting.drainagePlate=引流板
-cptwtrml.crafting.fixedFrame=固定框
-cptwtrml.crafting.fixedTool=固着器
-cptwtrml.crafting.rotationAxle=传动轴
-cptwtrml.crafting.outputInterface=输出接口
-cptwtrml.crafting.rotor=转子
-cptwtrml.crafting.stator=定子
-cptwtrml.crafting.casing=外壳
-cptwtrml.crafting.circuit=控制电路
+# component
+waterpower.component.paddleBase=桨叶座
+waterpower.component.drainagePlate=引流板
+waterpower.component.fixedFrame=固定框
+waterpower.component.fixedTool=固着器
+waterpower.component.rotationAxle=传动轴
+waterpower.component.outputInterface=输出接口
+waterpower.component.rotor=转子
+waterpower.component.stator=定子
+waterpower.component.casing=外壳
+waterpower.component.circuit=控制电路
 
 # level
-cptwtrml.level.MK1=木
-cptwtrml.level.MK3=锌合金
-cptwtrml.level.MK4=钢
-cptwtrml.level.MK5=钒钢
-cptwtrml.level.MK7=零点
+waterpower.level.MK1=木
+waterpower.level.MK3=锌合金
+waterpower.level.MK4=钢
+waterpower.level.MK5=钒钢
+waterpower.level.MK7=零点
+
+# component names, notice: "{component}" and "{level}" are variables, dont translate them, just adjust the order.
+waterpower.component.format={component}{level}
 
 # forms
-cptwtrml.forms.plate=板
-cptwtrml.forms.dust=粉
-cptwtrml.forms.dustTiny=小撮粉
-cptwtrml.forms.dustSmall=小堆粉
-cptwtrml.forms.plateDense=厚板
-cptwtrml.forms.ingot=锭
-cptwtrml.forms.block=块
-cptwtrml.forms.stick=棍
-cptwtrml.forms.screw=螺丝
-cptwtrml.forms.gear=齿轮
-cptwtrml.forms.nugget=粒
-cptwtrml.forms.ring=环
+waterpower.forms.plate=板
+waterpower.forms.dust=粉
+waterpower.forms.dustTiny=小撮粉
+waterpower.forms.dustSmall=小堆粉
+waterpower.forms.plateDense=厚板
+waterpower.forms.ingot=锭
+waterpower.forms.block=块
+waterpower.forms.stick=棍
+waterpower.forms.screw=螺丝
+waterpower.forms.gear=齿轮
+waterpower.forms.nugget=粒
+waterpower.forms.ring=环
 
 # materials
-cptwtrml.material.Zinc=锌合金
-cptwtrml.material.ZincAlloy=锌合金
-cptwtrml.material.Neodymium=钕
-cptwtrml.material.NeodymiumMagnet=钕磁铁
-cptwtrml.material.IndustrialSteel=工业钢
-cptwtrml.material.Magnet=磁铁
-cptwtrml.material.ManganeseSteel=锰钢
-cptwtrml.material.Manganese=锰
-cptwtrml.material.VanadiumSteel=钒钢
-cptwtrml.material.Vanadium=钒
-cptwtrml.material.Steel=钢
+waterpower.material.Zinc=锌
+waterpower.material.ZincAlloy=锌合金
+waterpower.material.Neodymium=钕
+waterpower.material.NeodymiumMagnet=钕磁铁
+waterpower.material.IndustrialSteel=工业钢
+waterpower.material.Magnetite=磁铁
+waterpower.material.ManganeseSteel=锰钢
+waterpower.material.Manganese=锰
+waterpower.material.VanadiumSteel=钒钢
+waterpower.material.Vanadium=钒
+waterpower.material.Steel=钢
+
+# material name, notice: "{material}" and "{forms}" are variables, dont translate them, just adjust the order.
+waterpower.material.format={material}{forms}
 
 # machines
-cptwtrml.machine.macerator.name=水力打粉机
-cptwtrml.machine.compressor.name=液压压缩机
-cptwtrml.machine.sawmill.name=水力锯木机
-cptwtrml.machine.advancedCompressor.name=高压液压压缩机
-cptwtrml.machine.centrifuge.name=高速离心机
-cptwtrml.machine.lathe.name=水力车床
-cptwtrml.machine.cutter.name=水力切割机
+waterpower.machine.crusher=水力打粉机
+waterpower.machine.compressor=液压压缩机
+waterpower.machine.sawmill=水力锯木机
+waterpower.machine.advancedCompressor=高压液压压缩机
+waterpower.machine.centrifuge=高速离心机
+waterpower.machine.lathe=水力车床
+waterpower.machine.cutter=水力切割机
 
-cptwtrml.machine.info=必须邻接水库方块来接收能量
+waterpower.machine.info=必须邻接水库方块来接收能量
 
 # ores
-cptwtrml.ore.monazite=独居石
-cptwtrml.ore.vanadium=钒矿
-cptwtrml.ore.manganese=锰矿
-cptwtrml.ore.magnet=磁铁矿
-cptwtrml.ore.zinc=锌矿
+waterpower.ore.monazite=独居石
+waterpower.ore.vanadium=钒矿
+waterpower.ore.manganese=锰矿
+waterpower.ore.magnetite=磁铁矿
+waterpower.ore.zinc=锌矿
 
 # plugins
-cptwtrml.plugin.UnderMK1=地下水接收插件MK1
-cptwtrml.plugin.UnderMK2=地下水接收插件MK2
-cptwtrml.plugin.UnderMK3=地下水接收插件MK3
-cptwtrml.plugin.UnderMK4=地下水接收插件MK4
-cptwtrml.plugin.OverMK1=地表水接收插件MK1
-cptwtrml.plugin.OverMK2=地表水接收插件MK2
-cptwtrml.plugin.OverMK3=地表水接收插件MK3
-cptwtrml.plugin.OverMK4=地表水接收插件MK4
-cptwtrml.plugin.RainMK1=雨水接收插件MK1
-cptwtrml.plugin.RainMK2=雨水接收插件MK2
-cptwtrml.plugin.RainMK3=雨水接收插件MK3
-cptwtrml.plugin.RainMK4=雨水接收插件MK4
-cptwtrml.plugin.AllRoundMK1=全能插件MK1
-cptwtrml.plugin.AllRoundMK2=全能插件MK2
-cptwtrml.plugin.AllRoundMK3=全能插件MK3
-cptwtrml.plugin.AllRoundMK4=全能插件MK4
-cptwtrml.plugin.StorageMK1=存储升级插件MK1
-cptwtrml.plugin.StorageMK2=存储升级插件MK2
-cptwtrml.plugin.StorageMK3=存储升级插件MK3
-cptwtrml.plugin.StorageMK4=存储升级插件MK4
-cptwtrml.plugin.SpeedMK1=速度升级插件MK1
-cptwtrml.plugin.SpeedMK2=速度升级插件MK2
-cptwtrml.plugin.SpeedMK3=速度升级插件MK3
-cptwtrml.plugin.SpeedMK4=速度升级插件MK4
+waterpower.plugin.under_mk1=地下水接收插件MK1
+waterpower.plugin.under_mk2=地下水接收插件MK2
+waterpower.plugin.under_mk3=地下水接收插件MK3
+waterpower.plugin.under_mk4=地下水接收插件MK4
+waterpower.plugin.over_mk1=地表水接收插件MK1
+waterpower.plugin.over_mk2=地表水接收插件MK2
+waterpower.plugin.over_mk3=地表水接收插件MK3
+waterpower.plugin.over_mk4=地表水接收插件MK4
+waterpower.plugin.rain_mk1=雨水接收插件MK1
+waterpower.plugin.rain_mk2=雨水接收插件MK2
+waterpower.plugin.rain_mk3=雨水接收插件MK3
+waterpower.plugin.rain_mk4=雨水接收插件MK4
+waterpower.plugin.all_round_mk1=全能插件MK1
+waterpower.plugin.all_round_mk2=全能插件MK2
+waterpower.plugin.all_round_mk3=全能插件MK3
+waterpower.plugin.all_round_mk4=全能插件MK4
+waterpower.plugin.storage_mk1=存储升级插件MK1
+waterpower.plugin.storage_mk2=存储升级插件MK2
+waterpower.plugin.storage_mk3=存储升级插件MK3
+waterpower.plugin.storage_mk4=存储升级插件MK4
+waterpower.plugin.speed_mk1=速度升级插件MK1
+waterpower.plugin.speed_mk2=速度升级插件MK2
+waterpower.plugin.speed_mk3=速度升级插件MK3
+waterpower.plugin.speed_mk4=速度升级插件MK4
 
 # crushed ore
-item.oreDustZinc.name=粉碎锌矿石
-item.oreDustVanadium.name=粉碎钒矿石
-item.oreDustManganese.name=粉碎锰矿石
-item.oreDustMonazite.name=粉碎独居石
-item.oreDustMagnet.name=粉碎磁铁矿
+waterpower.crushed.zinc=粉碎锌矿石
+waterpower.crushed.vanadium=粉碎钒矿石
+waterpower.crushed.manganese=粉碎锰矿石
+waterpower.crushed.monazite=粉碎独居石
+waterpower.crushed.magnetite=粉碎磁铁矿
 
 fluid.waterpower.molten.Monazite=熔融独居石
 fluid.waterpower.molten.Vanadium=熔融钒矿石

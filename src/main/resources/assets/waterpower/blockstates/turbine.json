@@ -1,40 +1,102 @@
 {
-    "forge_marker": 1,
-    "defaults": {
-        "model": "cube",
-        "textures": {
-            "particle": "#side",
-            "east": "#side",
-            "west": "#side",
-            "up": "#side",
-            "side": "waterpower:blocks/turbine/SIDE",
-            "south": "waterpower:blocks/turbine/BACK",
-            "down": "waterpower:blocks/turbine/DOWN"
-        }
-    }, 
-    "variants": {
-        "type": {
-            "mk1":  { "textures": { "north": "waterpower:blocks/turbine/mk1" } },
-            "mk2":  { "textures": { "north": "waterpower:blocks/turbine/mk2" } },
-            "mk3":  { "textures": { "north": "waterpower:blocks/turbine/mk3" } },
-            "mk4":  { "textures": { "north": "waterpower:blocks/turbine/mk4" } },
-            "mk5":  { "textures": { "north": "waterpower:blocks/turbine/mk5" } },
-            "mk6":  { "textures": { "north": "waterpower:blocks/turbine/mk6" } },
-            "mk7":  { "textures": { "north": "waterpower:blocks/turbine/mk7" } },
-            "mk8":  { "textures": { "north": "waterpower:blocks/turbine/mk8" } },
-            "mk9":  { "textures": { "north": "waterpower:blocks/turbine/mk9" } },
-            "mk10": { "textures": { "north": "waterpower:blocks/turbine/mk10" } },
-            "mk11": { "textures": { "north": "waterpower:blocks/turbine/mk11" } },
-            "mk12": { "textures": { "north": "waterpower:blocks/turbine/mk12" } }
-        },
-        "facing": {
-            "down": { "x": 90 },
-            "up": { "x": 270 },
-            "north": { "transform": "forge:default-block" },
-            "south": { "y": 180 },
-            "west": { "y": 270 },
-            "east": { "y": 90 }
-        },
-        "inventory": [{}]
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube",
+    "textures": {
+      "particle": "#side",
+      "east": "#side",
+      "west": "#side",
+      "up": "#side",
+      "side": "waterpower:blocks/turbine/side",
+      "south": "waterpower:blocks/turbine/back",
+      "down": "waterpower:blocks/turbine/down"
     }
+  },
+  "variants": {
+    "type": {
+      "mk1": {
+        "textures": {
+          "north": "waterpower:blocks/turbine/mk1"
+        }
+      },
+      "mk2": {
+        "textures": {
+          "north": "waterpower:blocks/turbine/mk2"
+        }
+      },
+      "mk3": {
+        "textures": {
+          "north": "waterpower:blocks/turbine/mk3"
+        }
+      },
+      "mk4": {
+        "textures": {
+          "north": "waterpower:blocks/turbine/mk4"
+        }
+      },
+      "mk5": {
+        "textures": {
+          "north": "waterpower:blocks/turbine/mk5"
+        }
+      },
+      "mk6": {
+        "textures": {
+          "north": "waterpower:blocks/turbine/mk6"
+        }
+      },
+      "mk7": {
+        "textures": {
+          "north": "waterpower:blocks/turbine/mk7"
+        }
+      },
+      "mk8": {
+        "textures": {
+          "north": "waterpower:blocks/turbine/mk8"
+        }
+      },
+      "mk9": {
+        "textures": {
+          "north": "waterpower:blocks/turbine/mk9"
+        }
+      },
+      "mk10": {
+        "textures": {
+          "north": "waterpower:blocks/turbine/mk10"
+        }
+      },
+      "mk11": {
+        "textures": {
+          "north": "waterpower:blocks/turbine/mk11"
+        }
+      },
+      "mk12": {
+        "textures": {
+          "north": "waterpower:blocks/turbine/mk12"
+        }
+      }
+    },
+    "facing": {
+      "down": {
+        "x": 90
+      },
+      "up": {
+        "x": 270
+      },
+      "north": {
+        "transform": "forge:default-block"
+      },
+      "south": {
+        "y": 180
+      },
+      "west": {
+        "y": 270
+      },
+      "east": {
+        "y": 90
+      }
+    },
+    "inventory": [
+      {}
+    ]
+  }
 }

@@ -1,62 +1,73 @@
-
-// For those who want the bleeding edge
 buildscript {
     repositories {
         jcenter()
-        maven {
-            name = "forge"
-            url = "http://files.minecraftforge.net/maven"
-        }
+        maven { url = "http://files.minecraftforge.net/maven" }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
     }
 }
-apply plugin: 'net.minecraftforge.gradle.forge'
 
-[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
-
-/*
-// for people who want stable - not yet functional for MC 1.8.8 - we require the forgegradle 2.1 snapshot
 plugins {
-    id "net.minecraftforge.gradle.forge" version "2.0.2"
+    id "org.jetbrains.kotlin.jvm" version "1.1.2-2"
 }
-*/
-def buildnumber = System.getenv("BUILD_NUMBER") == null ? "" : "-"+System.getenv("BUILD_NUMBER")
-def mod_version = "0.4.9"+buildnumber
+
+apply plugin: 'net.minecraftforge.gradle.forge'
+//Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
+
+file "build.properties" withReader {
+    def prop = new Properties()
+    prop.load(it)
+    ext.config = new ConfigSlurper().parse prop
+}
+
+def buildnumber = System.getenv("BUILD_NUMBER") == null ? "" : "-" + System.getenv("BUILD_NUMBER")
+def mod_version = "${config.waterpower}" + buildnumber
 version = mod_version
 group = "waterpower" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "WaterPower-1.10.2"
+archivesBaseName = "WaterPower-${config.mc}"
 
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 sourceCompatibility = targetCompatibility = "1.8" // Need this here so eclipse task generates correctly.
 compileJava {
     sourceCompatibility = targetCompatibility = "1.8"
 }
 
 minecraft {
-    version = "1.10.2-12.18.2.2179"
+    version = "${config.mc}-${config.forge}"
     runDir = "run"
 
-    replaceIn "Reference.java"
-    replace "@version@", mod_version
-    
     // the mappings can be changed at any time, and must be in the following format.
     // snapshot_YYYYMMDD   snapshot are built nightly.
     // stable_#            stables are built at the discretion of the MCP team.
-    // Use non-default mappings at your own risk. they may not allways work.
+    // Use non-default mappings at your own risk. they may not always work.
     // simply re-run your setup task after changing the mappings to update your workspace.
-    mappings = "snapshot_20160518"
+    mappings = "snapshot_20161220"
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 }
 
+repositories {
+    jcenter()
+    maven { // jei
+        name = 'mezz'
+        url = 'http://dvs1.progwml6.com/files/maven'
+    }
+    maven {
+        name = "ic2, forestry"
+        url = "http://maven.ic2.player.to/"
+    }
+    ivy {
+        name "BuildCraft"
+        artifactPattern "http://www.mod-buildcraft.com/releases/BuildCraft/[revision]/[module]-[revision]-[classifier].jar"
+    }
+    mavenCentral()
+}
+
 dependencies {
-    // you may put jars on which you depend on in ./libs
-    // or you may define them like so..
-    //compile "some.group:artifact:version:classifier"
-    //compile "some.group:artifact:version"
-      
-    // real examples
-    //compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
+    compile "org.jetbrains.kotlin:kotlin-stdlib:${config.kotlin}"
+    provided "mezz.jei:jei_${config.mc}:${config.jei}"
+    provided "net.industrial-craft:industrialcraft-2:${config.ic2}:dev"
+
     //compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
 
     // the 'provided' configuration is for optional dependencies that exist at compile-time but might not at runtime.
@@ -67,14 +78,17 @@ dependencies {
     //deobfCompile 'com.mod-buildcraft:buildcraft:6.0.8:dev'
     //deobfProvided 'com.mod-buildcraft:buildcraft:6.0.8:dev'
 
-    // for more info...
-    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
-    // http://www.gradle.org/docs/current/userguide/dependency_management.html
-
 }
 
-processResources
-{
+jar {
+    from {
+        configurations.compile
+                .filter { it.getName().contains("kotlin-stdlib") }
+                .collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+processResources {
     // this will ensure that this task is redone when the versions change.
     inputs.property "version", project.version
     inputs.property "mcversion", project.minecraft.version
@@ -82,13 +96,17 @@ processResources
     // replace stuff in mcmod.info, nothing else
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
-                
+
         // replace version and mcversion
-        expand 'version':project.version, 'mcversion':project.minecraft.version
+        expand 'version': project.version, 'mcversion': project.minecraft.version
     }
-        
-    // copy everything else, thats not the mcmod.info
+
+    // copy everything else except the mcmod.info
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
+}
+
+sourceSets {
+    main.java.srcDirs += 'src/main/kotlin'
 }

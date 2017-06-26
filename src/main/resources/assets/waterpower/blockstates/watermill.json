@@ -1,31 +1,115 @@
 {
-    "forge_marker": 1,
-    "defaults": {
-        "model": "cube_bottom_top",
-        "textures": {
-            "particle": "#side",
-            "bottom": "waterpower:blocks/watermill/DOWN",
-            "top": "waterpower:blocks/watermill/UP"
-        }
-    }, 
-    "variants": {
-        "type": {
-            "mk1":  { "textures": { "side": "waterpower:blocks/watermill/MK1" } },
-            "mk2":  { "textures": { "side": "waterpower:blocks/watermill/MK2" } },
-            "mk3":  { "textures": { "side": "waterpower:blocks/watermill/MK3" } },
-            "mk4":  { "textures": { "side": "waterpower:blocks/watermill/MK4" } },
-            "mk5":  { "textures": { "side": "waterpower:blocks/watermill/MK5" } },
-            "mk6":  { "textures": { "side": "waterpower:blocks/watermill/MK6" } },
-            "mk7":  { "textures": { "side": "waterpower:blocks/watermill/MK7" } },
-            "mk8":  { "textures": { "side": "waterpower:blocks/watermill/MK8" } },
-            "mk9":  { "textures": { "side": "waterpower:blocks/watermill/MK9" } },
-            "mk10": { "textures": { "side": "waterpower:blocks/watermill/MK10" } },
-            "mk11": { "textures": { "side": "waterpower:blocks/watermill/MK11" } },
-            "mk12": { "textures": { "side": "waterpower:blocks/watermill/MK12" } },
-            "mk13": { "textures": { "side": "waterpower:blocks/watermill/MK13" } },
-            "mk14": { "textures": { "side": "waterpower:blocks/watermill/MK14" } },
-            "mk15": { "textures": { "side": "waterpower:blocks/watermill/MK15" } },
-            "mk16": { "textures": { "side": "waterpower:blocks/watermill/MK16" } }
-        }
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_bottom_top",
+    "textures": {
+      "particle": "#side",
+      "bottom": "waterpower:blocks/watermill/down",
+      "top": "waterpower:blocks/watermill/up"
     }
+  },
+  "variants": {
+    "type": {
+      "mk1": {
+        "textures": {
+          "side": "waterpower:blocks/watermill/mk1"
+        }
+      },
+      "mk2": {
+        "textures": {
+          "side": "waterpower:blocks/watermill/mk2"
+        }
+      },
+      "mk3": {
+        "textures": {
+          "side": "waterpower:blocks/watermill/mk3"
+        }
+      },
+      "mk4": {
+        "textures": {
+          "side": "waterpower:blocks/watermill/mk4"
+        }
+      },
+      "mk5": {
+        "textures": {
+          "side": "waterpower:blocks/watermill/mk5"
+        }
+      },
+      "mk6": {
+        "textures": {
+          "side": "waterpower:blocks/watermill/mk6"
+        }
+      },
+      "mk7": {
+        "textures": {
+          "side": "waterpower:blocks/watermill/mk7"
+        }
+      },
+      "mk8": {
+        "textures": {
+          "side": "waterpower:blocks/watermill/mk8"
+        }
+      },
+      "mk9": {
+        "textures": {
+          "side": "waterpower:blocks/watermill/mk9"
+        }
+      },
+      "mk10": {
+        "textures": {
+          "side": "waterpower:blocks/watermill/mk10"
+        }
+      },
+      "mk11": {
+        "textures": {
+          "side": "waterpower:blocks/watermill/mk11"
+        }
+      },
+      "mk12": {
+        "textures": {
+          "side": "waterpower:blocks/watermill/mk12"
+        }
+      },
+      "mk13": {
+        "textures": {
+          "side": "waterpower:blocks/watermill/mk13"
+        }
+      },
+      "mk14": {
+        "textures": {
+          "side": "waterpower:blocks/watermill/mk14"
+        }
+      },
+      "mk15": {
+        "textures": {
+          "side": "waterpower:blocks/watermill/mk15"
+        }
+      },
+      "mk16": {
+        "textures": {
+          "side": "waterpower:blocks/watermill/mk16"
+        }
+      }
+    },
+    "facing": {
+      "down": {
+        "x": 90
+      },
+      "up": {
+        "x": 270
+      },
+      "north": {
+        "transform": "forge:default-block"
+      },
+      "south": {
+        "y": 180
+      },
+      "west": {
+        "y": 270
+      },
+      "east": {
+        "y": 90
+      }
+    }
+  }
 }
