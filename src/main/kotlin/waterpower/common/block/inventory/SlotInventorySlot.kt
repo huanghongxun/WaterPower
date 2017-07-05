@@ -10,7 +10,7 @@ package waterpower.common.block.inventory
 import net.minecraft.inventory.IInventory
 import net.minecraft.inventory.Slot
 import net.minecraft.item.ItemStack
-import waterpower.util.copyWithNewCount
+import waterpower.util.*
 
 
 class SlotInventorySlot(val invSlot: InventorySlot, val index: Int, xDisplayPosition: Int, yDisplayPosition: Int, val stackLimit: Int = -9999)
@@ -28,17 +28,17 @@ class SlotInventorySlot(val invSlot: InventorySlot, val index: Int, xDisplayPosi
     }
 
     override fun decrStackSize(amount: Int): ItemStack {
-        val itemStack = this.invSlot[this.index]
-        if (itemStack.isEmpty || amount <= 0) return ItemStack.EMPTY
+        var itemStack = this.invSlot[this.index]
+        if (isStackEmpty(itemStack) || amount <= 0) return emptyStack
 
-        if (itemStack.count <= amount) {
-            this.invSlot.put(this.index, ItemStack.EMPTY)
+        if (getCount(itemStack) <= amount) {
+            this.invSlot.put(this.index, emptyStack)
             onSlotChanged()
 
             return itemStack
         } else {
             val ret = itemStack.copyWithNewCount(amount)
-            itemStack.shrink(amount)
+            itemStack = shrink(itemStack)
             onSlotChanged()
 
             return ret

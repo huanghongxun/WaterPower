@@ -11,12 +11,12 @@ import net.minecraft.block.Block
 import net.minecraft.item.ItemStack
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
-import net.minecraft.world.chunk.IChunkGenerator
-import net.minecraft.world.chunk.IChunkProvider
 import net.minecraft.world.gen.feature.WorldGenMinable
-import net.minecraftforge.fml.common.IWorldGenerator
-import net.minecraftforge.fml.common.LoaderState
-import net.minecraftforge.fml.common.registry.GameRegistry
+import net.minecraft.world.gen.feature.WorldGenerator
+import net.minecraftforge.common.MinecraftForge
+import net.minecraftforge.event.terraingen.OreGenEvent
+import net.minecraftforge.event.terraingen.TerrainGen
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import waterpower.Preference
 import waterpower.annotations.Init
 import waterpower.common.block.ore.Ores
@@ -24,7 +24,8 @@ import waterpower.common.init.WPBlocks
 import waterpower.config.OreConfig
 import java.util.*
 
-object WorldGenerator : IWorldGenerator {
+@Init
+object WorldGen : WorldGenerator(false) {
 
     fun minable(ore: ItemStack, num: Int): WorldGenMinable {
         val blockState = Block.getBlockFromItem(ore.item).getStateFromMeta(ore.metadata)
@@ -45,18 +46,31 @@ object WorldGenerator : IWorldGenerator {
     fun generateOre(ore: ItemStack, oreConfig: OreConfig, world: World, random: Random, chunkX: Int, chunkZ: Int) =
             generateOre(ore, oreConfig.maxSize, oreConfig.amountPerChunk, world, random, chunkX, chunkZ, oreConfig.minLevel, oreConfig.maxLevel)
 
-    override fun generate(random: Random, chunkX: Int, chunkZ: Int, world: World, chunkGenerator: IChunkGenerator, chunkProvider: IChunkProvider) {
+    override fun generate(world: World, random: Random, position: BlockPos): Boolean {
+        if (!TerrainGen.generateOre(world, random, this, position, OreGenEvent.GenerateMinable.EventType.CUSTOM))
+            return true
+        val chunkX = position.x / 16
+        val chunkZ = position.z / 16
         generateOre(WPBlocks.ore.getItemStack(Ores.Vanadium), Preference.OreGeneration.vanadiumOre, world, random, chunkX, chunkZ)
         generateOre(WPBlocks.ore.getItemStack(Ores.Manganese), Preference.OreGeneration.manganeseOre, world, random, chunkX, chunkZ)
         generateOre(WPBlocks.ore.getItemStack(Ores.Monazite), Preference.OreGeneration.monaziteOre, world, random, chunkX, chunkZ)
         generateOre(WPBlocks.ore.getItemStack(Ores.Magnetite), Preference.OreGeneration.magnetiteOre, world, random, chunkX, chunkZ)
         generateOre(WPBlocks.ore.getItemStack(Ores.Zinc), Preference.OreGeneration.zincOre, world, random, chunkX, chunkZ)
+        return true
     }
 
     @JvmStatic
-    @Init(LoaderState.ModState.PREINITIALIZED)
-    fun init() {
-        GameRegistry.registerWorldGenerator(this, 0)
+    fun preInit() {
+        MinecraftForge.ORE_GEN_BUS.register(this)
     }
 
+    var pos: BlockPos? = null
+
+    @SubscribeEvent
+    fun onOreGen(event: OreGenEvent.Post) {
+        if (event.pos == pos)
+            return
+        pos = event.pos
+        generate(event.world, event.rand, event.pos)
+    }
 }

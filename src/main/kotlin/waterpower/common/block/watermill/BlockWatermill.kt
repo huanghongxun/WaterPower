@@ -19,8 +19,8 @@ import waterpower.integration.Mod
 import waterpower.integration.ic2.ICItemFinder
 import waterpower.util.generalize
 
-
 @NewInstance(LoaderState.ModState.PREINITIALIZED)
+@Init
 class BlockWatermill : BlockRotor<EnumWatermill>("watermill", Material.IRON, EnumWatermill::class.java, EnumWatermill.values()) {
 
     init {
@@ -30,8 +30,7 @@ class BlockWatermill : BlockRotor<EnumWatermill>("watermill", Material.IRON, Enu
 
     companion object {
         @JvmStatic
-        @Init(LoaderState.ModState.POSTINITIALIZED)
-        fun addRecipes() {
+        fun postInit() {
             val transformerUpgrade: Any = ICItemFinder.getItem("upgrade", "transformer") ?: "circuitBasic"
 
             if (Mod.IndustrialCraft2.isAvailable)

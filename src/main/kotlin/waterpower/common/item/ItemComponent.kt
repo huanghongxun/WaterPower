@@ -14,6 +14,8 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.NonNullList
 import net.minecraftforge.fml.common.LoaderState
+import net.minecraftforge.fml.relauncher.Side
+import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.oredict.OreDictionary
 import waterpower.annotations.Init
 import waterpower.annotations.NewInstance
@@ -29,11 +31,13 @@ import waterpower.common.recipe.Recipes.craftShapeless
 import waterpower.integration.IDs
 import waterpower.integration.Mod
 import waterpower.integration.ic2.ICItemFinder
+import waterpower.util.emptyStack
 import waterpower.util.generalize
 import waterpower.util.getItemStack
 import java.awt.Color
 
 @NewInstance(LoaderState.ModState.PREINITIALIZED)
+@Init
 class ItemComponent : ItemColorable("component") {
     init {
         WPItems.component = this
@@ -57,8 +61,8 @@ class ItemComponent : ItemColorable("component") {
     override fun getItemStackDisplayName(stack: ItemStack): String {
         val meta = stack.itemDamage
         return i18n("waterpower.component.format")
-                .replace("\\{component\\}", getFormFromMeta(meta).getLocalizedName())
-                .replace("\\{level\\}", getLevelFromMeta(meta).getLocalizedName())
+                .replace("{component}", getFormFromMeta(meta).getLocalizedName())
+                .replace("{level}", getLevelFromMeta(meta).getLocalizedName())
     }
 
     override fun getUnlocalizedName(stack: ItemStack): String {
@@ -72,12 +76,15 @@ class ItemComponent : ItemColorable("component") {
                 subItems += getItemStack(type, form)
     }
 
+    @SideOnly(Side.CLIENT)
     override fun getIconContainer(stack: ItemStack): IIconContainer
             = getIconContainers()[getFormFromMeta(stack.itemDamage).ordinal]
 
+    @SideOnly(Side.CLIENT)
     override fun getColorFromItemStack(stack: ItemStack, tintIndex: Int)
             = getLevelFromMeta(stack.itemDamage).color
 
+    @SideOnly(Side.CLIENT)
     override fun getIconContainers() = RecolorableTextures.CRAFTING
 
     companion object {
@@ -85,15 +92,14 @@ class ItemComponent : ItemColorable("component") {
                 WPItems.component.getItemStack(form, type, amount)
 
         @JvmStatic
-        @Init(LoaderState.ModState.POSTINITIALIZED)
-        fun addRecipes() {
+        fun postInit() {
             OreDictionary.registerOre("circuitBasic", get(circuit, MK1))
             OreDictionary.registerOre("circuitAdvanced", get(circuit, MK3))
             OreDictionary.registerOre("circuitElite", get(circuit, MK5))
             OreDictionary.registerOre("circuitUltimate", get(circuit, MK7))
 
-            val copperCable = getItemStack(IDs.Mekanism, "PartTransmitter", 2) ?: ItemStack.EMPTY
-            val goldCable = getItemStack(IDs.Mekanism, "PartTransmitter", 3) ?: ItemStack.EMPTY
+            val copperCable = getItemStack(IDs.Mekanism, "PartTransmitter", 2) ?: emptyStack
+            val goldCable = getItemStack(IDs.Mekanism, "PartTransmitter", 3) ?: emptyStack
 
             craft(get(stator, MK1), "M", "M", 'M', "dustMagnetite")
             craft(get(casing, MK1), "WSW", "WSW", "WSW", 'W', ItemCrafting.get(EnumCrafting.stone_structure), 'S', Blocks.STONEBRICK)
@@ -155,7 +161,7 @@ class ItemComponent : ItemColorable("component") {
             craft(get(fixedFrame, MK3), "PSP", "S S", "PSP", 'P',
                     ItemMaterial.get(MaterialTypes.Zinc, MaterialForms.plate), 'S', ItemMaterial.get(MaterialTypes.Zinc, MaterialForms.screw))
             craft(get(fixedTool, MK3), "PSP", "   ", "PSP", 'P',
-                    ItemMaterial.get(MaterialTypes.Zinc, MaterialForms.ingot), 'P', ItemMaterial.get(MaterialTypes.Zinc, MaterialForms.screw))
+                    ItemMaterial.get(MaterialTypes.Zinc, MaterialForms.ingot), 'S', ItemMaterial.get(MaterialTypes.Zinc, MaterialForms.screw))
             craft(get(rotationAxle, MK3), "GPG", "ICI", "GPG", 'G', "gearZincAlloy", 'P', "plateZincAlloy", 'I',
                     "plateIron", 'C', get(casing, MK3))
             craft(get(rotationAxle, MK3), "GPG", "ICI", "GPG", 'G', "gearZincAlloy", 'P', "plateZincAlloy", 'I',

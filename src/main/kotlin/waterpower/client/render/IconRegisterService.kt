@@ -30,8 +30,9 @@ import net.minecraftforge.client.model.pipeline.UnpackedBakedQuad
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.common.model.IModelState
 import net.minecraftforge.common.model.TRSRTransformation
-import net.minecraftforge.fml.common.LoaderState
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
+import net.minecraftforge.fml.relauncher.Side
+import net.minecraftforge.fml.relauncher.SideOnly
 import waterpower.WaterPower
 import waterpower.annotations.Init
 import waterpower.client.render.item.IItemIconProvider
@@ -39,6 +40,8 @@ import waterpower.common.init.WPItems
 import java.util.*
 import javax.vecmath.Vector4f
 
+@SideOnly(Side.CLIENT)
+@Init
 object IconRegisterService : IBakedModel, IModel {
 
     val items = LinkedList<IIconRegister>()
@@ -56,6 +59,12 @@ object IconRegisterService : IBakedModel, IModel {
     @SubscribeEvent
     fun onModelsBake(bakeEvent: ModelBakeEvent) {
         bakeEvent.modelRegistry.putObject(RESOURCE_LOCATION, this)
+    }
+
+    @JvmStatic
+    @SideOnly(Side.CLIENT)
+    fun preInit() {
+        MinecraftForge.EVENT_BUS.register(this)
     }
 
     private var itemStack: ItemStack? = null
@@ -120,18 +129,12 @@ object IconRegisterService : IBakedModel, IModel {
     private val RESOURCE_LOCATION = ModelResourceLocation(WaterPower.MOD_ID, "IItemIconProvider")
 
     @JvmStatic
-    @Init(LoaderState.ModState.INITIALIZED, side = 0)
+    @SideOnly(Side.CLIENT)
     fun init() {
         for (item in WPItems.items)
             if (item is IItemIconProvider)
                 for (i in 0 until Short.MAX_VALUE)
                     Minecraft.getMinecraft().renderItem.itemModelMesher.register(item, i, RESOURCE_LOCATION)
-    }
-
-    @JvmStatic
-    @Init(LoaderState.ModState.PREINITIALIZED, side = 0)
-    fun init2() {
-        MinecraftForge.EVENT_BUS.register(this)
     }
 
     fun getQuadsForSprite(tint: Int, sprite: TextureAtlasSprite, format: VertexFormat, transform: Optional<TRSRTransformation>): ImmutableList<BakedQuad> {

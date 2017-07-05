@@ -42,9 +42,11 @@ object AnnotationSystem {
         for (name in classes) {
             try {
                 val clazz = Class.forName(name, false, loader)
+                if (clazz.isInterface)
+                    continue
                 val sideOnly = clazz.getAnnotation(SideOnly::class.java)
                 if (sideOnly != null && sideOnly.value != side)
-                    continue;
+                    continue
                 val parser = clazz.getAnnotation(Parser::class.java)
                 if (parser != null)
                     parsers.add(ClassEngine.lookup.findStatic(clazz, "loadClass", MethodType.methodType(JavaAdapter.getVoidClass(), Class::class.java)))
@@ -55,6 +57,11 @@ object AnnotationSystem {
         for (name in classes) {
             try {
                 val clazz = Class.forName(name, false, loader)
+                if (clazz.isInterface)
+                    continue
+                val sideOnly = clazz.getAnnotation(SideOnly::class.java)
+                if (sideOnly != null && sideOnly.value != side)
+                    continue
                 for (handle in parsers)
                     JavaAdapter.invokeMethodHandle(handle, clazz)
             } catch(ignore1: ClassNotFoundException) {

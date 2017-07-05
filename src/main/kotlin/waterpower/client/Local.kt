@@ -7,8 +7,8 @@
  */
 package waterpower.client
 
-import net.minecraft.client.resources.I18n
+import net.minecraft.util.text.translation.I18n
 
 fun i18n(id: String, vararg par: Any): String {
-    return I18n.format(id, *par)
+    return I18n.translateToLocalFormatted(id, *par)
 }

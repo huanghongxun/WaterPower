@@ -13,13 +13,28 @@ import net.minecraft.world.World
 import net.minecraftforge.oredict.OreDictionary
 import java.util.*
 
+val emptyStack: ItemStack = ItemStack.EMPTY
+
 fun ItemStack.generalize()
-        = ItemStack(this.item, this.count, OreDictionary.WILDCARD_VALUE)
+        = ItemStack(this.item, getCount(this), OreDictionary.WILDCARD_VALUE)
+
+fun isStackEmpty(stack: ItemStack?) =
+        stack == null || getCount(stack) <= 0 || stack.item == null || stack.isEmpty
 
 fun ItemStack.set(newCount: Int): ItemStack {
     count = newCount
     return this
 }
+
+fun shrink(stack: ItemStack, count: Int = 1): ItemStack {
+    stack.shrink(count)
+    if (isStackEmpty(stack)) return emptyStack
+    else return stack
+}
+
+fun grow(stack: ItemStack, count: Int = 1) = shrink(stack, -count)
+
+fun getCount(stack: ItemStack) = stack.count
 
 fun ItemStack.dropAsEntity(world: World, x: Int, y: Int, z: Int) {
     val f = 0.7
@@ -43,11 +58,11 @@ fun ItemStack.damage(amount: Int): Boolean {
 }
 
 fun ItemStack.consume(): ItemStack {
-    if (count == 1) {
+    if (getCount(this) == 1) {
         if (item.hasContainerItem(this))
             return item.getContainerItem(this)
         else
-            return ItemStack.EMPTY
+            return emptyStack
     }
     splitStack(1)
     return this
@@ -58,8 +73,7 @@ fun getCopiedStacks(stack: Array<ItemStack>): Array<ItemStack> {
 }
 
 fun isStackEqual(a: ItemStack, b: ItemStack) =
-        a.isEmpty && b.isEmpty || (!a.isEmpty && !b.isEmpty && a.isItemEqual(b) && Objects.equals(a.tagCompound, b.tagCompound))
-
+        isStackEmpty(a) && isStackEmpty(b) || (!isStackEmpty(a) && !isStackEmpty(b) && a.isItemEqual(b) && Objects.equals(a.tagCompound, b.tagCompound))
 
 fun isStacksEqual(stacks1: Array<ItemStack>, stacks2: Array<ItemStack>): Boolean {
     if (stacks1.size != stacks2.size)

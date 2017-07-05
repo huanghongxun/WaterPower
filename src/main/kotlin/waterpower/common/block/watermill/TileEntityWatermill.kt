@@ -17,7 +17,9 @@ import waterpower.common.block.tile.TileEntityRotorGenerator
 import waterpower.common.init.WPBlocks
 import waterpower.common.item.ItemRange
 import waterpower.common.item.RangePlugins
+import waterpower.util.getCount
 import waterpower.util.isLava
+import waterpower.util.isStackEmpty
 import waterpower.util.isWater
 
 @HasGui(guiClass = GuiWatermill::class, containerClass = ContainerWatermill::class)
@@ -89,7 +91,7 @@ open class TileEntityWatermill(val type: EnumWatermill) : TileEntityRotorGenerat
     fun hasRangeUpdater(): Boolean {
         if (!slotUpdater.isEmpty()) {
             for (i in 0..slotUpdater.size() - 1)
-                if (!slotUpdater.get(i).isEmpty && slotUpdater.get(i).getItem() is ItemRange)
+                if (!isStackEmpty(slotUpdater.get(i)) && slotUpdater.get(i).item is ItemRange)
                     return true
         }
         return false
@@ -100,12 +102,12 @@ open class TileEntityWatermill(val type: EnumWatermill) : TileEntityRotorGenerat
             return _range
         _range = type.checkSize
         if (hasRangeUpdater()) {
-            for (i in 0..slotUpdater.size() - 1) {
-                val stack = slotUpdater.get(i)
-                if (stack.isEmpty) continue
-                if (slotUpdater.get(i).getItem() is ItemRange && stack.getItemDamage() >= RangePlugins.values().size)
+            for (i in 0 until slotUpdater.size()) {
+                val stack = slotUpdater[i]
+                if (isStackEmpty(stack)) continue
+                if (stack.item is ItemRange && stack.itemDamage >= RangePlugins.values().size)
                     return type.checkSize
-                _range -= stack.count * RangePlugins.values()[stack.getItemDamage()].range
+                _range -= getCount(stack) * RangePlugins.values()[stack.itemDamage].range
             }
         }
         if (_range < 3)

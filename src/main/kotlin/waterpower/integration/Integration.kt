@@ -8,7 +8,6 @@
 package waterpower.integration
 
 import net.minecraftforge.fml.common.Loader
-import net.minecraftforge.fml.common.LoaderState
 import net.minecraftforge.fml.common.ModAPIManager
 import net.minecraftforge.fml.common.versioning.VersionParser
 import waterpower.annotations.Init
@@ -17,6 +16,7 @@ import waterpower.annotations.Parser
 import waterpower.annotations.objectInstance
 import java.util.*
 
+@Init
 @Parser
 object IntegrationParser {
     val modules = LinkedList<IModule>()
@@ -30,20 +30,17 @@ object IntegrationParser {
     }
 
     @JvmStatic
-    @Init(LoaderState.ModState.PREINITIALIZED)
-    fun onPreInit() {
+    fun preInit() {
         modules.forEach { it.onPreInit() }
     }
 
     @JvmStatic
-    @Init(LoaderState.ModState.INITIALIZED)
-    fun onInit() {
+    fun init() {
         modules.forEach { it.onInit() }
     }
 
     @JvmStatic
-    @Init(LoaderState.ModState.POSTINITIALIZED)
-    fun onPostInit() {
+    fun postInit() {
         modules.forEach { it.onPostInit() }
     }
 }

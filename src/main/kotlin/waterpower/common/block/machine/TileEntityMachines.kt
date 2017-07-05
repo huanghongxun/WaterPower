@@ -14,7 +14,6 @@ import net.minecraft.inventory.InventoryCrafting
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.CraftingManager
 import net.minecraft.world.World
-import net.minecraftforge.fml.common.LoaderState
 import net.minecraftforge.oredict.OreDictionary
 import waterpower.annotations.HasGui
 import waterpower.annotations.Init
@@ -28,7 +27,7 @@ import waterpower.common.recipe.Recipes
 import waterpower.integration.Mod
 import waterpower.integration.ic2.Ic2Wrapper
 import waterpower.integration.ic2.IndustrialCraftModule
-import waterpower.util.copyWithNewCount
+import waterpower.util.*
 
 open class TileEntityMachine(consume: Int, period: Int, outputSlotCount: Int, val type: Machines, mgr: IRecipeManager, val _name: String)
     : TileEntityBaseMachine(consume, period, outputSlotCount) {
@@ -79,9 +78,9 @@ class TileEntityCentrifuge : TileEntityBaseMachine(80, 10 * 20, 4) {
     override fun getName() = "Water-Powered Centrifuge"
 }
 
+@Init
 object TileEntityMachines {
     @JvmStatic
-    @Init(LoaderState.ModState.INITIALIZED)
     fun init() {
         RecipeManagers.centrifuge = MultiRecipeManager()
 
@@ -120,7 +119,7 @@ object TileEntityMachines {
         val recipeList = CraftingManager.getInstance().recipeList
 
         for (i in 1..8)
-            tempCrafting.setInventorySlotContents(i, ItemStack.EMPTY)
+            tempCrafting.setInventorySlotContents(i, emptyStack)
 
         val registeredOres = OreDictionary.getOres("logWood")
         for (i in registeredOres.indices) {
@@ -134,8 +133,7 @@ object TileEntityMachines {
 
                     if (resultEntry != null) {
                         val result = resultEntry.copy()
-                        val tmp144_142 = result
-                        tmp144_142.count = (tmp144_142.count * 1.5f).toInt()
+                        result.set(getCount(result) * 3 / 2)
                         RecipeManagers.sawmill.addRecipe(log, result)
                     }
                 }
@@ -146,8 +144,7 @@ object TileEntityMachines {
 
                 if (resultEntry != null) {
                     val result = resultEntry.copy()
-                    val tmp216_214 = result
-                    tmp216_214.count = (tmp216_214.count * 1.5f).toInt()
+                    result.set(getCount(result) * 3 / 2)
                     RecipeManagers.sawmill.addRecipe(log, result)
                 }
             }
@@ -155,10 +152,10 @@ object TileEntityMachines {
     }
 
     fun findMatchingRecipe(inv: InventoryCrafting, world: World?): ItemStack? {
-        val dmgItems = Array<ItemStack>(2, { ItemStack.EMPTY })
+        val dmgItems = Array<ItemStack>(2, { emptyStack })
         for (i in 0..inv.sizeInventory - 1) {
             if (inv.getStackInSlot(i) != null) {
-                if (dmgItems[0].isEmpty) {
+                if (isStackEmpty(dmgItems[0])) {
                     dmgItems[0] = inv.getStackInSlot(i)
                 } else {
                     dmgItems[1] = inv.getStackInSlot(i)
@@ -167,15 +164,15 @@ object TileEntityMachines {
             }
         }
 
-        if (dmgItems[0].isEmpty)
+        if (isStackEmpty(dmgItems[0]))
             return null
-        if (!dmgItems[1].isEmpty && dmgItems[0].item == dmgItems[1].item && dmgItems[0].count == 1 && dmgItems[1].count == 1
+        if (!isStackEmpty(dmgItems[1]) && dmgItems[0].item == dmgItems[1].item && getCount(dmgItems[0]) == 1 && getCount(dmgItems[1]) == 1
                 && dmgItems[0].item.isRepairable) {
             val theItem = dmgItems[0].getItem()
             val var13 = theItem.maxDamage - dmgItems[0].itemDamage
             val var8 = theItem.maxDamage - dmgItems[1].itemDamage
             val var9 = var13 + var8 + theItem.maxDamage * 5 / 100
-            val var10 = Math.max(0, theItem.maxDamage - var9)
+            val var10 = maxOf(0, theItem.maxDamage - var9)
             return ItemStack(theItem, 1, var10)
         }
 

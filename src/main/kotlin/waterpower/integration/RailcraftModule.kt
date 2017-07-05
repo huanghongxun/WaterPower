@@ -13,6 +13,9 @@ import net.minecraftforge.fml.common.Optional
 import net.minecraftforge.fml.common.event.FMLInterModComms
 import waterpower.annotations.Integration
 import waterpower.common.recipe.Recipes
+import waterpower.util.getCount
+import waterpower.util.isStackEmpty
+import waterpower.util.set
 
 
 @Integration(IDs.RailCraft)
@@ -23,7 +26,7 @@ object RailcraftModule : IModule() {
         for (o in args)
             if (o == null)
                 return false
-        if (output.isEmpty)
+        if (isStackEmpty(output))
             return false
         //return RailcraftCraftingManager.rollingMachine.addRecipe(output, args)
         return false
@@ -35,7 +38,7 @@ object RailcraftModule : IModule() {
 
     @Optional.Method(modid = IDs.RailCraft)
     fun blastFurnace(input: ItemStack, matchDamage: Boolean, matchNBT: Boolean, cookTime: Int, output: ItemStack): Boolean {
-        if (input.isEmpty || output.isEmpty)
+        if (isStackEmpty(input) || isStackEmpty(output))
             return false
         //RailcraftCraftingManager.blastFurnace.addRecipe(input, matchDamage, matchNBT, cookTime, output)
         return false
@@ -47,7 +50,7 @@ object RailcraftModule : IModule() {
 
     @Optional.Method(modid = IDs.RailCraft)
     fun crusher(input: ItemStack, matchDamage: Boolean, matchNBT: Boolean, vararg output: ItemStack): Boolean {
-        if (input.isEmpty)
+        if (isStackEmpty(input))
             return false
         val data = NBTTagCompound()
         val `in` = NBTTagCompound()
@@ -68,8 +71,8 @@ object RailcraftModule : IModule() {
     @Optional.Method(modid = IDs.RailCraft)
     fun bender(i: ItemStack, output: ItemStack): Boolean {
         val input = i.copy()
-        input.count = 1
-        return when (i.count) {
+        input.set(1)
+        return when (getCount(i)) {
             1 -> rollingMachine(output, "A", 'A', input)
             2 -> rollingMachine(output, "AA", 'A', input)
             3 -> rollingMachine(output, "AAA", 'A', input)

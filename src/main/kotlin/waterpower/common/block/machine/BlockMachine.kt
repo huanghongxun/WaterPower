@@ -23,6 +23,7 @@ import waterpower.common.item.ItemComponent.Companion.get
 import waterpower.common.item.ItemCrafting
 import waterpower.common.recipe.Recipes.craft
 
+@Init
 @NewInstance(LoaderState.ModState.PREINITIALIZED)
 class BlockMachine : BlockEnumTile<Machines>("machine", Material.IRON, Machines::class.java, Machines.values()) {
     init {
@@ -40,8 +41,7 @@ class BlockMachine : BlockEnumTile<Machines>("machine", Material.IRON, Machines:
 
     companion object {
         @JvmStatic
-        @Init(LoaderState.ModState.POSTINITIALIZED)
-        fun addRecipes() {
+        fun postInit() {
             craft(WPBlocks.sawmill, " H ", "CPC", "KKK", 'H', WPItems.hammer, 'C',
                     get(casing, MK1), 'K', Blocks.STONEBRICK, 'P', ItemCrafting.get(EnumCrafting.diamond_blade));
             craft(WPBlocks.sawmill, " H ", "CPC", "KKK", 'H', WPItems.hammer, 'C',

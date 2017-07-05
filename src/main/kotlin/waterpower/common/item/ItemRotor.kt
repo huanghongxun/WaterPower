@@ -10,9 +10,12 @@ package waterpower.common.item
 import net.minecraft.client.renderer.texture.TextureAtlasSprite
 import net.minecraft.client.renderer.texture.TextureMap
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.init.Blocks
+import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
-import net.minecraftforge.fml.common.LoaderState
+import net.minecraftforge.fml.relauncher.Side
+import net.minecraftforge.fml.relauncher.SideOnly
 import waterpower.WaterPower
 import waterpower.annotations.Init
 import waterpower.client.i18n
@@ -20,25 +23,32 @@ import waterpower.client.render.IIconRegister
 import waterpower.client.render.item.IItemIconProvider
 import waterpower.common.INameable
 import waterpower.common.init.WPItems
+import waterpower.common.recipe.Recipes
 
+@Init
 class ItemRotor(val rotor: EnumRotor) : ItemBase("rotor.${rotor.name}"), IItemIconProvider, IIconRegister {
     init {
         WPItems.items += this
+        WPItems.rotors[rotor] = this
 
         setMaxStackSize(1)
         maxDamage = rotor.maxDamage
     }
 
+    @SideOnly(Side.CLIENT)
     lateinit var icon: TextureAtlasSprite
+
+    @SideOnly(Side.CLIENT)
     override fun registerIcons(textureMap: TextureMap) {
         icon = textureMap.registerSprite(ResourceLocation("${WaterPower.MOD_ID}:items/rotor/${rotor.name}"))
     }
 
+    @SideOnly(Side.CLIENT)
     override fun getIcon(stack: ItemStack, layer: Int) = icon
 
     override fun addInformation(stack: ItemStack, playerIn: EntityPlayer?, tooltip: MutableList<String>, advanced: Boolean) {
         if (rotor.isDamageable()) {
-            val leftOverTicks = stack.getMaxDamage() - stack.getItemDamage()
+            val leftOverTicks = stack.maxDamage - stack.itemDamage
             tooltip.add(i18n("waterpower.rotor.remain", leftOverTicks))
 
             val str = StringBuilder("(")
@@ -57,10 +67,34 @@ class ItemRotor(val rotor: EnumRotor) : ItemBase("rotor.${rotor.name}"), IItemIc
 
     companion object {
         @JvmStatic
-        @Init(LoaderState.ModState.PREINITIALIZED)
-        fun init() {
+        fun preInit() {
             for (type in EnumRotor.values())
                 ItemRotor(type)
+        }
+
+        @JvmStatic
+        fun postInit() {
+            addRotorRecipe(EnumRotor.wood, Items.STICK, "logWood");
+            addRotorRecipe(EnumRotor.stone, Blocks.COBBLESTONE, Blocks.STONE);
+            addRotorRecipe(EnumRotor.lapis, "plateLapis", "blockLapis");
+            addRotorRecipe(EnumRotor.tin, "plateTin", "blockTin");
+            addRotorRecipe(EnumRotor.copper, "plateCopper", "blockCopper");
+            addRotorRecipe(EnumRotor.quartz, Items.QUARTZ, Blocks.QUARTZ_BLOCK);
+            addRotorRecipe(EnumRotor.zinc_alloy, "plateZincAlloy", "blockZincAlloy");
+            addRotorRecipe(EnumRotor.bronze, "plateBronze", "blockBronze");
+            addRotorRecipe(EnumRotor.iron, "plateIron", "blockIron");
+            addRotorRecipe(EnumRotor.obsidian, "plateObsidian", "blockObsidian");
+            addRotorRecipe(EnumRotor.steel, "plateSteel", "blockSteel");
+            addRotorRecipe(EnumRotor.gold, "plateGold", "blockGold");
+            addRotorRecipe(EnumRotor.manganese_steel, "plateManganeseSteel", "blockManganeseSteel");
+            addRotorRecipe(EnumRotor.diamond, Items.DIAMOND, Blocks.DIAMOND_BLOCK);
+            addRotorRecipe(EnumRotor.vanadium_steel, "plateVanadiumSteel", "blockVanadiumSteel");
+        }
+
+        fun addRotorRecipe(output: EnumRotor, S: Any?, I: Any?) {
+            if (S == null || I == null)
+                return
+            Recipes.craft(ItemStack(WPItems.rotors[output]), "S S", " I ", "S S", 'S', S, 'I', I)
         }
     }
 }

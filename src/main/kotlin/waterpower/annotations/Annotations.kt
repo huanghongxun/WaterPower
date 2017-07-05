@@ -35,9 +35,9 @@ annotation class HasGui(val guiClass: KClass<out GuiContainer>, val containerCla
  * @see waterpower.annotations.InitParser
  * @see kotlin.jvm.JvmStatic
  */
-@Target(AnnotationTarget.FUNCTION)
+@Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class Init(val modState: LoaderState.ModState, val priority: Int = 0, val side: Int = 2)
+annotation class Init(val priority: Int = 0)
 
 /**
  * Must extend IModule

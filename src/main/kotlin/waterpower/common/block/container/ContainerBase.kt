@@ -13,6 +13,9 @@ import net.minecraft.inventory.IInventory
 import net.minecraft.inventory.Slot
 import net.minecraft.item.ItemStack
 import waterpower.common.block.inventory.SlotInventorySlot
+import waterpower.util.emptyStack
+import waterpower.util.getCount
+import waterpower.util.isStackEmpty
 
 
 abstract class ContainerBase(val inv: IInventory) : Container() {
@@ -35,15 +38,15 @@ abstract class ContainerBase(val inv: IInventory) : Container() {
 
     fun transferStackFromPlayerSlot(player: EntityPlayer, sourceStack: ItemStack): ItemStack {
         for (run in 0..3) {
-            if (sourceStack.isEmpty) break
+            if (isStackEmpty(sourceStack)) break
             if (run < 2)
                 for (targetSlot in inventorySlots) {
                     if (targetSlot is SlotInventorySlot && targetSlot.invSlot.canInput()
                             && targetSlot.isItemValid(sourceStack)) {
-                        if (!targetSlot.stack.isEmpty || run == 1) {
+                        if (!isStackEmpty(targetSlot.stack) || run == 1) {
                             mergeItemStack(sourceStack, targetSlot.slotNumber, targetSlot.slotNumber + 1, false)
 
-                            if (sourceStack.isEmpty)
+                            if (isStackEmpty(sourceStack))
                                 break
                         }
                     }
@@ -51,10 +54,10 @@ abstract class ContainerBase(val inv: IInventory) : Container() {
             else
                 for (targetSlot in inventorySlots) {
                     if (targetSlot.inventory != player.inventory && targetSlot.isItemValid(sourceStack)) {
-                        if (!targetSlot.stack.isEmpty || run == 3) {
+                        if (!isStackEmpty(targetSlot.stack) || run == 3) {
                             mergeItemStack(sourceStack, targetSlot.slotNumber, targetSlot.slotNumber + 1, false)
 
-                            if (sourceStack.isEmpty)
+                            if (isStackEmpty(sourceStack))
                                 break
                         }
                     }
@@ -66,16 +69,16 @@ abstract class ContainerBase(val inv: IInventory) : Container() {
     fun transferStackFromGuiSlotToPlayerSlot(player: EntityPlayer, sourceStack: ItemStack): ItemStack {
         var it: ListIterator<*>
         for (run in 0..1) {
-            if (sourceStack.isEmpty) break
+            if (isStackEmpty(sourceStack)) break
             it = this.inventorySlots.listIterator(this.inventorySlots.size)
             while (it.hasPrevious()) {
                 val targetSlot = it.previous()
 
                 if (targetSlot.inventory == player.inventory && targetSlot.isItemValid(sourceStack)) {
-                    if (!targetSlot.stack.isEmpty || run == 1) {
+                    if (!isStackEmpty(targetSlot.stack) || run == 1) {
                         mergeItemStack(sourceStack, targetSlot.slotNumber, targetSlot.slotNumber + 1, false)
 
-                        if (sourceStack.isEmpty)
+                        if (isStackEmpty(sourceStack))
                             break
                     }
                 }
@@ -89,14 +92,14 @@ abstract class ContainerBase(val inv: IInventory) : Container() {
 
         if (sourceSlot != null && sourceSlot.hasStack) {
             val sourceItemStack = sourceSlot.stack
-            val oldSourceItemStackSize = sourceItemStack.count
+            val oldSourceItemStackSize = getCount(sourceItemStack)
             val resultStack: ItemStack
             if (sourceSlot.inventory == player.inventory) {
                 resultStack = transferStackFromPlayerSlot(player, sourceItemStack)
             } else {
                 resultStack = transferStackFromGuiSlotToPlayerSlot(player, sourceItemStack)
             }
-            if (sourceItemStack.count != oldSourceItemStackSize) {
+            if (getCount(sourceItemStack) != oldSourceItemStackSize) {
                 sourceSlot.putStack(resultStack)
                 sourceSlot.onTake(player, sourceItemStack)
 
@@ -106,7 +109,7 @@ abstract class ContainerBase(val inv: IInventory) : Container() {
             }
         }
 
-        return ItemStack.EMPTY
+        return emptyStack
     }
 
     override fun canInteractWith(entityplayer: EntityPlayer): Boolean {

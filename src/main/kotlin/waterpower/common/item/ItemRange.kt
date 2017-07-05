@@ -20,7 +20,7 @@ import waterpower.integration.ic2.ICItemFinder
 import waterpower.util.generalize
 import waterpower.util.getItemStack
 
-
+@Init
 @NewInstance(LoaderState.ModState.PREINITIALIZED)
 class ItemRange : ItemEnum<RangePlugins>("range", RangePlugins.values()) {
 
@@ -33,8 +33,7 @@ class ItemRange : ItemEnum<RangePlugins>("range", RangePlugins.values()) {
 
     companion object {
         @JvmStatic
-        @Init(LoaderState.ModState.POSTINITIALIZED)
-        fun addRecipes() {
+        fun postInit() {
             val machine: Any = ICItemFinder.getItem("resource", "machine") ?: getItemStack(IDs.Mekanism, "BasicBlock", 8) ?: "blockIron"
 
             if (Mod.IndustrialCraft2.isAvailable) {

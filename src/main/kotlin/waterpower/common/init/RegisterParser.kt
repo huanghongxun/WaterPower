@@ -8,7 +8,6 @@
 package waterpower.common.init
 
 import net.minecraft.tileentity.TileEntity
-import net.minecraftforge.fml.common.LoaderState
 import net.minecraftforge.fml.common.registry.GameRegistry
 import waterpower.annotations.Init
 import waterpower.annotations.Parser
@@ -16,6 +15,7 @@ import waterpower.annotations.Register
 import waterpower.annotations.isSubClass
 
 @Parser
+@Init
 object RegisterParser {
     val classes = mutableListOf<Pair<Class<*>, String>>()
 
@@ -28,8 +28,7 @@ object RegisterParser {
     }
 
     @JvmStatic
-    @Init(LoaderState.ModState.POSTINITIALIZED)
-    fun init() {
+    fun postInit() {
         for ((cls, id) in classes)
             if (isSubClass(TileEntity::class.java, cls))
                 GameRegistry.registerTileEntity(cls as Class<out TileEntity>, id)

@@ -10,10 +10,8 @@ package waterpower.common.block.inventory
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.item.ItemStack
 import waterpower.common.block.tile.TileEntityInventory
-import waterpower.util.copyWithNewCount
-import waterpower.util.isStackEqual
+import waterpower.util.*
 import java.util.*
-
 
 abstract class InventorySlotConsumable : InventorySlot {
 
@@ -24,38 +22,38 @@ abstract class InventorySlotConsumable : InventorySlot {
     abstract override fun accepts(stack: ItemStack): Boolean
 
     override fun canOutput(): Boolean {
-        return super.canOutput() || this.access !== InventorySlot.Access.NONE && get() != ItemStack.EMPTY && !accepts(get())
+        return super.canOutput() || this.access !== InventorySlot.Access.NONE && !isStackEmpty(get()) && !accepts(get())
     }
 
     fun consume(count: Int, simulate: Boolean = false, consumeContainers: Boolean = false): ItemStack {
         var amount = count
-        var ret: ItemStack = ItemStack.EMPTY
+        var ret = emptyStack
 
         for (i in 0..size() - 1) {
-            val itemStack = get(i)
+            var itemStack = get(i)
 
-            if (itemStack.isEmpty || !accepts(itemStack) || !ret.isEmpty && !isStackEqual(itemStack, ret)
-                    || itemStack.count != 1 && !consumeContainers && itemStack.item.hasContainerItem()) {
+            if (isStackEmpty(itemStack) || !accepts(itemStack) || !isStackEmpty(ret) && !isStackEqual(itemStack, ret)
+                    || getCount(itemStack) != 1 && !consumeContainers && itemStack.item.hasContainerItem()) {
                 continue
             }
 
-            val currentAmount = Math.min(amount, itemStack.count)
+            val currentAmount = minOf(amount, getCount(itemStack))
 
             amount -= currentAmount
 
             if (!simulate)
-                if (itemStack.count == currentAmount)
+                if (getCount(itemStack) == currentAmount)
                     if (!consumeContainers && itemStack.item.hasContainerItem())
                         put(i, itemStack.item.getContainerItem(itemStack))
                     else
                         clear(i)
                 else
-                    itemStack.shrink(currentAmount)
+                    itemStack = shrink(itemStack)
 
-            if (ret == ItemStack.EMPTY)
+            if (isStackEmpty(ret))
                 ret = itemStack.copyWithNewCount(currentAmount)
             else
-                ret.grow(currentAmount)
+                ret = grow(ret)
 
             if (amount == 0)
                 break
@@ -65,19 +63,19 @@ abstract class InventorySlotConsumable : InventorySlot {
 
     fun damage(count: Int, src: EntityLivingBase? = null): ItemStack {
         var amount = count
-        var ret: ItemStack = ItemStack.EMPTY
+        var ret = emptyStack
         var damageApplied = 0
 
         var i = 0
         while (i < size()) {
-            val itemStack: ItemStack = get(i)
+            var itemStack = get(i)
 
-            if (itemStack.isEmpty || !accepts(itemStack) || !itemStack.item.isDamageable
-                    || !ret.isEmpty && (itemStack.item !== ret.item || !ItemStack.areItemStackTagsEqual(itemStack, ret))) {
+            if (isStackEmpty(itemStack) || !accepts(itemStack) || !itemStack.item.isDamageable
+                    || !isStackEmpty(ret) && (itemStack.item !== ret.item || !ItemStack.areItemStackTagsEqual(itemStack, ret))) {
                 ++i
                 continue
             }
-            val currentAmount = Math.min(amount, itemStack.maxDamage - itemStack.itemDamage)
+            val currentAmount = minOf(amount, itemStack.maxDamage - itemStack.itemDamage)
 
             damageApplied += currentAmount
             amount -= currentAmount
@@ -89,17 +87,17 @@ abstract class InventorySlotConsumable : InventorySlot {
             }
 
             if (itemStack.itemDamage >= itemStack.maxDamage) {
-                itemStack.shrink(1)
+                itemStack = shrink(itemStack)
                 itemStack.itemDamage = 0
             }
 
-            if (itemStack.isEmpty)
-                put(i, ItemStack.EMPTY)
+            if (isStackEmpty(itemStack))
+                put(i, emptyStack)
             else {
                 i--
             }
 
-            if (ret.isEmpty)
+            if (isStackEmpty(ret))
                 ret = itemStack.copy()
 
             if (amount == 0) {
@@ -107,7 +105,7 @@ abstract class InventorySlotConsumable : InventorySlot {
             }
             ++i
         }
-        ret.count = damageApplied / ret.maxDamage
+        ret.set(damageApplied / ret.maxDamage)
         ret.itemDamage = damageApplied % ret.maxDamage
 
         return ret

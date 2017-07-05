@@ -7,9 +7,12 @@
  */
 package waterpower.client
 
+import net.minecraftforge.fml.relauncher.Side
+import net.minecraftforge.fml.relauncher.SideOnly
 import waterpower.common.CommonProxy
 import waterpower.common.init.WPBlocks
 
+@SideOnly(Side.CLIENT)
 class ClientProxy() : CommonProxy() {
     override fun onPreInit() {
         for (block in WPBlocks.blocks)

@@ -37,6 +37,9 @@ minecraft {
     version = "${config.mc}-${config.forge}"
     runDir = "run"
 
+    replaceIn "WaterPower.kt"
+    replace "@MODVERSION@", mod_version
+
     // the mappings can be changed at any time, and must be in the following format.
     // snapshot_YYYYMMDD   snapshot are built nightly.
     // stable_#            stables are built at the discretion of the MCP team.
@@ -78,14 +81,6 @@ dependencies {
     //deobfCompile 'com.mod-buildcraft:buildcraft:6.0.8:dev'
     //deobfProvided 'com.mod-buildcraft:buildcraft:6.0.8:dev'
 
-}
-
-jar {
-    from {
-        configurations.compile
-                .filter { it.getName().contains("kotlin-stdlib") }
-                .collect { it.isDirectory() ? it : zipTree(it) }
-    }
 }
 
 processResources {

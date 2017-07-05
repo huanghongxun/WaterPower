@@ -29,7 +29,9 @@ import waterpower.common.init.WPBlocks
 import waterpower.common.init.WPItems
 import waterpower.common.item.EnumCrafting
 import waterpower.common.recipe.Recipes
+import waterpower.util.isStackEmpty
 
+@Init
 @NewInstance(LoaderState.ModState.PREINITIALIZED)
 class BlockReservoir : BlockEnum<Reservoirs>("reservoir", Material.IRON, Reservoirs::class.java, Reservoirs.values()), ITileEntityProvider {
 
@@ -45,7 +47,7 @@ class BlockReservoir : BlockEnum<Reservoirs>("reservoir", Material.IRON, Reservo
 
     override fun onBlockActivated(worldIn: World, pos: BlockPos, state: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
         val heldItem = playerIn.getHeldItem(hand)
-        if (!heldItem.isEmpty) {
+        if (!isStackEmpty(heldItem)) {
             val te = worldIn.getTileEntity(pos)
             if (te is TileEntityReservoir) {
                 if (Block.getBlockFromItem(heldItem.item) is BlockReservoir)
@@ -64,8 +66,7 @@ class BlockReservoir : BlockEnum<Reservoirs>("reservoir", Material.IRON, Reservo
 
     companion object {
         @JvmStatic
-        @Init(LoaderState.ModState.POSTINITIALIZED)
-        fun addRecipes() {
+        fun postInit() {
             val res = WPBlocks.reservoir
             addReservoirRecipe(ItemStack(res, 8, 0), "logWood")
             addReservoirRecipe(ItemStack(res, 8, 1), Blocks.STONE)

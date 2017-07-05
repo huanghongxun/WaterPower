@@ -10,12 +10,13 @@ package waterpower.common.block.inventory
 import net.minecraft.item.ItemStack
 import waterpower.common.block.tile.TileEntityInventory
 import waterpower.common.item.ItemRange
+import waterpower.util.isStackEmpty
 
 class InventorySlotRange(te: TileEntityInventory, count: Int = 4)
     : InventorySlot(te, "range", Access.IO, count) {
 
     override fun accepts(stack: ItemStack): Boolean {
-        if (stack.isEmpty) return false
+        if (isStackEmpty(stack)) return false
         return stack.item is ItemRange
     }
 }

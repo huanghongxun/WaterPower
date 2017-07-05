@@ -13,6 +13,8 @@ import net.minecraft.client.Minecraft
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
 import net.minecraftforge.fml.common.LoaderState
+import net.minecraftforge.fml.relauncher.Side
+import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.oredict.OreDictionary
 import waterpower.annotations.Init
 import waterpower.annotations.NewInstance
@@ -22,6 +24,7 @@ import waterpower.common.init.WPBlocks
 import waterpower.common.item.MaterialTypes
 import java.awt.Color
 
+@Init
 @NewInstance(LoaderState.ModState.PREINITIALIZED)
 class BlockMaterial : BlockEnum<MaterialTypes>("material_block", Material.ROCK, MaterialTypes::class.java, MaterialTypes.values()) {
     init {
@@ -40,7 +43,7 @@ class BlockMaterial : BlockEnum<MaterialTypes>("material_block", Material.ROCK, 
 
     companion object {
         @JvmStatic
-        @Init(LoaderState.ModState.INITIALIZED, side = 0)
+        @SideOnly(Side.CLIENT)
         fun init() {
             Minecraft.getMinecraft().blockColors.registerBlockColorHandler(BlockColor, WPBlocks.material)
         }

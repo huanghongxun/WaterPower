@@ -11,6 +11,7 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
 import waterpower.WaterPower
 import waterpower.client.i18n
+import waterpower.util.emptyStack
 
 abstract class ItemTool(id: String, maxUse: Int) : ItemBase(id) {
     init {
@@ -29,7 +30,7 @@ abstract class ItemTool(id: String, maxUse: Int) : ItemBase(id) {
     override fun getContainerItem(stack: ItemStack): ItemStack {
         val ret = stack.copy()
         if (ret.attemptDamageItem(1, WaterPower.random)) {
-            return ItemStack.EMPTY
+            return emptyStack
         }
         return ret
     }

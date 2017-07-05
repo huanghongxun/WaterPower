@@ -9,7 +9,7 @@ package waterpower.common.block.inventory
 
 import net.minecraft.item.ItemStack
 import waterpower.common.block.tile.TileEntityInventory
-import waterpower.util.isStackEqual
+import waterpower.util.*
 
 
 class InventorySlotOutput(base: TileEntityInventory, name: String, count: Int) : InventorySlot(base, name, InventorySlot.Access.O, count, InventorySlot.InvSide.BOTTOM) {
@@ -41,33 +41,31 @@ class InventorySlotOutput(base: TileEntityInventory, name: String, count: Int) :
         var totalAmount = 0
 
         for (itemStack in itemStacks) {
-            var amount = itemStack.count
+            var amount = getCount(itemStack)
 
             for (pass in 0..1) {
                 for (i in 0..size() - 1) {
-                    val existingItemStack: ItemStack = get(i)
+                    var existingItemStack: ItemStack = get(i)
 
-                    if (pass == 0 && !existingItemStack.isEmpty) {
-                        val space = existingItemStack.maxStackSize - existingItemStack.count
+                    if (pass == 0 && !isStackEmpty(existingItemStack)) {
+                        val space = existingItemStack.maxStackSize - getCount(existingItemStack)
 
                         if (space > 0 && isStackEqual(itemStack, existingItemStack)) {
                             if (space >= amount) {
                                 if (!simulate)
-                                    existingItemStack.grow(amount)
+                                    existingItemStack = grow(existingItemStack)
 
                                 amount = 0
                             } else {
                                 amount -= space
 
                                 if (!simulate)
-                                    existingItemStack.grow(space)
+                                    existingItemStack = grow(existingItemStack)
                             }
                         }
-                    } else if (pass == 1 && existingItemStack.isEmpty) {
-                        if (!simulate) {
-                            itemStack.count = amount
-                            put(i, itemStack)
-                        }
+                    } else if (pass == 1 && isStackEmpty(existingItemStack)) {
+                        if (!simulate)
+                            put(i, itemStack.set(amount))
 
                         amount = 0
                     }

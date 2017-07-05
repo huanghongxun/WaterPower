@@ -7,7 +7,6 @@
  */
 package waterpower.common.block.inventory
 
-import ic2.api.util.FluidContainerOutputMode
 import net.minecraft.item.ItemStack
 import net.minecraftforge.fluids.Fluid
 import net.minecraftforge.fluids.FluidStack
@@ -23,7 +22,7 @@ class InventorySlotConsumableLiquid(base: TileEntityInventory, name: String, acc
     constructor(base: TileEntityInventory, name: String, count: Int) : this(base, name, InventorySlot.Access.I, count) {}
 
     override fun accepts(stack: ItemStack): Boolean {
-        if (stack.isEmpty) {
+        if (isStackEmpty(stack)) {
             return false
         }
         if (!isFluidContainer(stack)) {
@@ -59,7 +58,7 @@ class InventorySlotConsumableLiquid(base: TileEntityInventory, name: String, acc
             return null
         }
         val stack = get()
-        if (stack.isEmpty) {
+        if (isStackEmpty(stack)) {
             return null
         }
         val result = drainContainer(stack, fluid, maxAmount, FluidContainerOutputMode.EmptyFullToOutput) ?: return null
@@ -82,7 +81,7 @@ class InventorySlotConsumableLiquid(base: TileEntityInventory, name: String, acc
             return 0
         }
         val stack = get()
-        if (stack.isEmpty) {
+        if (isStackEmpty(stack)) {
             return 0
         }
         val result = fillContainer(stack, fs, FluidContainerOutputMode.EmptyFullToOutput) ?: return 0
@@ -134,9 +133,9 @@ class InventorySlotConsumableLiquid(base: TileEntityInventory, name: String, acc
         }
         val output = MutableObject<ItemStack>()
         var wasChange = false
-        if (transferToTank(tank, output, true) && (output.value.isEmpty || outputSlot.canAdd(output.value))) {
+        if (transferToTank(tank, output, true) && (isStackEmpty(output.value) || outputSlot.canAdd(output.value))) {
             wasChange = transferToTank(tank, output, false)
-            if (!output.value.isEmpty) {
+            if (!isStackEmpty(output.value)) {
                 outputSlot.add(output.value)
             }
         }
@@ -149,9 +148,9 @@ class InventorySlotConsumableLiquid(base: TileEntityInventory, name: String, acc
         }
         val output = MutableObject<ItemStack>()
         var wasChange = false
-        if (transferFromTank(tank, output, true) && (output.value.isEmpty || outputSlot.canAdd(output.value))) {
+        if (transferFromTank(tank, output, true) && (isStackEmpty(output.value) || outputSlot.canAdd(output.value))) {
             wasChange = transferFromTank(tank, output, false)
-            if (!output.value.isEmpty) {
+            if (!isStackEmpty(output.value)) {
                 outputSlot.add(output.value)
             }
         }

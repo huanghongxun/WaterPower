@@ -19,7 +19,7 @@ import net.minecraftforge.items.IItemHandler
 import net.minecraftforge.items.wrapper.InvWrapper
 import net.minecraftforge.items.wrapper.SidedInvWrapper
 import waterpower.common.block.inventory.InventorySlot
-import waterpower.util.copyWithNewCount
+import waterpower.util.*
 import java.util.*
 
 abstract class TileEntityInventory : TileEntityBase(), ISidedInventory {
@@ -69,7 +69,7 @@ abstract class TileEntityInventory : TileEntityBase(), ISidedInventory {
     }
 
     override fun canInsertItem(index: Int, itemStack: ItemStack, side: EnumFacing): Boolean {
-        if (itemStack.isEmpty) return false
+        if (isStackEmpty(itemStack)) return false
         val targetSlot = getInvSlot(index) ?: return false
 
         if (!targetSlot.canInput() || !targetSlot.accepts(itemStack))
@@ -107,8 +107,8 @@ abstract class TileEntityInventory : TileEntityBase(), ISidedInventory {
 
     override fun removeStackFromSlot(index: Int): ItemStack {
         val ret = getStackInSlot(index)
-        if (!ret.isEmpty)
-            setInventorySlotContents(index, ItemStack.EMPTY)
+        if (!isStackEmpty(ret))
+            setInventorySlotContents(index, emptyStack)
         return ret
     }
 
@@ -120,14 +120,14 @@ abstract class TileEntityInventory : TileEntityBase(), ISidedInventory {
             i -= invSlot.size()
         }
 
-        return ItemStack.EMPTY
+        return emptyStack
     }
 
     override fun getDrops(): List<ItemStack> {
         val list = ArrayList(super.getDrops())
         for (slot in invSlots)
             for (stack in slot)
-                if (!stack.isEmpty)
+                if (!isStackEmpty(stack))
                     list += stack
         return list
     }
@@ -162,7 +162,7 @@ abstract class TileEntityInventory : TileEntityBase(), ISidedInventory {
     override fun getInventoryStackLimit(): Int {
         var max = 0
         for (slot in this.invSlots) {
-            max = Math.max(max, slot.stackSizeLimit)
+            max = maxOf(max, slot.stackSizeLimit)
         }
         return max
     }
@@ -190,15 +190,15 @@ abstract class TileEntityInventory : TileEntityBase(), ISidedInventory {
     }
 
     override fun decrStackSize(index: Int, count: Int): ItemStack {
-        val itemStack = getStackInSlot(index)
-        if (itemStack.isEmpty) return ItemStack.EMPTY
+        var itemStack = getStackInSlot(index)
+        if (isStackEmpty(itemStack)) return emptyStack
 
-        if (count >= itemStack.count) {
-            setInventorySlotContents(index, ItemStack.EMPTY)
+        if (count >= getCount(itemStack)) {
+            setInventorySlotContents(index, emptyStack)
             return itemStack
         }
 
-        itemStack.shrink(count)
+        itemStack = shrink(itemStack)
         return itemStack.copyWithNewCount(count)
     }
 

@@ -7,12 +7,15 @@
  */
 package waterpower.util
 
-import ic2.api.util.FluidContainerOutputMode
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
+import net.minecraft.util.EnumFacing
+import net.minecraft.util.math.BlockPos
+import net.minecraft.world.IBlockAccess
 import net.minecraftforge.fluids.Fluid
 import net.minecraftforge.fluids.FluidRegistry
 import net.minecraftforge.fluids.FluidStack
+import net.minecraftforge.fluids.FluidTank
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler
 import net.minecraftforge.fluids.capability.IFluidHandlerItem
 
@@ -22,6 +25,38 @@ fun isFluidContainer(stack: ItemStack): Boolean {
     return stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)
 }
 
+fun pushFluidAround(world: IBlockAccess, pos: BlockPos, tank: FluidTank) {
+    val potential = tank.drain(tank.fluidAmount, false)
+    var drained = 0
+    if (potential != null && potential.amount > 0) {
+        val working = potential.copy()
+
+        for (side in EnumFacing.VALUES) {
+            if (potential.amount <= 0)
+                break
+
+            val target = world.getTileEntity(pos.offset(side))
+            if (target != null) {
+                val handler = target.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side.opposite)
+                if (handler != null) {
+                    val used = handler.fill(potential, true)
+                    if (used > 0) {
+                        drained += used
+                        potential.amount -= used
+                    }
+                }
+            }
+        }
+
+        if (drained > 0) {
+            val actuallyDrained = tank.drain(drained, true)
+            if (actuallyDrained == null || actuallyDrained.amount != drained) {
+                throw IllegalStateException("Bad tank! Could drain " + working + " but only drained " + actuallyDrained + "( tank " + tank.javaClass + ")")
+            }
+        }
+
+    }
+}
 
 fun isFillableFluidContainer(stack: ItemStack): Boolean {
     return isFillableFluidContainer(stack, null)
@@ -80,9 +115,9 @@ private fun testFillFluid(handler: IFluidHandlerItem, fluid: Fluid, nbt: NBTTagC
 
 
 fun drainContainer(stack: ItemStack, fluid: Fluid?, maxAmount: Int, outputMode: FluidContainerOutputMode): FluidOperationResult? {
-    if (!stack.isEmpty && maxAmount > 0) {
+    if (!isStackEmpty(stack) && maxAmount > 0) {
         var inPlace = stack.copy()
-        var extra = ItemStack.EMPTY
+        var extra = emptyStack
         if (!inPlace.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)) {
             return null
         } else {
@@ -99,20 +134,20 @@ fun drainContainer(stack: ItemStack, fluid: Fluid?, maxAmount: Int, outputMode: 
                 }
 
                 if (fs != null && fs.amount > 0) {
-                    if (singleStack.isEmpty) {
-                        inPlace.shrink(1)
+                    if (isStackEmpty(singleStack)) {
+                        inPlace = shrink(inPlace)
                     } else {
                         val leftOver = handler.drain(Int.MAX_VALUE, false)
                         val isEmpty = leftOver == null || leftOver.amount <= 0
-                        if ((!isEmpty || !outputMode.isOutputEmptyFull) && outputMode != FluidContainerOutputMode.AnyToOutput && (outputMode != FluidContainerOutputMode.InPlacePreferred || inPlace.count <= 1)) {
-                            if (inPlace.count > 1) {
+                        if ((!isEmpty || !outputMode.isOutputEmptyFull) && outputMode != FluidContainerOutputMode.AnyToOutput && (outputMode != FluidContainerOutputMode.InPlacePreferred || getCount(inPlace) <= 1)) {
+                            if (getCount(inPlace) > 1) {
                                 return null
                             }
 
                             inPlace = handler.container
                         } else {
                             extra = handler.container
-                            inPlace.shrink(1)
+                            inPlace = shrink(inPlace)
                         }
                     }
 
@@ -128,9 +163,9 @@ fun drainContainer(stack: ItemStack, fluid: Fluid?, maxAmount: Int, outputMode: 
 }
 
 fun fillContainer(stack: ItemStack, fsIn: FluidStack?, outputMode: FluidContainerOutputMode): FluidOperationResult? {
-    if (!stack.isEmpty && fsIn != null && fsIn.amount > 0) {
+    if (!isStackEmpty(stack) && fsIn != null && fsIn.amount > 0) {
         var inPlace = stack.copy()
-        var extra = ItemStack.EMPTY
+        var extra = emptyStack
         if (inPlace.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)) {
             var singleStack = inPlace.copyWithNewCount(1)
             val handler = singleStack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)
@@ -148,11 +183,11 @@ fun fillContainer(stack: ItemStack, fsIn: FluidStack?, outputMode: FluidContaine
                     val isFull = handler.fill(fillTestFs, false) <= 0
                     singleStack = handler.container
 
-                    if (isFull && outputMode.isOutputEmptyFull || outputMode == FluidContainerOutputMode.AnyToOutput || outputMode == FluidContainerOutputMode.InPlacePreferred && inPlace.count > 1) {
+                    if (isFull && outputMode.isOutputEmptyFull || outputMode == FluidContainerOutputMode.AnyToOutput || outputMode == FluidContainerOutputMode.InPlacePreferred && getCount(inPlace) > 1) {
                         extra = singleStack
-                        inPlace.shrink(1)
+                        inPlace = shrink(inPlace)
                     } else {
-                        if (inPlace.count > 1) {
+                        if (getCount(inPlace) > 1) {
                             return null
                         }
 
@@ -170,5 +205,11 @@ fun fillContainer(stack: ItemStack, fsIn: FluidStack?, outputMode: FluidContaine
     }
 }
 
-data class FluidOperationResult
-internal constructor(val fluidChange: FluidStack, val inPlaceOutput: ItemStack, val extraOutput: ItemStack)
+data class FluidOperationResult(val fluidChange: FluidStack, val inPlaceOutput: ItemStack, val extraOutput: ItemStack)
+
+enum class FluidContainerOutputMode(val isOutputEmptyFull: Boolean) {
+    EmptyFullToOutput(true),
+    AnyToOutput(true),
+    InPlacePreferred(false),
+    InPlace(false);
+}

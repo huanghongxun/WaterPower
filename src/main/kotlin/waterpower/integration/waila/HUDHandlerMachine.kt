@@ -21,6 +21,7 @@ import net.minecraftforge.fml.common.Optional.*
 import waterpower.client.i18n
 import waterpower.common.block.machine.TileEntityBaseMachine
 import waterpower.integration.IDs
+import waterpower.util.emptyStack
 
 @InterfaceList(Interface(iface = "mcp.mobius.waila.api.IWailaDataProvider", modid = IDs.Waila))
 object HUDHandlerMachine : IWailaDataProvider {
@@ -44,7 +45,7 @@ object HUDHandlerMachine : IWailaDataProvider {
 
     @Method(modid = IDs.Waila)
     override fun getWailaStack(accessor: IWailaDataAccessor, configHandler: IWailaConfigHandler): ItemStack {
-        return ItemStack.EMPTY
+        return emptyStack
     }
 
     @Method(modid = IDs.Waila)

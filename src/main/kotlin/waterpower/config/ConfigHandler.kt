@@ -8,7 +8,6 @@
 package waterpower.config
 
 import net.minecraftforge.common.config.Configuration
-import net.minecraftforge.fml.common.LoaderState
 import waterpower.annotations.Init
 import waterpower.annotations.Parser
 import java.lang.reflect.Field
@@ -19,6 +18,7 @@ import java.lang.reflect.Field
  * @see waterpower.config.ConfigValue
  */
 @Parser
+@Init
 object ConfigHandler {
 
     val loadedWrappers = ArrayList<FieldWrapper>()
@@ -66,8 +66,7 @@ object ConfigHandler {
     }
 
     @JvmStatic
-    @Init(LoaderState.ModState.PREINITIALIZED)
-    fun init() {
+    fun preInit() {
         load()
         read()
         save()

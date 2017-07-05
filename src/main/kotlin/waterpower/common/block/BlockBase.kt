@@ -34,6 +34,7 @@ import waterpower.client.GuiHandler
 import waterpower.common.block.tile.TileEntityBase
 import waterpower.integration.BuildCraftModule
 import waterpower.util.dropItems
+import waterpower.util.isStackEmpty
 
 typealias ItemBlockProvider = (BlockBase) -> ItemBlock
 
@@ -118,9 +119,9 @@ abstract class BlockBase(id: String, material: Material, item: ItemBlockProvider
     override fun onBlockActivated(worldIn: World, pos: BlockPos, state: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
 
         val stack = playerIn.inventory.getCurrentItem()
-        val stackWrench = !stack.isEmpty && stack.item.javaClass.name.contains("Wrench")
+        val stackWrench = !isStackEmpty(stack) && stack.item.javaClass.name.contains("Wrench")
 
-        if (BuildCraftModule.isWrench(playerIn, stack, hand, playerIn.rayTrace(64.0, 1f)) && playerIn.isSneaking) {
+        if (BuildCraftModule.isWrench(playerIn, stack, hand, RayTraceResult(playerIn)) && playerIn.isSneaking) {
             val tileEntity = worldIn.getTileEntity(pos)
             if (tileEntity != null && tileEntity is TileEntityBase) {
                 val drops = state.block.getDrops(worldIn, pos, state, 0)

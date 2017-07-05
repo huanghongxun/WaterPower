@@ -57,7 +57,7 @@ abstract class ItemMeta(id: String) : ItemBase(id) {
         }
         if (stack.itemDamage < textures.size)
             return textures[stack.itemDamage]
-        return if (textures.size < 1) null else textures.first()
+        return if (textures.isEmpty()) null else textures.first()
     }
 
     override fun getSubItems(itemIn: Item, tab: CreativeTabs?, subItems: NonNullList<ItemStack>) {
