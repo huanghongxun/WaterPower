@@ -7,8 +7,9 @@
  */
 package waterpower.common.item
 
+import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.Item
-import net.minecraftforge.fml.common.registry.GameRegistry
+import net.minecraftforge.fml.common.registry.ForgeRegistries
 import waterpower.WaterPower
 import waterpower.common.init.WPItems
 
@@ -20,6 +21,8 @@ abstract class ItemBase(id: String) : Item() {
 
         setRegistryName(id)
         WPItems.registryNames += registryName!!
-        GameRegistry.register(this)
+        ForgeRegistries.ITEMS.register(this)
     }
+
+    fun isRightCreativeTab(tab: CreativeTabs?) = tab == WaterPower.creativeTab
 }

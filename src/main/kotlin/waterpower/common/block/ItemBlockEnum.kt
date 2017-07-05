@@ -7,10 +7,11 @@
  */
 package waterpower.common.block
 
-import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.item.ItemBlock
 import net.minecraft.item.ItemStack
 import net.minecraft.util.IStringSerializable
+import net.minecraft.world.World
 import waterpower.common.INameable
 
 class ItemBlockEnum<T>(val blockEnum: BlockEnum<T>, val types: Array<T>) : ItemBlock(blockEnum)
@@ -30,7 +31,7 @@ where T : Enum<T>, T : INameable, T : IStringSerializable {
             if (stack.itemDamage >= types.size) null
             else types[stack.itemDamage].getUnlocalizedName()
 
-    override fun addInformation(stack: ItemStack, playerIn: EntityPlayer?, tooltip: MutableList<String>, advanced: Boolean) {
+    override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
         types[stack.itemDamage].addInformation(tooltip)
     }
 }

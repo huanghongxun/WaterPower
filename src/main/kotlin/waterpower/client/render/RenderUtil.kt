@@ -27,9 +27,10 @@ import net.minecraftforge.fml.relauncher.SideOnly
 import org.lwjgl.opengl.GL11
 import org.lwjgl.opengl.GL11.*
 
-
+@SideOnly(Side.CLIENT)
 private val BLOCK_TEXTURE = TextureMap.LOCATION_BLOCKS_TEXTURE
 
+@SideOnly(Side.CLIENT)
 fun renderBlock(state: IBlockState, pos: BlockPos) {
 
     val tessellator = Tessellator.getInstance()
@@ -48,14 +49,17 @@ fun renderBlock(state: IBlockState, pos: BlockPos) {
 
 }
 
+@SideOnly(Side.CLIENT)
 fun getRenderPartialTicks(): Float {
     return Minecraft.getMinecraft().renderPartialTicks
 }
 
+@SideOnly(Side.CLIENT)
 fun calculateRenderOffset(now: Float, last: Float, partialTicks: Float): Float {
     return last + (now - last) * partialTicks
 }
 
+@SideOnly(Side.CLIENT)
 fun translateToZero() {
     val player = Minecraft.getMinecraft().player
     val partialTicks = getRenderPartialTicks()
@@ -66,6 +70,7 @@ fun translateToZero() {
     )
 }
 
+@SideOnly(Side.CLIENT)
 fun scaleAndCorrectThePosition(x: Float, y: Float, z: Float, dx: Float, dy: Float, dz: Float) {
 
     glTranslatef(dx * (1f - x), dy * (1f - y), dz * (1f - z))
@@ -77,10 +82,12 @@ fun scaleAndCorrectThePosition(x: Float, y: Float, z: Float, dx: Float, dy: Floa
 @SideOnly(Side.CLIENT)
 fun sprite2Container(sprite: TextureAtlasSprite): IIconContainer {
     return object : IIconContainer {
+        @SideOnly(Side.CLIENT)
         override fun getIcon(): TextureAtlasSprite? {
             return sprite
         }
 
+        @SideOnly(Side.CLIENT)
         override fun getOverlayIcon(): TextureAtlasSprite? {
             return sprite
         }
@@ -97,6 +104,7 @@ fun getTexture(location: ResourceLocation): TextureAtlasSprite {
     return Minecraft.getMinecraft().textureMapBlocks.getAtlasSprite(location.toString())
 }
 
+@SideOnly(Side.CLIENT)
 fun renderSide(vertexFormat: VertexFormat, sprite: TextureAtlasSprite, side: EnumFacing, tint: Int, offset: Float, color: Int, hideSiding: Boolean): BakedQuad {
     when (side) {
         EnumFacing.NORTH -> return buildQuad(vertexFormat, if (hideSiding) null else EnumFacing.NORTH, sprite, tint,
@@ -143,6 +151,7 @@ fun renderSide(vertexFormat: VertexFormat, sprite: TextureAtlasSprite, side: Enu
     }
 }
 
+@SideOnly(Side.CLIENT)
 fun renderQuadCustom(x: Float, y: Float, z: Float, width: Float, height: Float, vertexFormat: VertexFormat, sprite: TextureAtlasSprite, side: EnumFacing, tint: Int, color: Int, hide: Boolean): BakedQuad? {
     when (side) {
         EnumFacing.NORTH -> return buildQuad(vertexFormat, EnumFacing.NORTH, sprite, tint,
@@ -189,6 +198,7 @@ fun renderQuadCustom(x: Float, y: Float, z: Float, width: Float, height: Float, 
     }
 }
 
+@SideOnly(Side.CLIENT)
 private fun buildQuad(
         format: VertexFormat, side: EnumFacing?, sprite: TextureAtlasSprite, tint: Int,
         x0: Float, y0: Float, z0: Float, u0: Float, v0: Float,
@@ -207,6 +217,7 @@ private fun buildQuad(
     return builder.build()
 }
 
+@SideOnly(Side.CLIENT)
 private fun putVertex(builder: UnpackedBakedQuad.Builder, format: VertexFormat, side: EnumFacing?, x: Float, y: Float, z: Float, u: Float, v: Float, color: Int) {
     for (e in 0..format.getElementCount() - 1) {
         when (format.getElement(e).usage) {
@@ -227,26 +238,31 @@ private fun putVertex(builder: UnpackedBakedQuad.Builder, format: VertexFormat, 
     }
 }
 
+@SideOnly(Side.CLIENT)
 fun getSafeIcon(icon: TextureAtlasSprite?): TextureAtlasSprite {
     if (icon == null)
         return getMissingIcon()
     return icon
 }
 
+@SideOnly(Side.CLIENT)
 fun getMissingIcon(): TextureAtlasSprite {
     return Minecraft.getMinecraft().textureMapBlocks.missingSprite
 }
 
+@SideOnly(Side.CLIENT)
 fun getFluidTexture(stack: FluidStack?, flowing: Boolean): TextureAtlasSprite {
     if (stack == null || stack.fluid == null) return getMissingIcon()
     return getTexture(if (flowing) stack.fluid.getFlowing(stack).toString() else stack.fluid.getStill(stack).toString())
 
 }
 
+@SideOnly(Side.CLIENT)
 fun getFluidSheet(fluid: Fluid?): ResourceLocation {
     return BLOCK_TEXTURE
 }
 
+@SideOnly(Side.CLIENT)
 fun setColor(color: Int) {
     val red = (color shr 16 and 0xFF) / 255.0f
     val green = (color shr 8 and 0xFF) / 255.0f

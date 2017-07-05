@@ -7,7 +7,6 @@
  */
 package waterpower.common.network
 
-import net.minecraftforge.fml.common.LoaderState
 import net.minecraftforge.fml.common.network.NetworkRegistry
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler
@@ -18,6 +17,7 @@ import waterpower.annotations.Message
 import waterpower.annotations.Parser
 import java.util.*
 
+@Init
 @Parser
 object NetworkHandler {
 
@@ -39,8 +39,7 @@ object NetworkHandler {
     fun nextId() = ++id
 
     @JvmStatic
-    @Init(LoaderState.ModState.PREINITIALIZED)
-    fun <T> init()
+    fun <T> preInit()
             where T : IMessage, T : IMessageHandler<T, IMessage> {
         for (message in messages) {
             instance.registerMessage(message.first as Class<T>,

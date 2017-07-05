@@ -22,7 +22,7 @@ import waterpower.common.recipe.Recipes.craftShapeless
 import waterpower.integration.Mod
 import waterpower.integration.ic2.ICItemFinder
 
-
+@Init
 @NewInstance(LoaderState.ModState.PREINITIALIZED)
 class ItemPlugins() : ItemEnum<Plugins>("plugin", Plugins.values()), IUpgrade {
 
@@ -65,8 +65,7 @@ class ItemPlugins() : ItemEnum<Plugins>("plugin", Plugins.values()), IUpgrade {
 
     companion object {
         @JvmStatic
-        @Init(LoaderState.ModState.POSTINITIALIZED)
-        fun addRecipes() {
+        fun postInit() {
             craft(WPItems.plugin.getItemStack(Plugins.storage_mk4), "AA", "AA", 'A', WPItems.plugin.getItemStack(Plugins.storage_mk3))
             craft(WPItems.plugin.getItemStack(Plugins.storage_mk3), "AA", "AA", 'A', WPItems.plugin.getItemStack(Plugins.storage_mk2))
             craft(WPItems.plugin.getItemStack(Plugins.storage_mk2), "AA", "AA", 'A', WPItems.plugin.getItemStack(Plugins.storage_mk1))

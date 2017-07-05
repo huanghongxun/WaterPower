@@ -12,6 +12,7 @@ import net.minecraftforge.fml.common.Optional
 import waterpower.annotations.Integration
 import waterpower.annotations.forMethod
 import waterpower.common.recipe.Recipes
+import waterpower.util.emptyStack
 
 @Integration(IDs.ImmersiveEngineering)
 object ImmersiveEngineeringModule : IModule() {
@@ -22,7 +23,7 @@ object ImmersiveEngineeringModule : IModule() {
         try {
             if (method == null) {
                 method = forMethod(Class.forName("blusunrize.immersiveengineering.api.crafting.BlastFurnaceRecipe"), "addRecipe",
-                        ItemStack.EMPTY, Any(), 0, ItemStack.EMPTY)
+                        emptyStack, Any(), 0, emptyStack)
             }
             method!!.invoke(null, output, input, cookTime, slag)
             return true
@@ -32,10 +33,10 @@ object ImmersiveEngineeringModule : IModule() {
     }
 
     fun blastFurnace(input: ItemStack, output: ItemStack, time: Int) =
-            blastFurnace(input, time, output, ItemStack.EMPTY)
+            blastFurnace(input, time, output, emptyStack)
 
     fun blastFurnace(input: String, output: ItemStack, time: Int) =
-            blastFurnace(input, time, output, ItemStack.EMPTY)
+            blastFurnace(input, time, output, emptyStack)
 
     override fun onInit() {
         super.onInit()

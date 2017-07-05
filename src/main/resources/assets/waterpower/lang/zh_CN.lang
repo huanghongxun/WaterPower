@@ -192,7 +192,7 @@ waterpower.level.MK5=钒钢
 waterpower.level.MK7=零点
 
 # component names, notice: "{component}" and "{level}" are variables, dont translate them, just adjust the order.
-waterpower.component.format={component}{level}
+waterpower.component.format={level}{component}
 
 # forms
 waterpower.forms.plate=板

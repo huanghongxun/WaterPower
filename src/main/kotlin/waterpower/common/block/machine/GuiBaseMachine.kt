@@ -7,27 +7,27 @@
  */
 package waterpower.common.block.machine
 
-import net.minecraft.client.gui.inventory.GuiContainer
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import org.lwjgl.opengl.GL11
+import waterpower.client.GuiBase
 import waterpower.client.i18n
 
 @SideOnly(Side.CLIENT)
 abstract class GuiMachineBase(val container: ContainerBaseMachine,
                               val name: String,
-                              val background: ResourceLocation) : GuiContainer(container) {
+                              val background: ResourceLocation) : GuiBase(container) {
     val inv = i18n("container.inventory")
 
     override fun drawGuiContainerForegroundLayer(par1: Int, par2: Int) {
-        this.fontRendererObj.drawString(this.name, (this.xSize - this.fontRendererObj.getStringWidth(this.name)) / 2, 6, 0x404040)
-        this.fontRendererObj.drawString(this.inv, 8, this.ySize - 96 + 2, 0x404040)
+        this.fontRenderer.drawString(this.name, (this.xSize - this.fontRenderer.getStringWidth(this.name)) / 2, 6, 0x404040)
+        this.fontRenderer.drawString(this.inv, 8, this.ySize - 96 + 2, 0x404040)
 
-        this.fontRendererObj.drawString(i18n("waterpower.gui.stored") + ": " + this.container.tileEntity.getEnergy().energyStored + "mb", 8,
+        this.fontRenderer.drawString(i18n("waterpower.gui.stored") + ": " + this.container.tileEntity.getEnergy().energyStored + "mb", 8,
                 this.ySize - 105 + 2, 0x404040)
 
-        this.fontRendererObj.drawString(i18n("waterpower.gui.using") + ": " + this.container.tileEntity.energyConsume + "mb/t", 8,
+        this.fontRenderer.drawString(i18n("waterpower.gui.using") + ": " + this.container.tileEntity.energyConsume + "mb/t", 8,
                 this.ySize - 114 + 2, 0x404040)
     }
 

@@ -10,7 +10,6 @@ package waterpower.common.item
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Items
-import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumActionResult
 import net.minecraft.util.EnumFacing
@@ -20,7 +19,8 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import net.minecraftforge.fml.common.LoaderState
 import net.minecraftforge.fml.common.registry.GameRegistry
-import net.minecraftforge.fml.common.registry.GameRegistry.addShapedRecipe
+import net.minecraftforge.fml.relauncher.Side
+import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.oredict.OreDictionary
 import waterpower.annotations.Init
 import waterpower.annotations.NewInstance
@@ -34,7 +34,10 @@ import waterpower.common.recipe.RecipeInputOreDictionary
 import waterpower.common.recipe.Recipes
 import waterpower.integration.EnderIOModule
 import waterpower.integration.Mod
+import waterpower.util.isStackEmpty
+import waterpower.util.shrink
 
+@Init
 @NewInstance(LoaderState.ModState.PREINITIALIZED)
 class ItemMaterial() : ItemColorable("material") {
 
@@ -62,8 +65,8 @@ class ItemMaterial() : ItemColorable("material") {
     override fun getItemStackDisplayName(stack: ItemStack): String {
         val meta = stack.itemDamage
         return i18n("waterpower.material.format")
-                .replace("\\{forms\\}".toRegex(), getFormFromMeta(meta).getLocalizedName())
-                .replace("\\{material\\}".toRegex(), getTypeFromMeta(meta).getLocalizedName())
+                .replace("{forms}", getFormFromMeta(meta).getLocalizedName())
+                .replace("{material}", getTypeFromMeta(meta).getLocalizedName())
     }
 
     override fun getUnlocalizedName(stack: ItemStack): String {
@@ -73,25 +76,29 @@ class ItemMaterial() : ItemColorable("material") {
 
     override fun getTextureFolder() = "material"
 
-    override fun getSubItems(itemIn: Item, tab: CreativeTabs?, subItems: NonNullList<ItemStack>) {
+    override fun getSubItems(tab: CreativeTabs?, subItems: NonNullList<ItemStack>) {
+        if (!isRightCreativeTab(tab)) return
         for (form in MaterialForms.values())
             for (type in MaterialTypes.values())
                 subItems += getItemStack(type, form)
     }
 
+    @SideOnly(Side.CLIENT)
     override fun getIconContainer(stack: ItemStack): IIconContainer
             = getIconContainers()[getFormFromMeta(stack.itemDamage).ordinal]
 
+    @SideOnly(Side.CLIENT)
     override fun getColorFromItemStack(stack: ItemStack, tintIndex: Int)
             = getTypeFromMeta(stack.itemDamage).color
 
+    @SideOnly(Side.CLIENT)
     override fun getIconContainers() = RecolorableTextures.METAL
 
     override fun onItemUseFirst(player: EntityPlayer, world: World, pos: BlockPos, side: EnumFacing, hitX: Float, hitY: Float, hitZ: Float, hand: EnumHand): EnumActionResult {
-        val stack = player.getHeldItem(hand)
-        if (stack.count > 0 && getFormFromMeta(stack.itemDamage) == MaterialForms.ingot && getTypeFromMeta(stack.itemDamage) == MaterialTypes.Magnetite) {
+        var stack = player.getHeldItem(hand)
+        if (!isStackEmpty(stack) && getFormFromMeta(stack.itemDamage) == MaterialForms.ingot && getTypeFromMeta(stack.itemDamage) == MaterialTypes.Magnetite) {
             player.inventory.addItemStackToInventory(ItemStack(net.minecraft.init.Items.IRON_INGOT))
-            stack.shrink(1)
+            stack = shrink(stack)
         }
         return EnumActionResult.PASS
     }
@@ -101,10 +108,8 @@ class ItemMaterial() : ItemColorable("material") {
         fun get(type: MaterialTypes, form: MaterialForms, amount: Int = 1) =
                 WPItems.material.getItemStack(type, form, amount)
 
-        // recipe registry
         @JvmStatic
-        @Init(LoaderState.ModState.POSTINITIALIZED)
-        fun addRecipes() {
+        fun postInit() {
             if (Mod.EnderIO.isAvailable) {
                 EnderIOModule.alloySmelter("Zinc Alloy Dust", get(MaterialTypes.VanadiumSteel, ingot, 3), RecipeInputOreDictionary("ingotVanadium"),
                         RecipeInputOreDictionary("ingotSteel"), RecipeInputOreDictionary("ingotSteel"))
@@ -135,22 +140,22 @@ class ItemMaterial() : ItemColorable("material") {
 
                 Recipes.craftShapeless(get(type, dustSmall, 4), get(type, dust))
 
-                addShapedRecipe(ItemMaterial.get(type, dust), "AAA", "AAA", "AAA", 'A', ItemMaterial.get(type, dustTiny))
+                Recipes.craft(ItemMaterial.get(type, dust), "AAA", "AAA", "AAA", 'A', ItemMaterial.get(type, dustTiny))
 
-                addShapedRecipe(ItemMaterial.get(type, dustTiny, 9), "A", 'A', ItemMaterial.get(type, dust))
+                Recipes.craft(ItemMaterial.get(type, dustTiny, 9), "A", 'A', ItemMaterial.get(type, dust))
 
-                addShapedRecipe(WPBlocks.material.getItemStack(type), "AAA", "AAA", "AAA", 'A', ItemMaterial.get(type, ingot))
+                Recipes.craft(WPBlocks.material.getItemStack(type), "AAA", "AAA", "AAA", 'A', ItemMaterial.get(type, ingot))
 
-                addShapedRecipe(ItemMaterial.get(type, ingot), "AAA", "AAA", "AAA", 'A', ItemMaterial.get(type, nugget))
+                Recipes.craft(ItemMaterial.get(type, ingot), "AAA", "AAA", "AAA", 'A', ItemMaterial.get(type, nugget))
 
                 Recipes.craftShapeless(get(type, nugget, 9), get(type, ingot))
 
-                addShapedRecipe(ItemMaterial.get(type, stick, 4), "A", "A", 'A', ItemMaterial.get(type, ingot))
+                Recipes.craft(ItemMaterial.get(type, stick, 4), "A", "A", 'A', ItemMaterial.get(type, ingot))
 
-                addShapedRecipe(ItemMaterial.get(type, gear), // 4 sticks & 4 plates -> 1 gear
+                Recipes.craft(ItemMaterial.get(type, gear), // 4 sticks & 4 plates -> 1 gear
                         "SPS", "P P", "SPS", 'S', ItemMaterial.get(type, stick), 'P', ItemMaterial.get(type, plate))
 
-                addShapedRecipe(ItemMaterial.get(type, ring), // 4 sticks -> 1 ring
+                Recipes.craft(ItemMaterial.get(type, ring), // 4 sticks -> 1 ring
                         " S ", "S S", " S ", 'S', ItemMaterial.get(type, stick))
 
                 Recipes.craftShapeless(get(type, ingot, 9), WPBlocks.material.getItemStack(type))

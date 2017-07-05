@@ -8,13 +8,13 @@
 package waterpower.common.block.watermill
 
 import net.minecraft.client.gui.GuiButton
-import net.minecraft.client.gui.inventory.GuiContainer
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import org.lwjgl.opengl.GL11
 import waterpower.WaterPower
+import waterpower.client.GuiBase
 import waterpower.client.i18n
 import waterpower.common.Energy
 import waterpower.util.DEFAULT_DECIMAL_FORMAT
@@ -22,7 +22,7 @@ import java.io.IOException
 
 @SideOnly(Side.CLIENT)
 class GuiWatermill(player: EntityPlayer, val te: TileEntityWatermill)
-    : GuiContainer(ContainerWatermill(player, te)) {
+    : GuiBase(ContainerWatermill(player, te)) {
 
     lateinit var btnEnergyType: GuiButton
 
@@ -46,19 +46,19 @@ class GuiWatermill(player: EntityPlayer, val te: TileEntityWatermill)
 
     override fun drawGuiContainerForegroundLayer(par1: Int, par2: Int) {
 
-        fontRendererObj.drawString(te.getName(), 8, 6, 0x404040)
-        fontRendererObj.drawString(i18n("waterpower.rotor") + ":", 44, 30, 0x404040)
-        fontRendererObj.drawString(
+        fontRenderer.drawString(te.getName(), 8, 6, 0x404040)
+        fontRenderer.drawString(i18n("waterpower.rotor") + ":", 44, 30, 0x404040)
+        fontRenderer.drawString(
                 i18n("waterpower.watermill.output") + ": " + DEFAULT_DECIMAL_FORMAT.format(te.getFromEU(te.latestOutput))
                         + te.getEnergyUnit().name + "/t", 8, 45, 0x404040)
-        fontRendererObj
+        fontRenderer
                 .drawString(StringBuilder().append(i18n("waterpower.watermill.check_water")).append(',')
                         .append(i18n("waterpower.watermill.check_lava")).append(':')
                         .append(if (te.isRangeSupported()) ("" + te.waterBlocks + "," + te.lavaBlocks)
                         else i18n("waterpower.watermill.cannot_check")).toString(), 8, 55, 0x404040)
         val a = te.getRange()
         val b = a * a * a - 1
-        fontRendererObj.drawString(i18n("waterpower.watermill.need") + ":" + b + "=" + a + "^3-1", 8, 65, 0x404040)
+        fontRenderer.drawString(i18n("waterpower.watermill.need") + ":" + b + "=" + a + "^3-1", 8, 65, 0x404040)
     }
 
     @Throws(IOException::class)

@@ -8,10 +8,13 @@
 package waterpower.common.recipe
 
 import net.minecraft.item.ItemStack
+import net.minecraft.util.ResourceLocation
+import net.minecraftforge.fml.common.registry.ForgeRegistries
 import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.oredict.OreDictionary
 import net.minecraftforge.oredict.ShapedOreRecipe
 import net.minecraftforge.oredict.ShapelessOreRecipe
+import waterpower.WaterPower
 import java.util.*
 
 typealias RecipeAddPredicate = (ItemStack, ItemStack) -> Boolean
@@ -79,12 +82,15 @@ object Recipes {
     fun doesOreNameExist(name: String)
             = OreDictionary.getOres(name).isNotEmpty()
 
+    val GROUP = ResourceLocation("waterpower:recipes")
+    var id = 0
+
     fun craft(output: ItemStack, vararg pars: Any?) {
-        GameRegistry.addRecipe(ShapedOreRecipe(output, *pars))
+        ForgeRegistries.RECIPES.register(ShapedOreRecipe(GROUP, output, *pars).setRegistryName(WaterPower.MOD_ID, (++id).toString()))
     }
 
     fun craftShapeless(output: ItemStack, vararg pars: Any?) {
-        GameRegistry.addRecipe(ShapelessOreRecipe(output, *pars))
+        ForgeRegistries.RECIPES.register(ShapelessOreRecipe(GROUP, output, *pars).setRegistryName(WaterPower.MOD_ID, (++id).toString()))
     }
 
 }

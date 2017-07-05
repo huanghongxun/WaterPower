@@ -25,10 +25,11 @@ import waterpower.integration.IDs
 import waterpower.integration.Mod
 import waterpower.integration.RailcraftModule
 import waterpower.integration.ic2.ICItemFinder
+import waterpower.util.emptyStack
 import waterpower.util.generalize
 import waterpower.util.getItemStack
 
-
+@Init
 @NewInstance(LoaderState.ModState.PREINITIALIZED)
 class ItemCrafting : ItemEnum<EnumCrafting>("crafting", EnumCrafting.values()) {
 
@@ -43,8 +44,7 @@ class ItemCrafting : ItemEnum<EnumCrafting>("crafting", EnumCrafting.values()) {
         fun get(type: EnumCrafting, amount: Int = 1) = WPItems.crafting.getItemStack(type, amount)
 
         @JvmStatic
-        @Init(LoaderState.ModState.POSTINITIALIZED)
-        fun addRecipes() {
+        fun postInit() {
             OreDictionary.registerOre("plateDenseRedstone", get(EnumCrafting.dense_redstone_plate))
             OreDictionary.registerOre("dustCactus", get(EnumCrafting.cactus_dust))
             OreDictionary.registerOre("dustIron", get(EnumCrafting.iron_dust))
@@ -52,7 +52,7 @@ class ItemCrafting : ItemEnum<EnumCrafting>("crafting", EnumCrafting.values()) {
             OreDictionary.registerOre("dustDiamond", get(EnumCrafting.diamond_dust))
 
             val ic2 = Mod.IndustrialCraft2.isAvailable
-            val copperCable: Any = getItemStack(IDs.Mekanism, "PartTransmitter", 2) ?: ItemStack.EMPTY
+            val copperCable: Any = getItemStack(IDs.Mekanism, "PartTransmitter", 2) ?: emptyStack
             val industrialDiamond: Any = ICItemFinder.getItem("crafting", "industrial_diamond") ?: "gemDiamond"
             val advancedAlloy: Any = ICItemFinder.getItem("crafting", "alloy") ?: "plateSteel"
             val iridiumPlate: Any = ICItemFinder.getItem("crafting", "iridium") ?: "plateVanadiumSteel"

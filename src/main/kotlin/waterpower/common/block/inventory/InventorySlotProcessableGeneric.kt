@@ -11,20 +11,21 @@ import net.minecraft.item.ItemStack
 import waterpower.common.block.tile.TileEntityInventory
 import waterpower.common.recipe.IRecipeManager
 import waterpower.common.recipe.RecipeOutput
+import waterpower.util.isStackEmpty
+import waterpower.util.set
 import java.util.*
 
 class InventorySlotProcessableGeneric(base: TileEntityInventory, name: String, count: Int, var recipeManager: IRecipeManager) : InventorySlotProcessable(base, name, count) {
 
     override fun accepts(stack: ItemStack): Boolean {
-        val tmp = stack.copy()
-        tmp.count = 2147483647
+        val tmp = stack.copy().set(2147483647)
 
         return getOutput(tmp, false, true) != null
     }
 
     override fun process(): RecipeOutput? {
         val input = get()
-        if (input.isEmpty && !allowEmptyInput())
+        if (isStackEmpty(input) && !allowEmptyInput())
             return null
 
         val output = getOutput(input, false, false) ?: return null
@@ -40,12 +41,12 @@ class InventorySlotProcessableGeneric(base: TileEntityInventory, name: String, c
 
     override fun consume() {
         val input = get()
-        if (input.isEmpty && !allowEmptyInput())
+        if (isStackEmpty(input) && !allowEmptyInput())
             throw IllegalStateException("consume from empty slot")
 
         val output = getOutput(input, true, false) ?: throw IllegalStateException("consume without a processing result")
 
-        if (input.isEmpty)
+        if (isStackEmpty(input))
             clear()
     }
 
@@ -55,7 +56,7 @@ class InventorySlotProcessableGeneric(base: TileEntityInventory, name: String, c
 
     fun getRecipeOutput(): RecipeOutput? {
         val input = get()
-        if (input.isEmpty) return null
+        if (isStackEmpty(input)) return null
         return getOutput(input, false, false)
     }
 

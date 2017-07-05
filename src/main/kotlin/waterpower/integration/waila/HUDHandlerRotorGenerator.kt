@@ -23,6 +23,7 @@ import waterpower.client.i18n
 import waterpower.common.block.tile.TileEntityRotorGenerator
 import waterpower.integration.IDs
 import waterpower.util.DEFAULT_DECIMAL_FORMAT
+import waterpower.util.emptyStack
 
 @InterfaceList(Interface(iface = "mcp.mobius.waila.api.IWailaDataProvider", modid = IDs.Waila))
 object HUDHandlerRotorGenerator : IWailaDataProvider {
@@ -42,7 +43,7 @@ object HUDHandlerRotorGenerator : IWailaDataProvider {
 
     @Optional.Method(modid = IDs.Waila)
     override fun getWailaStack(accessor: IWailaDataAccessor, configHandler: IWailaConfigHandler): ItemStack {
-        return ItemStack.EMPTY
+        return emptyStack
     }
 
     @Optional.Method(modid = IDs.Waila)

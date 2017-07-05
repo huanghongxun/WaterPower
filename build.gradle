@@ -4,7 +4,7 @@ buildscript {
         maven { url = "http://files.minecraftforge.net/maven" }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
     }
 }
 
@@ -20,6 +20,10 @@ file "build.properties" withReader {
     prop.load(it)
     ext.config = new ConfigSlurper().parse prop
 }
+
+version = "1.0"
+group = "com.yourname.modid" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "modid"
 
 def buildnumber = System.getenv("BUILD_NUMBER") == null ? "" : "-" + System.getenv("BUILD_NUMBER")
 def mod_version = "${config.waterpower}" + buildnumber
@@ -37,37 +41,27 @@ minecraft {
     version = "${config.mc}-${config.forge}"
     runDir = "run"
 
+    replaceIn "WaterPower.kt"
+    replace "@MODVERSION@", mod_version
+
     // the mappings can be changed at any time, and must be in the following format.
     // snapshot_YYYYMMDD   snapshot are built nightly.
     // stable_#            stables are built at the discretion of the MCP team.
     // Use non-default mappings at your own risk. they may not always work.
     // simply re-run your setup task after changing the mappings to update your workspace.
-    mappings = "snapshot_20161220"
+    mappings = "${config.mappings}"
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
-}
-
-repositories {
-    jcenter()
-    maven { // jei
-        name = 'mezz'
-        url = 'http://dvs1.progwml6.com/files/maven'
-    }
-    maven {
-        name = "ic2, forestry"
-        url = "http://maven.ic2.player.to/"
-    }
-    ivy {
-        name "BuildCraft"
-        artifactPattern "http://www.mod-buildcraft.com/releases/BuildCraft/[revision]/[module]-[revision]-[classifier].jar"
-    }
-    mavenCentral()
 }
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:${config.kotlin}"
-    provided "mezz.jei:jei_${config.mc}:${config.jei}"
-    provided "net.industrial-craft:industrialcraft-2:${config.ic2}:dev"
+    // you may put jars on which you depend on in ./libs
+    // or you may define them like so..
+    //compile "some.group:artifact:version:classifier"
+    //compile "some.group:artifact:version"
 
+    // real examples
+    //compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
     //compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
 
     // the 'provided' configuration is for optional dependencies that exist at compile-time but might not at runtime.
@@ -78,14 +72,10 @@ dependencies {
     //deobfCompile 'com.mod-buildcraft:buildcraft:6.0.8:dev'
     //deobfProvided 'com.mod-buildcraft:buildcraft:6.0.8:dev'
 
-}
+    // for more info...
+    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
+    // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
-jar {
-    from {
-        configurations.compile
-                .filter { it.getName().contains("kotlin-stdlib") }
-                .collect { it.isDirectory() ? it : zipTree(it) }
-    }
 }
 
 processResources {

@@ -8,6 +8,7 @@
 package waterpower.common.block.reservoir
 
 import net.minecraft.util.EnumFacing
+import net.minecraft.world.biome.Biome
 import net.minecraftforge.fluids.FluidRegistry
 import net.minecraftforge.fluids.FluidStack
 import net.minecraftforge.fluids.FluidTank
@@ -28,6 +29,7 @@ import waterpower.common.block.tile.TileEntityMultiBlock
 import waterpower.common.init.WPBlocks
 import waterpower.util.Vec2i
 import waterpower.util.getWaterIncomeAndExpenseByBiome
+import waterpower.util.isStackEmpty
 
 @HasGui(guiClass = GuiReservoir::class, containerClass = ContainerReservoir::class)
 open class TileEntityReservoir(val type: Reservoirs) : TileEntityMultiBlock<TileEntityReservoir>(), IFluidHandler {
@@ -115,12 +117,17 @@ open class TileEntityReservoir(val type: Reservoirs) : TileEntityMultiBlock<Tile
         return helper.list
     }
 
+    val biomeID: String by lazy {
+        Biome.REGISTRY.getNameForObject(world.getBiomeForCoordsBody(pos))?.resourcePath?.toLowerCase() ?: ""
+    }
+
     override fun onUpdate() {
         super.onUpdate()
 
         if (isMaster() && !getWorld().isRemote && reservoir.uuid != null) {
 
-            val (weather, biomeGet) = getWaterIncomeAndExpenseByBiome(getWorld(), pos)
+            val biome = biomeID
+            val (weather, biomeGet) = getWaterIncomeAndExpenseByBiome(getWorld(), biome)
 
             val length = reservoir.length - 2
             val width = reservoir.width - 2
@@ -132,14 +139,13 @@ open class TileEntityReservoir(val type: Reservoirs) : TileEntityMultiBlock<Tile
             // Rain Receiving
             addWater += rainLevel * weather * add * (area - cover) * biomeGet
             // Tide Receiving
-            addWater += Math.min(this.ocean.x, this.ocean.y) * type.capacity / 100
+            addWater += minOf(this.ocean.x, this.ocean.y) * type.capacity / 100
             // Underground water receiving
             addWater += underLevel * (1.0 - this.pos.y / 256) * add * (area - cover) * biomeGet
             // Surface water receiving
             addWater += overLevel * (1.0 - Math.abs(64 - this.pos.y) / 64) * (area - cover) * biomeGet * add
 
-            val biomeID = getWorld().getBiomeForCoordsBody(pos).biomeName
-            if (("ocean" == biomeID || "river" == biomeID) && pos.y < 64) {
+            if ((biome.contains("ocean") || biome.contains("river")) && pos.y < 64) {
                 addWater += length.toDouble() * width.toDouble() * 0.5
             }
 
@@ -208,7 +214,7 @@ open class TileEntityReservoir(val type: Reservoirs) : TileEntityMultiBlock<Tile
             for (i in 0..this.upgradeSlot.size() - 1) {
                 val stack = this.upgradeSlot[i]
 
-                if (stack.isEmpty || stack.item !is IUpgrade)
+                if (isStackEmpty(stack) || stack.item !is IUpgrade)
                     continue
                 val upgrade = stack.item as IUpgrade
                 rainLevel += upgrade.getRainAdditionalValue(stack)

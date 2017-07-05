@@ -9,6 +9,8 @@ package waterpower.common.item
 
 import net.minecraft.item.ItemStack
 import net.minecraftforge.fml.common.LoaderState
+import net.minecraftforge.fml.relauncher.Side
+import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.oredict.OreDictionary
 import waterpower.annotations.NewInstance
 import waterpower.client.i18n
@@ -31,12 +33,15 @@ class ItemOreDust() : ItemColorable("crushed") {
     fun getItemStack(ore: Ores, amount: Int = 1)
             = getItemStack(ore.ordinal, amount)
 
+    @SideOnly(Side.CLIENT)
     override fun getColorFromItemStack(stack: ItemStack, tintIndex: Int)
             = Ores.values()[stack.itemDamage].material.color
 
+    @SideOnly(Side.CLIENT)
     override fun getIconContainer(stack: ItemStack): IIconContainer?
             = getIconContainers().first()
 
+    @SideOnly(Side.CLIENT)
     override fun getIconContainers(): Array<IIconContainer>
             = RecolorableTextures.CRUSHED
 

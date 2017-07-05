@@ -12,7 +12,6 @@ import net.minecraft.block.properties.PropertyEnum
 import net.minecraft.block.state.BlockStateContainer
 import net.minecraft.block.state.IBlockState
 import net.minecraft.creativetab.CreativeTabs
-import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.NonNullList
 import waterpower.common.INameable
@@ -56,7 +55,7 @@ where T : Enum<T>, T : INameable {
 
     override fun maxMetaData() = types.size
 
-    override fun getSubBlocks(itemIn: Item, tab: CreativeTabs?, list: NonNullList<ItemStack>) {
+    override fun getSubBlocks(tab: CreativeTabs?, list: NonNullList<ItemStack>) {
         for (i in 0 until maxMetaData())
             list.add(ItemStack(this, 1, i))
     }

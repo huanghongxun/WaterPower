@@ -27,6 +27,7 @@ class JEIModule : BlankModPlugin() {
     override fun register(registry: IModRegistry) {
         val guiHelper = registry.jeiHelpers.guiHelper
         registry.addRecipeHandlers(RecipeHandler())
+        addMachineRecipes(registry, "advcompressor", RecipeManagers.advCompressor, guiHelper, WPBlocks.advanced_compressor, GuiAdvCompressor::class.java)
         addMachineRecipes(registry, "compressor", RecipeManagers.compressor, guiHelper, WPBlocks.compressor, GuiCompressor::class.java)
         addMachineRecipes(registry, "cutter", RecipeManagers.cutter, guiHelper, WPBlocks.cutter, GuiCutter::class.java)
         addMachineRecipes(registry, "lathe", RecipeManagers.lathe, guiHelper, WPBlocks.lathe, GuiLathe::class.java)

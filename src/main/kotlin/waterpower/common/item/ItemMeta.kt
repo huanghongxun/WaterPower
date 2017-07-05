@@ -10,7 +10,6 @@ package waterpower.common.item
 import net.minecraft.client.renderer.texture.TextureAtlasSprite
 import net.minecraft.client.renderer.texture.TextureMap
 import net.minecraft.creativetab.CreativeTabs
-import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.NonNullList
 import net.minecraft.util.ResourceLocation
@@ -57,12 +56,13 @@ abstract class ItemMeta(id: String) : ItemBase(id) {
         }
         if (stack.itemDamage < textures.size)
             return textures[stack.itemDamage]
-        return if (textures.size < 1) null else textures.first()
+        return if (textures.isEmpty()) null else textures.first()
     }
 
-    override fun getSubItems(itemIn: Item, tab: CreativeTabs?, subItems: NonNullList<ItemStack>) {
+    override fun getSubItems(tab: CreativeTabs?, subItems: NonNullList<ItemStack>) {
+        if (!isRightCreativeTab(tab)) return
         for (meta in 0 until 32767) {
-            val stack = ItemStack(itemIn, 1, meta)
+            val stack = ItemStack(this, 1, meta)
             if (stopScanning(stack)) break
             if (validStack(stack)) subItems += stack
         }

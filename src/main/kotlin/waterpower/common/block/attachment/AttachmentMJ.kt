@@ -15,34 +15,34 @@ import net.minecraft.util.EnumFacing
 import waterpower.common.Energy
 import waterpower.common.block.tile.TileEntityBase
 
-
 class AttachmentMJ(master: TileEntityBase, val energyStorage: EnergyStorage) : TileEntityAttachment(master) {
     override fun getName() = "mj"
 
-    lateinit var mjConnector: IMjConnector
+    lateinit var mjConnector: Any
 
     override fun onLoaded() {
         super.onLoaded()
 
-        mjConnector = createConnector()
+        runIgnoringThrowables {
+            mjConnector = IMjConnector { it is IMjReceiver && it.canReceive() }
+        }
     }
 
     override fun onTick() {
         super.onTick()
 
-        for (facing in EnumFacing.VALUES)
-            sendPower(facing)
+        runIgnoringThrowables {
+            for (facing in EnumFacing.VALUES)
+                sendPower(facing)
+        }
     }
 
-    protected fun createConnector() =
-            IMjConnector { it is IMjReceiver && it.canReceive() }
-
-    fun getReceiverToPower(tile: TileEntity?, side: EnumFacing): IMjReceiver? {
+    fun getReceiverToPower(tile: TileEntity?, side: EnumFacing): Any? {
         if (tile == null) {
             return null
         } else {
             val rec = tile.getCapability(MjAPI.CAP_RECEIVER, side.opposite)
-            return if (rec != null && rec.canConnect(this.mjConnector)) rec else null
+            return if (rec != null && rec.canConnect(this.mjConnector as IMjConnector)) rec else null
         }
     }
 
@@ -56,7 +56,7 @@ class AttachmentMJ(master: TileEntityBase, val energyStorage: EnergyStorage) : T
         } else {
             val receiver = this.getReceiverToPower(tile, facing)
             return if (receiver == null) 0L
-            else energyStorage.extractEnergy(Energy.MJ2EU(receiver.powerRequested.toDouble()), doExtract).toLong()
+            else energyStorage.extractEnergy(Energy.MJ2EU((receiver as IMjReceiver).powerRequested.toDouble()), doExtract).toLong()
         }
     }
 
@@ -66,11 +66,18 @@ class AttachmentMJ(master: TileEntityBase, val energyStorage: EnergyStorage) : T
             val receiver = this.getReceiverToPower(tile, facing)
             if (receiver != null) {
                 val extracted = this.getPowerToExtract(facing, true)
-                if (extracted > 0L) {
+                if (extracted > 0L && receiver is IMjReceiver) {
                     val excess = receiver.receivePower(extracted, false)
                     energyStorage.extractEnergy(Energy.MJ2EU((extracted - excess).toDouble()), true)
                 }
             }
+        }
+    }
+
+    fun runIgnoringThrowables(x: () -> Unit) {
+        try {
+            x()
+        } catch(ignore: Throwable) {
         }
     }
 }

@@ -12,15 +12,13 @@ import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.nbt.NBTTagList
 import net.minecraft.util.EnumFacing
 import waterpower.common.block.tile.TileEntityInventory
-import waterpower.util.getCopiedStacks
-import waterpower.util.isStackEqual
-import waterpower.util.isStacksEqual
+import waterpower.util.*
 import java.util.*
 import kotlin.NoSuchElementException
 
 open class InventorySlot(val tileEntity: TileEntityInventory, val name: String, protected val access: InventorySlot.Access, count: Int, val preferredSide: InventorySlot.InvSide = InventorySlot.InvSide.ANY)
     : Iterable<ItemStack> {
-    protected val contents = Array<ItemStack>(count, { ItemStack.EMPTY })
+    protected val contents = Array<ItemStack>(count, { emptyStack })
     var stackSizeLimit = 64
 
     init {
@@ -43,7 +41,7 @@ open class InventorySlot(val tileEntity: TileEntityInventory, val name: String, 
         val contentsTag = NBTTagList()
 
         for (i in this.contents.indices) {
-            if (this.contents[i].isEmpty) {
+            if (isStackEmpty(this.contents[i])) {
                 continue
             }
             val contentTag = NBTTagCompound()
@@ -67,8 +65,8 @@ open class InventorySlot(val tileEntity: TileEntityInventory, val name: String, 
         this.contents[index] = content
     }
 
-    fun clear() = Arrays.fill(contents, ItemStack.EMPTY)
-    fun clear(index: Int) = put(index, ItemStack.EMPTY)
+    fun clear() = Arrays.fill(contents, emptyStack)
+    fun clear(index: Int) = put(index, emptyStack)
 
     open fun accepts(stack: ItemStack) = true
 
@@ -79,7 +77,7 @@ open class InventorySlot(val tileEntity: TileEntityInventory, val name: String, 
 
     fun isEmpty(): Boolean {
         for (itemStack in this.contents)
-            if (!itemStack.isEmpty)
+            if (!isStackEmpty(itemStack))
                 return false
 
         return true
@@ -89,25 +87,25 @@ open class InventorySlot(val tileEntity: TileEntityInventory, val name: String, 
         for (dstIndex in 0..this.contents.size - 1 - 1) {
             var dst: ItemStack = this.contents[dstIndex]
 
-            if (!dst.isEmpty && dst.count >= dst.maxStackSize)
+            if (!isStackEmpty(dst) && getCount(dst) >= dst.maxStackSize)
                 continue
             for (srcIndex in dstIndex + 1..this.contents.size - 1) {
-                val src = this.contents[srcIndex]
-                if (src.isEmpty) continue
-                if (dst.isEmpty) {
-                    this.contents[srcIndex] = ItemStack.EMPTY
-                    val tmp85_83 = src
-                    dst = tmp85_83
-                    this.contents[dstIndex] = tmp85_83
+                var src = this.contents[srcIndex]
+                if (isStackEmpty(src)) continue
+                if (isStackEmpty(dst)) {
+                    this.contents[srcIndex] = emptyStack
+                    val tmp = src
+                    dst = tmp
+                    this.contents[dstIndex] = tmp
                 } else if (isStackEqual(dst, src)) {
-                    val space = dst.maxStackSize - dst.count
+                    val space = dst.maxStackSize - getCount(dst)
 
-                    if (src.count <= space) {
-                        this.contents[srcIndex] = ItemStack.EMPTY
-                        dst.count += src.count
+                    if (getCount(src) <= space) {
+                        this.contents[srcIndex] = emptyStack
+                        dst = grow(dst, getCount(src))
                     } else {
-                        src.shrink(space)
-                        dst.grow(space)
+                        src = shrink(src)
+                        dst = grow(dst)
                         break
                     }
                 }

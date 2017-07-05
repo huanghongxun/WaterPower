@@ -11,7 +11,6 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
-import net.minecraftforge.fml.common.LoaderState
 import net.minecraftforge.fml.common.network.IGuiHandler
 import net.minecraftforge.fml.common.network.NetworkRegistry
 import waterpower.WaterPower
@@ -21,6 +20,7 @@ import waterpower.annotations.Parser
 import waterpower.annotations.call
 import java.util.*
 
+@Init
 @Parser
 object GuiHandler : IGuiHandler {
 
@@ -49,7 +49,6 @@ object GuiHandler : IGuiHandler {
     }
 
     @JvmStatic
-    @Init(LoaderState.ModState.INITIALIZED)
     fun init() {
         NetworkRegistry.INSTANCE.registerGuiHandler(WaterPower, this)
     }

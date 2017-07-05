@@ -7,7 +7,6 @@
  */
 package waterpower.common.block.tile
 
-import cofh.api.energy.IEnergyConnection
 import ic2.api.energy.tile.IHeatSource
 import ic2.api.energy.tile.IKineticSource
 import net.minecraft.client.Minecraft
@@ -32,10 +31,9 @@ import waterpower.util.pushFluidAround
 
 @InterfaceList(
         Interface(iface = "ic2.api.energy.tile.IKineticSource", modid = IDs.IndustrialCraft2, striprefs = true),
-        Interface(iface = "ic2.api.energy.tile.IHeatSource", modid = IDs.IndustrialCraft2, striprefs = true),
-        Interface(iface = "cofh.api.energy.IEnergyConnection", modid = IDs.CoFHAPIEnergy, striprefs = true))
+        Interface(iface = "ic2.api.energy.tile.IHeatSource", modid = IDs.IndustrialCraft2, striprefs = true))
 abstract class TileEntityGenerator(production: Int, maxStorage: Double, tier: Int)
-    : TileEntityInventory(), IKineticSource, IUnitChangeable, IHeatSource, IEnergyConnection {
+    : TileEntityInventory(), IKineticSource, IUnitChangeable, IHeatSource {
 
     protected val fluid = addAttachment(AttachmentFluid(this))
 
@@ -54,7 +52,7 @@ abstract class TileEntityGenerator(production: Int, maxStorage: Double, tier: In
             eu.sourceTier = tier
             energyAttachments[Energy.EU] = eu
         }
-        if (Mod.CoFHAPIEnergy.isAvailable)
+        if (Mod.RedstoneFlux.isAvailable)
             energyAttachments[Energy.RF] = AttachmentRF(this, energyStorage)
         if (Mod.BuildCraftPower.isAvailable)
             energyAttachments[Energy.MJ] = AttachmentMJ(this, energyStorage)
@@ -155,9 +153,6 @@ abstract class TileEntityGenerator(production: Int, maxStorage: Double, tier: In
         }
         energyType = energyUnit.ordinal
     }
-
-    @Optional.Method(modid = IDs.CoFHAPIEnergy)
-    override fun canConnectEnergy(d: EnumFacing) = true
 
     fun getFromEU(eu: Double): Double {
         return getEnergyUnit().getFromEU(eu)

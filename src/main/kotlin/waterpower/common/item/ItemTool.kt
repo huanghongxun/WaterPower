@@ -7,10 +7,12 @@
  */
 package waterpower.common.item
 
-import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.item.ItemStack
+import net.minecraft.world.World
 import waterpower.WaterPower
 import waterpower.client.i18n
+import waterpower.util.emptyStack
 
 abstract class ItemTool(id: String, maxUse: Int) : ItemBase(id) {
     init {
@@ -18,7 +20,7 @@ abstract class ItemTool(id: String, maxUse: Int) : ItemBase(id) {
         setMaxStackSize(1)
     }
 
-    override fun addInformation(stack: ItemStack, playerIn: EntityPlayer, tooltip: MutableList<String>, advanced: Boolean) {
+    override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
         tooltip.add(i18n("waterpower.tooltip.uses_left", getRemainingUses(stack)))
     }
 
@@ -28,8 +30,8 @@ abstract class ItemTool(id: String, maxUse: Int) : ItemBase(id) {
 
     override fun getContainerItem(stack: ItemStack): ItemStack {
         val ret = stack.copy()
-        if (ret.attemptDamageItem(1, WaterPower.random)) {
-            return ItemStack.EMPTY
+        if (ret.attemptDamageItem(1, WaterPower.random, null)) {
+            return emptyStack
         }
         return ret
     }

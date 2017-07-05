@@ -21,6 +21,7 @@ import waterpower.common.recipe.Recipes
 import waterpower.integration.Mod
 import waterpower.integration.ic2.ICItemFinder
 
+@Init
 @NewInstance(LoaderState.ModState.PREINITIALIZED)
 class BlockTurbine : BlockRotor<Turbines>("turbine", Material.IRON, Turbines::class.java, Turbines.values()) {
 
@@ -31,8 +32,7 @@ class BlockTurbine : BlockRotor<Turbines>("turbine", Material.IRON, Turbines::cl
 
     companion object {
         @JvmStatic
-        @Init(LoaderState.ModState.POSTINITIALIZED)
-        fun addRecipes() {
+        fun postInit() {
             val carbonPlate: Any = ICItemFinder.getItem("crafting", "carbon_plate") ?: "gemDiamond"
             val transformerUpgrade: Any = ICItemFinder.getItem("upgrade", "transformer") ?: "circuitBasic"
             val advancedMachine: Any = ICItemFinder.getItem("resource,advanced_machine") ?: "blockVanadiumSteel"

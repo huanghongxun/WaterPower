@@ -13,13 +13,10 @@ import net.minecraft.init.Blocks
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
-import net.minecraft.util.EnumFacing
 import net.minecraft.util.ResourceLocation
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
-import net.minecraftforge.fluids.FluidTank
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler
 import net.minecraftforge.fml.client.FMLClientHandler
 import net.minecraftforge.fml.common.FMLCommonHandler
 import net.minecraftforge.fml.relauncher.Side
@@ -28,13 +25,8 @@ import waterpower.WaterPower
 import java.text.DecimalFormat
 import java.util.*
 
-fun isServerSide(): Boolean {
-    return FMLCommonHandler.instance().effectiveSide.isServer
-}
-
-fun isClientSide(): Boolean {
-    return FMLCommonHandler.instance().effectiveSide.isClient
-}
+fun isServerSide() = FMLCommonHandler.instance().effectiveSide.isServer
+fun isClientSide() = FMLCommonHandler.instance().effectiveSide.isClient
 
 fun IBlockAccess.getActualBlockState(pos: BlockPos)
         = getBlockState(pos).getActualState(this, pos)
@@ -91,7 +83,7 @@ fun NBTTagCompound.getUUID(id: String): UUID? {
 fun dropItems(world: World, pos: BlockPos, drops: List<ItemStack>) {
     if (isServerSide()) {
         for (item in drops) {
-            if (!item.isEmpty) {
+            if (!isStackEmpty(item)) {
                 val rx = WaterPower.random.nextFloat() * 0.8f + 0.1f
                 val ry = WaterPower.random.nextFloat() * 0.8f + 0.1f
                 val rz = WaterPower.random.nextFloat() * 0.8f + 0.1f
@@ -111,56 +103,32 @@ fun dropItems(world: World, pos: BlockPos, drops: List<ItemStack>) {
 /**
  * @return int - weather: 0 -> sunshine; 1 -> raining; 2 -> thundering; double - acquirement
  */
-fun getWaterIncomeAndExpenseByBiome(world: World, pos: BlockPos): Pair<Int, Double> {
+fun getWaterIncomeAndExpenseByBiome(world: World, biomeID: String): Pair<Int, Double> {
     val weather = if (world.isThundering) 2 else if (world.isRaining) 1 else 0
-    val biomeID = world.getBiomeForCoordsBody(pos).biomeName.toLowerCase()
-    val acquirement = when (biomeID) {
-        "beach", "river", "taiga", "taigaHills", "forestHills" -> 1.0
-        "forest" -> 1.0
-        "plains", "extremeHills", "extremeHillsEdge" -> 0.75
-        "mushroomIsland", "mushroomIslandShore", "ocean" -> 1.2
-        "desertHills", "hell", "desert" -> 0.0
-        "frozenOcean", "frozenRiver" -> 1.2
-        "icePlains", "iceMountains" -> 1.0
-        "jungleHills", "jungle" -> 1.5
-        "swampland" -> 1.2
-        else -> 0.0
-    }
+    var acquirement = 0.0
+    val map = mapOf(
+            "beach" to 1.0,
+            "river" to 1.0,
+            "taiga" to 1.0,
+            "forest" to 1.0,
+            "plains" to 0.75,
+            "extreme" to 0.75,
+            "mushroom" to 1.2,
+            "ocean" to 1.2,
+            "desert" to 0.0,
+            "hell" to 0.0,
+            "frozen" to 1.2,
+            "ice" to 1.0,
+            "jungle" to 1.5,
+            "swapland" to 1.2
+    )
+    for ((key, value) in map)
+        if (biomeID.contains(key)) {
+            acquirement = value
+            break
+        }
 
     return weather to acquirement
-}
-
-fun pushFluidAround(world: IBlockAccess, pos: BlockPos, tank: FluidTank) {
-    val potential = tank.drain(tank.fluidAmount, false)
-    var drained = 0
-    if (potential != null && potential.amount > 0) {
-        val working = potential.copy()
-
-        for (side in EnumFacing.VALUES) {
-            if (potential.amount <= 0)
-                break
-
-            val target = world.getTileEntity(pos.offset(side))
-            if (target != null) {
-                val handler = target.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side.opposite)
-                if (handler != null) {
-                    val used = handler.fill(potential, true)
-                    if (used > 0) {
-                        drained += used
-                        potential.amount -= used
-                    }
-                }
-            }
-        }
-
-        if (drained > 0) {
-            val actuallyDrained = tank.drain(drained, true)
-            if (actuallyDrained == null || actuallyDrained.amount != drained) {
-                throw IllegalStateException("Bad tank! Could drain " + working + " but only drained " + actuallyDrained + "( tank " + tank.javaClass + ")")
-            }
-        }
-
-    }
 }
 
 val DEFAULT_DECIMAL_FORMAT = DecimalFormat("#.00")

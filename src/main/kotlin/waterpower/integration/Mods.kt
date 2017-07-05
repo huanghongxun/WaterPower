@@ -25,7 +25,6 @@ class Mod(val id: String) {
         val BuildCraftCore = Mod(IDs.BuildCraftCore)
         val BuildCraftFactory = Mod(IDs.BuildCraftFactory)
         val BuildCraftPower = Mod(IDs.BuildCraftPower)
-        val CoFHAPIEnergy = Mod(IDs.CoFHAPIEnergy)
         val CraftGuide = Mod(IDs.CraftGuide)
         val EnderIO = Mod(IDs.EnderIO)
         val ExNihilo = Mod(IDs.ExNihilo)
@@ -36,6 +35,7 @@ class Mod(val id: String) {
         val Mekanism = Mod(IDs.Mekanism)
         val CraftTweaker = Mod(IDs.CraftTweaker)
         val RailCraft = Mod(IDs.RailCraft)
+        val RedstoneFlux = Mod(IDs.RedstoneFlux)
         val Thaumcraft = Mod(IDs.Thaumcraft)
         val ThermalExpansion = Mod(IDs.ThermalExpansion)
         val TinkersConstruct = Mod(IDs.TinkersConstruct)
@@ -48,7 +48,6 @@ object IDs {
     const val BuildCraftCore = "buildcraftcore"
     const val BuildCraftFactory = "buildcraftfactory"
     const val BuildCraftPower = "BuildCraftAPI|power"
-    const val CoFHAPIEnergy = "CoFHAPI|energy"
     const val CraftGuide = "craftguide"
     const val CraftTweaker = "crafttweaker"
     const val EnderIO = "enderio"
@@ -59,6 +58,7 @@ object IDs {
     const val IndustrialCraft2 = "ic2"
     const val Mekanism = "mekanism"
     const val RailCraft = "railcraft"
+    const val RedstoneFlux = "redstoneflux"
     const val RotaryCraft = "RotaryCraft"
     const val Thaumcraft = "thaumcraft"
     const val ThermalExpansion = "thermalexpansion"

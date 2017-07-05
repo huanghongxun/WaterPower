@@ -8,19 +8,19 @@
 package waterpower.common.block.reservoir
 
 import com.google.common.collect.ImmutableList
-import net.minecraft.client.gui.inventory.GuiContainer
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import org.lwjgl.opengl.GL11
 import waterpower.WaterPower
+import waterpower.client.GuiBase
 import waterpower.client.i18n
 import waterpower.client.render.getFluidSheet
 import waterpower.client.render.getFluidTexture
 
 @SideOnly(Side.CLIENT)
-class GuiReservoir(player: EntityPlayer, private val gen: TileEntityReservoir) : GuiContainer(ContainerReservoir(player, gen)) {
+class GuiReservoir(player: EntityPlayer, private val gen: TileEntityReservoir) : GuiBase(ContainerReservoir(player, gen)) {
 
     init {
         allowUserInput = false
@@ -38,11 +38,11 @@ class GuiReservoir(player: EntityPlayer, private val gen: TileEntityReservoir) :
     override fun drawGuiContainerForegroundLayer(par1: Int, par2: Int) {
         val f = gen.getFluidTank()
 
-        fontRendererObj.drawString(gen.name, 8, 6, 0x404040)
-        fontRendererObj.drawString(i18n("container.inventory"), 8, ySize - 96 + 2, 0x404040)
-        fontRendererObj.drawString(i18n("waterpower.gui.reservoir.add") + ": " + gen.getLastAddedWater(), 12, 20, 0x404040)
-        fontRendererObj.drawString(i18n("waterpower.gui.capacity") + ": " + f.capacity, 12, 30, 0x404040)
-        fontRendererObj.drawString(i18n("waterpower.gui.stored") + ": " + f.fluidAmount, 12, 40, 0x404040)
+        fontRenderer.drawString(gen.name, 8, 6, 0x404040)
+        fontRenderer.drawString(i18n("container.inventory"), 8, ySize - 96 + 2, 0x404040)
+        fontRenderer.drawString(i18n("waterpower.gui.reservoir.add") + ": " + gen.getLastAddedWater(), 12, 20, 0x404040)
+        fontRenderer.drawString(i18n("waterpower.gui.capacity") + ": " + f.capacity, 12, 30, 0x404040)
+        fontRenderer.drawString(i18n("waterpower.gui.stored") + ": " + f.fluidAmount, 12, 40, 0x404040)
 
         val fluid = getFluidTexture(f.fluid, false)
         val percent = f.fluidAmount.toFloat() / f.capacity
@@ -57,7 +57,7 @@ class GuiReservoir(player: EntityPlayer, private val gen: TileEntityReservoir) :
         val x = par1 - l
         val y = par2 - i1
         if (x in 130..141 && y in 36..48) {
-            drawHoveringText(ImmutableList.of(if (f.fluid == null) i18n("waterpower.gui.empty") else f.fluid!!.localizedName, "${f.fluidAmount}/${f.capacity}mb"), x, y, fontRendererObj)
+            drawHoveringText(ImmutableList.of(if (f.fluid == null) i18n("waterpower.gui.empty") else f.fluid!!.localizedName, "${f.fluidAmount}/${f.capacity}mb"), x, y, fontRenderer)
         }
     }
 }

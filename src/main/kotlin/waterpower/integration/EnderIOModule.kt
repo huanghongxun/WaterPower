@@ -15,6 +15,7 @@ import waterpower.annotations.Integration
 import waterpower.common.recipe.IRecipeInput
 import waterpower.common.recipe.RecipeInputItemStack
 import waterpower.common.recipe.RecipeInputOreDictionary
+import waterpower.util.getCount
 
 @Integration(IDs.EnderIO)
 object EnderIOModule : IModule() {
@@ -30,7 +31,7 @@ object EnderIOModule : IModule() {
             else WaterPower.logger.warn("Unknown recipe input: ${x}, please contact with the mod author")
         val value = String.format("<recipeGroup name=\"WaterPower\">" + "<recipe name=\"%s\" energyCost=\"10000\">" + "<input>" + list + "</input>"
                 + "<output>" + "<itemStack modID=\"%s\" itemName=\"%s\" itemMeta=\"%s\" exp=\"1\" number=\"%d\" />" + "</output>" + "</recipe>"
-                + "</recipeGroup>", name, WaterPower.MOD_ID, o.item.delegate.name().resourcePath, o.itemDamage, o.count)
+                + "</recipeGroup>", name, WaterPower.MOD_ID, o.item.delegate.name().resourcePath, o.itemDamage, getCount(o))
         return FMLInterModComms.sendMessage(IDs.EnderIO, "recipe:alloysmelter", value)
     }
 

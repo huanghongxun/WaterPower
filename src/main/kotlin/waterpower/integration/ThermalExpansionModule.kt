@@ -12,6 +12,8 @@ import net.minecraft.nbt.NBTTagCompound
 import net.minecraftforge.fml.common.event.FMLInterModComms
 import waterpower.annotations.Integration
 import waterpower.common.recipe.Recipes
+import waterpower.util.emptyStack
+import waterpower.util.isStackEmpty
 
 @Integration(IDs.ThermalExpansion)
 object ThermalExpansionModule : IModule() {
@@ -26,10 +28,10 @@ object ThermalExpansionModule : IModule() {
     }
 
     fun addPulverizerRecipe(energy: Int, input: ItemStack, primaryOutput: ItemStack) =
-            addPulverizerRecipe(energy, input, primaryOutput, ItemStack.EMPTY, 0)
+            addPulverizerRecipe(energy, input, primaryOutput, emptyStack, 0)
 
     fun addPulverizerRecipe(energy: Int, input: ItemStack, primaryOutput: ItemStack, secondaryOutput: ItemStack, secondaryChance: Int = 100): Boolean {
-        if (input.isEmpty || primaryOutput.isEmpty)
+        if (isStackEmpty(input) || isStackEmpty(primaryOutput))
             return false
         val toSend = NBTTagCompound()
         toSend.setInteger("energy", energy)
@@ -47,10 +49,10 @@ object ThermalExpansionModule : IModule() {
             addPulverizerRecipe(3200, input, output)
 
     fun addSawmillRecipe(energy: Int, input: ItemStack, primaryOutput: ItemStack) =
-            addSawmillRecipe(energy, input, primaryOutput, ItemStack.EMPTY, 0)
+            addSawmillRecipe(energy, input, primaryOutput, emptyStack, 0)
 
     fun addSawmillRecipe(energy: Int, input: ItemStack, primaryOutput: ItemStack, secondaryOutput: ItemStack, secondaryChance: Int = 100): Boolean {
-        if (input.isEmpty || primaryOutput.isEmpty)
+        if (isStackEmpty(input) || isStackEmpty(primaryOutput))
             return false
         val toSend = NBTTagCompound()
         toSend.setInteger("energy", energy)
@@ -68,11 +70,11 @@ object ThermalExpansionModule : IModule() {
             addSawmillRecipe(3200, input, output)
 
     fun addSmelterRecipe(energy: Int, primaryInput: ItemStack, secondaryInput: ItemStack, primaryOutput: ItemStack) =
-            addSmelterRecipe(energy, primaryInput, secondaryInput, primaryOutput, ItemStack.EMPTY, 0)
+            addSmelterRecipe(energy, primaryInput, secondaryInput, primaryOutput, emptyStack, 0)
 
     fun addSmelterRecipe(energy: Int, primaryInput: ItemStack, secondaryInput: ItemStack, primaryOutput: ItemStack, secondaryOutput: ItemStack,
                          secondaryChance: Int = 100): Boolean {
-        if (primaryInput.isEmpty || secondaryInput.isEmpty || primaryOutput.isEmpty)
+        if (isStackEmpty(primaryInput) || isStackEmpty(secondaryInput) || isStackEmpty(primaryOutput))
             return false
         val toSend = NBTTagCompound()
         toSend.setInteger("energy", energy)
@@ -89,7 +91,7 @@ object ThermalExpansionModule : IModule() {
     }
 
     fun blastFurnace(input: ItemStack, output: ItemStack, time: Int) =
-            addSmelterRecipe(10000, input, ItemStack.EMPTY, output)
+            addSmelterRecipe(10000, input, emptyStack, output)
 
     override fun onInit() {
         super.onInit()

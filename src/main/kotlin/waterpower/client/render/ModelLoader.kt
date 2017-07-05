@@ -12,10 +12,13 @@ import net.minecraft.util.ResourceLocation
 import net.minecraftforge.client.model.ICustomModelLoader
 import net.minecraftforge.client.model.IModel
 import net.minecraftforge.client.model.ModelLoaderRegistry
-import net.minecraftforge.fml.common.LoaderState
+import net.minecraftforge.fml.relauncher.Side
+import net.minecraftforge.fml.relauncher.SideOnly
 import waterpower.annotations.Init
 import waterpower.common.init.WPItems
 
+@Init
+@SideOnly(Side.CLIENT)
 object ModelLoader : ICustomModelLoader {
 
     override fun loadModel(modelLocation: ResourceLocation): IModel {
@@ -33,7 +36,7 @@ object ModelLoader : ICustomModelLoader {
     }
 
     @JvmStatic
-    @Init(LoaderState.ModState.PREINITIALIZED, side = 0)
+    @SideOnly(Side.CLIENT)
     fun preInit() {
         ModelLoaderRegistry.registerLoader(this)
     }

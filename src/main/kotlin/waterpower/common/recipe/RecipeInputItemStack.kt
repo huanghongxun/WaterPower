@@ -9,8 +9,9 @@ package waterpower.common.recipe
 
 import net.minecraft.item.ItemStack
 import net.minecraftforge.oredict.OreDictionary
+import waterpower.util.getCount
 
-data class RecipeInputItemStack(var input: ItemStack, val count: Int = input.count) : IRecipeInput {
+data class RecipeInputItemStack(var input: ItemStack, val count: Int = getCount(input)) : IRecipeInput {
 
     init {
         input = input.copy()

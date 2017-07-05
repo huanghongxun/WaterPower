@@ -8,13 +8,13 @@
 package waterpower.common.block.turbine
 
 import net.minecraft.client.gui.GuiButton
-import net.minecraft.client.gui.inventory.GuiContainer
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import org.lwjgl.opengl.GL11
 import waterpower.WaterPower
+import waterpower.client.GuiBase
 import waterpower.client.i18n
 import waterpower.common.Energy
 import waterpower.common.block.container.ContainerRotor
@@ -22,7 +22,7 @@ import waterpower.util.DEFAULT_DECIMAL_FORMAT
 import java.io.IOException
 
 @SideOnly(Side.CLIENT)
-class GuiTurbine(player: EntityPlayer, private val gen: TileEntityTurbine) : GuiContainer(ContainerRotor(player, gen)) {
+class GuiTurbine(player: EntityPlayer, private val gen: TileEntityTurbine) : GuiBase(ContainerRotor(player, gen)) {
 
     private var btnEnergyType: GuiButton? = null
 
@@ -49,10 +49,10 @@ class GuiTurbine(player: EntityPlayer, private val gen: TileEntityTurbine) : Gui
     }
 
     override fun drawGuiContainerForegroundLayer(par1: Int, par2: Int) {
-        fontRendererObj.drawString(gen.getName(), 8, 6, 0x404040)
-        fontRendererObj.drawString(i18n("waterpower.watermill.rotor") + ":", 44, 30, 0x404040)
-        fontRendererObj.drawString(i18n("container.inventory"), 8, ySize - 96 + 2, 0x404040)
-        fontRendererObj.drawString(
+        fontRenderer.drawString(gen.getName(), 8, 6, 0x404040)
+        fontRenderer.drawString(i18n("waterpower.watermill.rotor") + ":", 44, 30, 0x404040)
+        fontRenderer.drawString(i18n("container.inventory"), 8, ySize - 96 + 2, 0x404040)
+        fontRenderer.drawString(
                 i18n("waterpower.watermill.output") + ": " + DEFAULT_DECIMAL_FORMAT.format(gen.getFromEU(gen.latestOutput))
                         + gen.getEnergyUnit().name + "/t", 8, 50, 0x404040)
     }

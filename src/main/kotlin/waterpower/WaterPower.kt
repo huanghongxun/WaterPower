@@ -1,5 +1,13 @@
+/**
+ * Copyright (c) Huang Yuhui, 2017
+ *
+ * "WaterPower" is distributed under the terms of the Minecraft Mod Public
+ * License 1.0, or MMPL. Please check the contents of the license located in
+ * http://www.mod-buildcraft.com/MMPL-1.0.txt
+ */
 package waterpower
 
+import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.common.config.Configuration
 import net.minecraftforge.fml.client.event.ConfigChangedEvent
 import net.minecraftforge.fml.common.LoaderState
@@ -16,16 +24,9 @@ import waterpower.common.init.NewInstanceParser
 import waterpower.config.ConfigHandler
 import java.util.*
 
-/**
- * Copyright (c) Huang Yuhui, 2017
- *
- * "WaterPower" is distributed under the terms of the Minecraft Mod Public
- * License 1.0, or MMPL. Please check the contents of the license located in
- * http://www.mod-buildcraft.com/MMPL-1.0.txt
- */
 @Mod(modid = WaterPower.MOD_ID, name = WaterPower.MOD_NAME, version = "@MODVERSION@", modLanguage = "kotlin",
         modLanguageAdapter = "waterpower.KotlinAdapter",
-        dependencies = "after:ic2; after:gregtech; after:thaumcraft; after:buildcraftcore; after:forestry; after:CoFHAPI; after:mekanism; after: tconstruct; ")
+        dependencies = "after:ic2; after:gregtech; after:thaumcraft; after:redstoneflux; after:jei; after:waila; after:buildcraftcore; after:forestry; after:CoFHAPI; after:mekanism; after: tconstruct; ")
 object WaterPower {
 
     lateinit var logger: Logger
@@ -42,6 +43,7 @@ object WaterPower {
 
     @Mod.EventHandler
     fun onConstruction(e: FMLConstructionEvent) {
+        MinecraftForge.EVENT_BUS.register(this)
         AnnotationSystem.initialize()
         InitParser.init(LoaderState.ModState.CONSTRUCTED)
     }
@@ -77,8 +79,8 @@ object WaterPower {
 
     @SubscribeEvent
     fun onConfigChanged(e: ConfigChangedEvent.OnConfigChangedEvent) {
-        if (MOD_ID.equals(e.modID))
-            ConfigHandler.init()
+        if (MOD_ID == e.modID)
+            ConfigHandler.preInit()
     }
 
     const val MOD_ID = "waterpower";

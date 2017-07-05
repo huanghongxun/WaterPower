@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) Huang Yuhui, 2017
+ *
+ * "WaterPower" is distributed under the terms of the Minecraft Mod Public
+ * License 1.0, or MMPL. Please check the contents of the license located in
+ * http://www.mod-buildcraft.com/MMPL-1.0.txt
+ */
 package waterpower.annotations
 
 import com.google.common.reflect.ClassPath
@@ -8,13 +15,6 @@ import java.net.URL
 import java.net.URLClassLoader
 import java.util.*
 
-/**
- * Copyright (c) Huang Yuhui, 2017
- *
- * "WaterPower" is distributed under the terms of the Minecraft Mod Public
- * License 1.0, or MMPL. Please check the contents of the license located in
- * http://www.mod-buildcraft.com/MMPL-1.0.txt
- */
 /**
  * @param obj null for constructors or static/object methods/fields.
  */

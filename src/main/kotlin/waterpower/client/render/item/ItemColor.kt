@@ -10,12 +10,14 @@ package waterpower.client.render.item
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.color.IItemColor
 import net.minecraft.item.ItemStack
-import net.minecraftforge.fml.common.LoaderState
+import net.minecraftforge.fml.relauncher.Side
+import net.minecraftforge.fml.relauncher.SideOnly
 import waterpower.annotations.Init
 import waterpower.common.init.WPItems
 import waterpower.common.item.ItemColorable
 
-
+@Init
+@SideOnly(Side.CLIENT)
 object ItemColor : IItemColor {
 
     override fun getColorFromItemstack(stack: ItemStack, tintIndex: Int): Int {
@@ -25,7 +27,7 @@ object ItemColor : IItemColor {
     }
 
     @JvmStatic
-    @Init(LoaderState.ModState.INITIALIZED, side = 0)
+    @SideOnly(Side.CLIENT)
     fun init() {
         WPItems.items.filter { it is ItemColorable }
                 .forEach { Minecraft.getMinecraft().itemColors.registerItemColorHandler(ItemColor, it) }

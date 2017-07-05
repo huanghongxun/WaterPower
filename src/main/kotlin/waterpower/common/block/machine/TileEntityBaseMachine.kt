@@ -22,6 +22,8 @@ import waterpower.common.block.inventory.InventorySlotProcessable
 import waterpower.common.block.inventory.InventorySlotUpgrade
 import waterpower.common.block.tile.TileEntityInventory
 import waterpower.common.recipe.RecipeOutput
+import waterpower.util.getCount
+import waterpower.util.isStackEmpty
 
 
 abstract class TileEntityBaseMachine(val defaultEnergyConsume: Int, val defaultOperationLength: Int, val outputSlotCount: Int = 2)
@@ -68,21 +70,21 @@ abstract class TileEntityBaseMachine(val defaultEnergyConsume: Int, val defaultO
         for (i in 0..this.upgradeSlot.size() - 1) {
             val stack = this.upgradeSlot.get(i)
 
-            if (stack.isEmpty || stack.item !is IUpgrade)
+            if (isStackEmpty(stack) || stack.item !is IUpgrade)
                 continue
             val upgrade = stack.item as IUpgrade
-            val count = stack.count.toDouble()
+            val count = getCount(stack).toDouble()
 
             processTimeMultiplier *= Math.pow(upgrade.getSpeedAdditionalValue(stack), count)
             energyDemandMultiplier *= Math.pow(upgrade.getEnergyDemandMultiplier(stack), count)
-            extraEnergyStorage += upgrade.getStorageAdditionalValue(stack) * stack.count
+            extraEnergyStorage += upgrade.getStorageAdditionalValue(stack) * getCount(stack)
             energyStorageMultiplier *= Math.pow(1.0, count)
         }
 
         val previousProgress = this.progress / this.operationLength
 
         val stackOpLen = (this.defaultOperationLength + extraProcessTime) * 64.0 * processTimeMultiplier
-        this.operationsPerTick = Math.min(Math.ceil(64.0 / stackOpLen), 2147483647.0).toInt()
+        this.operationsPerTick = minOf(Math.ceil(64.0 / stackOpLen), 2147483647.0).toInt()
         this.operationLength = Math.round(stackOpLen * this.operationsPerTick / 64.0).toInt()
 
         this.energyConsume = applyModifier(this.defaultEnergyConsume, extraEnergyDemand, energyDemandMultiplier).toInt()

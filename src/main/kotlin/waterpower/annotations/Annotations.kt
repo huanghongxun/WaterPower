@@ -7,10 +7,10 @@
  */
 package waterpower.annotations
 
-import net.minecraft.client.gui.inventory.GuiContainer
 import net.minecraft.inventory.Container
 import net.minecraftforge.fml.common.LoaderState
 import net.minecraftforge.fml.relauncher.Side
+import waterpower.client.GuiBase
 import java.lang.annotation.Inherited
 import kotlin.reflect.KClass
 
@@ -20,7 +20,7 @@ import kotlin.reflect.KClass
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
 @Inherited
-annotation class HasGui(val guiClass: KClass<out GuiContainer>, val containerClass: KClass<out Container>)
+annotation class HasGui(val guiClass: KClass<out GuiBase>, val containerClass: KClass<out Container>)
 
 /**
  * the annotated class should declare func init() or just use default init code.
@@ -35,9 +35,9 @@ annotation class HasGui(val guiClass: KClass<out GuiContainer>, val containerCla
  * @see waterpower.annotations.InitParser
  * @see kotlin.jvm.JvmStatic
  */
-@Target(AnnotationTarget.FUNCTION)
+@Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class Init(val modState: LoaderState.ModState, val priority: Int = 0, val side: Int = 2)
+annotation class Init(val priority: Int = 0)
 
 /**
  * Must extend IModule

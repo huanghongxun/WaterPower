@@ -18,6 +18,7 @@ import waterpower.common.init.WPItems
 import waterpower.common.item.MaterialForms
 import waterpower.common.recipe.Recipes
 
+@Init
 @NewInstance(LoaderState.ModState.PREINITIALIZED)
 class BlockOre : BlockEnum<Ores>("ore", Material.ROCK, Ores::class.java, Ores.values()) {
     init {
@@ -32,8 +33,7 @@ class BlockOre : BlockEnum<Ores>("ore", Material.ROCK, Ores::class.java, Ores.va
 
     companion object {
         @JvmStatic
-        @Init(LoaderState.ModState.POSTINITIALIZED)
-        fun addRecipes() {
+        fun postInit() {
             // register recipes of ores
             for (ore in Ores.values()) {
                 val stack = WPBlocks.ore.getItemStack(ore)

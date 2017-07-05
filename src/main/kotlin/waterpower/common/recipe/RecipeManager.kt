@@ -8,6 +8,9 @@
 package waterpower.common.recipe
 
 import net.minecraft.item.ItemStack
+import waterpower.util.getCount
+import waterpower.util.isStackEmpty
+import waterpower.util.shrink
 import java.util.*
 
 class RecipeManager : IRecipeManager {
@@ -15,11 +18,11 @@ class RecipeManager : IRecipeManager {
     private val singleOutputRecipes = ArrayList<HashMap<ItemStack, ItemStack>>()
 
     override fun addRecipe(input: ItemStack, vararg outputs: ItemStack): Boolean {
-        if (input.isEmpty)
+        if (isStackEmpty(input))
             return false
 
         for (i in outputs.indices) {
-            if (outputs[i].isEmpty)
+            if (isStackEmpty(outputs[i]))
                 throw NullPointerException("The output ItemStack #$i is empty (counting from 0)")
         }
 
@@ -31,7 +34,7 @@ class RecipeManager : IRecipeManager {
     }
 
     override fun removeRecipe(input: ItemStack): Boolean {
-        if (input.isEmpty)
+        if (isStackEmpty(input))
             throw NullPointerException("The recipe input is null")
 
         val r = LinkedList<IRecipeInput>()
@@ -46,12 +49,12 @@ class RecipeManager : IRecipeManager {
 
     override fun getOutput(input: ItemStack, adjustInput: Boolean): RecipeOutput? {
         var input: ItemStack = input
-        if (input.isEmpty)
+        if (isStackEmpty(input))
             return null
 
         for ((recipeInput, recipeOutput) in recipes.entries) {
             if (recipeInput.matches(input)) {
-                if (input.count < recipeInput.getAmount() || input.item.hasContainerItem() && input.count != recipeInput.getAmount())
+                if (getCount(input) < recipeInput.getAmount() || input.item.hasContainerItem() && getCount(input) != recipeInput.getAmount())
                     break
                 if (adjustInput) {
                     if (input.item.hasContainerItem()) {
@@ -59,7 +62,7 @@ class RecipeManager : IRecipeManager {
 
                         input = container.copy()
                     } else {
-                        input.shrink(recipeInput.getAmount())
+                        input = shrink(input, recipeInput.getAmount())
                     }
                 }
 

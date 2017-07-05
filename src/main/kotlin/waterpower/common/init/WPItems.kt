@@ -25,4 +25,5 @@ object WPItems {
     lateinit var plugin: ItemPlugins
     lateinit var component: ItemComponent
     val trousers = EnumMap<EnumWatermill, ItemTrouser>(EnumWatermill::class.java)
+    val rotors = EnumMap<EnumRotor, ItemRotor>(EnumRotor::class.java)
 }

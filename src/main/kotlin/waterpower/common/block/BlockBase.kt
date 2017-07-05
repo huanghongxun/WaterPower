@@ -26,7 +26,7 @@ import net.minecraft.util.math.RayTraceResult
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import net.minecraftforge.client.model.ModelLoader
-import net.minecraftforge.fml.common.registry.GameRegistry
+import net.minecraftforge.fml.common.registry.ForgeRegistries
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import waterpower.WaterPower
@@ -34,6 +34,7 @@ import waterpower.client.GuiHandler
 import waterpower.common.block.tile.TileEntityBase
 import waterpower.integration.BuildCraftModule
 import waterpower.util.dropItems
+import waterpower.util.isStackEmpty
 
 typealias ItemBlockProvider = (BlockBase) -> ItemBlock
 
@@ -45,11 +46,11 @@ abstract class BlockBase(id: String, material: Material, item: ItemBlockProvider
         setHardness(3.0f)
 
         setRegistryName(id)
-        GameRegistry.register(this)
+        ForgeRegistries.BLOCKS.register(this)
 
         val itemBlock = item(this)
         itemBlock.registryName = registryName
-        GameRegistry.register(itemBlock)
+        ForgeRegistries.ITEMS.register(itemBlock)
     }
 
     override fun damageDropped(state: IBlockState)
@@ -118,9 +119,9 @@ abstract class BlockBase(id: String, material: Material, item: ItemBlockProvider
     override fun onBlockActivated(worldIn: World, pos: BlockPos, state: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
 
         val stack = playerIn.inventory.getCurrentItem()
-        val stackWrench = !stack.isEmpty && stack.item.javaClass.name.contains("Wrench")
+        val stackWrench = !isStackEmpty(stack) && stack.item.javaClass.name.contains("Wrench")
 
-        if (BuildCraftModule.isWrench(playerIn, stack, hand, playerIn.rayTrace(64.0, 1f)) && playerIn.isSneaking) {
+        if (BuildCraftModule.isWrench(playerIn, stack, hand, RayTraceResult(playerIn)) && playerIn.isSneaking) {
             val tileEntity = worldIn.getTileEntity(pos)
             if (tileEntity != null && tileEntity is TileEntityBase) {
                 val drops = state.block.getDrops(worldIn, pos, state, 0)

@@ -7,11 +7,11 @@
  */
 package waterpower.common.item
 
+import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.creativetab.CreativeTabs
-import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.NonNullList
+import net.minecraft.world.World
 import waterpower.client.render.IIconRegister
 import waterpower.client.render.item.IItemIconProvider
 import waterpower.common.INameable
@@ -39,12 +39,13 @@ where T : Enum<T>, T : INameable {
             else
                 types[stack.itemDamage].getUnlocalizedName()
 
-    override fun addInformation(stack: ItemStack, playerIn: EntityPlayer, tooltip: MutableList<String>, advanced: Boolean) {
-        super.addInformation(stack, playerIn, tooltip, advanced)
+    override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, advanced: ITooltipFlag) {
+        super.addInformation(stack, worldIn, tooltip, advanced)
         types[stack.itemDamage].addInformation(tooltip)
     }
 
-    override fun getSubItems(itemIn: Item, tab: CreativeTabs?, subItems: NonNullList<ItemStack>) {
+    override fun getSubItems(tab: CreativeTabs?, subItems: NonNullList<ItemStack>) {
+        if (!isRightCreativeTab(tab)) return
         for (meta in 0 until types.size)
             subItems.add(getItemStack(meta))
     }

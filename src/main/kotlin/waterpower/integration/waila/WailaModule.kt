@@ -7,7 +7,6 @@
  */
 package waterpower.integration.waila
 
-import ic2.core.block.machine.tileentity.TileEntityMacerator
 import mcp.mobius.waila.api.impl.ModuleRegistrar
 import waterpower.annotations.Integration
 import waterpower.common.block.machine.*
@@ -32,8 +31,8 @@ object WailaModule : IModule() {
         ModuleRegistrar.instance().registerHeadProvider(HUDHandlerReservoir, TileEntityReservoir::class.java)
         ModuleRegistrar.instance().registerBodyProvider(HUDHandlerReservoir, TileEntityReservoir::class.java)
 
-        ModuleRegistrar.instance().registerHeadProvider(HUDHandlerMachine, TileEntityMacerator::class.java)
-        ModuleRegistrar.instance().registerBodyProvider(HUDHandlerMachine, TileEntityMacerator::class.java)
+        ModuleRegistrar.instance().registerHeadProvider(HUDHandlerMachine, TileEntityCrusher::class.java)
+        ModuleRegistrar.instance().registerBodyProvider(HUDHandlerMachine, TileEntityCrusher::class.java)
 
         ModuleRegistrar.instance().registerHeadProvider(HUDHandlerMachine, TileEntityAdvCompressor::class.java)
         ModuleRegistrar.instance().registerBodyProvider(HUDHandlerMachine, TileEntityAdvCompressor::class.java)

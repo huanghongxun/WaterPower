@@ -42,6 +42,8 @@ object AnnotationSystem {
         for (name in classes) {
             try {
                 val clazz = Class.forName(name, false, loader)
+                if (clazz.isInterface)
+                    continue
                 val sideOnly = clazz.getAnnotation(SideOnly::class.java)
                 if (sideOnly != null && sideOnly.value != side)
                     continue;
@@ -55,6 +57,11 @@ object AnnotationSystem {
         for (name in classes) {
             try {
                 val clazz = Class.forName(name, false, loader)
+                if (clazz.isInterface)
+                    continue
+                val sideOnly = clazz.getAnnotation(SideOnly::class.java)
+                if (sideOnly != null && sideOnly.value != side)
+                    continue
                 for (handle in parsers)
                     JavaAdapter.invokeMethodHandle(handle, clazz)
             } catch(ignore1: ClassNotFoundException) {
