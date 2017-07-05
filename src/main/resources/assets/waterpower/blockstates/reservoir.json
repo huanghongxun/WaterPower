@@ -1,24 +1,85 @@
 {
-    "forge_marker": 1,
-    "defaults": { "model": "cube_all" },
-    "variants": {
-        "type": {
-            "wood":      { "textures": { "all": "waterpower:blocks/reservoir/WOOD"     } },
-            "stone":     { "textures": { "all": "waterpower:blocks/reservoir/STONE"    } },
-            "lapis":     { "textures": { "all": "waterpower:blocks/reservoir/LAPIS"    } },
-            "tin":       { "textures": { "all": "waterpower:blocks/reservoir/TIN"      } },
-            "copper":    { "textures": { "all": "waterpower:blocks/reservoir/COPPER"   } },
-            "quartz":    { "textures": { "all": "waterpower:blocks/reservoir/QUARTZ"   } },
-            "zinc":      { "textures": { "all": "waterpower:blocks/reservoir/ZINC"     } },
-            "bronze":    { "textures": { "all": "waterpower:blocks/reservoir/BRONZE"   } },
-            "nether":    { "textures": { "all": "waterpower:blocks/reservoir/NETHER"   } },
-            "iron":      { "textures": { "all": "waterpower:blocks/reservoir/IRON"     } },
-            "obsidian":  { "textures": { "all": "waterpower:blocks/reservoir/OBSIDIAN" } },
-            "steel":     { "textures": { "all": "waterpower:blocks/reservoir/STEEL"    } },
-            "gold":      { "textures": { "all": "waterpower:blocks/reservoir/GOLD"     } },
-            "manganese": { "textures": { "all": "waterpower:blocks/reservoir/MANGANESE"} },
-            "diamond":   { "textures": { "all": "waterpower:blocks/reservoir/DIAMOND"  } },
-            "vanadium":  { "textures": { "all": "waterpower:blocks/reservoir/VANADIUM" } }
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all"
+  },
+  "variants": {
+    "type": {
+      "wood": {
+        "textures": {
+          "all": "waterpower:blocks/reservoir/wood"
         }
+      },
+      "stone": {
+        "textures": {
+          "all": "waterpower:blocks/reservoir/stone"
+        }
+      },
+      "lapis": {
+        "textures": {
+          "all": "waterpower:blocks/reservoir/lapis"
+        }
+      },
+      "tin": {
+        "textures": {
+          "all": "waterpower:blocks/reservoir/tin"
+        }
+      },
+      "copper": {
+        "textures": {
+          "all": "waterpower:blocks/reservoir/copper"
+        }
+      },
+      "quartz": {
+        "textures": {
+          "all": "waterpower:blocks/reservoir/quartz"
+        }
+      },
+      "zinc_alloy": {
+        "textures": {
+          "all": "waterpower:blocks/reservoir/zinc_alloy"
+        }
+      },
+      "bronze": {
+        "textures": {
+          "all": "waterpower:blocks/reservoir/bronze"
+        }
+      },
+      "iron": {
+        "textures": {
+          "all": "waterpower:blocks/reservoir/iron"
+        }
+      },
+      "obsidian": {
+        "textures": {
+          "all": "waterpower:blocks/reservoir/obsidian"
+        }
+      },
+      "steel": {
+        "textures": {
+          "all": "waterpower:blocks/reservoir/steel"
+        }
+      },
+      "gold": {
+        "textures": {
+          "all": "waterpower:blocks/reservoir/gold"
+        }
+      },
+      "manganese_steel": {
+        "textures": {
+          "all": "waterpower:blocks/reservoir/manganese_steel"
+        }
+      },
+      "diamond": {
+        "textures": {
+          "all": "waterpower:blocks/reservoir/diamond"
+        }
+      },
+      "vanadium_steel": {
+        "textures": {
+          "all": "waterpower:blocks/reservoir/vanadium_steel"
+        }
+      }
     }
+  }
 }

@@ -1,0 +1,65 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all"
+  },
+  "variants": {
+    "type": {
+      "zinc": {
+        "textures": {
+          "all": "waterpower:blocks/block"
+        }
+      },
+      "zincalloy": {
+        "textures": {
+          "all": "waterpower:blocks/block"
+        }
+      },
+      "neodymium": {
+        "textures": {
+          "all": "waterpower:blocks/block"
+        }
+      },
+      "neodymiummagnet": {
+        "textures": {
+          "all": "waterpower:blocks/block"
+        }
+      },
+      "industrialsteel": {
+        "textures": {
+          "all": "waterpower:blocks/block"
+        }
+      },
+      "magnetite": {
+        "textures": {
+          "all": "waterpower:blocks/block"
+        }
+      },
+      "vanadium": {
+        "textures": {
+          "all": "waterpower:blocks/block"
+        }
+      },
+      "vanadiumsteel": {
+        "textures": {
+          "all": "waterpower:blocks/block"
+        }
+      },
+      "manganese": {
+        "textures": {
+          "all": "waterpower:blocks/block"
+        }
+      },
+      "manganesesteel": {
+        "textures": {
+          "all": "waterpower:blocks/block"
+        }
+      },
+      "steel": {
+        "textures": {
+          "all": "waterpower:blocks/block"
+        }
+      }
+    }
+  }
+}

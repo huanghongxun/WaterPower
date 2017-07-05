@@ -1,4 +1,4 @@
-itemGroup.creativeTabWaterPower=Advanced Watermills
+itemGroup.creativeTabWaterPower=Water Power
 
 # tcIntegration
 tc.research_category.AdvancedWatermills=Продвинутые водяные мельницы
@@ -43,231 +43,237 @@ tc.research_name.cptwtrmlMK15=Продвинутые водяные мельни
 tc.research_name.cptwtrmlMK16=Продвинутые водяные мельницы MK16
 
 # Thaumcraft integration: research pages
-cptwtrml.research.waterUraniumIngot=Теперь вы можете использовать таумические элементы для получения водного уранового слитка.
-cptwtrml.research.industrialDiamond=Теперь вы можете использовать таумические элементы для получения промышленного алмаза.
-cptwtrml.research.reservoirCore=Теперь вы можете использовать таумические элементы для получения основного резервуара.
-cptwtrml.research.reservoirCoreAdvanced=Теперь вы можете использовать таумические элементы для получения продвинутого основного резервуара.
+waterpower.research.waterUraniumIngot=Теперь вы можете использовать таумические элементы для получения водного уранового слитка.
+waterpower.research.industrialDiamond=Теперь вы можете использовать таумические элементы для получения промышленного алмаза.
+waterpower.research.reservoirCore=Теперь вы можете использовать таумические элементы для получения основного резервуара.
+waterpower.research.reservoirCoreAdvanced=Теперь вы можете использовать таумические элементы для получения продвинутого основного резервуара.
 
 # reservoir block & rotor
-cptwtrml.reservoir.RESERVOIR=блок резервуара
-cptwtrml.reservoir.WOOD=Деревянный
-cptwtrml.reservoir.STONE=Каменный
-cptwtrml.reservoir.LAPIS=Лазуритовый
-cptwtrml.reservoir.TIN=Оловянный
-cptwtrml.reservoir.COPPER=Медный
-cptwtrml.reservoir.QUARTZ=Кварцевый
-cptwtrml.reservoir.ZINC=Цинковый
-cptwtrml.reservoir.BRONZE=Бронзовый
-cptwtrml.reservoir.NETHER=Адский
-cptwtrml.reservoir.IRON=Железный
-cptwtrml.reservoir.OBSIDIAN=Обсидиановый
-cptwtrml.reservoir.STEEL=Стальной
-cptwtrml.reservoir.GOLD=Золотой
-cptwtrml.reservoir.DIAMOND=Алмазный
+waterpower.reservoir.reservoir=блок резервуара
+waterpower.reservoir.wood=Деревянный
+waterpower.reservoir.stone=Каменный
+waterpower.reservoir.lapis=Лазуритовый
+waterpower.reservoir.tin=Оловянный
+waterpower.reservoir.copper=Медный
+waterpower.reservoir.quartz=Кварцевый
+waterpower.reservoir.zinc=Цинковый
+waterpower.reservoir.bronze=Бронзовый
+waterpower.reservoir.iron=Железный
+waterpower.reservoir.obsidian=Обсидиановый
+waterpower.reservoir.steel=Стальной
+waterpower.reservoir.gold=Золотой
+waterpower.reservoir.manganese_steel=Manganese Steel
+waterpower.reservoir.diamond=Алмазный
+waterpower.reservoir.vanadium_steel=Vanadium Steel
 
-cptwtrml.reservoir.MAXSOTRE=Максимальное хранение
-cptwtrml.reservoir.MAXUSE=Максимальное использование турбины
+waterpower.reservoir.MAXSOTRE=Максимальное хранение
+waterpower.reservoir.MAXUSE=Максимальное использование турбины
 
-cptwtrml.reservoir.info=Мультиблочная структура, как ведро. 
-cptwtrml.reservoir.info2=Может получать воду из дождя или из реки и океана. 
+waterpower.reservoir.info=Мультиблочная структура, как ведро. 
+waterpower.reservoir.info2=Может получать воду из дождя или из реки и океана. 
 
 # rotor
-cptwtrml.rotor.ROTOR=Ротор
-cptwtrml.rotor.INFINITE=Бесконечный
-cptwtrml.rotor.REMAINTIME=Осталось времени 
-cptwtrml.rotor.HOUR=часов 
-cptwtrml.rotor.MINUTE=минут 
-cptwtrml.rotor.SECOND=секунд
-cptwtrml.rotor.GOT_EFFICIENCY=Эффективность
+waterpower.rotor=Ротор
+waterpower.rotor.infinite=Бесконечный
+waterpower.rotor.remain=Осталось времени: %d tick(s)
+waterpower.rotor.hour=часов 
+waterpower.rotor.minute=минут 
+waterpower.rotor.second=секунд
+waterpower.rotor.efficiency=Эффективность: %d%%
 
 # updater
-cptwtrml.updater.WaterUraniumIngot=Слиток водного урана
-cptwtrml.updater.WaterUraniumPlateMK1=Водная урановая пластина MK1
-cptwtrml.updater.WaterUraniumPlateMK2=Водная урановая пластина MK2
-cptwtrml.updater.WaterUraniumPlateMK3=Водная урановая пластина MK3
-cptwtrml.updater.WaterUraniumPlateMK4=Водная урановая пластина MK4
-cptwtrml.updater.WaterUraniumPlateMK5=Водная урановая пластина MK5
-cptwtrml.updater.WaterUraniumPlateMK6=Водная урановая пластина MK6
-cptwtrml.updater.WaterUraniumPlateMK7=Водная урановая пластина MK7
-cptwtrml.updater.IR_FE=Пластина из сплава иридия и железа
-cptwtrml.updater.MK0=Обновление MK0
-cptwtrml.updater.MK1=Обновление MK1
-cptwtrml.updater.MK2=Обновление MK2
-cptwtrml.updater.MK3=Обновление MK3
-cptwtrml.updater.MK4=Обновление MK4
-cptwtrml.updater.MK5=Обновление MK5
-cptwtrml.updater.MK6=Обновление MK6
-cptwtrml.updater.MK7=Обновление MK7
-cptwtrml.updater.ReservoirCore=Блок основного резервуара
-cptwtrml.updater.ReservoirCoreAdvanced=Блок продвинутого основного резервуара
-cptwtrml.updater.PlasmaUraniumAlloyPlate=Пластина из сплава плазмы и урана
-cptwtrml.updater.PlasmaUraniumIngot=Плазменно-урановый слиток
-cptwtrml.updater.WaterUraniumAlloyPlate=Пластина из сплава водного урана
-cptwtrml.updater.BaseRotor=Базовый ротор
-cptwtrml.updater.StoneStruct=Каменная структура
-cptwtrml.updater.WoodenHammer=Деревянный молот
-cptwtrml.updater.WaterResistantRubber=Сжатая резина
-cptwtrml.updater.WaterResistantRubberPlate=Пластина из сжатой резины
-cptwtrml.updater.WaterResistantRubberDensePlate=Плотная пластина из сжатой резины
-cptwtrml.updater.DenseRedstonePlate=Плотная редстоуновая пластина
-cptwtrml.updater.DenseCoil=Плотная катушка
-cptwtrml.updater.OxygenEthanolFuel=Кислородно-этаноловое топливо
-cptwtrml.updater.SilverCoil=Серебряная катушка
-cptwtrml.updater.DenseSilverCoil=Плотная серебряная катушка
-cptwtrml.updater.FerricOxideDust=Пыль оксида железа
-cptwtrml.updater.FerroferricOxideDust=Закисе-окисьная пыль
-cptwtrml.updater.FerricOxideSmallDust=Небольшая ферроксидная пыль
-cptwtrml.updater.FerroferricOxideSmallDust=Ferroferric Oxide Small Dust
-cptwtrml.updater.HighPurityCarbonDust=Небольшая закисе-окисьная пыль
-cptwtrml.updater.TungstenCarbideIngot=Слиток карбид вольфрама
-cptwtrml.updater.DiamondBlade=Алмазное лезвие
-cptwtrml.updater.DiamondGlazingWheel=Алмазное остекление колеса
-cptwtrml.updater.BrassCentrifugePot=Котел латунной центрифуги
-cptwtrml.updater.VSteelWaterPipe=Труба из ванадиевой стали
-cptwtrml.updater.RubyWaterHole=Рубиновая водная скважина
-cptwtrml.updater.DataBall=Клубок данных
-cptwtrml.updater.DustDiamond=Алмазная пыль
-cptwtrml.updater.IndustrialSteelHydraulicCylinder=Гидравлический цилиндр из промышленной стали
-cptwtrml.updater.VSteelPistonCylinder=Поршень из ванадиевой стали
-cptwtrml.updater.DustCactus=Кактусовая пыль
-cptwtrml.updater.DustIron=Железная пыль
-cptwtrml.updater.DustGold=Золотая пыль
-cptwtrml.updater.DrawingWaterPart=Часть водного чертежа
-cptwtrml.updater.DrawingWaterComponent=Компонент водного чертежа
+waterpower.crafting.water_uranium_ingot=Слиток водного урана
+waterpower.crafting.water_uranium_plate_mk1=Водная урановая пластина MK1
+waterpower.crafting.water_uranium_plate_mk2=Водная урановая пластина MK2
+waterpower.crafting.water_uranium_plate_mk3=Водная урановая пластина MK3
+waterpower.crafting.water_uranium_plate_mk4=Водная урановая пластина MK4
+waterpower.crafting.water_uranium_plate_mk5=Водная урановая пластина MK5
+waterpower.crafting.water_uranium_plate_mk6=Водная урановая пластина MK6
+waterpower.crafting.water_uranium_plate_mk7=Водная урановая пластина MK7
+waterpower.crafting.water_uranium_alloy_plate=Пластина из сплава водного урана
+waterpower.crafting.plasma_uranium_ingot=Плазменно-урановый слиток
+waterpower.crafting.plasma_uranium_alloy_plate=Пластина из сплава плазмы и урана
+waterpower.crafting.iridium_iron_alloy_plate=Пластина из сплава иридия и железа
+waterpower.crafting.updater_mk0=Обновление MK0
+waterpower.crafting.updater_mk1=Обновление MK1
+waterpower.crafting.updater_mk2=Обновление MK2
+waterpower.crafting.updater_mk3=Обновление MK3
+waterpower.crafting.updater_mk4=Обновление MK4
+waterpower.crafting.updater_mk5=Обновление MK5
+waterpower.crafting.updater_mk6=Обновление MK6
+waterpower.crafting.updater_mk7=Обновление MK7
+waterpower.crafting.reservoir_core=Блок основного резервуара
+waterpower.crafting.reservoir_core_advanced=Блок продвинутого основного резервуара
+waterpower.crafting.base_rotor=Базовый ротор
+waterpower.crafting.stone_structure=Каменная структура
+waterpower.crafting.wooden_hammer=Деревянный молот
+waterpower.crafting.water_resistant_rubber=Сжатая резина
+waterpower.crafting.water_resistant_rubber_plate=Пластина из сжатой резины
+waterpower.crafting.water_resistant_rubber_dense_plate=Плотная пластина из сжатой резины
+waterpower.crafting.dense_redstone_plate=Плотная редстоуновая пластина
+waterpower.crafting.dense_copper_coil=Плотная катушка
+waterpower.crafting.oxygen_ethanol_fuel=Кислородно-этаноловое топливо
+waterpower.crafting.silver_coil=Серебряная катушка
+waterpower.crafting.dense_silver_coil=Плотная серебряная катушка
+waterpower.crafting.high_purity_carbon_dust=Небольшая закисе-окисьная пыль
+waterpower.crafting.tungsten_carbide_ingot=Слиток карбид вольфрама
+waterpower.crafting.diamond_blade=Алмазное лезвие
+waterpower.crafting.diamond_glazing_wheel=Алмазное остекление колеса
+waterpower.crafting.brass_centrifuge_pot=Котел латунной центрифуги
+waterpower.crafting.industrial_steel_hydraulic_cylinder=Гидравлический цилиндр из промышленной стали
+waterpower.crafting.vanadium_steel_piston_cylinder=Поршень из ванадиевой стали
+waterpower.crafting.vanadium_steel_water_pipe=Труба из ванадиевой стали
+waterpower.crafting.ruby_water_hole=Рубиновая водная скважина
+waterpower.crafting.data_ball=Клубок данных
+waterpower.crafting.cactus_dust=Кактусовая пыль
+waterpower.crafting.iron_dust=Железная пыль
+waterpower.crafting.gold_dust=Золотая пыль
+waterpower.crafting.diamond_dust=Алмазная пыль
 
-cptwtrml.updater.info=Для крафта
+waterpower.tooltip.crafting=Для крафта
+
+waterpower.tooltip.uses_left=Uses left: %d
 
 # range
-cptwtrml.range.info.MK1=Два узких блока в диапазоне
-cptwtrml.range.info.MK2=16 узких блоков в диапазоне
-cptwtrml.range.info.MK3=128 узких блоков в диапазоне
-cptwtrml.range.name.MK1=Плагин узкого диапазона MK1
-cptwtrml.range.name.MK2=Плагин узкого диапазона MK2
-cptwtrml.range.name.MK3=Плагин узкого диапазона MK3
+waterpower.range.MK1=Плагин узкого диапазона MK1
+waterpower.range.MK1.info=Два узких блока в диапазоне
+
+waterpower.range.MK2=Плагин узкого диапазона MK2
+waterpower.range.MK2.info=16 узких блоков в диапазоне
+
+waterpower.range.MK3=Плагин узкого диапазона MK3
+waterpower.range.MK3.info=128 узких блоков в диапазоне
 
 # watermill
-cptwtrml.watermill.WATERMILL=Продвинутая водяная мельница
-cptwtrml.watermill.TURBINE=Турбина
-cptwtrml.watermill.NEED=Требуется
-cptwtrml.watermill.CHECK_WATER=Вода
-cptwtrml.watermill.CHECK_LAVA=Лава
-cptwtrml.watermill.CANNOT_CHECK=Не удалось проверить
-cptwtrml.watermill.OUTPUT=Вывод
-cptwtrml.watermill.PRODUCTION=Выходной лимит
-cptwtmrl.watermill.TROUSERS=Брюки
-cptwtrml.watermill.ROTOR=Ротор
+waterpower.watermill.watermill=Продвинутая водяная мельница
+waterpower.watermill.turbine=Турбина
+waterpower.watermill.need=Требуется
+waterpower.watermill.check_water=Вода
+waterpower.watermill.check_lava=Лава
+waterpower.watermill.cannot_check=Не удалось проверить
+waterpower.watermill.output=Вывод
+waterpower.watermill.production=Выходной лимит
+waterpower.watermill.rotor=Ротор
+waterpower.watermill.trouser=%s Брюки
 
-cptwtrml.watermill.max_output=Максимальный вывод
+waterpower.watermill.max_output=Максимальный вывод
+waterpower.watermill.in_water=Charge batteries in your inventory when you are in water.
 
-cptwtrml.gui.reservoir.add=Добавляет
-cptwtrml.gui.reservoir.hpWater=HP воды
+waterpower.gui.reservoir.add=Добавляет
+waterpower.gui.reservoir.hpWater=HP воды
 
-cptwtrml.gui.capacity=Вместимость
-cptwtrml.gui.stored=Хранится
-cptwtrml.gui.latest_output=Последний вывод
-cptwtrml.gui.stored_fluid=Хранится жидкости
-cptwtrml.gui.fluid_amount=Количество жидкости
-cptwtrml.gui.empty=Пусто
-cptwtrml.gui.using=Использование энергии
+waterpower.gui.capacity=Вместимость
+waterpower.gui.stored=Хранится
+waterpower.gui.latest_output=Последний вывод
+waterpower.gui.stored_fluid=Хранится жидкости
+waterpower.gui.fluid_amount=Количество жидкости
+waterpower.gui.empty=Пусто
+waterpower.gui.using=Использование энергии
 
-cptwtrml.rotor.RANGE=Диапазон
+waterpower.rotor.RANGE=Диапазон
 
-# crafting
-cptwtrml.crafting.paddleBase=Основа весла
-cptwtrml.crafting.drainagePlate=Дренажная плита
-cptwtrml.crafting.fixedFrame=Исправленная рамка
-cptwtrml.crafting.fixedTool=Исправленный инструмент
-cptwtrml.crafting.rotationAxle=Вал
-cptwtrml.crafting.outputInterface=Порт вывода
-cptwtrml.crafting.rotor=Ротор
-cptwtrml.crafting.stator=Статор
-cptwtrml.crafting.casing=Оболочка
-cptwtrml.crafting.circuit=Схема
+# component
+waterpower.component.paddleBase=Основа весла
+waterpower.component.drainagePlate=Дренажная плита
+waterpower.component.fixedFrame=Исправленная рамка
+waterpower.component.fixedTool=Исправленный инструмент
+waterpower.component.rotationAxle=Вал
+waterpower.component.outputInterface=Порт вывода
+waterpower.component.rotor=Ротор
+waterpower.component.stator=Статор
+waterpower.component.casing=Оболочка
+waterpower.component.circuit=Схема
 
 # level
-cptwtrml.level.MK1=MK1
-cptwtrml.level.MK3=MK3
-cptwtrml.level.MK4=MK4
-cptwtrml.level.MK5=MK5
-cptwtrml.level.MK7=MK7
+waterpower.level.MK1=MK1
+waterpower.level.MK3=MK3
+waterpower.level.MK4=MK4
+waterpower.level.MK5=MK5
+waterpower.level.MK7=MK7
+
+# component names, notice: "{component}" and "{level}" are variables, dont translate them, just adjust the order.
+waterpower.component.format={component} {level}
 
 # forms
-cptwtrml.forms.plate=Пластина
-cptwtrml.forms.dust=пыль
-cptwtrml.forms.dustTiny=небольшая кучка пыли
-cptwtrml.forms.dustSmall=кучка пыли
-cptwtrml.forms.plateDense=Dense Plate
-cptwtrml.forms.ingot=слиток
-cptwtrml.forms.block=блок
-cptwtrml.forms.stick=стержень
-cptwtrml.forms.screw=Шуруп
-cptwtrml.forms.gear=Шестерня
-cptwtrml.forms.nugget=самородок
-cptwtrml.forms.ring=Кольцо
+waterpower.forms.plate=Пластина
+waterpower.forms.dust=пыль
+waterpower.forms.dustTiny=небольшая кучка пыли
+waterpower.forms.dustSmall=кучка пыли
+waterpower.forms.plateDense=Dense Plate
+waterpower.forms.ingot=слиток
+waterpower.forms.block=блок
+waterpower.forms.stick=стержень
+waterpower.forms.screw=Шуруп
+waterpower.forms.gear=Шестерня
+waterpower.forms.nugget=самородок
+waterpower.forms.ring=Кольцо
 
 # materials
-cptwtrml.material.Zinc=Цинк
-cptwtrml.material.ZincAlloy=Сплав цинка
-cptwtrml.material.Neodymium=Неодим
-cptwtrml.material.NeodymiumMagnet=Неодимовый магнит
-cptwtrml.material.IndustrialSteel=Промышленная сталь
-cptwtrml.material.Magnet=Магнит
-cptwtrml.material.ManganeseSteel=Марганцевая сталь
-cptwtrml.material.Manganese=Марганец
-cptwtrml.material.VanadiumSteel=Ванадиевая сталь
-cptwtrml.material.Vanadium=Ванадий
-cptwtrml.material.Steel=Сталь
+waterpower.material.Zinc=Цинк
+waterpower.material.ZincAlloy=Сплав цинка
+waterpower.material.Neodymium=Неодим
+waterpower.material.NeodymiumMagnet=Неодимовый магнит
+waterpower.material.IndustrialSteel=Промышленная сталь
+waterpower.material.Magnet=Магнит
+waterpower.material.ManganeseSteel=Марганцевая сталь
+waterpower.material.Manganese=Марганец
+waterpower.material.VanadiumSteel=Ванадиевая сталь
+waterpower.material.Vanadium=Ванадий
+waterpower.material.Steel=Сталь
+
+# material name, notice: "{material}" and "{forms}" are variables, dont translate them, just adjust the order.
+waterpower.material.format={forms} {material}
 
 # machines
-cptwtrml.machine.macerator.name=Гидроэнергетическая дробилка
-cptwtrml.machine.compressor.name=Гидроэнергетический компрессор
-cptwtrml.machine.sawmill.name=Гидроэнергетическая лесопилка
-cptwtrml.machine.advancedCompressor.name=Гидроэнергетический продвинутый компрессор
-cptwtrml.machine.centrifuge.name=Гидроэнергетическая центрифуга
-cptwtrml.machine.lathe.name=Гидроэнергетическая токарный станок
-cptwtrml.machine.cutter.name=Гидроэнергетический резак
+waterpower.machine.crusher=Гидроэнергетическая дробилка
+waterpower.machine.compressor=Гидроэнергетический компрессор
+waterpower.machine.sawmill=Гидроэнергетическая лесопилка
+waterpower.machine.advancedCompressor=Гидроэнергетический продвинутый компрессор
+waterpower.machine.centrifuge=Гидроэнергетическая центрифуга
+waterpower.machine.lathe=Гидроэнергетическая токарный станок
+waterpower.machine.cutter=Гидроэнергетический резак
 
-cptwtrml.machine.info=Должен быть рядом с действующим резервуаром для получения энергии
+waterpower.machine.info=Должен быть рядом с действующим резервуаром для получения энергии
 
 # ores
-cptwtrml.ore.monazite=Монацит
-cptwtrml.ore.vanadium=Ванадиевая руда
-cptwtrml.ore.manganese=Марганцевая руда
-cptwtrml.ore.magnet=Магнитная руда
-cptwtrml.ore.zinc=Цинковая руда
+waterpower.ore.monazite=Монацит
+waterpower.ore.vanadium=Ванадиевая руда
+waterpower.ore.manganese=Марганцевая руда
+waterpower.ore.magnetite=Магнитная руда
+waterpower.ore.zinc=Цинковая руда
 
 # plugins
-cptwtrml.plugin.UnderMK1=Улучшение приема подземных вод MK1
-cptwtrml.plugin.UnderMK2=Улучшение приема подземных вод MK2
-cptwtrml.plugin.UnderMK3=Улучшение приема подземных вод MK3
-cptwtrml.plugin.UnderMK4=Улучшение приема подземных вод MK4
-cptwtrml.plugin.OverMK1=Улучшение приема надземных вод MK1
-cptwtrml.plugin.OverMK2=Улучшение приема надземных вод MK2
-cptwtrml.plugin.OverMK3=Улучшение приема надземных вод MK3
-cptwtrml.plugin.OverMK4=Улучшение приема надземных вод MK4
-cptwtrml.plugin.RainMK1=Улучшение приема дождя MK1
-cptwtrml.plugin.RainMK2=Улучшение приема дождя MK2
-cptwtrml.plugin.RainMK3=Улучшение приема дождя MK3
-cptwtrml.plugin.RainMK4=Улучшение приема дождя  MK4
-cptwtrml.plugin.AllRoundMK1=Всестороннее улучшение MK1
-cptwtrml.plugin.AllRoundMK2=Всестороннее улучшение MK2
-cptwtrml.plugin.AllRoundMK3=Всестороннее улучшение MK3
-cptwtrml.plugin.AllRoundMK4=Всестороннее улучшение MK4
-cptwtrml.plugin.StorageMK1=Улучшение хранилища MK1
-cptwtrml.plugin.StorageMK2=Улучшение хранилища MK2
-cptwtrml.plugin.StorageMK3=Улучшение хранилища MK3
-cptwtrml.plugin.StorageMK4=Улучшение хранилища MK4
-cptwtrml.plugin.SpeedMK1=Улучшение скорости MK1
-cptwtrml.plugin.SpeedMK2=Улучшение скорости MK2
-cptwtrml.plugin.SpeedMK3=Улучшение скорости MK3
-cptwtrml.plugin.SpeedMK4=Улучшение скорости MK4
+waterpower.plugin.under_mk1=Улучшение приема подземных вод MK1
+waterpower.plugin.under_mk2=Улучшение приема подземных вод MK2
+waterpower.plugin.under_mk3=Улучшение приема подземных вод MK3
+waterpower.plugin.under_mk4=Улучшение приема подземных вод MK4
+waterpower.plugin.over_mk1=Улучшение приема надземных вод MK1
+waterpower.plugin.over_mk2=Улучшение приема надземных вод MK2
+waterpower.plugin.over_mk3=Улучшение приема надземных вод MK3
+waterpower.plugin.over_mk4=Улучшение приема надземных вод MK4
+waterpower.plugin.rain_mk1=Улучшение приема дождя MK1
+waterpower.plugin.rain_mk2=Улучшение приема дождя MK2
+waterpower.plugin.rain_mk3=Улучшение приема дождя MK3
+waterpower.plugin.rain_mk4=Улучшение приема дождя  MK4
+waterpower.plugin.all_round_mk1=Всестороннее улучшение MK1
+waterpower.plugin.all_round_mk2=Всестороннее улучшение MK2
+waterpower.plugin.all_round_mk3=Всестороннее улучшение MK3
+waterpower.plugin.all_round_mk4=Всестороннее улучшение MK4
+waterpower.plugin.storage_mk1=Улучшение хранилища MK1
+waterpower.plugin.storage_mk2=Улучшение хранилища MK2
+waterpower.plugin.storage_mk3=Улучшение хранилища MK3
+waterpower.plugin.storage_mk4=Улучшение хранилища MK4
+waterpower.plugin.speed_mk1=Улучшение скорости MK1
+waterpower.plugin.speed_mk2=Улучшение скорости MK2
+waterpower.plugin.speed_mk3=Улучшение скорости MK3
+waterpower.plugin.speed_mk4=Улучшение скорости MK4
 
 # crushed ore
-item.oreDustZinc.name=Измельченная цинковая руда
-item.oreDustVanadium.name=Измельченная ванадиевая руда
-item.oreDustManganese.name=Измельченная марганцевая руда
-item.oreDustMonazite.name=Измельченный монацит
-item.oreDustMagnet.name=Измельченная магнитная руда
+waterpower.crushed.zinc=Измельченная цинковая руда
+waterpower.crushed.vanadium=Измельченная ванадиевая руда
+waterpower.crushed.manganese=Измельченная марганцевая руда
+waterpower.crushed.monazite=Измельченный монацит
+waterpower.crushed.magnetite=Измельченная магнитная руда
 
 fluid.waterpower.molten.Monazite=Расплавленный неодим
 fluid.waterpower.molten.Vanadium=Расплавленный ванадий
