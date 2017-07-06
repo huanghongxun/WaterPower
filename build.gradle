@@ -54,7 +54,7 @@ minecraft {
 }
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib:${config.kotlin}"
+    //compile "org.jetbrains.kotlin:kotlin-stdlib:${config.kotlin}"
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
     //compile "some.group:artifact:version:classifier"

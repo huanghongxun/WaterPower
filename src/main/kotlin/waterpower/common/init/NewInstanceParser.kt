@@ -8,6 +8,7 @@
 package waterpower.common.init
 
 import com.google.common.collect.Lists
+import net.minecraftforge.fml.common.FMLLog
 import net.minecraftforge.fml.common.LoaderState
 import waterpower.JavaAdapter
 import waterpower.annotations.ClassEngine
@@ -44,6 +45,6 @@ object NewInstanceParser {
         this.state = state
 
         for (clazz in inits.get(state)!!.iterator())
-            JavaAdapter.invokeMethodHandle(ClassEngine.lookup.findConstructor(clazz, MethodType.methodType(JavaAdapter.getVoidClass())))
+            JavaAdapter.invokeMethodHandle(ClassEngine.lookup.findConstructor(clazz, MethodType.methodType(Void.TYPE)))
     }
 }

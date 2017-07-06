@@ -10,6 +10,7 @@ package waterpower.annotations
 
 import com.google.common.collect.Lists
 import net.minecraft.launchwrapper.Launch
+import net.minecraftforge.fml.common.FMLLog
 import net.minecraftforge.fml.relauncher.FMLLaunchHandler
 import net.minecraftforge.fml.relauncher.SideOnly
 import waterpower.JavaAdapter
@@ -17,6 +18,7 @@ import java.io.File
 import java.lang.invoke.MethodHandle
 import java.lang.invoke.MethodType
 import java.net.JarURLConnection
+import java.net.URLDecoder
 import java.util.*
 
 object AnnotationSystem {
@@ -27,14 +29,14 @@ object AnnotationSystem {
         val offset = AnnotationSystem::class.java.name.replace('.', '/') + ".class"
         val src = AnnotationSystem::class.java.getResource("/" + offset)
         when (src.protocol) {
-            "jar" -> File((src.openConnection() as JarURLConnection).jarFileURL.file)
+            "jar" -> File((src.openConnection() as JarURLConnection).jarFile.name)
             "file" -> File(src.file.replace(offset, ""))
             else -> throw IllegalStateException("Cannot identify the environment, jar or file?")
         }
     }
 
     fun initialize() {
-        classes.addAll(ClassEngine.findClassesInURL(modPath.toURI().toURL()))
+        classes.addAll(ClassEngine.findClassesInURL(modPath.toURL()))
 
         val side = FMLLaunchHandler.side()
         val loader = Launch.classLoader
@@ -46,11 +48,12 @@ object AnnotationSystem {
                     continue
                 val sideOnly = clazz.getAnnotation(SideOnly::class.java)
                 if (sideOnly != null && sideOnly.value != side)
-                    continue;
+                    continue
                 val parser = clazz.getAnnotation(Parser::class.java)
                 if (parser != null)
-                    parsers.add(ClassEngine.lookup.findStatic(clazz, "loadClass", MethodType.methodType(JavaAdapter.getVoidClass(), Class::class.java)))
+                    parsers.add(ClassEngine.lookup.findStatic(clazz, "loadClass", MethodType.methodType(Void.TYPE, Class::class.java)))
             } catch(ignore: ClassNotFoundException) {
+                ignore.printStackTrace()
             }
         }
 
@@ -65,7 +68,9 @@ object AnnotationSystem {
                 for (handle in parsers)
                     JavaAdapter.invokeMethodHandle(handle, clazz)
             } catch(ignore1: ClassNotFoundException) {
+                ignore1.printStackTrace()
             } catch(ignore2: NoClassDefFoundError) {
+                ignore2.printStackTrace()
             }
         }
     }

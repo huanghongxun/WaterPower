@@ -8,6 +8,7 @@
 package waterpower.common.init
 
 import com.google.common.collect.Lists
+import net.minecraftforge.fml.common.FMLLog
 import net.minecraftforge.fml.common.LoaderState
 import waterpower.JavaAdapter
 import waterpower.annotations.ClassEngine
@@ -33,7 +34,7 @@ object InitParser {
 
     fun addMethod(init: Init, state: LoaderState.ModState, clazz: Class<*>, methodName: String) {
         try {
-            val handle = ClassEngine.lookup.findStatic(clazz, methodName, MethodType.methodType(JavaAdapter.getVoidClass()))
+            val handle = ClassEngine.lookup.findStatic(clazz, methodName, MethodType.methodType(Void.TYPE))
             if (init.priority < 0)
                 inits[state]!!.addFirst(handle)
             else if (init.priority == 0)
@@ -41,6 +42,7 @@ object InitParser {
             else
                 initsLast[state]!!.add(handle)
         } catch(ignore: NoSuchMethodException) {
+            ignore.printStackTrace()
         }
     }
 
@@ -56,9 +58,8 @@ object InitParser {
                 addMethod(init, LoaderState.ModState.PREINITIALIZED, clazz, "preInit")
                 addMethod(init, LoaderState.ModState.POSTINITIALIZED, clazz, "postInit")
             }
-        } catch(ignore: NoClassDefFoundError) {
-            ignore.printStackTrace()
-        } catch(ignore1: ClassNotFoundException) {
+        } catch(ignore: Exception) {
+            FMLLog.log.fatal("", ignore)
         }
     }
 

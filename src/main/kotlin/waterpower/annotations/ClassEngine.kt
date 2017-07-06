@@ -8,11 +8,13 @@
 package waterpower.annotations
 
 import com.google.common.reflect.ClassPath
+import net.minecraftforge.fml.common.FMLLog
 import java.lang.invoke.MethodHandles
 import java.lang.reflect.Executable
 import java.lang.reflect.Method
 import java.net.URL
 import java.net.URLClassLoader
+import java.net.URLDecoder
 import java.util.*
 
 /**

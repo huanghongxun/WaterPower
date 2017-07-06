@@ -10,6 +10,7 @@ package waterpower
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.common.config.Configuration
 import net.minecraftforge.fml.client.event.ConfigChangedEvent
+import net.minecraftforge.fml.common.FMLLog
 import net.minecraftforge.fml.common.LoaderState
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.common.SidedProxy
@@ -25,8 +26,8 @@ import waterpower.config.ConfigHandler
 import java.util.*
 
 @Mod(modid = WaterPower.MOD_ID, name = WaterPower.MOD_NAME, version = "@MODVERSION@", modLanguage = "kotlin",
-        modLanguageAdapter = "waterpower.KotlinAdapter",
-        dependencies = "after:ic2; after:gregtech; after:thaumcraft; after:redstoneflux; after:jei; after:waila; after:buildcraftcore; after:forestry; after:CoFHAPI; after:mekanism; after: tconstruct; ")
+        modLanguageAdapter = "net.shadowfacts.forgelin.KotlinAdapter",
+        dependencies = "required-after: forgelin; after:ic2; after:gregtech; after:thaumcraft; after:redstoneflux; after:jei; after:waila; after:buildcraftcore; after:forestry; after:CoFHAPI; after:mekanism; after: tconstruct; ")
 object WaterPower {
 
     lateinit var logger: Logger

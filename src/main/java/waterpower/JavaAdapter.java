@@ -11,10 +11,6 @@ package waterpower;
 import java.lang.invoke.MethodHandle;
 
 public class JavaAdapter {
-    public static Class<?> getVoidClass() {
-        return void.class;
-    }
-
     public static void invokeMethodHandle(MethodHandle handle) throws Throwable {
         handle.invoke();
     }
