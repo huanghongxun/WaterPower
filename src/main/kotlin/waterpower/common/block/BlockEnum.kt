@@ -16,8 +16,8 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.NonNullList
 import waterpower.common.INameable
 
-abstract class BlockEnum<T>(id: String, material: Material, val typeClass: Class<T>, val types: Array<T>)
-    : BlockBase({ type = typeClass; typeValues = types; id }(), material, { b -> ItemBlockEnum(b as BlockEnum<T>, types) })
+abstract class BlockEnum<T>(id: String, material: Material, val typeClass: Class<T>)
+    : BlockBase({ type = typeClass; typeValues = typeClass.enumConstants; id }(), material, { b -> ItemBlockEnum(b as BlockEnum<T>, typeClass) })
 where T : Enum<T>, T : INameable {
 
     companion object {
@@ -26,6 +26,7 @@ where T : Enum<T>, T : INameable {
     }
 
     lateinit var TYPES: PropertyEnum<T>
+    val types: Array<T> = typeClass.enumConstants
 
     init {
         defaultState = blockState.baseState.withProperty(TYPES, types.first())

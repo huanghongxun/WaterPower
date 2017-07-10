@@ -20,8 +20,8 @@ import waterpower.common.item.ItemRotor
 import waterpower.util.emptyStack
 import waterpower.util.isStackEmpty
 
-abstract class BlockRotor<T>(id: String, material: Material, typeClass: Class<T>, types: Array<T>)
-    : BlockEnumTile<T>(id, material, typeClass, types)
+abstract class BlockRotor<T>(id: String, material: Material, typeClass: Class<T>)
+    : BlockEnumTile<T>(id, material, typeClass)
 where T : Enum<T>, T : waterpower.common.INameable, T : ITileEntityProvider {
 
     override fun onBlockActivated(worldIn: World, pos: BlockPos, state: IBlockState, playerIn: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {

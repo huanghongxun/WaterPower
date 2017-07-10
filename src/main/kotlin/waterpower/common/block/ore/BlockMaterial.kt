@@ -26,7 +26,7 @@ import java.awt.Color
 
 @Init
 @NewInstance(LoaderState.ModState.PREINITIALIZED)
-class BlockMaterial : BlockEnum<MaterialTypes>("material_block", Material.ROCK, MaterialTypes::class.java, MaterialTypes.values()) {
+class BlockMaterial : BlockEnum<MaterialTypes>("material_block", Material.ROCK, MaterialTypes::class.java) {
     init {
         WPBlocks.material = this
         WPBlocks.blocks += this

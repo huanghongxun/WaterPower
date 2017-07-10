@@ -23,7 +23,7 @@ import waterpower.integration.ic2.ICItemFinder
 
 @Init
 @NewInstance(LoaderState.ModState.PREINITIALIZED)
-class BlockTurbine : BlockRotor<Turbines>("turbine", Material.IRON, Turbines::class.java, Turbines.values()) {
+class BlockTurbine : BlockRotor<Turbines>("turbine", Material.IRON, Turbines::class.java) {
 
     init {
         WPBlocks.turbine = this

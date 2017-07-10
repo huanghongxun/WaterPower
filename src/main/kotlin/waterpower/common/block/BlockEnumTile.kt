@@ -25,8 +25,8 @@ import waterpower.common.block.tile.TileEntityBase
 import waterpower.integration.IDs
 
 @Optional.InterfaceList(Optional.Interface(iface = "ic2.api.tile.IWrenchable", modid = IDs.IndustrialCraft2, striprefs = true))
-abstract class BlockEnumTile<T>(id: String, material: Material, typeClass: Class<T>, val typesTile: Array<T>)
-    : BlockEnum<T>(id, material, typeClass, typesTile), ITileEntityProvider, IWrenchable
+abstract class BlockEnumTile<T>(id: String, material: Material, typeClass: Class<T>)
+    : BlockEnum<T>(id, material, typeClass), ITileEntityProvider, IWrenchable
 where T : Enum<T>, T : INameable, T : ITileEntityProvider {
 
     init {
@@ -34,8 +34,8 @@ where T : Enum<T>, T : INameable, T : ITileEntityProvider {
     }
 
     override fun createNewTileEntity(worldIn: World?, meta: Int): TileEntity? {
-        if (meta >= typesTile.size) return null
-        else return typesTile[meta].createNewTileEntity(worldIn, meta)
+        if (meta >= types.size) return null
+        else return types[meta].createNewTileEntity(worldIn, meta)
     }
 
     override fun createBlockStateImpl()

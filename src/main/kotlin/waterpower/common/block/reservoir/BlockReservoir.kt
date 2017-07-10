@@ -33,7 +33,7 @@ import waterpower.util.isStackEmpty
 
 @Init
 @NewInstance(LoaderState.ModState.PREINITIALIZED)
-class BlockReservoir : BlockEnum<Reservoirs>("reservoir", Material.IRON, Reservoirs::class.java, Reservoirs.values()), ITileEntityProvider {
+class BlockReservoir : BlockEnum<Reservoirs>("reservoir", Material.IRON, Reservoirs::class.java), ITileEntityProvider {
 
     init {
         WPBlocks.reservoir = this

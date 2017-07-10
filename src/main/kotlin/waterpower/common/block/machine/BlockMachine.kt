@@ -25,7 +25,7 @@ import waterpower.common.recipe.Recipes.craft
 
 @Init
 @NewInstance(LoaderState.ModState.PREINITIALIZED)
-class BlockMachine : BlockEnumTile<Machines>("machine", Material.IRON, Machines::class.java, Machines.values()) {
+class BlockMachine : BlockEnumTile<Machines>("machine", Material.IRON, Machines::class.java) {
     init {
         WPBlocks.machine = this
         WPBlocks.blocks += this

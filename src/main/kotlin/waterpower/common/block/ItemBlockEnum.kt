@@ -14,8 +14,10 @@ import net.minecraft.util.IStringSerializable
 import net.minecraft.world.World
 import waterpower.common.INameable
 
-class ItemBlockEnum<T>(val blockEnum: BlockEnum<T>, val types: Array<T>) : ItemBlock(blockEnum)
+class ItemBlockEnum<T>(val blockEnum: BlockEnum<T>, val type: Class<T>) : ItemBlock(blockEnum)
 where T : Enum<T>, T : INameable, T : IStringSerializable {
+    val types: Array<T> = type.enumConstants
+
     init {
         setHasSubtypes(true)
     }

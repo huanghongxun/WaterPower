@@ -20,7 +20,7 @@ import waterpower.common.recipe.Recipes
 
 @Init
 @NewInstance(LoaderState.ModState.PREINITIALIZED)
-class BlockOre : BlockEnum<Ores>("ore", Material.ROCK, Ores::class.java, Ores.values()) {
+class BlockOre : BlockEnum<Ores>("ore", Material.ROCK, Ores::class.java) {
     init {
         WPBlocks.ore = this
         WPBlocks.blocks += this

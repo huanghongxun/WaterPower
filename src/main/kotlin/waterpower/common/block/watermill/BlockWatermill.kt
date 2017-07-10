@@ -21,7 +21,7 @@ import waterpower.util.generalize
 
 @Init
 @NewInstance(LoaderState.ModState.PREINITIALIZED)
-class BlockWatermill : BlockRotor<EnumWatermill>("watermill", Material.IRON, EnumWatermill::class.java, EnumWatermill.values()) {
+class BlockWatermill : BlockRotor<EnumWatermill>("watermill", Material.IRON, EnumWatermill::class.java) {
 
     init {
         WPBlocks.watermill = this

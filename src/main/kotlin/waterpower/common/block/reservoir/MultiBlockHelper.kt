@@ -102,11 +102,11 @@ class MultiBlockHelper(val te: TileEntityReservoir) {
 
     fun coveredBlocks(r: Reservoir): Int {
         var res = 0
-        for (i in pos.x + 1..pos.x + r.length - 1)
-            for (j in pos.z + 1..pos.z + r.width - 1) {
+        for (i in pos.x + 1..pos.x + r.length - 2)
+            for (j in pos.z + 1..pos.z + r.width - 2) {
                 // if the height of (i, j) is larger than pos.y, there must be a block covering the reservoir
                 val height = world.getChunkFromBlockCoords(BlockPos(i, 0, j)).getHeight(BlockPos(i, 0, j))
-                if (height > pos.y) ++res
+                if (height > pos.y + 1) ++res
             }
         return res
     }
