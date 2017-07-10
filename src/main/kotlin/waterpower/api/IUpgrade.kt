@@ -12,11 +12,11 @@ import net.minecraft.item.ItemStack
 
 interface IUpgrade {
 
-    fun getUnderworldAdditionalValue(stack: ItemStack): Int
+    fun getUnderworldAdditionalValue(stack: ItemStack): Double
 
-    fun getOverworldAdditionalValue(stack: ItemStack): Int
+    fun getSurfaceAdditionalValue(stack: ItemStack): Double
 
-    fun getRainAdditionalValue(stack: ItemStack): Int
+    fun getRainAdditionalValue(stack: ItemStack): Double
 
     fun getEnergyDemandMultiplier(stack: ItemStack): Double
 

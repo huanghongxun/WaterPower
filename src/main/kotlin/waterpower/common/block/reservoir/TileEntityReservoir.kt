@@ -218,7 +218,7 @@ open class TileEntityReservoir(val type: Reservoirs) : TileEntityMultiBlock<Tile
                     continue
                 val upgrade = stack.item as IUpgrade
                 rainLevel += upgrade.getRainAdditionalValue(stack)
-                overLevel += upgrade.getOverworldAdditionalValue(stack)
+                overLevel += upgrade.getSurfaceAdditionalValue(stack)
                 underLevel += upgrade.getUnderworldAdditionalValue(stack)
                 extraStorage += upgrade.getStorageAdditionalValue(stack)
             }

@@ -26,18 +26,18 @@ import waterpower.integration.ic2.ICItemFinder
 @NewInstance(LoaderState.ModState.PREINITIALIZED)
 class ItemPlugins() : ItemEnum<Plugins>("plugin", Plugins.values()), IUpgrade {
 
-    override fun getUnderworldAdditionalValue(stack: ItemStack): Int {
-        if (stack.metadata >= Plugins.values().size) return 0
+    override fun getUnderworldAdditionalValue(stack: ItemStack): Double {
+        if (stack.metadata >= Plugins.values().size) return 0.0
         else return Plugins.values()[stack.itemDamage].under
     }
 
-    override fun getOverworldAdditionalValue(stack: ItemStack): Int {
-        if (stack.metadata >= Plugins.values().size) return 0
+    override fun getSurfaceAdditionalValue(stack: ItemStack): Double {
+        if (stack.metadata >= Plugins.values().size) return 0.0
         else return Plugins.values()[stack.itemDamage].over
     }
 
-    override fun getRainAdditionalValue(stack: ItemStack): Int {
-        if (stack.metadata >= Plugins.values().size) return 0
+    override fun getRainAdditionalValue(stack: ItemStack): Double {
+        if (stack.metadata >= Plugins.values().size) return 0.0
         else return Plugins.values()[stack.itemDamage].rain
     }
 
@@ -96,17 +96,17 @@ class ItemPlugins() : ItemEnum<Plugins>("plugin", Plugins.values()), IUpgrade {
     }
 }
 
-enum class Plugins(val under: Int, val over: Int, val rain: Int, val speed: Double, val storage: Int, val demand: Double)
+enum class Plugins(val under: Double, val over: Double, val rain: Double, val speed: Double, val storage: Int, val demand: Double)
     : INameable {
-    under_mk1(1, 0, 0, 0.0, 0, 0.0),
-    over_mk1(0, 1, 0, 0.0, 0, 0.0),
-    rain_mk1(0, 0, 1, 0.0, 0, 0.0),
-    storage_mk1(0, 0, 0, 0.0, 1, 0.0),
-    storage_mk2(0, 0, 0, 0.0, 4, 0.0),
-    storage_mk3(0, 0, 0, 0.0, 16, 0.0),
-    storage_mk4(0, 0, 0, 0.0, 64, 0.0),
-    all_round_mk1(1, 1, 1, 0.0, 1, 0.0),
-    speed_mk1(0, 0, 0, 0.7, 0, 1.6);
+    under_mk1(0.25, 0.0, 0.0, 0.0, 0, 0.0),
+    over_mk1(0.0, 0.25, 0.0, 0.0, 0, 0.0),
+    rain_mk1(0.0, 0.0, 1.0, 0.0, 0, 0.0),
+    storage_mk1(0.0, 0.0, 0.0, 0.0, 1, 0.0),
+    storage_mk2(0.0, 0.0, 0.0, 0.0, 4, 0.0),
+    storage_mk3(0.0, 0.0, 0.0, 0.0, 16, 0.0),
+    storage_mk4(0.0, 0.0, 0.0, 0.0, 64, 0.0),
+    all_round_mk1(0.25, 0.25, 1.0, 0.0, 1, 0.0),
+    speed_mk1(0.0, 0.0, 0.0, 0.7, 0, 1.6);
 
     override fun getUnlocalizedName() = "waterpower.plugin." + name
 
