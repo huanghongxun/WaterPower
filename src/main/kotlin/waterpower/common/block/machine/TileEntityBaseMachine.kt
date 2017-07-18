@@ -81,7 +81,7 @@ abstract class TileEntityBaseMachine(val defaultEnergyConsume: Int, val defaultO
             energyStorageMultiplier *= Math.pow(1.0, count)
         }
 
-        val previousProgress = this.progress / this.operationLength
+        val previousProgress = 1.0 * this.progress / this.operationLength
 
         val stackOpLen = (this.defaultOperationLength + extraProcessTime) * 64.0 * processTimeMultiplier
         this.operationsPerTick = minOf(Math.ceil(64.0 / stackOpLen), 2147483647.0).toInt()

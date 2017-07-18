@@ -184,7 +184,7 @@ abstract class TileEntityInventory : TileEntityBase(), ISidedInventory {
         var ret = index
         for (invSlot in invSlots)
             if (ret < invSlot.size()) {
-                invSlot.put(index, stack)
+                invSlot.put(ret, stack)
             } else
                 ret -= invSlot.size()
     }

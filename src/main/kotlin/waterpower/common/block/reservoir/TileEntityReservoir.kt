@@ -40,8 +40,8 @@ open class TileEntityReservoir(val type: Reservoirs) : TileEntityMultiBlock<Tile
 
     @Sync val reservoir = Reservoir()
 
-    var defaultStorage = 0
-    var extraStorage = 0
+    var defaultStorage = 0.0
+    var extraStorage = 0.0
 
     var rainLevel = 0.0
     var underLevel = 0.0
@@ -110,8 +110,8 @@ open class TileEntityReservoir(val type: Reservoirs) : TileEntityMultiBlock<Tile
         helper.reservoir(reservoir)
 
         if (reservoir.uuid != null) {
-            defaultStorage = reservoir.capacity * type.capacity
-            fluidTank.capacity = defaultStorage + extraStorage
+            defaultStorage = 1.0 * reservoir.capacity * type.capacity
+            fluidTank.capacity = (defaultStorage + extraStorage).toInt()
         }
 
         return helper.list
@@ -206,7 +206,7 @@ open class TileEntityReservoir(val type: Reservoirs) : TileEntityMultiBlock<Tile
 
     fun refreshPlugins() {
         if (isMaster()) {
-            extraStorage = 0
+            extraStorage = 0.0
             underLevel = 0.0
             overLevel = 0.0
             rainLevel = 0.0
@@ -223,7 +223,7 @@ open class TileEntityReservoir(val type: Reservoirs) : TileEntityMultiBlock<Tile
                 extraStorage += upgrade.getStorageAdditionalValue(stack)
             }
 
-            fluidTank.capacity = defaultStorage + extraStorage
+            fluidTank.capacity = (defaultStorage + extraStorage).toInt()
         }
     }
 

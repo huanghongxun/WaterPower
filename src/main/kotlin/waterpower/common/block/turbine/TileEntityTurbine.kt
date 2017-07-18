@@ -49,7 +49,7 @@ open class TileEntityTurbine(val type: Turbines) : TileEntityRotorGenerator(type
                 multiple = 5
             if (multiple == 0)
                 return 0.0
-            val baseEnergy = 1L * use / 2048 * type.getOutput() * multiple
+            val baseEnergy = 1.0 * use / 2048 * type.getOutput() * multiple
             val per = getEfficiency()
             if (per > 0) {
                 val energy = baseEnergy * per

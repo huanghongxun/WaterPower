@@ -53,14 +53,14 @@ class InventorySlotOutput(base: TileEntityInventory, name: String, count: Int) :
                         if (space > 0 && isStackEqual(itemStack, existingItemStack)) {
                             if (space >= amount) {
                                 if (!simulate)
-                                    existingItemStack = grow(existingItemStack)
+                                    existingItemStack = grow(existingItemStack, amount)
 
                                 amount = 0
                             } else {
                                 amount -= space
 
                                 if (!simulate)
-                                    existingItemStack = grow(existingItemStack)
+                                    existingItemStack = grow(existingItemStack, space)
                             }
                         }
                     } else if (pass == 1 && isStackEmpty(existingItemStack)) {

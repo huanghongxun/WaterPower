@@ -9,12 +9,14 @@ package waterpower.common.block.attachment
 
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.EnumFacing
+import net.minecraft.util.math.BlockPos
 import net.minecraftforge.common.capabilities.Capability
 
 abstract class TileEntityAttachment(val master: waterpower.common.block.tile.TileEntityBase) {
     abstract fun getName(): String
     open fun readFromNBT(tag: NBTTagCompound) {}
     open fun writeToNBT(): NBTTagCompound? = null
+    open fun onNeighborTileChange(neighbor: BlockPos) {}
     open fun onLoaded() {}
     open fun onUnloaded() {}
     open fun onTick() {}

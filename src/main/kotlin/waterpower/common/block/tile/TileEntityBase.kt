@@ -41,7 +41,10 @@ open class TileEntityBase : TileEntity(), ITickable {
 
     fun isServerSide() = !getWorld().isRemote
 
-    open fun onNeighborTileChanged(pos: BlockPos) {}
+    open fun onNeighborTileChanged(pos: BlockPos) {
+        for (a in attachments.values)
+            a.onNeighborTileChange(pos)
+    }
     open fun onNeighborBlockChanged() {}
     open fun onUpdate() {
         for (a in attachments.values)

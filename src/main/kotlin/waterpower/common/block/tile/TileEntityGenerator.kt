@@ -13,6 +13,7 @@ import net.minecraft.client.Minecraft
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
+import net.minecraftforge.common.capabilities.Capability
 import net.minecraftforge.fml.common.Optional
 import net.minecraftforge.fml.common.Optional.Interface
 import net.minecraftforge.fml.common.Optional.InterfaceList
@@ -80,6 +81,13 @@ abstract class TileEntityGenerator(production: Int, maxStorage: Double, tier: In
         return isServerSide()
     }
 
+    override fun onNeighborTileChanged(pos: BlockPos) {
+        super.onNeighborTileChanged(pos)
+
+        if (energyAttachments.containsKey(getEnergyUnit()))
+            energyAttachments[getEnergyUnit()]!!.onNeighborTileChange(pos)
+    }
+
     protected abstract fun computeOutput(world: World, pos: BlockPos): Double
 
     override fun update() {
@@ -97,6 +105,14 @@ abstract class TileEntityGenerator(production: Int, maxStorage: Double, tier: In
             if (energyAttachments.containsKey(getEnergyUnit()))
                 energyAttachments[getEnergyUnit()]!!.onTick()
         }
+    }
+
+    override fun onUpdate() {
+        super.onUpdate()
+
+        if (!isRedstonePowered())
+            if (energyAttachments.containsKey(getEnergyUnit()))
+                energyAttachments[getEnergyUnit()]!!.onUpdate()
     }
 
     /**
@@ -168,5 +184,22 @@ abstract class TileEntityGenerator(production: Int, maxStorage: Double, tier: In
     fun onUnitChanged(t: Energy) {
         energyType = t.ordinal
         NetworkHandler.instance.sendToServer(PacketUnitChanged(Minecraft.getMinecraft().player.world.provider.getDimension(), pos, getEnergyUnit()))
+    }
+
+    override fun <T> getCapability(capability: Capability<T>, facing: EnumFacing?): T? {
+        var cap: T? = null
+        if (energyAttachments.containsKey(getEnergyUnit()))
+            cap = energyAttachments[getEnergyUnit()]!!.getCapability(capability, facing)
+        if (cap == null)
+            cap = super.getCapability(capability, facing)
+        return cap
+    }
+
+    override fun hasCapability(capability: Capability<*>, facing: EnumFacing?): Boolean {
+        if (super.hasCapability(capability, facing)) return true
+        if (energyAttachments.containsKey(getEnergyUnit()))
+            return energyAttachments[getEnergyUnit()]!!.getCapabilities(facing).contains(capability)
+        else
+            return false
     }
 }
