@@ -42,7 +42,6 @@ object InitParser {
             else
                 initsLast[state]!!.add(handle)
         } catch(ignore: NoSuchMethodException) {
-            ignore.printStackTrace()
         }
     }
 

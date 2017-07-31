@@ -32,8 +32,8 @@ class PacketTileEntity() : Packet<PacketTileEntity>() {
     }
 
     override fun onMessage(message: PacketTileEntity, ctx: MessageContext): IMessage? {
-        val world = getWorld()
-        val te = world!!.getTileEntity(BlockPos.fromLong(message.pos))
+        val world = getWorld() ?: return null
+        val te = world.getTileEntity(BlockPos.fromLong(message.pos))
         if (te is TileEntityBase)
             message.base = te
         else

@@ -53,7 +53,7 @@ object AnnotationSystem {
                 if (parser != null)
                     parsers.add(ClassEngine.lookup.findStatic(clazz, "loadClass", MethodType.methodType(Void.TYPE, Class::class.java)))
             } catch(ignore: ClassNotFoundException) {
-                ignore.printStackTrace()
+            } catch(ignore2: NoClassDefFoundError) {
             }
         }
 
@@ -68,9 +68,7 @@ object AnnotationSystem {
                 for (handle in parsers)
                     JavaAdapter.invokeMethodHandle(handle, clazz)
             } catch(ignore1: ClassNotFoundException) {
-                ignore1.printStackTrace()
             } catch(ignore2: NoClassDefFoundError) {
-                ignore2.printStackTrace()
             }
         }
     }
