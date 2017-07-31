@@ -52,7 +52,7 @@ class ItemCrafting : ItemEnum<EnumCrafting>("crafting", EnumCrafting.values()) {
             OreDictionary.registerOre("dustDiamond", get(EnumCrafting.diamond_dust))
 
             val ic2 = Mod.IndustrialCraft2.isAvailable
-            val copperCable: Any = getItemStack(IDs.Mekanism, "PartTransmitter", 2) ?: emptyStack
+            val copperCable: Any = getItemStack(IDs.Mekanism, "universal_cable_elite") ?: emptyStack
             val industrialDiamond: Any = ICItemFinder.getItem("crafting", "industrial_diamond") ?: "gemDiamond"
             val advancedAlloy: Any = ICItemFinder.getItem("crafting", "alloy") ?: "plateSteel"
             val iridiumPlate: Any = ICItemFinder.getItem("crafting", "iridium") ?: "plateVanadiumSteel"
@@ -72,7 +72,7 @@ class ItemCrafting : ItemEnum<EnumCrafting>("crafting", EnumCrafting.values()) {
             } else {
                 Recipes.blastFurnace(ItemStack(Items.COAL), ItemCrafting.get(EnumCrafting.high_purity_carbon_dust), 1000)
             }
-            if (ic2 && Mod.Mekanism.isAvailable) {
+            if (ic2 && Mod.Mekanism.isAvailable && copperCable != emptyStack) {
                 flag = 1
                 craftShapeless(get(EnumCrafting.dense_copper_coil), ICItemFinder.getItem("crafting", "coil"), copperCable)
             }

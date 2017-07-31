@@ -43,7 +43,7 @@ fun getBlock(loc: ResourceLocation): Block?
 fun getBlock(name: String): Block?
         = getBlock(ResourceLocation(name))
 
-fun getItemStack(modName: String, itemName: String, meta: Int, amount: Int = 1): ItemStack? {
+fun getItemStack(modName: String, itemName: String, meta: Int = 0, amount: Int = 1): ItemStack? {
     val item = getItem(ResourceLocation(modName, itemName))
     if (item == null) return null
     else return ItemStack(item, amount, meta)

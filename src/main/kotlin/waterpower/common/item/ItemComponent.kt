@@ -98,8 +98,8 @@ class ItemComponent : ItemColorable("component") {
             OreDictionary.registerOre("circuitElite", get(circuit, MK5))
             OreDictionary.registerOre("circuitUltimate", get(circuit, MK7))
 
-            val copperCable = getItemStack(IDs.Mekanism, "PartTransmitter", 2) ?: emptyStack
-            val goldCable = getItemStack(IDs.Mekanism, "PartTransmitter", 3) ?: emptyStack
+            val copperCable = getItemStack(IDs.Mekanism, "universal_cable_elite") ?: emptyStack
+            val goldCable = getItemStack(IDs.Mekanism, "universal_cable_ultimate") ?: emptyStack
 
             craft(get(stator, MK1), "M", "M", 'M', "dustMagnetite")
             craft(get(casing, MK1), "WSW", "WSW", "WSW", 'W', ItemCrafting.get(EnumCrafting.stone_structure), 'S', Blocks.STONEBRICK)
@@ -114,7 +114,7 @@ class ItemComponent : ItemColorable("component") {
                         'W', "plankWood")
                 craftShapeless(get(circuit, MK1), ItemCrafting.get(EnumCrafting.water_resistant_rubber), "circuitBasic")
             }
-            if (Mod.Mekanism.isAvailable) {
+            if (Mod.Mekanism.isAvailable && goldCable != emptyStack) {
                 flag = 1
                 craft(get(outputInterface, MK1), "GW", " G", "GW", 'G', goldCable, 'W', "plankWood")
                 craftShapeless(get(circuit, MK1), ItemCrafting.get(EnumCrafting.water_resistant_rubber),
@@ -139,7 +139,7 @@ class ItemComponent : ItemColorable("component") {
                 craft(get(rotor, MK1), "CCC", "CAC", "CCC", 'C', ICItemFinder.getItem("cable", "type:copper,insulation:0"), 'A',
                         "dustMagnetite")
             }
-            if (Mod.Mekanism.isAvailable) {
+            if (Mod.Mekanism.isAvailable && copperCable != emptyStack) {
                 flag = 1
                 craft(get(rotor, MK1), "CCC", "CAC", "CCC", 'C', copperCable, 'A', "dustMagnetite")
             }
@@ -178,7 +178,7 @@ class ItemComponent : ItemColorable("component") {
                         ItemCrafting.get(EnumCrafting.dense_copper_coil), 'I', "ingotIron")
             }
 
-            if (Mod.Mekanism.isAvailable) {
+            if (Mod.Mekanism.isAvailable && goldCable != emptyStack) {
                 flag = 1
                 craft(get(rotor, MK3), "CIC", "GIG", "G G", 'G', goldCable, 'C', ItemCrafting.get(EnumCrafting.dense_copper_coil), 'I',
                         "ingotIron")
