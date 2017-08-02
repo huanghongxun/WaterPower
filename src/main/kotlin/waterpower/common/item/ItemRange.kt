@@ -35,11 +35,12 @@ class ItemRange : ItemEnum<RangePlugins>("range", RangePlugins.values()) {
     companion object {
         @JvmStatic
         fun init() {
-            val machine: Any = ICItemFinder.getItem("resource", "machine") ?: getItemStack(IDs.Mekanism, "BasicBlock", 8) ?: "blockIron"
+            var flag = false
 
             if (Mod.IndustrialCraft2.isAvailable) {
+                flag = true
                 Recipes.craft(WPItems.range.getItemStack(RangePlugins.MK1), "WSW", "SAS", "WSW", 'W', "circuitBasic", 'S', ICItemFinder.getItem("te,batbox"),
-                        'A', machine)
+                        'A', ICItemFinder.getItem("resource", "machine"))
                 Recipes.craft(WPItems.range.getItemStack(RangePlugins.MK2), "WSW", "SAS", "WSW", 'W', "circuitAdvanced", 'S',
                         ICItemFinder.getItem("te", "cesu"), 'A', WPItems.range.getItemStack(RangePlugins.MK1))
                 Recipes.craft(WPItems.range.getItemStack(RangePlugins.MK3), "WSW", "SAS", "WSW", 'W',
@@ -47,9 +48,24 @@ class ItemRange : ItemEnum<RangePlugins>("range", RangePlugins.values()) {
                 //addRecipeByOreDictionary(WPItems.range.getItemStack(RangePlugins.MK4), "WSW", "SAS", "WSW", 'W',
                 //        getUsualItemStack(ICItemFinder.getItem("lapotron_crystal")), 'S', ICItemFinder.getItem("te,mfe"), 'A', ItemStack(
                 //        GlobalItems.range, 1, 2))
-            } else {
+            }
+
+            if (Mod.Mekanism.isAvailable) {
+                flag = true
+                Recipes.craft(WPItems.range.getItemStack(RangePlugins.MK1), "WSW", "SAS", "WSW", 'W', "circuitBasic", 'S', ICItemFinder.getItem("te,batbox"),
+                        'A', getItemStack(IDs.Mekanism, "basicblock", 8))
+                Recipes.craft(WPItems.range.getItemStack(RangePlugins.MK2), "WSW", "SAS", "WSW", 'W', "circuitAdvanced", 'S',
+                        ICItemFinder.getItem("te", "cesu"), 'A', WPItems.range.getItemStack(RangePlugins.MK1))
+                Recipes.craft(WPItems.range.getItemStack(RangePlugins.MK3), "WSW", "SAS", "WSW", 'W',
+                        ICItemFinder.getItem("energy_crystal")?.generalize(), 'S', ICItemFinder.getItem("te,mfe"), 'A', WPItems.range.getItemStack(RangePlugins.MK2))
+                //addRecipeByOreDictionary(WPItems.range.getItemStack(RangePlugins.MK4), "WSW", "SAS", "WSW", 'W',
+                //        getUsualItemStack(ICItemFinder.getItem("lapotron_crystal")), 'S', ICItemFinder.getItem("te,mfe"), 'A', ItemStack(
+                //        GlobalItems.range, 1, 2))
+            }
+
+            if (flag) {
                 Recipes.craft(WPItems.range.getItemStack(RangePlugins.MK1), "WSW", "SAS", "WSW", 'W', ItemComponent.get(EnumComponent.circuit, EnumLevel.MK1), 'S', ItemComponent.get(EnumComponent.rotationAxle, EnumLevel.MK3),
-                        'A', machine)
+                        'A', "blockIron")
                 Recipes.craft(WPItems.range.getItemStack(RangePlugins.MK2), "WSW", "SAS", "WSW", 'W', ItemComponent.get(EnumComponent.circuit, EnumLevel.MK3), 'S',
                         ItemComponent.get(EnumComponent.rotationAxle, EnumLevel.MK4), 'A', WPItems.range.getItemStack(RangePlugins.MK1))
                 Recipes.craft(WPItems.range.getItemStack(RangePlugins.MK3), "WSW", "SAS", "WSW", 'W',

@@ -74,7 +74,7 @@ object MekanismModule : IModule() {
 
         for (ore in Ores.values()) {
             val stack = WPBlocks.ore.getItemStack(ore)
-            enrichmentChamber(stack, WPItems.material.getItemStack(ore.material, MaterialForms.dust))
+            enrichmentChamber(stack, WPItems.material.getItemStack(ore.material, MaterialForms.dust, 2))
         }
     }
 }
