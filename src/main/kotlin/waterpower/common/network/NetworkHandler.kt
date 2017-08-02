@@ -19,6 +19,7 @@ import java.util.*
 
 @Init
 @Parser
+@Suppress("UNCHECKED_CAST")
 object NetworkHandler {
 
     val instance = NetworkRegistry.INSTANCE.newSimpleChannel(WaterPower.MOD_ID)

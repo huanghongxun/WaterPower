@@ -98,6 +98,8 @@ object TileEntityMachines {
             Recipes.cutters += { input: ItemStack, output: ItemStack -> RecipeManagers.cutter.addRecipe(input, output) }
 
         RecipeManagers.lathe = MultiRecipeManager()
+        Recipes.lathes += { input: ItemStack, output: ItemStack -> RecipeManagers.lathe.addRecipe(input, output) }
+
         RecipeManagers.advCompressor = MultiRecipeManager()
         RecipeManagers.crusher = MultiRecipeManager()
         if (Mod.IndustrialCraft2.isAvailable)

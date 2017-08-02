@@ -84,7 +84,6 @@ class ItemTrouser(val type: EnumWatermill) : ItemArmor(ItemArmor.ArmorMaterial.D
 
     private fun tryToCharge(stack: ItemStack?) {
         if (stack != null && stack.item is IElectricItem) {
-            val electricItem = stack.item as IElectricItem
             saved -= ElectricItem.manager.charge(stack, saved, 2147483647, true, false)
         }
     }
