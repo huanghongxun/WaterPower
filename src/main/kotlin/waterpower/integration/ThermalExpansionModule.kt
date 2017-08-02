@@ -17,14 +17,47 @@ import waterpower.util.isStackEmpty
 
 @Integration(IDs.ThermalExpansion)
 object ThermalExpansionModule : IModule() {
-    fun addFurnaceRecipe(energy: Int, input: ItemStack, output: ItemStack) {
+
+    fun addFurnaceRecipe(energy: Int, input: ItemStack, output: ItemStack): Boolean {
         val toSend = NBTTagCompound()
         toSend.setInteger("energy", energy)
         toSend.setTag("input", NBTTagCompound())
         toSend.setTag("output", NBTTagCompound())
         input.writeToNBT(toSend.getCompoundTag("input"))
         output.writeToNBT(toSend.getCompoundTag("output"))
-        FMLInterModComms.sendMessage("ThermalExpansion", "FurnaceRecipe", toSend)
+        return FMLInterModComms.sendMessage(IDs.ThermalExpansion, "AddFurnaceRecipe", toSend)
+    }
+
+    fun furnace(input: ItemStack, output: ItemStack): Boolean {
+        return addFurnaceRecipe(3200, input, output)
+    }
+
+    fun addCompactorPressRecipe(energy: Int, input: ItemStack, output: ItemStack): Boolean {
+        val toSend = NBTTagCompound()
+        toSend.setInteger("energy", energy)
+        toSend.setTag("input", NBTTagCompound())
+        toSend.setTag("output", NBTTagCompound())
+        input.writeToNBT(toSend.getCompoundTag("input"))
+        output.writeToNBT(toSend.getCompoundTag("output"))
+        return FMLInterModComms.sendMessage(IDs.ThermalExpansion, "AddCompactorPressRecipe", toSend)
+    }
+
+    fun bender(input: ItemStack, output: ItemStack): Boolean {
+        return addCompactorPressRecipe(3200, input, output)
+    }
+
+    fun addCompactorStorageRecipe(energy: Int, input: ItemStack, output: ItemStack): Boolean {
+        val toSend = NBTTagCompound()
+        toSend.setInteger("energy", energy)
+        toSend.setTag("input", NBTTagCompound())
+        toSend.setTag("output", NBTTagCompound())
+        input.writeToNBT(toSend.getCompoundTag("input"))
+        output.writeToNBT(toSend.getCompoundTag("output"))
+        return FMLInterModComms.sendMessage(IDs.ThermalExpansion, "AddCompactorStorageRecipe", toSend)
+    }
+
+    fun compressor(input: ItemStack, output: ItemStack): Boolean {
+        return addCompactorStorageRecipe(3200, input, output)
     }
 
     fun addPulverizerRecipe(energy: Int, input: ItemStack, primaryOutput: ItemStack) =
@@ -42,7 +75,7 @@ object ThermalExpansionModule : IModule() {
         primaryOutput.writeToNBT(toSend.getCompoundTag("primaryOutput"))
         secondaryOutput.writeToNBT(toSend.getCompoundTag("secondaryOutput"))
         toSend.setInteger("secondaryChance", secondaryChance)
-        return FMLInterModComms.sendMessage("ThermalExpansion", "PulverizerRecipe", toSend)
+        return FMLInterModComms.sendMessage(IDs.ThermalExpansion, "AddPulverizerRecipe", toSend)
     }
 
     fun crusher(input: ItemStack, output: ItemStack) =
@@ -63,7 +96,7 @@ object ThermalExpansionModule : IModule() {
         primaryOutput.writeToNBT(toSend.getCompoundTag("primaryOutput"))
         secondaryOutput.writeToNBT(toSend.getCompoundTag("secondaryOutput"))
         toSend.setInteger("secondaryChance", secondaryChance)
-        return FMLInterModComms.sendMessage("ThermalExpansion", "SawmillRecipe", toSend)
+        return FMLInterModComms.sendMessage(IDs.ThermalExpansion, "AddSawmillRecipe", toSend)
     }
 
     fun sawmill(input: ItemStack, output: ItemStack) =
@@ -87,7 +120,7 @@ object ThermalExpansionModule : IModule() {
         primaryOutput.writeToNBT(toSend.getCompoundTag("primaryOutput"))
         secondaryOutput.writeToNBT(toSend.getCompoundTag("secondaryOutput"))
         toSend.setInteger("secondaryChance", secondaryChance)
-        return FMLInterModComms.sendMessage("ThermalExpansion", "SmelterRecipe", toSend)
+        return FMLInterModComms.sendMessage(IDs.ThermalExpansion, "AddSmelterRecipe", toSend)
     }
 
     fun blastFurnace(input: ItemStack, output: ItemStack, time: Int) =
@@ -96,6 +129,9 @@ object ThermalExpansionModule : IModule() {
     override fun onInit() {
         super.onInit()
 
+        //Recipes.furnaces += this::furnace
+        Recipes.benders += this::bender
+        Recipes.compressors += this::compressor
         Recipes.crushers += this::crusher
         Recipes.sawmills += this::sawmill
     }
