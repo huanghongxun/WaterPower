@@ -52,7 +52,7 @@ class ItemCrafting : ItemEnum<EnumCrafting>("crafting", EnumCrafting.values()) {
             OreDictionary.registerOre("dustDiamond", get(EnumCrafting.diamond_dust))
 
             val ic2 = Mod.IndustrialCraft2.isAvailable
-            val copperCable: Any = getItemStack(IDs.Mekanism, "universal_cable_elite") ?: emptyStack
+            val copperCable = getItemStack(IDs.Mekanism, "transmitter", 2) ?: emptyStack
             val industrialDiamond: Any = ICItemFinder.getItem("crafting", "industrial_diamond") ?: "gemDiamond"
             val advancedAlloy: Any = ICItemFinder.getItem("crafting", "alloy") ?: "plateSteel"
             val iridiumPlate: Any = ICItemFinder.getItem("crafting", "iridium") ?: "plateVanadiumSteel"

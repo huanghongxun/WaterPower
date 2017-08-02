@@ -46,14 +46,13 @@ class ItemOreDust() : ItemColorable("crushed") {
             = RecolorableTextures.CRUSHED
 
     override fun getItemStackDisplayName(stack: ItemStack)
-            = i18n(Ores.values()[stack.itemDamage].getUnlocalizedName()) + " " +
-            i18n("waterpower.forms.crushed")
+            = i18n("waterpower.crushed." + Ores.values()[stack.itemDamage].getName())
 
     override fun getUnlocalizedName(stack: ItemStack) =
             if (stack.itemDamage >= Ores.values().size)
                 null
             else
-                "waterpower.crushed." + Ores.values()[stack.itemDamage].name
+                "waterpower.crushed." + Ores.values()[stack.itemDamage].getName()
 
     override fun stopScanning(stack: ItemStack)
             = stack.itemDamage >= Ores.values().size

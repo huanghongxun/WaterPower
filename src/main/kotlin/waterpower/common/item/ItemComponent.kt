@@ -98,8 +98,8 @@ class ItemComponent : ItemColorable("component") {
             OreDictionary.registerOre("circuitElite", get(circuit, MK5))
             OreDictionary.registerOre("circuitUltimate", get(circuit, MK7))
 
-            val copperCable = getItemStack(IDs.Mekanism, "universal_cable_elite") ?: emptyStack
-            val goldCable = getItemStack(IDs.Mekanism, "universal_cable_ultimate") ?: emptyStack
+            val copperCable = getItemStack(IDs.Mekanism, "transmitter", 2) ?: emptyStack
+            val goldCable = getItemStack(IDs.Mekanism, "transmitter", 3) ?: emptyStack
 
             craft(get(stator, MK1), "M", "M", 'M', "dustMagnetite")
             craft(get(casing, MK1), "WSW", "WSW", "WSW", 'W', ItemCrafting.get(EnumCrafting.stone_structure), 'S', Blocks.STONEBRICK)

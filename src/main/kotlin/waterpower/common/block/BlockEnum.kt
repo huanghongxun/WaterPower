@@ -52,6 +52,9 @@ where T : Enum<T>, T : INameable {
         return createBlockStateImpl()
     }
 
+    open fun getItemStackDisplayName(stack: ItemStack) =
+            types[stack.itemDamage].getLocalizedName()
+
     open fun createBlockStateImpl() = BlockStateContainer(this, TYPES)
 
     override fun maxMetaData() = types.size

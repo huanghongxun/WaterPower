@@ -10,6 +10,7 @@ package waterpower.common.block.ore
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
 import net.minecraft.client.Minecraft
+import net.minecraft.item.ItemStack
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
 import net.minecraftforge.fml.common.LoaderState
@@ -18,6 +19,7 @@ import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.oredict.OreDictionary
 import waterpower.annotations.Init
 import waterpower.annotations.NewInstance
+import waterpower.client.i18n
 import waterpower.client.render.block.BlockColor
 import waterpower.common.block.BlockEnum
 import waterpower.common.init.WPBlocks
@@ -39,6 +41,13 @@ class BlockMaterial : BlockEnum<MaterialTypes>("material_block", Material.ROCK, 
     override fun colorMultiplier(state: IBlockState, world: IBlockAccess?, pos: BlockPos?, index: Int): Int {
         val type = getTypeFromState(state)
         return Color(type.R, type.G, type.B, type.A).rgb
+    }
+
+    override fun getItemStackDisplayName(stack: ItemStack): String {
+        val meta = stack.itemDamage
+        return i18n("waterpower.material.format")
+                .replace("{forms}", i18n("waterpower.forms.block"))
+                .replace("{material}", MaterialTypes.values()[meta].getLocalizedName())
     }
 
     companion object {

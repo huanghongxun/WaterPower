@@ -22,8 +22,7 @@ where T : Enum<T>, T : INameable, T : IStringSerializable {
         setHasSubtypes(true)
     }
 
-    override fun getItemStackDisplayName(stack: ItemStack) =
-            types[stack.itemDamage].getLocalizedName()
+    override fun getItemStackDisplayName(stack: ItemStack) = blockEnum.getItemStackDisplayName(stack)
 
     override fun getMetadata(damage: Int) =
             if (damage < blockEnum.maxMetaData()) damage

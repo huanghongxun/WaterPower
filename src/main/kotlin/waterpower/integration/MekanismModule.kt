@@ -7,11 +7,17 @@
  */
 package waterpower.integration
 
+import net.minecraft.block.Block
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraftforge.fml.common.Optional
 import net.minecraftforge.fml.common.event.FMLInterModComms
 import waterpower.annotations.Integration
+import waterpower.common.block.ore.BlockOre
+import waterpower.common.block.ore.Ores
+import waterpower.common.init.WPBlocks
+import waterpower.common.init.WPItems
+import waterpower.common.item.MaterialForms
 import waterpower.common.recipe.Recipes
 
 @Integration(IDs.Mekanism)
@@ -31,10 +37,15 @@ object MekanismModule : IModule() {
     }
 
     @Optional.Method(modid = IDs.Mekanism)
-    fun crusher(stack: ItemStack, output: ItemStack): Boolean {
-        val sendTag = convertToSimpleRecipe(stack, output)
+    fun crusher(stack: ItemStack, output: ItemStack) = recipe(stack, output, "Crusher")
 
-        return FMLInterModComms.sendMessage(IDs.Mekanism, "CrusherRecipe", sendTag)
+    @Optional.Method(modid = IDs.Mekanism)
+    fun enrichmentChamber(stack: ItemStack, output: ItemStack) = recipe(stack, output, "EnrichmentChamber")
+
+    private fun recipe(input: ItemStack, output: ItemStack, recipeName: String): Boolean {
+        val sendTag = convertToSimpleRecipe(input, output)
+
+        return FMLInterModComms.sendMessage(IDs.Mekanism, "${recipeName}Recipe", sendTag)
     }
 
     private fun convertToSimpleRecipe(input: ItemStack, out: ItemStack): NBTTagCompound {
@@ -56,5 +67,14 @@ object MekanismModule : IModule() {
 
         Recipes.crushers += this::crusher
         Recipes.blastFurnaces += this::blastFurnace
+    }
+
+    override fun onInit() {
+        super.onInit()
+
+        for (ore in Ores.values()) {
+            val stack = WPBlocks.ore.getItemStack(ore)
+            enrichmentChamber(stack, WPItems.material.getItemStack(ore.material, MaterialForms.dust))
+        }
     }
 }
