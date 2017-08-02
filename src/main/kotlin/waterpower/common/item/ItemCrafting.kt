@@ -61,7 +61,7 @@ class ItemCrafting : ItemEnum<EnumCrafting>("crafting", EnumCrafting.values()) {
             val transformerUpgrade: Any = ICItemFinder.getItem("upgrade", "transformer") ?: "circuitBasic"
 
             craft(get(EnumCrafting.stone_structure), "WW ", "WWS", "WW ", 'W', Blocks.STONEBRICK, 'S', WPItems.hammer)
-            craft(ItemStack(WPItems.hammer), "WW ", "WWI", "WW ", 'W', "logWood", 'I', Items.STICK)
+            craft(ItemStack(WPItems.hammerItem), "WW ", "WWI", "WW ", 'W', "logWood", 'I', Items.STICK)
             craft(get(EnumCrafting.silver_coil), "SSS", "SIS", "SSS", 'S', "ingotSilver", 'I', "ingotIndustrialSteel")
             craft(get(EnumCrafting.silver_coil), "SSS", "SIS", "SSS", 'S', "ingotNeodymium", 'I', "ingotIndustrialSteel")
             var flag = 0

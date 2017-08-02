@@ -181,7 +181,7 @@ class ItemMaterial() : ItemColorable("material") {
                     Recipes.crusher(get(type, ring), get(type, dust, 2)) // steel -> iron dust
                 }
 
-                Recipes.craftShapeless(get(type, plateDense), ItemStack(WPItems.hammer), WPBlocks.material.getItemStack(type))
+                Recipes.craftShapeless(get(type, plateDense), WPItems.hammer, WPBlocks.material.getItemStack(type))
             }
 
             if (!waterpower.integration.Mod.IndustrialCraft2.isAvailable) {

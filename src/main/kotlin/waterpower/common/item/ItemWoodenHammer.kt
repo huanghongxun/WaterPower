@@ -18,6 +18,7 @@ import waterpower.client.i18n
 import waterpower.client.render.IIconRegister
 import waterpower.client.render.item.IItemIconProvider
 import waterpower.common.init.WPItems
+import waterpower.util.generalize
 
 @NewInstance(LoaderState.ModState.PREINITIALIZED)
 class ItemWoodenHammer() : ItemTool("wooden_hammer", 20), IItemIconProvider, IIconRegister {
@@ -25,7 +26,8 @@ class ItemWoodenHammer() : ItemTool("wooden_hammer", 20), IItemIconProvider, IIc
     init {
         unlocalizedName = "waterpower.crafting.wooden_hammer"
 
-        WPItems.hammer = this
+        WPItems.hammerItem = this
+        WPItems.hammer = ItemStack(this).generalize()
         WPItems.items += this
     }
 

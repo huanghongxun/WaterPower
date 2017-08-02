@@ -8,6 +8,7 @@
 package waterpower.common.init
 
 import net.minecraft.item.Item
+import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
 import waterpower.common.block.watermill.EnumWatermill
 import waterpower.common.item.*
@@ -21,7 +22,8 @@ object WPItems {
     lateinit var material: ItemMaterial
     lateinit var crafting: ItemCrafting
     lateinit var range: ItemRange
-    lateinit var hammer: ItemWoodenHammer
+    lateinit var hammerItem: ItemWoodenHammer
+    lateinit var hammer: ItemStack
     lateinit var plugin: ItemPlugins
     lateinit var component: ItemComponent
     val trousers = EnumMap<EnumWatermill, ItemTrouser>(EnumWatermill::class.java)
