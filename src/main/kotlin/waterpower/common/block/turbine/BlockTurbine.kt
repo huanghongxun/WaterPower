@@ -10,6 +10,7 @@ package waterpower.common.block.turbine
 import net.minecraft.block.material.Material
 import net.minecraft.init.Blocks
 import net.minecraftforge.fml.common.LoaderState
+import net.minecraftforge.fml.common.eventhandler.EventPriority
 import waterpower.annotations.Init
 import waterpower.annotations.NewInstance
 import waterpower.common.block.BlockRotor
@@ -21,7 +22,7 @@ import waterpower.common.recipe.Recipes
 import waterpower.integration.Mod
 import waterpower.integration.ic2.ICItemFinder
 
-@Init
+@Init(priority = EventPriority.LOW)
 @NewInstance(LoaderState.ModState.PREINITIALIZED)
 class BlockTurbine : BlockRotor<Turbines>("turbine", Material.IRON, Turbines::class.java) {
 
@@ -32,7 +33,7 @@ class BlockTurbine : BlockRotor<Turbines>("turbine", Material.IRON, Turbines::cl
 
     companion object {
         @JvmStatic
-        fun postInit() {
+        fun init() {
             val carbonPlate: Any = ICItemFinder.getItem("crafting", "carbon_plate") ?: "gemDiamond"
             val transformerUpgrade: Any = ICItemFinder.getItem("upgrade", "transformer") ?: "circuitBasic"
             val advancedMachine: Any = ICItemFinder.getItem("resource,advanced_machine") ?: "blockVanadiumSteel"

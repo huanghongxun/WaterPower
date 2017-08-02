@@ -13,6 +13,7 @@ import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
 import net.minecraft.util.NonNullList
 import net.minecraftforge.fml.common.LoaderState
+import net.minecraftforge.fml.common.eventhandler.EventPriority
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.oredict.OreDictionary
@@ -35,7 +36,7 @@ import waterpower.util.generalize
 import waterpower.util.getItemStack
 import java.awt.Color
 
-@Init
+@Init(priority = EventPriority.LOW)
 @NewInstance(LoaderState.ModState.PREINITIALIZED)
 class ItemComponent : ItemColorable("component") {
     init {
@@ -92,7 +93,7 @@ class ItemComponent : ItemColorable("component") {
                 WPItems.component.getItemStack(form, type, amount)
 
         @JvmStatic
-        fun postInit() {
+        fun init() {
             OreDictionary.registerOre("circuitBasic", get(circuit, MK1))
             OreDictionary.registerOre("circuitAdvanced", get(circuit, MK3))
             OreDictionary.registerOre("circuitElite", get(circuit, MK5))

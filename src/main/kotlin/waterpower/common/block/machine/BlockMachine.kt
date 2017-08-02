@@ -11,6 +11,7 @@ import net.minecraft.block.material.Material
 import net.minecraft.init.Blocks
 import net.minecraft.init.Items
 import net.minecraftforge.fml.common.LoaderState
+import net.minecraftforge.fml.common.eventhandler.EventPriority
 import waterpower.annotations.Init
 import waterpower.annotations.NewInstance
 import waterpower.common.block.BlockEnumTile
@@ -23,7 +24,7 @@ import waterpower.common.item.ItemComponent.Companion.get
 import waterpower.common.item.ItemCrafting
 import waterpower.common.recipe.Recipes.craft
 
-@Init
+@Init(priority = EventPriority.LOW)
 @NewInstance(LoaderState.ModState.PREINITIALIZED)
 class BlockMachine : BlockEnumTile<Machines>("machine", Material.IRON, Machines::class.java) {
     init {
@@ -41,7 +42,7 @@ class BlockMachine : BlockEnumTile<Machines>("machine", Material.IRON, Machines:
 
     companion object {
         @JvmStatic
-        fun postInit() {
+        fun init() {
             craft(WPBlocks.sawmill, " H ", "CPC", "KKK", 'H', WPItems.hammer, 'C',
                     get(casing, MK1), 'K', Blocks.STONEBRICK, 'P', ItemCrafting.get(EnumCrafting.diamond_blade));
             craft(WPBlocks.sawmill, " H ", "CPC", "KKK", 'H', WPItems.hammer, 'C',

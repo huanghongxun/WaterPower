@@ -24,6 +24,7 @@ import net.minecraft.util.ResourceLocation
 import net.minecraft.world.World
 import net.minecraft.world.biome.Biome
 import net.minecraftforge.common.ISpecialArmor
+import net.minecraftforge.fml.common.eventhandler.EventPriority
 import net.minecraftforge.fml.common.registry.ForgeRegistries
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
@@ -38,7 +39,7 @@ import waterpower.common.init.WPItems
 import waterpower.common.recipe.Recipes
 import waterpower.util.getWaterIncomeAndExpenseByBiome
 
-@Init
+@Init(priority = EventPriority.LOW)
 class ItemTrouser(val type: EnumWatermill) : ItemArmor(ItemArmor.ArmorMaterial.DIAMOND, -1, EntityEquipmentSlot.LEGS), ISpecialArmor, IIconRegister, IItemIconProvider {
     var saved = 0.0
 
@@ -125,7 +126,7 @@ class ItemTrouser(val type: EnumWatermill) : ItemArmor(ItemArmor.ArmorMaterial.D
         }
 
         @JvmStatic
-        fun postInit() {
+        fun init() {
             for (i in EnumWatermill.values()) {
                 Recipes.craftShapeless(ItemStack(WPItems.trousers[i], 1, 0), WPBlocks.watermill.getItemStack(i),
                         Items.IRON_LEGGINGS)

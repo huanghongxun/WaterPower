@@ -9,6 +9,7 @@ package waterpower.common.block.watermill
 
 import net.minecraft.block.material.Material
 import net.minecraftforge.fml.common.LoaderState
+import net.minecraftforge.fml.common.eventhandler.EventPriority
 import waterpower.annotations.Init
 import waterpower.annotations.NewInstance
 import waterpower.common.block.BlockRotor
@@ -19,7 +20,7 @@ import waterpower.integration.Mod
 import waterpower.integration.ic2.ICItemFinder
 import waterpower.util.generalize
 
-@Init
+@Init(priority = EventPriority.LOW)
 @NewInstance(LoaderState.ModState.PREINITIALIZED)
 class BlockWatermill : BlockRotor<EnumWatermill>("watermill", Material.IRON, EnumWatermill::class.java) {
 
@@ -30,7 +31,7 @@ class BlockWatermill : BlockRotor<EnumWatermill>("watermill", Material.IRON, Enu
 
     companion object {
         @JvmStatic
-        fun postInit() {
+        fun init() {
             val transformerUpgrade: Any = ICItemFinder.getItem("upgrade", "transformer") ?: "circuitBasic"
 
             if (Mod.IndustrialCraft2.isAvailable)

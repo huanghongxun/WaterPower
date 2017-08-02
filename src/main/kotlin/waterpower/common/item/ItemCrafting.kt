@@ -11,6 +11,7 @@ import net.minecraft.init.Blocks
 import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
 import net.minecraftforge.fml.common.LoaderState
+import net.minecraftforge.fml.common.eventhandler.EventPriority
 import net.minecraftforge.oredict.OreDictionary
 import net.minecraftforge.oredict.OreDictionary.doesOreNameExist
 import waterpower.annotations.Init
@@ -29,7 +30,7 @@ import waterpower.util.emptyStack
 import waterpower.util.generalize
 import waterpower.util.getItemStack
 
-@Init
+@Init(priority = EventPriority.LOW)
 @NewInstance(LoaderState.ModState.PREINITIALIZED)
 class ItemCrafting : ItemEnum<EnumCrafting>("crafting", EnumCrafting.values()) {
 
@@ -44,7 +45,7 @@ class ItemCrafting : ItemEnum<EnumCrafting>("crafting", EnumCrafting.values()) {
         fun get(type: EnumCrafting, amount: Int = 1) = WPItems.crafting.getItemStack(type, amount)
 
         @JvmStatic
-        fun postInit() {
+        fun init() {
             OreDictionary.registerOre("plateDenseRedstone", get(EnumCrafting.dense_redstone_plate))
             OreDictionary.registerOre("dustCactus", get(EnumCrafting.cactus_dust))
             OreDictionary.registerOre("dustIron", get(EnumCrafting.iron_dust))

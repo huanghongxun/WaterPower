@@ -15,6 +15,7 @@ import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
 import net.minecraft.world.World
+import net.minecraftforge.fml.common.eventhandler.EventPriority
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import waterpower.WaterPower
@@ -26,7 +27,7 @@ import waterpower.common.INameable
 import waterpower.common.init.WPItems
 import waterpower.common.recipe.Recipes
 
-@Init
+@Init(priority = EventPriority.LOW)
 class ItemRotor(val rotor: EnumRotor) : ItemBase("rotor.${rotor.name}"), IItemIconProvider, IIconRegister {
     init {
         WPItems.items += this
@@ -74,7 +75,7 @@ class ItemRotor(val rotor: EnumRotor) : ItemBase("rotor.${rotor.name}"), IItemIc
         }
 
         @JvmStatic
-        fun postInit() {
+        fun init() {
             addRotorRecipe(EnumRotor.wood, Items.STICK, "logWood");
             addRotorRecipe(EnumRotor.stone, Blocks.COBBLESTONE, Blocks.STONE);
             addRotorRecipe(EnumRotor.lapis, "plateLapis", "blockLapis");

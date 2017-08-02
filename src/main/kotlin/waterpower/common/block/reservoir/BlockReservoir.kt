@@ -21,6 +21,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import net.minecraftforge.fluids.FluidUtil
 import net.minecraftforge.fml.common.LoaderState
+import net.minecraftforge.fml.common.eventhandler.EventPriority
 import waterpower.annotations.Init
 import waterpower.annotations.NewInstance
 import waterpower.common.block.BlockEnum
@@ -31,7 +32,7 @@ import waterpower.common.item.EnumCrafting
 import waterpower.common.recipe.Recipes
 import waterpower.util.isStackEmpty
 
-@Init
+@Init(priority = EventPriority.LOW)
 @NewInstance(LoaderState.ModState.PREINITIALIZED)
 class BlockReservoir : BlockEnum<Reservoirs>("reservoir", Material.IRON, Reservoirs::class.java), ITileEntityProvider {
 
@@ -66,7 +67,7 @@ class BlockReservoir : BlockEnum<Reservoirs>("reservoir", Material.IRON, Reservo
 
     companion object {
         @JvmStatic
-        fun postInit() {
+        fun init() {
             val res = WPBlocks.reservoir
             addReservoirRecipe(ItemStack(res, 8, 0), "logWood")
             addReservoirRecipe(ItemStack(res, 8, 1), Blocks.STONE)

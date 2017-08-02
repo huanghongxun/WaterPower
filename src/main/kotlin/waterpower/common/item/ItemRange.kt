@@ -8,6 +8,7 @@
 package waterpower.common.item
 
 import net.minecraftforge.fml.common.LoaderState
+import net.minecraftforge.fml.common.eventhandler.EventPriority
 import waterpower.annotations.Init
 import waterpower.annotations.NewInstance
 import waterpower.client.i18n
@@ -20,7 +21,7 @@ import waterpower.integration.ic2.ICItemFinder
 import waterpower.util.generalize
 import waterpower.util.getItemStack
 
-@Init
+@Init(priority = EventPriority.LOW)
 @NewInstance(LoaderState.ModState.PREINITIALIZED)
 class ItemRange : ItemEnum<RangePlugins>("range", RangePlugins.values()) {
 
@@ -33,7 +34,7 @@ class ItemRange : ItemEnum<RangePlugins>("range", RangePlugins.values()) {
 
     companion object {
         @JvmStatic
-        fun postInit() {
+        fun init() {
             val machine: Any = ICItemFinder.getItem("resource", "machine") ?: getItemStack(IDs.Mekanism, "BasicBlock", 8) ?: "blockIron"
 
             if (Mod.IndustrialCraft2.isAvailable) {

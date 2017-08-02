@@ -18,6 +18,7 @@ import net.minecraft.util.NonNullList
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import net.minecraftforge.fml.common.LoaderState
+import net.minecraftforge.fml.common.eventhandler.EventPriority
 import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
@@ -37,7 +38,7 @@ import waterpower.integration.Mod
 import waterpower.util.isStackEmpty
 import waterpower.util.shrink
 
-@Init
+@Init(priority = EventPriority.LOW)
 @NewInstance(LoaderState.ModState.PREINITIALIZED)
 class ItemMaterial() : ItemColorable("material") {
 
@@ -109,7 +110,7 @@ class ItemMaterial() : ItemColorable("material") {
                 WPItems.material.getItemStack(type, form, amount)
 
         @JvmStatic
-        fun postInit() {
+        fun init() {
             if (Mod.EnderIO.isAvailable) {
                 EnderIOModule.alloySmelter("Zinc Alloy Dust", get(MaterialTypes.VanadiumSteel, ingot, 3), RecipeInputOreDictionary("ingotVanadium"),
                         RecipeInputOreDictionary("ingotSteel"), RecipeInputOreDictionary("ingotSteel"))

@@ -9,6 +9,7 @@ package waterpower.common.block.ore
 
 import net.minecraft.block.material.Material
 import net.minecraftforge.fml.common.LoaderState
+import net.minecraftforge.fml.common.eventhandler.EventPriority
 import net.minecraftforge.oredict.OreDictionary
 import waterpower.annotations.Init
 import waterpower.annotations.NewInstance
@@ -18,7 +19,7 @@ import waterpower.common.init.WPItems
 import waterpower.common.item.MaterialForms
 import waterpower.common.recipe.Recipes
 
-@Init
+@Init(priority = EventPriority.LOW)
 @NewInstance(LoaderState.ModState.PREINITIALIZED)
 class BlockOre : BlockEnum<Ores>("ore", Material.ROCK, Ores::class.java) {
     init {
@@ -33,7 +34,7 @@ class BlockOre : BlockEnum<Ores>("ore", Material.ROCK, Ores::class.java) {
 
     companion object {
         @JvmStatic
-        fun postInit() {
+        fun init() {
             // register recipes of ores
             for (ore in Ores.values()) {
                 val stack = WPBlocks.ore.getItemStack(ore)

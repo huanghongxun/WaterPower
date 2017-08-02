@@ -10,6 +10,7 @@ package waterpower.common.item
 import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
 import net.minecraftforge.fml.common.LoaderState
+import net.minecraftforge.fml.common.eventhandler.EventPriority
 import waterpower.annotations.Init
 import waterpower.annotations.NewInstance
 import waterpower.api.IUpgrade
@@ -22,7 +23,7 @@ import waterpower.common.recipe.Recipes.craftShapeless
 import waterpower.integration.Mod
 import waterpower.integration.ic2.ICItemFinder
 
-@Init
+@Init(priority = EventPriority.LOW)
 @NewInstance(LoaderState.ModState.PREINITIALIZED)
 class ItemPlugins() : ItemEnum<Plugins>("plugin", Plugins.values()), IUpgrade {
 
@@ -65,7 +66,7 @@ class ItemPlugins() : ItemEnum<Plugins>("plugin", Plugins.values()), IUpgrade {
 
     companion object {
         @JvmStatic
-        fun postInit() {
+        fun init() {
             craft(WPItems.plugin.getItemStack(Plugins.storage_mk4), "AA", "AA", 'A', WPItems.plugin.getItemStack(Plugins.storage_mk3))
             craft(WPItems.plugin.getItemStack(Plugins.storage_mk3), "AA", "AA", 'A', WPItems.plugin.getItemStack(Plugins.storage_mk2))
             craft(WPItems.plugin.getItemStack(Plugins.storage_mk2), "AA", "AA", 'A', WPItems.plugin.getItemStack(Plugins.storage_mk1))
