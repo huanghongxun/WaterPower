@@ -9,6 +9,7 @@ package waterpower.annotations
 
 import net.minecraft.inventory.Container
 import net.minecraftforge.fml.common.LoaderState
+import net.minecraftforge.fml.common.eventhandler.EventPriority
 import net.minecraftforge.fml.relauncher.Side
 import waterpower.client.GuiBase
 import java.lang.annotation.Inherited
@@ -32,12 +33,12 @@ annotation class HasGui(val guiClass: KClass<out GuiBase>, val containerClass: K
  * @param modState when will the initialize procedure run
  * @param side client = 0, server = 1 or both = 2
  * @param priority -1: most first, 0: normal, 1: most last
- * @see waterpower.annotations.InitParser
+ * @see waterpower.common.init.InitParser
  * @see kotlin.jvm.JvmStatic
  */
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class Init(val priority: Int = 0)
+annotation class Init(val priority: EventPriority = EventPriority.NORMAL)
 
 /**
  * Must extend IModule

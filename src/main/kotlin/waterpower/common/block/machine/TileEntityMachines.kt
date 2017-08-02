@@ -14,6 +14,7 @@ import net.minecraft.inventory.InventoryCrafting
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.CraftingManager
 import net.minecraft.world.World
+import net.minecraftforge.fml.common.eventhandler.EventPriority
 import net.minecraftforge.oredict.OreDictionary
 import waterpower.annotations.HasGui
 import waterpower.annotations.Init
@@ -78,7 +79,7 @@ class TileEntityCentrifuge : TileEntityBaseMachine(80, 10 * 20, 4) {
     override fun getName() = "Water-Powered Centrifuge"
 }
 
-@Init
+@Init(priority = EventPriority.NORMAL)
 object TileEntityMachines {
     @JvmStatic
     fun init() {
@@ -105,7 +106,6 @@ object TileEntityMachines {
             Recipes.crushers += { input: ItemStack, output: ItemStack -> RecipeManagers.crusher.addRecipe(input, output) }
 
         RecipeManagers.sawmill = MultiRecipeManager()
-
         addAllLogs()
     }
 

@@ -7,9 +7,11 @@
  */
 package waterpower.common.init
 
+import com.google.common.collect.LinkedHashMultimap
 import com.google.common.collect.Lists
 import net.minecraftforge.fml.common.FMLLog
 import net.minecraftforge.fml.common.LoaderState
+import net.minecraftforge.fml.common.eventhandler.EventPriority
 import waterpower.JavaAdapter
 import waterpower.annotations.ClassEngine
 import waterpower.annotations.Init
@@ -21,26 +23,18 @@ import java.util.*
 @Parser
 object InitParser {
 
-    val inits = LinkedHashMap<LoaderState.ModState, LinkedList<MethodHandle>>()
-    val initsLast = LinkedHashMap<LoaderState.ModState, LinkedList<MethodHandle>>()
+    val inits = LinkedHashMap<LoaderState.ModState, LinkedHashMultimap<EventPriority, MethodHandle>>()
     var state = LoaderState.ModState.UNLOADED
 
     init {
-        for (modState in LoaderState.ModState.values()) {
-            inits[modState] = Lists.newLinkedList()
-            initsLast[modState] = Lists.newLinkedList()
-        }
+        for (modState in LoaderState.ModState.values())
+            inits[modState] = LinkedHashMultimap.create()
     }
 
     fun addMethod(init: Init, state: LoaderState.ModState, clazz: Class<*>, methodName: String) {
         try {
             val handle = ClassEngine.lookup.findStatic(clazz, methodName, MethodType.methodType(Void.TYPE))
-            if (init.priority < 0)
-                inits[state]!!.addFirst(handle)
-            else if (init.priority == 0)
-                inits[state]!!.add(handle)
-            else
-                initsLast[state]!!.add(handle)
+            inits[state]!![init.priority].add(handle)
         } catch(ignore: NoSuchMethodException) {
         }
     }
@@ -67,10 +61,10 @@ object InitParser {
             return
         this.state = state
 
-        inits[state]!!.addAll(initsLast[state]!!)
-        for (method in inits.get(state)!!.iterator())
-        // kotlin will also generate a non-static method in Companion class, we need to solve this.
-            JavaAdapter.invokeMethodHandle(method)
+        for (priority in EventPriority.values())
+            for (method in inits[state]!![priority])
+            // kotlin will also generate a non-static method in Companion class, we need to solve this.
+                JavaAdapter.invokeMethodHandle(method)
     }
 
 }
