@@ -9,6 +9,7 @@ package waterpower.common.item
 
 import net.minecraftforge.fml.common.LoaderState
 import net.minecraftforge.fml.common.eventhandler.EventPriority
+import waterpower.WaterPower
 import waterpower.annotations.Init
 import waterpower.annotations.NewInstance
 import waterpower.client.i18n
@@ -20,6 +21,7 @@ import waterpower.integration.Mod
 import waterpower.integration.ic2.ICItemFinder
 import waterpower.util.generalize
 import waterpower.util.getItemStack
+import waterpower.util.withNBT
 
 @Init(priority = EventPriority.LOW)
 @NewInstance(LoaderState.ModState.PREINITIALIZED)
@@ -51,16 +53,20 @@ class ItemRange : ItemEnum<RangePlugins>("range", RangePlugins.values()) {
             }
 
             if (Mod.Mekanism.isAvailable) {
-                flag = true
-                Recipes.craft(WPItems.range.getItemStack(RangePlugins.MK1), "WSW", "SAS", "WSW", 'W', "circuitBasic", 'S', ICItemFinder.getItem("te,batbox"),
-                        'A', getItemStack(IDs.Mekanism, "basicblock", 8))
-                Recipes.craft(WPItems.range.getItemStack(RangePlugins.MK2), "WSW", "SAS", "WSW", 'W', "circuitAdvanced", 'S',
-                        ICItemFinder.getItem("te", "cesu"), 'A', WPItems.range.getItemStack(RangePlugins.MK1))
-                Recipes.craft(WPItems.range.getItemStack(RangePlugins.MK3), "WSW", "SAS", "WSW", 'W',
-                        ICItemFinder.getItem("energy_crystal")?.generalize(), 'S', ICItemFinder.getItem("te,mfe"), 'A', WPItems.range.getItemStack(RangePlugins.MK2))
-                //addRecipeByOreDictionary(WPItems.range.getItemStack(RangePlugins.MK4), "WSW", "SAS", "WSW", 'W',
-                //        getUsualItemStack(ICItemFinder.getItem("lapotron_crystal")), 'S', ICItemFinder.getItem("te,mfe"), 'A', ItemStack(
-                //        GlobalItems.range, 1, 2))
+                try {
+                    Recipes.craft(WPItems.range.getItemStack(RangePlugins.MK1), "WSW", "SAS", "WSW", 'W', "circuitBasic", 'S', getItemStack(IDs.Mekanism, "energycube", 0),
+                            'A', getItemStack(IDs.Mekanism, "basicblock", 8))
+                    Recipes.craft(WPItems.range.getItemStack(RangePlugins.MK2), "WSW", "SAS", "WSW", 'W', "circuitAdvanced", 'S',
+                            getItemStack(IDs.Mekanism, "energycube", 0)?.withNBT(mapOf("tier" to 1)), 'A', WPItems.range.getItemStack(RangePlugins.MK1))
+                    Recipes.craft(WPItems.range.getItemStack(RangePlugins.MK3), "WSW", "SAS", "WSW", 'W',
+                            ItemComponent.get(EnumComponent.circuit, EnumLevel.MK4), 'S', getItemStack(IDs.Mekanism, "energycube", 0)?.withNBT(mapOf("tier" to 2)), 'A', WPItems.range.getItemStack(RangePlugins.MK2))
+                    //addRecipeByOreDictionary(WPItems.range.getItemStack(RangePlugins.MK4), "WSW", "SAS", "WSW", 'W',
+                    //        getUsualItemStack(ICItemFinder.getItem("lapotron_crystal")), 'S', getItemStack(IDs.Mekanism, "energycube", 3), 'A', ItemStack(
+                    //        GlobalItems.range, 1, 2))
+                    flag = true
+                } catch (e: Throwable) {
+                    WaterPower.logger.error("Unable to register mekanism recipes", e)
+                }
             }
 
             if (flag) {

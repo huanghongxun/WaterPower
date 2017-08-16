@@ -53,6 +53,7 @@ object IDs {
     const val EnderIO = "enderio"
     const val ExNihilo = "exnihilo"
     const val Factorization = "factorization"
+    const val Forestry = "forestry"
     const val GregTech = "gregtech"
     const val ImmersiveEngineering = "immersiveengineering"
     const val IndustrialCraft2 = "ic2"

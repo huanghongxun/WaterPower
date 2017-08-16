@@ -23,11 +23,12 @@ import waterpower.common.CommonProxy
 import waterpower.common.init.InitParser
 import waterpower.common.init.NewInstanceParser
 import waterpower.config.ConfigHandler
+import waterpower.integration.IDs
 import java.util.*
 
 @Mod(modid = WaterPower.MOD_ID, name = WaterPower.MOD_NAME, version = "@MODVERSION@", modLanguage = "kotlin",
         modLanguageAdapter = "net.shadowfacts.forgelin.KotlinAdapter",
-        dependencies = "required-after: forgelin; after:ic2; after:gregtech; after:thaumcraft; after:redstoneflux; after:jei; after:waila; after:buildcraftcore; after:forestry; after:CoFHAPI; after:mekanism; after: tconstruct; ")
+        dependencies = "required-after: forgelin; after:${IDs.IndustrialCraft2}; after:${IDs.GregTech}; after:${IDs.Thaumcraft}; after:${IDs.Waila}; after:jei; after:${IDs.BuildCraftCore}; after:${IDs.Forestry}; after:${IDs.RedstoneFlux}; after:${IDs.Mekanism}; after: ${IDs.TinkersConstruct}; ")
 object WaterPower {
 
     lateinit var logger: Logger

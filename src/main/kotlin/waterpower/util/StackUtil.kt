@@ -9,6 +9,8 @@ package waterpower.util
 
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.item.ItemStack
+import net.minecraft.nbt.NBTBase
+import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.world.World
 import net.minecraftforge.oredict.OreDictionary
 import java.util.*
@@ -23,6 +25,27 @@ fun isStackEmpty(stack: ItemStack?) =
 
 fun ItemStack.set(newCount: Int): ItemStack {
     count = newCount
+    return this
+}
+
+fun ItemStack.withNBT(map: Map<String, Any>): ItemStack {
+    if (tagCompound == null)
+        tagCompound = NBTTagCompound()
+    for ((key, value) in map.entries) {
+        when (value) {
+            is Int -> tagCompound?.setInteger(key, value)
+            is Boolean -> tagCompound?.setBoolean(key, value)
+            is Double -> tagCompound?.setDouble(key, value)
+            is Float -> tagCompound?.setFloat(key, value)
+            is Byte -> tagCompound?.setByte(key, value)
+            is Long -> tagCompound?.setLong(key, value)
+            is Short -> tagCompound?.setShort(key, value)
+            is String -> tagCompound?.setString(key, value)
+            is NBTBase -> tagCompound?.setTag(key, value)
+            is ByteArray -> tagCompound?.setByteArray(key, value)
+            is IntArray -> tagCompound?.setIntArray(key, value)
+        }
+    }
     return this
 }
 
